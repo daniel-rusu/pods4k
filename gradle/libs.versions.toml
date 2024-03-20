@@ -1,0 +1,10 @@
+[versions]
+kotlin = "1.9.23" # https://kotlinlang.org/docs/releases.html#release-details
+jUnit = "5.10.2" # https://github.com/junit-team/junit5
+jUnitPlatformLauncher = "1.10.2" # https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
+strikt = "0.34.1" # https://github.com/robfletcher/strikt/releases/latest
+
+[libraries]
+jUnit = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jUnit" }
+jUnitPlatformLauncher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "jUnitPlatformLauncher" }
+strikt = { module = "io.strikt:strikt-core", version.ref = "strikt" }

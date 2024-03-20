@@ -1,0 +1,4 @@
+# Generated files
+.gradle
+build
+out
