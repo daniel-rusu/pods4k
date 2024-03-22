@@ -9,6 +9,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/code-generators" />
+            <option value="$PROJECT_DIR$/immutable-arrays" />
           </set>
         </option>
       </GradleProjectSettings>
