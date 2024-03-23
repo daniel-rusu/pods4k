@@ -24,6 +24,19 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `toString validation`() {
+        with(ImmutableIntArray(0) { it }) {
+            expectThat(this.toString()).isEqualTo("[]")
+        }
+        with(ImmutableIntArray(1) { it }) {
+            expectThat(this.toString()).isEqualTo("[0]")
+        }
+        with(ImmutableIntArray(4) { 2 * it }) {
+            expectThat(this.toString()).isEqualTo("[0, 2, 4, 6]")
+        }
+    }
+
+    @Test
     fun `size validation`() {
         // Cannot create with negative size
         expectThrows<NegativeArraySizeException> {

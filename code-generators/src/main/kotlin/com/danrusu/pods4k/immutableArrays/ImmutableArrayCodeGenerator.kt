@@ -32,6 +32,7 @@ private fun generateImmutableArrayFile(baseType: BaseType, packageName: String):
                 .maybeAddGenericType(baseType)
                 .addPrimaryConstructor(baseType)
                 .addPropertyWithGetter<Int>(name = "size", get = "return values.size")
+                .addFunction(createToStringMethod())
                 .addFunction(createArrayIndexOperator(baseType))
                 .addFunction(createIteratorOperator(baseType))
                 .addType(
@@ -59,6 +60,18 @@ private fun TypeSpec.Builder.addPrimaryConstructor(baseType: BaseType): TypeSpec
             .initializer(valuesPropertyName)
             .build()
     )
+}
+
+private fun createToStringMethod(): FunSpec {
+    return FunSpec.builder("toString")
+        .addModifiers(KModifier.OVERRIDE)
+        .returns(String::class)
+        .addStatement(
+            """
+                return values.joinToString(prefix = "[", postfix = "]")
+            """.trimIndent()
+        )
+        .build()
 }
 
 private fun createArrayIndexOperator(baseType: BaseType): FunSpec {

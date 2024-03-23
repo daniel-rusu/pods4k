@@ -5,6 +5,7 @@ import kotlin.Char
 import kotlin.CharArray
 import kotlin.Int
 import kotlin.PublishedApi
+import kotlin.String
 import kotlin.collections.Iterator
 import kotlin.jvm.JvmInline
 
@@ -14,6 +15,8 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
 ) {
   public val size: Int
     get() = values.size
+
+  override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
 
   /**
    * Returns the element at the specified [index]. This method can be called using the index
