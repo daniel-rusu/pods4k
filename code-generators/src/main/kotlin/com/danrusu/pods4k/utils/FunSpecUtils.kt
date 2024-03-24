@@ -7,6 +7,6 @@ internal fun FunSpec.Builder.suppress(warning: String): FunSpec.Builder {
     return addAnnotation(
         AnnotationSpec.builder(Suppress::class)
             .addMember("%S", warning)
-            .build().apply {  }
+            .build()
     )
 }
