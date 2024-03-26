@@ -15,6 +15,12 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
   public val size: Int
     get() = values.size
 
+  /**
+   * Returns the index of the last element or -1 if the array is empty.
+   */
+  public val lastIndex: Int
+    get() = values.size - 1
+
   override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
 
   /**

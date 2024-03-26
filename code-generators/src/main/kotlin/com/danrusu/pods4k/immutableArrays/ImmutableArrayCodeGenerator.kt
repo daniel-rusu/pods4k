@@ -29,6 +29,12 @@ private fun generateImmutableArrayFile(baseType: BaseType, packageName: String):
             }
             addPrimaryConstructor(baseType)
             addProperty(name = "size", type = Int::class.asTypeName(), get = "return values.size")
+            addProperty(
+                kdoc = "Returns the index of the last element or -1 if the array is empty.",
+                name = "lastIndex",
+                type = Int::class.asTypeName(),
+                get = "return values.size - 1"
+            )
             overrideToString()
             addArrayIndexOperator(baseType)
             addIteratorOperator(baseType)

@@ -22,6 +22,7 @@ internal inline fun TypeSpec.Builder.addCompanionObject(body: TypeSpec.Builder.(
 
 internal fun TypeSpec.Builder.addProperty(
     vararg modifiers: KModifier,
+    kdoc: String? = null,
     name: String,
     type: TypeName,
     init: String? = null,
@@ -29,14 +30,9 @@ internal fun TypeSpec.Builder.addProperty(
 ): TypeSpec.Builder {
     return addProperty(
         PropertySpec.builder(name, type, *modifiers).apply {
-            if (init != null) {
-                initializer(init)
-            }
-            if (get != null) {
-                getter(
-                    FunSpec.getterBuilder().addStatement(get).build()
-                )
-            }
+            kdoc?.let { addKdoc(it) }
+            init?.let { initializer(it) }
+            get?.let { getter(FunSpec.getterBuilder().addStatement(get).build()) }
         }.build()
     )
 }
@@ -51,9 +47,7 @@ internal inline fun TypeSpec.Builder.addFunction(
 ): TypeSpec.Builder {
     return addFunction(
         FunSpec.builder(name).apply {
-            if (kdoc != null) {
-                addKdoc(kdoc)
-            }
+            kdoc?.let { addKdoc(it) }
             addModifiers(*modifiers)
             addParameters(ParameterDSL().apply(parameters).build())
             returns(returns)
