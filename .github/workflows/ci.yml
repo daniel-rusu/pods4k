@@ -6,16 +6,19 @@ on:
     branches: [ main ]
 jobs:
   build:
+    strategy:
+      matrix:
+        java: [ 8, 11, 17, 21 ] # Test against Java LTS releases
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - uses: gradle/wrapper-validation-action@v2
 
-      - name: Setup JDK 17
+      - name: Setup JDK ${{ matrix.java }}
         uses: actions/setup-java@v4
         with:
-          java-version: 17
+          java-version: ${{ matrix.java }}
           distribution: 'adopt'
 
       - name: Setup Gradle

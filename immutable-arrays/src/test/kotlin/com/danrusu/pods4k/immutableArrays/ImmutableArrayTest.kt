@@ -3,7 +3,10 @@ package com.danrusu.pods4k.immutableArrays
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.api.expectThrows
-import strikt.assertions.*
+import strikt.assertions.isA
+import strikt.assertions.isEqualTo
+import strikt.assertions.isFalse
+import strikt.assertions.isTrue
 
 private data class Person(val id: Int)
 
@@ -69,9 +72,9 @@ class ImmutableArrayTest {
             expectThat(get(1)).isEqualTo("element 1")
             expectThat(get(2)).isEqualTo("element 2")
 
-            expectThrows<IndexOutOfBoundsException> {
+            expectThrows<ArrayIndexOutOfBoundsException> {
                 get(3)
-            }.message.isEqualTo("Index 3 out of bounds for length 3")
+            }
         }
     }
 
@@ -82,9 +85,9 @@ class ImmutableArrayTest {
             expectThat(this[1]).isEqualTo(get(1))
             expectThat(this[2]).isEqualTo(get(2))
 
-            expectThrows<IndexOutOfBoundsException> {
+            expectThrows<ArrayIndexOutOfBoundsException> {
                 this[3]
-            }.message.isEqualTo("Index 3 out of bounds for length 3")
+            }
         }
     }
 
