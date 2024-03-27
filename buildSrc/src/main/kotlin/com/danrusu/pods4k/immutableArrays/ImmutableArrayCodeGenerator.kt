@@ -1,19 +1,18 @@
 package com.danrusu.pods4k.immutableArrays
 
-import com.danrusu.pods4k.ModulePath
 import com.danrusu.pods4k.utils.*
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import java.io.File
 
 internal object ImmutableArrayCodeGenerator {
-    fun generate() {
+    fun generate(destinationPath: String) {
         val packageName = ImmutableArrayCodeGenerator::class.java.`package`.name
 
         for (baseType in BaseType.values()) {
             val fileSpec = generateImmutableArrayFile(baseType, packageName)
 
-            fileSpec.writeTo(File(ModulePath.IMMUTABLE_ARRAYS, ""))
+            fileSpec.writeTo(File(destinationPath, ""))
         }
     }
 }
