@@ -24,6 +24,9 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v3
 
+      - name: Generate code # Ensure that CI build & test is run against the latest generated code
+        run: ./gradlew generateCode --no-daemon
+
       - name: Build & run tests
         run: ./gradlew build --no-daemon
 
