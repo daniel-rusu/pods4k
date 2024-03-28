@@ -13,13 +13,13 @@ internal inline fun createFile(packageName: String, fileName: String, body: File
 }
 
 internal inline fun FileSpec.Builder.addClass(
-    vararg modifiers: KModifier,
+    modifiers: List<KModifier> = emptyList(),
     name: ClassName,
     body: TypeSpec.Builder.() -> Unit
 ): FileSpec.Builder {
     return addType(
         TypeSpec.classBuilder(name).apply {
-            addModifiers(*modifiers)
+            addModifiers(modifiers)
             body()
         }.build()
     )

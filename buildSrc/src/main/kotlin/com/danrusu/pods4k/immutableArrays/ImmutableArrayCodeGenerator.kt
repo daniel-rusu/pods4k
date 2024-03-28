@@ -21,7 +21,7 @@ private fun generateImmutableArrayFile(baseType: BaseType, packageName: String):
     val qualifiedClassName = ClassName(packageName, baseType.generatedClassName)
 
     return createFile(packageName, baseType.generatedClassName) {
-        addClass(KModifier.VALUE, name = qualifiedClassName) {
+        addClass(modifiers = listOf(KModifier.VALUE), name = qualifiedClassName) {
             addAnnotation(JvmInline::class)
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
@@ -48,12 +48,12 @@ private fun TypeSpec.Builder.addPrimaryConstructor(baseType: BaseType) {
     // adding a parameter to the primary constructor and creating an identical property initialized by that parameter
     // ends up defining it in the primary constructor
     addPrimaryConstructor(
-        KModifier.INTERNAL,
+        modifiers = listOf(KModifier.INTERNAL),
         parameters = { "values"(type = baseType.backingArrayType) },
     ) {
         addAnnotation(PublishedApi::class)
     }.addProperty(
-        KModifier.PRIVATE,
+        modifiers = listOf(KModifier.PRIVATE),
         name = "values",
         type = baseType.backingArrayType,
         init = "values",
@@ -61,18 +61,19 @@ private fun TypeSpec.Builder.addPrimaryConstructor(baseType: BaseType) {
 }
 
 private fun TypeSpec.Builder.overrideToString() {
-    addFunction(KModifier.OVERRIDE, name = "toString", returns = String::class.asTypeName()) {
-        addStatement(
-            """
-                return values.joinToString(prefix = "[", postfix = "]")
-            """.trimIndent()
-        )
-    }
+    addFunction(
+        modifiers = listOf(KModifier.OVERRIDE),
+        name = "toString",
+        returns = String::class.asTypeName(),
+        code = """
+            return values.joinToString(prefix = "[", postfix = "]")
+        """.trimIndent()
+    )
 }
 
 private fun TypeSpec.Builder.addArrayIndexOperator(baseType: BaseType) {
     addFunction(
-        KModifier.OPERATOR,
+        modifiers = listOf(KModifier.OPERATOR),
         kdoc = "Returns the element at the specified [index]. This method can be called using the index operator.",
         name = "get",
         parameters = { "index"<Int>() },
@@ -91,8 +92,8 @@ private fun TypeSpec.Builder.addIteratorOperator(baseType: BaseType) {
     val iteratorType = Iterator::class.asClassName().parameterizedBy(baseType.type)
 
     addFunction(
-        KModifier.OPERATOR,
         kdoc = "Creates an iterator allowing iteration over the elements of the array.",
+        modifiers = listOf(KModifier.OPERATOR),
         name = "iterator",
         returns = iteratorType,
     ) {
@@ -107,7 +108,6 @@ private fun TypeSpec.Builder.addIteratorOperator(baseType: BaseType) {
 
 private fun TypeSpec.Builder.addInvokeOperator(baseType: BaseType, qualifiedClassName: ClassName) {
     addFunction(
-        KModifier.INLINE, KModifier.OPERATOR,
         kdoc = """
             Creates a ${baseType.generatedClassName} instance of the specified [size], where each element is calculated by calling the specified [init] function.
             
@@ -116,6 +116,7 @@ private fun TypeSpec.Builder.addInvokeOperator(baseType: BaseType, qualifiedClas
             Implementation:
             We're using the invoke method instead of a regular constructor so that we can declare it inline.  The call site will look like a regular constructor call.
         """.trimIndent(),
+        modifiers = listOf(KModifier.INLINE, KModifier.OPERATOR),
         name = "invoke",
         parameters = {
             "size"<Int>()
