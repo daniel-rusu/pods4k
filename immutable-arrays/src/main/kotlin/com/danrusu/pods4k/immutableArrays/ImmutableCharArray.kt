@@ -35,6 +35,16 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
    */
   public operator fun `get`(index: Int): Char = values[index]
 
+  public operator fun component1(): Char = get(0)
+
+  public operator fun component2(): Char = get(1)
+
+  public operator fun component3(): Char = get(2)
+
+  public operator fun component4(): Char = get(3)
+
+  public operator fun component5(): Char = get(4)
+
   /**
    * Creates an iterator allowing iteration over the elements of the array.
    */

@@ -35,6 +35,16 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
    */
   public operator fun `get`(index: Int): Double = values[index]
 
+  public operator fun component1(): Double = get(0)
+
+  public operator fun component2(): Double = get(1)
+
+  public operator fun component3(): Double = get(2)
+
+  public operator fun component4(): Double = get(3)
+
+  public operator fun component5(): Double = get(4)
+
   /**
    * Creates an iterator allowing iteration over the elements of the array.
    */

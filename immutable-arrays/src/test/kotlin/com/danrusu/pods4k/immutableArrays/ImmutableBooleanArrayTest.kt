@@ -31,6 +31,13 @@ class ImmutableBooleanArrayTest {
     }
 
     @Test
+    fun `componentN function validation`() {
+        val values = ImmutableBooleanArray(1) { it % 2 == 0 }
+        val (first) = values
+        expectThat(first::class.java == primitiveBooleanClass)
+    }
+
+    @Test
     fun `iterator validation`() {
         with(ImmutableBooleanArray(3) { it % 2 == 0 }) {
             for (value in this) {

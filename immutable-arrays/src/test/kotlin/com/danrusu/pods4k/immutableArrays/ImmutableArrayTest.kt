@@ -104,6 +104,41 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `componentN function validation`() {
+        val values = ImmutableArray(5) { "element $it" }
+        with(values) {
+            val (first) = this
+            expectThat(first).isEqualTo("element 0")
+        }
+        with(values) {
+            val (first, second) = this
+            expectThat(first).isEqualTo("element 0")
+            expectThat(second).isEqualTo("element 1")
+        }
+        with(values) {
+            val (first, second, third) = this
+            expectThat(first).isEqualTo("element 0")
+            expectThat(second).isEqualTo("element 1")
+            expectThat(third).isEqualTo("element 2")
+        }
+        with(values) {
+            val (first, second, third, fourth) = this
+            expectThat(first).isEqualTo("element 0")
+            expectThat(second).isEqualTo("element 1")
+            expectThat(third).isEqualTo("element 2")
+            expectThat(fourth).isEqualTo("element 3")
+        }
+        with(values) {
+            val (first, second, third, fourth, fifth) = this
+            expectThat(first).isEqualTo("element 0")
+            expectThat(second).isEqualTo("element 1")
+            expectThat(third).isEqualTo("element 2")
+            expectThat(fourth).isEqualTo("element 3")
+            expectThat(fifth).isEqualTo("element 4")
+        }
+    }
+
+    @Test
     fun `iterator validation`() {
         with(ImmutableArray(0) { "element $it" }) {
             expectThat(this.iterator().hasNext()).isFalse()

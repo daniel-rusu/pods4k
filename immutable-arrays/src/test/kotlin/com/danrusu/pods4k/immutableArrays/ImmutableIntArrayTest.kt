@@ -111,6 +111,42 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `componentN function validation`() {
+        val values = ImmutableIntArray(5) { it }
+        with(values) {
+            val (first) = this
+            expectThat(first::class.java == primitiveIntClass)
+            expectThat(first).isEqualTo(0)
+        }
+        with(values) {
+            val (first, second) = this
+            expectThat(first).isEqualTo(0)
+            expectThat(second).isEqualTo(1)
+        }
+        with(values) {
+            val (first, second, third) = this
+            expectThat(first).isEqualTo(0)
+            expectThat(second).isEqualTo(1)
+            expectThat(third).isEqualTo(2)
+        }
+        with(values) {
+            val (first, second, third, fourth) = this
+            expectThat(first).isEqualTo(0)
+            expectThat(second).isEqualTo(1)
+            expectThat(third).isEqualTo(2)
+            expectThat(fourth).isEqualTo(3)
+        }
+        with(values) {
+            val (first, second, third, fourth, fifth) = this
+            expectThat(first).isEqualTo(0)
+            expectThat(second).isEqualTo(1)
+            expectThat(third).isEqualTo(2)
+            expectThat(fourth).isEqualTo(3)
+            expectThat(fifth).isEqualTo(4)
+        }
+    }
+
+    @Test
     fun `iterator validation`() {
         with(ImmutableIntArray(0) { it }) {
             expectThat(this.iterator().hasNext()).isFalse()

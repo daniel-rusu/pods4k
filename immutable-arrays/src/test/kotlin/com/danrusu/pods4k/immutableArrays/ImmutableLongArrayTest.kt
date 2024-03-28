@@ -31,6 +31,13 @@ class ImmutableLongArrayTest {
     }
 
     @Test
+    fun `componentN function validation`() {
+        val values = ImmutableLongArray(1) { it.toLong() }
+        val (first) = values
+        expectThat(first::class.java == primitiveLongClass)
+    }
+
+    @Test
     fun `iterator validation`() {
         with(ImmutableLongArray(3) { it.toLong() }) {
             for (value in this) {

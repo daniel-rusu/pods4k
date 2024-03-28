@@ -34,6 +34,16 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
    */
   public operator fun `get`(index: Int): Boolean = values[index]
 
+  public operator fun component1(): Boolean = get(0)
+
+  public operator fun component2(): Boolean = get(1)
+
+  public operator fun component3(): Boolean = get(2)
+
+  public operator fun component4(): Boolean = get(3)
+
+  public operator fun component5(): Boolean = get(4)
+
   /**
    * Creates an iterator allowing iteration over the elements of the array.
    */

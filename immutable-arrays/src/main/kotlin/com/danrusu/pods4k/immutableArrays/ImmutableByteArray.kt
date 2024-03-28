@@ -35,6 +35,16 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
    */
   public operator fun `get`(index: Int): Byte = values[index]
 
+  public operator fun component1(): Byte = get(0)
+
+  public operator fun component2(): Byte = get(1)
+
+  public operator fun component3(): Byte = get(2)
+
+  public operator fun component4(): Byte = get(3)
+
+  public operator fun component5(): Byte = get(4)
+
   /**
    * Creates an iterator allowing iteration over the elements of the array.
    */

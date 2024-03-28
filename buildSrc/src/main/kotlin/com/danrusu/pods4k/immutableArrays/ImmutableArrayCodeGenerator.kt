@@ -5,6 +5,8 @@ import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import java.io.File
 
+private const val NUM_COMPONENT_N_FUNCTIONS = 5
+
 internal object ImmutableArrayCodeGenerator {
     fun generate(destinationPath: String) {
         val packageName = ImmutableArrayCodeGenerator::class.java.`package`.name
@@ -38,6 +40,7 @@ private fun generateImmutableArrayFile(baseType: BaseType, packageName: String):
             addIsEmpty()
             addIsNotEmpty()
             addArrayIndexOperator(baseType)
+            addComponentNFunctions(baseType)
             addIteratorOperator(baseType)
             addCompanionObject {
                 addInvokeOperator(baseType, qualifiedClassName)
@@ -107,6 +110,17 @@ private fun TypeSpec.Builder.addArrayIndexOperator(baseType: BaseType) {
         } else {
             addStatement("return values[index]")
         }
+    }
+}
+
+private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
+    for (n in 1..NUM_COMPONENT_N_FUNCTIONS) {
+        addFunction(
+            modifiers = listOf(KModifier.OPERATOR),
+            name = "component$n",
+            returns = baseType.type,
+            code = "return get(${n - 1})"
+        )
     }
 }
 

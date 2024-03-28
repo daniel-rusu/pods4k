@@ -35,6 +35,16 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
    */
   public operator fun `get`(index: Int): Long = values[index]
 
+  public operator fun component1(): Long = get(0)
+
+  public operator fun component2(): Long = get(1)
+
+  public operator fun component3(): Long = get(2)
+
+  public operator fun component4(): Long = get(3)
+
+  public operator fun component5(): Long = get(4)
+
   /**
    * Creates an iterator allowing iteration over the elements of the array.
    */

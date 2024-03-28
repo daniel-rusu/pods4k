@@ -35,6 +35,16 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
    */
   public operator fun `get`(index: Int): Float = values[index]
 
+  public operator fun component1(): Float = get(0)
+
+  public operator fun component2(): Float = get(1)
+
+  public operator fun component3(): Float = get(2)
+
+  public operator fun component4(): Float = get(3)
+
+  public operator fun component5(): Float = get(4)
+
   /**
    * Creates an iterator allowing iteration over the elements of the array.
    */

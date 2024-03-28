@@ -35,6 +35,16 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
    */
   public operator fun `get`(index: Int): Short = values[index]
 
+  public operator fun component1(): Short = get(0)
+
+  public operator fun component2(): Short = get(1)
+
+  public operator fun component3(): Short = get(2)
+
+  public operator fun component4(): Short = get(3)
+
+  public operator fun component5(): Short = get(4)
+
   /**
    * Creates an iterator allowing iteration over the elements of the array.
    */

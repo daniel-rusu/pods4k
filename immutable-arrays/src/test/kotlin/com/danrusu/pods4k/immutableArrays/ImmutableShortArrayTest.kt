@@ -31,6 +31,13 @@ class ImmutableShortArrayTest {
     }
 
     @Test
+    fun `componentN function validation`() {
+        val values = ImmutableShortArray(1) { it.toShort() }
+        val (first) = values
+        expectThat(first::class.java == primitiveShortClass)
+    }
+
+    @Test
     fun `iterator validation`() {
         with(ImmutableShortArray(3) { it.toShort() }) {
             for (value in this) {

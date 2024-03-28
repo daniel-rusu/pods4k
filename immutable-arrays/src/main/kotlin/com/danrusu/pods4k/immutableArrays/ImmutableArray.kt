@@ -37,6 +37,16 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
   @Suppress("UNCHECKED_CAST")
   public operator fun `get`(index: Int): T = values[index] as T
 
+  public operator fun component1(): T = get(0)
+
+  public operator fun component2(): T = get(1)
+
+  public operator fun component3(): T = get(2)
+
+  public operator fun component4(): T = get(3)
+
+  public operator fun component5(): T = get(4)
+
   /**
    * Creates an iterator allowing iteration over the elements of the array.
    */
