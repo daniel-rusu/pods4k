@@ -22,19 +22,6 @@ class ImmutableArrayTest {
     }
 
     @Test
-    fun `toString validation`() {
-        with(ImmutableArray(0) { "element $it" }) {
-            expectThat(this.toString()).isEqualTo("[]")
-        }
-        with(ImmutableArray(1) { "element $it" }) {
-            expectThat(this.toString()).isEqualTo("[element 0]")
-        }
-        with(ImmutableArray(4) { Person(id = it) }) {
-            expectThat(this.toString()).isEqualTo("[Person(id=0), Person(id=1), Person(id=2), Person(id=3)]")
-        }
-    }
-
-    @Test
     fun `size validation`() {
         // Cannot create with negative size
         expectThrows<NegativeArraySizeException> {
@@ -62,6 +49,31 @@ class ImmutableArrayTest {
         }
         with(ImmutableArray(10) { "element $it" }) {
             expectThat(this.lastIndex).isEqualTo(9)
+        }
+    }
+
+    @Test
+    fun `toString validation`() {
+        with(ImmutableArray(0) { "element $it" }) {
+            expectThat(this.toString()).isEqualTo("[]")
+        }
+        with(ImmutableArray(1) { "element $it" }) {
+            expectThat(this.toString()).isEqualTo("[element 0]")
+        }
+        with(ImmutableArray(4) { Person(id = it) }) {
+            expectThat(this.toString()).isEqualTo("[Person(id=0), Person(id=1), Person(id=2), Person(id=3)]")
+        }
+    }
+
+    @Test
+    fun `isEmpty and isNotEmpty validation`() {
+        with(ImmutableArray(0) { "element $it" }) {
+            expectThat(this.isEmpty()).isTrue()
+            expectThat(this.isNotEmpty()).isFalse()
+        }
+        with(ImmutableArray(3) { "element $it" }) {
+            expectThat(this.isEmpty()).isFalse()
+            expectThat(this.isNotEmpty()).isTrue()
         }
     }
 

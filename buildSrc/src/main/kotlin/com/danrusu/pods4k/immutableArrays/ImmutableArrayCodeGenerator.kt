@@ -35,6 +35,8 @@ private fun generateImmutableArrayFile(baseType: BaseType, packageName: String):
                 get = "return values.size - 1"
             )
             overrideToString()
+            addIsEmpty()
+            addIsNotEmpty()
             addArrayIndexOperator(baseType)
             addIteratorOperator(baseType)
             addCompanionObject {
@@ -67,6 +69,26 @@ private fun TypeSpec.Builder.overrideToString() {
         returns = String::class.asTypeName(),
         code = """
             return values.joinToString(prefix = "[", postfix = "]")
+        """.trimIndent()
+    )
+}
+
+private fun TypeSpec.Builder.addIsEmpty() {
+    addFunction(
+        name = "isEmpty",
+        returns = Boolean::class.asTypeName(),
+        code = """
+            return values.isEmpty()
+        """.trimIndent()
+    )
+}
+
+private fun TypeSpec.Builder.addIsNotEmpty() {
+    addFunction(
+        name = "isNotEmpty",
+        returns = Boolean::class.asTypeName(),
+        code = """
+            return values.isNotEmpty()
         """.trimIndent()
     )
 }

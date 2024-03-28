@@ -27,19 +27,6 @@ class ImmutableIntArrayTest {
     }
 
     @Test
-    fun `toString validation`() {
-        with(ImmutableIntArray(0) { it }) {
-            expectThat(this.toString()).isEqualTo("[]")
-        }
-        with(ImmutableIntArray(1) { it }) {
-            expectThat(this.toString()).isEqualTo("[0]")
-        }
-        with(ImmutableIntArray(4) { 2 * it }) {
-            expectThat(this.toString()).isEqualTo("[0, 2, 4, 6]")
-        }
-    }
-
-    @Test
     fun `size validation`() {
         // Cannot create with negative size
         expectThrows<NegativeArraySizeException> {
@@ -67,6 +54,31 @@ class ImmutableIntArrayTest {
         }
         with(ImmutableIntArray(10) { it }) {
             expectThat(this.lastIndex).isEqualTo(9)
+        }
+    }
+
+    @Test
+    fun `toString validation`() {
+        with(ImmutableIntArray(0) { it }) {
+            expectThat(this.toString()).isEqualTo("[]")
+        }
+        with(ImmutableIntArray(1) { it }) {
+            expectThat(this.toString()).isEqualTo("[0]")
+        }
+        with(ImmutableIntArray(4) { 2 * it }) {
+            expectThat(this.toString()).isEqualTo("[0, 2, 4, 6]")
+        }
+    }
+
+    @Test
+    fun `isEmpty and isNotEmpty validation`() {
+        with(ImmutableIntArray(0) { it }) {
+            expectThat(this.isEmpty()).isTrue()
+            expectThat(this.isNotEmpty()).isFalse()
+        }
+        with(ImmutableIntArray(3) { it }) {
+            expectThat(this.isEmpty()).isFalse()
+            expectThat(this.isNotEmpty()).isTrue()
         }
     }
 

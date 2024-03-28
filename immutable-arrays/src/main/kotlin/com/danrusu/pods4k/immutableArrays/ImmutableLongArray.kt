@@ -1,6 +1,7 @@
 // Auto-generated file. DO NOT EDIT!
 package com.danrusu.pods4k.immutableArrays
 
+import kotlin.Boolean
 import kotlin.Int
 import kotlin.Long
 import kotlin.LongArray
@@ -23,6 +24,10 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     get() = values.size - 1
 
   override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
+
+  public fun isEmpty(): Boolean = values.isEmpty()
+
+  public fun isNotEmpty(): Boolean = values.isNotEmpty()
 
   /**
    * Returns the element at the specified [index]. This method can be called using the index

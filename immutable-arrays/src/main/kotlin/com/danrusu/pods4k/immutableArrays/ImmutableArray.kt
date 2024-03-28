@@ -3,6 +3,7 @@ package com.danrusu.pods4k.immutableArrays
 
 import kotlin.Any
 import kotlin.Array
+import kotlin.Boolean
 import kotlin.Int
 import kotlin.PublishedApi
 import kotlin.String
@@ -24,6 +25,10 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     get() = values.size - 1
 
   override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
+
+  public fun isEmpty(): Boolean = values.isEmpty()
+
+  public fun isNotEmpty(): Boolean = values.isNotEmpty()
 
   /**
    * Returns the element at the specified [index]. This method can be called using the index

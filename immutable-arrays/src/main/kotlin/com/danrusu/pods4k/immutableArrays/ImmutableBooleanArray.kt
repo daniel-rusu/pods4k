@@ -24,6 +24,10 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
 
   override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
 
+  public fun isEmpty(): Boolean = values.isEmpty()
+
+  public fun isNotEmpty(): Boolean = values.isNotEmpty()
+
   /**
    * Returns the element at the specified [index]. This method can be called using the index
    * operator.
