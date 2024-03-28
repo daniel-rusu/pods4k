@@ -24,8 +24,19 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v3
 
-      - name: Generate code # Ensure that CI build & test is run against the latest generated code
+      - name: Generate code
         run: ./gradlew generateCode --no-daemon
+
+      - name: Check for changes in generated code
+        id: diff
+        run: |
+          git diff --exit-code >/dev/null 2>&1
+
+      - name: Fail if submission doesn't include the latest generated code
+        if: ${{ always() && steps.diff.outcome != 'success' }}
+        run: |
+          echo "Generated files changed. Run './gradlew generateCode' after changing the code generators and include the updated files with your submission."
+          exit 1
 
       - name: Build & run tests
         run: ./gradlew build --no-daemon
