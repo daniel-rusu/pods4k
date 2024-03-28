@@ -2,3 +2,6 @@
 
 *.bat text eol=crlf
 *.jar binary
+
+# Define auto-generated files with LF line endings since they're generated that way so that re-generating them with no changes shouldn't show as changed
+immutable-arrays/src/main/kotlin/com/danrusu/pods4k/immutableArrays/*.kt eol=lf
