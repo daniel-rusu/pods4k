@@ -35,6 +35,17 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
    */
   public operator fun `get`(index: Int): Long = values[index]
 
+  /**
+   * Returns the first element.
+   *
+   * @throws NoSuchElementException if the array is empty.
+   */
+  public fun first(): Long {
+    if (isEmpty()) throw NoSuchElementException("Array is empty!")
+
+    return get(0)
+  }
+
   public operator fun component1(): Long = get(0)
 
   public operator fun component2(): Long = get(1)

@@ -37,6 +37,17 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
   @Suppress("UNCHECKED_CAST")
   public operator fun `get`(index: Int): T = values[index] as T
 
+  /**
+   * Returns the first element.
+   *
+   * @throws NoSuchElementException if the array is empty.
+   */
+  public fun first(): T {
+    if (isEmpty()) throw NoSuchElementException("Array is empty!")
+
+    return get(0)
+  }
+
   public operator fun component1(): T = get(0)
 
   public operator fun component2(): T = get(1)

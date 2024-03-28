@@ -31,6 +31,13 @@ class ImmutableDoubleArrayTest {
     }
 
     @Test
+    fun `first validation`() {
+        with(ImmutableDoubleArray(3) { it.toDouble() }) {
+            expectThat(this.first()::class.java).isEqualTo(primitiveDoubleClass)
+        }
+    }
+
+    @Test
     fun `componentN function validation`() {
         val values = ImmutableDoubleArray(1) { it.toDouble() }
         val (first) = values

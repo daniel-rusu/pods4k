@@ -34,6 +34,17 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
    */
   public operator fun `get`(index: Int): Boolean = values[index]
 
+  /**
+   * Returns the first element.
+   *
+   * @throws NoSuchElementException if the array is empty.
+   */
+  public fun first(): Boolean {
+    if (isEmpty()) throw NoSuchElementException("Array is empty!")
+
+    return get(0)
+  }
+
   public operator fun component1(): Boolean = get(0)
 
   public operator fun component2(): Boolean = get(1)

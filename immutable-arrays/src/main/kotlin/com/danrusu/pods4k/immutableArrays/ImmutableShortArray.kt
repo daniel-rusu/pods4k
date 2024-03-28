@@ -35,6 +35,17 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
    */
   public operator fun `get`(index: Int): Short = values[index]
 
+  /**
+   * Returns the first element.
+   *
+   * @throws NoSuchElementException if the array is empty.
+   */
+  public fun first(): Short {
+    if (isEmpty()) throw NoSuchElementException("Array is empty!")
+
+    return get(0)
+  }
+
   public operator fun component1(): Short = get(0)
 
   public operator fun component2(): Short = get(1)

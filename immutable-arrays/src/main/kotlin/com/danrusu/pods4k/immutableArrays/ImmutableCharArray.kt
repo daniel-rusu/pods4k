@@ -35,6 +35,17 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
    */
   public operator fun `get`(index: Int): Char = values[index]
 
+  /**
+   * Returns the first element.
+   *
+   * @throws NoSuchElementException if the array is empty.
+   */
+  public fun first(): Char {
+    if (isEmpty()) throw NoSuchElementException("Array is empty!")
+
+    return get(0)
+  }
+
   public operator fun component1(): Char = get(0)
 
   public operator fun component2(): Char = get(1)

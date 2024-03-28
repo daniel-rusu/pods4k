@@ -31,6 +31,13 @@ class ImmutableCharArrayTest {
     }
 
     @Test
+    fun `first validation`() {
+        with(ImmutableCharArray(3) { it.toChar() }) {
+            expectThat(this.first()::class.java).isEqualTo(primitiveCharClass)
+        }
+    }
+
+    @Test
     fun `componentN function validation`() {
         val values = ImmutableCharArray(1) { it.toChar() }
         val (first) = values

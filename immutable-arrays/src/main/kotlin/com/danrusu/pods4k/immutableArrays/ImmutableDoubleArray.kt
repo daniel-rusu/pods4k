@@ -35,6 +35,17 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
    */
   public operator fun `get`(index: Int): Double = values[index]
 
+  /**
+   * Returns the first element.
+   *
+   * @throws NoSuchElementException if the array is empty.
+   */
+  public fun first(): Double {
+    if (isEmpty()) throw NoSuchElementException("Array is empty!")
+
+    return get(0)
+  }
+
   public operator fun component1(): Double = get(0)
 
   public operator fun component2(): Double = get(1)

@@ -34,6 +34,17 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
    */
   public operator fun `get`(index: Int): Int = values[index]
 
+  /**
+   * Returns the first element.
+   *
+   * @throws NoSuchElementException if the array is empty.
+   */
+  public fun first(): Int {
+    if (isEmpty()) throw NoSuchElementException("Array is empty!")
+
+    return get(0)
+  }
+
   public operator fun component1(): Int = get(0)
 
   public operator fun component2(): Int = get(1)

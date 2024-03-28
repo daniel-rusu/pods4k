@@ -35,6 +35,17 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
    */
   public operator fun `get`(index: Int): Byte = values[index]
 
+  /**
+   * Returns the first element.
+   *
+   * @throws NoSuchElementException if the array is empty.
+   */
+  public fun first(): Byte {
+    if (isEmpty()) throw NoSuchElementException("Array is empty!")
+
+    return get(0)
+  }
+
   public operator fun component1(): Byte = get(0)
 
   public operator fun component2(): Byte = get(1)

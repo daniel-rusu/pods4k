@@ -3,10 +3,7 @@ package com.danrusu.pods4k.immutableArrays
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.api.expectThrows
-import strikt.assertions.isA
-import strikt.assertions.isEqualTo
-import strikt.assertions.isFalse
-import strikt.assertions.isTrue
+import strikt.assertions.*
 
 private val primitiveIntClass = 3::class.java
 
@@ -107,6 +104,19 @@ class ImmutableIntArrayTest {
             expectThrows<ArrayIndexOutOfBoundsException> {
                 this[3]
             }
+        }
+    }
+
+    @Test
+    fun `first validation`() {
+        with(ImmutableIntArray(0) { it }) {
+            expectThrows<NoSuchElementException> { this.first() }
+        }.message.isEqualTo("Array is empty!")
+
+        with(ImmutableIntArray(3) { it }) {
+            val first = this.first()
+            expectThat(first).isEqualTo(0)
+            expectThat(first::class.java).isEqualTo(primitiveIntClass)
         }
     }
 

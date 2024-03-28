@@ -31,6 +31,13 @@ class ImmutableByteArrayTest {
     }
 
     @Test
+    fun `first validation`() {
+        with(ImmutableByteArray(3) { it.toByte() }) {
+            expectThat(this.first()::class.java).isEqualTo(primitiveByteClass)
+        }
+    }
+
+    @Test
     fun `componentN function validation`() {
         val values = ImmutableByteArray(1) { it.toByte() }
         val (first) = values
