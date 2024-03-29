@@ -66,4 +66,13 @@ class ImmutableFloatArrayTest {
             }
         }
     }
+
+    @Test
+    fun `forEach validation`() {
+        with(ImmutableFloatArray(3) { it.toFloat() }) {
+            this.forEach { element ->
+                expectThat(element::class.java).isEqualTo(primitiveFloatClass)
+            }
+        }
+    }
 }

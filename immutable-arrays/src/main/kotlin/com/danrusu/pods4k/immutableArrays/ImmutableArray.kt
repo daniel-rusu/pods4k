@@ -8,6 +8,7 @@ import kotlin.Int
 import kotlin.PublishedApi
 import kotlin.String
 import kotlin.Suppress
+import kotlin.Unit
 import kotlin.collections.Iterator
 import kotlin.jvm.JvmInline
 
@@ -84,6 +85,15 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
    */
   @Suppress("UNCHECKED_CAST")
   public operator fun iterator(): Iterator<T> = values.iterator() as Iterator<T>
+
+  /**
+   * Performs the specified [action] on each element sequentially starting with the first element
+   */
+  public inline fun forEach(action: (element: T) -> Unit) {
+    for (value in this) {
+        action(value)
+    }
+  }
 
   public companion object {
     /**

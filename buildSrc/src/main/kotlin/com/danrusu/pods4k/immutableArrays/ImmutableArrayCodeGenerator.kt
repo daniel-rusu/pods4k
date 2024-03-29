@@ -45,6 +45,7 @@ private fun generateImmutableArrayFile(baseType: BaseType, packageName: String):
             addFirst(baseType)
             addLast(baseType)
             addIteratorOperator(baseType)
+            addForEach(baseType)
             addCompanionObject {
                 addInvokeOperator(baseType, qualifiedClassName)
             }
@@ -194,6 +195,27 @@ private fun TypeSpec.Builder.addIteratorOperator(baseType: BaseType) {
             addStatement("return values.iterator()")
         }
     }
+}
+
+private fun TypeSpec.Builder.addForEach(baseType: BaseType) {
+    addFunction(
+        kdoc = "Performs the specified [action] on each element sequentially starting with the first element",
+        modifiers = listOf(KModifier.INLINE),
+        name = "forEach",
+        parameters = {
+            "action"(
+                type = LambdaTypeName.get(
+                    parameters = parameters { "element"(type = baseType.type) },
+                    returnType = Unit::class.asTypeName()
+                )
+            )
+        },
+        code = """
+            for (value in this) {
+                action(value)
+            }
+        """.trimIndent()
+    )
 }
 
 private fun TypeSpec.Builder.addInvokeOperator(baseType: BaseType, qualifiedClassName: ClassName) {

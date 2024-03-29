@@ -6,6 +6,7 @@ import kotlin.BooleanArray
 import kotlin.Int
 import kotlin.PublishedApi
 import kotlin.String
+import kotlin.Unit
 import kotlin.collections.Iterator
 import kotlin.jvm.JvmInline
 
@@ -80,6 +81,15 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
    * Creates an iterator allowing iteration over the elements of the array.
    */
   public operator fun iterator(): Iterator<Boolean> = values.iterator()
+
+  /**
+   * Performs the specified [action] on each element sequentially starting with the first element
+   */
+  public inline fun forEach(action: (element: Boolean) -> Unit) {
+    for (value in this) {
+        action(value)
+    }
+  }
 
   public companion object {
     /**

@@ -7,6 +7,7 @@ import kotlin.Long
 import kotlin.LongArray
 import kotlin.PublishedApi
 import kotlin.String
+import kotlin.Unit
 import kotlin.collections.Iterator
 import kotlin.jvm.JvmInline
 
@@ -81,6 +82,15 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
    * Creates an iterator allowing iteration over the elements of the array.
    */
   public operator fun iterator(): Iterator<Long> = values.iterator()
+
+  /**
+   * Performs the specified [action] on each element sequentially starting with the first element
+   */
+  public inline fun forEach(action: (element: Long) -> Unit) {
+    for (value in this) {
+        action(value)
+    }
+  }
 
   public companion object {
     /**

@@ -66,4 +66,13 @@ class ImmutableLongArrayTest {
             }
         }
     }
+
+    @Test
+    fun `forEach validation`() {
+        with(ImmutableLongArray(3) { it.toLong() }) {
+            this.forEach { element ->
+                expectThat(element::class.java).isEqualTo(primitiveLongClass)
+            }
+        }
+    }
 }

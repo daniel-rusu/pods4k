@@ -207,4 +207,15 @@ class ImmutableArrayTest {
             expectThat(elements).isEqualTo(mutableListOf("element 0", "element 1", "element 2"))
         }
     }
+
+    @Test
+    fun `forEach validation`() {
+        with(ImmutableArray(3) { "element $it" }) {
+            val elements = mutableListOf<String>()
+            this.forEach { element ->
+                elements += element
+            }
+            expectThat(elements).isEqualTo(mutableListOf("element 0", "element 1", "element 2"))
+        }
+    }
 }

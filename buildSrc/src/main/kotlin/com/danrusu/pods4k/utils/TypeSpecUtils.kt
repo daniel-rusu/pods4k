@@ -42,7 +42,7 @@ internal inline fun TypeSpec.Builder.addFunction(
     modifiers: List<KModifier> = emptyList(),
     name: String,
     parameters: ParameterDSL.() -> Unit = {},
-    returns: TypeName,
+    returns: TypeName? = null,
     code: String,
 ): TypeSpec.Builder {
     return addFunction(kdoc, modifiers, name, parameters, returns) {
@@ -55,7 +55,7 @@ internal inline fun TypeSpec.Builder.addFunction(
     modifiers: List<KModifier> = emptyList(),
     name: String,
     parameters: ParameterDSL.() -> Unit = {},
-    returns: TypeName,
+    returns: TypeName? = null,
     body: FunSpec.Builder.() -> Unit
 ): TypeSpec.Builder {
     return addFunction(
@@ -63,7 +63,7 @@ internal inline fun TypeSpec.Builder.addFunction(
             kdoc?.let { addKdoc(it) }
             addModifiers(modifiers)
             addParameters(ParameterDSL().apply(parameters).build())
-            returns(returns)
+            returns?.let { returns(it) }
             body()
         }.build()
     )

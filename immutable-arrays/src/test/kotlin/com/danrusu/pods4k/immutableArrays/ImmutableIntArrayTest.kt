@@ -224,4 +224,16 @@ class ImmutableIntArrayTest {
             expectThat(elements).isEqualTo(mutableListOf(0, 1, 2))
         }
     }
+
+    @Test
+    fun `forEach validation`() {
+        with(ImmutableIntArray(3) { it }) {
+            val elements = mutableListOf<Int>()
+            this.forEach { element ->
+                expectThat(element::class.java).isEqualTo(primitiveIntClass)
+                elements += element
+            }
+            expectThat(elements).isEqualTo(mutableListOf(0, 1, 2))
+        }
+    }
 }
