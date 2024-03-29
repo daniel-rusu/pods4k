@@ -13,109 +13,110 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 public value class ImmutableCharArray @PublishedApi internal constructor(
-  private val values: CharArray,
+    private val values: CharArray,
 ) {
-  public val size: Int
-    get() = values.size
+    public val size: Int
+        get() = values.size
 
-  /**
-   * Returns the index of the last element or -1 if the array is empty.
-   */
-  public val lastIndex: Int
-    get() = values.size - 1
-
-  override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
-
-  public fun isEmpty(): Boolean = values.isEmpty()
-
-  public fun isNotEmpty(): Boolean = values.isNotEmpty()
-
-  /**
-   * Returns the element at the specified [index]. This method can be called using the index
-   * operator.
-   */
-  public operator fun `get`(index: Int): Char = values[index]
-
-  public operator fun component1(): Char = get(0)
-
-  public operator fun component2(): Char = get(1)
-
-  public operator fun component3(): Char = get(2)
-
-  public operator fun component4(): Char = get(3)
-
-  public operator fun component5(): Char = get(4)
-
-  /**
-   * Returns the single element from the array, or throws an exception if the array is empty or has
-   * more than one element.
-   */
-  public fun single(): Char = when (size) {
-      0 -> throw NoSuchElementException("Array is empty!")
-      1 -> get(0)
-      else -> throw IllegalArgumentException("Array has more than one element!")
-  }
-
-  /**
-   * Returns the first element.
-   *
-   * @throws NoSuchElementException if the array is empty.
-   */
-  public fun first(): Char {
-    if (isEmpty()) throw NoSuchElementException("Array is empty!")
-
-    return get(0)
-  }
-
-  /**
-   * Returns the last element.
-   *
-   * @throws NoSuchElementException if the array is empty.
-   */
-  public fun last(): Char {
-    if (isEmpty()) throw NoSuchElementException("Array is empty!")
-
-    return get(lastIndex)
-  }
-
-  /**
-   * Creates an iterator allowing iteration over the elements of the array.
-   */
-  public operator fun iterator(): Iterator<Char> = values.iterator()
-
-  /**
-   * Performs the specified [action] on each element sequentially starting with the first element
-   */
-  public inline fun forEach(action: (element: Char) -> Unit) {
-    for (value in this) {
-        action(value)
-    }
-  }
-
-  /**
-   * Performs the specified [action] on each element sequentially starting with the first element
-   */
-  public inline fun forEachIndexed(action: (index: Int, element: Char) -> Unit) {
-    for (index in 0..lastIndex) {
-        action(index, get(index))
-    }
-  }
-
-  public companion object {
     /**
-     * Creates a ImmutableCharArray instance of the specified [size], where each element is
-     * calculated by calling the specified [init] function.
-     *
-     * [init] is called sequentially starting at index 0 to initialize the array with each element
-     * at its given index.
-     *
-     * Implementation:
-     * We're using the invoke method instead of a regular constructor so that we can declare it
-     * inline.  The call site will look like a regular constructor call.
+     * Returns the index of the last element or -1 if the array is empty.
      */
-    public inline operator fun invoke(size: Int, `init`: (index: Int) -> Char): ImmutableCharArray {
-      val backingArray = CharArray(size) { index -> init(index) }
-      return ImmutableCharArray(backingArray)
+    public val lastIndex: Int
+        get() = values.size - 1
+
+    override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
+
+    public fun isEmpty(): Boolean = values.isEmpty()
+
+    public fun isNotEmpty(): Boolean = values.isNotEmpty()
+
+    /**
+     * Returns the element at the specified [index]. This method can be called using the index
+     * operator.
+     */
+    public operator fun `get`(index: Int): Char = values[index]
+
+    public operator fun component1(): Char = get(0)
+
+    public operator fun component2(): Char = get(1)
+
+    public operator fun component3(): Char = get(2)
+
+    public operator fun component4(): Char = get(3)
+
+    public operator fun component5(): Char = get(4)
+
+    /**
+     * Returns the single element from the array, or throws an exception if the array is empty or
+     * has more than one element.
+     */
+    public fun single(): Char = when (size) {
+        0 -> throw NoSuchElementException("Array is empty!")
+        1 -> get(0)
+        else -> throw IllegalArgumentException("Array has more than one element!")
     }
-  }
+
+    /**
+     * Returns the first element.
+     *
+     * @throws NoSuchElementException if the array is empty.
+     */
+    public fun first(): Char {
+        if (isEmpty()) throw NoSuchElementException("Array is empty!")
+
+        return get(0)
+    }
+
+    /**
+     * Returns the last element.
+     *
+     * @throws NoSuchElementException if the array is empty.
+     */
+    public fun last(): Char {
+        if (isEmpty()) throw NoSuchElementException("Array is empty!")
+
+        return get(lastIndex)
+    }
+
+    /**
+     * Creates an iterator allowing iteration over the elements of the array.
+     */
+    public operator fun iterator(): Iterator<Char> = values.iterator()
+
+    /**
+     * Performs the specified [action] on each element sequentially starting with the first element
+     */
+    public inline fun forEach(action: (element: Char) -> Unit) {
+        for (value in this) {
+            action(value)
+        }
+    }
+
+    /**
+     * Performs the specified [action] on each element sequentially starting with the first element
+     */
+    public inline fun forEachIndexed(action: (index: Int, element: Char) -> Unit) {
+        for (index in 0..lastIndex) {
+            action(index, get(index))
+        }
+    }
+
+    public companion object {
+        /**
+         * Creates a ImmutableCharArray instance of the specified [size], where each element is
+         * calculated by calling the specified [init] function.
+         *
+         * [init] is called sequentially starting at index 0 to initialize the array with each
+         * element at its given index.
+         *
+         * Implementation:
+         * We're using the invoke method instead of a regular constructor so that we can declare it
+         * inline.  The call site will look like a regular constructor call.
+         */
+        public inline operator fun invoke(size: Int, `init`: (index: Int) -> Char):
+                ImmutableCharArray {
+            val backingArray = CharArray(size) { index -> init(index) }
+            return ImmutableCharArray(backingArray)
+        }
+    }
 }
