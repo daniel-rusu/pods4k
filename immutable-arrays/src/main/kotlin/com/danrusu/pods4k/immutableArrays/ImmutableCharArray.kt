@@ -92,6 +92,15 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     }
   }
 
+  /**
+   * Performs the specified [action] on each element sequentially starting with the first element
+   */
+  public inline fun forEachIndexed(action: (index: Int, element: Char) -> Unit) {
+    for (index in 0..lastIndex) {
+        action(index, get(index))
+    }
+  }
+
   public companion object {
     /**
      * Creates a ImmutableCharArray instance of the specified [size], where each element is

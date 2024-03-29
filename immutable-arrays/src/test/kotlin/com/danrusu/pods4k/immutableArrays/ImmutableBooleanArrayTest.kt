@@ -75,4 +75,13 @@ class ImmutableBooleanArrayTest {
             }
         }
     }
+
+    @Test
+    fun `forEachIndexed validation`() {
+        with(ImmutableBooleanArray(3) { it % 2 == 0 }) {
+            this.forEachIndexed { _, element ->
+                expectThat(element::class.java).isEqualTo(primitiveBooleanClass)
+            }
+        }
+    }
 }

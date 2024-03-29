@@ -75,4 +75,13 @@ class ImmutableShortArrayTest {
             }
         }
     }
+
+    @Test
+    fun `forEachIndexed validation`() {
+        with(ImmutableShortArray(3) { it.toShort() }) {
+            this.forEachIndexed { _, element ->
+                expectThat(element::class.java).isEqualTo(primitiveShortClass)
+            }
+        }
+    }
 }

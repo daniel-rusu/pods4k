@@ -95,6 +95,15 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     }
   }
 
+  /**
+   * Performs the specified [action] on each element sequentially starting with the first element
+   */
+  public inline fun forEachIndexed(action: (index: Int, element: T) -> Unit) {
+    for (index in 0..lastIndex) {
+        action(index, get(index))
+    }
+  }
+
   public companion object {
     /**
      * Creates a ImmutableArray instance of the specified [size], where each element is calculated

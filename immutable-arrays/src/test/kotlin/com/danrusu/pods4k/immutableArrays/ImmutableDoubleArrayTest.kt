@@ -75,4 +75,13 @@ class ImmutableDoubleArrayTest {
             }
         }
     }
+
+    @Test
+    fun `forEachIndexed validation`() {
+        with(ImmutableDoubleArray(3) { it.toDouble() }) {
+            this.forEachIndexed { _, element ->
+                expectThat(element::class.java).isEqualTo(primitiveDoubleClass)
+            }
+        }
+    }
 }

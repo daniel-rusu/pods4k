@@ -75,4 +75,13 @@ class ImmutableByteArrayTest {
             }
         }
     }
+
+    @Test
+    fun `forEachIndexed validation`() {
+        with(ImmutableByteArray(3) { it.toByte() }) {
+            this.forEachIndexed { _, element ->
+                expectThat(element::class.java).isEqualTo(primitiveByteClass)
+            }
+        }
+    }
 }

@@ -91,6 +91,15 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     }
   }
 
+  /**
+   * Performs the specified [action] on each element sequentially starting with the first element
+   */
+  public inline fun forEachIndexed(action: (index: Int, element: Boolean) -> Unit) {
+    for (index in 0..lastIndex) {
+        action(index, get(index))
+    }
+  }
+
   public companion object {
     /**
      * Creates a ImmutableBooleanArray instance of the specified [size], where each element is

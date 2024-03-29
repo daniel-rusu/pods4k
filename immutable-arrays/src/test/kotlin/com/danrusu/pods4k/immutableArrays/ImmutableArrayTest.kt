@@ -218,4 +218,21 @@ class ImmutableArrayTest {
             expectThat(elements).isEqualTo(mutableListOf("element 0", "element 1", "element 2"))
         }
     }
+
+    @Test
+    fun `forEachIndexed validation`() {
+        with(ImmutableArray(3) { "element $it" }) {
+            val elements = mutableMapOf<Int, String>()
+            this.forEachIndexed { index, element ->
+                elements[index] = element
+            }
+            expectThat(elements).isEqualTo(
+                mutableMapOf(
+                    0 to "element 0",
+                    1 to "element 1",
+                    2 to "element 2",
+                )
+            )
+        }
+    }
 }

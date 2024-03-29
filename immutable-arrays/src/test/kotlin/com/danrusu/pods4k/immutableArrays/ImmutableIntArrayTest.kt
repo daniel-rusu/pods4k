@@ -236,4 +236,22 @@ class ImmutableIntArrayTest {
             expectThat(elements).isEqualTo(mutableListOf(0, 1, 2))
         }
     }
+
+    @Test
+    fun `forEachIndexed validation`() {
+        with(ImmutableIntArray(3) { 10 * it }) {
+            val elements = mutableMapOf<Int, Int>()
+            this.forEachIndexed { index, element ->
+                expectThat(element::class.java).isEqualTo(primitiveIntClass)
+                elements[index] = element
+            }
+            expectThat(elements).isEqualTo(
+                mutableMapOf(
+                    0 to 0,
+                    1 to 10,
+                    2 to 20,
+                )
+            )
+        }
+    }
 }

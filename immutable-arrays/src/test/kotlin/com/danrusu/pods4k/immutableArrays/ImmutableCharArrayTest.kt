@@ -75,4 +75,13 @@ class ImmutableCharArrayTest {
             }
         }
     }
+
+    @Test
+    fun `forEachIndexed validation`() {
+        with(ImmutableCharArray(3) { it.toChar() }) {
+            this.forEachIndexed { _, element ->
+                expectThat(element::class.java).isEqualTo(primitiveCharClass)
+            }
+        }
+    }
 }
