@@ -40,8 +40,9 @@ private fun generateImmutableArrayFile(baseType: BaseType, packageName: String):
             addIsEmpty()
             addIsNotEmpty()
             addArrayIndexOperator(baseType)
-            addFirst(baseType)
             addComponentNFunctions(baseType)
+            addFirst(baseType)
+            addLast(baseType)
             addIteratorOperator(baseType)
             addCompanionObject {
                 addInvokeOperator(baseType, qualifiedClassName)
@@ -127,6 +128,23 @@ private fun TypeSpec.Builder.addFirst(baseType: BaseType) {
             if (isEmpty()) throw NoSuchElementException("Array is empty!")
             
             return get(0)
+        """.trimIndent(),
+    )
+}
+
+private fun TypeSpec.Builder.addLast(baseType: BaseType) {
+    addFunction(
+        kdoc = """
+            Returns the last element.
+            
+            @throws NoSuchElementException if the array is empty.
+        """.trimIndent(),
+        name = "last",
+        returns = baseType.type,
+        code = """
+            if (isEmpty()) throw NoSuchElementException("Array is empty!")
+            
+            return get(lastIndex)
         """.trimIndent(),
     )
 }

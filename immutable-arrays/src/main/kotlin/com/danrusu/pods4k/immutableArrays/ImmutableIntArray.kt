@@ -34,6 +34,16 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
    */
   public operator fun `get`(index: Int): Int = values[index]
 
+  public operator fun component1(): Int = get(0)
+
+  public operator fun component2(): Int = get(1)
+
+  public operator fun component3(): Int = get(2)
+
+  public operator fun component4(): Int = get(3)
+
+  public operator fun component5(): Int = get(4)
+
   /**
    * Returns the first element.
    *
@@ -45,15 +55,16 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     return get(0)
   }
 
-  public operator fun component1(): Int = get(0)
+  /**
+   * Returns the last element.
+   *
+   * @throws NoSuchElementException if the array is empty.
+   */
+  public fun last(): Int {
+    if (isEmpty()) throw NoSuchElementException("Array is empty!")
 
-  public operator fun component2(): Int = get(1)
-
-  public operator fun component3(): Int = get(2)
-
-  public operator fun component4(): Int = get(3)
-
-  public operator fun component5(): Int = get(4)
+    return get(lastIndex)
+  }
 
   /**
    * Creates an iterator allowing iteration over the elements of the array.

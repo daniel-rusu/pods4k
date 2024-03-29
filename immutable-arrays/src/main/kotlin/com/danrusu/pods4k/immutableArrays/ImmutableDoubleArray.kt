@@ -35,6 +35,16 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
    */
   public operator fun `get`(index: Int): Double = values[index]
 
+  public operator fun component1(): Double = get(0)
+
+  public operator fun component2(): Double = get(1)
+
+  public operator fun component3(): Double = get(2)
+
+  public operator fun component4(): Double = get(3)
+
+  public operator fun component5(): Double = get(4)
+
   /**
    * Returns the first element.
    *
@@ -46,15 +56,16 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     return get(0)
   }
 
-  public operator fun component1(): Double = get(0)
+  /**
+   * Returns the last element.
+   *
+   * @throws NoSuchElementException if the array is empty.
+   */
+  public fun last(): Double {
+    if (isEmpty()) throw NoSuchElementException("Array is empty!")
 
-  public operator fun component2(): Double = get(1)
-
-  public operator fun component3(): Double = get(2)
-
-  public operator fun component4(): Double = get(3)
-
-  public operator fun component5(): Double = get(4)
+    return get(lastIndex)
+  }
 
   /**
    * Creates an iterator allowing iteration over the elements of the array.

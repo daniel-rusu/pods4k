@@ -31,6 +31,13 @@ class ImmutableLongArrayTest {
     }
 
     @Test
+    fun `componentN function validation`() {
+        val values = ImmutableLongArray(1) { it.toLong() }
+        val (first) = values
+        expectThat(first::class.java == primitiveLongClass)
+    }
+
+    @Test
     fun `first validation`() {
         with(ImmutableLongArray(3) { it.toLong() }) {
             expectThat(this.first()::class.java).isEqualTo(primitiveLongClass)
@@ -38,10 +45,10 @@ class ImmutableLongArrayTest {
     }
 
     @Test
-    fun `componentN function validation`() {
-        val values = ImmutableLongArray(1) { it.toLong() }
-        val (first) = values
-        expectThat(first::class.java == primitiveLongClass)
+    fun `last validation`() {
+        with(ImmutableLongArray(3) { it.toLong() }) {
+            expectThat(this.last()::class.java).isEqualTo(primitiveLongClass)
+        }
     }
 
     @Test

@@ -108,19 +108,6 @@ class ImmutableIntArrayTest {
     }
 
     @Test
-    fun `first validation`() {
-        with(ImmutableIntArray(0) { it }) {
-            expectThrows<NoSuchElementException> { this.first() }
-        }.message.isEqualTo("Array is empty!")
-
-        with(ImmutableIntArray(3) { it }) {
-            val first = this.first()
-            expectThat(first).isEqualTo(0)
-            expectThat(first::class.java).isEqualTo(primitiveIntClass)
-        }
-    }
-
-    @Test
     fun `componentN function validation`() {
         val values = ImmutableIntArray(5) { it }
         with(values) {
@@ -153,6 +140,32 @@ class ImmutableIntArrayTest {
             expectThat(third).isEqualTo(2)
             expectThat(fourth).isEqualTo(3)
             expectThat(fifth).isEqualTo(4)
+        }
+    }
+
+    @Test
+    fun `first validation`() {
+        with(ImmutableIntArray(0) { it }) {
+            expectThrows<NoSuchElementException> { this.first() }
+        }.message.isEqualTo("Array is empty!")
+
+        with(ImmutableIntArray(3) { it }) {
+            val first = this.first()
+            expectThat(first).isEqualTo(0)
+            expectThat(first::class.java).isEqualTo(primitiveIntClass)
+        }
+    }
+
+    @Test
+    fun `last validation`() {
+        with(ImmutableIntArray(0) { it }) {
+            expectThrows<NoSuchElementException> { this.last() }
+        }.message.isEqualTo("Array is empty!")
+
+        with(ImmutableIntArray(3) { it }) {
+            val last = this.last()
+            expectThat(last).isEqualTo(2)
+            expectThat(last::class.java).isEqualTo(primitiveIntClass)
         }
     }
 

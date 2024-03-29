@@ -35,6 +35,16 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
    */
   public operator fun `get`(index: Int): Short = values[index]
 
+  public operator fun component1(): Short = get(0)
+
+  public operator fun component2(): Short = get(1)
+
+  public operator fun component3(): Short = get(2)
+
+  public operator fun component4(): Short = get(3)
+
+  public operator fun component5(): Short = get(4)
+
   /**
    * Returns the first element.
    *
@@ -46,15 +56,16 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     return get(0)
   }
 
-  public operator fun component1(): Short = get(0)
+  /**
+   * Returns the last element.
+   *
+   * @throws NoSuchElementException if the array is empty.
+   */
+  public fun last(): Short {
+    if (isEmpty()) throw NoSuchElementException("Array is empty!")
 
-  public operator fun component2(): Short = get(1)
-
-  public operator fun component3(): Short = get(2)
-
-  public operator fun component4(): Short = get(3)
-
-  public operator fun component5(): Short = get(4)
+    return get(lastIndex)
+  }
 
   /**
    * Creates an iterator allowing iteration over the elements of the array.

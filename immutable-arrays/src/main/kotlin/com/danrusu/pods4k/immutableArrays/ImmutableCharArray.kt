@@ -35,6 +35,16 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
    */
   public operator fun `get`(index: Int): Char = values[index]
 
+  public operator fun component1(): Char = get(0)
+
+  public operator fun component2(): Char = get(1)
+
+  public operator fun component3(): Char = get(2)
+
+  public operator fun component4(): Char = get(3)
+
+  public operator fun component5(): Char = get(4)
+
   /**
    * Returns the first element.
    *
@@ -46,15 +56,16 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     return get(0)
   }
 
-  public operator fun component1(): Char = get(0)
+  /**
+   * Returns the last element.
+   *
+   * @throws NoSuchElementException if the array is empty.
+   */
+  public fun last(): Char {
+    if (isEmpty()) throw NoSuchElementException("Array is empty!")
 
-  public operator fun component2(): Char = get(1)
-
-  public operator fun component3(): Char = get(2)
-
-  public operator fun component4(): Char = get(3)
-
-  public operator fun component5(): Char = get(4)
+    return get(lastIndex)
+  }
 
   /**
    * Creates an iterator allowing iteration over the elements of the array.

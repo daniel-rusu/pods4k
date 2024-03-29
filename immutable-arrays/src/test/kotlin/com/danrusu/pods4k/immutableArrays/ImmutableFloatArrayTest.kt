@@ -31,6 +31,13 @@ class ImmutableFloatArrayTest {
     }
 
     @Test
+    fun `componentN function validation`() {
+        val values = ImmutableFloatArray(1) { it.toFloat() }
+        val (first) = values
+        expectThat(first::class.java == primitiveFloatClass)
+    }
+
+    @Test
     fun `first validation`() {
         with(ImmutableFloatArray(3) { it.toFloat() }) {
             expectThat(this.first()::class.java).isEqualTo(primitiveFloatClass)
@@ -38,10 +45,10 @@ class ImmutableFloatArrayTest {
     }
 
     @Test
-    fun `componentN function validation`() {
-        val values = ImmutableFloatArray(1) { it.toFloat() }
-        val (first) = values
-        expectThat(first::class.java == primitiveFloatClass)
+    fun `last validation`() {
+        with(ImmutableFloatArray(3) { it.toFloat() }) {
+            expectThat(this.last()::class.java).isEqualTo(primitiveFloatClass)
+        }
     }
 
     @Test

@@ -101,17 +101,6 @@ class ImmutableArrayTest {
     }
 
     @Test
-    fun `first validation`() {
-        with(ImmutableArray(0) { "element $it" }) {
-            expectThrows<NoSuchElementException> { this.first() }
-        }.message.isEqualTo("Array is empty!")
-
-        with(ImmutableArray(3) { "element $it" }) {
-            expectThat(this.first()).isEqualTo("element 0")
-        }
-    }
-
-    @Test
     fun `componentN function validation`() {
         val values = ImmutableArray(5) { "element $it" }
         with(values) {
@@ -143,6 +132,28 @@ class ImmutableArrayTest {
             expectThat(third).isEqualTo("element 2")
             expectThat(fourth).isEqualTo("element 3")
             expectThat(fifth).isEqualTo("element 4")
+        }
+    }
+
+    @Test
+    fun `first validation`() {
+        with(ImmutableArray(0) { "element $it" }) {
+            expectThrows<NoSuchElementException> { this.first() }
+        }.message.isEqualTo("Array is empty!")
+
+        with(ImmutableArray(3) { "element $it" }) {
+            expectThat(this.first()).isEqualTo("element 0")
+        }
+    }
+
+    @Test
+    fun `last validation`() {
+        with(ImmutableArray(0) { "element $it" }) {
+            expectThrows<NoSuchElementException> { this.last() }
+        }.message.isEqualTo("Array is empty!")
+
+        with(ImmutableArray(3) { "element $it" }) {
+            expectThat(this.last()).isEqualTo("element 2")
         }
     }
 
