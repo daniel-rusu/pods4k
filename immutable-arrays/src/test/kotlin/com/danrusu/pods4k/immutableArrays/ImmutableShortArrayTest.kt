@@ -38,6 +38,13 @@ class ImmutableShortArrayTest {
     }
 
     @Test
+    fun `single validation`() {
+        with(ImmutableShortArray(1) { it.toShort() }) {
+            expectThat(this.single()::class.java).isEqualTo(primitiveShortClass)
+        }
+    }
+
+    @Test
     fun `first validation`() {
         with(ImmutableShortArray(3) { it.toShort() }) {
             expectThat(this.first()::class.java).isEqualTo(primitiveShortClass)

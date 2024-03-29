@@ -38,6 +38,13 @@ class ImmutableByteArrayTest {
     }
 
     @Test
+    fun `single validation`() {
+        with(ImmutableByteArray(1) { it.toByte() }) {
+            expectThat(this.single()::class.java).isEqualTo(primitiveByteClass)
+        }
+    }
+
+    @Test
     fun `first validation`() {
         with(ImmutableByteArray(3) { it.toByte() }) {
             expectThat(this.first()::class.java).isEqualTo(primitiveByteClass)

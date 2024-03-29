@@ -144,6 +144,23 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `single validation`() {
+        with(ImmutableIntArray(0) { it }) {
+            expectThrows<NoSuchElementException> { this.single() }
+        }.message.isEqualTo("Array is empty!")
+
+        with(ImmutableIntArray(3) { it }) {
+            expectThrows<IllegalArgumentException> { this.single() }
+        }.message.isEqualTo("Array has more than one element!")
+
+        with(ImmutableIntArray(1) { it }) {
+            val singleValue = this.single()
+            expectThat(singleValue).isEqualTo(0)
+            expectThat(singleValue::class.java).isEqualTo(primitiveIntClass)
+        }
+    }
+
+    @Test
     fun `first validation`() {
         with(ImmutableIntArray(0) { it }) {
             expectThrows<NoSuchElementException> { this.first() }

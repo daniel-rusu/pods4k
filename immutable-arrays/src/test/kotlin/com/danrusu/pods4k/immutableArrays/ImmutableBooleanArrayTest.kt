@@ -38,6 +38,13 @@ class ImmutableBooleanArrayTest {
     }
 
     @Test
+    fun `single validation`() {
+        with(ImmutableBooleanArray(1) { it % 2 == 0 }) {
+            expectThat(this.single()::class.java).isEqualTo(primitiveBooleanClass)
+        }
+    }
+
+    @Test
     fun `first validation`() {
         with(ImmutableBooleanArray(3) { it % 2 == 0 }) {
             expectThat(this.first()::class.java).isEqualTo(primitiveBooleanClass)

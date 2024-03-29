@@ -38,6 +38,13 @@ class ImmutableLongArrayTest {
     }
 
     @Test
+    fun `single validation`() {
+        with(ImmutableLongArray(1) { it.toLong() }) {
+            expectThat(this.single()::class.java).isEqualTo(primitiveLongClass)
+        }
+    }
+
+    @Test
     fun `first validation`() {
         with(ImmutableLongArray(3) { it.toLong() }) {
             expectThat(this.first()::class.java).isEqualTo(primitiveLongClass)

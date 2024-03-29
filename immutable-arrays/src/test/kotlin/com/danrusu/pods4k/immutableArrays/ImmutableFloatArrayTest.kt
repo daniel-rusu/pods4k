@@ -38,6 +38,13 @@ class ImmutableFloatArrayTest {
     }
 
     @Test
+    fun `single validation`() {
+        with(ImmutableFloatArray(1) { it.toFloat() }) {
+            expectThat(this.single()::class.java).isEqualTo(primitiveFloatClass)
+        }
+    }
+
+    @Test
     fun `first validation`() {
         with(ImmutableFloatArray(3) { it.toFloat() }) {
             expectThat(this.first()::class.java).isEqualTo(primitiveFloatClass)

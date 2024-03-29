@@ -136,6 +136,21 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `single validation`() {
+        with(ImmutableArray(0) { "element $it" }) {
+            expectThrows<NoSuchElementException> { this.single() }
+        }.message.isEqualTo("Array is empty!")
+
+        with(ImmutableArray(3) { "element $it" }) {
+            expectThrows<IllegalArgumentException> { this.single() }
+        }.message.isEqualTo("Array has more than one element!")
+
+        with(ImmutableArray(1) { "element $it" }) {
+            expectThat(this.single()).isEqualTo("element 0")
+        }
+    }
+
+    @Test
     fun `first validation`() {
         with(ImmutableArray(0) { "element $it" }) {
             expectThrows<NoSuchElementException> { this.first() }

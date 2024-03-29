@@ -38,6 +38,13 @@ class ImmutableCharArrayTest {
     }
 
     @Test
+    fun `single validation`() {
+        with(ImmutableCharArray(1) { it.toChar() }) {
+            expectThat(this.single()::class.java).isEqualTo(primitiveCharClass)
+        }
+    }
+
+    @Test
     fun `first validation`() {
         with(ImmutableCharArray(3) { it.toChar() }) {
             expectThat(this.first()::class.java).isEqualTo(primitiveCharClass)

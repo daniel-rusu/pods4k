@@ -48,6 +48,16 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
   public operator fun component5(): T = get(4)
 
   /**
+   * Returns the single element from the array, or throws an exception if the array is empty or has
+   * more than one element.
+   */
+  public fun single(): T = when (size) {
+      0 -> throw NoSuchElementException("Array is empty!")
+      1 -> get(0)
+      else -> throw IllegalArgumentException("Array has more than one element!")
+  }
+
+  /**
    * Returns the first element.
    *
    * @throws NoSuchElementException if the array is empty.

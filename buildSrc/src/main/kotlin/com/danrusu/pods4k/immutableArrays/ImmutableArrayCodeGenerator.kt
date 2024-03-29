@@ -41,6 +41,7 @@ private fun generateImmutableArrayFile(baseType: BaseType, packageName: String):
             addIsNotEmpty()
             addArrayIndexOperator(baseType)
             addComponentNFunctions(baseType)
+            addSingle(baseType)
             addFirst(baseType)
             addLast(baseType)
             addIteratorOperator(baseType)
@@ -113,6 +114,23 @@ private fun TypeSpec.Builder.addArrayIndexOperator(baseType: BaseType) {
             addStatement("return values[index]")
         }
     }
+}
+
+private fun TypeSpec.Builder.addSingle(baseType: BaseType) {
+    addFunction(
+        kdoc = """
+            Returns the single element from the array, or throws an exception if the array is empty or has more than one element.
+        """.trimIndent(),
+        name = "single",
+        returns = baseType.type,
+        code = """
+            return when (size) {
+                0 -> throw NoSuchElementException("Array is empty!")
+                1 -> get(0)
+                else -> throw IllegalArgumentException("Array has more than one element!")
+            }
+        """.trimIndent(),
+    )
 }
 
 private fun TypeSpec.Builder.addFirst(baseType: BaseType) {
