@@ -7,19 +7,24 @@ import java.io.File
 
 private const val NUM_COMPONENT_N_FUNCTIONS = 5
 
+private const val EMPTY_SINGLETONS_PACKAGE_NAME = "emptySingletons"
+private val packageName = ImmutableArrayCodeGenerator::class.java.`package`.name
+private val emptySingletonsPackageName = "$packageName.emptySingletons"
+
+private val emptyIterator = ClassName(emptySingletonsPackageName, "EmptyIterator")
+
 internal object ImmutableArrayCodeGenerator {
     fun generate(destinationPath: String) {
-        val packageName = ImmutableArrayCodeGenerator::class.java.`package`.name
 
         for (baseType in BaseType.values()) {
-            val fileSpec = generateImmutableArrayFile(baseType, packageName)
+            val fileSpec = generateImmutableArrayFile(baseType)
 
             fileSpec.writeTo(File(destinationPath, ""))
         }
     }
 }
 
-private fun generateImmutableArrayFile(baseType: BaseType, packageName: String): FileSpec {
+private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
     val qualifiedClassName = ClassName(packageName, baseType.generatedClassName)
 
     return createFile(packageName, baseType.generatedClassName) {
@@ -195,6 +200,7 @@ private fun TypeSpec.Builder.addIteratorOperator(baseType: BaseType) {
         name = "iterator",
         returns = iteratorType,
     ) {
+        addStatement("if (isEmpty()) return %T", emptyIterator)
         if (baseType == BaseType.GENERIC) {
             suppress("UNCHECKED_CAST")
             addStatement("return values.iterator() as %T", iteratorType)

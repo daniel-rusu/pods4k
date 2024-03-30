@@ -1,6 +1,7 @@
 // Auto-generated file. DO NOT EDIT!
 package com.danrusu.pods4k.immutableArrays
 
+import com.danrusu.pods4k.immutableArrays.emptySingletons.EmptyIterator
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.DoubleArray
@@ -88,7 +89,10 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * Creates an iterator allowing iteration over the elements of the array.
      */
-    public operator fun iterator(): Iterator<Double> = values.iterator()
+    public operator fun iterator(): Iterator<Double> {
+        if (isEmpty()) return EmptyIterator
+        return values.iterator()
+    }
 
     /**
      * Performs the specified [action] on each element sequentially starting with the first element
