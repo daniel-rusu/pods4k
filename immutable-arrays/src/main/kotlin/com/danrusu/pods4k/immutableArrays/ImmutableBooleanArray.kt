@@ -10,6 +10,7 @@ import kotlin.String
 import kotlin.Unit
 import kotlin.collections.Iterator
 import kotlin.collections.List
+import kotlin.collections.MutableList
 import kotlin.jvm.JvmInline
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
@@ -88,9 +89,14 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     }
 
     /**
-     * Returns a [List] containing all elements.
+     * Returns a [List] containing all the elements.
      */
     public fun toList(): List<Boolean> = values.toList()
+
+    /**
+     * Returns a [MutableList] containing all the elements.
+     */
+    public fun toMutableList(): MutableList<Boolean> = values.toMutableList()
 
     /**
      * Returns an iterator allowing iteration over the elements of the array.

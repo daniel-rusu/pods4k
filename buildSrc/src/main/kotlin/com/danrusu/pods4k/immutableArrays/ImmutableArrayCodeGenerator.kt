@@ -55,6 +55,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addFirst(baseType)
             addLast(baseType)
             addToList(baseType)
+            addToMutableList(baseType)
             addIteratorOperator(baseType)
             addAsSequence(baseType)
             addForEach(baseType)
@@ -196,7 +197,7 @@ private fun TypeSpec.Builder.addToList(baseType: BaseType) {
     val listType = List::class.asTypeName().parameterizedBy(baseType.type)
 
     addFunction(
-        kdoc = "Returns a [List] containing all elements.",
+        kdoc = "Returns a [List] containing all the elements.",
         name = "toList",
         returns = listType,
     ) {
@@ -205,6 +206,24 @@ private fun TypeSpec.Builder.addToList(baseType: BaseType) {
             addStatement("return values.toList() as %T", listType)
         } else {
             addStatement("return values.toList()")
+        }
+    }
+}
+
+private fun TypeSpec.Builder.addToMutableList(baseType: BaseType) {
+    val mutableListClassName = ClassName("kotlin.collections", "MutableList")
+    val listType = mutableListClassName.parameterizedBy(baseType.type)
+
+    addFunction(
+        kdoc = "Returns a [MutableList] containing all the elements.",
+        name = "toMutableList",
+        returns = listType,
+    ) {
+        if (baseType == BaseType.GENERIC) {
+            suppress("UNCHECKED_CAST")
+            addStatement("return values.toMutableList() as %T", listType)
+        } else {
+            addStatement("return values.toMutableList()")
         }
     }
 }

@@ -12,6 +12,7 @@ import kotlin.Suppress
 import kotlin.Unit
 import kotlin.collections.Iterator
 import kotlin.collections.List
+import kotlin.collections.MutableList
 import kotlin.jvm.JvmInline
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
@@ -91,10 +92,16 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     }
 
     /**
-     * Returns a [List] containing all elements.
+     * Returns a [List] containing all the elements.
      */
     @Suppress("UNCHECKED_CAST")
     public fun toList(): List<T> = values.toList() as List<T>
+
+    /**
+     * Returns a [MutableList] containing all the elements.
+     */
+    @Suppress("UNCHECKED_CAST")
+    public fun toMutableList(): MutableList<T> = values.toMutableList() as MutableList<T>
 
     /**
      * Returns an iterator allowing iteration over the elements of the array.

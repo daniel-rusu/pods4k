@@ -211,6 +211,13 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `toMutableList validation`() {
+        with(ImmutableIntArray(3) { it }) {
+            expectThat(this.toMutableList()).isEqualTo(mutableListOf(0, 1, 2))
+        }
+    }
+
+    @Test
     fun `iterator validation`() {
         with(ImmutableIntArray(0) { it }) {
             val iterator = this.iterator()

@@ -197,6 +197,13 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `toMutableList validation`() {
+        with(ImmutableArray(3) { "element $it" }) {
+            expectThat(this.toMutableList()).isEqualTo(mutableListOf("element 0", "element 1", "element 2"))
+        }
+    }
+
+    @Test
     fun `iterator validation`() {
         with(ImmutableArray(0) { "element $it" }) {
             val iterator = this.iterator()
