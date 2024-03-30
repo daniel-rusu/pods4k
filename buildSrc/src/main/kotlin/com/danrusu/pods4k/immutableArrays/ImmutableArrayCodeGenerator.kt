@@ -54,6 +54,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addSingle(baseType)
             addFirst(baseType)
             addLast(baseType)
+            addToList(baseType)
             addIteratorOperator(baseType)
             addAsSequence(baseType)
             addForEach(baseType)
@@ -188,6 +189,23 @@ private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
             returns = baseType.type,
             code = "return get(${n - 1})",
         )
+    }
+}
+
+private fun TypeSpec.Builder.addToList(baseType: BaseType) {
+    val listType = List::class.asTypeName().parameterizedBy(baseType.type)
+
+    addFunction(
+        kdoc = "Returns a [List] containing all elements.",
+        name = "toList",
+        returns = listType,
+    ) {
+        if (baseType == BaseType.GENERIC) {
+            suppress("UNCHECKED_CAST")
+            addStatement("return values.toList() as %T", listType)
+        } else {
+            addStatement("return values.toList()")
+        }
     }
 }
 

@@ -9,6 +9,7 @@ import kotlin.PublishedApi
 import kotlin.String
 import kotlin.Unit
 import kotlin.collections.Iterator
+import kotlin.collections.List
 import kotlin.jvm.JvmInline
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
@@ -85,6 +86,11 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
 
         return get(lastIndex)
     }
+
+    /**
+     * Returns a [List] containing all elements.
+     */
+    public fun toList(): List<Int> = values.toList()
 
     /**
      * Returns an iterator allowing iteration over the elements of the array.

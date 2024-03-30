@@ -201,6 +201,16 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `toList validation`() {
+        with(ImmutableIntArray(0) { it }) {
+            expectThat(this.toList() === emptyList<Int>()).isTrue()
+        }
+        with(ImmutableIntArray(3) { it }) {
+            expectThat(this.toList()).isEqualTo(listOf(0, 1, 2))
+        }
+    }
+
+    @Test
     fun `iterator validation`() {
         with(ImmutableIntArray(0) { it }) {
             val iterator = this.iterator()
@@ -245,7 +255,7 @@ class ImmutableIntArrayTest {
     @Test
     fun `asSequence validation`() {
         with(ImmutableIntArray(0) { it }) {
-            expectThat(this.asSequence() === emptySequence<Int>())
+            expectThat(this.asSequence() === emptySequence<Int>()).isTrue()
         }
         with(ImmutableIntArray(3) { it }) {
             val elementsFromSequence = this.asSequence().toList()
