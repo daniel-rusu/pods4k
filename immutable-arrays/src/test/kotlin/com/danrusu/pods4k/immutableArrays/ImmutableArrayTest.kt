@@ -226,6 +226,17 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `asSequence validation`() {
+        with(ImmutableArray(0) { "element $it" }) {
+            expectThat(this.asSequence() === emptySequence<String>())
+        }
+        with(ImmutableArray(3) { "element $it" }) {
+            val elementsFromSequence = this.asSequence().toList()
+            expectThat(elementsFromSequence).isEqualTo(listOf("element 0", "element 1", "element 2"))
+        }
+    }
+
+    @Test
     fun `forEach validation`() {
         with(ImmutableArray(3) { "element $it" }) {
             val elements = mutableListOf<String>()

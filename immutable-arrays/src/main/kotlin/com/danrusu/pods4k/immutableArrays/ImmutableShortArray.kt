@@ -12,6 +12,7 @@ import kotlin.Unit
 import kotlin.collections.Iterator
 import kotlin.jvm.JvmInline
 import kotlin.ranges.IntRange
+import kotlin.sequences.Sequence
 
 @JvmInline
 public value class ImmutableShortArray @PublishedApi internal constructor(
@@ -87,11 +88,20 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     }
 
     /**
-     * Creates an iterator allowing iteration over the elements of the array.
+     * Returns an iterator allowing iteration over the elements of the array.
      */
     public operator fun iterator(): Iterator<Short> {
         if (isEmpty()) return EmptyIterator
         return values.iterator()
+    }
+
+    /**
+     * Returns a [Sequence] which returns the elements of this array when iterated.
+     */
+    public fun asSequence(): Sequence<Short> {
+        if (isEmpty()) return emptySequence()
+
+        return Sequence { iterator() }
     }
 
     /**

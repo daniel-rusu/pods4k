@@ -7,7 +7,6 @@ import java.io.File
 
 private const val NUM_COMPONENT_N_FUNCTIONS = 5
 
-private const val EMPTY_SINGLETONS_PACKAGE_NAME = "emptySingletons"
 private val packageName = ImmutableArrayCodeGenerator::class.java.`package`.name
 private val emptySingletonsPackageName = "$packageName.emptySingletons"
 
@@ -56,6 +55,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addFirst(baseType)
             addLast(baseType)
             addIteratorOperator(baseType)
+            addAsSequence(baseType)
             addForEach(baseType)
             addForEachIndexed(baseType)
             addCompanionObject {
@@ -195,7 +195,7 @@ private fun TypeSpec.Builder.addIteratorOperator(baseType: BaseType) {
     val iteratorType = Iterator::class.asClassName().parameterizedBy(baseType.type)
 
     addFunction(
-        kdoc = "Creates an iterator allowing iteration over the elements of the array.",
+        kdoc = "Returns an iterator allowing iteration over the elements of the array.",
         modifiers = listOf(KModifier.OPERATOR),
         name = "iterator",
         returns = iteratorType,
@@ -208,6 +208,19 @@ private fun TypeSpec.Builder.addIteratorOperator(baseType: BaseType) {
             addStatement("return values.iterator()")
         }
     }
+}
+
+private fun TypeSpec.Builder.addAsSequence(baseType: BaseType) {
+    addFunction(
+        kdoc = "Returns a [Sequence] which returns the elements of this array when iterated.",
+        name = "asSequence",
+        returns = Sequence::class.asClassName().parameterizedBy(baseType.type),
+        code = """
+            if (isEmpty()) return emptySequence()
+            
+            return Sequence { iterator() }
+        """.trimIndent()
+    )
 }
 
 private fun TypeSpec.Builder.addForEach(baseType: BaseType) {

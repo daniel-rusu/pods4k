@@ -13,6 +13,7 @@ import kotlin.Unit
 import kotlin.collections.Iterator
 import kotlin.jvm.JvmInline
 import kotlin.ranges.IntRange
+import kotlin.sequences.Sequence
 
 @JvmInline
 public value class ImmutableArray<T> @PublishedApi internal constructor(
@@ -89,12 +90,21 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     }
 
     /**
-     * Creates an iterator allowing iteration over the elements of the array.
+     * Returns an iterator allowing iteration over the elements of the array.
      */
     @Suppress("UNCHECKED_CAST")
     public operator fun iterator(): Iterator<T> {
         if (isEmpty()) return EmptyIterator
         return values.iterator() as Iterator<T>
+    }
+
+    /**
+     * Returns a [Sequence] which returns the elements of this array when iterated.
+     */
+    public fun asSequence(): Sequence<T> {
+        if (isEmpty()) return emptySequence()
+
+        return Sequence { iterator() }
     }
 
     /**
