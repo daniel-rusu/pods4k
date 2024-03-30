@@ -34,7 +34,13 @@ private fun generateImmutableArrayFile(baseType: BaseType, packageName: String):
                 kdoc = "Returns the index of the last element or -1 if the array is empty.",
                 name = "lastIndex",
                 type = Int::class.asTypeName(),
-                get = "return values.size - 1"
+                get = "return values.size - 1",
+            )
+            addProperty(
+                kdoc = "Returns the range of valid indices for the array.",
+                name = "indices",
+                type = IntRange::class.asTypeName(),
+                get = "return IntRange(0, lastIndex)",
             )
             overrideToString()
             addIsEmpty()
@@ -77,7 +83,7 @@ private fun TypeSpec.Builder.overrideToString() {
         returns = String::class.asTypeName(),
         code = """
             return values.joinToString(prefix = "[", postfix = "]")
-        """.trimIndent()
+        """.trimIndent(),
     )
 }
 
@@ -87,7 +93,7 @@ private fun TypeSpec.Builder.addIsEmpty() {
         returns = Boolean::class.asTypeName(),
         code = """
             return values.isEmpty()
-        """.trimIndent()
+        """.trimIndent(),
     )
 }
 
@@ -97,7 +103,7 @@ private fun TypeSpec.Builder.addIsNotEmpty() {
         returns = Boolean::class.asTypeName(),
         code = """
             return values.isNotEmpty()
-        """.trimIndent()
+        """.trimIndent(),
     )
 }
 
@@ -175,7 +181,7 @@ private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
             modifiers = listOf(KModifier.OPERATOR),
             name = "component$n",
             returns = baseType.type,
-            code = "return get(${n - 1})"
+            code = "return get(${n - 1})",
         )
     }
 }
@@ -215,7 +221,7 @@ private fun TypeSpec.Builder.addForEach(baseType: BaseType) {
             for (value in this) {
                 action(value)
             }
-        """.trimIndent()
+        """.trimIndent(),
     )
 }
 
@@ -236,7 +242,7 @@ private fun TypeSpec.Builder.addForEachIndexed(baseType: BaseType) {
             for (index in 0..lastIndex) {
                 action(index, get(index))
             }
-        """.trimIndent()
+        """.trimIndent(),
     )
 }
 
@@ -261,7 +267,7 @@ private fun TypeSpec.Builder.addInvokeOperator(baseType: BaseType, qualifiedClas
                 )
             )
         },
-        returns = qualifiedClassName.maybeAddGenericType(baseType)
+        returns = qualifiedClassName.maybeAddGenericType(baseType),
     ) {
         if (baseType == BaseType.GENERIC) {
             addTypeVariable(baseType.type as TypeVariableName)

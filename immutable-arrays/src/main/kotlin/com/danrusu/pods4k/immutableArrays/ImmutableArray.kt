@@ -11,6 +11,7 @@ import kotlin.Suppress
 import kotlin.Unit
 import kotlin.collections.Iterator
 import kotlin.jvm.JvmInline
+import kotlin.ranges.IntRange
 
 @JvmInline
 public value class ImmutableArray<T> @PublishedApi internal constructor(
@@ -24,6 +25,12 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
      */
     public val lastIndex: Int
         get() = values.size - 1
+
+    /**
+     * Returns the range of valid indices for the array.
+     */
+    public val indices: IntRange
+        get() = IntRange(0, lastIndex)
 
     override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
 

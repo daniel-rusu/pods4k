@@ -50,6 +50,19 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `indices validation`() {
+        with(ImmutableArray(0) { "element $it" }) {
+            expectThat(this.indices).isEqualTo(IntRange(start = 0, endInclusive = -1))
+        }
+        with(ImmutableArray(1) { "element $it" }) {
+            expectThat(this.indices).isEqualTo(IntRange(start = 0, endInclusive = 0))
+        }
+        with(ImmutableArray(3) { "element $it" }) {
+            expectThat(this.indices).isEqualTo(IntRange(start = 0, endInclusive = 2))
+        }
+    }
+
+    @Test
     fun `toString validation`() {
         with(ImmutableArray(0) { "element $it" }) {
             expectThat(this.toString()).isEqualTo("[]")
