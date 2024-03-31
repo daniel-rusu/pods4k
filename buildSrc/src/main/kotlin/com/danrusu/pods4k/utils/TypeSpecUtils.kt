@@ -20,19 +20,21 @@ internal inline fun TypeSpec.Builder.addCompanionObject(body: TypeSpec.Builder.(
     return addType(TypeSpec.companionObjectBuilder().apply(body).build())
 }
 
-internal fun TypeSpec.Builder.addProperty(
+internal inline fun TypeSpec.Builder.addProperty(
     kdoc: String? = null,
     modifiers: List<KModifier> = emptyList(),
     name: String,
     type: TypeName,
     init: String? = null,
-    get: String? = null
+    get: String? = null,
+    body: PropertySpec.Builder.() -> Unit = {},
 ): TypeSpec.Builder {
     return addProperty(
         PropertySpec.builder(name, type, modifiers).apply {
             kdoc?.let { addKdoc(it) }
             init?.let { initializer(it) }
             get?.let { getter(FunSpec.getterBuilder().addStatement(get).build()) }
+            body()
         }.build()
     )
 }

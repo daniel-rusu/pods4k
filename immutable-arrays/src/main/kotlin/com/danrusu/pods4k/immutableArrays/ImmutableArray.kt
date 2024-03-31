@@ -19,7 +19,8 @@ import kotlin.sequences.Sequence
 
 @JvmInline
 public value class ImmutableArray<T> @PublishedApi internal constructor(
-    private val values: Array<Any?>,
+    @PublishedApi
+    internal val values: Array<Any?>,
 ) {
     public val size: Int
         get() = values.size
@@ -28,13 +29,13 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
      * Returns the index of the last element or -1 if the array is empty.
      */
     public val lastIndex: Int
-        get() = values.size - 1
+        get() = values.lastIndex
 
     /**
      * Returns the range of valid indices for the array.
      */
     public val indices: IntRange
-        get() = IntRange(0, lastIndex)
+        get() = values.indices
 
     override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
 
@@ -52,11 +53,8 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     /**
      * Returns the element at the specified [index] or null if the index is out of bounds.
      */
-    public fun getOrNull(index: Int): T? {
-        if (index < 0 || index > lastIndex) return null
-
-        return get(index)
-    }
+    @Suppress("UNCHECKED_CAST")
+    public fun getOrNull(index: Int): T? = values.getOrNull(index) as T
 
     public operator fun component1(): T = get(0)
 
@@ -72,38 +70,30 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
      * Returns the single element from the array, or throws an exception if the array is empty or
      * has more than one element.
      */
-    public fun single(): T = when (size) {
-        0 -> throw NoSuchElementException("Array is empty!")
-        1 -> get(0)
-        else -> throw IllegalArgumentException("Array has more than one element!")
-    }
+    @Suppress("UNCHECKED_CAST")
+    public fun single(): T = values.single() as T
 
     /**
      * Returns the first element.
      *
      * @throws NoSuchElementException if the array is empty.
      */
-    public fun first(): T {
-        if (isEmpty()) throw NoSuchElementException("Array is empty!")
-
-        return get(0)
-    }
+    @Suppress("UNCHECKED_CAST")
+    public fun first(): T = values.first() as T
 
     /**
      * Returns the first element or null if the array is empty.
      */
-    public fun firstOrNull(): T? = if (isEmpty()) null else get(0)
+    @Suppress("UNCHECKED_CAST")
+    public fun firstOrNull(): T? = values.firstOrNull() as T
 
     /**
      * Returns the last element.
      *
      * @throws NoSuchElementException if the array is empty.
      */
-    public fun last(): T {
-        if (isEmpty()) throw NoSuchElementException("Array is empty!")
-
-        return get(lastIndex)
-    }
+    @Suppress("UNCHECKED_CAST")
+    public fun last(): T = values.last() as T
 
     /**
      * Returns a [List] containing all the elements.
@@ -129,29 +119,22 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     /**
      * Returns a [Sequence] which returns the elements of this array when iterated.
      */
-    public fun asSequence(): Sequence<T> {
-        if (isEmpty()) return emptySequence()
-
-        return Sequence { iterator() }
-    }
+    @Suppress("UNCHECKED_CAST")
+    public fun asSequence(): Sequence<T> = values.asSequence() as Sequence<T>
 
     /**
      * Performs the specified [action] on each element sequentially starting with the first element
      */
-    public inline fun forEach(action: (element: T) -> Unit) {
-        for (value in this) {
-            action(value)
-        }
-    }
+    @Suppress("UNCHECKED_CAST")
+    public inline fun forEach(action: (element: T) -> Unit): Unit = values.forEach { action(it as T)
+            }
 
     /**
      * Performs the specified [action] on each element sequentially starting with the first element
      */
-    public inline fun forEachIndexed(action: (index: Int, element: T) -> Unit) {
-        for (index in 0..lastIndex) {
-            action(index, get(index))
-        }
-    }
+    @Suppress("UNCHECKED_CAST")
+    public inline fun forEachIndexed(action: (index: Int, element: T) -> Unit): Unit =
+            values.forEachIndexed { index, element -> action(index, element as T) }
 
     public companion object {
         /**

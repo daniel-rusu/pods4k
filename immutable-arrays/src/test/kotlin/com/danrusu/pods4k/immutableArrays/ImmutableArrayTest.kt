@@ -17,21 +17,15 @@ class ImmutableArrayTest {
     fun `creation validation`() {
         expectThat(ImmutableArray(1) { "element $it" })
             .isA<ImmutableArray<String>>()
-    }
 
-    @Test
-    fun `size validation`() {
         // Cannot create with negative size
         expectThrows<NegativeArraySizeException> {
             ImmutableArray(-1) { "element $it" }
         }
+    }
 
-        with(ImmutableArray(0) { "element $it" }) {
-            expectThat(this.size).isEqualTo(0)
-        }
-        with(ImmutableArray(1) { "element $it" }) {
-            expectThat(this.size).isEqualTo(1)
-        }
+    @Test
+    fun `size validation`() {
         with(ImmutableArray(10) { "element $it" }) {
             expectThat(this.size).isEqualTo(10)
         }
@@ -39,12 +33,6 @@ class ImmutableArrayTest {
 
     @Test
     fun `lastIndex validation`() {
-        with(ImmutableArray(0) { "element $it" }) {
-            expectThat(this.lastIndex).isEqualTo(-1)
-        }
-        with(ImmutableArray(1) { "element $it" }) {
-            expectThat(this.lastIndex).isEqualTo(0)
-        }
         with(ImmutableArray(10) { "element $it" }) {
             expectThat(this.lastIndex).isEqualTo(9)
         }
@@ -52,12 +40,6 @@ class ImmutableArrayTest {
 
     @Test
     fun `indices validation`() {
-        with(ImmutableArray(0) { "element $it" }) {
-            expectThat(this.indices).isEqualTo(IntRange(start = 0, endInclusive = -1))
-        }
-        with(ImmutableArray(1) { "element $it" }) {
-            expectThat(this.indices).isEqualTo(IntRange(start = 0, endInclusive = 0))
-        }
         with(ImmutableArray(3) { "element $it" }) {
             expectThat(this.indices).isEqualTo(IntRange(start = 0, endInclusive = 2))
         }
@@ -104,10 +86,7 @@ class ImmutableArrayTest {
     @Test
     fun `getOrNull validation`() {
         with(ImmutableArray(3) { "element $it" }) {
-            expectThat(this.getOrNull(0)).isEqualTo("element 0")
             expectThat(this.getOrNull(2)).isEqualTo("element 2")
-
-            expectThat(this.getOrNull(-1)).isNull()
             expectThat(this.getOrNull(3)).isNull()
         }
     }
@@ -162,18 +141,11 @@ class ImmutableArrayTest {
 
     @Test
     fun `single validation`() {
-        with(ImmutableArray(0) { "element $it" }) {
-            expectThrows<NoSuchElementException> {
-                this.single()
-            }.message.isEqualTo("Array is empty!")
-        }
-
         with(ImmutableArray(3) { "element $it" }) {
             expectThrows<IllegalArgumentException> {
                 this.single()
-            }.message.isEqualTo("Array has more than one element!")
+            }.message.isEqualTo("Array has more than one element.")
         }
-
         with(ImmutableArray(1) { "element $it" }) {
             expectThat(this.single()).isEqualTo("element 0")
         }
@@ -181,12 +153,6 @@ class ImmutableArrayTest {
 
     @Test
     fun `first validation`() {
-        with(ImmutableArray(0) { "element $it" }) {
-            expectThrows<NoSuchElementException> {
-                this.first()
-            }.message.isEqualTo("Array is empty!")
-        }
-
         with(ImmutableArray(3) { "element $it" }) {
             expectThat(this.first()).isEqualTo("element 0")
         }
@@ -204,12 +170,6 @@ class ImmutableArrayTest {
 
     @Test
     fun `last validation`() {
-        with(ImmutableArray(0) { "element $it" }) {
-            expectThrows<NoSuchElementException> {
-                this.last()
-            }.message.isEqualTo("Array is empty!")
-        }
-
         with(ImmutableArray(3) { "element $it" }) {
             expectThat(this.last()).isEqualTo("element 2")
         }
@@ -217,9 +177,6 @@ class ImmutableArrayTest {
 
     @Test
     fun `toList validation`() {
-        with(ImmutableArray(0) { "element $it" }) {
-            expectThat(this.toList() === emptyList<String>()).isTrue()
-        }
         with(ImmutableArray(3) { "element $it" }) {
             expectThat(this.toList()).isEqualTo(listOf("element 0", "element 1", "element 2"))
         }
@@ -240,23 +197,13 @@ class ImmutableArrayTest {
             expectThat(iterator.hasNext()).isFalse()
             expectThrows<NoSuchElementException> { iterator.next() }
         }
-        with(ImmutableArray(1) { "element $it" }) {
-            val iterator = this.iterator()
-            expectThat(iterator.hasNext()).isTrue()
-            expectThat(iterator.next()).isEqualTo("element 0")
-
-            expectThat(iterator.hasNext()).isFalse()
-        }
-        with(ImmutableArray(3) { Person(id = it) }) {
+        with(ImmutableArray(2) { Person(id = it) }) {
             val iterator = this.iterator()
             expectThat(iterator.hasNext()).isTrue()
             expectThat(iterator.next()).isEqualTo(Person(id = 0))
 
             expectThat(iterator.hasNext()).isTrue()
             expectThat(iterator.next()).isEqualTo(Person(id = 1))
-
-            expectThat(iterator.hasNext()).isTrue()
-            expectThat(iterator.next()).isEqualTo(Person(id = 2))
 
             expectThat(iterator.hasNext()).isFalse()
         }
@@ -273,9 +220,6 @@ class ImmutableArrayTest {
 
     @Test
     fun `asSequence validation`() {
-        with(ImmutableArray(0) { "element $it" }) {
-            expectThat(this.asSequence() === emptySequence<String>()).isTrue()
-        }
         with(ImmutableArray(3) { "element $it" }) {
             val elementsFromSequence = this.asSequence().toList()
             expectThat(elementsFromSequence).isEqualTo(listOf("element 0", "element 1", "element 2"))

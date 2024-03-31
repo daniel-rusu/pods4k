@@ -18,7 +18,8 @@ import kotlin.sequences.Sequence
 
 @JvmInline
 public value class ImmutableLongArray @PublishedApi internal constructor(
-    private val values: LongArray,
+    @PublishedApi
+    internal val values: LongArray,
 ) {
     public val size: Int
         get() = values.size
@@ -27,13 +28,13 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
      * Returns the index of the last element or -1 if the array is empty.
      */
     public val lastIndex: Int
-        get() = values.size - 1
+        get() = values.lastIndex
 
     /**
      * Returns the range of valid indices for the array.
      */
     public val indices: IntRange
-        get() = IntRange(0, lastIndex)
+        get() = values.indices
 
     override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
 
@@ -58,11 +59,7 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
      * garbage collector, we recommend ensuring that the [index] is always within bounds and use [get]
      * instead as that returns the primitive value without any autoboxing.
      */
-    public fun getOrNull(index: Int): Long? {
-        if (index < 0 || index > lastIndex) return null
-
-        return get(index)
-    }
+    public fun getOrNull(index: Int): Long? = values.getOrNull(index)
 
     public operator fun component1(): Long = get(0)
 
@@ -78,38 +75,26 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
      * Returns the single element from the array, or throws an exception if the array is empty or
      * has more than one element.
      */
-    public fun single(): Long = when (size) {
-        0 -> throw NoSuchElementException("Array is empty!")
-        1 -> get(0)
-        else -> throw IllegalArgumentException("Array has more than one element!")
-    }
+    public fun single(): Long = values.single()
 
     /**
      * Returns the first element.
      *
      * @throws NoSuchElementException if the array is empty.
      */
-    public fun first(): Long {
-        if (isEmpty()) throw NoSuchElementException("Array is empty!")
-
-        return get(0)
-    }
+    public fun first(): Long = values.first()
 
     /**
      * Returns the first element or null if the array is empty.
      */
-    public fun firstOrNull(): Long? = if (isEmpty()) null else get(0)
+    public fun firstOrNull(): Long? = values.firstOrNull()
 
     /**
      * Returns the last element.
      *
      * @throws NoSuchElementException if the array is empty.
      */
-    public fun last(): Long {
-        if (isEmpty()) throw NoSuchElementException("Array is empty!")
-
-        return get(lastIndex)
-    }
+    public fun last(): Long = values.last()
 
     /**
      * Returns a [List] containing all the elements.
@@ -132,29 +117,18 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * Returns a [Sequence] which returns the elements of this array when iterated.
      */
-    public fun asSequence(): Sequence<Long> {
-        if (isEmpty()) return emptySequence()
-
-        return Sequence { iterator() }
-    }
+    public fun asSequence(): Sequence<Long> = values.asSequence()
 
     /**
      * Performs the specified [action] on each element sequentially starting with the first element
      */
-    public inline fun forEach(action: (element: Long) -> Unit) {
-        for (value in this) {
-            action(value)
-        }
-    }
+    public inline fun forEach(action: (element: Long) -> Unit): Unit = values.forEach(action)
 
     /**
      * Performs the specified [action] on each element sequentially starting with the first element
      */
-    public inline fun forEachIndexed(action: (index: Int, element: Long) -> Unit) {
-        for (index in 0..lastIndex) {
-            action(index, get(index))
-        }
-    }
+    public inline fun forEachIndexed(action: (index: Int, element: Long) -> Unit): Unit =
+            values.forEachIndexed(action)
 
     public companion object {
         /**

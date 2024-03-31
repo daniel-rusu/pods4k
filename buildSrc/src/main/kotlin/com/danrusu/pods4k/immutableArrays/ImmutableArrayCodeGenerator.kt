@@ -38,13 +38,13 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 kdoc = "Returns the index of the last element or -1 if the array is empty.",
                 name = "lastIndex",
                 type = Int::class.asTypeName(),
-                get = "return values.size - 1",
+                get = "return values.lastIndex",
             )
             addProperty(
                 kdoc = "Returns the range of valid indices for the array.",
                 name = "indices",
                 type = IntRange::class.asTypeName(),
-                get = "return IntRange(0, lastIndex)",
+                get = "return values.indices",
             )
             overrideToString()
             addIsEmpty()
@@ -78,11 +78,13 @@ private fun TypeSpec.Builder.addPrimaryConstructor(baseType: BaseType) {
     ) {
         addAnnotation(PublishedApi::class)
     }.addProperty(
-        modifiers = listOf(KModifier.PRIVATE),
+        modifiers = listOf(KModifier.INTERNAL),
         name = "values",
         type = baseType.backingArrayType,
         init = "values",
-    )
+    ) {
+        addAnnotation(PublishedApi::class)
+    }
 }
 
 private fun TypeSpec.Builder.overrideToString() {
@@ -152,13 +154,15 @@ private fun TypeSpec.Builder.addGetOrNull(baseType: BaseType) {
         kdoc = "Returns the element at the specified [index] or null if the index is out of bounds.$warning",
         name = "getOrNull",
         parameters = { "index"<Int>() },
-        returns = baseType.type.copy(nullable = true),
-        code = """
-            if (index < 0 || index > lastIndex) return null
-            
-            return get(index)
-        """.trimIndent()
-    )
+        returns = baseType.type.copy(nullable = true)
+    ) {
+        if (baseType == BaseType.GENERIC) {
+            suppress("UNCHECKED_CAST")
+            addStatement("return values.getOrNull(index) as %T", baseType.type)
+        } else {
+            addStatement("return values.getOrNull(index)")
+        }
+    }
 }
 
 private fun TypeSpec.Builder.addSingle(baseType: BaseType) {
@@ -167,15 +171,15 @@ private fun TypeSpec.Builder.addSingle(baseType: BaseType) {
             Returns the single element from the array, or throws an exception if the array is empty or has more than one element.
         """.trimIndent(),
         name = "single",
-        returns = baseType.type,
-        code = """
-            return when (size) {
-                0 -> throw NoSuchElementException("Array is empty!")
-                1 -> get(0)
-                else -> throw IllegalArgumentException("Array has more than one element!")
-            }
-        """.trimIndent(),
-    )
+        returns = baseType.type
+    ) {
+        if (baseType == BaseType.GENERIC) {
+            suppress("UNCHECKED_CAST")
+            addStatement("return values.single() as %T", baseType.type)
+        } else {
+            addStatement("return values.single()")
+        }
+    }
 }
 
 private fun TypeSpec.Builder.addFirst(baseType: BaseType) {
@@ -186,22 +190,30 @@ private fun TypeSpec.Builder.addFirst(baseType: BaseType) {
             @throws NoSuchElementException if the array is empty.
         """.trimIndent(),
         name = "first",
-        returns = baseType.type,
-        code = """
-            if (isEmpty()) throw NoSuchElementException("Array is empty!")
-            
-            return get(0)
-        """.trimIndent(),
-    )
+        returns = baseType.type
+    ) {
+        if (baseType == BaseType.GENERIC) {
+            suppress("UNCHECKED_CAST")
+            addStatement("return values.first() as %T", baseType.type)
+        } else {
+            addStatement("return values.first()")
+        }
+    }
 }
 
 private fun TypeSpec.Builder.addFirstOrNull(baseType: BaseType) {
     addFunction(
         kdoc = "Returns the first element or null if the array is empty.",
         name = "firstOrNull",
-        returns = baseType.type.copy(nullable = true),
-        code = "return if (isEmpty()) null else get(0)"
-    )
+        returns = baseType.type.copy(nullable = true)
+    ) {
+        if (baseType == BaseType.GENERIC) {
+            suppress("UNCHECKED_CAST")
+            addStatement("return values.firstOrNull() as %T", baseType.type)
+        } else {
+            addStatement("return values.firstOrNull()")
+        }
+    }
 }
 
 private fun TypeSpec.Builder.addLast(baseType: BaseType) {
@@ -212,13 +224,15 @@ private fun TypeSpec.Builder.addLast(baseType: BaseType) {
             @throws NoSuchElementException if the array is empty.
         """.trimIndent(),
         name = "last",
-        returns = baseType.type,
-        code = """
-            if (isEmpty()) throw NoSuchElementException("Array is empty!")
-            
-            return get(lastIndex)
-        """.trimIndent(),
-    )
+        returns = baseType.type
+    ) {
+        if (baseType == BaseType.GENERIC) {
+            suppress("UNCHECKED_CAST")
+            addStatement("return values.last() as %T", baseType.type)
+        } else {
+            addStatement("return values.last()")
+        }
+    }
 }
 
 private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
@@ -287,16 +301,19 @@ private fun TypeSpec.Builder.addIteratorOperator(baseType: BaseType) {
 }
 
 private fun TypeSpec.Builder.addAsSequence(baseType: BaseType) {
+    val sequenceType = Sequence::class.asClassName().parameterizedBy(baseType.type)
     addFunction(
         kdoc = "Returns a [Sequence] which returns the elements of this array when iterated.",
         name = "asSequence",
-        returns = Sequence::class.asClassName().parameterizedBy(baseType.type),
-        code = """
-            if (isEmpty()) return emptySequence()
-            
-            return Sequence { iterator() }
-        """.trimIndent()
-    )
+        returns = sequenceType,
+    ) {
+        if (baseType == BaseType.GENERIC) {
+            suppress("UNCHECKED_CAST")
+            addStatement("return values.asSequence() as %T", sequenceType)
+        } else {
+            addStatement("return values.asSequence()")
+        }
+    }
 }
 
 private fun TypeSpec.Builder.addForEach(baseType: BaseType) {
@@ -312,12 +329,14 @@ private fun TypeSpec.Builder.addForEach(baseType: BaseType) {
                 )
             )
         },
-        code = """
-            for (value in this) {
-                action(value)
-            }
-        """.trimIndent(),
-    )
+    ) {
+        if (baseType == BaseType.GENERIC) {
+            suppress("UNCHECKED_CAST")
+            addStatement("return values.forEach { action(it as %T) }", baseType.type)
+        } else {
+            addStatement("return values.forEach(action)")
+        }
+    }
 }
 
 private fun TypeSpec.Builder.addForEachIndexed(baseType: BaseType) {
@@ -333,12 +352,17 @@ private fun TypeSpec.Builder.addForEachIndexed(baseType: BaseType) {
                 )
             )
         },
-        code = """
-            for (index in 0..lastIndex) {
-                action(index, get(index))
-            }
-        """.trimIndent(),
-    )
+    ) {
+        if (baseType == BaseType.GENERIC) {
+            suppress("UNCHECKED_CAST")
+            addStatement(
+                "return values.forEachIndexed { index, element -> action(index, element as %T) }",
+                baseType.type
+            )
+        } else {
+            addStatement("return values.forEachIndexed(action)")
+        }
+    }
 }
 
 private fun TypeSpec.Builder.addInvokeOperator(baseType: BaseType, qualifiedClassName: ClassName) {
