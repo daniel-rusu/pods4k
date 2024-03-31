@@ -163,12 +163,16 @@ class ImmutableArrayTest {
     @Test
     fun `single validation`() {
         with(ImmutableArray(0) { "element $it" }) {
-            expectThrows<NoSuchElementException> { this.single() }
-        }.message.isEqualTo("Array is empty!")
+            expectThrows<NoSuchElementException> {
+                this.single()
+            }.message.isEqualTo("Array is empty!")
+        }
 
         with(ImmutableArray(3) { "element $it" }) {
-            expectThrows<IllegalArgumentException> { this.single() }
-        }.message.isEqualTo("Array has more than one element!")
+            expectThrows<IllegalArgumentException> {
+                this.single()
+            }.message.isEqualTo("Array has more than one element!")
+        }
 
         with(ImmutableArray(1) { "element $it" }) {
             expectThat(this.single()).isEqualTo("element 0")
@@ -178,8 +182,10 @@ class ImmutableArrayTest {
     @Test
     fun `first validation`() {
         with(ImmutableArray(0) { "element $it" }) {
-            expectThrows<NoSuchElementException> { this.first() }
-        }.message.isEqualTo("Array is empty!")
+            expectThrows<NoSuchElementException> {
+                this.first()
+            }.message.isEqualTo("Array is empty!")
+        }
 
         with(ImmutableArray(3) { "element $it" }) {
             expectThat(this.first()).isEqualTo("element 0")
@@ -187,10 +193,22 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `firstOrNull validation`() {
+        with(ImmutableArray(0) { "element $it" }) {
+            expectThat(this.firstOrNull()).isNull()
+        }
+        with(ImmutableArray(3) { "element $it" }) {
+            expectThat(this.firstOrNull()).isEqualTo("element 0")
+        }
+    }
+
+    @Test
     fun `last validation`() {
         with(ImmutableArray(0) { "element $it" }) {
-            expectThrows<NoSuchElementException> { this.last() }
-        }.message.isEqualTo("Array is empty!")
+            expectThrows<NoSuchElementException> {
+                this.last()
+            }.message.isEqualTo("Array is empty!")
+        }
 
         with(ImmutableArray(3) { "element $it" }) {
             expectThat(this.last()).isEqualTo("element 2")

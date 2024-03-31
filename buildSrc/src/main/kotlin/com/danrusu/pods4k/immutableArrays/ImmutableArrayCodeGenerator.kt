@@ -54,6 +54,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addComponentNFunctions(baseType)
             addSingle(baseType)
             addFirst(baseType)
+            addFirstOrNull(baseType)
             addLast(baseType)
             addToList(baseType)
             addToMutableList(baseType)
@@ -191,6 +192,15 @@ private fun TypeSpec.Builder.addFirst(baseType: BaseType) {
             
             return get(0)
         """.trimIndent(),
+    )
+}
+
+private fun TypeSpec.Builder.addFirstOrNull(baseType: BaseType) {
+    addFunction(
+        kdoc = "Returns the first element or null if the array is empty.",
+        name = "firstOrNull",
+        returns = baseType.type.copy(nullable = true),
+        code = "return if (isEmpty()) null else get(0)"
     )
 }
 

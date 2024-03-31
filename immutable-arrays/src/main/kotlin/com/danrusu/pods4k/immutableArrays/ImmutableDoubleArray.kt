@@ -96,6 +96,11 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     }
 
     /**
+     * Returns the first element or null if the array is empty.
+     */
+    public fun firstOrNull(): Double? = if (isEmpty()) null else get(0)
+
+    /**
      * Returns the last element.
      *
      * @throws NoSuchElementException if the array is empty.

@@ -171,12 +171,16 @@ class ImmutableIntArrayTest {
     @Test
     fun `single validation`() {
         with(ImmutableIntArray(0) { it }) {
-            expectThrows<NoSuchElementException> { this.single() }
-        }.message.isEqualTo("Array is empty!")
+            expectThrows<NoSuchElementException> {
+                this.single()
+            }.message.isEqualTo("Array is empty!")
+        }
 
         with(ImmutableIntArray(3) { it }) {
-            expectThrows<IllegalArgumentException> { this.single() }
-        }.message.isEqualTo("Array has more than one element!")
+            expectThrows<IllegalArgumentException> {
+                this.single()
+            }.message.isEqualTo("Array has more than one element!")
+        }
 
         with(ImmutableIntArray(1) { it }) {
             val singleValue = this.single()
@@ -188,8 +192,10 @@ class ImmutableIntArrayTest {
     @Test
     fun `first validation`() {
         with(ImmutableIntArray(0) { it }) {
-            expectThrows<NoSuchElementException> { this.first() }
-        }.message.isEqualTo("Array is empty!")
+            expectThrows<NoSuchElementException> {
+                this.first()
+            }.message.isEqualTo("Array is empty!")
+        }
 
         with(ImmutableIntArray(3) { it }) {
             val first = this.first()
@@ -199,10 +205,22 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `firstOrNull validation`() {
+        with(ImmutableIntArray(0) { it }) {
+            expectThat(this.firstOrNull()).isNull()
+        }
+        with(ImmutableArray(3) { it }) {
+            expectThat(this.firstOrNull()).isEqualTo(0)
+        }
+    }
+
+    @Test
     fun `last validation`() {
         with(ImmutableIntArray(0) { it }) {
-            expectThrows<NoSuchElementException> { this.last() }
-        }.message.isEqualTo("Array is empty!")
+            expectThrows<NoSuchElementException> {
+                this.last()
+            }.message.isEqualTo("Array is empty!")
+        }
 
         with(ImmutableIntArray(3) { it }) {
             val last = this.last()
