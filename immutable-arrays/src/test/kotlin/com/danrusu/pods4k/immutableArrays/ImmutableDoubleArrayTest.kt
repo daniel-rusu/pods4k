@@ -18,48 +18,48 @@ class ImmutableDoubleArrayTest {
     }
 
     @Test
-    fun `creation validation`() {
+    fun `creation type validation`() {
         expectThat(ImmutableDoubleArray(1) { it.toDouble() })
             .isA<ImmutableDoubleArray>()
     }
 
     @Test
-    fun `get validation`() {
+    fun `get primitive type validation`() {
         with(ImmutableDoubleArray(1) { it.toDouble() }) {
             expectThat(get(0)::class.java).isEqualTo(primitiveDoubleClass)
         }
     }
 
     @Test
-    fun `componentN function validation`() {
+    fun `componentN function primitive type validation`() {
         val values = ImmutableDoubleArray(1) { it.toDouble() }
         val (first) = values
         expectThat(first::class.java == primitiveDoubleClass)
     }
 
     @Test
-    fun `single validation`() {
+    fun `single primitive type validation`() {
         with(ImmutableDoubleArray(1) { it.toDouble() }) {
             expectThat(this.single()::class.java).isEqualTo(primitiveDoubleClass)
         }
     }
 
     @Test
-    fun `first validation`() {
+    fun `first primitive type validation`() {
         with(ImmutableDoubleArray(3) { it.toDouble() }) {
             expectThat(this.first()::class.java).isEqualTo(primitiveDoubleClass)
         }
     }
 
     @Test
-    fun `last validation`() {
+    fun `last primitive type validation`() {
         with(ImmutableDoubleArray(3) { it.toDouble() }) {
             expectThat(this.last()::class.java).isEqualTo(primitiveDoubleClass)
         }
     }
 
     @Test
-    fun `iterator validation`() {
+    fun `iteration primitive type validation`() {
         with(ImmutableDoubleArray(3) { it.toDouble() }) {
             for (value in this) {
                 expectThat(value::class.java).isEqualTo(primitiveDoubleClass)
@@ -68,7 +68,7 @@ class ImmutableDoubleArrayTest {
     }
 
     @Test
-    fun `forEach validation`() {
+    fun `forEach primitive type validation`() {
         with(ImmutableDoubleArray(3) { it.toDouble() }) {
             this.forEach { element ->
                 expectThat(element::class.java).isEqualTo(primitiveDoubleClass)
@@ -77,7 +77,7 @@ class ImmutableDoubleArrayTest {
     }
 
     @Test
-    fun `forEachIndexed validation`() {
+    fun `forEachIndexed primitive type validation`() {
         with(ImmutableDoubleArray(3) { it.toDouble() }) {
             this.forEachIndexed { _, element ->
                 expectThat(element::class.java).isEqualTo(primitiveDoubleClass)

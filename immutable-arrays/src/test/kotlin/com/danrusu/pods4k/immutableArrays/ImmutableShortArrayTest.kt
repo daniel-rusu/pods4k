@@ -18,48 +18,48 @@ class ImmutableShortArrayTest {
     }
 
     @Test
-    fun `creation validation`() {
+    fun `creation type validation`() {
         expectThat(ImmutableShortArray(1) { it.toShort() })
             .isA<ImmutableShortArray>()
     }
 
     @Test
-    fun `get validation`() {
+    fun `get primitive type validation`() {
         with(ImmutableShortArray(1) { it.toShort() }) {
             expectThat(get(0)::class.java).isEqualTo(primitiveShortClass)
         }
     }
 
     @Test
-    fun `componentN function validation`() {
+    fun `componentN function primitive type validation`() {
         val values = ImmutableShortArray(1) { it.toShort() }
         val (first) = values
         expectThat(first::class.java == primitiveShortClass)
     }
 
     @Test
-    fun `single validation`() {
+    fun `single primitive type validation`() {
         with(ImmutableShortArray(1) { it.toShort() }) {
             expectThat(this.single()::class.java).isEqualTo(primitiveShortClass)
         }
     }
 
     @Test
-    fun `first validation`() {
+    fun `first primitive type validation`() {
         with(ImmutableShortArray(3) { it.toShort() }) {
             expectThat(this.first()::class.java).isEqualTo(primitiveShortClass)
         }
     }
 
     @Test
-    fun `last validation`() {
+    fun `last primitive type validation`() {
         with(ImmutableShortArray(3) { it.toShort() }) {
             expectThat(this.last()::class.java).isEqualTo(primitiveShortClass)
         }
     }
 
     @Test
-    fun `iterator validation`() {
+    fun `iteration primitive type validation`() {
         with(ImmutableShortArray(3) { it.toShort() }) {
             for (value in this) {
                 expectThat(value::class.java).isEqualTo(primitiveShortClass)
@@ -68,7 +68,7 @@ class ImmutableShortArrayTest {
     }
 
     @Test
-    fun `forEach validation`() {
+    fun `forEach primitive type validation`() {
         with(ImmutableShortArray(3) { it.toShort() }) {
             this.forEach { element ->
                 expectThat(element::class.java).isEqualTo(primitiveShortClass)
@@ -77,7 +77,7 @@ class ImmutableShortArrayTest {
     }
 
     @Test
-    fun `forEachIndexed validation`() {
+    fun `forEachIndexed primitive type validation`() {
         with(ImmutableShortArray(3) { it.toShort() }) {
             this.forEachIndexed { _, element ->
                 expectThat(element::class.java).isEqualTo(primitiveShortClass)

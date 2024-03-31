@@ -18,48 +18,48 @@ class ImmutableLongArrayTest {
     }
 
     @Test
-    fun `creation validation`() {
+    fun `creation type validation`() {
         expectThat(ImmutableLongArray(1) { it.toLong() })
             .isA<ImmutableLongArray>()
     }
 
     @Test
-    fun `get validation`() {
+    fun `get primitive type validation`() {
         with(ImmutableLongArray(1) { it.toLong() }) {
             expectThat(get(0)::class.java).isEqualTo(primitiveLongClass)
         }
     }
 
     @Test
-    fun `componentN function validation`() {
+    fun `componentN function primitive type validation`() {
         val values = ImmutableLongArray(1) { it.toLong() }
         val (first) = values
         expectThat(first::class.java == primitiveLongClass)
     }
 
     @Test
-    fun `single validation`() {
+    fun `single primitive type validation`() {
         with(ImmutableLongArray(1) { it.toLong() }) {
             expectThat(this.single()::class.java).isEqualTo(primitiveLongClass)
         }
     }
 
     @Test
-    fun `first validation`() {
+    fun `first primitive type validation`() {
         with(ImmutableLongArray(3) { it.toLong() }) {
             expectThat(this.first()::class.java).isEqualTo(primitiveLongClass)
         }
     }
 
     @Test
-    fun `last validation`() {
+    fun `last primitive type validation`() {
         with(ImmutableLongArray(3) { it.toLong() }) {
             expectThat(this.last()::class.java).isEqualTo(primitiveLongClass)
         }
     }
 
     @Test
-    fun `iterator validation`() {
+    fun `iteration primitive type validation`() {
         with(ImmutableLongArray(3) { it.toLong() }) {
             for (value in this) {
                 expectThat(value::class.java).isEqualTo(primitiveLongClass)
@@ -68,7 +68,7 @@ class ImmutableLongArrayTest {
     }
 
     @Test
-    fun `forEach validation`() {
+    fun `forEach primitive type validation`() {
         with(ImmutableLongArray(3) { it.toLong() }) {
             this.forEach { element ->
                 expectThat(element::class.java).isEqualTo(primitiveLongClass)
@@ -77,7 +77,7 @@ class ImmutableLongArrayTest {
     }
 
     @Test
-    fun `forEachIndexed validation`() {
+    fun `forEachIndexed primitive type validation`() {
         with(ImmutableLongArray(3) { it.toLong() }) {
             this.forEachIndexed { _, element ->
                 expectThat(element::class.java).isEqualTo(primitiveLongClass)

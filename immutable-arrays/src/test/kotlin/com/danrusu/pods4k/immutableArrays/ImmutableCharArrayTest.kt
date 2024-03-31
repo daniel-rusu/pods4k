@@ -18,48 +18,48 @@ class ImmutableCharArrayTest {
     }
 
     @Test
-    fun `creation validation`() {
+    fun `creation type validation`() {
         expectThat(ImmutableCharArray(1) { it.toChar() })
             .isA<ImmutableCharArray>()
     }
 
     @Test
-    fun `get validation`() {
+    fun `get primitive type validation`() {
         with(ImmutableCharArray(1) { it.toChar() }) {
             expectThat(get(0)::class.java).isEqualTo(primitiveCharClass)
         }
     }
 
     @Test
-    fun `componentN function validation`() {
+    fun `componentN function primitive type validation`() {
         val values = ImmutableCharArray(1) { it.toChar() }
         val (first) = values
         expectThat(first::class.java == primitiveCharClass)
     }
 
     @Test
-    fun `single validation`() {
+    fun `single primitive type validation`() {
         with(ImmutableCharArray(1) { it.toChar() }) {
             expectThat(this.single()::class.java).isEqualTo(primitiveCharClass)
         }
     }
 
     @Test
-    fun `first validation`() {
+    fun `first primitive type validation`() {
         with(ImmutableCharArray(3) { it.toChar() }) {
             expectThat(this.first()::class.java).isEqualTo(primitiveCharClass)
         }
     }
 
     @Test
-    fun `last validation`() {
+    fun `last primitive type validation`() {
         with(ImmutableCharArray(3) { it.toChar() }) {
             expectThat(this.last()::class.java).isEqualTo(primitiveCharClass)
         }
     }
 
     @Test
-    fun `iterator validation`() {
+    fun `iteration primitive type validation`() {
         with(ImmutableCharArray(3) { it.toChar() }) {
             for (value in this) {
                 expectThat(value::class.java).isEqualTo(primitiveCharClass)
@@ -68,7 +68,7 @@ class ImmutableCharArrayTest {
     }
 
     @Test
-    fun `forEach validation`() {
+    fun `forEach primitive type validation`() {
         with(ImmutableCharArray(3) { it.toChar() }) {
             this.forEach { element ->
                 expectThat(element::class.java).isEqualTo(primitiveCharClass)
@@ -77,7 +77,7 @@ class ImmutableCharArrayTest {
     }
 
     @Test
-    fun `forEachIndexed validation`() {
+    fun `forEachIndexed primitive type validation`() {
         with(ImmutableCharArray(3) { it.toChar() }) {
             this.forEachIndexed { _, element ->
                 expectThat(element::class.java).isEqualTo(primitiveCharClass)

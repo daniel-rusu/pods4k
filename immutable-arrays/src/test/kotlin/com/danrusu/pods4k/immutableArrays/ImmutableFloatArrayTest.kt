@@ -18,48 +18,48 @@ class ImmutableFloatArrayTest {
     }
 
     @Test
-    fun `creation validation`() {
+    fun `creation type validation`() {
         expectThat(ImmutableFloatArray(1) { it.toFloat() })
             .isA<ImmutableFloatArray>()
     }
 
     @Test
-    fun `get validation`() {
+    fun `get primitive type validation`() {
         with(ImmutableFloatArray(1) { it.toFloat() }) {
             expectThat(get(0)::class.java).isEqualTo(primitiveFloatClass)
         }
     }
 
     @Test
-    fun `componentN function validation`() {
+    fun `componentN function primitive type validation`() {
         val values = ImmutableFloatArray(1) { it.toFloat() }
         val (first) = values
         expectThat(first::class.java == primitiveFloatClass)
     }
 
     @Test
-    fun `single validation`() {
+    fun `single primitive type validation`() {
         with(ImmutableFloatArray(1) { it.toFloat() }) {
             expectThat(this.single()::class.java).isEqualTo(primitiveFloatClass)
         }
     }
 
     @Test
-    fun `first validation`() {
+    fun `first primitive type validation`() {
         with(ImmutableFloatArray(3) { it.toFloat() }) {
             expectThat(this.first()::class.java).isEqualTo(primitiveFloatClass)
         }
     }
 
     @Test
-    fun `last validation`() {
+    fun `last primitive type validation`() {
         with(ImmutableFloatArray(3) { it.toFloat() }) {
             expectThat(this.last()::class.java).isEqualTo(primitiveFloatClass)
         }
     }
 
     @Test
-    fun `iterator validation`() {
+    fun `iteration primitive type validation`() {
         with(ImmutableFloatArray(3) { it.toFloat() }) {
             for (value in this) {
                 expectThat(value::class.java).isEqualTo(primitiveFloatClass)
@@ -68,7 +68,7 @@ class ImmutableFloatArrayTest {
     }
 
     @Test
-    fun `forEach validation`() {
+    fun `forEach primitive type validation`() {
         with(ImmutableFloatArray(3) { it.toFloat() }) {
             this.forEach { element ->
                 expectThat(element::class.java).isEqualTo(primitiveFloatClass)
@@ -77,7 +77,7 @@ class ImmutableFloatArrayTest {
     }
 
     @Test
-    fun `forEachIndexed validation`() {
+    fun `forEachIndexed primitive type validation`() {
         with(ImmutableFloatArray(3) { it.toFloat() }) {
             this.forEachIndexed { _, element ->
                 expectThat(element::class.java).isEqualTo(primitiveFloatClass)

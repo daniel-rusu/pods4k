@@ -18,48 +18,48 @@ class ImmutableBooleanArrayTest {
     }
 
     @Test
-    fun `creation validation`() {
+    fun `creation type validation`() {
         expectThat(ImmutableBooleanArray(1) { it % 2 == 0 })
             .isA<ImmutableBooleanArray>()
     }
 
     @Test
-    fun `get validation`() {
+    fun `get primitive type validation`() {
         with(ImmutableBooleanArray(3) { it % 2 == 0 }) {
             expectThat(get(0)::class.java).isEqualTo(primitiveBooleanClass)
         }
     }
 
     @Test
-    fun `componentN function validation`() {
+    fun `componentN function primitive type validation`() {
         val values = ImmutableBooleanArray(1) { it % 2 == 0 }
         val (first) = values
         expectThat(first::class.java == primitiveBooleanClass)
     }
 
     @Test
-    fun `single validation`() {
+    fun `single primitive type validation`() {
         with(ImmutableBooleanArray(1) { it % 2 == 0 }) {
             expectThat(this.single()::class.java).isEqualTo(primitiveBooleanClass)
         }
     }
 
     @Test
-    fun `first validation`() {
+    fun `first primitive type validation`() {
         with(ImmutableBooleanArray(3) { it % 2 == 0 }) {
             expectThat(this.first()::class.java).isEqualTo(primitiveBooleanClass)
         }
     }
 
     @Test
-    fun `last validation`() {
+    fun `last primitive type validation`() {
         with(ImmutableBooleanArray(3) { it % 2 == 0 }) {
             expectThat(this.last()::class.java).isEqualTo(primitiveBooleanClass)
         }
     }
 
     @Test
-    fun `iterator validation`() {
+    fun `iteration primitive type validation`() {
         with(ImmutableBooleanArray(3) { it % 2 == 0 }) {
             for (value in this) {
                 expectThat(value::class.java).isEqualTo(primitiveBooleanClass)
@@ -68,7 +68,7 @@ class ImmutableBooleanArrayTest {
     }
 
     @Test
-    fun `forEach validation`() {
+    fun `forEach primitive type validation`() {
         with(ImmutableBooleanArray(3) { it % 2 == 0 }) {
             this.forEach { element ->
                 expectThat(element::class.java).isEqualTo(primitiveBooleanClass)
@@ -77,7 +77,7 @@ class ImmutableBooleanArrayTest {
     }
 
     @Test
-    fun `forEachIndexed validation`() {
+    fun `forEachIndexed primitive type validation`() {
         with(ImmutableBooleanArray(3) { it % 2 == 0 }) {
             this.forEachIndexed { _, element ->
                 expectThat(element::class.java).isEqualTo(primitiveBooleanClass)
