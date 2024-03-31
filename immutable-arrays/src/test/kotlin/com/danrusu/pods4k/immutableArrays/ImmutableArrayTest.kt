@@ -176,6 +176,16 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `lastOrNull validation`() {
+        with(ImmutableArray(0) { "element $it" }) {
+            expectThat(this.lastOrNull()).isNull()
+        }
+        with(ImmutableArray(3) { "element $it" }) {
+            expectThat(this.lastOrNull()).isEqualTo("element 2")
+        }
+    }
+
+    @Test
     fun `toList validation`() {
         with(ImmutableArray(3) { "element $it" }) {
             expectThat(this.toList()).isEqualTo(listOf("element 0", "element 1", "element 2"))

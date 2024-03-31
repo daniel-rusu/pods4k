@@ -56,6 +56,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addFirst(baseType)
             addFirstOrNull(baseType)
             addLast(baseType)
+            addLastOrNull(baseType)
             addToList(baseType)
             addToMutableList(baseType)
             addIteratorOperator(baseType)
@@ -202,14 +203,15 @@ private fun TypeSpec.Builder.addFirst(baseType: BaseType) {
 }
 
 private fun TypeSpec.Builder.addFirstOrNull(baseType: BaseType) {
+    val returnType = baseType.type.copy(nullable = true)
     addFunction(
         kdoc = "Returns the first element or null if the array is empty.",
         name = "firstOrNull",
-        returns = baseType.type.copy(nullable = true)
+        returns = returnType
     ) {
         if (baseType == BaseType.GENERIC) {
             suppress("UNCHECKED_CAST")
-            addStatement("return values.firstOrNull() as %T", baseType.type)
+            addStatement("return values.firstOrNull() as %T", returnType)
         } else {
             addStatement("return values.firstOrNull()")
         }
@@ -231,6 +233,22 @@ private fun TypeSpec.Builder.addLast(baseType: BaseType) {
             addStatement("return values.last() as %T", baseType.type)
         } else {
             addStatement("return values.last()")
+        }
+    }
+}
+
+private fun TypeSpec.Builder.addLastOrNull(baseType: BaseType) {
+    val returnType = baseType.type.copy(nullable = true)
+    addFunction(
+        kdoc = "Returns the last element or null if the array is empty.",
+        name = "lastOrNull",
+        returns = returnType
+    ) {
+        if (baseType == BaseType.GENERIC) {
+            suppress("UNCHECKED_CAST")
+            addStatement("return values.lastOrNull() as %T", returnType)
+        } else {
+            addStatement("return values.lastOrNull()")
         }
     }
 }

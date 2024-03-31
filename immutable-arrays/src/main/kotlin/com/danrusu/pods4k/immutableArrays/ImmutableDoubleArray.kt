@@ -97,6 +97,11 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     public fun last(): Double = values.last()
 
     /**
+     * Returns the last element or null if the array is empty.
+     */
+    public fun lastOrNull(): Double? = values.lastOrNull()
+
+    /**
      * Returns a [List] containing all the elements.
      */
     public fun toList(): List<Double> = values.toList()

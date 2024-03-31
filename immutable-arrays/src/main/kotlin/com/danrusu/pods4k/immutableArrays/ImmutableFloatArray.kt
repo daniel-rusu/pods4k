@@ -97,6 +97,11 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     public fun last(): Float = values.last()
 
     /**
+     * Returns the last element or null if the array is empty.
+     */
+    public fun lastOrNull(): Float? = values.lastOrNull()
+
+    /**
      * Returns a [List] containing all the elements.
      */
     public fun toList(): List<Float> = values.toList()

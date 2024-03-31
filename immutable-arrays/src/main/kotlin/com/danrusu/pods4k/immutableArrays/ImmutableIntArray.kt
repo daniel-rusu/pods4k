@@ -96,6 +96,11 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     public fun last(): Int = values.last()
 
     /**
+     * Returns the last element or null if the array is empty.
+     */
+    public fun lastOrNull(): Int? = values.lastOrNull()
+
+    /**
      * Returns a [List] containing all the elements.
      */
     public fun toList(): List<Int> = values.toList()

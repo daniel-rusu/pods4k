@@ -97,6 +97,11 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     public fun last(): Short = values.last()
 
     /**
+     * Returns the last element or null if the array is empty.
+     */
+    public fun lastOrNull(): Short? = values.lastOrNull()
+
+    /**
      * Returns a [List] containing all the elements.
      */
     public fun toList(): List<Short> = values.toList()

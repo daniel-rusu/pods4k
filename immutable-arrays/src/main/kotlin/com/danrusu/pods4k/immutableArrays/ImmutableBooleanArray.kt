@@ -96,6 +96,11 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     public fun last(): Boolean = values.last()
 
     /**
+     * Returns the last element or null if the array is empty.
+     */
+    public fun lastOrNull(): Boolean? = values.lastOrNull()
+
+    /**
      * Returns a [List] containing all the elements.
      */
     public fun toList(): List<Boolean> = values.toList()

@@ -97,6 +97,11 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     public fun last(): Char = values.last()
 
     /**
+     * Returns the last element or null if the array is empty.
+     */
+    public fun lastOrNull(): Char? = values.lastOrNull()
+
+    /**
      * Returns a [List] containing all the elements.
      */
     public fun toList(): List<Char> = values.toList()

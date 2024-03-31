@@ -97,6 +97,11 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     public fun last(): Byte = values.last()
 
     /**
+     * Returns the last element or null if the array is empty.
+     */
+    public fun lastOrNull(): Byte? = values.lastOrNull()
+
+    /**
      * Returns a [List] containing all the elements.
      */
     public fun toList(): List<Byte> = values.toList()

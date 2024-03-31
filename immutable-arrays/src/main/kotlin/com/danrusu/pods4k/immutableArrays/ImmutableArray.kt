@@ -85,7 +85,7 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
      * Returns the first element or null if the array is empty.
      */
     @Suppress("UNCHECKED_CAST")
-    public fun firstOrNull(): T? = values.firstOrNull() as T
+    public fun firstOrNull(): T? = values.firstOrNull() as T?
 
     /**
      * Returns the last element.
@@ -94,6 +94,12 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
      */
     @Suppress("UNCHECKED_CAST")
     public fun last(): T = values.last() as T
+
+    /**
+     * Returns the last element or null if the array is empty.
+     */
+    @Suppress("UNCHECKED_CAST")
+    public fun lastOrNull(): T? = values.lastOrNull() as T?
 
     /**
      * Returns a [List] containing all the elements.

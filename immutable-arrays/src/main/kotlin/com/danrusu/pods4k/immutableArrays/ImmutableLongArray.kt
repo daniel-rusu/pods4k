@@ -97,6 +97,11 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     public fun last(): Long = values.last()
 
     /**
+     * Returns the last element or null if the array is empty.
+     */
+    public fun lastOrNull(): Long? = values.lastOrNull()
+
+    /**
      * Returns a [List] containing all the elements.
      */
     public fun toList(): List<Long> = values.toList()
