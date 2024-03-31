@@ -109,6 +109,17 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `getOrNull validation`() {
+        with(ImmutableIntArray(3) { it }) {
+            expectThat(this.getOrNull(0)).isEqualTo(0)
+            expectThat(this.getOrNull(2)).isEqualTo(2)
+
+            expectThat(this.getOrNull(-1)).isNull()
+            expectThat(this.getOrNull(3)).isNull()
+        }
+    }
+
+    @Test
     fun `index operator validation`() {
         with(ImmutableIntArray(3) { it }) {
             expectThat(this[0]).isEqualTo(get(0))

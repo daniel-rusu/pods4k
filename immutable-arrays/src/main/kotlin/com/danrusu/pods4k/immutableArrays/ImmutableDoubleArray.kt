@@ -47,6 +47,23 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
      */
     public operator fun `get`(index: Int): Double = values[index]
 
+    /**
+     * Returns the element at the specified [index] or null if the index is out of bounds.
+     *
+     * Note: 
+     * This array stores primitive values but getOrNull returns a nullable reference type resulting
+     * in the value being auto-boxed.
+     *
+     * When calling this method in a loop, for best performance and to reduce the pressure on the
+     * garbage collector, we recommend ensuring that the [index] is always within bounds and use [get]
+     * instead as that returns the primitive value without any autoboxing.
+     */
+    public fun getOrNull(index: Int): Double? {
+        if (index < 0 || index > lastIndex) return null
+
+        return get(index)
+    }
+
     public operator fun component1(): Double = get(0)
 
     public operator fun component2(): Double = get(1)

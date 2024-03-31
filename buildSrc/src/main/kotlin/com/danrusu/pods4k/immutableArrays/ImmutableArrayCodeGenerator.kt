@@ -50,6 +50,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addIsEmpty()
             addIsNotEmpty()
             addArrayIndexOperator(baseType)
+            addGetOrNull(baseType)
             addComponentNFunctions(baseType)
             addSingle(baseType)
             addFirst(baseType)
@@ -129,6 +130,34 @@ private fun TypeSpec.Builder.addArrayIndexOperator(baseType: BaseType) {
             addStatement("return values[index]")
         }
     }
+}
+
+private fun TypeSpec.Builder.addGetOrNull(baseType: BaseType) {
+    val warning = when {
+        // The 2 consecutive blank lines are intentional so that the kdoc ends up with a blank line before the warning
+        baseType != BaseType.GENERIC -> """
+            
+            
+            Note: 
+            This array stores primitive values but getOrNull returns a nullable reference type resulting in the value being auto-boxed.
+            
+            When calling this method in a loop, for best performance and to reduce the pressure on the garbage collector, we recommend ensuring that the [index] is always within bounds and use [get] instead as that returns the primitive value without any autoboxing.
+        """.trimIndent()
+
+        else -> ""
+    }
+
+    addFunction(
+        kdoc = "Returns the element at the specified [index] or null if the index is out of bounds.$warning",
+        name = "getOrNull",
+        parameters = { "index"<Int>() },
+        returns = baseType.type.copy(nullable = true),
+        code = """
+            if (index < 0 || index > lastIndex) return null
+            
+            return get(index)
+        """.trimIndent()
+    )
 }
 
 private fun TypeSpec.Builder.addSingle(baseType: BaseType) {

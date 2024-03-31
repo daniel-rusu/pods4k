@@ -49,6 +49,15 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     @Suppress("UNCHECKED_CAST")
     public operator fun `get`(index: Int): T = values[index] as T
 
+    /**
+     * Returns the element at the specified [index] or null if the index is out of bounds.
+     */
+    public fun getOrNull(index: Int): T? {
+        if (index < 0 || index > lastIndex) return null
+
+        return get(index)
+    }
+
     public operator fun component1(): T = get(0)
 
     public operator fun component2(): T = get(1)
