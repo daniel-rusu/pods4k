@@ -60,6 +60,13 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
      */
     public fun getOrNull(index: Int): Boolean? = values.getOrNull(index)
 
+    /**
+     * Returns the element at the specified [index] or the result of calling the [defaultValue]
+     * function if the [index] is out of bounds.
+     */
+    public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> Boolean): Boolean =
+            values.getOrElse(index, defaultValue)
+
     public operator fun component1(): Boolean = get(0)
 
     public operator fun component2(): Boolean = get(1)

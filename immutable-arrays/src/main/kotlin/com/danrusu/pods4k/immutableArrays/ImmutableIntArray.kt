@@ -60,6 +60,13 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
      */
     public fun getOrNull(index: Int): Int? = values.getOrNull(index)
 
+    /**
+     * Returns the element at the specified [index] or the result of calling the [defaultValue]
+     * function if the [index] is out of bounds.
+     */
+    public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> Int): Int =
+            values.getOrElse(index, defaultValue)
+
     public operator fun component1(): Int = get(0)
 
     public operator fun component2(): Int = get(1)

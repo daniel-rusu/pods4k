@@ -61,6 +61,13 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
      */
     public fun getOrNull(index: Int): Float? = values.getOrNull(index)
 
+    /**
+     * Returns the element at the specified [index] or the result of calling the [defaultValue]
+     * function if the [index] is out of bounds.
+     */
+    public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> Float): Float =
+            values.getOrElse(index, defaultValue)
+
     public operator fun component1(): Float = get(0)
 
     public operator fun component2(): Float = get(1)

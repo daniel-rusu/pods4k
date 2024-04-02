@@ -56,6 +56,14 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     @Suppress("UNCHECKED_CAST")
     public fun getOrNull(index: Int): T? = values.getOrNull(index) as T
 
+    /**
+     * Returns the element at the specified [index] or the result of calling the [defaultValue]
+     * function if the [index] is out of bounds.
+     */
+    @Suppress("UNCHECKED_CAST")
+    public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> T): T =
+            values.getOrElse(index, defaultValue) as T
+
     public operator fun component1(): T = get(0)
 
     public operator fun component2(): T = get(1)

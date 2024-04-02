@@ -51,6 +51,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addIsNotEmpty()
             addArrayIndexOperator(baseType)
             addGetOrNull(baseType)
+            addGetOrElse(baseType)
             addComponentNFunctions(baseType)
             addSingle(baseType)
             addFirst(baseType)
@@ -162,6 +163,31 @@ private fun TypeSpec.Builder.addGetOrNull(baseType: BaseType) {
             addStatement("return values.getOrNull(index) as %T", baseType.type)
         } else {
             addStatement("return values.getOrNull(index)")
+        }
+    }
+}
+
+private fun TypeSpec.Builder.addGetOrElse(baseType: BaseType) {
+    addFunction(
+        kdoc = "Returns the element at the specified [index] or the result of calling the [defaultValue] function if the [index] is out of bounds.",
+        modifiers = listOf(KModifier.INLINE),
+        name = "getOrElse",
+        parameters = {
+            "index"<Int>()
+            "defaultValue"(
+                type = LambdaTypeName.get(
+                    parameters = parameters { "index"<Int>() },
+                    returnType = baseType.type,
+                )
+            )
+        },
+        returns = baseType.type
+    ) {
+        if (baseType == BaseType.GENERIC) {
+            suppress("UNCHECKED_CAST")
+            addStatement("return values.getOrElse(index, defaultValue) as %T", baseType.type)
+        } else {
+            addStatement("return values.getOrElse(index, defaultValue)")
         }
     }
 }

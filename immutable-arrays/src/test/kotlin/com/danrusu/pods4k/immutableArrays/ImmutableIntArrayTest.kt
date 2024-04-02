@@ -99,6 +99,21 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `getOrElse validation`() {
+        with(ImmutableIntArray(3) { it }) {
+            expectThat(
+                this.getOrElse(2) { 100 }::class.java
+            ).isEqualTo(primitiveIntClass)
+            expectThat(
+                this.getOrElse(2) { 100 }
+            ).isEqualTo(2)
+            expectThat(
+                this.getOrElse(3) { 100 }
+            ).isEqualTo(100)
+        }
+    }
+
+    @Test
     fun `index operator validation`() {
         with(ImmutableIntArray(3) { it }) {
             expectThat(this[0]).isEqualTo(get(0))

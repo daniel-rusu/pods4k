@@ -61,6 +61,13 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
      */
     public fun getOrNull(index: Int): Short? = values.getOrNull(index)
 
+    /**
+     * Returns the element at the specified [index] or the result of calling the [defaultValue]
+     * function if the [index] is out of bounds.
+     */
+    public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> Short): Short =
+            values.getOrElse(index, defaultValue)
+
     public operator fun component1(): Short = get(0)
 
     public operator fun component2(): Short = get(1)

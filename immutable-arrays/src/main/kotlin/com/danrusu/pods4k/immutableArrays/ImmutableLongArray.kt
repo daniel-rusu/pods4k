@@ -61,6 +61,13 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
      */
     public fun getOrNull(index: Int): Long? = values.getOrNull(index)
 
+    /**
+     * Returns the element at the specified [index] or the result of calling the [defaultValue]
+     * function if the [index] is out of bounds.
+     */
+    public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> Long): Long =
+            values.getOrElse(index, defaultValue)
+
     public operator fun component1(): Long = get(0)
 
     public operator fun component2(): Long = get(1)
