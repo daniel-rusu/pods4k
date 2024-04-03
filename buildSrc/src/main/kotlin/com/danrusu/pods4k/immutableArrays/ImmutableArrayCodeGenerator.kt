@@ -26,7 +26,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
     return createFile(packageName, baseType.generatedClassName) {
         addClass(modifiers = listOf(KModifier.VALUE), name = qualifiedClassName) {
             addAnnotation(JvmInline::class)
-            if (baseType == BaseType.GENERIC) {
+            if (baseType.isGeneric()) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
             addPrimaryConstructor(baseType)
@@ -52,7 +52,20 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 returns = baseType.type.copy(nullable = true),
                 isGeneric = baseType.isGeneric(),
             )
-            addGetOrElse(baseType)
+            "getOrElse"(
+                modifiers = listOf(KModifier.INLINE),
+                parameters = {
+                    "index"<Int>()
+                    "defaultValue"(
+                        type = LambdaTypeName.get(
+                            parameters = parameters { "index"<Int>() },
+                            returnType = baseType.type,
+                        )
+                    )
+                },
+                returns = baseType.type,
+                isGeneric = baseType.isGeneric(),
+            )
             addComponentNFunctions(baseType)
             "single"(returns = baseType.type, isGeneric = baseType.isGeneric())
             "first"(returns = baseType.type, isGeneric = baseType.isGeneric())
@@ -161,31 +174,6 @@ private fun TypeSpec.Builder.addArrayIndexOperator(baseType: BaseType) {
             addStatement("return values[index] as %T", baseType.type)
         } else {
             addStatement("return values[index]")
-        }
-    }
-}
-
-private fun TypeSpec.Builder.addGetOrElse(baseType: BaseType) {
-    addFunction(
-        kdoc = "Returns the element at the specified [index] or the result of calling the [defaultValue] function if the [index] is out of bounds.",
-        modifiers = listOf(KModifier.INLINE),
-        name = "getOrElse",
-        parameters = {
-            "index"<Int>()
-            "defaultValue"(
-                type = LambdaTypeName.get(
-                    parameters = parameters { "index"<Int>() },
-                    returnType = baseType.type,
-                )
-            )
-        },
-        returns = baseType.type
-    ) {
-        if (baseType == BaseType.GENERIC) {
-            suppress("UNCHECKED_CAST")
-            addStatement("return values.getOrElse(index, defaultValue) as %T", baseType.type)
-        } else {
-            addStatement("return values.getOrElse(index, defaultValue)")
         }
     }
 }

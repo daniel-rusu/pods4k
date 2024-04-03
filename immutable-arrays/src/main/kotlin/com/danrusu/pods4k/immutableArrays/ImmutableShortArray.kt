@@ -59,8 +59,7 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     public fun getOrNull(index: Int): Short? = values.getOrNull(index)
 
     /**
-     * Returns the element at the specified [index] or the result of calling the [defaultValue]
-     * function if the [index] is out of bounds.
+     * See [Array.getOrElse]
      */
     public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> Short): Short =
             values.getOrElse(index, defaultValue)

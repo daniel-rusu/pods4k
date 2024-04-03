@@ -58,8 +58,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     public fun getOrNull(index: Int): Boolean? = values.getOrNull(index)
 
     /**
-     * Returns the element at the specified [index] or the result of calling the [defaultValue]
-     * function if the [index] is out of bounds.
+     * See [Array.getOrElse]
      */
     public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> Boolean): Boolean =
             values.getOrElse(index, defaultValue)

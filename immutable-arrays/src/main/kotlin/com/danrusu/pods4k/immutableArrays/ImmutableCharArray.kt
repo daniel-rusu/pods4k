@@ -59,8 +59,7 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     public fun getOrNull(index: Int): Char? = values.getOrNull(index)
 
     /**
-     * Returns the element at the specified [index] or the result of calling the [defaultValue]
-     * function if the [index] is out of bounds.
+     * See [Array.getOrElse]
      */
     public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> Char): Char =
             values.getOrElse(index, defaultValue)
