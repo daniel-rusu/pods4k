@@ -99,7 +99,7 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.single]
      */
-    public fun single(predicate: (element: Char) -> Boolean): Char = values.single(predicate)
+    public inline fun single(predicate: (element: Char) -> Boolean): Char = values.single(predicate)
 
     /**
      * See [CharArray.singleOrNull]
@@ -109,7 +109,7 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.singleOrNull]
      */
-    public fun singleOrNull(predicate: (element: Char) -> Boolean): Char? =
+    public inline fun singleOrNull(predicate: (element: Char) -> Boolean): Char? =
             values.singleOrNull(predicate)
 
     /**
@@ -120,7 +120,7 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.first]
      */
-    public fun first(predicate: (element: Char) -> Boolean): Char = values.first(predicate)
+    public inline fun first(predicate: (element: Char) -> Boolean): Char = values.first(predicate)
 
     /**
      * See [CharArray.firstOrNull]
@@ -130,7 +130,7 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.firstOrNull]
      */
-    public fun firstOrNull(predicate: (element: Char) -> Boolean): Char? =
+    public inline fun firstOrNull(predicate: (element: Char) -> Boolean): Char? =
             values.firstOrNull(predicate)
 
     /**
@@ -141,7 +141,7 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.last]
      */
-    public fun last(predicate: (element: Char) -> Boolean): Char = values.last(predicate)
+    public inline fun last(predicate: (element: Char) -> Boolean): Char = values.last(predicate)
 
     /**
      * See [CharArray.lastOrNull]
@@ -151,7 +151,7 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.lastOrNull]
      */
-    public fun lastOrNull(predicate: (element: Char) -> Boolean): Char? =
+    public inline fun lastOrNull(predicate: (element: Char) -> Boolean): Char? =
             values.lastOrNull(predicate)
 
     /**

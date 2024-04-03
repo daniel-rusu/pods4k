@@ -99,7 +99,8 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.single]
      */
-    public fun single(predicate: (element: Double) -> Boolean): Double = values.single(predicate)
+    public inline fun single(predicate: (element: Double) -> Boolean): Double =
+            values.single(predicate)
 
     /**
      * See [DoubleArray.singleOrNull]
@@ -109,7 +110,7 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.singleOrNull]
      */
-    public fun singleOrNull(predicate: (element: Double) -> Boolean): Double? =
+    public inline fun singleOrNull(predicate: (element: Double) -> Boolean): Double? =
             values.singleOrNull(predicate)
 
     /**
@@ -120,7 +121,8 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.first]
      */
-    public fun first(predicate: (element: Double) -> Boolean): Double = values.first(predicate)
+    public inline fun first(predicate: (element: Double) -> Boolean): Double =
+            values.first(predicate)
 
     /**
      * See [DoubleArray.firstOrNull]
@@ -130,7 +132,7 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.firstOrNull]
      */
-    public fun firstOrNull(predicate: (element: Double) -> Boolean): Double? =
+    public inline fun firstOrNull(predicate: (element: Double) -> Boolean): Double? =
             values.firstOrNull(predicate)
 
     /**
@@ -141,7 +143,7 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.last]
      */
-    public fun last(predicate: (element: Double) -> Boolean): Double = values.last(predicate)
+    public inline fun last(predicate: (element: Double) -> Boolean): Double = values.last(predicate)
 
     /**
      * See [DoubleArray.lastOrNull]
@@ -151,7 +153,7 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.lastOrNull]
      */
-    public fun lastOrNull(predicate: (element: Double) -> Boolean): Double? =
+    public inline fun lastOrNull(predicate: (element: Double) -> Boolean): Double? =
             values.lastOrNull(predicate)
 
     /**

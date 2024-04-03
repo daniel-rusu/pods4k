@@ -99,7 +99,7 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.single]
      */
-    public fun single(predicate: (element: Long) -> Boolean): Long = values.single(predicate)
+    public inline fun single(predicate: (element: Long) -> Boolean): Long = values.single(predicate)
 
     /**
      * See [LongArray.singleOrNull]
@@ -109,7 +109,7 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.singleOrNull]
      */
-    public fun singleOrNull(predicate: (element: Long) -> Boolean): Long? =
+    public inline fun singleOrNull(predicate: (element: Long) -> Boolean): Long? =
             values.singleOrNull(predicate)
 
     /**
@@ -120,7 +120,7 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.first]
      */
-    public fun first(predicate: (element: Long) -> Boolean): Long = values.first(predicate)
+    public inline fun first(predicate: (element: Long) -> Boolean): Long = values.first(predicate)
 
     /**
      * See [LongArray.firstOrNull]
@@ -130,7 +130,7 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.firstOrNull]
      */
-    public fun firstOrNull(predicate: (element: Long) -> Boolean): Long? =
+    public inline fun firstOrNull(predicate: (element: Long) -> Boolean): Long? =
             values.firstOrNull(predicate)
 
     /**
@@ -141,7 +141,7 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.last]
      */
-    public fun last(predicate: (element: Long) -> Boolean): Long = values.last(predicate)
+    public inline fun last(predicate: (element: Long) -> Boolean): Long = values.last(predicate)
 
     /**
      * See [LongArray.lastOrNull]
@@ -151,7 +151,7 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.lastOrNull]
      */
-    public fun lastOrNull(predicate: (element: Long) -> Boolean): Long? =
+    public inline fun lastOrNull(predicate: (element: Long) -> Boolean): Long? =
             values.lastOrNull(predicate)
 
     /**

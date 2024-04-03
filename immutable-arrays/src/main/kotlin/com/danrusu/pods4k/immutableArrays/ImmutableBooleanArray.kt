@@ -98,7 +98,8 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.single]
      */
-    public fun single(predicate: (element: Boolean) -> Boolean): Boolean = values.single(predicate)
+    public inline fun single(predicate: (element: Boolean) -> Boolean): Boolean =
+            values.single(predicate)
 
     /**
      * See [BooleanArray.singleOrNull]
@@ -108,7 +109,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.singleOrNull]
      */
-    public fun singleOrNull(predicate: (element: Boolean) -> Boolean): Boolean? =
+    public inline fun singleOrNull(predicate: (element: Boolean) -> Boolean): Boolean? =
             values.singleOrNull(predicate)
 
     /**
@@ -119,7 +120,8 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.first]
      */
-    public fun first(predicate: (element: Boolean) -> Boolean): Boolean = values.first(predicate)
+    public inline fun first(predicate: (element: Boolean) -> Boolean): Boolean =
+            values.first(predicate)
 
     /**
      * See [BooleanArray.firstOrNull]
@@ -129,7 +131,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.firstOrNull]
      */
-    public fun firstOrNull(predicate: (element: Boolean) -> Boolean): Boolean? =
+    public inline fun firstOrNull(predicate: (element: Boolean) -> Boolean): Boolean? =
             values.firstOrNull(predicate)
 
     /**
@@ -140,7 +142,8 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.last]
      */
-    public fun last(predicate: (element: Boolean) -> Boolean): Boolean = values.last(predicate)
+    public inline fun last(predicate: (element: Boolean) -> Boolean): Boolean =
+            values.last(predicate)
 
     /**
      * See [BooleanArray.lastOrNull]
@@ -150,7 +153,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.lastOrNull]
      */
-    public fun lastOrNull(predicate: (element: Boolean) -> Boolean): Boolean? =
+    public inline fun lastOrNull(predicate: (element: Boolean) -> Boolean): Boolean? =
             values.lastOrNull(predicate)
 
     /**

@@ -99,7 +99,7 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     /**
      * See [Array.single]
      */
-    public fun single(predicate: (element: T) -> Boolean): T = values.single(predicate)
+    public inline fun single(predicate: (element: T) -> Boolean): T = values.single(predicate)
 
     /**
      * See [Array.singleOrNull]
@@ -109,7 +109,8 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     /**
      * See [Array.singleOrNull]
      */
-    public fun singleOrNull(predicate: (element: T) -> Boolean): T? = values.singleOrNull(predicate)
+    public inline fun singleOrNull(predicate: (element: T) -> Boolean): T? =
+            values.singleOrNull(predicate)
 
     /**
      * See [Array.first]
@@ -119,7 +120,7 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     /**
      * See [Array.first]
      */
-    public fun first(predicate: (element: T) -> Boolean): T = values.first(predicate)
+    public inline fun first(predicate: (element: T) -> Boolean): T = values.first(predicate)
 
     /**
      * See [Array.firstOrNull]
@@ -129,7 +130,8 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     /**
      * See [Array.firstOrNull]
      */
-    public fun firstOrNull(predicate: (element: T) -> Boolean): T? = values.firstOrNull(predicate)
+    public inline fun firstOrNull(predicate: (element: T) -> Boolean): T? =
+            values.firstOrNull(predicate)
 
     /**
      * See [Array.last]
@@ -139,7 +141,7 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     /**
      * See [Array.last]
      */
-    public fun last(predicate: (element: T) -> Boolean): T = values.last(predicate)
+    public inline fun last(predicate: (element: T) -> Boolean): T = values.last(predicate)
 
     /**
      * See [Array.lastOrNull]
@@ -149,7 +151,8 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     /**
      * See [Array.lastOrNull]
      */
-    public fun lastOrNull(predicate: (element: T) -> Boolean): T? = values.lastOrNull(predicate)
+    public inline fun lastOrNull(predicate: (element: T) -> Boolean): T? =
+            values.lastOrNull(predicate)
 
     /**
      * See [Array.toList]

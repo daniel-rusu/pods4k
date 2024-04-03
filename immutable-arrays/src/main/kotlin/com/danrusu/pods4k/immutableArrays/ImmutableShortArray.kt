@@ -99,7 +99,8 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.single]
      */
-    public fun single(predicate: (element: Short) -> Boolean): Short = values.single(predicate)
+    public inline fun single(predicate: (element: Short) -> Boolean): Short =
+            values.single(predicate)
 
     /**
      * See [ShortArray.singleOrNull]
@@ -109,7 +110,7 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.singleOrNull]
      */
-    public fun singleOrNull(predicate: (element: Short) -> Boolean): Short? =
+    public inline fun singleOrNull(predicate: (element: Short) -> Boolean): Short? =
             values.singleOrNull(predicate)
 
     /**
@@ -120,7 +121,7 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.first]
      */
-    public fun first(predicate: (element: Short) -> Boolean): Short = values.first(predicate)
+    public inline fun first(predicate: (element: Short) -> Boolean): Short = values.first(predicate)
 
     /**
      * See [ShortArray.firstOrNull]
@@ -130,7 +131,7 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.firstOrNull]
      */
-    public fun firstOrNull(predicate: (element: Short) -> Boolean): Short? =
+    public inline fun firstOrNull(predicate: (element: Short) -> Boolean): Short? =
             values.firstOrNull(predicate)
 
     /**
@@ -141,7 +142,7 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.last]
      */
-    public fun last(predicate: (element: Short) -> Boolean): Short = values.last(predicate)
+    public inline fun last(predicate: (element: Short) -> Boolean): Short = values.last(predicate)
 
     /**
      * See [ShortArray.lastOrNull]
@@ -151,7 +152,7 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.lastOrNull]
      */
-    public fun lastOrNull(predicate: (element: Short) -> Boolean): Short? =
+    public inline fun lastOrNull(predicate: (element: Short) -> Boolean): Short? =
             values.lastOrNull(predicate)
 
     /**

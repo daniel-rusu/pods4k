@@ -99,7 +99,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.single]
      */
-    public fun single(predicate: (element: Byte) -> Boolean): Byte = values.single(predicate)
+    public inline fun single(predicate: (element: Byte) -> Boolean): Byte = values.single(predicate)
 
     /**
      * See [ByteArray.singleOrNull]
@@ -109,7 +109,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.singleOrNull]
      */
-    public fun singleOrNull(predicate: (element: Byte) -> Boolean): Byte? =
+    public inline fun singleOrNull(predicate: (element: Byte) -> Boolean): Byte? =
             values.singleOrNull(predicate)
 
     /**
@@ -120,7 +120,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.first]
      */
-    public fun first(predicate: (element: Byte) -> Boolean): Byte = values.first(predicate)
+    public inline fun first(predicate: (element: Byte) -> Boolean): Byte = values.first(predicate)
 
     /**
      * See [ByteArray.firstOrNull]
@@ -130,7 +130,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.firstOrNull]
      */
-    public fun firstOrNull(predicate: (element: Byte) -> Boolean): Byte? =
+    public inline fun firstOrNull(predicate: (element: Byte) -> Boolean): Byte? =
             values.firstOrNull(predicate)
 
     /**
@@ -141,7 +141,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.last]
      */
-    public fun last(predicate: (element: Byte) -> Boolean): Byte = values.last(predicate)
+    public inline fun last(predicate: (element: Byte) -> Boolean): Byte = values.last(predicate)
 
     /**
      * See [ByteArray.lastOrNull]
@@ -151,7 +151,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.lastOrNull]
      */
-    public fun lastOrNull(predicate: (element: Byte) -> Boolean): Byte? =
+    public inline fun lastOrNull(predicate: (element: Byte) -> Boolean): Byte? =
             values.lastOrNull(predicate)
 
     /**

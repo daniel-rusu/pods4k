@@ -69,6 +69,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             "single"(baseType = baseType, returns = baseType.type)
             "single"(
                 baseType = baseType,
+                modifiers = listOf(KModifier.INLINE),
                 parameters = {
                     "predicate"(
                         type = LambdaTypeName.get(
@@ -85,6 +86,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             )
             "singleOrNull"(
                 baseType = baseType,
+                modifiers = listOf(KModifier.INLINE),
                 parameters = {
                     "predicate"(
                         type = LambdaTypeName.get(
@@ -98,6 +100,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             "first"(baseType = baseType, returns = baseType.type)
             "first"(
                 baseType = baseType,
+                modifiers = listOf(KModifier.INLINE),
                 parameters = {
                     "predicate"(
                         type = LambdaTypeName.get(
@@ -114,6 +117,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             )
             "firstOrNull"(
                 baseType = baseType,
+                modifiers = listOf(KModifier.INLINE),
                 parameters = {
                     "predicate"(
                         type = LambdaTypeName.get(
@@ -127,6 +131,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             "last"(baseType = baseType, returns = baseType.type)
             "last"(
                 baseType = baseType,
+                modifiers = listOf(KModifier.INLINE),
                 parameters = {
                     "predicate"(
                         type = LambdaTypeName.get(
@@ -143,6 +148,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             )
             "lastOrNull"(
                 baseType = baseType,
+                modifiers = listOf(KModifier.INLINE),
                 parameters = {
                     "predicate"(
                         type = LambdaTypeName.get(

@@ -98,7 +98,7 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.single]
      */
-    public fun single(predicate: (element: Int) -> Boolean): Int = values.single(predicate)
+    public inline fun single(predicate: (element: Int) -> Boolean): Int = values.single(predicate)
 
     /**
      * See [IntArray.singleOrNull]
@@ -108,7 +108,7 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.singleOrNull]
      */
-    public fun singleOrNull(predicate: (element: Int) -> Boolean): Int? =
+    public inline fun singleOrNull(predicate: (element: Int) -> Boolean): Int? =
             values.singleOrNull(predicate)
 
     /**
@@ -119,7 +119,7 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.first]
      */
-    public fun first(predicate: (element: Int) -> Boolean): Int = values.first(predicate)
+    public inline fun first(predicate: (element: Int) -> Boolean): Int = values.first(predicate)
 
     /**
      * See [IntArray.firstOrNull]
@@ -129,7 +129,7 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.firstOrNull]
      */
-    public fun firstOrNull(predicate: (element: Int) -> Boolean): Int? =
+    public inline fun firstOrNull(predicate: (element: Int) -> Boolean): Int? =
             values.firstOrNull(predicate)
 
     /**
@@ -140,7 +140,7 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.last]
      */
-    public fun last(predicate: (element: Int) -> Boolean): Int = values.last(predicate)
+    public inline fun last(predicate: (element: Int) -> Boolean): Int = values.last(predicate)
 
     /**
      * See [IntArray.lastOrNull]
@@ -150,7 +150,8 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.lastOrNull]
      */
-    public fun lastOrNull(predicate: (element: Int) -> Boolean): Int? = values.lastOrNull(predicate)
+    public inline fun lastOrNull(predicate: (element: Int) -> Boolean): Int? =
+            values.lastOrNull(predicate)
 
     /**
      * See [IntArray.toList]

@@ -99,7 +99,8 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.single]
      */
-    public fun single(predicate: (element: Float) -> Boolean): Float = values.single(predicate)
+    public inline fun single(predicate: (element: Float) -> Boolean): Float =
+            values.single(predicate)
 
     /**
      * See [FloatArray.singleOrNull]
@@ -109,7 +110,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.singleOrNull]
      */
-    public fun singleOrNull(predicate: (element: Float) -> Boolean): Float? =
+    public inline fun singleOrNull(predicate: (element: Float) -> Boolean): Float? =
             values.singleOrNull(predicate)
 
     /**
@@ -120,7 +121,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.first]
      */
-    public fun first(predicate: (element: Float) -> Boolean): Float = values.first(predicate)
+    public inline fun first(predicate: (element: Float) -> Boolean): Float = values.first(predicate)
 
     /**
      * See [FloatArray.firstOrNull]
@@ -130,7 +131,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.firstOrNull]
      */
-    public fun firstOrNull(predicate: (element: Float) -> Boolean): Float? =
+    public inline fun firstOrNull(predicate: (element: Float) -> Boolean): Float? =
             values.firstOrNull(predicate)
 
     /**
@@ -141,7 +142,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.last]
      */
-    public fun last(predicate: (element: Float) -> Boolean): Float = values.last(predicate)
+    public inline fun last(predicate: (element: Float) -> Boolean): Float = values.last(predicate)
 
     /**
      * See [FloatArray.lastOrNull]
@@ -151,7 +152,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.lastOrNull]
      */
-    public fun lastOrNull(predicate: (element: Float) -> Boolean): Float? =
+    public inline fun lastOrNull(predicate: (element: Float) -> Boolean): Float? =
             values.lastOrNull(predicate)
 
     /**
