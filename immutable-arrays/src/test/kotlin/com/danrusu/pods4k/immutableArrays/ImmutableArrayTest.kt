@@ -191,6 +191,18 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `singleOrNull with predicate validation`() {
+        with(ImmutableArray(3) { "element $it" }) {
+            expectThat(
+                this.singleOrNull { it.contains("element") }
+            ).isNull()
+        }
+        with(ImmutableArray(3) { "element $it" }) {
+            expectThat(this.singleOrNull { it.contains("2") }).isEqualTo("element 2")
+        }
+    }
+
+    @Test
     fun `first validation`() {
         with(ImmutableArray(3) { "element $it" }) {
             expectThat(this.first()).isEqualTo("element 0")

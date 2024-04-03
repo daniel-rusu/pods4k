@@ -83,6 +83,18 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 baseType = baseType,
                 returns = baseType.type.copy(nullable = true)
             )
+            "singleOrNull"(
+                baseType = baseType,
+                parameters = {
+                    "predicate"(
+                        type = LambdaTypeName.get(
+                            parameters = parameters { "element"(type = baseType.type) },
+                            returnType = Boolean::class.asTypeName()
+                        )
+                    )
+                },
+                returns = baseType.type.copy(nullable = true)
+            )
             "first"(baseType = baseType, returns = baseType.type)
             "first"(
                 baseType = baseType,

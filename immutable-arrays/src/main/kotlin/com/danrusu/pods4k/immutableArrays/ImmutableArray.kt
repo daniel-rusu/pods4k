@@ -107,6 +107,11 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     public fun singleOrNull(): T? = values.singleOrNull()
 
     /**
+     * See [Array.singleOrNull]
+     */
+    public fun singleOrNull(predicate: (element: T) -> Boolean): T? = values.singleOrNull(predicate)
+
+    /**
      * See [Array.first]
      */
     public fun first(): T = values.first()

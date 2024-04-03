@@ -204,6 +204,18 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `singleOrNull with predicate validation`() {
+        with(ImmutableIntArray(3) { it }) {
+            expectThat(
+                this.singleOrNull { it > 0 }
+            ).isNull()
+        }
+        with(ImmutableIntArray(3) { it }) {
+            expectThat(this.singleOrNull { it % 2 == 1 }).isEqualTo(1)
+        }
+    }
+
+    @Test
     fun `first validation`() {
         with(ImmutableIntArray(3) { it }) {
             val first = this.first()
