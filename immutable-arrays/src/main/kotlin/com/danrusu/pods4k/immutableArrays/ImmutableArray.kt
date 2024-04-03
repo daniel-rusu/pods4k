@@ -112,6 +112,11 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     public fun firstOrNull(): T? = values.firstOrNull()
 
     /**
+     * See [Array.firstOrNull]
+     */
+    public fun firstOrNull(predicate: (element: T) -> Boolean): T? = values.firstOrNull(predicate)
+
+    /**
      * See [Array.last]
      */
     public fun last(): T = values.last()

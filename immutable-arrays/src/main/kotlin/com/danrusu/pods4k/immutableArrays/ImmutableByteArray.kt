@@ -112,6 +112,12 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     public fun firstOrNull(): Byte? = values.firstOrNull()
 
     /**
+     * See [ByteArray.firstOrNull]
+     */
+    public fun firstOrNull(predicate: (element: Byte) -> Boolean): Byte? =
+            values.firstOrNull(predicate)
+
+    /**
      * See [ByteArray.last]
      */
     public fun last(): Byte = values.last()

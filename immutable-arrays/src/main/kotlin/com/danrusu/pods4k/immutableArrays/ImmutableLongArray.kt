@@ -112,6 +112,12 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     public fun firstOrNull(): Long? = values.firstOrNull()
 
     /**
+     * See [LongArray.firstOrNull]
+     */
+    public fun firstOrNull(predicate: (element: Long) -> Boolean): Long? =
+            values.firstOrNull(predicate)
+
+    /**
      * See [LongArray.last]
      */
     public fun last(): Long = values.last()

@@ -213,6 +213,20 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `firstOrNull with predicate validation`() {
+        with(ImmutableIntArray(5) { 2 * it }) {
+            val first = this.firstOrNull { element ->
+                expectThat(element::class.java).isEqualTo(primitiveIntClass)
+
+                element % 4 == 0
+            }
+            expectThat(first).isEqualTo(0)
+
+            expectThat(this.firstOrNull { it > 0 && it % 7 == 0 }).isNull()
+        }
+    }
+
+    @Test
     fun `last validation`() {
         with(ImmutableIntArray(3) { it }) {
             val last = this.last()

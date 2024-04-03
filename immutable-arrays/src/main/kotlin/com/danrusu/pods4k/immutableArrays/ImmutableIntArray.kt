@@ -111,6 +111,12 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     public fun firstOrNull(): Int? = values.firstOrNull()
 
     /**
+     * See [IntArray.firstOrNull]
+     */
+    public fun firstOrNull(predicate: (element: Int) -> Boolean): Int? =
+            values.firstOrNull(predicate)
+
+    /**
      * See [IntArray.last]
      */
     public fun last(): Int = values.last()
