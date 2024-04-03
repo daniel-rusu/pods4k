@@ -32,6 +32,12 @@ class ImmutableArrayTest {
 
     @Test
     fun `lastIndex validation`() {
+        with(ImmutableArray(0) { "element $it" }) {
+            expectThat(this.lastIndex).isEqualTo(-1)
+        }
+        with(ImmutableArray(1) { "element $it" }) {
+            expectThat(this.lastIndex).isEqualTo(0)
+        }
         with(ImmutableArray(10) { "element $it" }) {
             expectThat(this.lastIndex).isEqualTo(9)
         }

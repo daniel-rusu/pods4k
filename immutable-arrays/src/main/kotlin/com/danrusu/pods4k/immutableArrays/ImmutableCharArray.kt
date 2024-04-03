@@ -29,7 +29,7 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
      * Returns the index of the last element or -1 if the array is empty.
      */
     public val lastIndex: Int
-        get() = values.lastIndex
+        get() = values.size - 1
 
     /**
      * Returns the range of valid indices for the array.

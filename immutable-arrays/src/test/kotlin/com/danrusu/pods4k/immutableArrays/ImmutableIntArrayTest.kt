@@ -37,6 +37,12 @@ class ImmutableIntArrayTest {
 
     @Test
     fun `lastIndex validation`() {
+        with(ImmutableIntArray(0) { it }) {
+            expectThat(this.lastIndex).isEqualTo(-1)
+        }
+        with(ImmutableIntArray(1) { it }) {
+            expectThat(this.lastIndex).isEqualTo(0)
+        }
         with(ImmutableIntArray(10) { it }) {
             expectThat(this.lastIndex).isEqualTo(9)
         }

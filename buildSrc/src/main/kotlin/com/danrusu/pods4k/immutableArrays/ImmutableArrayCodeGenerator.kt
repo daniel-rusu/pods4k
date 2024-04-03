@@ -34,7 +34,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 kdoc = "Returns the index of the last element or -1 if the array is empty.",
                 name = "lastIndex",
                 type = Int::class.asTypeName(),
-                get = "return values.lastIndex",
+                get = "return values.size - 1",
             )
             addProperty(
                 kdoc = "Returns the range of valid indices for the array.",
