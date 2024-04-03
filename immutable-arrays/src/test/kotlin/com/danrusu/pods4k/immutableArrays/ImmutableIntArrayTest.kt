@@ -262,6 +262,15 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `withIndex validation`() {
+        with(ImmutableIntArray(2) { 10 * it }) {
+            expectThat(this.withIndex().toList()).isEqualTo(
+                listOf(IndexedValue(index = 0, value = 0), IndexedValue(index = 1, value = 10))
+            )
+        }
+    }
+
+    @Test
     fun `asSequence validation`() {
         with(ImmutableIntArray(3) { it }) {
             val elementsFromSequence = this.asSequence().toList()

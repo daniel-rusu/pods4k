@@ -8,6 +8,7 @@ import kotlin.Int
 import kotlin.PublishedApi
 import kotlin.String
 import kotlin.Unit
+import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
 import kotlin.collections.Iterator
 import kotlin.collections.List
@@ -119,6 +120,11 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
      * See [Array.asIterable]
      */
     public fun asIterable(): Iterable<Double> = values.asIterable()
+
+    /**
+     * See [Array.withIndex]
+     */
+    public fun withIndex(): Iterable<IndexedValue<Double>> = values.withIndex()
 
     /**
      * See [Array.asSequence]

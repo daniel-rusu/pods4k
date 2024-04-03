@@ -244,6 +244,15 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `withIndex validation`() {
+        with(ImmutableArray(2) { "element $it" }) {
+            expectThat(this.withIndex().toList()).isEqualTo(
+                listOf(IndexedValue(0, "element 0"), IndexedValue(1, "element 1"))
+            )
+        }
+    }
+
+    @Test
     fun `asSequence validation`() {
         with(ImmutableArray(3) { "element $it" }) {
             val elementsFromSequence = this.asSequence().toList()

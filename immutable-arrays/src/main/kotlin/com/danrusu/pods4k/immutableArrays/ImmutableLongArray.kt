@@ -8,6 +8,7 @@ import kotlin.LongArray
 import kotlin.PublishedApi
 import kotlin.String
 import kotlin.Unit
+import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
 import kotlin.collections.Iterator
 import kotlin.collections.List
@@ -119,6 +120,11 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
      * See [Array.asIterable]
      */
     public fun asIterable(): Iterable<Long> = values.asIterable()
+
+    /**
+     * See [Array.withIndex]
+     */
+    public fun withIndex(): Iterable<IndexedValue<Long>> = values.withIndex()
 
     /**
      * See [Array.asSequence]

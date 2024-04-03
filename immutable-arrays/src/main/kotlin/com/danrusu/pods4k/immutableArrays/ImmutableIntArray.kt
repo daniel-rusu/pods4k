@@ -7,6 +7,7 @@ import kotlin.IntArray
 import kotlin.PublishedApi
 import kotlin.String
 import kotlin.Unit
+import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
 import kotlin.collections.Iterator
 import kotlin.collections.List
@@ -118,6 +119,11 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
      * See [Array.asIterable]
      */
     public fun asIterable(): Iterable<Int> = values.asIterable()
+
+    /**
+     * See [Array.withIndex]
+     */
+    public fun withIndex(): Iterable<IndexedValue<Int>> = values.withIndex()
 
     /**
      * See [Array.asSequence]
