@@ -1,7 +1,6 @@
 // Auto-generated file. DO NOT EDIT!
 package com.danrusu.pods4k.immutableArrays
 
-import com.danrusu.pods4k.immutableArrays.emptySingletons.EmptyIterator
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
@@ -39,8 +38,14 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
 
     override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
 
+    /**
+     * See [Array.isEmpty]
+     */
     public fun isEmpty(): Boolean = values.isEmpty()
 
+    /**
+     * See [Array.isNotEmpty]
+     */
     public fun isNotEmpty(): Boolean = values.isNotEmpty()
 
     /**
@@ -51,10 +56,10 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     public operator fun `get`(index: Int): T = values[index] as T
 
     /**
-     * Returns the element at the specified [index] or null if the index is out of bounds.
+     * See [Array.getOrNull]
      */
     @Suppress("UNCHECKED_CAST")
-    public fun getOrNull(index: Int): T? = values.getOrNull(index) as T
+    public fun getOrNull(index: Int): T? = values.getOrNull(index) as T?
 
     /**
      * Returns the element at the specified [index] or the result of calling the [defaultValue]
@@ -75,63 +80,55 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     public operator fun component5(): T = get(4)
 
     /**
-     * Returns the single element from the array, or throws an exception if the array is empty or
-     * has more than one element.
+     * See [Array.single]
      */
     @Suppress("UNCHECKED_CAST")
     public fun single(): T = values.single() as T
 
     /**
-     * Returns the first element.
-     *
-     * @throws NoSuchElementException if the array is empty.
+     * See [Array.first]
      */
     @Suppress("UNCHECKED_CAST")
     public fun first(): T = values.first() as T
 
     /**
-     * Returns the first element or null if the array is empty.
+     * See [Array.firstOrNull]
      */
     @Suppress("UNCHECKED_CAST")
     public fun firstOrNull(): T? = values.firstOrNull() as T?
 
     /**
-     * Returns the last element.
-     *
-     * @throws NoSuchElementException if the array is empty.
+     * See [Array.last]
      */
     @Suppress("UNCHECKED_CAST")
     public fun last(): T = values.last() as T
 
     /**
-     * Returns the last element or null if the array is empty.
+     * See [Array.lastOrNull]
      */
     @Suppress("UNCHECKED_CAST")
     public fun lastOrNull(): T? = values.lastOrNull() as T?
 
     /**
-     * Returns a [List] containing all the elements.
+     * See [Array.toList]
      */
     @Suppress("UNCHECKED_CAST")
     public fun toList(): List<T> = values.toList() as List<T>
 
     /**
-     * Returns a [MutableList] containing all the elements.
+     * See [Array.toMutableList]
      */
     @Suppress("UNCHECKED_CAST")
     public fun toMutableList(): MutableList<T> = values.toMutableList() as MutableList<T>
 
     /**
-     * Returns an iterator allowing iteration over the elements of the array.
+     * See [Array.iterator]
      */
     @Suppress("UNCHECKED_CAST")
-    public operator fun iterator(): Iterator<T> {
-        if (isEmpty()) return EmptyIterator
-        return values.iterator() as Iterator<T>
-    }
+    public operator fun iterator(): Iterator<T> = values.iterator() as Iterator<T>
 
     /**
-     * Returns a [Sequence] which returns the elements of this array when iterated.
+     * See [Array.asSequence]
      */
     @Suppress("UNCHECKED_CAST")
     public fun asSequence(): Sequence<T> = values.asSequence() as Sequence<T>

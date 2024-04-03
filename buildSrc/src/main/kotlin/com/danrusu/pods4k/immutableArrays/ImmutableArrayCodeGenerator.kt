@@ -8,9 +8,6 @@ import java.io.File
 private const val NUM_COMPONENT_N_FUNCTIONS = 5
 
 private val packageName = ImmutableArrayCodeGenerator::class.java.`package`.name
-private val emptySingletonsPackageName = "$packageName.emptySingletons"
-
-private val emptyIterator = ClassName(emptySingletonsPackageName, "EmptyIterator")
 
 internal object ImmutableArrayCodeGenerator {
     fun generate(destinationPath: String) {
@@ -47,21 +44,44 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 get = "return values.indices",
             )
             overrideToString()
-            addIsEmpty()
-            addIsNotEmpty()
+            "isEmpty"(returns = Boolean::class.asTypeName())
+            "isNotEmpty"(returns = Boolean::class.asTypeName())
             addArrayIndexOperator(baseType)
-            addGetOrNull(baseType)
+            "getOrNull"(
+                parameters = { "index"<Int>() },
+                returns = baseType.type.copy(nullable = true),
+                isGeneric = baseType.isGeneric(),
+            )
             addGetOrElse(baseType)
             addComponentNFunctions(baseType)
-            addSingle(baseType)
-            addFirst(baseType)
-            addFirstOrNull(baseType)
-            addLast(baseType)
-            addLastOrNull(baseType)
-            addToList(baseType)
-            addToMutableList(baseType)
-            addIteratorOperator(baseType)
-            addAsSequence(baseType)
+            "single"(returns = baseType.type, isGeneric = baseType.isGeneric())
+            "first"(returns = baseType.type, isGeneric = baseType.isGeneric())
+            "firstOrNull"(
+                returns = baseType.type.copy(nullable = true),
+                isGeneric = baseType.isGeneric(),
+            )
+            "last"(returns = baseType.type, isGeneric = baseType.isGeneric())
+            "lastOrNull"(
+                returns = baseType.type.copy(nullable = true),
+                isGeneric = baseType.isGeneric(),
+            )
+            "toList"(
+                returns = List::class.asTypeName().parameterizedBy(baseType.type),
+                isGeneric = baseType.isGeneric(),
+            )
+            "toMutableList"(
+                returns = ClassName("kotlin.collections", "MutableList").parameterizedBy(baseType.type),
+                isGeneric = baseType.isGeneric(),
+            )
+            "iterator"(
+                modifiers = listOf(KModifier.OPERATOR),
+                returns = Iterator::class.asClassName().parameterizedBy(baseType.type),
+                isGeneric = baseType.isGeneric()
+            )
+            "asSequence"(
+                returns = Sequence::class.asClassName().parameterizedBy(baseType.type),
+                isGeneric = baseType.isGeneric(),
+            )
             addForEach(baseType)
             addForEachIndexed(baseType)
             addCompanionObject {
@@ -89,6 +109,34 @@ private fun TypeSpec.Builder.addPrimaryConstructor(baseType: BaseType) {
     }
 }
 
+/**
+ * Delegates to the same function on the backing array.
+ */
+context (TypeSpec.Builder)
+private operator fun String.invoke(
+    kdoc: String = "See [Array.$this]",
+    modifiers: List<KModifier> = emptyList(),
+    parameters: ParameterDSL.() -> Unit = {},
+    returns: TypeName,
+    isGeneric: Boolean = false,
+) {
+    val params = ParameterDSL().apply(parameters).build().map { it.name }.joinToString()
+    addFunction(
+        kdoc = kdoc,
+        modifiers = modifiers,
+        name = this,
+        parameters = parameters,
+        returns = returns,
+    ) {
+        if (isGeneric) {
+            suppress("UNCHECKED_CAST")
+            addStatement("return values.${this@invoke}($params) as %T", returns)
+        } else {
+            addStatement("return values.${this@invoke}($params)")
+        }
+    }
+}
+
 private fun TypeSpec.Builder.overrideToString() {
     addFunction(
         modifiers = listOf(KModifier.OVERRIDE),
@@ -96,26 +144,6 @@ private fun TypeSpec.Builder.overrideToString() {
         returns = String::class.asTypeName(),
         code = """
             return values.joinToString(prefix = "[", postfix = "]")
-        """.trimIndent(),
-    )
-}
-
-private fun TypeSpec.Builder.addIsEmpty() {
-    addFunction(
-        name = "isEmpty",
-        returns = Boolean::class.asTypeName(),
-        code = """
-            return values.isEmpty()
-        """.trimIndent(),
-    )
-}
-
-private fun TypeSpec.Builder.addIsNotEmpty() {
-    addFunction(
-        name = "isNotEmpty",
-        returns = Boolean::class.asTypeName(),
-        code = """
-            return values.isNotEmpty()
         """.trimIndent(),
     )
 }
@@ -133,36 +161,6 @@ private fun TypeSpec.Builder.addArrayIndexOperator(baseType: BaseType) {
             addStatement("return values[index] as %T", baseType.type)
         } else {
             addStatement("return values[index]")
-        }
-    }
-}
-
-private fun TypeSpec.Builder.addGetOrNull(baseType: BaseType) {
-    val warning = when {
-        // The 2 consecutive blank lines are intentional so that the kdoc ends up with a blank line before the warning
-        baseType != BaseType.GENERIC -> """
-            
-            
-            Note: 
-            This array stores primitive values but getOrNull returns a nullable reference type resulting in the value being auto-boxed.
-            
-            When calling this method in a loop, for best performance and to reduce the pressure on the garbage collector, we recommend ensuring that the [index] is always within bounds and use [get] instead as that returns the primitive value without any autoboxing.
-        """.trimIndent()
-
-        else -> ""
-    }
-
-    addFunction(
-        kdoc = "Returns the element at the specified [index] or null if the index is out of bounds.$warning",
-        name = "getOrNull",
-        parameters = { "index"<Int>() },
-        returns = baseType.type.copy(nullable = true)
-    ) {
-        if (baseType == BaseType.GENERIC) {
-            suppress("UNCHECKED_CAST")
-            addStatement("return values.getOrNull(index) as %T", baseType.type)
-        } else {
-            addStatement("return values.getOrNull(index)")
         }
     }
 }
@@ -192,93 +190,6 @@ private fun TypeSpec.Builder.addGetOrElse(baseType: BaseType) {
     }
 }
 
-private fun TypeSpec.Builder.addSingle(baseType: BaseType) {
-    addFunction(
-        kdoc = """
-            Returns the single element from the array, or throws an exception if the array is empty or has more than one element.
-        """.trimIndent(),
-        name = "single",
-        returns = baseType.type
-    ) {
-        if (baseType == BaseType.GENERIC) {
-            suppress("UNCHECKED_CAST")
-            addStatement("return values.single() as %T", baseType.type)
-        } else {
-            addStatement("return values.single()")
-        }
-    }
-}
-
-private fun TypeSpec.Builder.addFirst(baseType: BaseType) {
-    addFunction(
-        kdoc = """
-            Returns the first element.
-            
-            @throws NoSuchElementException if the array is empty.
-        """.trimIndent(),
-        name = "first",
-        returns = baseType.type
-    ) {
-        if (baseType == BaseType.GENERIC) {
-            suppress("UNCHECKED_CAST")
-            addStatement("return values.first() as %T", baseType.type)
-        } else {
-            addStatement("return values.first()")
-        }
-    }
-}
-
-private fun TypeSpec.Builder.addFirstOrNull(baseType: BaseType) {
-    val returnType = baseType.type.copy(nullable = true)
-    addFunction(
-        kdoc = "Returns the first element or null if the array is empty.",
-        name = "firstOrNull",
-        returns = returnType
-    ) {
-        if (baseType == BaseType.GENERIC) {
-            suppress("UNCHECKED_CAST")
-            addStatement("return values.firstOrNull() as %T", returnType)
-        } else {
-            addStatement("return values.firstOrNull()")
-        }
-    }
-}
-
-private fun TypeSpec.Builder.addLast(baseType: BaseType) {
-    addFunction(
-        kdoc = """
-            Returns the last element.
-            
-            @throws NoSuchElementException if the array is empty.
-        """.trimIndent(),
-        name = "last",
-        returns = baseType.type
-    ) {
-        if (baseType == BaseType.GENERIC) {
-            suppress("UNCHECKED_CAST")
-            addStatement("return values.last() as %T", baseType.type)
-        } else {
-            addStatement("return values.last()")
-        }
-    }
-}
-
-private fun TypeSpec.Builder.addLastOrNull(baseType: BaseType) {
-    val returnType = baseType.type.copy(nullable = true)
-    addFunction(
-        kdoc = "Returns the last element or null if the array is empty.",
-        name = "lastOrNull",
-        returns = returnType
-    ) {
-        if (baseType == BaseType.GENERIC) {
-            suppress("UNCHECKED_CAST")
-            addStatement("return values.lastOrNull() as %T", returnType)
-        } else {
-            addStatement("return values.lastOrNull()")
-        }
-    }
-}
-
 private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
     for (n in 1..NUM_COMPONENT_N_FUNCTIONS) {
         addFunction(
@@ -287,76 +198,6 @@ private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
             returns = baseType.type,
             code = "return get(${n - 1})",
         )
-    }
-}
-
-private fun TypeSpec.Builder.addToList(baseType: BaseType) {
-    val listType = List::class.asTypeName().parameterizedBy(baseType.type)
-
-    addFunction(
-        kdoc = "Returns a [List] containing all the elements.",
-        name = "toList",
-        returns = listType,
-    ) {
-        if (baseType == BaseType.GENERIC) {
-            suppress("UNCHECKED_CAST")
-            addStatement("return values.toList() as %T", listType)
-        } else {
-            addStatement("return values.toList()")
-        }
-    }
-}
-
-private fun TypeSpec.Builder.addToMutableList(baseType: BaseType) {
-    val mutableListClassName = ClassName("kotlin.collections", "MutableList")
-    val listType = mutableListClassName.parameterizedBy(baseType.type)
-
-    addFunction(
-        kdoc = "Returns a [MutableList] containing all the elements.",
-        name = "toMutableList",
-        returns = listType,
-    ) {
-        if (baseType == BaseType.GENERIC) {
-            suppress("UNCHECKED_CAST")
-            addStatement("return values.toMutableList() as %T", listType)
-        } else {
-            addStatement("return values.toMutableList()")
-        }
-    }
-}
-
-private fun TypeSpec.Builder.addIteratorOperator(baseType: BaseType) {
-    val iteratorType = Iterator::class.asClassName().parameterizedBy(baseType.type)
-
-    addFunction(
-        kdoc = "Returns an iterator allowing iteration over the elements of the array.",
-        modifiers = listOf(KModifier.OPERATOR),
-        name = "iterator",
-        returns = iteratorType,
-    ) {
-        addStatement("if (isEmpty()) return %T", emptyIterator)
-        if (baseType == BaseType.GENERIC) {
-            suppress("UNCHECKED_CAST")
-            addStatement("return values.iterator() as %T", iteratorType)
-        } else {
-            addStatement("return values.iterator()")
-        }
-    }
-}
-
-private fun TypeSpec.Builder.addAsSequence(baseType: BaseType) {
-    val sequenceType = Sequence::class.asClassName().parameterizedBy(baseType.type)
-    addFunction(
-        kdoc = "Returns a [Sequence] which returns the elements of this array when iterated.",
-        name = "asSequence",
-        returns = sequenceType,
-    ) {
-        if (baseType == BaseType.GENERIC) {
-            suppress("UNCHECKED_CAST")
-            addStatement("return values.asSequence() as %T", sequenceType)
-        } else {
-            addStatement("return values.asSequence()")
-        }
     }
 }
 

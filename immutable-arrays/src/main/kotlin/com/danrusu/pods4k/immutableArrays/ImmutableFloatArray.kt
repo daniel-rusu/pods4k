@@ -1,7 +1,6 @@
 // Auto-generated file. DO NOT EDIT!
 package com.danrusu.pods4k.immutableArrays
 
-import com.danrusu.pods4k.immutableArrays.emptySingletons.EmptyIterator
 import kotlin.Boolean
 import kotlin.Float
 import kotlin.FloatArray
@@ -38,8 +37,14 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
 
     override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
 
+    /**
+     * See [Array.isEmpty]
+     */
     public fun isEmpty(): Boolean = values.isEmpty()
 
+    /**
+     * See [Array.isNotEmpty]
+     */
     public fun isNotEmpty(): Boolean = values.isNotEmpty()
 
     /**
@@ -49,15 +54,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     public operator fun `get`(index: Int): Float = values[index]
 
     /**
-     * Returns the element at the specified [index] or null if the index is out of bounds.
-     *
-     * Note: 
-     * This array stores primitive values but getOrNull returns a nullable reference type resulting
-     * in the value being auto-boxed.
-     *
-     * When calling this method in a loop, for best performance and to reduce the pressure on the
-     * garbage collector, we recommend ensuring that the [index] is always within bounds and use [get]
-     * instead as that returns the primitive value without any autoboxing.
+     * See [Array.getOrNull]
      */
     public fun getOrNull(index: Int): Float? = values.getOrNull(index)
 
@@ -79,55 +76,47 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     public operator fun component5(): Float = get(4)
 
     /**
-     * Returns the single element from the array, or throws an exception if the array is empty or
-     * has more than one element.
+     * See [Array.single]
      */
     public fun single(): Float = values.single()
 
     /**
-     * Returns the first element.
-     *
-     * @throws NoSuchElementException if the array is empty.
+     * See [Array.first]
      */
     public fun first(): Float = values.first()
 
     /**
-     * Returns the first element or null if the array is empty.
+     * See [Array.firstOrNull]
      */
     public fun firstOrNull(): Float? = values.firstOrNull()
 
     /**
-     * Returns the last element.
-     *
-     * @throws NoSuchElementException if the array is empty.
+     * See [Array.last]
      */
     public fun last(): Float = values.last()
 
     /**
-     * Returns the last element or null if the array is empty.
+     * See [Array.lastOrNull]
      */
     public fun lastOrNull(): Float? = values.lastOrNull()
 
     /**
-     * Returns a [List] containing all the elements.
+     * See [Array.toList]
      */
     public fun toList(): List<Float> = values.toList()
 
     /**
-     * Returns a [MutableList] containing all the elements.
+     * See [Array.toMutableList]
      */
     public fun toMutableList(): MutableList<Float> = values.toMutableList()
 
     /**
-     * Returns an iterator allowing iteration over the elements of the array.
+     * See [Array.iterator]
      */
-    public operator fun iterator(): Iterator<Float> {
-        if (isEmpty()) return EmptyIterator
-        return values.iterator()
-    }
+    public operator fun iterator(): Iterator<Float> = values.iterator()
 
     /**
-     * Returns a [Sequence] which returns the elements of this array when iterated.
+     * See [Array.asSequence]
      */
     public fun asSequence(): Sequence<Float> = values.asSequence()
 

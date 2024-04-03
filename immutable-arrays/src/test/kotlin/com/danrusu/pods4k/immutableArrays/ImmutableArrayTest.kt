@@ -1,6 +1,5 @@
 package com.danrusu.pods4k.immutableArrays
 
-import com.danrusu.pods4k.immutableArrays.emptySingletons.EmptyIterator
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.api.expectThrows
@@ -213,12 +212,6 @@ class ImmutableArrayTest {
 
     @Test
     fun `iterator validation`() {
-        with(ImmutableArray(0) { "element $it" }) {
-            val iterator = this.iterator()
-            expectThat(iterator === EmptyIterator).isTrue()
-            expectThat(iterator.hasNext()).isFalse()
-            expectThrows<NoSuchElementException> { iterator.next() }
-        }
         with(ImmutableArray(2) { Person(id = it) }) {
             val iterator = this.iterator()
             expectThat(iterator.hasNext()).isTrue()
