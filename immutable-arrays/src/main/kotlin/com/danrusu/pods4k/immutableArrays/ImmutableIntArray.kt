@@ -131,12 +131,12 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     public fun asSequence(): Sequence<Int> = values.asSequence()
 
     /**
-     * Performs the specified [action] on each element sequentially starting with the first element
+     * See [Array.forEach]
      */
     public inline fun forEach(action: (element: Int) -> Unit): Unit = values.forEach(action)
 
     /**
-     * Performs the specified [action] on each element sequentially starting with the first element
+     * See [Array.forEachIndexed]
      */
     public inline fun forEachIndexed(action: (index: Int, element: Int) -> Unit): Unit =
             values.forEachIndexed(action)

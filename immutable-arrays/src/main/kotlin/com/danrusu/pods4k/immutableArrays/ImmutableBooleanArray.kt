@@ -131,12 +131,12 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     public fun asSequence(): Sequence<Boolean> = values.asSequence()
 
     /**
-     * Performs the specified [action] on each element sequentially starting with the first element
+     * See [Array.forEach]
      */
     public inline fun forEach(action: (element: Boolean) -> Unit): Unit = values.forEach(action)
 
     /**
-     * Performs the specified [action] on each element sequentially starting with the first element
+     * See [Array.forEachIndexed]
      */
     public inline fun forEachIndexed(action: (index: Int, element: Boolean) -> Unit): Unit =
             values.forEachIndexed(action)

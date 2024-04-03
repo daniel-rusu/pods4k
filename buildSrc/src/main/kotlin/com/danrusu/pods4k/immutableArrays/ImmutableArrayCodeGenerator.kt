@@ -95,8 +95,28 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             "asSequence"(
                 returns = Sequence::class.asTypeName().parameterizedBy(baseType.type),
             )
-            addForEach(baseType)
-            addForEachIndexed(baseType)
+            "forEach"(
+                modifiers = listOf(KModifier.INLINE),
+                parameters = {
+                    "action"(
+                        type = LambdaTypeName.get(
+                            parameters = parameters { "element"(type = baseType.type) },
+                            returnType = Unit::class.asTypeName()
+                        )
+                    )
+                },
+            )
+            "forEachIndexed"(
+                modifiers = listOf(KModifier.INLINE),
+                parameters = {
+                    "action"(
+                        type = LambdaTypeName.get(
+                            parameters = parameters { "index"<Int>(); "element"(type = baseType.type) },
+                            returnType = Unit::class.asTypeName()
+                        )
+                    )
+                },
+            )
             addCompanionObject {
                 addInvokeOperator(baseType, qualifiedClassName)
             }
@@ -130,7 +150,7 @@ private operator fun String.invoke(
     kdoc: String = "See [Array.$this]",
     modifiers: List<KModifier> = emptyList(),
     parameters: ParameterDSL.() -> Unit = {},
-    returns: TypeName,
+    returns: TypeName = Unit::class.asTypeName(),
 ) {
     val params = ParameterDSL().apply(parameters).build().map { it.name }.joinToString()
     addFunction(
@@ -175,42 +195,6 @@ private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
             returns = baseType.type,
             code = "return get(${n - 1})",
         )
-    }
-}
-
-private fun TypeSpec.Builder.addForEach(baseType: BaseType) {
-    addFunction(
-        kdoc = "Performs the specified [action] on each element sequentially starting with the first element",
-        modifiers = listOf(KModifier.INLINE),
-        name = "forEach",
-        parameters = {
-            "action"(
-                type = LambdaTypeName.get(
-                    parameters = parameters { "element"(type = baseType.type) },
-                    returnType = Unit::class.asTypeName()
-                )
-            )
-        },
-    ) {
-        addStatement("return values.forEach(action)")
-    }
-}
-
-private fun TypeSpec.Builder.addForEachIndexed(baseType: BaseType) {
-    addFunction(
-        kdoc = "Performs the specified [action] on each element sequentially starting with the first element",
-        modifiers = listOf(KModifier.INLINE),
-        name = "forEachIndexed",
-        parameters = {
-            "action"(
-                type = LambdaTypeName.get(
-                    parameters = parameters { "index"<Int>(); "element"(type = baseType.type) },
-                    returnType = Unit::class.asTypeName()
-                )
-            )
-        },
-    ) {
-        addStatement("return values.forEachIndexed(action)")
     }
 }
 

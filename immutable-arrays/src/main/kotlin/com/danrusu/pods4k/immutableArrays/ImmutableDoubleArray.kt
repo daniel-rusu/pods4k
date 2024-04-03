@@ -132,12 +132,12 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     public fun asSequence(): Sequence<Double> = values.asSequence()
 
     /**
-     * Performs the specified [action] on each element sequentially starting with the first element
+     * See [Array.forEach]
      */
     public inline fun forEach(action: (element: Double) -> Unit): Unit = values.forEach(action)
 
     /**
-     * Performs the specified [action] on each element sequentially starting with the first element
+     * See [Array.forEachIndexed]
      */
     public inline fun forEachIndexed(action: (index: Int, element: Double) -> Unit): Unit =
             values.forEachIndexed(action)

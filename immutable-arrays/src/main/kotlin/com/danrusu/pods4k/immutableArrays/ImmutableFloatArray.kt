@@ -132,12 +132,12 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     public fun asSequence(): Sequence<Float> = values.asSequence()
 
     /**
-     * Performs the specified [action] on each element sequentially starting with the first element
+     * See [Array.forEach]
      */
     public inline fun forEach(action: (element: Float) -> Unit): Unit = values.forEach(action)
 
     /**
-     * Performs the specified [action] on each element sequentially starting with the first element
+     * See [Array.forEachIndexed]
      */
     public inline fun forEachIndexed(action: (index: Int, element: Float) -> Unit): Unit =
             values.forEachIndexed(action)
