@@ -7,6 +7,7 @@ import kotlin.Int
 import kotlin.PublishedApi
 import kotlin.String
 import kotlin.Unit
+import kotlin.collections.Iterable
 import kotlin.collections.Iterator
 import kotlin.collections.List
 import kotlin.collections.MutableList
@@ -112,6 +113,11 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
      * See [Array.iterator]
      */
     public operator fun iterator(): Iterator<Boolean> = values.iterator()
+
+    /**
+     * See [Array.asIterable]
+     */
+    public fun asIterable(): Iterable<Boolean> = values.asIterable()
 
     /**
      * See [Array.asSequence]

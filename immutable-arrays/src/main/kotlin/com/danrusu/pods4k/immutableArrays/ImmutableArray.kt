@@ -9,6 +9,7 @@ import kotlin.PublishedApi
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Unit
+import kotlin.collections.Iterable
 import kotlin.collections.Iterator
 import kotlin.collections.List
 import kotlin.collections.MutableList
@@ -125,6 +126,12 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
      */
     @Suppress("UNCHECKED_CAST")
     public operator fun iterator(): Iterator<T> = values.iterator() as Iterator<T>
+
+    /**
+     * See [Array.asIterable]
+     */
+    @Suppress("UNCHECKED_CAST")
+    public fun asIterable(): Iterable<T> = values.asIterable() as Iterable<T>
 
     /**
      * See [Array.asSequence]

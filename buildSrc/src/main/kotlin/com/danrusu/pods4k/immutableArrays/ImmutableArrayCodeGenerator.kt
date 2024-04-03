@@ -88,11 +88,15 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             )
             "iterator"(
                 modifiers = listOf(KModifier.OPERATOR),
-                returns = Iterator::class.asClassName().parameterizedBy(baseType.type),
+                returns = Iterator::class.asTypeName().parameterizedBy(baseType.type),
+                isGeneric = baseType.isGeneric()
+            )
+            "asIterable"(
+                returns = Iterable::class.asTypeName().parameterizedBy(baseType.type),
                 isGeneric = baseType.isGeneric()
             )
             "asSequence"(
-                returns = Sequence::class.asClassName().parameterizedBy(baseType.type),
+                returns = Sequence::class.asTypeName().parameterizedBy(baseType.type),
                 isGeneric = baseType.isGeneric(),
             )
             addForEach(baseType)
