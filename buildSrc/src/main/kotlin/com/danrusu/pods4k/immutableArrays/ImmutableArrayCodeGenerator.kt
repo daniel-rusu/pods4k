@@ -79,6 +79,10 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 },
                 returns = baseType.type
             )
+            "singleOrNull"(
+                baseType = baseType,
+                returns = baseType.type.copy(nullable = true)
+            )
             "first"(baseType = baseType, returns = baseType.type)
             "first"(
                 baseType = baseType,

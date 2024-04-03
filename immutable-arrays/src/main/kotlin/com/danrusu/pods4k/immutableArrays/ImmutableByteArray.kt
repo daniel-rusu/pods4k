@@ -102,6 +102,11 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     public fun single(predicate: (element: Byte) -> Boolean): Byte = values.single(predicate)
 
     /**
+     * See [ByteArray.singleOrNull]
+     */
+    public fun singleOrNull(): Byte? = values.singleOrNull()
+
+    /**
      * See [ByteArray.first]
      */
     public fun first(): Byte = values.first()

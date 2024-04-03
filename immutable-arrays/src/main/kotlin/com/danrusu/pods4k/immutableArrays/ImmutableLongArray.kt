@@ -102,6 +102,11 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     public fun single(predicate: (element: Long) -> Boolean): Long = values.single(predicate)
 
     /**
+     * See [LongArray.singleOrNull]
+     */
+    public fun singleOrNull(): Long? = values.singleOrNull()
+
+    /**
      * See [LongArray.first]
      */
     public fun first(): Long = values.first()

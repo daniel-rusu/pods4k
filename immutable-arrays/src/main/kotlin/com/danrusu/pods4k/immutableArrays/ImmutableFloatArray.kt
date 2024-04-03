@@ -102,6 +102,11 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     public fun single(predicate: (element: Float) -> Boolean): Float = values.single(predicate)
 
     /**
+     * See [FloatArray.singleOrNull]
+     */
+    public fun singleOrNull(): Float? = values.singleOrNull()
+
+    /**
      * See [FloatArray.first]
      */
     public fun first(): Float = values.first()

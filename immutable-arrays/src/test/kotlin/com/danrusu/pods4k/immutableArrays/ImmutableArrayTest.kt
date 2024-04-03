@@ -181,6 +181,16 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `singleOrNull validation`() {
+        with(ImmutableArray(3) { "element $it" }) {
+            expectThat(this.singleOrNull()).isNull()
+        }
+        with(ImmutableArray(1) { "element $it" }) {
+            expectThat(this.singleOrNull()).isEqualTo("element 0")
+        }
+    }
+
+    @Test
     fun `first validation`() {
         with(ImmutableArray(3) { "element $it" }) {
             expectThat(this.first()).isEqualTo("element 0")

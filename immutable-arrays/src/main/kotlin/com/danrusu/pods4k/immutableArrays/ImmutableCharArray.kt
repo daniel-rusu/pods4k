@@ -102,6 +102,11 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     public fun single(predicate: (element: Char) -> Boolean): Char = values.single(predicate)
 
     /**
+     * See [CharArray.singleOrNull]
+     */
+    public fun singleOrNull(): Char? = values.singleOrNull()
+
+    /**
      * See [CharArray.first]
      */
     public fun first(): Char = values.first()
