@@ -50,7 +50,6 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             "getOrNull"(
                 parameters = { "index"<Int>() },
                 returns = baseType.type.copy(nullable = true),
-                isGeneric = baseType.isGeneric(),
             )
             "getOrElse"(
                 modifiers = listOf(KModifier.INLINE),
@@ -64,46 +63,37 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                     )
                 },
                 returns = baseType.type,
-                isGeneric = baseType.isGeneric(),
             )
             addComponentNFunctions(baseType)
-            "single"(returns = baseType.type, isGeneric = baseType.isGeneric())
-            "first"(returns = baseType.type, isGeneric = baseType.isGeneric())
+            "single"(returns = baseType.type)
+            "first"(returns = baseType.type)
             "firstOrNull"(
                 returns = baseType.type.copy(nullable = true),
-                isGeneric = baseType.isGeneric(),
             )
-            "last"(returns = baseType.type, isGeneric = baseType.isGeneric())
+            "last"(returns = baseType.type)
             "lastOrNull"(
                 returns = baseType.type.copy(nullable = true),
-                isGeneric = baseType.isGeneric(),
             )
             "toList"(
                 returns = List::class.asTypeName().parameterizedBy(baseType.type),
-                isGeneric = baseType.isGeneric(),
             )
             "toMutableList"(
                 returns = ClassName("kotlin.collections", "MutableList").parameterizedBy(baseType.type),
-                isGeneric = baseType.isGeneric(),
             )
             "iterator"(
                 modifiers = listOf(KModifier.OPERATOR),
                 returns = Iterator::class.asTypeName().parameterizedBy(baseType.type),
-                isGeneric = baseType.isGeneric(),
             )
             "asIterable"(
                 returns = Iterable::class.asTypeName().parameterizedBy(baseType.type),
-                isGeneric = baseType.isGeneric(),
             )
             "withIndex"(
                 returns = Iterable::class.asTypeName().parameterizedBy(
                     IndexedValue::class.asTypeName().parameterizedBy(baseType.type)
                 ),
-                isGeneric = baseType.isGeneric(),
             )
             "asSequence"(
                 returns = Sequence::class.asTypeName().parameterizedBy(baseType.type),
-                isGeneric = baseType.isGeneric(),
             )
             addForEach(baseType)
             addForEachIndexed(baseType)
@@ -141,7 +131,6 @@ private operator fun String.invoke(
     modifiers: List<KModifier> = emptyList(),
     parameters: ParameterDSL.() -> Unit = {},
     returns: TypeName,
-    isGeneric: Boolean = false,
 ) {
     val params = ParameterDSL().apply(parameters).build().map { it.name }.joinToString()
     addFunction(
@@ -151,12 +140,7 @@ private operator fun String.invoke(
         parameters = parameters,
         returns = returns,
     ) {
-        if (isGeneric) {
-            suppress("UNCHECKED_CAST")
-            addStatement("return values.${this@invoke}($params) as %T", returns)
-        } else {
-            addStatement("return values.${this@invoke}($params)")
-        }
+        addStatement("return values.${this@invoke}($params)")
     }
 }
 
@@ -179,12 +163,7 @@ private fun TypeSpec.Builder.addArrayIndexOperator(baseType: BaseType) {
         parameters = { "index"<Int>() },
         returns = baseType.type,
     ) {
-        if (baseType == BaseType.GENERIC) {
-            suppress("UNCHECKED_CAST")
-            addStatement("return values[index] as %T", baseType.type)
-        } else {
-            addStatement("return values[index]")
-        }
+        addStatement("return values[index]")
     }
 }
 
@@ -213,12 +192,7 @@ private fun TypeSpec.Builder.addForEach(baseType: BaseType) {
             )
         },
     ) {
-        if (baseType == BaseType.GENERIC) {
-            suppress("UNCHECKED_CAST")
-            addStatement("return values.forEach { action(it as %T) }", baseType.type)
-        } else {
-            addStatement("return values.forEach(action)")
-        }
+        addStatement("return values.forEach(action)")
     }
 }
 
@@ -236,15 +210,7 @@ private fun TypeSpec.Builder.addForEachIndexed(baseType: BaseType) {
             )
         },
     ) {
-        if (baseType == BaseType.GENERIC) {
-            suppress("UNCHECKED_CAST")
-            addStatement(
-                "return values.forEachIndexed { index, element -> action(index, element as %T) }",
-                baseType.type
-            )
-        } else {
-            addStatement("return values.forEachIndexed(action)")
-        }
+        addStatement("return values.forEachIndexed(action)")
     }
 }
 
@@ -272,14 +238,15 @@ private fun TypeSpec.Builder.addInvokeOperator(baseType: BaseType, qualifiedClas
         returns = qualifiedClassName.maybeAddGenericType(baseType),
     ) {
         if (baseType == BaseType.GENERIC) {
+            suppress("UNCHECKED_CAST")
             addTypeVariable(baseType.type as TypeVariableName)
         }
-        addCode(
-            """
-                val backingArray = ${baseType.backingArrayConstructor}(size) { index -> init(index) }
-                return ${baseType.generatedClassName}(backingArray)
-            """.trimIndent()
-        )
+        addStatement("val backingArray = ${baseType.backingArrayConstructor}(size) { index -> init(index) }")
+        if (baseType == BaseType.GENERIC) {
+            addStatement("return ${baseType.generatedClassName}(backingArray as %T)", baseType.backingArrayType)
+        } else {
+            addStatement("return ${baseType.generatedClassName}(backingArray)")
+        }
     }
 }
 

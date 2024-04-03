@@ -1,7 +1,6 @@
 // Auto-generated file. DO NOT EDIT!
 package com.danrusu.pods4k.immutableArrays
 
-import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
 import kotlin.Int
@@ -21,7 +20,7 @@ import kotlin.sequences.Sequence
 @JvmInline
 public value class ImmutableArray<T> @PublishedApi internal constructor(
     @PublishedApi
-    internal val values: Array<Any?>,
+    internal val values: Array<T>,
 ) {
     public val size: Int
         get() = values.size
@@ -54,21 +53,18 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
      * Returns the element at the specified [index]. This method can be called using the index
      * operator.
      */
-    @Suppress("UNCHECKED_CAST")
-    public operator fun `get`(index: Int): T = values[index] as T
+    public operator fun `get`(index: Int): T = values[index]
 
     /**
      * See [Array.getOrNull]
      */
-    @Suppress("UNCHECKED_CAST")
-    public fun getOrNull(index: Int): T? = values.getOrNull(index) as T?
+    public fun getOrNull(index: Int): T? = values.getOrNull(index)
 
     /**
      * See [Array.getOrElse]
      */
-    @Suppress("UNCHECKED_CAST")
     public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> T): T =
-            values.getOrElse(index, defaultValue) as T
+            values.getOrElse(index, defaultValue)
 
     public operator fun component1(): T = get(0)
 
@@ -83,83 +79,68 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     /**
      * See [Array.single]
      */
-    @Suppress("UNCHECKED_CAST")
-    public fun single(): T = values.single() as T
+    public fun single(): T = values.single()
 
     /**
      * See [Array.first]
      */
-    @Suppress("UNCHECKED_CAST")
-    public fun first(): T = values.first() as T
+    public fun first(): T = values.first()
 
     /**
      * See [Array.firstOrNull]
      */
-    @Suppress("UNCHECKED_CAST")
-    public fun firstOrNull(): T? = values.firstOrNull() as T?
+    public fun firstOrNull(): T? = values.firstOrNull()
 
     /**
      * See [Array.last]
      */
-    @Suppress("UNCHECKED_CAST")
-    public fun last(): T = values.last() as T
+    public fun last(): T = values.last()
 
     /**
      * See [Array.lastOrNull]
      */
-    @Suppress("UNCHECKED_CAST")
-    public fun lastOrNull(): T? = values.lastOrNull() as T?
+    public fun lastOrNull(): T? = values.lastOrNull()
 
     /**
      * See [Array.toList]
      */
-    @Suppress("UNCHECKED_CAST")
-    public fun toList(): List<T> = values.toList() as List<T>
+    public fun toList(): List<T> = values.toList()
 
     /**
      * See [Array.toMutableList]
      */
-    @Suppress("UNCHECKED_CAST")
-    public fun toMutableList(): MutableList<T> = values.toMutableList() as MutableList<T>
+    public fun toMutableList(): MutableList<T> = values.toMutableList()
 
     /**
      * See [Array.iterator]
      */
-    @Suppress("UNCHECKED_CAST")
-    public operator fun iterator(): Iterator<T> = values.iterator() as Iterator<T>
+    public operator fun iterator(): Iterator<T> = values.iterator()
 
     /**
      * See [Array.asIterable]
      */
-    @Suppress("UNCHECKED_CAST")
-    public fun asIterable(): Iterable<T> = values.asIterable() as Iterable<T>
+    public fun asIterable(): Iterable<T> = values.asIterable()
 
     /**
      * See [Array.withIndex]
      */
-    @Suppress("UNCHECKED_CAST")
-    public fun withIndex(): Iterable<IndexedValue<T>> = values.withIndex() as
-            Iterable<IndexedValue<T>>
+    public fun withIndex(): Iterable<IndexedValue<T>> = values.withIndex()
 
     /**
      * See [Array.asSequence]
      */
-    @Suppress("UNCHECKED_CAST")
-    public fun asSequence(): Sequence<T> = values.asSequence() as Sequence<T>
+    public fun asSequence(): Sequence<T> = values.asSequence()
 
     /**
      * Performs the specified [action] on each element sequentially starting with the first element
      */
-    @Suppress("UNCHECKED_CAST")
-    public inline fun forEach(action: (element: T) -> Unit): Unit = values.forEach { action(it as T)
-            }
+    public inline fun forEach(action: (element: T) -> Unit): Unit = values.forEach(action)
 
     /**
      * Performs the specified [action] on each element sequentially starting with the first element
      */
-    @Suppress("UNCHECKED_CAST")
     public inline fun forEachIndexed(action: (index: Int, element: T) -> Unit): Unit =
-            values.forEachIndexed { index, element -> action(index, element as T) }
+            values.forEachIndexed(action)
 
     public companion object {
         /**
@@ -173,10 +154,11 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
          * We're using the invoke method instead of a regular constructor so that we can declare it
          * inline.  The call site will look like a regular constructor call.
          */
+        @Suppress("UNCHECKED_CAST")
         public inline operator fun <T> invoke(size: Int, `init`: (index: Int) -> T):
                 ImmutableArray<T> {
             val backingArray = Array<Any?>(size) { index -> init(index) }
-            return ImmutableArray(backingArray)
+            return ImmutableArray(backingArray as Array<T>)
         }
     }
 }

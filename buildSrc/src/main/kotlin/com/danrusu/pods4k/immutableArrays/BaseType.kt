@@ -1,10 +1,12 @@
 package com.danrusu.pods4k.immutableArrays
 
+import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeVariableName
 import com.squareup.kotlinpoet.asTypeName
-import com.squareup.kotlinpoet.typeNameOf
 import kotlin.reflect.KClass
+
+private val genericType = TypeVariableName("T")
 
 internal enum class BaseType(
     val type: TypeName,
@@ -13,8 +15,8 @@ internal enum class BaseType(
     val generatedClassName: String,
 ) {
     GENERIC(
-        type = TypeVariableName("T"),
-        backingArrayType = typeNameOf<Array<Any?>>(),
+        type = genericType,
+        backingArrayType = Array::class.asTypeName().parameterizedBy(genericType),
         backingArrayConstructor = "Array<Any?>",
         generatedClassName = "ImmutableArray"
     ),
