@@ -97,6 +97,11 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     public fun single(): T = values.single()
 
     /**
+     * See [Array.single]
+     */
+    public fun single(predicate: (element: T) -> Boolean): T = values.single(predicate)
+
+    /**
      * See [Array.first]
      */
     public fun first(): T = values.first()

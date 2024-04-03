@@ -96,6 +96,11 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     public fun single(): Boolean = values.single()
 
     /**
+     * See [BooleanArray.single]
+     */
+    public fun single(predicate: (element: Boolean) -> Boolean): Boolean = values.single(predicate)
+
+    /**
      * See [BooleanArray.first]
      */
     public fun first(): Boolean = values.first()

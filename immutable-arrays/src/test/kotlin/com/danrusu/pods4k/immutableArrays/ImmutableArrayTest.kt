@@ -169,6 +169,18 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `single with predicate validation`() {
+        with(ImmutableArray(3) { "element $it" }) {
+            expectThrows<IllegalArgumentException> {
+                this.single { it.contains("element") }
+            }.message.isEqualTo("Array contains more than one matching element.")
+        }
+        with(ImmutableArray(3) { "element $it" }) {
+            expectThat(this.single { it.contains("2") }).isEqualTo("element 2")
+        }
+    }
+
+    @Test
     fun `first validation`() {
         with(ImmutableArray(3) { "element $it" }) {
             expectThat(this.first()).isEqualTo("element 0")
