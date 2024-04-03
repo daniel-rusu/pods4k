@@ -102,6 +102,11 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     public fun first(): Char = values.first()
 
     /**
+     * See [CharArray.first]
+     */
+    public fun first(predicate: (element: Char) -> Boolean): Char = values.first(predicate)
+
+    /**
      * See [CharArray.firstOrNull]
      */
     public fun firstOrNull(): Char? = values.firstOrNull()

@@ -102,6 +102,11 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     public fun first(): Double = values.first()
 
     /**
+     * See [DoubleArray.first]
+     */
+    public fun first(predicate: (element: Double) -> Boolean): Double = values.first(predicate)
+
+    /**
      * See [DoubleArray.firstOrNull]
      */
     public fun firstOrNull(): Double? = values.firstOrNull()

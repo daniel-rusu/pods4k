@@ -68,6 +68,18 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addComponentNFunctions(baseType)
             "single"(baseType = baseType, returns = baseType.type)
             "first"(baseType = baseType, returns = baseType.type)
+            "first"(
+                baseType = baseType,
+                parameters = {
+                    "predicate"(
+                        type = LambdaTypeName.get(
+                            parameters = parameters { "element"(type = baseType.type) },
+                            returnType = Boolean::class.asTypeName()
+                        )
+                    )
+                },
+                returns = baseType.type
+            )
             "firstOrNull"(
                 baseType = baseType,
                 returns = baseType.type.copy(nullable = true),

@@ -176,6 +176,15 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `first with predicate validation`() {
+        with(ImmutableArray(3) { "element $it" }) {
+            expectThat(
+                this.first { it.contains("2") }
+            ).isEqualTo("element 2")
+        }
+    }
+
+    @Test
     fun `firstOrNull validation`() {
         with(ImmutableArray(0) { "element $it" }) {
             expectThat(this.firstOrNull()).isNull()

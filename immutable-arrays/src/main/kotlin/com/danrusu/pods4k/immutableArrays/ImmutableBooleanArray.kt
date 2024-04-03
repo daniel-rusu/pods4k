@@ -101,6 +101,11 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     public fun first(): Boolean = values.first()
 
     /**
+     * See [BooleanArray.first]
+     */
+    public fun first(predicate: (element: Boolean) -> Boolean): Boolean = values.first(predicate)
+
+    /**
      * See [BooleanArray.firstOrNull]
      */
     public fun firstOrNull(): Boolean? = values.firstOrNull()

@@ -102,6 +102,11 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     public fun first(): Short = values.first()
 
     /**
+     * See [ShortArray.first]
+     */
+    public fun first(predicate: (element: Short) -> Boolean): Short = values.first(predicate)
+
+    /**
      * See [ShortArray.firstOrNull]
      */
     public fun firstOrNull(): Short? = values.firstOrNull()

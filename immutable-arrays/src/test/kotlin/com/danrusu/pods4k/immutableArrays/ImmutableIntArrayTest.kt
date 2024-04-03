@@ -191,6 +191,17 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `first with predicate validation`() {
+        with(ImmutableIntArray(5) { 5 * it }) {
+            val first = this.first { element ->
+                expectThat(element::class.java).isEqualTo(primitiveIntClass)
+                element > 12
+            }
+            expectThat(first).isEqualTo(15)
+        }
+    }
+
+    @Test
     fun `firstOrNull validation`() {
         with(ImmutableIntArray(0) { it }) {
             expectThat(this.firstOrNull()).isNull()
