@@ -117,6 +117,11 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     public fun last(): Float = values.last()
 
     /**
+     * See [FloatArray.last]
+     */
+    public fun last(predicate: (element: Float) -> Boolean): Float = values.last(predicate)
+
+    /**
      * See [FloatArray.lastOrNull]
      */
     public fun lastOrNull(): Float? = values.lastOrNull()

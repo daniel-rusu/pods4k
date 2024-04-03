@@ -116,6 +116,11 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     public fun last(): Int = values.last()
 
     /**
+     * See [IntArray.last]
+     */
+    public fun last(predicate: (element: Int) -> Boolean): Int = values.last(predicate)
+
+    /**
      * See [IntArray.lastOrNull]
      */
     public fun lastOrNull(): Int? = values.lastOrNull()

@@ -116,6 +116,11 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     public fun last(): Boolean = values.last()
 
     /**
+     * See [BooleanArray.last]
+     */
+    public fun last(predicate: (element: Boolean) -> Boolean): Boolean = values.last(predicate)
+
+    /**
      * See [BooleanArray.lastOrNull]
      */
     public fun lastOrNull(): Boolean? = values.lastOrNull()

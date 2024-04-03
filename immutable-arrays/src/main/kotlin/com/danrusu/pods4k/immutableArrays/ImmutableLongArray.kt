@@ -117,6 +117,11 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     public fun last(): Long = values.last()
 
     /**
+     * See [LongArray.last]
+     */
+    public fun last(predicate: (element: Long) -> Boolean): Long = values.last(predicate)
+
+    /**
      * See [LongArray.lastOrNull]
      */
     public fun lastOrNull(): Long? = values.lastOrNull()

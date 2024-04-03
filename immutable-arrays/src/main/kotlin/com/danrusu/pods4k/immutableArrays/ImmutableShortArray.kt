@@ -117,6 +117,11 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     public fun last(): Short = values.last()
 
     /**
+     * See [ShortArray.last]
+     */
+    public fun last(predicate: (element: Short) -> Boolean): Short = values.last(predicate)
+
+    /**
      * See [ShortArray.lastOrNull]
      */
     public fun lastOrNull(): Short? = values.lastOrNull()

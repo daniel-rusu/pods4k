@@ -117,6 +117,11 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     public fun last(): T = values.last()
 
     /**
+     * See [Array.last]
+     */
+    public fun last(predicate: (element: T) -> Boolean): T = values.last(predicate)
+
+    /**
      * See [Array.lastOrNull]
      */
     public fun lastOrNull(): T? = values.lastOrNull()

@@ -177,10 +177,10 @@ class ImmutableArrayTest {
 
     @Test
     fun `first with predicate validation`() {
-        with(ImmutableArray(3) { "element $it" }) {
+        with(ImmutableArray(6) { "${2 * it}" }) {
             expectThat(
                 this.first { it.contains("2") }
-            ).isEqualTo("element 2")
+            ).isEqualTo("2")
         }
     }
 
@@ -198,6 +198,15 @@ class ImmutableArrayTest {
     fun `last validation`() {
         with(ImmutableArray(3) { "element $it" }) {
             expectThat(this.last()).isEqualTo("element 2")
+        }
+    }
+
+    @Test
+    fun `last with predicate validation`() {
+        with(ImmutableArray(7) { "${2 * it}" }) {
+            expectThat(
+                this.last { it.contains("2") }
+            ).isEqualTo("12")
         }
     }
 
