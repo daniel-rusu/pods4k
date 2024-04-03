@@ -40,12 +40,12 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
 
     /**
-     * See [Array.isEmpty]
+     * See [ShortArray.isEmpty]
      */
     public fun isEmpty(): Boolean = values.isEmpty()
 
     /**
-     * See [Array.isNotEmpty]
+     * See [ShortArray.isNotEmpty]
      */
     public fun isNotEmpty(): Boolean = values.isNotEmpty()
 
@@ -56,12 +56,12 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     public operator fun `get`(index: Int): Short = values[index]
 
     /**
-     * See [Array.getOrNull]
+     * See [ShortArray.getOrNull]
      */
     public fun getOrNull(index: Int): Short? = values.getOrNull(index)
 
     /**
-     * See [Array.getOrElse]
+     * See [ShortArray.getOrElse]
      */
     public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> Short): Short =
             values.getOrElse(index, defaultValue)
@@ -77,67 +77,67 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     public operator fun component5(): Short = get(4)
 
     /**
-     * See [Array.single]
+     * See [ShortArray.single]
      */
     public fun single(): Short = values.single()
 
     /**
-     * See [Array.first]
+     * See [ShortArray.first]
      */
     public fun first(): Short = values.first()
 
     /**
-     * See [Array.firstOrNull]
+     * See [ShortArray.firstOrNull]
      */
     public fun firstOrNull(): Short? = values.firstOrNull()
 
     /**
-     * See [Array.last]
+     * See [ShortArray.last]
      */
     public fun last(): Short = values.last()
 
     /**
-     * See [Array.lastOrNull]
+     * See [ShortArray.lastOrNull]
      */
     public fun lastOrNull(): Short? = values.lastOrNull()
 
     /**
-     * See [Array.toList]
+     * See [ShortArray.toList]
      */
     public fun toList(): List<Short> = values.toList()
 
     /**
-     * See [Array.toMutableList]
+     * See [ShortArray.toMutableList]
      */
     public fun toMutableList(): MutableList<Short> = values.toMutableList()
 
     /**
-     * See [Array.iterator]
+     * See [ShortArray.iterator]
      */
     public operator fun iterator(): Iterator<Short> = values.iterator()
 
     /**
-     * See [Array.asIterable]
+     * See [ShortArray.asIterable]
      */
     public fun asIterable(): Iterable<Short> = values.asIterable()
 
     /**
-     * See [Array.withIndex]
+     * See [ShortArray.withIndex]
      */
     public fun withIndex(): Iterable<IndexedValue<Short>> = values.withIndex()
 
     /**
-     * See [Array.asSequence]
+     * See [ShortArray.asSequence]
      */
     public fun asSequence(): Sequence<Short> = values.asSequence()
 
     /**
-     * See [Array.forEach]
+     * See [ShortArray.forEach]
      */
     public inline fun forEach(action: (element: Short) -> Unit): Unit = values.forEach(action)
 
     /**
-     * See [Array.forEachIndexed]
+     * See [ShortArray.forEachIndexed]
      */
     public inline fun forEachIndexed(action: (index: Int, element: Short) -> Unit): Unit =
             values.forEachIndexed(action)

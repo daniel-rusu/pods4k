@@ -40,12 +40,12 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
 
     /**
-     * See [Array.isEmpty]
+     * See [DoubleArray.isEmpty]
      */
     public fun isEmpty(): Boolean = values.isEmpty()
 
     /**
-     * See [Array.isNotEmpty]
+     * See [DoubleArray.isNotEmpty]
      */
     public fun isNotEmpty(): Boolean = values.isNotEmpty()
 
@@ -56,12 +56,12 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     public operator fun `get`(index: Int): Double = values[index]
 
     /**
-     * See [Array.getOrNull]
+     * See [DoubleArray.getOrNull]
      */
     public fun getOrNull(index: Int): Double? = values.getOrNull(index)
 
     /**
-     * See [Array.getOrElse]
+     * See [DoubleArray.getOrElse]
      */
     public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> Double): Double =
             values.getOrElse(index, defaultValue)
@@ -77,67 +77,67 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     public operator fun component5(): Double = get(4)
 
     /**
-     * See [Array.single]
+     * See [DoubleArray.single]
      */
     public fun single(): Double = values.single()
 
     /**
-     * See [Array.first]
+     * See [DoubleArray.first]
      */
     public fun first(): Double = values.first()
 
     /**
-     * See [Array.firstOrNull]
+     * See [DoubleArray.firstOrNull]
      */
     public fun firstOrNull(): Double? = values.firstOrNull()
 
     /**
-     * See [Array.last]
+     * See [DoubleArray.last]
      */
     public fun last(): Double = values.last()
 
     /**
-     * See [Array.lastOrNull]
+     * See [DoubleArray.lastOrNull]
      */
     public fun lastOrNull(): Double? = values.lastOrNull()
 
     /**
-     * See [Array.toList]
+     * See [DoubleArray.toList]
      */
     public fun toList(): List<Double> = values.toList()
 
     /**
-     * See [Array.toMutableList]
+     * See [DoubleArray.toMutableList]
      */
     public fun toMutableList(): MutableList<Double> = values.toMutableList()
 
     /**
-     * See [Array.iterator]
+     * See [DoubleArray.iterator]
      */
     public operator fun iterator(): Iterator<Double> = values.iterator()
 
     /**
-     * See [Array.asIterable]
+     * See [DoubleArray.asIterable]
      */
     public fun asIterable(): Iterable<Double> = values.asIterable()
 
     /**
-     * See [Array.withIndex]
+     * See [DoubleArray.withIndex]
      */
     public fun withIndex(): Iterable<IndexedValue<Double>> = values.withIndex()
 
     /**
-     * See [Array.asSequence]
+     * See [DoubleArray.asSequence]
      */
     public fun asSequence(): Sequence<Double> = values.asSequence()
 
     /**
-     * See [Array.forEach]
+     * See [DoubleArray.forEach]
      */
     public inline fun forEach(action: (element: Double) -> Unit): Unit = values.forEach(action)
 
     /**
-     * See [Array.forEachIndexed]
+     * See [DoubleArray.forEachIndexed]
      */
     public inline fun forEachIndexed(action: (index: Int, element: Double) -> Unit): Unit =
             values.forEachIndexed(action)

@@ -38,6 +38,4 @@ internal enum class BaseType(
         backingArrayConstructor = arrayType.simpleName!!,
         generatedClassName = "Immutable${type.simpleName}Array"
     )
-
-    fun isGeneric(): Boolean = this == GENERIC
 }

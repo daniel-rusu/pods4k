@@ -40,12 +40,12 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
 
     /**
-     * See [Array.isEmpty]
+     * See [FloatArray.isEmpty]
      */
     public fun isEmpty(): Boolean = values.isEmpty()
 
     /**
-     * See [Array.isNotEmpty]
+     * See [FloatArray.isNotEmpty]
      */
     public fun isNotEmpty(): Boolean = values.isNotEmpty()
 
@@ -56,12 +56,12 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     public operator fun `get`(index: Int): Float = values[index]
 
     /**
-     * See [Array.getOrNull]
+     * See [FloatArray.getOrNull]
      */
     public fun getOrNull(index: Int): Float? = values.getOrNull(index)
 
     /**
-     * See [Array.getOrElse]
+     * See [FloatArray.getOrElse]
      */
     public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> Float): Float =
             values.getOrElse(index, defaultValue)
@@ -77,67 +77,67 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     public operator fun component5(): Float = get(4)
 
     /**
-     * See [Array.single]
+     * See [FloatArray.single]
      */
     public fun single(): Float = values.single()
 
     /**
-     * See [Array.first]
+     * See [FloatArray.first]
      */
     public fun first(): Float = values.first()
 
     /**
-     * See [Array.firstOrNull]
+     * See [FloatArray.firstOrNull]
      */
     public fun firstOrNull(): Float? = values.firstOrNull()
 
     /**
-     * See [Array.last]
+     * See [FloatArray.last]
      */
     public fun last(): Float = values.last()
 
     /**
-     * See [Array.lastOrNull]
+     * See [FloatArray.lastOrNull]
      */
     public fun lastOrNull(): Float? = values.lastOrNull()
 
     /**
-     * See [Array.toList]
+     * See [FloatArray.toList]
      */
     public fun toList(): List<Float> = values.toList()
 
     /**
-     * See [Array.toMutableList]
+     * See [FloatArray.toMutableList]
      */
     public fun toMutableList(): MutableList<Float> = values.toMutableList()
 
     /**
-     * See [Array.iterator]
+     * See [FloatArray.iterator]
      */
     public operator fun iterator(): Iterator<Float> = values.iterator()
 
     /**
-     * See [Array.asIterable]
+     * See [FloatArray.asIterable]
      */
     public fun asIterable(): Iterable<Float> = values.asIterable()
 
     /**
-     * See [Array.withIndex]
+     * See [FloatArray.withIndex]
      */
     public fun withIndex(): Iterable<IndexedValue<Float>> = values.withIndex()
 
     /**
-     * See [Array.asSequence]
+     * See [FloatArray.asSequence]
      */
     public fun asSequence(): Sequence<Float> = values.asSequence()
 
     /**
-     * See [Array.forEach]
+     * See [FloatArray.forEach]
      */
     public inline fun forEach(action: (element: Float) -> Unit): Unit = values.forEach(action)
 
     /**
-     * See [Array.forEachIndexed]
+     * See [FloatArray.forEachIndexed]
      */
     public inline fun forEachIndexed(action: (index: Int, element: Float) -> Unit): Unit =
             values.forEachIndexed(action)

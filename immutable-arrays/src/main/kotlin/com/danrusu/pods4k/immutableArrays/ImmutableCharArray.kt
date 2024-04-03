@@ -40,12 +40,12 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
 
     /**
-     * See [Array.isEmpty]
+     * See [CharArray.isEmpty]
      */
     public fun isEmpty(): Boolean = values.isEmpty()
 
     /**
-     * See [Array.isNotEmpty]
+     * See [CharArray.isNotEmpty]
      */
     public fun isNotEmpty(): Boolean = values.isNotEmpty()
 
@@ -56,12 +56,12 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     public operator fun `get`(index: Int): Char = values[index]
 
     /**
-     * See [Array.getOrNull]
+     * See [CharArray.getOrNull]
      */
     public fun getOrNull(index: Int): Char? = values.getOrNull(index)
 
     /**
-     * See [Array.getOrElse]
+     * See [CharArray.getOrElse]
      */
     public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> Char): Char =
             values.getOrElse(index, defaultValue)
@@ -77,67 +77,67 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     public operator fun component5(): Char = get(4)
 
     /**
-     * See [Array.single]
+     * See [CharArray.single]
      */
     public fun single(): Char = values.single()
 
     /**
-     * See [Array.first]
+     * See [CharArray.first]
      */
     public fun first(): Char = values.first()
 
     /**
-     * See [Array.firstOrNull]
+     * See [CharArray.firstOrNull]
      */
     public fun firstOrNull(): Char? = values.firstOrNull()
 
     /**
-     * See [Array.last]
+     * See [CharArray.last]
      */
     public fun last(): Char = values.last()
 
     /**
-     * See [Array.lastOrNull]
+     * See [CharArray.lastOrNull]
      */
     public fun lastOrNull(): Char? = values.lastOrNull()
 
     /**
-     * See [Array.toList]
+     * See [CharArray.toList]
      */
     public fun toList(): List<Char> = values.toList()
 
     /**
-     * See [Array.toMutableList]
+     * See [CharArray.toMutableList]
      */
     public fun toMutableList(): MutableList<Char> = values.toMutableList()
 
     /**
-     * See [Array.iterator]
+     * See [CharArray.iterator]
      */
     public operator fun iterator(): Iterator<Char> = values.iterator()
 
     /**
-     * See [Array.asIterable]
+     * See [CharArray.asIterable]
      */
     public fun asIterable(): Iterable<Char> = values.asIterable()
 
     /**
-     * See [Array.withIndex]
+     * See [CharArray.withIndex]
      */
     public fun withIndex(): Iterable<IndexedValue<Char>> = values.withIndex()
 
     /**
-     * See [Array.asSequence]
+     * See [CharArray.asSequence]
      */
     public fun asSequence(): Sequence<Char> = values.asSequence()
 
     /**
-     * See [Array.forEach]
+     * See [CharArray.forEach]
      */
     public inline fun forEach(action: (element: Char) -> Unit): Unit = values.forEach(action)
 
     /**
-     * See [Array.forEachIndexed]
+     * See [CharArray.forEachIndexed]
      */
     public inline fun forEachIndexed(action: (index: Int, element: Char) -> Unit): Unit =
             values.forEachIndexed(action)

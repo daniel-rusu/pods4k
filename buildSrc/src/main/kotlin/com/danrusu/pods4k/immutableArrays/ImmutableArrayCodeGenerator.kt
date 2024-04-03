@@ -14,7 +14,6 @@ internal object ImmutableArrayCodeGenerator {
 
         for (baseType in BaseType.values()) {
             val fileSpec = generateImmutableArrayFile(baseType)
-
             fileSpec.writeTo(File(destinationPath, ""))
         }
     }
@@ -26,7 +25,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
     return createFile(packageName, baseType.generatedClassName) {
         addClass(modifiers = listOf(KModifier.VALUE), name = qualifiedClassName) {
             addAnnotation(JvmInline::class)
-            if (baseType.isGeneric()) {
+            if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
             addPrimaryConstructor(baseType)
@@ -44,14 +43,16 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 get = "return values.indices",
             )
             overrideToString()
-            "isEmpty"(returns = Boolean::class.asTypeName())
-            "isNotEmpty"(returns = Boolean::class.asTypeName())
+            "isEmpty"(baseType = baseType, returns = Boolean::class.asTypeName())
+            "isNotEmpty"(baseType = baseType, returns = Boolean::class.asTypeName())
             addArrayIndexOperator(baseType)
             "getOrNull"(
+                baseType = baseType,
                 parameters = { "index"<Int>() },
                 returns = baseType.type.copy(nullable = true),
             )
             "getOrElse"(
+                baseType = baseType,
                 modifiers = listOf(KModifier.INLINE),
                 parameters = {
                     "index"<Int>()
@@ -65,37 +66,46 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 returns = baseType.type,
             )
             addComponentNFunctions(baseType)
-            "single"(returns = baseType.type)
-            "first"(returns = baseType.type)
+            "single"(baseType = baseType, returns = baseType.type)
+            "first"(baseType = baseType, returns = baseType.type)
             "firstOrNull"(
+                baseType = baseType,
                 returns = baseType.type.copy(nullable = true),
             )
-            "last"(returns = baseType.type)
+            "last"(baseType = baseType, returns = baseType.type)
             "lastOrNull"(
+                baseType = baseType,
                 returns = baseType.type.copy(nullable = true),
             )
             "toList"(
+                baseType = baseType,
                 returns = List::class.asTypeName().parameterizedBy(baseType.type),
             )
             "toMutableList"(
+                baseType = baseType,
                 returns = ClassName("kotlin.collections", "MutableList").parameterizedBy(baseType.type),
             )
             "iterator"(
+                baseType = baseType,
                 modifiers = listOf(KModifier.OPERATOR),
                 returns = Iterator::class.asTypeName().parameterizedBy(baseType.type),
             )
             "asIterable"(
+                baseType = baseType,
                 returns = Iterable::class.asTypeName().parameterizedBy(baseType.type),
             )
             "withIndex"(
+                baseType = baseType,
                 returns = Iterable::class.asTypeName().parameterizedBy(
                     IndexedValue::class.asTypeName().parameterizedBy(baseType.type)
                 ),
             )
             "asSequence"(
+                baseType = baseType,
                 returns = Sequence::class.asTypeName().parameterizedBy(baseType.type),
             )
             "forEach"(
+                baseType = baseType,
                 modifiers = listOf(KModifier.INLINE),
                 parameters = {
                     "action"(
@@ -107,6 +117,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 },
             )
             "forEachIndexed"(
+                baseType = baseType,
                 modifiers = listOf(KModifier.INLINE),
                 parameters = {
                     "action"(
@@ -147,11 +158,13 @@ private fun TypeSpec.Builder.addPrimaryConstructor(baseType: BaseType) {
  */
 context (TypeSpec.Builder)
 private operator fun String.invoke(
-    kdoc: String = "See [Array.$this]",
+    baseType: BaseType,
+    kdoc: String = "See [${if (baseType == BaseType.GENERIC) "Array" else baseType.backingArrayConstructor}.$this]",
     modifiers: List<KModifier> = emptyList(),
     parameters: ParameterDSL.() -> Unit = {},
     returns: TypeName = Unit::class.asTypeName(),
 ) {
+
     val params = ParameterDSL().apply(parameters).build().map { it.name }.joinToString()
     addFunction(
         kdoc = kdoc,

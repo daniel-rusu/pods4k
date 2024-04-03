@@ -40,12 +40,12 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
 
     /**
-     * See [Array.isEmpty]
+     * See [LongArray.isEmpty]
      */
     public fun isEmpty(): Boolean = values.isEmpty()
 
     /**
-     * See [Array.isNotEmpty]
+     * See [LongArray.isNotEmpty]
      */
     public fun isNotEmpty(): Boolean = values.isNotEmpty()
 
@@ -56,12 +56,12 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     public operator fun `get`(index: Int): Long = values[index]
 
     /**
-     * See [Array.getOrNull]
+     * See [LongArray.getOrNull]
      */
     public fun getOrNull(index: Int): Long? = values.getOrNull(index)
 
     /**
-     * See [Array.getOrElse]
+     * See [LongArray.getOrElse]
      */
     public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> Long): Long =
             values.getOrElse(index, defaultValue)
@@ -77,67 +77,67 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     public operator fun component5(): Long = get(4)
 
     /**
-     * See [Array.single]
+     * See [LongArray.single]
      */
     public fun single(): Long = values.single()
 
     /**
-     * See [Array.first]
+     * See [LongArray.first]
      */
     public fun first(): Long = values.first()
 
     /**
-     * See [Array.firstOrNull]
+     * See [LongArray.firstOrNull]
      */
     public fun firstOrNull(): Long? = values.firstOrNull()
 
     /**
-     * See [Array.last]
+     * See [LongArray.last]
      */
     public fun last(): Long = values.last()
 
     /**
-     * See [Array.lastOrNull]
+     * See [LongArray.lastOrNull]
      */
     public fun lastOrNull(): Long? = values.lastOrNull()
 
     /**
-     * See [Array.toList]
+     * See [LongArray.toList]
      */
     public fun toList(): List<Long> = values.toList()
 
     /**
-     * See [Array.toMutableList]
+     * See [LongArray.toMutableList]
      */
     public fun toMutableList(): MutableList<Long> = values.toMutableList()
 
     /**
-     * See [Array.iterator]
+     * See [LongArray.iterator]
      */
     public operator fun iterator(): Iterator<Long> = values.iterator()
 
     /**
-     * See [Array.asIterable]
+     * See [LongArray.asIterable]
      */
     public fun asIterable(): Iterable<Long> = values.asIterable()
 
     /**
-     * See [Array.withIndex]
+     * See [LongArray.withIndex]
      */
     public fun withIndex(): Iterable<IndexedValue<Long>> = values.withIndex()
 
     /**
-     * See [Array.asSequence]
+     * See [LongArray.asSequence]
      */
     public fun asSequence(): Sequence<Long> = values.asSequence()
 
     /**
-     * See [Array.forEach]
+     * See [LongArray.forEach]
      */
     public inline fun forEach(action: (element: Long) -> Unit): Unit = values.forEach(action)
 
     /**
-     * See [Array.forEachIndexed]
+     * See [LongArray.forEachIndexed]
      */
     public inline fun forEachIndexed(action: (index: Int, element: Long) -> Unit): Unit =
             values.forEachIndexed(action)

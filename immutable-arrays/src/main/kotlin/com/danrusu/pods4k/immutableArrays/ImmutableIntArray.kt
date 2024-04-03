@@ -39,12 +39,12 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
 
     /**
-     * See [Array.isEmpty]
+     * See [IntArray.isEmpty]
      */
     public fun isEmpty(): Boolean = values.isEmpty()
 
     /**
-     * See [Array.isNotEmpty]
+     * See [IntArray.isNotEmpty]
      */
     public fun isNotEmpty(): Boolean = values.isNotEmpty()
 
@@ -55,12 +55,12 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     public operator fun `get`(index: Int): Int = values[index]
 
     /**
-     * See [Array.getOrNull]
+     * See [IntArray.getOrNull]
      */
     public fun getOrNull(index: Int): Int? = values.getOrNull(index)
 
     /**
-     * See [Array.getOrElse]
+     * See [IntArray.getOrElse]
      */
     public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> Int): Int =
             values.getOrElse(index, defaultValue)
@@ -76,67 +76,67 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     public operator fun component5(): Int = get(4)
 
     /**
-     * See [Array.single]
+     * See [IntArray.single]
      */
     public fun single(): Int = values.single()
 
     /**
-     * See [Array.first]
+     * See [IntArray.first]
      */
     public fun first(): Int = values.first()
 
     /**
-     * See [Array.firstOrNull]
+     * See [IntArray.firstOrNull]
      */
     public fun firstOrNull(): Int? = values.firstOrNull()
 
     /**
-     * See [Array.last]
+     * See [IntArray.last]
      */
     public fun last(): Int = values.last()
 
     /**
-     * See [Array.lastOrNull]
+     * See [IntArray.lastOrNull]
      */
     public fun lastOrNull(): Int? = values.lastOrNull()
 
     /**
-     * See [Array.toList]
+     * See [IntArray.toList]
      */
     public fun toList(): List<Int> = values.toList()
 
     /**
-     * See [Array.toMutableList]
+     * See [IntArray.toMutableList]
      */
     public fun toMutableList(): MutableList<Int> = values.toMutableList()
 
     /**
-     * See [Array.iterator]
+     * See [IntArray.iterator]
      */
     public operator fun iterator(): Iterator<Int> = values.iterator()
 
     /**
-     * See [Array.asIterable]
+     * See [IntArray.asIterable]
      */
     public fun asIterable(): Iterable<Int> = values.asIterable()
 
     /**
-     * See [Array.withIndex]
+     * See [IntArray.withIndex]
      */
     public fun withIndex(): Iterable<IndexedValue<Int>> = values.withIndex()
 
     /**
-     * See [Array.asSequence]
+     * See [IntArray.asSequence]
      */
     public fun asSequence(): Sequence<Int> = values.asSequence()
 
     /**
-     * See [Array.forEach]
+     * See [IntArray.forEach]
      */
     public inline fun forEach(action: (element: Int) -> Unit): Unit = values.forEach(action)
 
     /**
-     * See [Array.forEachIndexed]
+     * See [IntArray.forEachIndexed]
      */
     public inline fun forEachIndexed(action: (index: Int, element: Int) -> Unit): Unit =
             values.forEachIndexed(action)

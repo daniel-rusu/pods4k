@@ -39,12 +39,12 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
 
     /**
-     * See [Array.isEmpty]
+     * See [BooleanArray.isEmpty]
      */
     public fun isEmpty(): Boolean = values.isEmpty()
 
     /**
-     * See [Array.isNotEmpty]
+     * See [BooleanArray.isNotEmpty]
      */
     public fun isNotEmpty(): Boolean = values.isNotEmpty()
 
@@ -55,12 +55,12 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     public operator fun `get`(index: Int): Boolean = values[index]
 
     /**
-     * See [Array.getOrNull]
+     * See [BooleanArray.getOrNull]
      */
     public fun getOrNull(index: Int): Boolean? = values.getOrNull(index)
 
     /**
-     * See [Array.getOrElse]
+     * See [BooleanArray.getOrElse]
      */
     public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> Boolean): Boolean =
             values.getOrElse(index, defaultValue)
@@ -76,67 +76,67 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     public operator fun component5(): Boolean = get(4)
 
     /**
-     * See [Array.single]
+     * See [BooleanArray.single]
      */
     public fun single(): Boolean = values.single()
 
     /**
-     * See [Array.first]
+     * See [BooleanArray.first]
      */
     public fun first(): Boolean = values.first()
 
     /**
-     * See [Array.firstOrNull]
+     * See [BooleanArray.firstOrNull]
      */
     public fun firstOrNull(): Boolean? = values.firstOrNull()
 
     /**
-     * See [Array.last]
+     * See [BooleanArray.last]
      */
     public fun last(): Boolean = values.last()
 
     /**
-     * See [Array.lastOrNull]
+     * See [BooleanArray.lastOrNull]
      */
     public fun lastOrNull(): Boolean? = values.lastOrNull()
 
     /**
-     * See [Array.toList]
+     * See [BooleanArray.toList]
      */
     public fun toList(): List<Boolean> = values.toList()
 
     /**
-     * See [Array.toMutableList]
+     * See [BooleanArray.toMutableList]
      */
     public fun toMutableList(): MutableList<Boolean> = values.toMutableList()
 
     /**
-     * See [Array.iterator]
+     * See [BooleanArray.iterator]
      */
     public operator fun iterator(): Iterator<Boolean> = values.iterator()
 
     /**
-     * See [Array.asIterable]
+     * See [BooleanArray.asIterable]
      */
     public fun asIterable(): Iterable<Boolean> = values.asIterable()
 
     /**
-     * See [Array.withIndex]
+     * See [BooleanArray.withIndex]
      */
     public fun withIndex(): Iterable<IndexedValue<Boolean>> = values.withIndex()
 
     /**
-     * See [Array.asSequence]
+     * See [BooleanArray.asSequence]
      */
     public fun asSequence(): Sequence<Boolean> = values.asSequence()
 
     /**
-     * See [Array.forEach]
+     * See [BooleanArray.forEach]
      */
     public inline fun forEach(action: (element: Boolean) -> Unit): Unit = values.forEach(action)
 
     /**
-     * See [Array.forEachIndexed]
+     * See [BooleanArray.forEachIndexed]
      */
     public inline fun forEachIndexed(action: (index: Int, element: Boolean) -> Unit): Unit =
             values.forEachIndexed(action)

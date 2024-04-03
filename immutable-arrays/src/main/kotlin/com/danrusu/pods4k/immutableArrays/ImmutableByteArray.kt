@@ -40,12 +40,12 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
 
     /**
-     * See [Array.isEmpty]
+     * See [ByteArray.isEmpty]
      */
     public fun isEmpty(): Boolean = values.isEmpty()
 
     /**
-     * See [Array.isNotEmpty]
+     * See [ByteArray.isNotEmpty]
      */
     public fun isNotEmpty(): Boolean = values.isNotEmpty()
 
@@ -56,12 +56,12 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     public operator fun `get`(index: Int): Byte = values[index]
 
     /**
-     * See [Array.getOrNull]
+     * See [ByteArray.getOrNull]
      */
     public fun getOrNull(index: Int): Byte? = values.getOrNull(index)
 
     /**
-     * See [Array.getOrElse]
+     * See [ByteArray.getOrElse]
      */
     public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> Byte): Byte =
             values.getOrElse(index, defaultValue)
@@ -77,67 +77,67 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     public operator fun component5(): Byte = get(4)
 
     /**
-     * See [Array.single]
+     * See [ByteArray.single]
      */
     public fun single(): Byte = values.single()
 
     /**
-     * See [Array.first]
+     * See [ByteArray.first]
      */
     public fun first(): Byte = values.first()
 
     /**
-     * See [Array.firstOrNull]
+     * See [ByteArray.firstOrNull]
      */
     public fun firstOrNull(): Byte? = values.firstOrNull()
 
     /**
-     * See [Array.last]
+     * See [ByteArray.last]
      */
     public fun last(): Byte = values.last()
 
     /**
-     * See [Array.lastOrNull]
+     * See [ByteArray.lastOrNull]
      */
     public fun lastOrNull(): Byte? = values.lastOrNull()
 
     /**
-     * See [Array.toList]
+     * See [ByteArray.toList]
      */
     public fun toList(): List<Byte> = values.toList()
 
     /**
-     * See [Array.toMutableList]
+     * See [ByteArray.toMutableList]
      */
     public fun toMutableList(): MutableList<Byte> = values.toMutableList()
 
     /**
-     * See [Array.iterator]
+     * See [ByteArray.iterator]
      */
     public operator fun iterator(): Iterator<Byte> = values.iterator()
 
     /**
-     * See [Array.asIterable]
+     * See [ByteArray.asIterable]
      */
     public fun asIterable(): Iterable<Byte> = values.asIterable()
 
     /**
-     * See [Array.withIndex]
+     * See [ByteArray.withIndex]
      */
     public fun withIndex(): Iterable<IndexedValue<Byte>> = values.withIndex()
 
     /**
-     * See [Array.asSequence]
+     * See [ByteArray.asSequence]
      */
     public fun asSequence(): Sequence<Byte> = values.asSequence()
 
     /**
-     * See [Array.forEach]
+     * See [ByteArray.forEach]
      */
     public inline fun forEach(action: (element: Byte) -> Unit): Unit = values.forEach(action)
 
     /**
-     * See [Array.forEachIndexed]
+     * See [ByteArray.forEachIndexed]
      */
     public inline fun forEachIndexed(action: (index: Int, element: Byte) -> Unit): Unit =
             values.forEachIndexed(action)
