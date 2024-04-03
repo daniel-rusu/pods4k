@@ -133,6 +133,12 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     public fun lastOrNull(): Char? = values.lastOrNull()
 
     /**
+     * See [CharArray.lastOrNull]
+     */
+    public fun lastOrNull(predicate: (element: Char) -> Boolean): Char? =
+            values.lastOrNull(predicate)
+
+    /**
      * See [CharArray.toList]
      */
     public fun toList(): List<Char> = values.toList()

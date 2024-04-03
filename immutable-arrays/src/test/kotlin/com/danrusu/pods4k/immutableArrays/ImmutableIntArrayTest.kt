@@ -237,13 +237,13 @@ class ImmutableIntArrayTest {
 
     @Test
     fun `last with predicate validation`() {
-        with(ImmutableIntArray(5) { 2 * it }) {
-            val first = this.last { element ->
+        with(ImmutableIntArray(6) { 2 * it }) {
+            val last = this.last { element ->
                 expectThat(element::class.java).isEqualTo(primitiveIntClass)
 
                 element % 4 == 0
             }
-            expectThat(first).isEqualTo(8)
+            expectThat(last).isEqualTo(8)
         }
     }
 
@@ -254,6 +254,22 @@ class ImmutableIntArrayTest {
         }
         with(ImmutableArray(3) { "element $it" }) {
             expectThat(this.lastOrNull()).isEqualTo("element 2")
+        }
+    }
+
+    @Test
+    fun `lastOrNull with predicate validation`() {
+        with(ImmutableIntArray(6) { 2 * it }) {
+            val last = this.lastOrNull { element ->
+                expectThat(element::class.java).isEqualTo(primitiveIntClass)
+
+                element % 4 == 0
+            }
+            expectThat(last).isEqualTo(8)
+
+            expectThat(
+                this.lastOrNull { it > 0 && it % 7 == 0 }
+            ).isNull()
         }
     }
 

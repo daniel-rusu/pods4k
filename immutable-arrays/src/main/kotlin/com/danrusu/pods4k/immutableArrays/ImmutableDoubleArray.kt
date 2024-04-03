@@ -133,6 +133,12 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     public fun lastOrNull(): Double? = values.lastOrNull()
 
     /**
+     * See [DoubleArray.lastOrNull]
+     */
+    public fun lastOrNull(predicate: (element: Double) -> Boolean): Double? =
+            values.lastOrNull(predicate)
+
+    /**
      * See [DoubleArray.toList]
      */
     public fun toList(): List<Double> = values.toList()

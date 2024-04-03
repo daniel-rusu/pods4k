@@ -133,6 +133,12 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     public fun lastOrNull(): Byte? = values.lastOrNull()
 
     /**
+     * See [ByteArray.lastOrNull]
+     */
+    public fun lastOrNull(predicate: (element: Byte) -> Boolean): Byte? =
+            values.lastOrNull(predicate)
+
+    /**
      * See [ByteArray.toList]
      */
     public fun toList(): List<Byte> = values.toList()
