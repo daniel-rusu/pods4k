@@ -1,6 +1,7 @@
 // Auto-generated file. DO NOT EDIT!
 package com.danrusu.pods4k.immutableArrays
 
+import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
 import kotlin.Int
@@ -196,8 +197,11 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
             values.forEachIndexed(action)
 
     public companion object {
+        @PublishedApi
+        internal val EMPTY: ImmutableArray<Any?> = ImmutableArray(emptyArray())
+
         /**
-         * Creates a ImmutableArray instance of the specified [size], where each element is
+         * Returns an ImmutableArray instance of the specified [size], where each element is
          * calculated by calling the specified [init] function.
          *
          * [init] is called sequentially starting at index 0 to initialize the array with each
@@ -210,6 +214,7 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
         @Suppress("UNCHECKED_CAST")
         public inline operator fun <T> invoke(size: Int, `init`: (index: Int) -> T):
                 ImmutableArray<T> {
+            if (size == 0) return EMPTY as ImmutableArray<T>
             val backingArray = Array<Any?>(size) { index -> init(index) }
             return ImmutableArray(backingArray as Array<T>)
         }

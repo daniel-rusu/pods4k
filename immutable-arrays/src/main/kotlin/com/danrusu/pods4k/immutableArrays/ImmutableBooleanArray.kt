@@ -198,8 +198,11 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
             values.forEachIndexed(action)
 
     public companion object {
+        @PublishedApi
+        internal val EMPTY: ImmutableBooleanArray = ImmutableBooleanArray(BooleanArray(0))
+
         /**
-         * Creates a ImmutableBooleanArray instance of the specified [size], where each element is
+         * Returns an ImmutableBooleanArray instance of the specified [size], where each element is
          * calculated by calling the specified [init] function.
          *
          * [init] is called sequentially starting at index 0 to initialize the array with each
@@ -211,6 +214,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
          */
         public inline operator fun invoke(size: Int, `init`: (index: Int) -> Boolean):
                 ImmutableBooleanArray {
+            if (size == 0) return EMPTY
             val backingArray = BooleanArray(size) { index -> init(index) }
             return ImmutableBooleanArray(backingArray)
         }

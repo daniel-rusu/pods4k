@@ -197,8 +197,11 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
             values.forEachIndexed(action)
 
     public companion object {
+        @PublishedApi
+        internal val EMPTY: ImmutableFloatArray = ImmutableFloatArray(FloatArray(0))
+
         /**
-         * Creates a ImmutableFloatArray instance of the specified [size], where each element is
+         * Returns an ImmutableFloatArray instance of the specified [size], where each element is
          * calculated by calling the specified [init] function.
          *
          * [init] is called sequentially starting at index 0 to initialize the array with each
@@ -210,6 +213,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
          */
         public inline operator fun invoke(size: Int, `init`: (index: Int) -> Float):
                 ImmutableFloatArray {
+            if (size == 0) return EMPTY
             val backingArray = FloatArray(size) { index -> init(index) }
             return ImmutableFloatArray(backingArray)
         }

@@ -211,6 +211,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 },
             )
             addCompanionObject {
+                addEmptyProperty(baseType, qualifiedClassName)
                 addInvokeOperator(baseType, qualifiedClassName)
             }
         }
@@ -300,10 +301,30 @@ private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
     }
 }
 
+private fun TypeSpec.Builder.addEmptyProperty(baseType: BaseType, qualifiedClassName: ClassName) {
+    val type = when (baseType) {
+        BaseType.GENERIC -> qualifiedClassName.parameterizedBy(Any::class.asTypeName().copy(nullable = true))
+        else -> qualifiedClassName
+    }
+    addProperty(
+        modifiers = listOf(KModifier.INTERNAL),
+        name = "EMPTY",
+        type = type,
+    ) {
+        addAnnotation(PublishedApi::class)
+        if (baseType == BaseType.GENERIC) {
+            initializer("${baseType.generatedClassName}(emptyArray())")
+        } else {
+            initializer("${baseType.generatedClassName}(${baseType.backingArrayConstructor}(0))")
+        }
+    }
+}
+
 private fun TypeSpec.Builder.addInvokeOperator(baseType: BaseType, qualifiedClassName: ClassName) {
+    val returnType = qualifiedClassName.maybeAddGenericType(baseType)
     addFunction(
         kdoc = """
-            Creates a ${baseType.generatedClassName} instance of the specified [size], where each element is calculated by calling the specified [init] function.
+            Returns an ${baseType.generatedClassName} instance of the specified [size], where each element is calculated by calling the specified [init] function.
             
             [init] is called sequentially starting at index 0 to initialize the array with each element at its given index.
             
@@ -321,12 +342,16 @@ private fun TypeSpec.Builder.addInvokeOperator(baseType: BaseType, qualifiedClas
                 )
             )
         },
-        returns = qualifiedClassName.maybeAddGenericType(baseType),
+        returns = returnType,
     ) {
         if (baseType == BaseType.GENERIC) {
             suppress("UNCHECKED_CAST")
             addTypeVariable(baseType.type as TypeVariableName)
+            addStatement("if (size == 0) return EMPTY as %T", returnType)
+        } else {
+            addStatement("if (size == 0) return EMPTY")
         }
+
         addStatement("val backingArray = ${baseType.backingArrayConstructor}(size) { index -> init(index) }")
         if (baseType == BaseType.GENERIC) {
             addStatement("return ${baseType.generatedClassName}(backingArray as %T)", baseType.backingArrayType)

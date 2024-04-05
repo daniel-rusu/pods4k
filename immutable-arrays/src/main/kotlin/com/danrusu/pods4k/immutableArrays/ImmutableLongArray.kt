@@ -196,8 +196,11 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
             values.forEachIndexed(action)
 
     public companion object {
+        @PublishedApi
+        internal val EMPTY: ImmutableLongArray = ImmutableLongArray(LongArray(0))
+
         /**
-         * Creates a ImmutableLongArray instance of the specified [size], where each element is
+         * Returns an ImmutableLongArray instance of the specified [size], where each element is
          * calculated by calling the specified [init] function.
          *
          * [init] is called sequentially starting at index 0 to initialize the array with each
@@ -209,6 +212,7 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
          */
         public inline operator fun invoke(size: Int, `init`: (index: Int) -> Long):
                 ImmutableLongArray {
+            if (size == 0) return EMPTY
             val backingArray = LongArray(size) { index -> init(index) }
             return ImmutableLongArray(backingArray)
         }

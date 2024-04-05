@@ -198,8 +198,11 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
             values.forEachIndexed(action)
 
     public companion object {
+        @PublishedApi
+        internal val EMPTY: ImmutableDoubleArray = ImmutableDoubleArray(DoubleArray(0))
+
         /**
-         * Creates a ImmutableDoubleArray instance of the specified [size], where each element is
+         * Returns an ImmutableDoubleArray instance of the specified [size], where each element is
          * calculated by calling the specified [init] function.
          *
          * [init] is called sequentially starting at index 0 to initialize the array with each
@@ -211,6 +214,7 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
          */
         public inline operator fun invoke(size: Int, `init`: (index: Int) -> Double):
                 ImmutableDoubleArray {
+            if (size == 0) return EMPTY
             val backingArray = DoubleArray(size) { index -> init(index) }
             return ImmutableDoubleArray(backingArray)
         }
