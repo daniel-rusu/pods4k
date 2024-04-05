@@ -5,10 +5,28 @@ import strikt.api.expectThat
 import strikt.api.expectThrows
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
+import strikt.assertions.isTrue
 
 class ImmutableArraysTest {
     @Test
+    fun `emptyImmutableArray validation`() {
+        with(emptyImmutableArray<String>()) {
+            expectThat(this).isA<ImmutableArray<String>>()
+            expectThat(this.isEmpty()).isTrue()
+        }
+        with(emptyImmutableIntArray()) {
+            expectThat(this).isA<ImmutableIntArray>()
+            expectThat(this.isEmpty()).isTrue()
+        }
+    }
+
+    @Test
     fun `immutableArrayOf validation`() {
+        with(immutableArrayOf<String>()) {
+            expectThat(this).isA<ImmutableArray<String>>()
+            expectThat(this.isEmpty()).isTrue()
+        }
+
         with(immutableArrayOf("one", "two")) {
             expectThat(this).isA<ImmutableArray<String>>()
             expectThat(this.size).isEqualTo(2)
