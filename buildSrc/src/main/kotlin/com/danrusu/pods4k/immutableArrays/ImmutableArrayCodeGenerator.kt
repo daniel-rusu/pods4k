@@ -5,13 +5,8 @@ import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import java.io.File
 
-private const val NUM_COMPONENT_N_FUNCTIONS = 5
-
-private val packageName = ImmutableArrayCodeGenerator::class.java.`package`.name
-
 internal object ImmutableArrayCodeGenerator {
     fun generate(destinationPath: String) {
-
         for (baseType in BaseType.values()) {
             val fileSpec = generateImmutableArrayFile(baseType)
             fileSpec.writeTo(File(destinationPath, ""))
@@ -20,10 +15,8 @@ internal object ImmutableArrayCodeGenerator {
 }
 
 private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
-    val qualifiedClassName = ClassName(packageName, baseType.generatedClassName)
-
-    return createFile(packageName, baseType.generatedClassName) {
-        addClass(modifiers = listOf(KModifier.VALUE), name = qualifiedClassName) {
+    return createFile(Config.packageName, baseType.generatedClassName) {
+        addClass(modifiers = listOf(KModifier.VALUE), name = baseType.getGeneratedClass()) {
             addAnnotation(JvmInline::class)
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
@@ -211,8 +204,8 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 },
             )
             addCompanionObject {
-                addEmptyProperty(baseType, qualifiedClassName)
-                addInvokeOperator(baseType, qualifiedClassName)
+                addEmptyProperty(baseType)
+                addInvokeOperator(baseType)
             }
         }
     }
@@ -291,7 +284,7 @@ private fun TypeSpec.Builder.addArrayIndexOperator(baseType: BaseType) {
 }
 
 private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
-    for (n in 1..NUM_COMPONENT_N_FUNCTIONS) {
+    for (n in 1..Config.NUM_COMPONENT_N_FUNCTIONS) {
         addFunction(
             modifiers = listOf(KModifier.OPERATOR),
             name = "component$n",
@@ -301,10 +294,10 @@ private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
     }
 }
 
-private fun TypeSpec.Builder.addEmptyProperty(baseType: BaseType, qualifiedClassName: ClassName) {
+private fun TypeSpec.Builder.addEmptyProperty(baseType: BaseType) {
     val type = when (baseType) {
-        BaseType.GENERIC -> qualifiedClassName.parameterizedBy(Any::class.asTypeName().copy(nullable = true))
-        else -> qualifiedClassName
+        BaseType.GENERIC -> baseType.getGeneratedClass().parameterizedBy(Any::class.asTypeName().copy(nullable = true))
+        else -> baseType.getGeneratedClass()
     }
     addProperty(
         modifiers = listOf(KModifier.INTERNAL),
@@ -320,8 +313,8 @@ private fun TypeSpec.Builder.addEmptyProperty(baseType: BaseType, qualifiedClass
     }
 }
 
-private fun TypeSpec.Builder.addInvokeOperator(baseType: BaseType, qualifiedClassName: ClassName) {
-    val returnType = qualifiedClassName.maybeAddGenericType(baseType)
+private fun TypeSpec.Builder.addInvokeOperator(baseType: BaseType) {
+    val returnType = baseType.getGeneratedTypeName()
     addFunction(
         kdoc = """
             Returns an ${baseType.generatedClassName} instance of the specified [size], where each element is calculated by calling the specified [init] function.
@@ -359,9 +352,4 @@ private fun TypeSpec.Builder.addInvokeOperator(baseType: BaseType, qualifiedClas
             addStatement("return ${baseType.generatedClassName}(backingArray)")
         }
     }
-}
-
-private fun ClassName.maybeAddGenericType(baseType: BaseType): TypeName = when (baseType) {
-    BaseType.GENERIC -> this.parameterizedBy(baseType.type)
-    else -> this
 }

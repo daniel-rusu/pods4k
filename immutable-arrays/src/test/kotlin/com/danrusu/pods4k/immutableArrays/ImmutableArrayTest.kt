@@ -188,6 +188,7 @@ class ImmutableArrayTest {
         with(ImmutableArray(1) { "element $it" }) {
             expectThat(this.singleOrNull()).isEqualTo("element 0")
         }
+        val boo = arrayOf("boo")
     }
 
     @Test

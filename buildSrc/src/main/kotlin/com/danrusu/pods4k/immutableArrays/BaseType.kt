@@ -1,5 +1,6 @@
 package com.danrusu.pods4k.immutableArrays
 
+import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeVariableName
@@ -38,4 +39,13 @@ internal enum class BaseType(
         backingArrayConstructor = arrayType.simpleName!!,
         generatedClassName = "Immutable${type.simpleName}Array"
     )
+
+    fun getGeneratedClass(): ClassName = ClassName(Config.packageName, generatedClassName)
+
+    fun getGeneratedTypeName(): TypeName {
+        if (this == GENERIC) {
+            return getGeneratedClass().parameterizedBy(type)
+        }
+        return getGeneratedClass()
+    }
 }

@@ -1,5 +1,6 @@
 package com.danrusu.pods4k.utils
 
+import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.ParameterSpec
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.asTypeName
@@ -15,8 +16,12 @@ internal class ParameterDSL {
         invoke(T::class.asTypeName())
     }
 
-    operator fun String.invoke(type: TypeName) {
-        parameters += ParameterSpec.builder(this, type).build()
+    operator fun String.invoke(type: TypeName, isVararg: Boolean = false) {
+        val parameter = ParameterSpec.builder(this, type)
+        if (isVararg) {
+            parameter.addModifiers(KModifier.VARARG)
+        }
+        parameters += parameter.build()
     }
 
     fun build(): List<ParameterSpec> = parameters

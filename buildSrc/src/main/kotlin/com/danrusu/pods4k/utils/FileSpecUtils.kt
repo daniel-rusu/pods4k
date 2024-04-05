@@ -1,9 +1,6 @@
 package com.danrusu.pods4k.utils
 
-import com.squareup.kotlinpoet.ClassName
-import com.squareup.kotlinpoet.FileSpec
-import com.squareup.kotlinpoet.KModifier
-import com.squareup.kotlinpoet.TypeSpec
+import com.squareup.kotlinpoet.*
 
 internal inline fun createFile(packageName: String, fileName: String, body: FileSpec.Builder.() -> Unit): FileSpec {
     return FileSpec.builder(packageName, fileName).apply {
@@ -21,6 +18,25 @@ internal inline fun FileSpec.Builder.addClass(
     return addType(
         TypeSpec.classBuilder(name).apply {
             addModifiers(modifiers)
+            body()
+        }.build()
+    )
+}
+
+internal inline fun FileSpec.Builder.addFunction(
+    kdoc: String? = null,
+    modifiers: List<KModifier> = emptyList(),
+    name: String,
+    parameters: ParameterDSL.() -> Unit = {},
+    returns: TypeName? = null,
+    body: FunSpec.Builder.() -> Unit
+): FileSpec.Builder {
+    return addFunction(
+        FunSpec.builder(name).apply {
+            kdoc?.let { addKdoc(it) }
+            addModifiers(modifiers)
+            addParameters(ParameterDSL().apply(parameters).build())
+            returns?.let { returns(it) }
             body()
         }.build()
     )
