@@ -9,15 +9,11 @@ import java.io.File
 
 internal object ImmutableArrayFactoryFunctionsGenerator {
     fun generate(destinationPath: String) {
-        val fileSpec = generateFactoryFunctions()
+        val fileSpec = createFile(Config.packageName, "ImmutableArrays") {
+            addEmptyFunctions()
+            addImmutableArrayOf()
+        }
         fileSpec.writeTo(File(destinationPath, ""))
-    }
-}
-
-private fun generateFactoryFunctions(): FileSpec {
-    return createFile(Config.packageName, "ImmutableArrays") {
-        addEmptyFunctions()
-        addImmutableArrayOf()
     }
 }
 

@@ -26,6 +26,7 @@ internal inline fun FileSpec.Builder.addClass(
 internal inline fun FileSpec.Builder.addFunction(
     kdoc: String? = null,
     modifiers: List<KModifier> = emptyList(),
+    receiver: TypeName? = null,
     name: String,
     parameters: ParameterDSL.() -> Unit = {},
     returns: TypeName? = null,
@@ -35,6 +36,7 @@ internal inline fun FileSpec.Builder.addFunction(
         FunSpec.builder(name).apply {
             kdoc?.let { addKdoc(it) }
             addModifiers(modifiers)
+            receiver?.let { receiver(it) }
             addParameters(ParameterDSL().apply(parameters).build())
             returns?.let { returns(it) }
             body()
