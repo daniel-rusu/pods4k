@@ -1,13 +1,6 @@
 package com.danrusu.pods4k.utils
 
-import com.squareup.kotlinpoet.KModifier
-import com.squareup.kotlinpoet.ParameterSpec
-import com.squareup.kotlinpoet.TypeName
-import com.squareup.kotlinpoet.asTypeName
-
-internal fun parameters(body: ParameterDSL.() -> Unit): List<ParameterSpec> {
-    return ParameterDSL().apply(body).build()
-}
+import com.squareup.kotlinpoet.*
 
 internal class ParameterDSL {
     private val parameters = mutableListOf<ParameterSpec>()
@@ -22,6 +15,16 @@ internal class ParameterDSL {
             parameter.addModifiers(KModifier.VARARG)
         }
         parameters += parameter.build()
+    }
+
+    inline fun <reified T : Any> lambda(parameters: ParameterDSL.() -> Unit): TypeName {
+        val params = ParameterDSL().apply(parameters).build()
+        return LambdaTypeName.get(parameters = params, returnType = T::class.asTypeName())
+    }
+
+    inline fun lambda(parameters: ParameterDSL.() -> Unit, returnType: TypeName): TypeName {
+        val params = ParameterDSL().apply(parameters).build()
+        return LambdaTypeName.get(parameters = params, returnType = returnType)
     }
 
     fun build(): List<ParameterSpec> = parameters

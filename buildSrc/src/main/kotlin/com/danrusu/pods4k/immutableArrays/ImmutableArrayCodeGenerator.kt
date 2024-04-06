@@ -49,12 +49,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 modifiers = listOf(KModifier.INLINE),
                 parameters = {
                     "index"<Int>()
-                    "defaultValue"(
-                        type = LambdaTypeName.get(
-                            parameters = parameters { "index"<Int>() },
-                            returnType = baseType.type,
-                        )
-                    )
+                    "defaultValue"(type = lambda(parameters = { "index"<Int>() }, returnType = baseType.type))
                 },
                 returns = baseType.type,
             )
@@ -64,12 +59,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 baseType = baseType,
                 modifiers = listOf(KModifier.INLINE),
                 parameters = {
-                    "predicate"(
-                        type = LambdaTypeName.get(
-                            parameters = parameters { "element"(type = baseType.type) },
-                            returnType = Boolean::class.asTypeName()
-                        )
-                    )
+                    "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
                 },
                 returns = baseType.type
             )
@@ -81,12 +71,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 baseType = baseType,
                 modifiers = listOf(KModifier.INLINE),
                 parameters = {
-                    "predicate"(
-                        type = LambdaTypeName.get(
-                            parameters = parameters { "element"(type = baseType.type) },
-                            returnType = Boolean::class.asTypeName()
-                        )
-                    )
+                    "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
                 },
                 returns = baseType.type.copy(nullable = true)
             )
@@ -95,12 +80,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 baseType = baseType,
                 modifiers = listOf(KModifier.INLINE),
                 parameters = {
-                    "predicate"(
-                        type = LambdaTypeName.get(
-                            parameters = parameters { "element"(type = baseType.type) },
-                            returnType = Boolean::class.asTypeName()
-                        )
-                    )
+                    "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
                 },
                 returns = baseType.type
             )
@@ -112,12 +92,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 baseType = baseType,
                 modifiers = listOf(KModifier.INLINE),
                 parameters = {
-                    "predicate"(
-                        type = LambdaTypeName.get(
-                            parameters = parameters { "element"(type = baseType.type) },
-                            returnType = Boolean::class.asTypeName()
-                        )
-                    )
+                    "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
                 },
                 returns = baseType.type.copy(nullable = true)
             )
@@ -126,12 +101,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 baseType = baseType,
                 modifiers = listOf(KModifier.INLINE),
                 parameters = {
-                    "predicate"(
-                        type = LambdaTypeName.get(
-                            parameters = parameters { "element"(type = baseType.type) },
-                            returnType = Boolean::class.asTypeName()
-                        )
-                    )
+                    "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
                 },
                 returns = baseType.type
             )
@@ -143,12 +113,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 baseType = baseType,
                 modifiers = listOf(KModifier.INLINE),
                 parameters = {
-                    "predicate"(
-                        type = LambdaTypeName.get(
-                            parameters = parameters { "element"(type = baseType.type) },
-                            returnType = Boolean::class.asTypeName()
-                        )
-                    )
+                    "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
                 },
                 returns = baseType.type.copy(nullable = true)
             )
@@ -183,24 +148,14 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 baseType = baseType,
                 modifiers = listOf(KModifier.INLINE),
                 parameters = {
-                    "action"(
-                        type = LambdaTypeName.get(
-                            parameters = parameters { "element"(type = baseType.type) },
-                            returnType = Unit::class.asTypeName()
-                        )
-                    )
+                    "action"(type = lambda<Unit> { "element"(type = baseType.type) })
                 },
             )
             "forEachIndexed"(
                 baseType = baseType,
                 modifiers = listOf(KModifier.INLINE),
                 parameters = {
-                    "action"(
-                        type = LambdaTypeName.get(
-                            parameters = parameters { "index"<Int>(); "element"(type = baseType.type) },
-                            returnType = Unit::class.asTypeName()
-                        )
-                    )
+                    "action"(type = lambda<Unit> { "index"<Int>(); "element"(type = baseType.type) })
                 },
             )
             addCompanionObject {
@@ -208,6 +163,29 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 addInvokeOperator(baseType)
             }
         }
+    }
+}
+
+/**
+ * Delegates to the same function on the backing array.
+ */
+context (TypeSpec.Builder)
+private operator fun String.invoke(
+    baseType: BaseType,
+    kdoc: String = "See [${if (baseType == BaseType.GENERIC) "Array" else baseType.backingArrayConstructor}.$this]",
+    modifiers: List<KModifier> = emptyList(),
+    parameters: ParameterDSL.() -> Unit = {},
+    returns: TypeName = Unit::class.asTypeName(),
+) {
+    val params = ParameterDSL().apply(parameters).build().joinToString { it.name }
+    addFunction(
+        kdoc = kdoc,
+        modifiers = modifiers,
+        name = this,
+        parameters = parameters,
+        returns = returns,
+    ) {
+        addStatement("return values.${this@invoke}($params)")
     }
 }
 
@@ -233,30 +211,6 @@ private fun TypeSpec.Builder.addPrimaryConstructor(baseType: BaseType) {
         init = "values",
     ) {
         addAnnotation(PublishedApi::class)
-    }
-}
-
-/**
- * Delegates to the same function on the backing array.
- */
-context (TypeSpec.Builder)
-private operator fun String.invoke(
-    baseType: BaseType,
-    kdoc: String = "See [${if (baseType == BaseType.GENERIC) "Array" else baseType.backingArrayConstructor}.$this]",
-    modifiers: List<KModifier> = emptyList(),
-    parameters: ParameterDSL.() -> Unit = {},
-    returns: TypeName = Unit::class.asTypeName(),
-) {
-
-    val params = ParameterDSL().apply(parameters).build().map { it.name }.joinToString()
-    addFunction(
-        kdoc = kdoc,
-        modifiers = modifiers,
-        name = this,
-        parameters = parameters,
-        returns = returns,
-    ) {
-        addStatement("return values.${this@invoke}($params)")
     }
 }
 
@@ -328,12 +282,7 @@ private fun TypeSpec.Builder.addInvokeOperator(baseType: BaseType) {
         name = "invoke",
         parameters = {
             "size"<Int>()
-            "init"(
-                type = LambdaTypeName.get(
-                    parameters = parameters { "index"<Int>() },
-                    returnType = baseType.type
-                )
-            )
+            "init"(type = lambda(parameters = { "index"<Int>() }, returnType = baseType.type))
         },
         returns = returnType,
     ) {
