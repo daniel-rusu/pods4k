@@ -11,6 +11,7 @@ import java.io.File
 internal object ArrayExtensionsGenerator {
     fun generate(destinationPath: String) {
         val fileSpec = createFile(Config.packageName, "Arrays") {
+            addPrimitiveArrayToImmutableArray()
             addGenericArrayToImmutableArray()
         }
         fileSpec.writeTo(File(destinationPath, ""))
@@ -27,10 +28,23 @@ private fun FileSpec.Builder.addGenericArrayToImmutableArray() {
         ) {
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
-            } else {
-                addComment("Automatically unboxing the boxed values and storing the primitive values directly ")
             }
-            addStatement("return ${baseType.generatedClassName}(size) { this[it] }")
+            addStatement("return ${baseType.generatedClassName}(size)·{·this[it]·}")
+        }
+    }
+}
+
+private fun FileSpec.Builder.addPrimitiveArrayToImmutableArray() {
+    for (baseType in BaseType.values()) {
+        if (baseType == BaseType.GENERIC) continue
+
+        addFunction(
+            kdoc = "Returns an [${baseType.generatedClassName}] with the contents of this array.",
+            receiver = baseType.backingArrayType,
+            name = "toImmutableArray",
+            returns = baseType.getGeneratedTypeName(),
+        ) {
+            addStatement("return ${baseType.generatedClassName}(size)·{·this[it]·}")
         }
     }
 }

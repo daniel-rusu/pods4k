@@ -8,6 +8,25 @@ import strikt.assertions.isTrue
 
 class ArraysTest {
     @Test
+    fun `primitive array toImmutableArray validation`() {
+        with(BooleanArray(0)) {
+            val immutable = this.toImmutableArray()
+            expectThat(immutable).isA<ImmutableBooleanArray>()
+
+            expectThat(immutable.isEmpty()).isTrue()
+        }
+        with(intArrayOf(1, 3, 5)) {
+            val immutable = this.toImmutableArray()
+            expectThat(immutable).isA<ImmutableIntArray>()
+            expectThat(immutable.size).isEqualTo(3)
+
+            expectThat(immutable[0]).isEqualTo(1)
+            expectThat(immutable[1]).isEqualTo(3)
+            expectThat(immutable[2]).isEqualTo(5)
+        }
+    }
+
+    @Test
     fun `generic array toImmutableArray validation`() {
         with(emptyArray<String>()) {
             val immutable = this.toImmutableArray()
@@ -18,6 +37,7 @@ class ArraysTest {
         with(arrayOf("one", "two")) {
             val immutable = this.toImmutableArray()
             expectThat(immutable).isA<ImmutableArray<String>>()
+            expectThat(immutable.size).isEqualTo(2)
 
             expectThat(immutable[0]).isEqualTo("one")
             expectThat(immutable[1]).isEqualTo("two")
