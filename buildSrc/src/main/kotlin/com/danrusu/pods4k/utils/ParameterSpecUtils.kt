@@ -17,12 +17,12 @@ internal class ParameterDSL {
         parameters += parameter.build()
     }
 
-    inline fun <reified T : Any> lambda(parameters: ParameterDSL.() -> Unit): TypeName {
+    inline fun <reified T : Any> lambda(parameters: ParameterDSL.() -> Unit): LambdaTypeName {
         val params = ParameterDSL().apply(parameters).build()
         return LambdaTypeName.get(parameters = params, returnType = T::class.asTypeName())
     }
 
-    inline fun lambda(parameters: ParameterDSL.() -> Unit, returnType: TypeName): TypeName {
+    inline fun lambda(parameters: ParameterDSL.() -> Unit, returnType: TypeName): LambdaTypeName {
         val params = ParameterDSL().apply(parameters).build()
         return LambdaTypeName.get(parameters = params, returnType = returnType)
     }

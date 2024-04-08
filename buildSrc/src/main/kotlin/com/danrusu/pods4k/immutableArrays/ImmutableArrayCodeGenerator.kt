@@ -46,7 +46,6 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             )
             "getOrElse"(
                 baseType = baseType,
-                modifiers = listOf(KModifier.INLINE),
                 parameters = {
                     "index"<Int>()
                     "defaultValue"(type = lambda(parameters = { "index"<Int>() }, returnType = baseType.type))
@@ -57,7 +56,6 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             "single"(baseType = baseType, returns = baseType.type)
             "single"(
                 baseType = baseType,
-                modifiers = listOf(KModifier.INLINE),
                 parameters = {
                     "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
                 },
@@ -69,7 +67,6 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             )
             "singleOrNull"(
                 baseType = baseType,
-                modifiers = listOf(KModifier.INLINE),
                 parameters = {
                     "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
                 },
@@ -78,7 +75,6 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             "first"(baseType = baseType, returns = baseType.type)
             "first"(
                 baseType = baseType,
-                modifiers = listOf(KModifier.INLINE),
                 parameters = {
                     "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
                 },
@@ -90,7 +86,6 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             )
             "firstOrNull"(
                 baseType = baseType,
-                modifiers = listOf(KModifier.INLINE),
                 parameters = {
                     "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
                 },
@@ -99,7 +94,6 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             "last"(baseType = baseType, returns = baseType.type)
             "last"(
                 baseType = baseType,
-                modifiers = listOf(KModifier.INLINE),
                 parameters = {
                     "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
                 },
@@ -111,7 +105,6 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             )
             "lastOrNull"(
                 baseType = baseType,
-                modifiers = listOf(KModifier.INLINE),
                 parameters = {
                     "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
                 },
@@ -146,14 +139,12 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             )
             "forEach"(
                 baseType = baseType,
-                modifiers = listOf(KModifier.INLINE),
                 parameters = {
                     "action"(type = lambda<Unit> { "element"(type = baseType.type) })
                 },
             )
             "forEachIndexed"(
                 baseType = baseType,
-                modifiers = listOf(KModifier.INLINE),
                 parameters = {
                     "action"(type = lambda<Unit> { "index"<Int>(); "element"(type = baseType.type) })
                 },
@@ -177,15 +168,21 @@ private operator fun String.invoke(
     parameters: ParameterDSL.() -> Unit = {},
     returns: TypeName = Unit::class.asTypeName(),
 ) {
-    val params = ParameterDSL().apply(parameters).build().joinToString { it.name }
+    val params = ParameterDSL().apply(parameters).build()
+    // Ensure that all delegated methods that accept a lambda are inlined
+    val updatedModifiers = if (KModifier.INLINE !in modifiers && params.any { it.type is LambdaTypeName }) {
+        modifiers + KModifier.INLINE
+    } else {
+        modifiers
+    }
     addFunction(
         kdoc = kdoc,
-        modifiers = modifiers,
+        modifiers = updatedModifiers,
         name = this,
         parameters = parameters,
         returns = returns,
     ) {
-        addStatement("return values.${this@invoke}($params)")
+        addStatement("return values.${this@invoke}(${params.joinToString { it.name }})")
     }
 }
 
