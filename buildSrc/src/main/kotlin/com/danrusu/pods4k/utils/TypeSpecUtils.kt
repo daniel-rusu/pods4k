@@ -20,6 +20,17 @@ internal inline fun TypeSpec.Builder.addCompanionObject(body: TypeSpec.Builder.(
     return addType(TypeSpec.companionObjectBuilder().apply(body).build())
 }
 
+internal inline fun <reified T : Any> TypeSpec.Builder.addProperty(
+    kdoc: String? = null,
+    modifiers: List<KModifier> = emptyList(),
+    name: String,
+    init: String? = null,
+    get: String? = null,
+    body: PropertySpec.Builder.() -> Unit = {},
+): TypeSpec.Builder {
+    return addProperty(kdoc, modifiers, name, type = T::class.asTypeName(), init, get, body)
+}
+
 internal inline fun TypeSpec.Builder.addProperty(
     kdoc: String? = null,
     modifiers: List<KModifier> = emptyList(),

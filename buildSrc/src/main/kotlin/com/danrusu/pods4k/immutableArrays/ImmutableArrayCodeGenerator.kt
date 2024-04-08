@@ -22,17 +22,15 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
             addPrimaryConstructor(baseType)
-            addProperty(name = "size", type = Int::class.asTypeName(), get = "return values.size")
-            addProperty(
+            addProperty<Int>(name = "size", get = "return values.size")
+            addProperty<Int>(
                 kdoc = "Returns the index of the last element or -1 if the array is empty.",
                 name = "lastIndex",
-                type = Int::class.asTypeName(),
                 get = "return values.size - 1",
             )
-            addProperty(
+            addProperty<IntRange>(
                 kdoc = "Returns the range of valid indices for the array.",
                 name = "indices",
-                type = IntRange::class.asTypeName(),
                 get = "return values.indices",
             )
             overrideToString()
