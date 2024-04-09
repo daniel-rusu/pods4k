@@ -1,9 +1,6 @@
 package com.danrusu.pods4k
 
-import com.danrusu.pods4k.immutableArrays.ArrayExtensionsGenerator
-import com.danrusu.pods4k.immutableArrays.CollectionExtensionsGenerator
-import com.danrusu.pods4k.immutableArrays.ImmutableArrayCodeGenerator
-import com.danrusu.pods4k.immutableArrays.ImmutableArraysFileGenerator
+import com.danrusu.pods4k.immutableArrays.*
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -20,6 +17,7 @@ public open class CodeGenerator : Plugin<Project> {
                 ImmutableArraysFileGenerator.generate(destinationPath = immutableArrayPath)
                 ArrayExtensionsGenerator.generate(destinationPath = immutableArrayPath)
                 CollectionExtensionsGenerator.generate(destinationPath = immutableArrayPath)
+                SequenceExtensionsGenerator.generate(destinationPath = immutableArrayPath)
             }
         }
     }
