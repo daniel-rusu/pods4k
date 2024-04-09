@@ -14,6 +14,7 @@ internal object ImmutableArraysFileGenerator {
             addEmptyFunctions()
             addImmutableArrayOf()
             addGenericImmutableArrayToPrimitiveImmutableArray()
+            addPrimitiveImmutableArrayToTypedImmutableArray()
         }
         fileSpec.writeTo(File(destinationPath, ""))
     }
@@ -77,6 +78,24 @@ private fun FileSpec.Builder.addGenericImmutableArrayToPrimitiveImmutableArray()
             name = "to${baseType.generatedClassName}",
             returns = baseType.getGeneratedTypeName(),
             code = "return ${baseType.generatedClassName}(size)·{·this[it]·}"
+        )
+    }
+}
+
+private fun FileSpec.Builder.addPrimitiveImmutableArrayToTypedImmutableArray() {
+    for (baseType in BaseType.values()) {
+        if (baseType == BaseType.GENERIC) continue
+
+        addFunction(
+            kdoc = """
+                Returns a typed [${baseType.generatedClassName}] containing the values of this array.
+                
+                Note that [${BaseType.GENERIC.generatedClassName}] uses more memory and is slower to access as each primitive value will be auto-boxed in a wrapper object.
+            """.trimIndent(),
+            receiver = baseType.getGeneratedClass(),
+            name = "toTyped${BaseType.GENERIC.generatedClassName}",
+            returns = BaseType.GENERIC.getGeneratedClass().parameterizedBy(baseType.type),
+            code = "return ${BaseType.GENERIC.generatedClassName}(size)·{·this[it]·}"
         )
     }
 }

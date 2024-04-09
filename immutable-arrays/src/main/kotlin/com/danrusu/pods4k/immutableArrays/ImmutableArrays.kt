@@ -187,3 +187,75 @@ public fun ImmutableArray<Float>.toImmutableFloatArray(): ImmutableFloatArray =
  */
 public fun ImmutableArray<Double>.toImmutableDoubleArray(): ImmutableDoubleArray =
         ImmutableDoubleArray(size) { this[it] }
+
+/**
+ * Returns a typed [ImmutableBooleanArray] containing the values of this array.
+ *
+ * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
+ * be auto-boxed in a wrapper object.
+ */
+public fun ImmutableBooleanArray.toTypedImmutableArray(): ImmutableArray<Boolean> =
+        ImmutableArray(size) { this[it] }
+
+/**
+ * Returns a typed [ImmutableByteArray] containing the values of this array.
+ *
+ * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
+ * be auto-boxed in a wrapper object.
+ */
+public fun ImmutableByteArray.toTypedImmutableArray(): ImmutableArray<Byte> =
+        ImmutableArray(size) { this[it] }
+
+/**
+ * Returns a typed [ImmutableCharArray] containing the values of this array.
+ *
+ * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
+ * be auto-boxed in a wrapper object.
+ */
+public fun ImmutableCharArray.toTypedImmutableArray(): ImmutableArray<Char> =
+        ImmutableArray(size) { this[it] }
+
+/**
+ * Returns a typed [ImmutableShortArray] containing the values of this array.
+ *
+ * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
+ * be auto-boxed in a wrapper object.
+ */
+public fun ImmutableShortArray.toTypedImmutableArray(): ImmutableArray<Short> =
+        ImmutableArray(size) { this[it] }
+
+/**
+ * Returns a typed [ImmutableIntArray] containing the values of this array.
+ *
+ * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
+ * be auto-boxed in a wrapper object.
+ */
+public fun ImmutableIntArray.toTypedImmutableArray(): ImmutableArray<Int> =
+        ImmutableArray(size) { this[it] }
+
+/**
+ * Returns a typed [ImmutableLongArray] containing the values of this array.
+ *
+ * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
+ * be auto-boxed in a wrapper object.
+ */
+public fun ImmutableLongArray.toTypedImmutableArray(): ImmutableArray<Long> =
+        ImmutableArray(size) { this[it] }
+
+/**
+ * Returns a typed [ImmutableFloatArray] containing the values of this array.
+ *
+ * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
+ * be auto-boxed in a wrapper object.
+ */
+public fun ImmutableFloatArray.toTypedImmutableArray(): ImmutableArray<Float> =
+        ImmutableArray(size) { this[it] }
+
+/**
+ * Returns a typed [ImmutableDoubleArray] containing the values of this array.
+ *
+ * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
+ * be auto-boxed in a wrapper object.
+ */
+public fun ImmutableDoubleArray.toTypedImmutableArray(): ImmutableArray<Double> =
+        ImmutableArray(size) { this[it] }
