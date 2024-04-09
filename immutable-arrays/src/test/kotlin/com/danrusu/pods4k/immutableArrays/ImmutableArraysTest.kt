@@ -28,7 +28,7 @@ class ImmutableArraysTest {
 
         with(immutableArrayOf("one", "two")) {
             expectThat(this).isA<ImmutableArray<String>>()
-            expectThat(this.size).isEqualTo(2)
+            expectThat(this).hasSize(2)
 
             expectThat(this[0]).isEqualTo("one")
             expectThat(this[1]).isEqualTo("two")
@@ -38,7 +38,7 @@ class ImmutableArraysTest {
 
         with(immutableArrayOf(10, 20, 30)) {
             expectThat(this).isA<ImmutableIntArray>()
-            expectThat(this.size).isEqualTo(3)
+            expectThat(this).hasSize(3)
 
             expectThat(this[0]).isEqualTo(10)
             expectThat(this[1]).isEqualTo(20)

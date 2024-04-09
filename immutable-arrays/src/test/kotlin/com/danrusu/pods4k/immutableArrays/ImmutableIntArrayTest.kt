@@ -31,7 +31,7 @@ class ImmutableIntArrayTest {
     @Test
     fun `size validation`() {
         with(ImmutableIntArray(10) { it }) {
-            expectThat(this.size).isEqualTo(10)
+            expectThat(this).hasSize(10)
         }
     }
 

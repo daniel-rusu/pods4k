@@ -26,7 +26,7 @@ class ImmutableArrayTest {
     @Test
     fun `size validation`() {
         with(ImmutableArray(10) { "element $it" }) {
-            expectThat(this.size).isEqualTo(10)
+            expectThat(this).hasSize(10)
         }
     }
 

@@ -289,3 +289,120 @@ fun Assertion.Builder<ImmutableShortArray>.isNotEmpty(): Assertion.Builder<Immut
         }
     }
 }
+
+@JvmName("immutableArray_hasSize")
+fun <T> Assertion.Builder<ImmutableArray<T>>.hasSize(expectedSize: Int): Assertion.Builder<ImmutableArray<T>> {
+    return assert(description = "has size %d", expectedSize) {
+        if (subject.size == 0 != subject.isEmpty()) {
+            return@assert fail("Inconsistent size:${subject.size} with isEmpty():${subject.isEmpty()}")
+        }
+        when (subject.size) {
+            expectedSize -> pass()
+            else -> fail(actual = subject.size, description = "Invalid size")
+        }
+    }
+}
+
+@JvmName("immutableBooleanArray_hasSize")
+fun Assertion.Builder<ImmutableBooleanArray>.hasSize(expectedSize: Int): Assertion.Builder<ImmutableBooleanArray> {
+    return assert(description = "has size %d", expectedSize) {
+        if (subject.size == 0 != subject.isEmpty()) {
+            return@assert fail("Inconsistent size:${subject.size} with isEmpty():${subject.isEmpty()}")
+        }
+        when (subject.size) {
+            expectedSize -> pass()
+            else -> fail(actual = subject.size, description = "Invalid size")
+        }
+    }
+}
+
+@JvmName("immutableByteArray_hasSize")
+fun Assertion.Builder<ImmutableByteArray>.hasSize(expectedSize: Int): Assertion.Builder<ImmutableByteArray> {
+    return assert(description = "has size %d", expectedSize) {
+        if (subject.size == 0 != subject.isEmpty()) {
+            return@assert fail("Inconsistent size:${subject.size} with isEmpty():${subject.isEmpty()}")
+        }
+        when (subject.size) {
+            expectedSize -> pass()
+            else -> fail(actual = subject.size, description = "Invalid size")
+        }
+    }
+}
+
+@JvmName("immutableCharArray_hasSize")
+fun Assertion.Builder<ImmutableCharArray>.hasSize(expectedSize: Int): Assertion.Builder<ImmutableCharArray> {
+    return assert(description = "has size %d", expectedSize) {
+        if (subject.size == 0 != subject.isEmpty()) {
+            return@assert fail("Inconsistent size:${subject.size} with isEmpty():${subject.isEmpty()}")
+        }
+        when (subject.size) {
+            expectedSize -> pass()
+            else -> fail(actual = subject.size, description = "Invalid size")
+        }
+    }
+}
+
+@JvmName("immutableDoubleArray_hasSize")
+fun Assertion.Builder<ImmutableDoubleArray>.hasSize(expectedSize: Int): Assertion.Builder<ImmutableDoubleArray> {
+    return assert(description = "has size %d", expectedSize) {
+        if (subject.size == 0 != subject.isEmpty()) {
+            return@assert fail("Inconsistent size:${subject.size} with isEmpty():${subject.isEmpty()}")
+        }
+        when (subject.size) {
+            expectedSize -> pass()
+            else -> fail(actual = subject.size, description = "Invalid size")
+        }
+    }
+}
+
+@JvmName("immutableFloatArray_hasSize")
+fun Assertion.Builder<ImmutableFloatArray>.hasSize(expectedSize: Int): Assertion.Builder<ImmutableFloatArray> {
+    return assert(description = "has size %d", expectedSize) {
+        if (subject.size == 0 != subject.isEmpty()) {
+            return@assert fail("Inconsistent size:${subject.size} with isEmpty():${subject.isEmpty()}")
+        }
+        when (subject.size) {
+            expectedSize -> pass()
+            else -> fail(actual = subject.size, description = "Invalid size")
+        }
+    }
+}
+
+@JvmName("immutableIntArray_hasSize")
+fun Assertion.Builder<ImmutableIntArray>.hasSize(expectedSize: Int): Assertion.Builder<ImmutableIntArray> {
+    return assert(description = "has size %d", expectedSize) {
+        if (subject.size == 0 != subject.isEmpty()) {
+            return@assert fail("Inconsistent size:${subject.size} with isEmpty():${subject.isEmpty()}")
+        }
+        when (subject.size) {
+            expectedSize -> pass()
+            else -> fail(actual = subject.size, description = "Invalid size")
+        }
+    }
+}
+
+@JvmName("immutableLongArray_hasSize")
+fun Assertion.Builder<ImmutableLongArray>.hasSize(expectedSize: Int): Assertion.Builder<ImmutableLongArray> {
+    return assert(description = "has size %d", expectedSize) {
+        if (subject.size == 0 != subject.isEmpty()) {
+            return@assert fail("Inconsistent size:${subject.size} with isEmpty():${subject.isEmpty()}")
+        }
+        when (subject.size) {
+            expectedSize -> pass()
+            else -> fail(actual = subject.size, description = "Invalid size")
+        }
+    }
+}
+
+@JvmName("immutableShortArray_hasSize")
+fun Assertion.Builder<ImmutableShortArray>.hasSize(expectedSize: Int): Assertion.Builder<ImmutableShortArray> {
+    return assert(description = "has size %d", expectedSize) {
+        if (subject.size == 0 != subject.isEmpty()) {
+            return@assert fail("Inconsistent size:${subject.size} with isEmpty():${subject.isEmpty()}")
+        }
+        when (subject.size) {
+            expectedSize -> pass()
+            else -> fail(actual = subject.size, description = "Invalid size")
+        }
+    }
+}
