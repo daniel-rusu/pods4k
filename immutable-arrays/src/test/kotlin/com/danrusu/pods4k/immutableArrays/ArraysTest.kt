@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
-import strikt.assertions.isTrue
 
 class ArraysTest {
     @Test
@@ -13,7 +12,7 @@ class ArraysTest {
             val immutable = this.toImmutableArray()
             expectThat(immutable).isA<ImmutableBooleanArray>()
 
-            expectThat(immutable.isEmpty()).isTrue()
+            expectThat(immutable).isEmpty()
         }
         with(intArrayOf(1, 3, 5)) {
             val immutable = this.toImmutableArray()
@@ -32,7 +31,7 @@ class ArraysTest {
             val immutable = this.toImmutableArray()
             expectThat(immutable).isA<ImmutableArray<String>>()
 
-            expectThat(immutable.isEmpty()).isTrue()
+            expectThat(immutable).isEmpty()
         }
         with(arrayOf("one", "two")) {
             val immutable = this.toImmutableArray()
@@ -45,7 +44,7 @@ class ArraysTest {
         with(emptyArray<Int>()) {
             val immutable = this.toImmutableIntArray()
             expectThat(immutable).isA<ImmutableIntArray>()
-            expectThat(immutable.isEmpty()).isTrue()
+            expectThat(immutable).isEmpty()
         }
         with(arrayOf(1, 3, 5)) {
             val immutable = this.toImmutableIntArray()

@@ -12,7 +12,7 @@ class CollectionsTest {
         with(listOf<String>()) {
             val immutableArray = this.toImmutableArray()
             expectThat(immutableArray).isA<ImmutableArray<String>>()
-            expectThat(immutableArray.isEmpty()).isTrue()
+            expectThat(immutableArray).isEmpty()
         }
         with(listOf(1, 3)) {
             val immutableArray = this.toImmutableArray()

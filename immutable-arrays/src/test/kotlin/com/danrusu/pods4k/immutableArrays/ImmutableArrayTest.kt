@@ -66,12 +66,10 @@ class ImmutableArrayTest {
     @Test
     fun `isEmpty and isNotEmpty validation`() {
         with(ImmutableArray(0) { "element $it" }) {
-            expectThat(this.isEmpty()).isTrue()
-            expectThat(this.isNotEmpty()).isFalse()
+            expectThat(this).isEmpty()
         }
         with(ImmutableArray(3) { "element $it" }) {
-            expectThat(this.isEmpty()).isFalse()
-            expectThat(this.isNotEmpty()).isTrue()
+            expectThat(this).isNotEmpty()
         }
     }
 

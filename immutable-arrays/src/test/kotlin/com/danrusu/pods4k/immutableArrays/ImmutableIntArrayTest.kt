@@ -71,12 +71,10 @@ class ImmutableIntArrayTest {
     @Test
     fun `isEmpty and isNotEmpty validation`() {
         with(ImmutableIntArray(0) { it }) {
-            expectThat(this.isEmpty()).isTrue()
-            expectThat(this.isNotEmpty()).isFalse()
+            expectThat(this).isEmpty()
         }
         with(ImmutableIntArray(3) { it }) {
-            expectThat(this.isEmpty()).isFalse()
-            expectThat(this.isNotEmpty()).isTrue()
+            expectThat(this).isNotEmpty()
         }
     }
 
