@@ -6,6 +6,7 @@ import kotlin.Int
 import kotlin.IntArray
 import kotlin.PublishedApi
 import kotlin.String
+import kotlin.Suppress
 import kotlin.Unit
 import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
@@ -56,12 +57,14 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.isEmpty]
      */
-    public fun isEmpty(): Boolean = values.isEmpty()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun isEmpty(): Boolean = values.isEmpty()
 
     /**
      * See [IntArray.isNotEmpty]
      */
-    public fun isNotEmpty(): Boolean = values.isNotEmpty()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun isNotEmpty(): Boolean = values.isNotEmpty()
 
     /**
      * Returns the element at the specified [index]. This method can be called using the index
@@ -72,7 +75,8 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.getOrNull]
      */
-    public fun getOrNull(index: Int): Int? = values.getOrNull(index)
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun getOrNull(index: Int): Int? = values.getOrNull(index)
 
     /**
      * See [IntArray.getOrElse]
@@ -93,7 +97,8 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.single]
      */
-    public fun single(): Int = values.single()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun single(): Int = values.single()
 
     /**
      * See [IntArray.single]
@@ -103,7 +108,8 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.singleOrNull]
      */
-    public fun singleOrNull(): Int? = values.singleOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun singleOrNull(): Int? = values.singleOrNull()
 
     /**
      * See [IntArray.singleOrNull]
@@ -114,7 +120,8 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.first]
      */
-    public fun first(): Int = values.first()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun first(): Int = values.first()
 
     /**
      * See [IntArray.first]
@@ -124,7 +131,8 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.firstOrNull]
      */
-    public fun firstOrNull(): Int? = values.firstOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun firstOrNull(): Int? = values.firstOrNull()
 
     /**
      * See [IntArray.firstOrNull]
@@ -135,7 +143,8 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.last]
      */
-    public fun last(): Int = values.last()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun last(): Int = values.last()
 
     /**
      * See [IntArray.last]
@@ -145,7 +154,8 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.lastOrNull]
      */
-    public fun lastOrNull(): Int? = values.lastOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun lastOrNull(): Int? = values.lastOrNull()
 
     /**
      * See [IntArray.lastOrNull]
@@ -156,32 +166,38 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.toList]
      */
-    public fun toList(): List<Int> = values.toList()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun toList(): List<Int> = values.toList()
 
     /**
      * See [IntArray.toMutableList]
      */
-    public fun toMutableList(): MutableList<Int> = values.toMutableList()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun toMutableList(): MutableList<Int> = values.toMutableList()
 
     /**
      * See [IntArray.iterator]
      */
-    public operator fun iterator(): Iterator<Int> = values.iterator()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline operator fun iterator(): Iterator<Int> = values.iterator()
 
     /**
      * See [IntArray.asIterable]
      */
-    public fun asIterable(): Iterable<Int> = values.asIterable()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun asIterable(): Iterable<Int> = values.asIterable()
 
     /**
      * See [IntArray.withIndex]
      */
-    public fun withIndex(): Iterable<IndexedValue<Int>> = values.withIndex()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun withIndex(): Iterable<IndexedValue<Int>> = values.withIndex()
 
     /**
      * See [IntArray.asSequence]
      */
-    public fun asSequence(): Sequence<Int> = values.asSequence()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun asSequence(): Sequence<Int> = values.asSequence()
 
     /**
      * See [IntArray.forEach]

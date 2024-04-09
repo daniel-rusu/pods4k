@@ -7,6 +7,7 @@ import kotlin.DoubleArray
 import kotlin.Int
 import kotlin.PublishedApi
 import kotlin.String
+import kotlin.Suppress
 import kotlin.Unit
 import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
@@ -57,12 +58,14 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.isEmpty]
      */
-    public fun isEmpty(): Boolean = values.isEmpty()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun isEmpty(): Boolean = values.isEmpty()
 
     /**
      * See [DoubleArray.isNotEmpty]
      */
-    public fun isNotEmpty(): Boolean = values.isNotEmpty()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun isNotEmpty(): Boolean = values.isNotEmpty()
 
     /**
      * Returns the element at the specified [index]. This method can be called using the index
@@ -73,7 +76,8 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.getOrNull]
      */
-    public fun getOrNull(index: Int): Double? = values.getOrNull(index)
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun getOrNull(index: Int): Double? = values.getOrNull(index)
 
     /**
      * See [DoubleArray.getOrElse]
@@ -94,7 +98,8 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.single]
      */
-    public fun single(): Double = values.single()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun single(): Double = values.single()
 
     /**
      * See [DoubleArray.single]
@@ -105,7 +110,8 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.singleOrNull]
      */
-    public fun singleOrNull(): Double? = values.singleOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun singleOrNull(): Double? = values.singleOrNull()
 
     /**
      * See [DoubleArray.singleOrNull]
@@ -116,7 +122,8 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.first]
      */
-    public fun first(): Double = values.first()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun first(): Double = values.first()
 
     /**
      * See [DoubleArray.first]
@@ -127,7 +134,8 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.firstOrNull]
      */
-    public fun firstOrNull(): Double? = values.firstOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun firstOrNull(): Double? = values.firstOrNull()
 
     /**
      * See [DoubleArray.firstOrNull]
@@ -138,7 +146,8 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.last]
      */
-    public fun last(): Double = values.last()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun last(): Double = values.last()
 
     /**
      * See [DoubleArray.last]
@@ -148,7 +157,8 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.lastOrNull]
      */
-    public fun lastOrNull(): Double? = values.lastOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun lastOrNull(): Double? = values.lastOrNull()
 
     /**
      * See [DoubleArray.lastOrNull]
@@ -159,32 +169,38 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.toList]
      */
-    public fun toList(): List<Double> = values.toList()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun toList(): List<Double> = values.toList()
 
     /**
      * See [DoubleArray.toMutableList]
      */
-    public fun toMutableList(): MutableList<Double> = values.toMutableList()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun toMutableList(): MutableList<Double> = values.toMutableList()
 
     /**
      * See [DoubleArray.iterator]
      */
-    public operator fun iterator(): Iterator<Double> = values.iterator()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline operator fun iterator(): Iterator<Double> = values.iterator()
 
     /**
      * See [DoubleArray.asIterable]
      */
-    public fun asIterable(): Iterable<Double> = values.asIterable()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun asIterable(): Iterable<Double> = values.asIterable()
 
     /**
      * See [DoubleArray.withIndex]
      */
-    public fun withIndex(): Iterable<IndexedValue<Double>> = values.withIndex()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun withIndex(): Iterable<IndexedValue<Double>> = values.withIndex()
 
     /**
      * See [DoubleArray.asSequence]
      */
-    public fun asSequence(): Sequence<Double> = values.asSequence()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun asSequence(): Sequence<Double> = values.asSequence()
 
     /**
      * See [DoubleArray.forEach]

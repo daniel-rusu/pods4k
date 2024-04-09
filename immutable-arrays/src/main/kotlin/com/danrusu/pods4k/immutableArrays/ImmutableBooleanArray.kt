@@ -6,6 +6,7 @@ import kotlin.BooleanArray
 import kotlin.Int
 import kotlin.PublishedApi
 import kotlin.String
+import kotlin.Suppress
 import kotlin.Unit
 import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
@@ -56,12 +57,14 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.isEmpty]
      */
-    public fun isEmpty(): Boolean = values.isEmpty()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun isEmpty(): Boolean = values.isEmpty()
 
     /**
      * See [BooleanArray.isNotEmpty]
      */
-    public fun isNotEmpty(): Boolean = values.isNotEmpty()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun isNotEmpty(): Boolean = values.isNotEmpty()
 
     /**
      * Returns the element at the specified [index]. This method can be called using the index
@@ -72,7 +75,8 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.getOrNull]
      */
-    public fun getOrNull(index: Int): Boolean? = values.getOrNull(index)
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun getOrNull(index: Int): Boolean? = values.getOrNull(index)
 
     /**
      * See [BooleanArray.getOrElse]
@@ -93,7 +97,8 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.single]
      */
-    public fun single(): Boolean = values.single()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun single(): Boolean = values.single()
 
     /**
      * See [BooleanArray.single]
@@ -104,7 +109,8 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.singleOrNull]
      */
-    public fun singleOrNull(): Boolean? = values.singleOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun singleOrNull(): Boolean? = values.singleOrNull()
 
     /**
      * See [BooleanArray.singleOrNull]
@@ -115,7 +121,8 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.first]
      */
-    public fun first(): Boolean = values.first()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun first(): Boolean = values.first()
 
     /**
      * See [BooleanArray.first]
@@ -126,7 +133,8 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.firstOrNull]
      */
-    public fun firstOrNull(): Boolean? = values.firstOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun firstOrNull(): Boolean? = values.firstOrNull()
 
     /**
      * See [BooleanArray.firstOrNull]
@@ -137,7 +145,8 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.last]
      */
-    public fun last(): Boolean = values.last()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun last(): Boolean = values.last()
 
     /**
      * See [BooleanArray.last]
@@ -148,7 +157,8 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.lastOrNull]
      */
-    public fun lastOrNull(): Boolean? = values.lastOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun lastOrNull(): Boolean? = values.lastOrNull()
 
     /**
      * See [BooleanArray.lastOrNull]
@@ -159,32 +169,38 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.toList]
      */
-    public fun toList(): List<Boolean> = values.toList()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun toList(): List<Boolean> = values.toList()
 
     /**
      * See [BooleanArray.toMutableList]
      */
-    public fun toMutableList(): MutableList<Boolean> = values.toMutableList()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun toMutableList(): MutableList<Boolean> = values.toMutableList()
 
     /**
      * See [BooleanArray.iterator]
      */
-    public operator fun iterator(): Iterator<Boolean> = values.iterator()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline operator fun iterator(): Iterator<Boolean> = values.iterator()
 
     /**
      * See [BooleanArray.asIterable]
      */
-    public fun asIterable(): Iterable<Boolean> = values.asIterable()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun asIterable(): Iterable<Boolean> = values.asIterable()
 
     /**
      * See [BooleanArray.withIndex]
      */
-    public fun withIndex(): Iterable<IndexedValue<Boolean>> = values.withIndex()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun withIndex(): Iterable<IndexedValue<Boolean>> = values.withIndex()
 
     /**
      * See [BooleanArray.asSequence]
      */
-    public fun asSequence(): Sequence<Boolean> = values.asSequence()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun asSequence(): Sequence<Boolean> = values.asSequence()
 
     /**
      * See [BooleanArray.forEach]

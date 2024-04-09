@@ -167,19 +167,19 @@ private operator fun String.invoke(
     returns: TypeName = Unit::class.asTypeName(),
 ) {
     val params = ParameterDSL().apply(parameters).build()
-    // Ensure that all delegated methods that accept a lambda are inlined
-    val updatedModifiers = if (KModifier.INLINE !in modifiers && params.any { it.type is LambdaTypeName }) {
-        modifiers + KModifier.INLINE
-    } else {
-        modifiers
-    }
     addFunction(
         kdoc = kdoc,
-        modifiers = updatedModifiers,
+        // Inline all delegated functions so that we get the same performance as if working with a regular array
+        modifiers = modifiers + KModifier.INLINE,
         name = this,
         parameters = parameters,
         returns = returns,
     ) {
+        if (params.none { it.type is LambdaTypeName }) {
+            // Inlining won't introduce negative performance impacts since the current method is a dummy wrapper that
+            // delegates to the same method on the backing array so the instruction cache isn't negatively affected
+            suppress("NOTHING_TO_INLINE")
+        }
         addStatement("return values.${this@invoke}(${params.joinToString { it.name }})")
     }
 }
@@ -227,9 +227,8 @@ private fun TypeSpec.Builder.addArrayIndexOperator(baseType: BaseType) {
         name = "get",
         parameters = { "index"<Int>() },
         returns = baseType.type,
-    ) {
-        addStatement("return values[index]")
-    }
+        code = "return values[index]"
+    )
 }
 
 private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {

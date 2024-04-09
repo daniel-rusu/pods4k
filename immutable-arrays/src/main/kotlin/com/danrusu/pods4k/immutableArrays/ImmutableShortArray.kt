@@ -7,6 +7,7 @@ import kotlin.PublishedApi
 import kotlin.Short
 import kotlin.ShortArray
 import kotlin.String
+import kotlin.Suppress
 import kotlin.Unit
 import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
@@ -57,12 +58,14 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.isEmpty]
      */
-    public fun isEmpty(): Boolean = values.isEmpty()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun isEmpty(): Boolean = values.isEmpty()
 
     /**
      * See [ShortArray.isNotEmpty]
      */
-    public fun isNotEmpty(): Boolean = values.isNotEmpty()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun isNotEmpty(): Boolean = values.isNotEmpty()
 
     /**
      * Returns the element at the specified [index]. This method can be called using the index
@@ -73,7 +76,8 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.getOrNull]
      */
-    public fun getOrNull(index: Int): Short? = values.getOrNull(index)
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun getOrNull(index: Int): Short? = values.getOrNull(index)
 
     /**
      * See [ShortArray.getOrElse]
@@ -94,7 +98,8 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.single]
      */
-    public fun single(): Short = values.single()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun single(): Short = values.single()
 
     /**
      * See [ShortArray.single]
@@ -105,7 +110,8 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.singleOrNull]
      */
-    public fun singleOrNull(): Short? = values.singleOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun singleOrNull(): Short? = values.singleOrNull()
 
     /**
      * See [ShortArray.singleOrNull]
@@ -116,7 +122,8 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.first]
      */
-    public fun first(): Short = values.first()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun first(): Short = values.first()
 
     /**
      * See [ShortArray.first]
@@ -126,7 +133,8 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.firstOrNull]
      */
-    public fun firstOrNull(): Short? = values.firstOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun firstOrNull(): Short? = values.firstOrNull()
 
     /**
      * See [ShortArray.firstOrNull]
@@ -137,7 +145,8 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.last]
      */
-    public fun last(): Short = values.last()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun last(): Short = values.last()
 
     /**
      * See [ShortArray.last]
@@ -147,7 +156,8 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.lastOrNull]
      */
-    public fun lastOrNull(): Short? = values.lastOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun lastOrNull(): Short? = values.lastOrNull()
 
     /**
      * See [ShortArray.lastOrNull]
@@ -158,32 +168,38 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.toList]
      */
-    public fun toList(): List<Short> = values.toList()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun toList(): List<Short> = values.toList()
 
     /**
      * See [ShortArray.toMutableList]
      */
-    public fun toMutableList(): MutableList<Short> = values.toMutableList()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun toMutableList(): MutableList<Short> = values.toMutableList()
 
     /**
      * See [ShortArray.iterator]
      */
-    public operator fun iterator(): Iterator<Short> = values.iterator()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline operator fun iterator(): Iterator<Short> = values.iterator()
 
     /**
      * See [ShortArray.asIterable]
      */
-    public fun asIterable(): Iterable<Short> = values.asIterable()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun asIterable(): Iterable<Short> = values.asIterable()
 
     /**
      * See [ShortArray.withIndex]
      */
-    public fun withIndex(): Iterable<IndexedValue<Short>> = values.withIndex()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun withIndex(): Iterable<IndexedValue<Short>> = values.withIndex()
 
     /**
      * See [ShortArray.asSequence]
      */
-    public fun asSequence(): Sequence<Short> = values.asSequence()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun asSequence(): Sequence<Short> = values.asSequence()
 
     /**
      * See [ShortArray.forEach]

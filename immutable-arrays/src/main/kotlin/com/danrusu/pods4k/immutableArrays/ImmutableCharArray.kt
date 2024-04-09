@@ -7,6 +7,7 @@ import kotlin.CharArray
 import kotlin.Int
 import kotlin.PublishedApi
 import kotlin.String
+import kotlin.Suppress
 import kotlin.Unit
 import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
@@ -57,12 +58,14 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.isEmpty]
      */
-    public fun isEmpty(): Boolean = values.isEmpty()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun isEmpty(): Boolean = values.isEmpty()
 
     /**
      * See [CharArray.isNotEmpty]
      */
-    public fun isNotEmpty(): Boolean = values.isNotEmpty()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun isNotEmpty(): Boolean = values.isNotEmpty()
 
     /**
      * Returns the element at the specified [index]. This method can be called using the index
@@ -73,7 +76,8 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.getOrNull]
      */
-    public fun getOrNull(index: Int): Char? = values.getOrNull(index)
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun getOrNull(index: Int): Char? = values.getOrNull(index)
 
     /**
      * See [CharArray.getOrElse]
@@ -94,7 +98,8 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.single]
      */
-    public fun single(): Char = values.single()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun single(): Char = values.single()
 
     /**
      * See [CharArray.single]
@@ -104,7 +109,8 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.singleOrNull]
      */
-    public fun singleOrNull(): Char? = values.singleOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun singleOrNull(): Char? = values.singleOrNull()
 
     /**
      * See [CharArray.singleOrNull]
@@ -115,7 +121,8 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.first]
      */
-    public fun first(): Char = values.first()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun first(): Char = values.first()
 
     /**
      * See [CharArray.first]
@@ -125,7 +132,8 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.firstOrNull]
      */
-    public fun firstOrNull(): Char? = values.firstOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun firstOrNull(): Char? = values.firstOrNull()
 
     /**
      * See [CharArray.firstOrNull]
@@ -136,7 +144,8 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.last]
      */
-    public fun last(): Char = values.last()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun last(): Char = values.last()
 
     /**
      * See [CharArray.last]
@@ -146,7 +155,8 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.lastOrNull]
      */
-    public fun lastOrNull(): Char? = values.lastOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun lastOrNull(): Char? = values.lastOrNull()
 
     /**
      * See [CharArray.lastOrNull]
@@ -157,32 +167,38 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.toList]
      */
-    public fun toList(): List<Char> = values.toList()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun toList(): List<Char> = values.toList()
 
     /**
      * See [CharArray.toMutableList]
      */
-    public fun toMutableList(): MutableList<Char> = values.toMutableList()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun toMutableList(): MutableList<Char> = values.toMutableList()
 
     /**
      * See [CharArray.iterator]
      */
-    public operator fun iterator(): Iterator<Char> = values.iterator()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline operator fun iterator(): Iterator<Char> = values.iterator()
 
     /**
      * See [CharArray.asIterable]
      */
-    public fun asIterable(): Iterable<Char> = values.asIterable()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun asIterable(): Iterable<Char> = values.asIterable()
 
     /**
      * See [CharArray.withIndex]
      */
-    public fun withIndex(): Iterable<IndexedValue<Char>> = values.withIndex()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun withIndex(): Iterable<IndexedValue<Char>> = values.withIndex()
 
     /**
      * See [CharArray.asSequence]
      */
-    public fun asSequence(): Sequence<Char> = values.asSequence()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun asSequence(): Sequence<Char> = values.asSequence()
 
     /**
      * See [CharArray.forEach]

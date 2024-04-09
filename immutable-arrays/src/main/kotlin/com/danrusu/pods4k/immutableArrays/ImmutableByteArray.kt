@@ -7,6 +7,7 @@ import kotlin.ByteArray
 import kotlin.Int
 import kotlin.PublishedApi
 import kotlin.String
+import kotlin.Suppress
 import kotlin.Unit
 import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
@@ -57,12 +58,14 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.isEmpty]
      */
-    public fun isEmpty(): Boolean = values.isEmpty()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun isEmpty(): Boolean = values.isEmpty()
 
     /**
      * See [ByteArray.isNotEmpty]
      */
-    public fun isNotEmpty(): Boolean = values.isNotEmpty()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun isNotEmpty(): Boolean = values.isNotEmpty()
 
     /**
      * Returns the element at the specified [index]. This method can be called using the index
@@ -73,7 +76,8 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.getOrNull]
      */
-    public fun getOrNull(index: Int): Byte? = values.getOrNull(index)
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun getOrNull(index: Int): Byte? = values.getOrNull(index)
 
     /**
      * See [ByteArray.getOrElse]
@@ -94,7 +98,8 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.single]
      */
-    public fun single(): Byte = values.single()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun single(): Byte = values.single()
 
     /**
      * See [ByteArray.single]
@@ -104,7 +109,8 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.singleOrNull]
      */
-    public fun singleOrNull(): Byte? = values.singleOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun singleOrNull(): Byte? = values.singleOrNull()
 
     /**
      * See [ByteArray.singleOrNull]
@@ -115,7 +121,8 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.first]
      */
-    public fun first(): Byte = values.first()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun first(): Byte = values.first()
 
     /**
      * See [ByteArray.first]
@@ -125,7 +132,8 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.firstOrNull]
      */
-    public fun firstOrNull(): Byte? = values.firstOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun firstOrNull(): Byte? = values.firstOrNull()
 
     /**
      * See [ByteArray.firstOrNull]
@@ -136,7 +144,8 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.last]
      */
-    public fun last(): Byte = values.last()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun last(): Byte = values.last()
 
     /**
      * See [ByteArray.last]
@@ -146,7 +155,8 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.lastOrNull]
      */
-    public fun lastOrNull(): Byte? = values.lastOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun lastOrNull(): Byte? = values.lastOrNull()
 
     /**
      * See [ByteArray.lastOrNull]
@@ -157,32 +167,38 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.toList]
      */
-    public fun toList(): List<Byte> = values.toList()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun toList(): List<Byte> = values.toList()
 
     /**
      * See [ByteArray.toMutableList]
      */
-    public fun toMutableList(): MutableList<Byte> = values.toMutableList()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun toMutableList(): MutableList<Byte> = values.toMutableList()
 
     /**
      * See [ByteArray.iterator]
      */
-    public operator fun iterator(): Iterator<Byte> = values.iterator()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline operator fun iterator(): Iterator<Byte> = values.iterator()
 
     /**
      * See [ByteArray.asIterable]
      */
-    public fun asIterable(): Iterable<Byte> = values.asIterable()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun asIterable(): Iterable<Byte> = values.asIterable()
 
     /**
      * See [ByteArray.withIndex]
      */
-    public fun withIndex(): Iterable<IndexedValue<Byte>> = values.withIndex()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun withIndex(): Iterable<IndexedValue<Byte>> = values.withIndex()
 
     /**
      * See [ByteArray.asSequence]
      */
-    public fun asSequence(): Sequence<Byte> = values.asSequence()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun asSequence(): Sequence<Byte> = values.asSequence()
 
     /**
      * See [ByteArray.forEach]

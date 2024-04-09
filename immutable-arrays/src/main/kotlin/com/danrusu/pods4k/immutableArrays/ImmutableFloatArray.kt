@@ -7,6 +7,7 @@ import kotlin.FloatArray
 import kotlin.Int
 import kotlin.PublishedApi
 import kotlin.String
+import kotlin.Suppress
 import kotlin.Unit
 import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
@@ -57,12 +58,14 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.isEmpty]
      */
-    public fun isEmpty(): Boolean = values.isEmpty()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun isEmpty(): Boolean = values.isEmpty()
 
     /**
      * See [FloatArray.isNotEmpty]
      */
-    public fun isNotEmpty(): Boolean = values.isNotEmpty()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun isNotEmpty(): Boolean = values.isNotEmpty()
 
     /**
      * Returns the element at the specified [index]. This method can be called using the index
@@ -73,7 +76,8 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.getOrNull]
      */
-    public fun getOrNull(index: Int): Float? = values.getOrNull(index)
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun getOrNull(index: Int): Float? = values.getOrNull(index)
 
     /**
      * See [FloatArray.getOrElse]
@@ -94,7 +98,8 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.single]
      */
-    public fun single(): Float = values.single()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun single(): Float = values.single()
 
     /**
      * See [FloatArray.single]
@@ -105,7 +110,8 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.singleOrNull]
      */
-    public fun singleOrNull(): Float? = values.singleOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun singleOrNull(): Float? = values.singleOrNull()
 
     /**
      * See [FloatArray.singleOrNull]
@@ -116,7 +122,8 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.first]
      */
-    public fun first(): Float = values.first()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun first(): Float = values.first()
 
     /**
      * See [FloatArray.first]
@@ -126,7 +133,8 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.firstOrNull]
      */
-    public fun firstOrNull(): Float? = values.firstOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun firstOrNull(): Float? = values.firstOrNull()
 
     /**
      * See [FloatArray.firstOrNull]
@@ -137,7 +145,8 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.last]
      */
-    public fun last(): Float = values.last()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun last(): Float = values.last()
 
     /**
      * See [FloatArray.last]
@@ -147,7 +156,8 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.lastOrNull]
      */
-    public fun lastOrNull(): Float? = values.lastOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun lastOrNull(): Float? = values.lastOrNull()
 
     /**
      * See [FloatArray.lastOrNull]
@@ -158,32 +168,38 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.toList]
      */
-    public fun toList(): List<Float> = values.toList()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun toList(): List<Float> = values.toList()
 
     /**
      * See [FloatArray.toMutableList]
      */
-    public fun toMutableList(): MutableList<Float> = values.toMutableList()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun toMutableList(): MutableList<Float> = values.toMutableList()
 
     /**
      * See [FloatArray.iterator]
      */
-    public operator fun iterator(): Iterator<Float> = values.iterator()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline operator fun iterator(): Iterator<Float> = values.iterator()
 
     /**
      * See [FloatArray.asIterable]
      */
-    public fun asIterable(): Iterable<Float> = values.asIterable()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun asIterable(): Iterable<Float> = values.asIterable()
 
     /**
      * See [FloatArray.withIndex]
      */
-    public fun withIndex(): Iterable<IndexedValue<Float>> = values.withIndex()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun withIndex(): Iterable<IndexedValue<Float>> = values.withIndex()
 
     /**
      * See [FloatArray.asSequence]
      */
-    public fun asSequence(): Sequence<Float> = values.asSequence()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun asSequence(): Sequence<Float> = values.asSequence()
 
     /**
      * See [FloatArray.forEach]

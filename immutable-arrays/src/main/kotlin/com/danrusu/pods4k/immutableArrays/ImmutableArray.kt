@@ -58,12 +58,14 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     /**
      * See [Array.isEmpty]
      */
-    public fun isEmpty(): Boolean = values.isEmpty()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun isEmpty(): Boolean = values.isEmpty()
 
     /**
      * See [Array.isNotEmpty]
      */
-    public fun isNotEmpty(): Boolean = values.isNotEmpty()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun isNotEmpty(): Boolean = values.isNotEmpty()
 
     /**
      * Returns the element at the specified [index]. This method can be called using the index
@@ -74,7 +76,8 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     /**
      * See [Array.getOrNull]
      */
-    public fun getOrNull(index: Int): T? = values.getOrNull(index)
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun getOrNull(index: Int): T? = values.getOrNull(index)
 
     /**
      * See [Array.getOrElse]
@@ -95,7 +98,8 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     /**
      * See [Array.single]
      */
-    public fun single(): T = values.single()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun single(): T = values.single()
 
     /**
      * See [Array.single]
@@ -105,7 +109,8 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     /**
      * See [Array.singleOrNull]
      */
-    public fun singleOrNull(): T? = values.singleOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun singleOrNull(): T? = values.singleOrNull()
 
     /**
      * See [Array.singleOrNull]
@@ -116,7 +121,8 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     /**
      * See [Array.first]
      */
-    public fun first(): T = values.first()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun first(): T = values.first()
 
     /**
      * See [Array.first]
@@ -126,7 +132,8 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     /**
      * See [Array.firstOrNull]
      */
-    public fun firstOrNull(): T? = values.firstOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun firstOrNull(): T? = values.firstOrNull()
 
     /**
      * See [Array.firstOrNull]
@@ -137,7 +144,8 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     /**
      * See [Array.last]
      */
-    public fun last(): T = values.last()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun last(): T = values.last()
 
     /**
      * See [Array.last]
@@ -147,7 +155,8 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     /**
      * See [Array.lastOrNull]
      */
-    public fun lastOrNull(): T? = values.lastOrNull()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun lastOrNull(): T? = values.lastOrNull()
 
     /**
      * See [Array.lastOrNull]
@@ -158,32 +167,38 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     /**
      * See [Array.toList]
      */
-    public fun toList(): List<T> = values.toList()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun toList(): List<T> = values.toList()
 
     /**
      * See [Array.toMutableList]
      */
-    public fun toMutableList(): MutableList<T> = values.toMutableList()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun toMutableList(): MutableList<T> = values.toMutableList()
 
     /**
      * See [Array.iterator]
      */
-    public operator fun iterator(): Iterator<T> = values.iterator()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline operator fun iterator(): Iterator<T> = values.iterator()
 
     /**
      * See [Array.asIterable]
      */
-    public fun asIterable(): Iterable<T> = values.asIterable()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun asIterable(): Iterable<T> = values.asIterable()
 
     /**
      * See [Array.withIndex]
      */
-    public fun withIndex(): Iterable<IndexedValue<T>> = values.withIndex()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun withIndex(): Iterable<IndexedValue<T>> = values.withIndex()
 
     /**
      * See [Array.asSequence]
      */
-    public fun asSequence(): Sequence<T> = values.asSequence()
+    @Suppress("NOTHING_TO_INLINE")
+    public inline fun asSequence(): Sequence<T> = values.asSequence()
 
     /**
      * See [Array.forEach]
