@@ -4,14 +4,16 @@ import com.danrusu.pods4k.utils.addFunction
 import com.danrusu.pods4k.utils.createFile
 import com.danrusu.pods4k.utils.suppress
 import com.squareup.kotlinpoet.FileSpec
+import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeVariableName
 import java.io.File
 
-internal object ImmutableArrayFactoryFunctionsGenerator {
+internal object ImmutableArraysFileGenerator {
     fun generate(destinationPath: String) {
         val fileSpec = createFile(Config.packageName, "ImmutableArrays") {
             addEmptyFunctions()
             addImmutableArrayOf()
+            addGenericImmutableArrayToPrimitiveImmutableArray()
         }
         fileSpec.writeTo(File(destinationPath, ""))
     }
@@ -58,5 +60,23 @@ private fun FileSpec.Builder.addEmptyFunctions() {
                 addStatement("return ${baseType.generatedClassName}.EMPTY")
             }
         }
+    }
+}
+
+private fun FileSpec.Builder.addGenericImmutableArrayToPrimitiveImmutableArray() {
+    for (baseType in BaseType.values()) {
+        if (baseType == BaseType.GENERIC) continue
+
+        addFunction(
+            kdoc = """
+                Returns an [${baseType.generatedClassName}] containing the values of this array.
+                
+                [${baseType.generatedClassName}] uses less memory and is faster to access as it stores the primitive values directly without needing to store them in wrapper objects.
+            """.trimIndent(),
+            receiver = BaseType.GENERIC.getGeneratedClass().parameterizedBy(baseType.type),
+            name = "to${baseType.generatedClassName}",
+            returns = baseType.getGeneratedTypeName(),
+            code = "return ${baseType.generatedClassName}(size)·{·this[it]·}"
+        )
     }
 }

@@ -115,3 +115,75 @@ public fun immutableArrayOf(vararg values: Float): ImmutableFloatArray =
  */
 public fun immutableArrayOf(vararg values: Double): ImmutableDoubleArray =
         ImmutableDoubleArray(values.size) { values[it] }
+
+/**
+ * Returns an [ImmutableBooleanArray] containing the values of this array.
+ *
+ * [ImmutableBooleanArray] uses less memory and is faster to access as it stores the primitive
+ * values directly without needing to store them in wrapper objects.
+ */
+public fun ImmutableArray<Boolean>.toImmutableBooleanArray(): ImmutableBooleanArray =
+        ImmutableBooleanArray(size) { this[it] }
+
+/**
+ * Returns an [ImmutableByteArray] containing the values of this array.
+ *
+ * [ImmutableByteArray] uses less memory and is faster to access as it stores the primitive values
+ * directly without needing to store them in wrapper objects.
+ */
+public fun ImmutableArray<Byte>.toImmutableByteArray(): ImmutableByteArray =
+        ImmutableByteArray(size) { this[it] }
+
+/**
+ * Returns an [ImmutableCharArray] containing the values of this array.
+ *
+ * [ImmutableCharArray] uses less memory and is faster to access as it stores the primitive values
+ * directly without needing to store them in wrapper objects.
+ */
+public fun ImmutableArray<Char>.toImmutableCharArray(): ImmutableCharArray =
+        ImmutableCharArray(size) { this[it] }
+
+/**
+ * Returns an [ImmutableShortArray] containing the values of this array.
+ *
+ * [ImmutableShortArray] uses less memory and is faster to access as it stores the primitive values
+ * directly without needing to store them in wrapper objects.
+ */
+public fun ImmutableArray<Short>.toImmutableShortArray(): ImmutableShortArray =
+        ImmutableShortArray(size) { this[it] }
+
+/**
+ * Returns an [ImmutableIntArray] containing the values of this array.
+ *
+ * [ImmutableIntArray] uses less memory and is faster to access as it stores the primitive values
+ * directly without needing to store them in wrapper objects.
+ */
+public fun ImmutableArray<Int>.toImmutableIntArray(): ImmutableIntArray =
+        ImmutableIntArray(size) { this[it] }
+
+/**
+ * Returns an [ImmutableLongArray] containing the values of this array.
+ *
+ * [ImmutableLongArray] uses less memory and is faster to access as it stores the primitive values
+ * directly without needing to store them in wrapper objects.
+ */
+public fun ImmutableArray<Long>.toImmutableLongArray(): ImmutableLongArray =
+        ImmutableLongArray(size) { this[it] }
+
+/**
+ * Returns an [ImmutableFloatArray] containing the values of this array.
+ *
+ * [ImmutableFloatArray] uses less memory and is faster to access as it stores the primitive values
+ * directly without needing to store them in wrapper objects.
+ */
+public fun ImmutableArray<Float>.toImmutableFloatArray(): ImmutableFloatArray =
+        ImmutableFloatArray(size) { this[it] }
+
+/**
+ * Returns an [ImmutableDoubleArray] containing the values of this array.
+ *
+ * [ImmutableDoubleArray] uses less memory and is faster to access as it stores the primitive values
+ * directly without needing to store them in wrapper objects.
+ */
+public fun ImmutableArray<Double>.toImmutableDoubleArray(): ImmutableDoubleArray =
+        ImmutableDoubleArray(size) { this[it] }

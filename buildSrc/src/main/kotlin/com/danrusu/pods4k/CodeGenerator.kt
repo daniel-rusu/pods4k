@@ -3,7 +3,7 @@ package com.danrusu.pods4k
 import com.danrusu.pods4k.immutableArrays.ArrayExtensionsGenerator
 import com.danrusu.pods4k.immutableArrays.CollectionExtensionsGenerator
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayCodeGenerator
-import com.danrusu.pods4k.immutableArrays.ImmutableArrayFactoryFunctionsGenerator
+import com.danrusu.pods4k.immutableArrays.ImmutableArraysFileGenerator
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -17,7 +17,7 @@ public open class CodeGenerator : Plugin<Project> {
                         "/src/main/kotlin"
 
                 ImmutableArrayCodeGenerator.generate(destinationPath = immutableArrayPath)
-                ImmutableArrayFactoryFunctionsGenerator.generate(destinationPath = immutableArrayPath)
+                ImmutableArraysFileGenerator.generate(destinationPath = immutableArrayPath)
                 ArrayExtensionsGenerator.generate(destinationPath = immutableArrayPath)
                 CollectionExtensionsGenerator.generate(destinationPath = immutableArrayPath)
             }

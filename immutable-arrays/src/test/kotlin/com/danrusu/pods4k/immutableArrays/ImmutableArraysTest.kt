@@ -34,4 +34,15 @@ class ImmutableArraysTest {
             expectThat(this).containsExactly(10, 20, 30)
         }
     }
+
+    @Test
+    fun `generic ImmutableArray to primitive immutable array validation`() {
+        with(immutableArrayOf<Int>(1, 3, 5)) {
+            expectThat(this).isA<ImmutableArray<Int>>()
+
+            val primitiveVersion = this.toImmutableIntArray()
+            expectThat(primitiveVersion).isA<ImmutableIntArray>()
+            expectThat(primitiveVersion).containsExactly(1, 3, 5)
+        }
+    }
 }

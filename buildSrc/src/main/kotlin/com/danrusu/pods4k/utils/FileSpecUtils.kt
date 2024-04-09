@@ -30,6 +30,20 @@ internal inline fun FileSpec.Builder.addFunction(
     name: String,
     parameters: ParameterDSL.() -> Unit = {},
     returns: TypeName? = null,
+    code: String,
+): FileSpec.Builder {
+    return addFunction(kdoc, modifiers, receiver, name, parameters, returns) {
+        addStatement(code)
+    }
+}
+
+internal inline fun FileSpec.Builder.addFunction(
+    kdoc: String? = null,
+    modifiers: List<KModifier> = emptyList(),
+    receiver: TypeName? = null,
+    name: String,
+    parameters: ParameterDSL.() -> Unit = {},
+    returns: TypeName? = null,
     body: FunSpec.Builder.() -> Unit
 ): FileSpec.Builder {
     return addFunction(
