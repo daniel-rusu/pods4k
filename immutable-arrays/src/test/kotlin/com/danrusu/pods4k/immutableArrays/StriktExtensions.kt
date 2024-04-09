@@ -2,6 +2,149 @@ package com.danrusu.pods4k.immutableArrays
 
 import strikt.api.Assertion
 
+@JvmName("immutableArray_containsExactly")
+fun <T> Assertion.Builder<ImmutableArray<T>>.containsExactly(vararg values: T): Assertion.Builder<ImmutableArray<T>> {
+    return assert("contains exactly") {
+        if (subject.size != values.size) {
+            fail("expected [${values.joinToString()}] but was $subject")
+        }
+        for (index in values.indices) {
+            if (subject[index] != values[index]) {
+                fail("expected [${values.joinToString()}] but was $subject")
+            }
+        }
+        pass()
+    }
+}
+
+@JvmName("immutableBooleanArray_containsExactly")
+fun Assertion.Builder<ImmutableBooleanArray>.containsExactly(
+    vararg values: Boolean
+): Assertion.Builder<ImmutableBooleanArray> {
+    return assert("contains exactly") {
+        if (subject.size != values.size) {
+            fail("expected [${values.joinToString()}] but was $subject")
+        }
+        for (index in values.indices) {
+            if (subject[index] != values[index]) {
+                fail("expected [${values.joinToString()}] but was $subject")
+            }
+        }
+        pass()
+    }
+}
+
+@JvmName("immutableByteArray_containsExactly")
+fun Assertion.Builder<ImmutableByteArray>.containsExactly(vararg values: Byte): Assertion.Builder<ImmutableByteArray> {
+    return assert("contains exactly") {
+        if (subject.size != values.size) {
+            fail("expected [${values.joinToString()}] but was $subject")
+        }
+        for (index in values.indices) {
+            if (subject[index] != values[index]) {
+                fail("expected [${values.joinToString()}] but was $subject")
+            }
+        }
+        pass()
+    }
+}
+
+@JvmName("immutableCharArray_containsExactly")
+fun Assertion.Builder<ImmutableCharArray>.containsExactly(vararg values: Char): Assertion.Builder<ImmutableCharArray> {
+    return assert("contains exactly") {
+        if (subject.size != values.size) {
+            fail("expected [${values.joinToString()}] but was $subject")
+        }
+        for (index in values.indices) {
+            if (subject[index] != values[index]) {
+                fail("expected [${values.joinToString()}] but was $subject")
+            }
+        }
+        pass()
+    }
+}
+
+@JvmName("immutableDoubleArray_containsExactly")
+fun Assertion.Builder<ImmutableDoubleArray>.containsExactly(
+    vararg values: Double
+): Assertion.Builder<ImmutableDoubleArray> {
+    return assert("contains exactly") {
+        if (subject.size != values.size) {
+            fail("expected [${values.joinToString()}] but was $subject")
+        }
+        for (index in values.indices) {
+            if (subject[index] != values[index]) {
+                fail("expected [${values.joinToString()}] but was $subject")
+            }
+        }
+        pass()
+    }
+}
+
+@JvmName("immutableFloatArray_containsExactly")
+fun Assertion.Builder<ImmutableFloatArray>.containsExactly(
+    vararg values: Float
+): Assertion.Builder<ImmutableFloatArray> {
+    return assert("contains exactly") {
+        if (subject.size != values.size) {
+            fail("expected [${values.joinToString()}] but was $subject")
+        }
+        for (index in values.indices) {
+            if (subject[index] != values[index]) {
+                fail("expected [${values.joinToString()}] but was $subject")
+            }
+        }
+        pass()
+    }
+}
+
+@JvmName("immutableIntArray_containsExactly")
+fun Assertion.Builder<ImmutableIntArray>.containsExactly(vararg values: Int): Assertion.Builder<ImmutableIntArray> {
+    return assert("contains exactly") {
+        if (subject.size != values.size) {
+            fail("expected [${values.joinToString()}] but was $subject")
+        }
+        for (index in values.indices) {
+            if (subject[index] != values[index]) {
+                fail("expected [${values.joinToString()}] but was $subject")
+            }
+        }
+        pass()
+    }
+}
+
+@JvmName("immutableLongArray_containsExactly")
+fun Assertion.Builder<ImmutableLongArray>.containsExactly(vararg values: Long): Assertion.Builder<ImmutableLongArray> {
+    return assert("contains exactly") {
+        if (subject.size != values.size) {
+            fail("expected [${values.joinToString()}] but was $subject")
+        }
+        for (index in values.indices) {
+            if (subject[index] != values[index]) {
+                fail("expected [${values.joinToString()}] but was $subject")
+            }
+        }
+        pass()
+    }
+}
+
+@JvmName("immutableShortArray_containsExactly")
+fun Assertion.Builder<ImmutableShortArray>.containsExactly(
+    vararg values: Short
+): Assertion.Builder<ImmutableShortArray> {
+    return assert("contains exactly") {
+        if (subject.size != values.size) {
+            fail("expected [${values.joinToString()}] but was $subject")
+        }
+        for (index in values.indices) {
+            if (subject[index] != values[index]) {
+                fail("expected [${values.joinToString()}] but was $subject")
+            }
+        }
+        pass()
+    }
+}
+
 @JvmName("immutableArray_isEmpty")
 fun <T> Assertion.Builder<ImmutableArray<T>>.isEmpty(): Assertion.Builder<ImmutableArray<T>> {
     return assert(description = "is empty") {

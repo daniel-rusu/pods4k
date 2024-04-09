@@ -2,9 +2,7 @@ package com.danrusu.pods4k.immutableArrays
 
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
-import strikt.api.expectThrows
 import strikt.assertions.isA
-import strikt.assertions.isEqualTo
 
 class ImmutableArraysTest {
     @Test
@@ -28,23 +26,12 @@ class ImmutableArraysTest {
 
         with(immutableArrayOf("one", "two")) {
             expectThat(this).isA<ImmutableArray<String>>()
-            expectThat(this).hasSize(2)
-
-            expectThat(this[0]).isEqualTo("one")
-            expectThat(this[1]).isEqualTo("two")
-
-            expectThrows<ArrayIndexOutOfBoundsException> { this[3] }
+            expectThat(this).containsExactly("one", "two")
         }
 
         with(immutableArrayOf(10, 20, 30)) {
             expectThat(this).isA<ImmutableIntArray>()
-            expectThat(this).hasSize(3)
-
-            expectThat(this[0]).isEqualTo(10)
-            expectThat(this[1]).isEqualTo(20)
-            expectThat(this[2]).isEqualTo(30)
-
-            expectThrows<ArrayIndexOutOfBoundsException> { this[3] }
+            expectThat(this).containsExactly(10, 20, 30)
         }
     }
 }

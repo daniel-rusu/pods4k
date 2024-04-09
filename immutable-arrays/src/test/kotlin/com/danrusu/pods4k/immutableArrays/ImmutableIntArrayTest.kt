@@ -30,6 +30,9 @@ class ImmutableIntArrayTest {
 
     @Test
     fun `size validation`() {
+        with(ImmutableIntArray(0) { it }) {
+            expectThat(this).hasSize(0)
+        }
         with(ImmutableIntArray(10) { it }) {
             expectThat(this).hasSize(10)
         }
