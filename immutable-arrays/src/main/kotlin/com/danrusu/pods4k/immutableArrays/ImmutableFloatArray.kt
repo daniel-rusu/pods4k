@@ -64,6 +64,15 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
         return true
     }
 
+    override fun hashCode(): Int {
+        // Start with non-zero hash so that arrays that start with a different number of zero-hash elements end up with different hashCodes
+        var hashCode = 7
+        for (value in values) {
+            hashCode = 31 * hashCode + value.hashCode()
+        }
+        return hashCode
+    }
+
     /**
      * See [FloatArray.isEmpty]
      */

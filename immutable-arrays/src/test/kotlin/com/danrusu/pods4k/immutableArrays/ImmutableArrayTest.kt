@@ -122,6 +122,29 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `hashCode validation`() {
+        with(emptyImmutableArray<String>()) {
+            expectThat(this.hashCode()).isEqualTo(emptyImmutableArray<String>().hashCode())
+            expectThat(this.hashCode()).isNotEqualTo(0)
+            expectThat(this.hashCode()).isNotEqualTo(immutableArrayOf("").hashCode())
+        }
+        with(immutableArrayOf("")) {
+            expectThat(this.hashCode()).isEqualTo(immutableArrayOf("").hashCode())
+            expectThat(this.hashCode()).isNotEqualTo(immutableArrayOf("boo").hashCode())
+            expectThat(this.hashCode()).isNotEqualTo(immutableArrayOf("", "").hashCode())
+        }
+        with(immutableArrayOf("one")) {
+            expectThat(this.hashCode()).isEqualTo(immutableArrayOf("one").hashCode())
+            expectThat(this.hashCode()).isNotEqualTo(immutableArrayOf("", "one").hashCode())
+        }
+        with(immutableArrayOf("one", "two")) {
+            expectThat(this.hashCode()).isEqualTo(immutableArrayOf("one", "two").hashCode())
+            expectThat(this.hashCode()).isNotEqualTo(immutableArrayOf("two", "one").hashCode())
+            expectThat(this.hashCode()).isNotEqualTo(immutableArrayOf("", "one", "two").hashCode())
+        }
+    }
+
+    @Test
     fun `isEmpty and isNotEmpty validation`() {
         with(ImmutableArray(0) { "element $it" }) {
             expectThat(this).isEmpty()

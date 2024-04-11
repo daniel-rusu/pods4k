@@ -35,6 +35,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             )
             overrideToString()
             addEqualsOperator(baseType)
+            overrideHashCode(baseType)
             "isEmpty"(baseType = baseType, returns = Boolean::class.asTypeName())
             "isNotEmpty"(baseType = baseType, returns = Boolean::class.asTypeName())
             addArrayIndexOperator(baseType)
@@ -240,6 +241,33 @@ private fun TypeSpec.Builder.addEqualsOperator(baseType: BaseType) {
             return true
         """.trimIndent(),
     )
+}
+
+private fun TypeSpec.Builder.overrideHashCode(baseType: BaseType) {
+    val prime1 = 7
+    val prime2 = 31
+    addFunction(
+        modifiers = listOf(KModifier.OVERRIDE),
+        name = "hashCode",
+        returns = Int::class.asTypeName(),
+    ) {
+        addComment("Start with non-zero hash so that arrays that start with a different number of zero-hash elements end up with different hashCodes")
+        addCode(
+            """ 
+            var hashCode = $prime1
+            for (value in values) {
+                ${
+                if (baseType == BaseType.GENERIC) {
+                    "hashCode = $prime2 * hashCode + (value?.hashCode() ?: 0)"
+                } else {
+                    "hashCode = $prime2 * hashCode + value.hashCode()"
+                }
+            }
+            }
+            return hashCode
+        """.trimIndent()
+        )
+    }
 }
 
 private fun TypeSpec.Builder.addArrayIndexOperator(baseType: BaseType) {

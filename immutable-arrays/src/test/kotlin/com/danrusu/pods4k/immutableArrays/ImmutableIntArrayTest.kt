@@ -130,6 +130,29 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `hashCode validation`() {
+        with(emptyImmutableIntArray()) {
+            expectThat(this.hashCode()).isEqualTo(emptyImmutableIntArray().hashCode())
+            expectThat(this.hashCode()).isNotEqualTo(0)
+            expectThat(this.hashCode()).isNotEqualTo(immutableArrayOf(0).hashCode())
+        }
+        with(immutableArrayOf(0)) {
+            expectThat(this.hashCode()).isEqualTo(immutableArrayOf(0).hashCode())
+            expectThat(this.hashCode()).isNotEqualTo(immutableArrayOf(1).hashCode())
+            expectThat(this.hashCode()).isNotEqualTo(immutableArrayOf(0, 0).hashCode())
+        }
+        with(immutableArrayOf(1)) {
+            expectThat(this.hashCode()).isEqualTo(immutableArrayOf(1).hashCode())
+            expectThat(this.hashCode()).isNotEqualTo(immutableArrayOf(0, 1).hashCode())
+        }
+        with(immutableArrayOf(1, 2)) {
+            expectThat(this.hashCode()).isEqualTo(immutableArrayOf(1, 2).hashCode())
+            expectThat(this.hashCode()).isNotEqualTo(immutableArrayOf(2, 1).hashCode())
+            expectThat(this.hashCode()).isNotEqualTo(immutableArrayOf(0, 1, 2).hashCode())
+        }
+    }
+
+    @Test
     fun `isEmpty and isNotEmpty validation`() {
         with(ImmutableIntArray(0) { it }) {
             expectThat(this).isEmpty()
