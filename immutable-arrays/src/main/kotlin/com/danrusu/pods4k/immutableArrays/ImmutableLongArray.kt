@@ -55,6 +55,15 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
 
     override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
 
+    public operator fun equals(other: ImmutableLongArray): Boolean {
+        if (other.size != this.size) return false
+
+        forEachIndexed { index, element ->
+            if (other[index] != element) return false
+        }
+        return true
+    }
+
     /**
      * See [LongArray.isEmpty]
      */

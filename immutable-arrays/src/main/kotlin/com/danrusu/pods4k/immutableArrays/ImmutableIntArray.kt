@@ -54,6 +54,15 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
 
     override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
 
+    public operator fun equals(other: ImmutableIntArray): Boolean {
+        if (other.size != this.size) return false
+
+        forEachIndexed { index, element ->
+            if (other[index] != element) return false
+        }
+        return true
+    }
+
     /**
      * See [IntArray.isEmpty]
      */

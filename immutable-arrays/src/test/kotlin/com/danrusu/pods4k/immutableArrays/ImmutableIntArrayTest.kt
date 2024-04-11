@@ -72,6 +72,64 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `equals validation`() {
+        // Comprehensive testing is required here since equals in inline classes are experimental (as of Kotlin 1.9.23)
+        // Note that we're purposely using expectThat(a == b).isTrue() instead of expectThat(a).isEqualTo(b) in order
+        // to control when boxing occurs and to explicitly validate both scenarios.
+
+        with(emptyImmutableIntArray()) {
+            expectThat(this == emptyImmutableIntArray()).isTrue()
+            expectThat(this.equals(emptyImmutableIntArray())).isTrue()
+            expectThat((this as Any) == emptyImmutableIntArray()).isTrue()
+            expectThat(this == (emptyImmutableIntArray() as Any)).isTrue()
+            expectThat((this as Any) == (emptyImmutableIntArray() as Any)).isTrue()
+
+            expectThat(this == immutableArrayOf(0)).isFalse()
+            expectThat((this as Any) == immutableArrayOf(0)).isFalse()
+            expectThat(this == (immutableArrayOf(0) as Any)).isFalse()
+            expectThat((this as Any) == (immutableArrayOf(0) as Any)).isFalse()
+
+            expectThat(this == immutableArrayOf(1, 2)).isFalse()
+            expectThat((this as Any) == immutableArrayOf(1, 2)).isFalse()
+            expectThat(this == (immutableArrayOf(1, 2) as Any)).isFalse()
+            expectThat((this as Any) == (immutableArrayOf(1, 2) as Any)).isFalse()
+
+            // Ensure same behavior as comparing IntArray with Array<Int>
+            expectThat((this as Any) == emptyImmutableArray<Int>()).isFalse()
+            expectThat(this == (emptyImmutableArray<Int>() as Any)).isFalse()
+            expectThat((this as Any) == (emptyImmutableArray<Int>() as Any)).isFalse()
+
+            // Ensure same behavior as comparing IntArray with BooleanArray
+            expectThat((this as Any) == emptyImmutableBooleanArray()).isFalse()
+            expectThat(this == (emptyImmutableBooleanArray() as Any)).isFalse()
+            expectThat((this as Any) == (emptyImmutableBooleanArray() as Any)).isFalse()
+        }
+
+        with(immutableArrayOf(1, 3, 5)) {
+            expectThat(this == immutableArrayOf(1, 3, 5)).isTrue()
+            expectThat(this.equals(immutableArrayOf(1, 3, 5))).isTrue()
+            expectThat((this as Any) == immutableArrayOf(1, 3, 5)).isTrue()
+            expectThat(this == (immutableArrayOf(1, 3, 5) as Any)).isTrue()
+            expectThat((this as Any) == (immutableArrayOf(1, 3, 5) as Any)).isTrue()
+
+            expectThat(this == immutableArrayOf(1, 3)).isFalse()
+            expectThat((this as Any) == immutableArrayOf(1, 3)).isFalse()
+            expectThat(this == (immutableArrayOf(1, 3) as Any)).isFalse()
+            expectThat((this as Any) == (immutableArrayOf(1, 3) as Any)).isFalse()
+
+            expectThat(this == immutableArrayOf(1, 3, 6)).isFalse()
+            expectThat((this as Any) == immutableArrayOf(1, 3, 6)).isFalse()
+            expectThat(this == (immutableArrayOf(1, 3, 6) as Any)).isFalse()
+            expectThat((this as Any) == (immutableArrayOf(1, 3, 6) as Any)).isFalse()
+
+            // Ensure same behavior as comparing IntArray with Array<Int>
+            expectThat((this as Any) == immutableArrayOf<Int>(1, 3, 5)).isFalse()
+            expectThat(this == (immutableArrayOf<Int>(1, 3, 5) as Any)).isFalse()
+            expectThat((this as Any) == (immutableArrayOf<Int>(1, 3, 5) as Any)).isFalse()
+        }
+    }
+
+    @Test
     fun `isEmpty and isNotEmpty validation`() {
         with(ImmutableIntArray(0) { it }) {
             expectThat(this).isEmpty()

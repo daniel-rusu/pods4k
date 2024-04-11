@@ -21,6 +21,7 @@ allprojects {
 
             // generate default methods in interfaces without the DefaultImpls
             freeCompilerArgs.add("-Xjvm-default=all")
+            freeCompilerArgs.add("-XXLanguage:+CustomEqualsInValueClasses")
 
             // enforce redundant visibility modifiers
             kotlin.explicitApi()

@@ -34,6 +34,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 get = "return values.indices",
             )
             overrideToString()
+            addEqualsOperator(baseType)
             "isEmpty"(baseType = baseType, returns = Boolean::class.asTypeName())
             "isNotEmpty"(baseType = baseType, returns = Boolean::class.asTypeName())
             addArrayIndexOperator(baseType)
@@ -216,6 +217,27 @@ private fun TypeSpec.Builder.overrideToString() {
         returns = String::class.asTypeName(),
         code = """
             return values.joinToString(prefix = "[", postfix = "]")
+        """.trimIndent(),
+    )
+}
+
+private fun TypeSpec.Builder.addEqualsOperator(baseType: BaseType) {
+    val otherType = when (baseType) {
+        BaseType.GENERIC -> baseType.getGeneratedClass().parameterizedBy(STAR)
+        else -> baseType.getGeneratedClass()
+    }
+    addFunction(
+        modifiers = listOf(KModifier.OPERATOR),
+        name = "equals",
+        parameters = { "other"(type = otherType) },
+        returns = Boolean::class.asTypeName(),
+        code = """
+            if (other.size != this.size) return false
+            
+            forEachIndexed { index, element ->
+                if (other[index] != element) return false
+            }
+            return true
         """.trimIndent(),
     )
 }
