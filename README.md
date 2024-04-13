@@ -24,8 +24,9 @@ names[1] = "Jane" // Compile error: No set method providing array access
 On top of the base efficiency improvements when storing typical generic types, immutable arrays are even more efficient
 when dealing with the 8 primitive types. The primitive variants of immutable arrays store primitive values in a compact
 contiguous region of memory instead of auto-boxing each value and storing pointers to scattered wrapper objects like
-what read-only lists do. For example, when storing integers, this reduces memory consumption by up to 7 times on a
-64bit JVM and performance can improve by over 10 times when performing operations on these values in tight loops:
+what read-only lists do. For example, when storing integers, this reduces memory consumption by 5 to 8 times depending
+on how the JVM is configured and performance can improve by over 10 times when performing operations on these values in
+tight loops:
 
 ```kotlin
 val people = immutableArrayOf(
