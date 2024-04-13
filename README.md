@@ -8,9 +8,9 @@ impossible at first glance.
 ## Immutable Arrays
 
 A safer and more efficient alternative to read-only lists providing the same type of capabilities and similar-looking
-code. Immutable arrays are also safer, cleaner, and more efficient than regular arrays when mutability isn't required.
+code.
 
-Immutable arrays are zero-cost abstractions over regular arrays which are eliminated at compile-time. However, unlike
+Immutable arrays wrap regular arrays with zero-cost abstractions that get eliminated at compile-time. However, unlike
 standard arrays, the array elements cannot be re-assigned, so immutable arrays can be safely shared without needing to
 be wrapped in immutable collections:
 
@@ -21,11 +21,11 @@ println(names[0]) // Dan
 names[1] = "Jane" // Compile error: No set method providing array access
 ```
 
-Immutable arrays are safer than read-only lists as they don't have any back-door to get at the underlying data. They're
-more efficient than lists for pretty much all operations
-[details here](immutable-arrays/README.md#benefits-over-read-only-lists)). Additionally, they're significantly more
-efficient when dealing with primitive types as primitive values are stored together in a compact contiguous region of
-memory instead of auto-boxing each value and storing pointers to scattered wrapper objects:
+On top of the base efficiency improvements when storing typical generic types, immutable arrays are even more efficient
+when dealing with the 8 primitive types. The primitive variants of immutable arrays store primitive values in a compact
+contiguous region of memory instead of auto-boxing each value and storing pointers to scattered wrapper objects like
+what read-only lists do. For example, when storing integers, this reduces memory consumption by up to 7 times on a
+64bit JVM and performance can improve by over 10 times when performing operations on these values in tight loops:
 
 ```kotlin
 val people = immutableArrayOf(
@@ -33,11 +33,14 @@ val people = immutableArrayOf(
     Person(name = "Bob", age = 4),
 ) // ImmutableArray<Person>
 
+// Mapping the ages automatically uses an efficient ImmutableIntArray[3, 4] storing primitive int values
 val ages = people.map { it.age }
-// ImmutableIntArray[3, 4] storing primitive int values
+performStatisticalAnalysis(ages)
 ```
 
-See [Immutable arrays](immutable-arrays/README.md) for more specifics along with a detailed comparison against regular
+When mutability isn't needed, Immutable arrays are also a safer and cleaner alternative to regular arrays providing
+significant efficiency improvements over regular arrays for dozens of common operations. See
+[Immutable Arrays](immutable-arrays/README.md) for more specifics along with a detailed comparison against regular
 arrays, read-only lists, and immutable lists.
 
 ## Java Compatibility
@@ -45,5 +48,5 @@ arrays, read-only lists, and immutable lists.
 Automated tests are run on all the LTS JDK releases which are supported by Kotlin (JDK 8, 11, 17, etc.)
 
 Some data structures use techniques which are only supported by the Kotlin compiler. While they can be used in a mixed
-Java & Kotlin codebase, such as storing one of these data structures in a Java-defined collection, using these data
+Java & Kotlin codebase to store one of these data structures in a Java-defined collection, referencing these data
 structures by their class name is only supported within Kotlin files.
