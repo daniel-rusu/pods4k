@@ -1,7 +1,7 @@
 # Immutable Arrays
 
 A safer and more efficient alternative to read-only lists providing the same type of capabilities and similar-looking
-code.
+code (see [Benefits over read-only lists](#benefits-over-read-only-lists)).
 
 Immutable arrays are also a safer and cleaner alternative to regular arrays that aren't intended to be mutated
 providing significant efficiency improvements over regular arrays for dozens of common operations
@@ -186,18 +186,8 @@ the same way that we compare lists:
 if (immutableArrayOf(1, 2) == immutableArrayOf(1, 2)) return
 ```
 
-Since we can compare 2 lists directly, developers occasionally attempt to do the same thing with regular arrays
-resulting in subtle defects:
-
-```kotlin
-// For a real codebase, imagine these were retrieved from somewhere else
-val previousValues = arrayOf(1, 2)
-val currentValues = arrayOf(1, 2)
-// Oops, this condition will be false even though the arrays have identical contents
-if (previousValues == currentValues) return
-```
-
-The defects can be even more subtle:
+Since we can compare 2 lists directly, developers occasionally attempt to do the same with regular arrays. Even worse,
+defects can sneak in without obvious usages of these broken behaviors:
 
 ```kotlin
 data class Order(val id: Long, private val products: Array<Product>)
@@ -211,6 +201,57 @@ val rejectedOrders = mutableSetOf<Order>()
 </details>
 
 ## Benefits over read-only lists
+
+<details>
+<summary>Safer</summary>
+
+Read-only lists appear to be immutable at first as they don't expose any mutating methods. However, they can be cast
+into a `MutableList` and modified:
+
+```kotlin
+val values = listOf(1, 2, 3)
+values[0] = 2 // Compiler error: No set method providing array access
+
+(values as MutableList)[0] = 100
+println(values) // [100, 2, 3]
+```
+
+Immutable arrays don't have this backdoor:
+
+```kotlin
+val values = immutableArrayOf(1, 2, 3)
+values[0] = 2 // Compiler error: No set method providing array access
+
+@Suppress("CAST_NEVER_SUCCEEDS")
+(values as IntArray)[1] = "Jane"
+// ClassCastException: ImmutableIntArray cannot be cast to [I
+```
+
+</details>
+
+<details>
+<summary>More memory efficient</summary>
+
+Read-only lists containing one of the eight base types, like `List<Int>`, use between 5 to 8 times more memory than
+immutable arrays! See the **Memory Impacts** section in [Memory Layout](#memory-layout) for details.
+
+Even when storing generic types, read-only lists still use more memory as their backing array usually has about 17% of
+unused capacity. There's also the small memory overhead of the `ArrayList` object whereas variables of immutable array
+types point directly at the backing array.
+
+</details>
+
+<details>
+<summary>Higher performance</summary>
+
+Executing tight loops on read-only lists containing one of the eight base types, like `List<Int>`, can be over 10 times
+slower than immutable arrays. See the **Performance Impacts** section in [Memory Layout](#memory-layout) for details.
+
+Even when operating on generic types, read-only lists have an extra layer of indirection since method calls such as
+getting an element, are routed through the `ArrayList` class whereas getting an element from an immutable arrays
+accesses the array elements directly.
+
+</details>
 
 ## Benefits over immutable lists
 
