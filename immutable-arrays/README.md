@@ -245,7 +245,7 @@ types point directly at the backing array.
 <summary>Higher performance</summary>
 
 Executing tight loops on read-only lists containing one of the eight base types, like `List<Int>`, can be over 10 times
-slower than immutable arrays. See the **Performance Impacts** section in [Memory Layout](#memory-layout) for details.
+slower than immutable arrays. See the `Performance Impacts` section in [Memory Layout](#memory-layout) for details.
 
 Even when operating on generic types, read-only lists have an extra layer of indirection since method calls such as
 getting an element, are routed through the `ArrayList` class whereas getting an element from an immutable arrays
@@ -253,6 +253,41 @@ accesses the array elements directly.
 
 </details>
 
-## Benefits over immutable lists
+## Benefits over Guava immutable lists
+
+<details>
+<summary>Safer</summary>
+
+Guava immutable lists implement the Java `List` interface and expose mutating methods which throw exceptions at runtime
+when attempted to be mutated. Although this prevents mutation, it can result in exceptions being thrown during runtime
+affecting the user experience.
+
+Attempting to mutate an immutable array won't even compile catching these types of defects much sooner.
+
+</details>
+
+<details>
+<summary>More memory efficient</summary>
+
+When creating Guava immutable lists by copying an existing list, they have the same memory drawbacks as read-only lists
+(see [Benefits over read-only lists](#benefits-over-read-only-lists)) but twice as bad since we have 2 lists.
+
+When creating a Guava immutable list by wrapping an existing list, it pretty much has the same memory drawbacks as
+read-only lists since the extra wrapper is tiny.
+
+</details>
+
+<details>
+<summary>Higher performance</summary>
+
+When exposing an encapsulated list by copying it into a Guava immutable list, this has the same performance drawbacks
+as read-only lists (see [Benefits over read-only lists](#benefits-over-read-only-lists)) plus the added overhead of
+copying the elements.
+
+When wrapping an existing list in a Guava immutable list, we get the same performance drawbacks as read-only lists
+(see [Benefits over read-only lists](#benefits-over-read-only-lists)) but they're slightly worse as they introduce
+another layer of indirection due to the additional wrapper object.
+
+</details>
 
 ## Caveats
