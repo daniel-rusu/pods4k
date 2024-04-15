@@ -7,10 +7,8 @@ impossible at first glance.
 
 ## Immutable Arrays
 
-A safer and more efficient alternative to read-only lists providing the same type of capabilities and similar-looking
-code.
-
-Immutable arrays wrap regular arrays with zero-cost abstractions that get eliminated at compile-time. However, unlike
+[Immutable Arrays](immutable-arrays/README.md) wrap regular arrays with zero-cost abstractions that get eliminated at
+compile-time. However, unlike
 standard arrays, the array elements cannot be re-assigned, so immutable arrays can be safely shared without needing to
 be wrapped in immutable collections:
 
@@ -21,12 +19,10 @@ println(names[0]) // Dan
 names[1] = "Jane" // Compile error: No set method providing array access
 ```
 
-On top of the base efficiency improvements when storing typical generic types, immutable arrays are even more efficient
-when dealing with the 8 primitive types. The primitive variants of immutable arrays store primitive values in a compact
-contiguous region of memory instead of auto-boxing each value and storing pointers to scattered wrapper objects like
-what read-only lists do. For example, when storing integers, this reduces memory consumption by 5 to 8 times depending
-on how the JVM is configured and performance can improve by over 10 times when performing operations on these values in
-tight loops:
+On top of the base efficiency improvements over immutable or read-only lists when storing typical generic types,
+immutable arrays are even more efficient when dealing with the 8 primitive types. For example, when storing integers,
+this reduces memory consumption by 5 to 8 times depending on how the JVM is configured and performance can improve by
+over 10 times when performing operations on these values in tight loops:
 
 ```kotlin
 val people = immutableArrayOf(
@@ -34,13 +30,13 @@ val people = immutableArrayOf(
     Person(name = "Bob", age = 4),
 ) // ImmutableArray<Person>
 
-// Mapping the ages automatically uses an efficient ImmutableIntArray[3, 4] storing primitive int values
+// Mapping ages automatically uses an efficient ImmutableIntArray[3, 4] storing primitive int values
 val ages = people.map { it.age }
 performStatisticalAnalysis(ages)
 ```
 
 When mutability isn't needed, Immutable arrays are also a safer and cleaner alternative to regular arrays providing
-significant efficiency improvements over regular arrays for dozens of common operations. See
+significant efficiency improvements over regular arrays for dozens of commonly used operations. See
 [Immutable Arrays](immutable-arrays/README.md) for more specifics along with a detailed comparison against regular
 arrays, read-only lists, and immutable lists.
 
