@@ -284,10 +284,62 @@ When exposing an encapsulated list by copying it into a Guava immutable list, th
 as read-only lists (see [Benefits over read-only lists](#benefits-over-read-only-lists)) plus the added overhead of
 copying the elements.
 
-When wrapping an existing list in a Guava immutable list, we get the same performance drawbacks as read-only lists
-(see [Benefits over read-only lists](#benefits-over-read-only-lists)) but they're slightly worse as they introduce
-another layer of indirection due to the additional wrapper object.
+When wrapping an existing list in a Guava immutable list, we get the same performance drawbacks as read-only lists , but
+slightly worse as this introduces another layer of indirection due to the additional wrapper object.
 
 </details>
 
 ## Caveats
+
+<details>
+<summary>Auto-boxing</summary>
+
+</details>
+
+<details>
+<summary>No identity</summary>
+
+Immutable arrays are zero-cost abstractions that get eliminated at compile time. In a way, we can think of immutable
+arrays as a kind of virtual quantum particle that doesn't actually exist except sometimes (see Auto-boxing above).
+
+Since immutable arrays aren't real objects, attempting to use their identities is not supported. Here are some patterns
+that attempt to make use of their identities:
+
+Reference equality:
+
+```kotlin
+fun replaceArray(replacement: ImmutableArray<String>) {
+    if (currentValues === replacement) { // Compiler error: Identity equality is forbidden
+        // Note the reference equality.  Regular structural equality using `==` is allowed and works as expected
+    }
+    currentValues = replacement
+}
+```
+
+Identity hashCode:
+
+```kotlin
+val values = immutableArrayOf(1, 2, 3)
+val identityHashCode = System.identityHashCode(values)
+// Oops, the identityHashCode function accepts any type instead of an immutable array type, so it's auto-boxed into a 
+// tiny wrapper object and the identity hashCode of that temporary wrapper is returned
+```
+
+Synchronization:
+
+```kotlin
+class Account(val accountHolders: ReadOnlyArray<Person>) {
+    private var balance: Money = 0.dollars
+
+    fun withdraw(amount: Money) {
+        // Compiler warning: Synchronizing by ImmutableArray<Person> is forbidden
+        synchronized(accountHolders) {
+            // Oops, the synchronized function accepts any type instead of an immutable array type, so it's auto-boxed 
+            // into a new temporary tiny wrapper object.  We're meaninglessly synchronizing on that temporary wrapper
+            balance -= amount
+        }
+    }
+}
+```
+
+</details>
