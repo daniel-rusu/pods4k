@@ -42,7 +42,7 @@ arrays, read-only lists, and immutable lists.
 
 ## Java Compatibility
 
-Automated tests are run on all the LTS JDK releases which are supported by Kotlin (JDK 8, 11, 17, etc.)
+Requires JDK 11 or later. Automated tests are run on JDK LTS releases 11, 17, & 21.
 
 Some data structures use techniques which are only supported by the Kotlin compiler. While they can be used in a mixed
 Java & Kotlin codebase to store one of these data structures in a Java-defined collection, referencing these data
