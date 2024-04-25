@@ -13,7 +13,6 @@ import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
 import kotlin.collections.Iterator
 import kotlin.collections.List
-import kotlin.collections.MutableList
 import kotlin.jvm.JvmInline
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
@@ -96,12 +95,6 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
      */
     @Suppress("NOTHING_TO_INLINE")
     public inline fun getOrNull(index: Int): Long? = values.getOrNull(index)
-
-    /**
-     * See [LongArray.getOrElse]
-     */
-    public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> Long): Long =
-            values.getOrElse(index, defaultValue)
 
     public operator fun component1(): Long = get(0)
 
@@ -187,12 +180,6 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
      */
     @Suppress("NOTHING_TO_INLINE")
     public inline fun toList(): List<Long> = values.toList()
-
-    /**
-     * See [LongArray.toMutableList]
-     */
-    @Suppress("NOTHING_TO_INLINE")
-    public inline fun toMutableList(): MutableList<Long> = values.toMutableList()
 
     /**
      * See [LongArray.iterator]

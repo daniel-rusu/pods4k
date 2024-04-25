@@ -10,6 +10,7 @@ import kotlin.Int
 import kotlin.Long
 import kotlin.Short
 import kotlin.Suppress
+import kotlin.collections.MutableList
 
 /**
  * Returns an empty [ImmutableArray].
@@ -259,3 +260,112 @@ public fun ImmutableFloatArray.toTypedImmutableArray(): ImmutableArray<Float> =
  */
 public fun ImmutableDoubleArray.toTypedImmutableArray(): ImmutableArray<Double> =
         ImmutableArray(size) { this[it] }
+
+/**
+ * See [Array.toMutableList]
+ */
+@Suppress("NOTHING_TO_INLINE")
+public inline fun <T> ImmutableArray<T>.toMutableList(): MutableList<T> = values.toMutableList()
+
+/**
+ * See [Array.toMutableList]
+ */
+@Suppress("NOTHING_TO_INLINE")
+public inline fun ImmutableBooleanArray.toMutableList(): MutableList<Boolean> =
+        values.toMutableList()
+
+/**
+ * See [Array.toMutableList]
+ */
+@Suppress("NOTHING_TO_INLINE")
+public inline fun ImmutableByteArray.toMutableList(): MutableList<Byte> = values.toMutableList()
+
+/**
+ * See [Array.toMutableList]
+ */
+@Suppress("NOTHING_TO_INLINE")
+public inline fun ImmutableCharArray.toMutableList(): MutableList<Char> = values.toMutableList()
+
+/**
+ * See [Array.toMutableList]
+ */
+@Suppress("NOTHING_TO_INLINE")
+public inline fun ImmutableShortArray.toMutableList(): MutableList<Short> = values.toMutableList()
+
+/**
+ * See [Array.toMutableList]
+ */
+@Suppress("NOTHING_TO_INLINE")
+public inline fun ImmutableIntArray.toMutableList(): MutableList<Int> = values.toMutableList()
+
+/**
+ * See [Array.toMutableList]
+ */
+@Suppress("NOTHING_TO_INLINE")
+public inline fun ImmutableLongArray.toMutableList(): MutableList<Long> = values.toMutableList()
+
+/**
+ * See [Array.toMutableList]
+ */
+@Suppress("NOTHING_TO_INLINE")
+public inline fun ImmutableFloatArray.toMutableList(): MutableList<Float> = values.toMutableList()
+
+/**
+ * See [Array.toMutableList]
+ */
+@Suppress("NOTHING_TO_INLINE")
+public inline fun ImmutableDoubleArray.toMutableList(): MutableList<Double> = values.toMutableList()
+
+/**
+ * See [Array.getOrElse]
+ */
+public inline fun <T> ImmutableArray<T>.getOrElse(index: Int, defaultValue: (index: Int) -> T): T =
+        values.getOrElse(index, defaultValue)
+
+/**
+ * See [Array.getOrElse]
+ */
+public inline fun ImmutableBooleanArray.getOrElse(index: Int,
+        defaultValue: (index: Int) -> Boolean): Boolean = values.getOrElse(index, defaultValue)
+
+/**
+ * See [Array.getOrElse]
+ */
+public inline fun ImmutableByteArray.getOrElse(index: Int, defaultValue: (index: Int) -> Byte): Byte
+        = values.getOrElse(index, defaultValue)
+
+/**
+ * See [Array.getOrElse]
+ */
+public inline fun ImmutableCharArray.getOrElse(index: Int, defaultValue: (index: Int) -> Char): Char
+        = values.getOrElse(index, defaultValue)
+
+/**
+ * See [Array.getOrElse]
+ */
+public inline fun ImmutableShortArray.getOrElse(index: Int, defaultValue: (index: Int) -> Short):
+        Short = values.getOrElse(index, defaultValue)
+
+/**
+ * See [Array.getOrElse]
+ */
+public inline fun ImmutableIntArray.getOrElse(index: Int, defaultValue: (index: Int) -> Int): Int =
+        values.getOrElse(index, defaultValue)
+
+/**
+ * See [Array.getOrElse]
+ */
+public inline fun ImmutableLongArray.getOrElse(index: Int, defaultValue: (index: Int) -> Long): Long
+        = values.getOrElse(index, defaultValue)
+
+/**
+ * See [Array.getOrElse]
+ */
+public inline fun ImmutableFloatArray.getOrElse(index: Int, defaultValue: (index: Int) -> Float):
+        Float = values.getOrElse(index, defaultValue)
+
+/**
+ * See [Array.getOrElse]
+ */
+public inline fun ImmutableDoubleArray.getOrElse(index: Int, defaultValue: (index: Int) -> Double):
+        Double = values.getOrElse(index, defaultValue)

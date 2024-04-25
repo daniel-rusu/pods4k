@@ -3,7 +3,9 @@ package com.danrusu.pods4k.immutableArrays
 import com.danrusu.pods4k.utils.addFunction
 import com.danrusu.pods4k.utils.createFile
 import com.danrusu.pods4k.utils.suppress
+import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
+import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeVariableName
 import java.io.File
@@ -15,6 +17,8 @@ internal object ImmutableArraysFileGenerator {
             addImmutableArrayOf()
             addGenericImmutableArrayToPrimitiveImmutableArray()
             addPrimitiveImmutableArrayToTypedImmutableArray()
+            addImmutableArrayToMutableList()
+            addImmutableArrayGetOrElse()
         }
         fileSpec.writeTo(File(destinationPath, ""))
     }
@@ -97,5 +101,55 @@ private fun FileSpec.Builder.addPrimitiveImmutableArrayToTypedImmutableArray() {
             returns = BaseType.GENERIC.getGeneratedClass().parameterizedBy(baseType.type),
             code = "return ${BaseType.GENERIC.generatedClassName}(size)·{·this[it]·}"
         )
+    }
+}
+
+private fun FileSpec.Builder.addImmutableArrayToMutableList() {
+    for (baseType in BaseType.values()) {
+        val receiver = when (baseType) {
+            BaseType.GENERIC -> baseType.getGeneratedClass().parameterizedBy(baseType.type)
+            else -> baseType.getGeneratedClass()
+        }
+        addFunction(
+            kdoc = "See [Array.toMutableList]",
+            modifiers = listOf(KModifier.INLINE),
+            receiver = receiver,
+            name = "toMutableList",
+            returns = ClassName("kotlin.collections", "MutableList").parameterizedBy(baseType.type),
+        ) {
+            // Inlining won't introduce negative performance impacts since the current method is a dummy wrapper that
+            // delegates to the same method on the backing array so the instruction cache isn't negatively affected
+            suppress("NOTHING_TO_INLINE")
+
+            if (baseType == BaseType.GENERIC) {
+                addTypeVariable(baseType.type as TypeVariableName)
+            }
+            addStatement("return values.toMutableList()")
+        }
+    }
+}
+
+private fun FileSpec.Builder.addImmutableArrayGetOrElse() {
+    for (baseType in BaseType.values()) {
+        val receiver = when (baseType) {
+            BaseType.GENERIC -> baseType.getGeneratedClass().parameterizedBy(baseType.type)
+            else -> baseType.getGeneratedClass()
+        }
+        addFunction(
+            kdoc = "See [Array.getOrElse]",
+            modifiers = listOf(KModifier.INLINE),
+            receiver = receiver,
+            name = "getOrElse",
+            parameters = {
+                "index"<Int>()
+                "defaultValue"(type = lambda(parameters = { "index"<Int>() }, returnType = baseType.type))
+            },
+            returns = baseType.type,
+        ) {
+            if (baseType == BaseType.GENERIC) {
+                addTypeVariable(baseType.type as TypeVariableName)
+            }
+            addStatement("return values.getOrElse(index, defaultValue)")
+        }
     }
 }

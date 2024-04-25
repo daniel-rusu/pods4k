@@ -4,6 +4,7 @@ import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeVariableName
+import com.squareup.kotlinpoet.WildcardTypeName
 import com.squareup.kotlinpoet.asTypeName
 import kotlin.reflect.KClass
 
@@ -17,7 +18,7 @@ internal enum class BaseType(
 ) {
     GENERIC(
         type = genericType,
-        backingArrayType = Array::class.asTypeName().parameterizedBy(genericType),
+        backingArrayType = Array::class.asTypeName().parameterizedBy(WildcardTypeName.producerOf(genericType)),
         backingArrayConstructor = "Array<Any?>",
         generatedClassName = "ImmutableArray"
     ),

@@ -13,6 +13,22 @@ private data class Person(val id: Int)
  */
 class ImmutableArrayTest {
     @Test
+    fun `immutable arrays are covariant`() {
+        open class Person(val name: String)
+        class Manager(name: String, val numEmployees: Int) : Person(name)
+
+        val bob = Manager(name = "Bob", numEmployees = 3)
+        val managers: ImmutableArray<Manager> = immutableArrayOf(bob)
+
+        // This should be allowed because every manager is also a person
+        val people: ImmutableArray<Person> = managers
+
+        // The managers ImmutableArray<Manager> is safe from heap pollution when referenced as an
+        // ImmutableArray<Person> because it's immutable, so we can't add a regular non-manager person into it
+        expectThat(people.single() === bob).isTrue()
+    }
+
+    @Test
     fun `creation validation`() {
         expectThat(ImmutableArray(1) { "element $it" })
             .isA<ImmutableArray<String>>()
@@ -114,7 +130,6 @@ class ImmutableArrayTest {
         }
 
         with(immutableArrayOf("1", "2")) {
-            expectThat(this == immutableArrayOf<Int>(1, 2)).isFalse()
             expectThat((this as Any) == immutableArrayOf<Int>(1, 2)).isFalse()
             expectThat(this == (immutableArrayOf<Int>(1, 2) as Any)).isFalse()
             expectThat((this as Any) == (immutableArrayOf<Int>(1, 2) as Any)).isFalse()

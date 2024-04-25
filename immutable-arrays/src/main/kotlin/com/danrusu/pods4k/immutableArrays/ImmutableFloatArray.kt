@@ -13,7 +13,6 @@ import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
 import kotlin.collections.Iterator
 import kotlin.collections.List
-import kotlin.collections.MutableList
 import kotlin.jvm.JvmInline
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
@@ -96,12 +95,6 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
      */
     @Suppress("NOTHING_TO_INLINE")
     public inline fun getOrNull(index: Int): Float? = values.getOrNull(index)
-
-    /**
-     * See [FloatArray.getOrElse]
-     */
-    public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> Float): Float =
-            values.getOrElse(index, defaultValue)
 
     public operator fun component1(): Float = get(0)
 
@@ -188,12 +181,6 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
      */
     @Suppress("NOTHING_TO_INLINE")
     public inline fun toList(): List<Float> = values.toList()
-
-    /**
-     * See [FloatArray.toMutableList]
-     */
-    @Suppress("NOTHING_TO_INLINE")
-    public inline fun toMutableList(): MutableList<Float> = values.toMutableList()
 
     /**
      * See [FloatArray.iterator]

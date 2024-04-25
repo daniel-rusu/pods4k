@@ -13,13 +13,12 @@ import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
 import kotlin.collections.Iterator
 import kotlin.collections.List
-import kotlin.collections.MutableList
 import kotlin.jvm.JvmInline
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
 
 @JvmInline
-public value class ImmutableArray<T> @PublishedApi internal constructor(
+public value class ImmutableArray<out T> @PublishedApi internal constructor(
     /**
      * This is internal instead of private so we can have inline functions that delegate to the same
      * function on the backing array.  The backing array won't be accessible from Kotlin code since the
@@ -36,7 +35,7 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
      * makes this effectively private.
      */
     @PublishedApi
-    internal val values: Array<T>,
+    internal val values: Array<out T>,
 ) {
     public val size: Int
         get() = values.size
@@ -96,12 +95,6 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
      */
     @Suppress("NOTHING_TO_INLINE")
     public inline fun getOrNull(index: Int): T? = values.getOrNull(index)
-
-    /**
-     * See [Array.getOrElse]
-     */
-    public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> T): T =
-            values.getOrElse(index, defaultValue)
 
     public operator fun component1(): T = get(0)
 
@@ -189,12 +182,6 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
     public inline fun toList(): List<T> = values.toList()
 
     /**
-     * See [Array.toMutableList]
-     */
-    @Suppress("NOTHING_TO_INLINE")
-    public inline fun toMutableList(): MutableList<T> = values.toMutableList()
-
-    /**
      * See [Array.iterator]
      */
     @Suppress("NOTHING_TO_INLINE")
@@ -249,7 +236,7 @@ public value class ImmutableArray<T> @PublishedApi internal constructor(
                 ImmutableArray<T> {
             if (size == 0) return EMPTY as ImmutableArray<T>
             val backingArray = Array<Any?>(size) { index -> init(index) }
-            return ImmutableArray(backingArray as Array<T>)
+            return ImmutableArray(backingArray as Array<out T>)
         }
     }
 }

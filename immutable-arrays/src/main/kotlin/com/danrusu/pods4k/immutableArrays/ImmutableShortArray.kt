@@ -13,7 +13,6 @@ import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
 import kotlin.collections.Iterator
 import kotlin.collections.List
-import kotlin.collections.MutableList
 import kotlin.jvm.JvmInline
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
@@ -96,12 +95,6 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
      */
     @Suppress("NOTHING_TO_INLINE")
     public inline fun getOrNull(index: Int): Short? = values.getOrNull(index)
-
-    /**
-     * See [ShortArray.getOrElse]
-     */
-    public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> Short): Short =
-            values.getOrElse(index, defaultValue)
 
     public operator fun component1(): Short = get(0)
 
@@ -188,12 +181,6 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
      */
     @Suppress("NOTHING_TO_INLINE")
     public inline fun toList(): List<Short> = values.toList()
-
-    /**
-     * See [ShortArray.toMutableList]
-     */
-    @Suppress("NOTHING_TO_INLINE")
-    public inline fun toMutableList(): MutableList<Short> = values.toMutableList()
 
     /**
      * See [ShortArray.iterator]

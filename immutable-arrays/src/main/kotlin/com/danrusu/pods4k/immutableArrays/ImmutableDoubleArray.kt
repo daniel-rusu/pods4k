@@ -13,7 +13,6 @@ import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
 import kotlin.collections.Iterator
 import kotlin.collections.List
-import kotlin.collections.MutableList
 import kotlin.jvm.JvmInline
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
@@ -96,12 +95,6 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
      */
     @Suppress("NOTHING_TO_INLINE")
     public inline fun getOrNull(index: Int): Double? = values.getOrNull(index)
-
-    /**
-     * See [DoubleArray.getOrElse]
-     */
-    public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> Double): Double =
-            values.getOrElse(index, defaultValue)
 
     public operator fun component1(): Double = get(0)
 
@@ -189,12 +182,6 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
      */
     @Suppress("NOTHING_TO_INLINE")
     public inline fun toList(): List<Double> = values.toList()
-
-    /**
-     * See [DoubleArray.toMutableList]
-     */
-    @Suppress("NOTHING_TO_INLINE")
-    public inline fun toMutableList(): MutableList<Double> = values.toMutableList()
 
     /**
      * See [DoubleArray.iterator]

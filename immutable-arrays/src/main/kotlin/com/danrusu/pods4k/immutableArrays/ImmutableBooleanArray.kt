@@ -12,7 +12,6 @@ import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
 import kotlin.collections.Iterator
 import kotlin.collections.List
-import kotlin.collections.MutableList
 import kotlin.jvm.JvmInline
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
@@ -95,12 +94,6 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
      */
     @Suppress("NOTHING_TO_INLINE")
     public inline fun getOrNull(index: Int): Boolean? = values.getOrNull(index)
-
-    /**
-     * See [BooleanArray.getOrElse]
-     */
-    public inline fun getOrElse(index: Int, defaultValue: (index: Int) -> Boolean): Boolean =
-            values.getOrElse(index, defaultValue)
 
     public operator fun component1(): Boolean = get(0)
 
@@ -189,12 +182,6 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
      */
     @Suppress("NOTHING_TO_INLINE")
     public inline fun toList(): List<Boolean> = values.toList()
-
-    /**
-     * See [BooleanArray.toMutableList]
-     */
-    @Suppress("NOTHING_TO_INLINE")
-    public inline fun toMutableList(): MutableList<Boolean> = values.toMutableList()
 
     /**
      * See [BooleanArray.iterator]

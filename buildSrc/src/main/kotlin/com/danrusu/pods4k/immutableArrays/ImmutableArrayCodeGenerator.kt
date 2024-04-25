@@ -19,7 +19,10 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
         addClass(modifiers = listOf(KModifier.VALUE), name = baseType.getGeneratedClass()) {
             addAnnotation(JvmInline::class)
             if (baseType == BaseType.GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
+                val typeName = (baseType.type as TypeVariableName).name
+                addTypeVariable(
+                    TypeVariableName.invoke(typeName, KModifier.OUT)
+                )
             }
             addPrimaryConstructor(baseType)
             addProperty<Int>(name = "size", get = "return values.size")
@@ -43,14 +46,6 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 baseType = baseType,
                 parameters = { "index"<Int>() },
                 returns = baseType.type.copy(nullable = true),
-            )
-            "getOrElse"(
-                baseType = baseType,
-                parameters = {
-                    "index"<Int>()
-                    "defaultValue"(type = lambda(parameters = { "index"<Int>() }, returnType = baseType.type))
-                },
-                returns = baseType.type,
             )
             addComponentNFunctions(baseType)
             "single"(baseType = baseType, returns = baseType.type)
@@ -113,10 +108,6 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             "toList"(
                 baseType = baseType,
                 returns = List::class.asTypeName().parameterizedBy(baseType.type),
-            )
-            "toMutableList"(
-                baseType = baseType,
-                returns = ClassName("kotlin.collections", "MutableList").parameterizedBy(baseType.type),
             )
             "iterator"(
                 baseType = baseType,
