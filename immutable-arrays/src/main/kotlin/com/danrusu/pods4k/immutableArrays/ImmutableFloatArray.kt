@@ -26,8 +26,11 @@ import kotlin.sequences.Sequence
  *
  * In order to preserve the same performance as regular arrays, all methods that delegate to the
  * same method on the backing array are marked with inline so that call sites end up calling the
- * underlying methods directly.
+ * underlying methods directly.  Note that this won't have any negative performance impacts as it
+ * doesn't result in duplicate code or anything as it just replaces the wrapper method call with the
+ * underlying method call.
  */
+@Suppress("NOTHING_TO_INLINE")
 @JvmInline
 public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
@@ -86,26 +89,22 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.isEmpty]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun isEmpty(): Boolean = values.isEmpty()
 
     /**
      * See [FloatArray.isNotEmpty]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun isNotEmpty(): Boolean = values.isNotEmpty()
 
     /**
      * Returns the element at the specified [index]. This method can be called using the index
      * operator.
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline operator fun `get`(index: Int): Float = values[index]
 
     /**
      * See [FloatArray.getOrNull]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun getOrNull(index: Int): Float? = values.getOrNull(index)
 
     public operator fun component1(): Float = get(0)
@@ -121,7 +120,6 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.single]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun single(): Float = values.single()
 
     /**
@@ -133,7 +131,6 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.singleOrNull]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun singleOrNull(): Float? = values.singleOrNull()
 
     /**
@@ -145,7 +142,6 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.first]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun first(): Float = values.first()
 
     /**
@@ -156,7 +152,6 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.firstOrNull]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun firstOrNull(): Float? = values.firstOrNull()
 
     /**
@@ -168,7 +163,6 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.last]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun last(): Float = values.last()
 
     /**
@@ -179,7 +173,6 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.lastOrNull]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun lastOrNull(): Float? = values.lastOrNull()
 
     /**
@@ -191,31 +184,26 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.toList]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun toList(): List<Float> = values.toList()
 
     /**
      * See [FloatArray.iterator]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline operator fun iterator(): Iterator<Float> = values.iterator()
 
     /**
      * See [FloatArray.asIterable]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun asIterable(): Iterable<Float> = values.asIterable()
 
     /**
      * See [FloatArray.withIndex]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun withIndex(): Iterable<IndexedValue<Float>> = values.withIndex()
 
     /**
      * See [FloatArray.asSequence]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun asSequence(): Sequence<Float> = values.asSequence()
 
     /**

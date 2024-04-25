@@ -10,7 +10,6 @@ import com.danrusu.pods4k.utils.createFile
 import com.danrusu.pods4k.utils.suppress
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.KModifier
-import com.squareup.kotlinpoet.LambdaTypeName
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.STAR
 import com.squareup.kotlinpoet.TypeName
@@ -37,9 +36,10 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                     
                     Although this is a class that wraps a regular array, it's really a zero-cost abstraction that gets eliminated at compile time so that variables of this type end up pointing directly at the underlying array.
                     
-                    In order to preserve the same performance as regular arrays, all methods that delegate to the same method on the backing array are marked with inline so that call sites end up calling the underlying methods directly.
+                    In order to preserve the same performance as regular arrays, all methods that delegate to the same method on the backing array are marked with inline so that call sites end up calling the underlying methods directly.  Note that this won't have any negative performance impacts as it doesn't result in duplicate code or anything as it just replaces the wrapper method call with the underlying method call.
                 """.trimIndent()
             )
+            suppress("NOTHING_TO_INLINE")
             addAnnotation(JvmInline::class)
             if (baseType == BaseType.GENERIC) {
                 val typeName = (baseType.type as TypeVariableName).name
@@ -197,11 +197,6 @@ private operator fun String.invoke(
         parameters = parameters,
         returns = returns,
     ) {
-        if (params.none { it.type is LambdaTypeName }) {
-            // Inlining won't introduce negative performance impacts since the current method is a dummy wrapper that
-            // delegates to the same method on the backing array so the instruction cache isn't negatively affected
-            suppress("NOTHING_TO_INLINE")
-        }
         addStatement("return values.${this@invoke}(${params.joinToString { it.name }})")
     }
 }
@@ -297,10 +292,8 @@ private fun TypeSpec.Builder.addArrayIndexOperator(baseType: BaseType) {
         name = "get",
         parameters = { "index"<Int>() },
         returns = baseType.type,
-    ) {
-        suppress("NOTHING_TO_INLINE")
-        addStatement("return values[index]")
-    }
+        code = "return values[index]",
+    )
 }
 
 private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {

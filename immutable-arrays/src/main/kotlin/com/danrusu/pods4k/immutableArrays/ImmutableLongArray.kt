@@ -26,8 +26,11 @@ import kotlin.sequences.Sequence
  *
  * In order to preserve the same performance as regular arrays, all methods that delegate to the
  * same method on the backing array are marked with inline so that call sites end up calling the
- * underlying methods directly.
+ * underlying methods directly.  Note that this won't have any negative performance impacts as it
+ * doesn't result in duplicate code or anything as it just replaces the wrapper method call with the
+ * underlying method call.
  */
+@Suppress("NOTHING_TO_INLINE")
 @JvmInline
 public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
@@ -86,26 +89,22 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.isEmpty]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun isEmpty(): Boolean = values.isEmpty()
 
     /**
      * See [LongArray.isNotEmpty]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun isNotEmpty(): Boolean = values.isNotEmpty()
 
     /**
      * Returns the element at the specified [index]. This method can be called using the index
      * operator.
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline operator fun `get`(index: Int): Long = values[index]
 
     /**
      * See [LongArray.getOrNull]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun getOrNull(index: Int): Long? = values.getOrNull(index)
 
     public operator fun component1(): Long = get(0)
@@ -121,7 +120,6 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.single]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun single(): Long = values.single()
 
     /**
@@ -132,7 +130,6 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.singleOrNull]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun singleOrNull(): Long? = values.singleOrNull()
 
     /**
@@ -144,7 +141,6 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.first]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun first(): Long = values.first()
 
     /**
@@ -155,7 +151,6 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.firstOrNull]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun firstOrNull(): Long? = values.firstOrNull()
 
     /**
@@ -167,7 +162,6 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.last]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun last(): Long = values.last()
 
     /**
@@ -178,7 +172,6 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.lastOrNull]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun lastOrNull(): Long? = values.lastOrNull()
 
     /**
@@ -190,31 +183,26 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.toList]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun toList(): List<Long> = values.toList()
 
     /**
      * See [LongArray.iterator]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline operator fun iterator(): Iterator<Long> = values.iterator()
 
     /**
      * See [LongArray.asIterable]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun asIterable(): Iterable<Long> = values.asIterable()
 
     /**
      * See [LongArray.withIndex]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun withIndex(): Iterable<IndexedValue<Long>> = values.withIndex()
 
     /**
      * See [LongArray.asSequence]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun asSequence(): Sequence<Long> = values.asSequence()
 
     /**

@@ -1,11 +1,20 @@
 package com.danrusu.pods4k.utils
 
+import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.asTypeName
+
+internal fun TypeSpec.Builder.suppress(warning: String): TypeSpec.Builder {
+    return addAnnotation(
+        AnnotationSpec.builder(Suppress::class)
+            .addMember("%S", warning)
+            .build()
+    )
+}
 
 internal inline fun TypeSpec.Builder.addPrimaryConstructor(
     modifiers: List<KModifier> = emptyList(),

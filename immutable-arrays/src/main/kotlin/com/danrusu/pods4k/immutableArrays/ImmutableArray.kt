@@ -26,8 +26,11 @@ import kotlin.sequences.Sequence
  *
  * In order to preserve the same performance as regular arrays, all methods that delegate to the
  * same method on the backing array are marked with inline so that call sites end up calling the
- * underlying methods directly.
+ * underlying methods directly.  Note that this won't have any negative performance impacts as it
+ * doesn't result in duplicate code or anything as it just replaces the wrapper method call with the
+ * underlying method call.
  */
+@Suppress("NOTHING_TO_INLINE")
 @JvmInline
 public value class ImmutableArray<out T> @PublishedApi internal constructor(
     /**
@@ -86,26 +89,22 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     /**
      * See [Array.isEmpty]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun isEmpty(): Boolean = values.isEmpty()
 
     /**
      * See [Array.isNotEmpty]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun isNotEmpty(): Boolean = values.isNotEmpty()
 
     /**
      * Returns the element at the specified [index]. This method can be called using the index
      * operator.
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline operator fun `get`(index: Int): T = values[index]
 
     /**
      * See [Array.getOrNull]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun getOrNull(index: Int): T? = values.getOrNull(index)
 
     public operator fun component1(): T = get(0)
@@ -121,7 +120,6 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     /**
      * See [Array.single]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun single(): T = values.single()
 
     /**
@@ -132,7 +130,6 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     /**
      * See [Array.singleOrNull]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun singleOrNull(): T? = values.singleOrNull()
 
     /**
@@ -144,7 +141,6 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     /**
      * See [Array.first]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun first(): T = values.first()
 
     /**
@@ -155,7 +151,6 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     /**
      * See [Array.firstOrNull]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun firstOrNull(): T? = values.firstOrNull()
 
     /**
@@ -167,7 +162,6 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     /**
      * See [Array.last]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun last(): T = values.last()
 
     /**
@@ -178,7 +172,6 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     /**
      * See [Array.lastOrNull]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun lastOrNull(): T? = values.lastOrNull()
 
     /**
@@ -190,31 +183,26 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     /**
      * See [Array.toList]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun toList(): List<T> = values.toList()
 
     /**
      * See [Array.iterator]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline operator fun iterator(): Iterator<T> = values.iterator()
 
     /**
      * See [Array.asIterable]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun asIterable(): Iterable<T> = values.asIterable()
 
     /**
      * See [Array.withIndex]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun withIndex(): Iterable<IndexedValue<T>> = values.withIndex()
 
     /**
      * See [Array.asSequence]
      */
-    @Suppress("NOTHING_TO_INLINE")
     public inline fun asSequence(): Sequence<T> = values.asSequence()
 
     /**
