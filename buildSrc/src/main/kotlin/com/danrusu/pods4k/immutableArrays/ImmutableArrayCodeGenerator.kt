@@ -1,8 +1,22 @@
 package com.danrusu.pods4k.immutableArrays
 
-import com.danrusu.pods4k.utils.*
-import com.squareup.kotlinpoet.*
+import com.danrusu.pods4k.utils.ParameterDSL
+import com.danrusu.pods4k.utils.addClass
+import com.danrusu.pods4k.utils.addCompanionObject
+import com.danrusu.pods4k.utils.addFunction
+import com.danrusu.pods4k.utils.addPrimaryConstructor
+import com.danrusu.pods4k.utils.addProperty
+import com.danrusu.pods4k.utils.createFile
+import com.danrusu.pods4k.utils.suppress
+import com.squareup.kotlinpoet.FileSpec
+import com.squareup.kotlinpoet.KModifier
+import com.squareup.kotlinpoet.LambdaTypeName
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
+import com.squareup.kotlinpoet.STAR
+import com.squareup.kotlinpoet.TypeName
+import com.squareup.kotlinpoet.TypeSpec
+import com.squareup.kotlinpoet.TypeVariableName
+import com.squareup.kotlinpoet.asTypeName
 import java.io.File
 
 internal object ImmutableArrayCodeGenerator {
@@ -17,6 +31,15 @@ internal object ImmutableArrayCodeGenerator {
 private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
     return createFile(Config.packageName, baseType.generatedClassName) {
         addClass(modifiers = listOf(KModifier.VALUE), name = baseType.getGeneratedClass()) {
+            addKdoc(
+                """
+                    Represents an array that cannot have it's elements re-assigned.
+                    
+                    Although this is a class that wraps a regular array, it's really a zero-cost abstraction that gets eliminated at compile time so that variables of this type end up pointing directly at the underlying array.
+                    
+                    In order to preserve the same performance as regular arrays, all methods that delegate to the same method on the backing array are marked with inline so that call sites end up calling the underlying methods directly.
+                """.trimIndent()
+            )
             addAnnotation(JvmInline::class)
             if (baseType == BaseType.GENERIC) {
                 val typeName = (baseType.type as TypeVariableName).name
@@ -263,13 +286,15 @@ private fun TypeSpec.Builder.overrideHashCode(baseType: BaseType) {
 
 private fun TypeSpec.Builder.addArrayIndexOperator(baseType: BaseType) {
     addFunction(
-        modifiers = listOf(KModifier.OPERATOR),
+        modifiers = listOf(KModifier.INLINE, KModifier.OPERATOR),
         kdoc = "Returns the element at the specified [index]. This method can be called using the index operator.",
         name = "get",
         parameters = { "index"<Int>() },
         returns = baseType.type,
-        code = "return values[index]"
-    )
+    ) {
+        suppress("NOTHING_TO_INLINE")
+        addStatement("return values[index]")
+    }
 }
 
 private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {

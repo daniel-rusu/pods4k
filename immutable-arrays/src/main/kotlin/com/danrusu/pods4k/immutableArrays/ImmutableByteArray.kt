@@ -17,6 +17,17 @@ import kotlin.jvm.JvmInline
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
 
+/**
+ * Represents an array that cannot have it's elements re-assigned.
+ *
+ * Although this is a class that wraps a regular array, it's really a zero-cost abstraction that
+ * gets eliminated at compile time so that variables of this type end up pointing directly at the
+ * underlying array.
+ *
+ * In order to preserve the same performance as regular arrays, all methods that delegate to the
+ * same method on the backing array are marked with inline so that call sites end up calling the
+ * underlying methods directly.
+ */
 @JvmInline
 public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
@@ -88,7 +99,8 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
      * Returns the element at the specified [index]. This method can be called using the index
      * operator.
      */
-    public operator fun `get`(index: Int): Byte = values[index]
+    @Suppress("NOTHING_TO_INLINE")
+    public inline operator fun `get`(index: Int): Byte = values[index]
 
     /**
      * See [ByteArray.getOrNull]
