@@ -18,7 +18,7 @@ import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
 
 /**
- * Represents an array that cannot have it's elements re-assigned.
+ * Represents an array that cannot have its elements re-assigned.
  *
  * Although this is a class that wraps a regular array, it's really a zero-cost abstraction that
  * gets eliminated at compile time so that variables of this type end up pointing directly at the
@@ -48,19 +48,19 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     @PublishedApi
     internal val values: DoubleArray,
 ) {
-    public val size: Int
+    public inline val size: Int
         get() = values.size
 
     /**
      * Returns the index of the last element or -1 if the array is empty.
      */
-    public val lastIndex: Int
-        get() = values.size - 1
+    public inline val lastIndex: Int
+        get() = values.lastIndex
 
     /**
      * Returns the range of valid indices for the array.
      */
-    public val indices: IntRange
+    public inline val indices: IntRange
         get() = values.indices
 
     override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")

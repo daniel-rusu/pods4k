@@ -33,7 +33,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
         addClass(modifiers = listOf(KModifier.VALUE), name = baseType.getGeneratedClass()) {
             addKdoc(
                 """
-                    Represents an array that cannot have it's elements re-assigned.
+                    Represents an array that cannot have its elements re-assigned.
                     
                     Although this is a class that wraps a regular array, it's really a zero-cost abstraction that gets eliminated at compile time so that variables of this type end up pointing directly at the underlying array.
                     
@@ -48,15 +48,21 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 )
             }
             addPrimaryConstructor(baseType)
-            addProperty<Int>(name = "size", get = "return values.size")
+            addProperty<Int>(
+                name = "size",
+                getModifiers = listOf(KModifier.INLINE),
+                get = "return values.size"
+            )
             addProperty<Int>(
                 kdoc = "Returns the index of the last element or -1 if the array is empty.",
                 name = "lastIndex",
-                get = "return values.size - 1",
+                getModifiers = listOf(KModifier.INLINE),
+                get = "return values.lastIndex",
             )
             addProperty<IntRange>(
                 kdoc = "Returns the range of valid indices for the array.",
                 name = "indices",
+                getModifiers = listOf(KModifier.INLINE),
                 get = "return values.indices",
             )
             overrideToString()

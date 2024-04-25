@@ -1,6 +1,11 @@
 package com.danrusu.pods4k.utils
 
-import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.FunSpec
+import com.squareup.kotlinpoet.KModifier
+import com.squareup.kotlinpoet.PropertySpec
+import com.squareup.kotlinpoet.TypeName
+import com.squareup.kotlinpoet.TypeSpec
+import com.squareup.kotlinpoet.asTypeName
 
 internal inline fun TypeSpec.Builder.addPrimaryConstructor(
     modifiers: List<KModifier> = emptyList(),
@@ -25,10 +30,11 @@ internal inline fun <reified T : Any> TypeSpec.Builder.addProperty(
     modifiers: List<KModifier> = emptyList(),
     name: String,
     init: String? = null,
+    getModifiers: List<KModifier> = emptyList(),
     get: String? = null,
     body: PropertySpec.Builder.() -> Unit = {},
 ): TypeSpec.Builder {
-    return addProperty(kdoc, modifiers, name, type = T::class.asTypeName(), init, get, body)
+    return addProperty(kdoc, modifiers, name, type = T::class.asTypeName(), init, getModifiers, get, body)
 }
 
 internal inline fun TypeSpec.Builder.addProperty(
@@ -37,6 +43,7 @@ internal inline fun TypeSpec.Builder.addProperty(
     name: String,
     type: TypeName,
     init: String? = null,
+    getModifiers: List<KModifier> = emptyList(),
     get: String? = null,
     body: PropertySpec.Builder.() -> Unit = {},
 ): TypeSpec.Builder {
@@ -44,7 +51,14 @@ internal inline fun TypeSpec.Builder.addProperty(
         PropertySpec.builder(name, type, modifiers).apply {
             kdoc?.let { addKdoc(it) }
             init?.let { initializer(it) }
-            get?.let { getter(FunSpec.getterBuilder().addStatement(get).build()) }
+            get?.let {
+                getter(
+                    FunSpec.getterBuilder()
+                        .addModifiers(getModifiers)
+                        .addStatement(get)
+                        .build()
+                )
+            }
             body()
         }.build()
     )
