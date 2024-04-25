@@ -41,19 +41,20 @@ collector periodically moves surviving objects around, so we can end up with the
 <details>
 <summary>Memory Impacts</summary>
 
-Notice that the list contains 7 values but the backing array has a size of 10 with 3 null elements.  `ArrayList` starts
-with a default capacity of 10. As elements pass the filter criteria and get added to the array, if the backing array
-becomes full, a new array that's 1.5 times larger is created and the elements are copied over. On average, array lists
-end up with about 17% of unused capacity when the exact resulting size isn't known ahead of time.
+1. Notice that the list contains 7 values but the backing array has a size of 10 with 3 null elements.  `ArrayList`
+   starts with a default capacity of 10. As elements pass the filter criteria and get added to the array, if the backing
+   array becomes full, a new array that's 1.5 times larger is created and the elements are copied over. On average,
+   array lists end up with about 17% of unused capacity when the exact resulting size isn't known ahead of time.
 
-Although a 32-bit integer needs just 4 bytes to represent the value, in a typical 64-bit JVM environment, an `Integer`
-wrapper object requires 16 bytes for the object header, 4 bytes for the actual integer value, plus another 4 bytes of
-padding totalling 24 bytes. If we enable pointer compression, we can reduce this down to 16 bytes per wrapper.
+2. Although a 32-bit integer needs just 4 bytes to represent the value, in a typical 64-bit JVM environment,
+   an `Integer` wrapper object requires 16 bytes for the object header, 4 bytes for the actual integer value, plus
+   another 4 bytes of padding totalling 24 bytes. If we enable pointer compression, we can reduce this down to 16 bytes
+   per wrapper.
 
-In addition to the size of the `Integer` wrapper objects, the backing array stores pointers to the memory address of
-each of these wrappers. So ignoring the memory overhead of the list object and ignoring the unused over-provisioned
-spots, we need 32 bytes to store each 4-byte integer value!  With pointer compression, we can reduce this down to 20
-bytes for each 4-byte integer but that's still a 5X increase in memory!
+3. In addition to the size of the `Integer` wrapper objects, the backing array stores pointers to the memory address of
+   each of these wrappers. So ignoring the memory overhead of the list object and ignoring the unused over-provisioned
+   spots, we need 32 bytes to store each 4-byte integer value!  With pointer compression, we can reduce this down to 20
+   bytes for each 4-byte integer but that's still a 5X increase in memory!
 
 </details>
 
@@ -68,7 +69,7 @@ scenes (note that this is a simplified explanation of the main steps):
 3. Fetch the memory at the address specified by the `elementData` variable from the `ArrayList` class to load the
    backing array object.
 4. Ensure that `index` is smaller than the array size. This second check is enforced by the JVM for array accesses.
-5. Compute the address of the address for that element into the array (ie. `offset + elementSize * index`)
+5. Compute the array address of that element into the array (ie. `offset + elementSize * index`)
 6. Fetch the memory at that computed location into the array, interpreting it as a pointer, and return that pointer
    back up the chain to the caller of `readOnlyList.get(index)`.
 7. Fetch the memory specified by that pointer to get the `Integer` wrapper object.
@@ -117,10 +118,10 @@ Immutable arrays can be safely shared resulting in cleaner and more efficient co
 </details>
 
 <details>
-<summary>Efficient transformations</summary>
+<summary>Efficient operations</summary>
 
 Regular arrays are usually chosen for memory or performance reasons, however these benefits are negated when performing
-dozens of typical transformations:
+dozens of typical operations:
 
 ```kotlin
 val weights = doubleArrayOf(1.5, 3.0, 10.2, 15.7, 2.0)
@@ -151,7 +152,6 @@ be added in future releases):
 * mapIndexed
 * flatMap
 * flatMapIndexed
-* groupBy
 * filter
 * filterIndexed
 * filterNot
@@ -226,7 +226,7 @@ val values = immutableArrayOf(1, 2, 3)
 values[0] = 2 // Compiler error: No set method providing array access
 
 @Suppress("CAST_NEVER_SUCCEEDS")
-(values as IntArray)[1] = "Jane"
+(values as IntArray)[0] = 100
 // ClassCastException: ImmutableIntArray cannot be cast to [I
 ```
 
@@ -337,7 +337,7 @@ Here are some examples to get a better idea of where auto-boxing occurs:
 val names = immutableArrayOf("Dan", "Bob") // no auto-boxing.  `names` references the underlying array directly.
 
 with(names) { // no auto-boxing because `with` is an inline function so the generic parameter disappears at compile time
-    println(this.size) // `this` refers to the immutable array
+    println(this.size)
 }
 
 names as Any // casting induces auto-boxing.  This prevents any backdoor to the underlying array 
