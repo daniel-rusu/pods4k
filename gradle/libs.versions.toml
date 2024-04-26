@@ -4,9 +4,13 @@ jUnit = "5.10.2" # https://github.com/junit-team/junit5
 jUnitPlatformLauncher = "1.10.2" # https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
 kotlinPoet = "1.16.0" # https://github.com/square/kotlinpoet
 strikt = "0.34.1" # https://github.com/robfletcher/strikt/releases/latest
+gradleMavenPublishPlugin = "0.28.0" # https://github.com/vanniktech/gradle-maven-publish-plugin
 
 [libraries]
 jUnit = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jUnit" }
 jUnitPlatformLauncher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "jUnitPlatformLauncher" }
 kotlinPoet = { module = "com.squareup:kotlinpoet", version.ref = "kotlinPoet" }
 strikt = { module = "io.strikt:strikt-core", version.ref = "strikt" }
+
+[plugins]
+mavenPublishing = { id = "com.vanniktech.maven.publish", version.ref = "gradleMavenPublishPlugin" }
