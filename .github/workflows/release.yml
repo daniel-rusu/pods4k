@@ -2,6 +2,9 @@ name: Trigger Release
 
 on:
   workflow_dispatch:
+  release:
+    # We'll run this workflow when a new GitHub release is created
+    types: [ released ]
 
 jobs:
   publish_archives:
