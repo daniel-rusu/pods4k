@@ -8,9 +8,6 @@ plugins {
 }
 
 allprojects {
-    group = "com.danrusu.pods4k"
-    version = "0.5.1"//"0.6.0-SNAPSHOT"
-
     repositories {
         mavenCentral()
     }
