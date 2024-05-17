@@ -3,6 +3,7 @@ Change Log
 
 ## Unreleased
 
+### Immutable Arrays
 * New: Add declaration-site variance so that a variable of type ImmutableArray\<Parent> can accept an
   ImmutableArray\<Child> when Child extends Parent
 * New: Add equals & hashCode methods
@@ -44,5 +45,3 @@ Change Log
 * New: Add size property
 * New: Add invoke factory function
 * New: Create ImmutableArray + 8 variants for each primitive type
-* New: Create gradle plugin to auto-generate the code and ensure that all immutable array types remain in sync with
-  identical behavior
