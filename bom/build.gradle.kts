@@ -1,20 +1,32 @@
-import com.vanniktech.maven.publish.SonatypeHost
-
 plugins {
-    kotlin("jvm") version libs.versions.kotlin
+    id("java-platform")
     alias(libs.plugins.mavenPublishing)
 }
 
+javaPlatform {
+    allowDependencies()
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    constraints {
+        api(project(":immutable-arrays"))
+    }
+}
+
 mavenPublishing {
-    coordinates(artifactId = "immutable-arrays")
-    publishToMavenCentral(host = SonatypeHost.CENTRAL_PORTAL, automaticRelease = false)
+    coordinates(artifactId = "bom")
+    publishToMavenCentral(host = com.vanniktech.maven.publish.SonatypeHost.CENTRAL_PORTAL, automaticRelease = false)
     signAllPublications()
 
     pom {
-        name = "immutable-arrays"
-        description = "Immutable Arrays for Kotlin"
+        name = "bom"
+        description = "Bill of materials for pods4k allowing for a single dependency"
         inceptionYear = "2024"
-        url = "https://github.com/daniel-rusu/pods4k/tree/main/immutable-arrays"
+        url = "https://github.com/daniel-rusu/pods4k"
 
         licenses {
             license {
