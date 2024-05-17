@@ -13,6 +13,6 @@ repositories {
 
 dependencies {
     constraints {
-        api(project(":immutable-arrays"))
+        api(projects.immutableArrays)
     }
 }
