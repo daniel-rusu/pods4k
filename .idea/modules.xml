@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/immutable-arrays-to-standard-collections/pods4k.immutable-arrays-to-standard-collections.test.iml" filepath="$PROJECT_DIR$/.idea/modules/immutable-arrays-to-standard-collections/pods4k.immutable-arrays-to-standard-collections.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/immutable-arrays/core/pods4k.immutable-arrays.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/immutable-arrays/core/pods4k.immutable-arrays.core.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/immutable-arrays/core/pods4k.immutable-arrays.core.test.iml" filepath="$PROJECT_DIR$/.idea/modules/immutable-arrays/core/pods4k.immutable-arrays.core.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/immutable-arrays/pods4k.immutable-arrays.main.iml" filepath="$PROJECT_DIR$/.idea/modules/immutable-arrays/pods4k.immutable-arrays.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/immutable-arrays/transformations-to-standard-collections/pods4k.immutable-arrays.transformations-to-standard-collections.main.iml" filepath="$PROJECT_DIR$/.idea/modules/immutable-arrays/transformations-to-standard-collections/pods4k.immutable-arrays.transformations-to-standard-collections.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/immutable-arrays/transformations-to-standard-collections/pods4k.immutable-arrays.transformations-to-standard-collections.test.iml" filepath="$PROJECT_DIR$/.idea/modules/immutable-arrays/transformations-to-standard-collections/pods4k.immutable-arrays.transformations-to-standard-collections.test.iml" />
     </modules>
   </component>
 </project>

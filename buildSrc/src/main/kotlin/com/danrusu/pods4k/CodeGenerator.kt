@@ -23,8 +23,9 @@ public open class CodeGenerator : Plugin<Project> {
 }
 
 private fun generateImmutableArraysModule(target: Project) {
-    val moduleSourcePath = target.childProjects["immutable-arrays"]!!.projectDir.absolutePath +
-            "/src/main/kotlin"
+    val moduleSourcePath = target.childProjects["immutable-arrays"]!!
+        .childProjects["core"]!!
+        .projectDir.absolutePath + "/src/main/kotlin"
 
     ImmutableArrayCodeGenerator.generate(destinationPath = moduleSourcePath)
     ImmutableArraysFileGenerator.generate(destinationPath = moduleSourcePath)
@@ -34,7 +35,8 @@ private fun generateImmutableArraysModule(target: Project) {
 }
 
 private fun generateImmutableArraysToStandardCollectionsModule(target: Project) {
-    val moduleSourcePath = target.childProjects["immutable-arrays-to-standard-collections"]!!
+    val moduleSourcePath = target.childProjects["immutable-arrays"]!!
+        .childProjects["transformations-to-standard-collections"]!!
         .projectDir.absolutePath + "/src/main/kotlin"
 
     TransformationsToListFileGenerator.generate(moduleSourcePath)

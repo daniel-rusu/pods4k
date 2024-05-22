@@ -1,5 +1,10 @@
 package com.danrusu.pods4k.immutableArrays
 
+import com.danrusu.pods4k.immutableArrays.ImmutableArray
+import com.danrusu.pods4k.immutableArrays.ImmutableBooleanArray
+import com.danrusu.pods4k.immutableArrays.ImmutableIntArray
+import com.danrusu.pods4k.immutableArrays.toImmutableArray
+import com.danrusu.pods4k.immutableArrays.toImmutableIntArray
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isA

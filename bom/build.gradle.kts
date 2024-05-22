@@ -13,7 +13,7 @@ repositories {
 
 dependencies {
     constraints {
-        api(projects.immutableArrays)
-        api(projects.immutableArraysToStandardCollections)
+        api(projects.immutableArrays.core)
+        api(projects.immutableArrays.transformationsToStandardCollections)
     }
 }

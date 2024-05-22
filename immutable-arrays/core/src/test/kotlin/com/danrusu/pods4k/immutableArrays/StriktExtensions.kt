@@ -1,5 +1,14 @@
 package com.danrusu.pods4k.immutableArrays
 
+import com.danrusu.pods4k.immutableArrays.ImmutableArray
+import com.danrusu.pods4k.immutableArrays.ImmutableBooleanArray
+import com.danrusu.pods4k.immutableArrays.ImmutableByteArray
+import com.danrusu.pods4k.immutableArrays.ImmutableCharArray
+import com.danrusu.pods4k.immutableArrays.ImmutableDoubleArray
+import com.danrusu.pods4k.immutableArrays.ImmutableFloatArray
+import com.danrusu.pods4k.immutableArrays.ImmutableIntArray
+import com.danrusu.pods4k.immutableArrays.ImmutableLongArray
+import com.danrusu.pods4k.immutableArrays.ImmutableShortArray
 import strikt.api.Assertion
 
 @JvmName("immutableArray_containsExactly")
