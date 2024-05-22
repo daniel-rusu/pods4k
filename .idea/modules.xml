@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/immutable-arrays-to-standard-collections/pods4k.immutable-arrays-to-standard-collections.test.iml" filepath="$PROJECT_DIR$/.idea/modules/immutable-arrays-to-standard-collections/pods4k.immutable-arrays-to-standard-collections.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/immutable-arrays/pods4k.immutable-arrays.main.iml" filepath="$PROJECT_DIR$/.idea/modules/immutable-arrays/pods4k.immutable-arrays.main.iml" />
     </modules>
   </component>

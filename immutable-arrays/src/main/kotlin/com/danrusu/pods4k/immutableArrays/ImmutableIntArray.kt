@@ -11,7 +11,6 @@ import kotlin.Unit
 import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
 import kotlin.collections.Iterator
-import kotlin.collections.List
 import kotlin.jvm.JvmInline
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
@@ -178,11 +177,6 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
      */
     public inline fun lastOrNull(predicate: (element: Int) -> Boolean): Int? =
             values.lastOrNull(predicate)
-
-    /**
-     * See [IntArray.toList]
-     */
-    public inline fun toList(): List<Int> = values.toList()
 
     /**
      * See [IntArray.iterator]

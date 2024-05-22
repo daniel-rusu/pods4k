@@ -3,7 +3,14 @@ package com.danrusu.pods4k.immutableArrays
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.api.expectThrows
-import strikt.assertions.*
+import strikt.assertions.isA
+import strikt.assertions.isEqualTo
+import strikt.assertions.isFalse
+import strikt.assertions.isNotEqualTo
+import strikt.assertions.isNull
+import strikt.assertions.isTrue
+import strikt.assertions.message
+import kotlin.collections.set
 
 private val primitiveIntClass = 3::class.java
 
@@ -386,20 +393,6 @@ class ImmutableIntArrayTest {
             expectThat(
                 this.lastOrNull { it > 0 && it % 7 == 0 }
             ).isNull()
-        }
-    }
-
-    @Test
-    fun `toList validation`() {
-        with(ImmutableIntArray(3) { it }) {
-            expectThat(this.toList()).isEqualTo(listOf(0, 1, 2))
-        }
-    }
-
-    @Test
-    fun `toMutableList validation`() {
-        with(ImmutableIntArray(3) { it }) {
-            expectThat(this.toMutableList()).isEqualTo(mutableListOf(0, 1, 2))
         }
     }
 

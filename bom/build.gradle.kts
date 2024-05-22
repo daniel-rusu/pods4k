@@ -14,5 +14,6 @@ repositories {
 dependencies {
     constraints {
         api(projects.immutableArrays)
+        api(projects.immutableArraysToStandardCollections)
     }
 }

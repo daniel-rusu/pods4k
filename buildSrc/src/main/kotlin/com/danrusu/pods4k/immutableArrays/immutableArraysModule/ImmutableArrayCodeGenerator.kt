@@ -1,5 +1,7 @@
-package com.danrusu.pods4k.immutableArrays
+package com.danrusu.pods4k.immutableArrays.immutableArraysModule
 
+import com.danrusu.pods4k.immutableArrays.BaseType
+import com.danrusu.pods4k.immutableArrays.Config
 import com.danrusu.pods4k.utils.ParameterDSL
 import com.danrusu.pods4k.utils.addClass
 import com.danrusu.pods4k.utils.addCompanionObject
@@ -133,10 +135,6 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                     "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
                 },
                 returns = baseType.type.copy(nullable = true)
-            )
-            "toList"(
-                baseType = baseType,
-                returns = List::class.asTypeName().parameterizedBy(baseType.type),
             )
             "iterator"(
                 baseType = baseType,

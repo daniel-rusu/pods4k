@@ -3,7 +3,14 @@ package com.danrusu.pods4k.immutableArrays
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.api.expectThrows
-import strikt.assertions.*
+import strikt.assertions.isA
+import strikt.assertions.isEqualTo
+import strikt.assertions.isFalse
+import strikt.assertions.isNotEqualTo
+import strikt.assertions.isNull
+import strikt.assertions.isTrue
+import strikt.assertions.message
+import kotlin.collections.set
 
 private data class Person(val id: Int)
 
@@ -371,20 +378,6 @@ class ImmutableArrayTest {
         }
         with(ImmutableArray(3) { "element $it" }) {
             expectThat(this.lastOrNull()).isEqualTo("element 2")
-        }
-    }
-
-    @Test
-    fun `toList validation`() {
-        with(ImmutableArray(3) { "element $it" }) {
-            expectThat(this.toList()).isEqualTo(listOf("element 0", "element 1", "element 2"))
-        }
-    }
-
-    @Test
-    fun `toMutableList validation`() {
-        with(ImmutableArray(3) { "element $it" }) {
-            expectThat(this.toMutableList()).isEqualTo(mutableListOf("element 0", "element 1", "element 2"))
         }
     }
 

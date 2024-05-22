@@ -10,7 +10,6 @@ import kotlin.Int
 import kotlin.Long
 import kotlin.Short
 import kotlin.Suppress
-import kotlin.collections.MutableList
 
 /**
  * Returns an empty [ImmutableArray].
@@ -260,61 +259,6 @@ public fun ImmutableFloatArray.toTypedImmutableArray(): ImmutableArray<Float> =
  */
 public fun ImmutableDoubleArray.toTypedImmutableArray(): ImmutableArray<Double> =
         ImmutableArray(size) { this[it] }
-
-/**
- * See [Array.toMutableList]
- */
-@Suppress("NOTHING_TO_INLINE")
-public inline fun <T> ImmutableArray<T>.toMutableList(): MutableList<T> = values.toMutableList()
-
-/**
- * See [Array.toMutableList]
- */
-@Suppress("NOTHING_TO_INLINE")
-public inline fun ImmutableBooleanArray.toMutableList(): MutableList<Boolean> =
-        values.toMutableList()
-
-/**
- * See [Array.toMutableList]
- */
-@Suppress("NOTHING_TO_INLINE")
-public inline fun ImmutableByteArray.toMutableList(): MutableList<Byte> = values.toMutableList()
-
-/**
- * See [Array.toMutableList]
- */
-@Suppress("NOTHING_TO_INLINE")
-public inline fun ImmutableCharArray.toMutableList(): MutableList<Char> = values.toMutableList()
-
-/**
- * See [Array.toMutableList]
- */
-@Suppress("NOTHING_TO_INLINE")
-public inline fun ImmutableShortArray.toMutableList(): MutableList<Short> = values.toMutableList()
-
-/**
- * See [Array.toMutableList]
- */
-@Suppress("NOTHING_TO_INLINE")
-public inline fun ImmutableIntArray.toMutableList(): MutableList<Int> = values.toMutableList()
-
-/**
- * See [Array.toMutableList]
- */
-@Suppress("NOTHING_TO_INLINE")
-public inline fun ImmutableLongArray.toMutableList(): MutableList<Long> = values.toMutableList()
-
-/**
- * See [Array.toMutableList]
- */
-@Suppress("NOTHING_TO_INLINE")
-public inline fun ImmutableFloatArray.toMutableList(): MutableList<Float> = values.toMutableList()
-
-/**
- * See [Array.toMutableList]
- */
-@Suppress("NOTHING_TO_INLINE")
-public inline fun ImmutableDoubleArray.toMutableList(): MutableList<Double> = values.toMutableList()
 
 /**
  * See [Array.getOrElse]

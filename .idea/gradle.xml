@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/bom" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/immutable-arrays" />
+            <option value="$PROJECT_DIR$/immutable-arrays-to-standard-collections" />
           </set>
         </option>
       </GradleProjectSettings>

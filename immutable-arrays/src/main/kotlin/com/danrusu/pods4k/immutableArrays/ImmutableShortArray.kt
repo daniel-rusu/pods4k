@@ -12,7 +12,6 @@ import kotlin.Unit
 import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
 import kotlin.collections.Iterator
-import kotlin.collections.List
 import kotlin.jvm.JvmInline
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
@@ -180,11 +179,6 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
      */
     public inline fun lastOrNull(predicate: (element: Short) -> Boolean): Short? =
             values.lastOrNull(predicate)
-
-    /**
-     * See [ShortArray.toList]
-     */
-    public inline fun toList(): List<Short> = values.toList()
 
     /**
      * See [ShortArray.iterator]

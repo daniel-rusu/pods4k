@@ -12,7 +12,6 @@ import kotlin.Unit
 import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
 import kotlin.collections.Iterator
-import kotlin.collections.List
 import kotlin.jvm.JvmInline
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
@@ -181,11 +180,6 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
      */
     public inline fun lastOrNull(predicate: (element: Double) -> Boolean): Double? =
             values.lastOrNull(predicate)
-
-    /**
-     * See [DoubleArray.toList]
-     */
-    public inline fun toList(): List<Double> = values.toList()
 
     /**
      * See [DoubleArray.iterator]

@@ -1,5 +1,7 @@
-package com.danrusu.pods4k.immutableArrays
+package com.danrusu.pods4k.immutableArrays.immutableArraysModule
 
+import com.danrusu.pods4k.immutableArrays.BaseType
+import com.danrusu.pods4k.immutableArrays.Config
 import com.danrusu.pods4k.utils.addFunction
 import com.danrusu.pods4k.utils.createFile
 import com.squareup.kotlinpoet.FileSpec

@@ -12,7 +12,6 @@ import kotlin.Unit
 import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
 import kotlin.collections.Iterator
-import kotlin.collections.List
 import kotlin.jvm.JvmInline
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
@@ -179,11 +178,6 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
      */
     public inline fun lastOrNull(predicate: (element: Long) -> Boolean): Long? =
             values.lastOrNull(predicate)
-
-    /**
-     * See [LongArray.toList]
-     */
-    public inline fun toList(): List<Long> = values.toList()
 
     /**
      * See [LongArray.iterator]
