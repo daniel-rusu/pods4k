@@ -326,32 +326,42 @@ at compile time to operate directly on the underlying array without any auto-box
 
 In order to avoid representing its identity as the identity of the underlying array, the Kotlin compiler adds additional
 instructions everywhere the immutable array is interpreted as a generic type, or by a supertype like `Any` or `Any?`. In
-these scenarios, the immutable array is auto-boxed into a tiny wrapper object which stores a single reference to the
+these scenarios, the immutable array is auto-boxed into a single tiny wrapper object which stores a reference to the
 actual array and that wrapper object is passed along. However, generic functions that are marked with the `inline`
 modifier, such as `with` from the Kotlin standard library, don't induce auto-boxing because the function is inlined into
 each call site replacing the generic with the actual type.
 
+Note that using reflection to traverse the object graph, reflective code will encounter the underlying array directly
+without any wrapper except for the auto-boxing scenarios in which case it will encounter the wrapper that contains the
+underlying array.
+
 Here are some examples to get a better idea of where auto-boxing occurs:
 
 ```kotlin
-val names = immutableArrayOf("Dan", "Bob") // no auto-boxing.  `names` references the underlying array directly.
+// no auto-boxing.  `names` references the underlying array directly
+val names = immutableArrayOf("Dan", "Bob")
 
-with(names) { // no auto-boxing because `with` is an inline function so the generic parameter disappears at compile time
+// no auto-boxing because `with` is an inline function so the generic parameter disappears at compile time
+with(names) {
     println(this.size)
 }
 
-names as Any // casting induces auto-boxing.  This prevents any backdoor to the underlying array 
-println(names) // auto-boxing since println accepts a variable of type Any
+// casting induces auto-boxing.  This prevents any backdoor to the underlying array 
+names as Any
+
+// auto-boxing since println accepts a variable of type Any
+println(names)
 
 // Even though we're explicitly specifying the ImmutableArray type as the generic type, remember that the ArrayList 
 // class itself isn't hardcoded to work with immutable arrays
 val arrays = ArrayList<ImmutableArray<String>>()
 arrays += names // auto-boxing due to generics
 
-names.genericExtensionFunction() // auto-boxing due to generic receiver
+// auto-boxing due to generic receiver
+names.genericExtensionFunction()
 
 fun <T> T.genericExtensionFunction() {
-    println(this)
+    ...
 }
 ```
 
