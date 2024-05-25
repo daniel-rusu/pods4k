@@ -2,27 +2,49 @@
 
 ## Performance-oriented data structures for Kotlin
 
-A collection of performance-oriented data structures that provide performance and efficiency that might appear to be
+A collection of performance-oriented data structures providing performance and efficiency that might appear to be
 impossible at first glance.
+
+## Dependency
+
+**Gradle:**
+
+```kotlin
+dependencies {
+    implementation("com.danrusu:pods4k:[version]")
+}
+```
+
+**Maven:**
+
+```xml
+
+<dependency>
+    <groupId>com.danrusu</groupId>
+    <artifactId>pods4k</artifactId>
+    <version>[version]</version>
+</dependency>
+```
 
 ## Immutable Arrays
 
-[Immutable Arrays](immutable-arrays/README.md) wrap regular arrays with zero-cost abstractions that get eliminated at
-compile-time. However, unlike
-standard arrays, the array elements cannot be re-assigned, so immutable arrays can be safely shared without needing to
-be wrapped in immutable collections:
+[Immutable Arrays](immutable-arrays/README.md) are a safer and more efficient alternative to read-only lists while
+maintaining familiar operations.
+
+Unlike regular arrays, the elements cannot be re-assigned, so immutable arrays can be safely shared without needing
+immutable collections:
 
 ```kotlin
 val names = immutableArrayOf("Dan", "Bob")
-println(names[0]) // Dan
+println(names[0]) // "Dan"
 
 names[1] = "Jane" // Compile error: No set method providing array access
 ```
 
-On top of the base efficiency improvements over immutable or read-only lists when storing typical generic types,
-immutable arrays are even more efficient when dealing with the 8 primitive types. For example, when storing integers,
-this reduces memory consumption by 5 to 8 times depending on how the JVM is configured and performance can improve by
-over 10 times when performing operations on these values in tight loops:
+On top of the base efficiency improvements, immutable arrays are even more efficient when dealing with the 8 base
+types such as Int, Boolean, etc. For example, depending on your JVM configuration, when storing integers, this reduces
+memory consumption by 5 to 8 times compared to lists and performance can improve by over 10 times when performing
+operations on these values.
 
 ```kotlin
 val people = immutableArrayOf(
