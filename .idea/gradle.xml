@@ -17,6 +17,8 @@
             <option value="$PROJECT_DIR$/immutable-arrays" />
             <option value="$PROJECT_DIR$/immutable-arrays/core" />
             <option value="$PROJECT_DIR$/immutable-arrays/transformations-to-standard-collections" />
+            <option value="$PROJECT_DIR$/publishing" />
+            <option value="$PROJECT_DIR$/publishing/aggregator" />
           </set>
         </option>
       </GradleProjectSettings>
