@@ -3,14 +3,6 @@ plugins {
     alias(libs.plugins.mavenPublishing)
 }
 
-javaPlatform {
-    allowDependencies()
-}
-
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     constraints {
         api(projects.immutableArrays.core)

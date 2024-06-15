@@ -11,7 +11,7 @@ impossible at first glance.
 
 ```kotlin
 dependencies {
-    implementation("com.danrusu:pods4k:[version]")
+    implementation("com.danrusu.pods4k:pods4k:[version]")
 }
 ```
 
@@ -20,7 +20,7 @@ dependencies {
 ```xml
 
 <dependency>
-    <groupId>com.danrusu</groupId>
+    <groupId>com.danrusu.pods4k</groupId>
     <artifactId>pods4k</artifactId>
     <version>[version]</version>
 </dependency>
