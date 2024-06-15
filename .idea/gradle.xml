@@ -12,13 +12,13 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/bom" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/immutable-arrays" />
             <option value="$PROJECT_DIR$/immutable-arrays/core" />
             <option value="$PROJECT_DIR$/immutable-arrays/transformations-to-standard-collections" />
             <option value="$PROJECT_DIR$/publishing" />
             <option value="$PROJECT_DIR$/publishing/aggregator" />
+            <option value="$PROJECT_DIR$/publishing/bom" />
           </set>
         </option>
       </GradleProjectSettings>
