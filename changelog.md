@@ -3,7 +3,12 @@ Change Log
 
 ## Unreleased
 
+## 0.1.0
+
+_2024-06-16_
+
 ### Immutable Arrays
+
 * New: Add declaration-site variance so that a variable of type ImmutableArray\<Parent> can accept an
   ImmutableArray\<Child> when Child extends Parent
 * New: Add equals & hashCode methods
