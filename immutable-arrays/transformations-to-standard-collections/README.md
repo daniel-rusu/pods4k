@@ -14,5 +14,7 @@ more efficient manner.
 
 If we ever decide to use non-standard collections for these transformations in the future, that ability would be added
 in a separate module to provide an easy upgrade path. This would allow users that prefer to continue using standard
-collections to configure the appropriate dependencies without needing to modify their code. There are no plans for using
-different collections at the moment so this approach is just a precaution to reduce future backward-compatibility risk.
+collections to configure the appropriate dependencies without needing to modify their code.
+
+Note that there are no plans for using different collection libraries at the moment so this approach is just a
+precaution to reduce backward-compatibility risk.

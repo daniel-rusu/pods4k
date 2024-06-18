@@ -121,7 +121,8 @@ Performing some operation that results in an `ImmutableIntArray` ends up with th
 
 ![Memory Layout of immutable arrays](src/main/resources/immutable-array-memory-layout.drawio.png)
 
-Note that the `values` variable of type `ImmutableIntArray` actually references a regular primitive int array.
+Note that the `values` variable of type `ImmutableIntArray` actually references a regular primitive int array in the
+bytecode.
 
 Here is the same example but operating on a regular primitive array and ending up with a read-only list:
 
@@ -137,7 +138,7 @@ collector periodically moves surviving objects around, so we can end up with the
 1. Notice that the list contains 7 values but the backing array has a size of 10 with 3 null elements.  `ArrayList`
    starts with a default capacity of 10. As elements pass the filter criteria and get added to the array, if the backing
    array becomes full, a new array that's 1.5 times larger is created and the elements are copied over. On average,
-   array lists end up with about 17% of unused capacity when the exact resulting size isn't known ahead of time.
+   array lists end up with about 17% of unused capacity when the exact size isn't known ahead of time.
 
 2. Although a 32-bit integer needs just 4 bytes to represent the value, in a typical 64-bit JVM environment,
    an `Integer` wrapper object requires 16 bytes for the object header, 4 bytes for the actual integer value, plus
@@ -174,12 +175,12 @@ loops and performing operations on primitive values performs very poorly on mode
 these values are scattered throughout memory resulting in very poor cache locality.
 
 Fetching data from main memory can take several hundred cycles on modern CPU architectures. The CPU tries to minimize
-this latency by predicting addresses that will be fetched and pre-fetches data from those locations before they're
-actually requested. When these guesses are incorrect, that pre-fetched data is ignored and the values need to be loaded
-from the correct address in main memory. Iterating through a primitive array is a best-case scenario as the CPU will
-fetch the initial element along with neighboring elements so that subsequent elements are already loaded by the time we
-request them. However, the CPU pre-fetcher has a tough time predicting the address of scattered data so this can have a
-large impact on performance.
+this latency by fetching in bulk and predicting addresses that will be requested to pre-fetches data before it's
+actually requested. Iterating through a primitive array is predictable as they are stored in a contiguous block of
+memory. With primitive arrays, the CPU will fetch the initial element along with neighboring elements, so subsequent
+elements are already loaded in the much quicker CPU caches by the time they're requested. However, the CPU pre-fetcher
+has a tough time predicting the address of scattered memory requiring several hundred extra cycles to access each new
+element if that hasn't already been fetched.
 
 To get an idea of the potential performance impact of wrapper objects, Java Language Architect, Brian Goetz, ran some
 benchmarks replacing reference carriers with values as part of project Valhalla exploration. Brian found performance
@@ -206,8 +207,8 @@ println(arrayOf("Dan", "Bob")) // [Ljava.lang.String;@7d4991ad  Yuck!
 <details>
 <summary>Efficient sharing of encapsulated data</summary>
 
-Regular arrays can have their elements reassigned making them a poor choice for encapsulated data that's occasionally
-shared. Using an array forces us to duplicate the contents into a collection before sharing so that callers can't
+Regular arrays can have their elements reassigned making them a poor choice for encapsulated data that needs to be
+occasionally shared. Using a regular array forces us to duplicate the contents before sharing so that callers can't
 mutate the encapsulated array. This negatively affects performance and adds extra pressure on the garbage collector.
 Immutable arrays can be safely shared resulting in cleaner and more efficient code.
 </details>
@@ -225,7 +226,7 @@ val interestingWeights = weights.filter { it > 10.0 }
 // List<Double> auto-boxing each resulting value!
 ```
 
-Unlike regular arrays, all operations on immutable arrays produce the most efficient type so that clean code is
+Unlike regular arrays, most of the common operations on immutable arrays have specializations so that clean code is
 efficient by default:
 
 ```kotlin
@@ -234,13 +235,14 @@ val people = immutableArrayOf(
     Person(name = "Bob", age = 4),
 ) // ImmutableArray<Person>
 
-// Mapping the ages automatically uses an efficient ImmutableIntArray[3, 4] storing primitive int values
+// Since the age field is a non-nullable Int, Mapping the ages uses an 
+// efficient ImmutableIntArray storing primitive int values
 val ages = people.map { it.age }
 performStatisticalAnalysis(ages)
 ```
 
-Here's a non-exhaustive list of operations that benefit from this significant efficiency improvement (some of these will
-be added in future releases):
+Here's a non-exhaustive list of operations that benefit from specializations resulting in significant efficiency
+improvements (note that some of these will be added in future releases):
 
 * map
 * mapNotNull
@@ -334,8 +336,8 @@ Read-only lists containing one of the eight base types, like `List<Int>`, use be
 immutable arrays! See the **Memory Impacts** section in [Memory Layout](#memory-layout) for details.
 
 Even when storing generic types, read-only lists still use more memory as their backing array usually has about 17% of
-unused capacity. There's also the small memory overhead of the `ArrayList` object whereas variables of immutable array
-types point directly at the backing array.
+unused capacity. There's also the small memory overhead of the `ArrayList` class whereas variables of immutable array
+types point directly at the backing array in the bytecode.
 
 </details>
 
@@ -346,8 +348,9 @@ Executing tight loops on read-only lists containing one of the eight base types,
 slower than immutable arrays. See the `Performance Impacts` section in [Memory Layout](#memory-layout) for details.
 
 Even when operating on generic types, read-only lists have an extra layer of indirection since method calls such as
-getting an element, are routed through the `ArrayList` class whereas getting an element from an immutable arrays
-accesses the array elements directly.
+getting an element, are routed through the `ArrayList` class whereas getting an element from an immutable array accesses
+the array element directly. This is because immutable arrays are a zero-cost abstraction that gets eliminated at compile
+time.
 
 </details>
 
@@ -356,11 +359,12 @@ accesses the array elements directly.
 <details>
 <summary>No mutation exceptions at runtime</summary>
 
-Guava immutable lists implement the Java `List` interface and expose mutating methods which throw exceptions at runtime
-when attempted to be mutated. Although this prevents mutation, it can result in exceptions being thrown during runtime
-affecting the user experience.
+Guava immutable lists implement the Java `List` interface and override mutating methods to throw exceptions. Although
+this prevents mutation, it can result in exceptions being thrown at runtime affecting the user experience. These
+aren't always obvious as the caller might operate on a variable of type List without realizing that it's an immutable
+list.
 
-Attempting to mutate an immutable array won't even compile catching these types of defects much sooner.
+However, attempting to mutate an immutable array won't even compile preventing this category of defects altogether.
 
 </details>
 
@@ -368,7 +372,8 @@ Attempting to mutate an immutable array won't even compile catching these types 
 <summary>More memory efficient</summary>
 
 When creating Guava immutable lists by copying an existing list, they have the same memory drawbacks as read-only lists
-(see [Benefits over read-only lists](#benefits-over-read-only-lists)) but twice as bad since we have 2 lists.
+(see [Benefits over read-only lists](#benefits-over-read-only-lists)) but twice as bad since we have 2 lists thus
+duplicating the memory overhead.
 
 When creating a Guava immutable list by wrapping an existing list, it pretty much has the same memory drawbacks as
 read-only lists since the extra wrapper is tiny.
@@ -426,9 +431,9 @@ actual array and that wrapper object is passed along. However, generic functions
 modifier, such as `with` from the Kotlin standard library, don't induce auto-boxing because the function is inlined into
 each call site replacing the generic with the actual type.
 
-Note that using reflection to traverse the object graph, reflective code will encounter the underlying array directly
-without any wrapper except for the auto-boxing scenarios in which case it will encounter the wrapper that contains the
-underlying array.
+Note that when using reflection to traverse the object graph, reflective code will encounter the underlying array
+directly without any wrapper object except for the auto-boxing scenarios in which case it will encounter the wrapper
+that contains the underlying array.
 
 Here are some examples to get a better idea of where auto-boxing occurs:
 
@@ -436,7 +441,7 @@ Here are some examples to get a better idea of where auto-boxing occurs:
 // no auto-boxing.  `names` references the underlying array directly
 val names = immutableArrayOf("Dan", "Bob")
 
-// no auto-boxing because `with` is an inline function so the generic parameter disappears at compile time
+// no auto-boxing because `with` is an inline function so the generic parameter becomes strongly typed
 with(names) {
     println(this.size)
 }
@@ -448,16 +453,16 @@ names as Any
 println(names)
 
 // Even though we're explicitly specifying the ImmutableArray type as the generic type, remember that the ArrayList 
-// class itself isn't hardcoded to work with immutable arrays
+// class itself isn't hardcoded to work with immutable arrays, so each immutable array must be auto-boxed
 val arrays = ArrayList<ImmutableArray<String>>()
 arrays += names // auto-boxing due to generics
 
-// auto-boxing due to generic receiver
-names.genericExtensionFunction()
-
+// auto-boxing due as the immutable array is used as a generic receiver
 fun <T> T.genericExtensionFunction() {
     ...
 }
+
+names.genericExtensionFunction()
 ```
 
 The overhead of auto-boxing the entire array is identical to that of autoboxing a single primitive `Double` value. Since
@@ -466,8 +471,9 @@ most scenarios. Normally auto-boxing can have a large memory or performance impa
 what happens with read-only lists. However, in this case the immutable array itself is auto-boxed into a single tiny
 wrapper without auto-boxing any of the array elements.
 
-For optimal performance, we recommend using the immutable array types for everything that expects to work with immutable
-arrays as this avoids auto-boxing. Generic types on inline functions also avoid auto-boxing.
+For optimal performance, we recommend using the immutable array types for everything that expects to work with
+immutable arrays as this avoids auto-boxing. However, passing immutable arrays to generic inline functions as the
+generic type avoids auto-boxing since the generic parameter becomes strongly typed when inlined into the call site.
 
 </details>
 
@@ -475,10 +481,10 @@ arrays as this avoids auto-boxing. Generic types on inline functions also avoid 
 <summary>No identity</summary>
 
 Immutable arrays are zero-cost abstractions that get eliminated at compile time. In a way, we can think of them as a
-kind of virtual quantum particle that doesn't actually exist except sometimes (see Auto-boxing above).
+kind of virtual quantum particle that comes in and out of existence (see Auto-boxing above).
 
-Since immutable arrays aren't real wrapper objects, attempting to use their identities is not supported. Here are some
-patterns that attempt to make use of their identities:
+Since immutable arrays aren't persistent wrapper objects, attempting to use their identities is not supported. Here are
+some patterns that attempt to make use of their identities:
 
 Reference equality:
 
@@ -497,7 +503,7 @@ Identity hashCode:
 val values = immutableArrayOf(1, 2, 3)
 val identityHashCode = System.identityHashCode(values)
 // Oops, the identityHashCode function accepts any type instead of an immutable array type, so it's auto-boxed into a 
-// tiny wrapper object and the identity hashCode of that temporary wrapper is returned
+// tiny wrapper object and the identity hashCode of that temporary wrapper is returned which is meaningless
 ```
 
 Synchronization:

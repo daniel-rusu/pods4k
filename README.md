@@ -26,6 +26,8 @@ dependencies {
 </dependency>
 ```
 
+Alternatively, you can [pick & choose individual components](publishing/bom/README.md) of this library.
+
 ## Immutable Arrays
 
 [Immutable Arrays](immutable-arrays/README.md) are a safer and more efficient alternative to read-only lists while
@@ -52,15 +54,14 @@ val people = immutableArrayOf(
     Person(name = "Bob", age = 4),
 ) // ImmutableArray<Person>
 
-// Mapping ages automatically uses an efficient ImmutableIntArray[3, 4] storing primitive int values
+// Since age is a non-nullable Int, mapping ages uses an efficient ImmutableIntArray storing primitive int values
 val ages = people.map { it.age }
 performStatisticalAnalysis(ages)
 ```
 
-When mutability isn't needed, Immutable arrays are also a safer and cleaner alternative to regular arrays providing
-significant efficiency improvements over regular arrays for dozens of commonly used operations. See
-[Immutable Arrays](immutable-arrays/README.md) for more specifics along with a detailed comparison against regular
-arrays, read-only lists, and immutable lists.
+Surprisingly, immutable arrays are significantly more efficient than regular arrays as they have specializations for
+dozens of commonly used operations. See [Immutable Arrays](immutable-arrays/README.md) for more specifics along with a
+detailed comparison against regular arrays, read-only lists, and immutable lists.
 
 ## Java Compatibility
 
