@@ -1,7 +1,8 @@
 # Immutable Arrays
 
 Immutable Arrays are a safer and more efficient alternative to read-only lists while maintaining familiar operations.
-See [Benefits](#benefits) for a detailed comparison versus regular arrays, read-only lists, and immutable lists.
+See [Benefits](#benefits) for a detailed comparison versus regular arrays, read-only lists, unmodifiable lists, and
+immutable lists.
 
 Unlike regular arrays or read-only lists, immutable arrays cannot be mutated allowing them to be safely shared without
 needing immutable collections:
@@ -354,15 +355,28 @@ time.
 
 </details>
 
-### Benefits over Guava immutable lists
+### Benefits over unmodifiable lists
+
+<details>
+<summary>Safer and more robust</summary>
+
+Calling `Collections.unmodifiableList(myMutableList)` doesn't copy the elements into a new immutable list but rather
+creates a view that wraps the original collection. Although the view won't allow mutation, the underlying collection
+that the view references can continue to mutate. This introduces a category of defects where a view is shared and
+intended to be processed right away but the underlying mutable list is modified again before it's processed. This can
+happen when the view is shared and then a separate thread mutates the underlying list. Another scenario is when the
+processing logic is enhanced to delay the processing to a later time such as by adding it to some processing queue.
+
+Immutable arrays don't have this problem as they can never be mutated by anyone.
+
+</details>
 
 <details>
 <summary>No mutation exceptions at runtime</summary>
 
-Guava immutable lists implement the Java `List` interface and override mutating methods to throw exceptions. Although
-this prevents mutation, it can result in exceptions being thrown at runtime affecting the user experience. These
-aren't always obvious as the caller might operate on a variable of type List without realizing that it's an immutable
-list.
+Unmodifiable lists implement the Java `List` interface and override mutating methods to throw exceptions. Although
+this prevents mutation at the view level, it can result in exceptions being thrown at runtime affecting the user
+experience.
 
 However, attempting to mutate an immutable array won't even compile preventing this category of defects altogether.
 
@@ -371,24 +385,48 @@ However, attempting to mutate an immutable array won't even compile preventing t
 <details>
 <summary>More memory efficient</summary>
 
-When creating Guava immutable lists by copying an existing list, they have the same memory drawbacks as read-only lists
-(see [Benefits over read-only lists](#benefits-over-read-only-lists)) but twice as bad since we have 2 lists thus
-duplicating the memory overhead.
-
-When creating a Guava immutable list by wrapping an existing list, it pretty much has the same memory drawbacks as
-read-only lists since the extra wrapper is tiny.
+Unmodifiable lists have the same memory drawbacks as read-only lists
+(see [Benefits over read-only lists](#benefits-over-read-only-lists)) along with a tiny extra overhead from the wrapper.
 
 </details>
 
 <details>
 <summary>Higher performance</summary>
 
-When exposing an encapsulated list by copying it into a Guava immutable list, this has the same performance drawbacks
-as read-only lists (see [Benefits over read-only lists](#benefits-over-read-only-lists)) plus the added overhead of
-copying the elements.
+Unmodifiable lists have the performance drawbacks of read-only lists
+(see [Benefits over read-only lists](#benefits-over-read-only-lists)) but even worse due to the extra layer of
+indirection caused by the wrapper object.
 
-When wrapping an existing list in a Guava immutable list, we get the same performance drawbacks as read-only lists , but
-slightly worse as this introduces another layer of indirection due to the additional wrapper object.
+</details>
+
+### Benefits over immutable lists
+
+<details>
+<summary>No mutation exceptions at runtime</summary>
+
+Immutable lists implement the Java `List` interface and override mutating methods to throw exceptions. Although this
+prevents mutation, it can result in exceptions being thrown at runtime affecting the user experience.
+
+However, attempting to mutate an immutable array won't even compile preventing this category of defects altogether.
+
+</details>
+
+<details>
+<summary>More memory efficient</summary>
+
+Immutable lists containing one of the eight base types, like List<Int>, use between 5 to 8 times more memory than
+immutable arrays! See the Memory Impacts section in Memory Layout for details.
+
+There's also the small memory overhead of the immutable list class whereas variables of immutable array types point
+directly at the backing array in the bytecode.
+
+</details>
+
+<details>
+<summary>Higher performance</summary>
+
+Immutable lists have the same performance drawbacks as read-only lists
+(see [Benefits over read-only lists](#benefits-over-read-only-lists)).
 
 </details>
 

@@ -26,7 +26,7 @@ dependencies {
 </dependency>
 ```
 
-Alternatively, you can [pick & choose individual components](publishing/bom/README.md) of this library.
+Alternatively, you can [pick & choose](publishing/bom/README.md) individual components of this library.
 
 ## Immutable Arrays
 
