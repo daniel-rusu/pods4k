@@ -5,6 +5,8 @@
 A collection of performance-oriented data structures providing performance and efficiency that might appear to be
 impossible at first glance.
 
+If you're enjoying this library, support us by starring and sharing this repo with others.
+
 ## Dependency
 
 **Gradle:**
@@ -44,9 +46,10 @@ names[1] = "Jane" // Compile error: No set method providing array access
 ```
 
 On top of the base efficiency improvements, immutable arrays are even more efficient when dealing with the 8 base
-types such as Int, Boolean, etc. For example, depending on your JVM configuration, when storing integers, this reduces
-memory consumption by 5 to 8 times compared to lists and performance can improve by over 10 times when performing
-operations on these values.
+types as they use between 3 to 24 times less memory than lists and performance can improve by over 10 times!
+
+Surprisingly, immutable arrays are even more efficient than regular arrays as they have hundreds of optimized
+specializations for common operations when working with or transforming into one of the 8 base types:
 
 ```kotlin
 val people = immutableArrayOf(
@@ -59,8 +62,7 @@ val ages = people.map { it.age }
 performStatisticalAnalysis(ages)
 ```
 
-Surprisingly, immutable arrays are significantly more efficient than regular arrays as they have specializations for
-dozens of commonly used operations. See [Immutable Arrays](immutable-arrays/README.md) for more specifics along with a
+See [Immutable Arrays](immutable-arrays/README.md) for more specifics along with a
 detailed comparison against regular arrays, read-only lists, and immutable lists.
 
 ## Java Compatibility
