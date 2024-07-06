@@ -2,10 +2,16 @@
 package com.danrusu.pods4k.immutableArrays
 
 import kotlin.Boolean
+import kotlin.Byte
+import kotlin.Char
+import kotlin.Double
 import kotlin.Float
 import kotlin.FloatArray
 import kotlin.Int
+import kotlin.Long
+import kotlin.OverloadResolutionByLambdaReturnType
 import kotlin.PublishedApi
+import kotlin.Short
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Unit
@@ -210,6 +216,78 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
      */
     public inline fun forEachIndexed(action: (index: Int, element: Float) -> Unit): Unit =
             values.forEachIndexed(action)
+
+    /**
+     * Returns an immutable array containing the results of applying the given [transform] function
+     * to each element in the original collection.
+     */
+    @OverloadResolutionByLambdaReturnType
+    public inline fun <R> map(transform: (element: Float) -> R): ImmutableArray<R> =
+            ImmutableArray(size) { transform(get(it)) }
+
+    /**
+     * Returns an immutable array containing the results of applying the given [transform] function
+     * to each element in the original collection.
+     */
+    @OverloadResolutionByLambdaReturnType
+    public inline fun map(transform: (element: Float) -> Boolean): ImmutableBooleanArray =
+            ImmutableBooleanArray(size) { transform(get(it)) }
+
+    /**
+     * Returns an immutable array containing the results of applying the given [transform] function
+     * to each element in the original collection.
+     */
+    @OverloadResolutionByLambdaReturnType
+    public inline fun map(transform: (element: Float) -> Byte): ImmutableByteArray =
+            ImmutableByteArray(size) { transform(get(it)) }
+
+    /**
+     * Returns an immutable array containing the results of applying the given [transform] function
+     * to each element in the original collection.
+     */
+    @OverloadResolutionByLambdaReturnType
+    public inline fun map(transform: (element: Float) -> Char): ImmutableCharArray =
+            ImmutableCharArray(size) { transform(get(it)) }
+
+    /**
+     * Returns an immutable array containing the results of applying the given [transform] function
+     * to each element in the original collection.
+     */
+    @OverloadResolutionByLambdaReturnType
+    public inline fun map(transform: (element: Float) -> Short): ImmutableShortArray =
+            ImmutableShortArray(size) { transform(get(it)) }
+
+    /**
+     * Returns an immutable array containing the results of applying the given [transform] function
+     * to each element in the original collection.
+     */
+    @OverloadResolutionByLambdaReturnType
+    public inline fun map(transform: (element: Float) -> Int): ImmutableIntArray =
+            ImmutableIntArray(size) { transform(get(it)) }
+
+    /**
+     * Returns an immutable array containing the results of applying the given [transform] function
+     * to each element in the original collection.
+     */
+    @OverloadResolutionByLambdaReturnType
+    public inline fun map(transform: (element: Float) -> Long): ImmutableLongArray =
+            ImmutableLongArray(size) { transform(get(it)) }
+
+    /**
+     * Returns an immutable array containing the results of applying the given [transform] function
+     * to each element in the original collection.
+     */
+    @OverloadResolutionByLambdaReturnType
+    public inline fun map(transform: (element: Float) -> Float): ImmutableFloatArray =
+            ImmutableFloatArray(size) { transform(get(it)) }
+
+    /**
+     * Returns an immutable array containing the results of applying the given [transform] function
+     * to each element in the original collection.
+     */
+    @OverloadResolutionByLambdaReturnType
+    public inline fun map(transform: (element: Float) -> Double): ImmutableDoubleArray =
+            ImmutableDoubleArray(size) { transform(get(it)) }
 
     public companion object {
         @PublishedApi

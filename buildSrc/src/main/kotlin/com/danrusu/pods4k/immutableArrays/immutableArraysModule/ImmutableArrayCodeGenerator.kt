@@ -167,6 +167,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                     "action"(type = lambda<Unit> { "index"<Int>(); "element"(type = baseType.type) })
                 },
             )
+            addMapFunction(baseType)
             addCompanionObject {
                 addEmptyProperty(baseType)
                 addInvokeOperator(baseType)
@@ -356,6 +357,44 @@ private fun TypeSpec.Builder.addInvokeOperator(baseType: BaseType) {
             addStatement("return ${baseType.generatedClassName}(backingArray as %T)", baseType.backingArrayType)
         } else {
             addStatement("return ${baseType.generatedClassName}(backingArray)")
+        }
+    }
+}
+
+private fun TypeSpec.Builder.addMapFunction(baseType: BaseType) {
+    for (resultType in BaseType.values()) {
+        val mappedType: TypeName
+        val resultTypeName: TypeName
+        if (resultType == BaseType.GENERIC) {
+            mappedType = TypeVariableName("R")
+            resultTypeName = resultType.getGeneratedClass().parameterizedBy(mappedType)
+        } else {
+            mappedType = resultType.type
+            resultTypeName = resultType.getGeneratedTypeName()
+        }
+        addFunction(
+            modifiers = listOf(KModifier.INLINE),
+            kdoc = "Returns an immutable array containing the results of applying the given [transform] function to each element in the original collection.",
+            name = "map",
+            parameters = {
+                "transform"(
+                    type = lambda(
+                        { "element"(type = baseType.type) },
+                        returnType = mappedType
+                    )
+                )
+            },
+            returns = resultTypeName,
+        ) {
+            addAnnotation(OverloadResolutionByLambdaReturnType::class)
+            if (resultType == BaseType.GENERIC) {
+                addTypeVariable(mappedType as TypeVariableName)
+            }
+            addCode(
+                """
+                    return ${resultType.generatedClassName}(size) { transform(get(it)) }
+                """.trimIndent()
+            )
         }
     }
 }

@@ -18,6 +18,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
         // generate default methods in interfaces without the DefaultImpls
         freeCompilerArgs.add("-Xjvm-default=all")
         freeCompilerArgs.add("-Xcontext-receivers")
+        freeCompilerArgs.add("-opt-in=kotlin.experimental.ExperimentalTypeInference")
 
         // enforce redundant visibility modifiers
         kotlin.explicitApi()

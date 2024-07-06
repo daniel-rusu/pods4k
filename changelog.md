@@ -3,6 +3,10 @@ Change Log
 
 ## Unreleased
 
+### Immutable Arrays
+
+* New: Add map transformation functions
+
 ## 0.1.0
 
 _2024-06-16_

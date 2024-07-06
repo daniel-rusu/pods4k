@@ -1,12 +1,5 @@
 package com.danrusu.pods4k.immutableArrays
 
-import com.danrusu.pods4k.immutableArrays.ImmutableArray
-import com.danrusu.pods4k.immutableArrays.ImmutableIntArray
-import com.danrusu.pods4k.immutableArrays.emptyImmutableArray
-import com.danrusu.pods4k.immutableArrays.emptyImmutableBooleanArray
-import com.danrusu.pods4k.immutableArrays.emptyImmutableIntArray
-import com.danrusu.pods4k.immutableArrays.getOrElse
-import com.danrusu.pods4k.immutableArrays.immutableArrayOf
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.api.expectThrows
@@ -481,6 +474,17 @@ class ImmutableIntArrayTest {
                     2 to 20,
                 )
             )
+        }
+    }
+
+    @Test
+    fun `map validation`() {
+        with(immutableArrayOf(1, 2, 3)) {
+            expectThat(this.map { it * 1.5 })
+                .isEqualTo(immutableArrayOf(1.5, 3.0, 4.5))
+
+            expectThat(this.map { it % 2 == 0 })
+                .isEqualTo(immutableArrayOf(false, true, false))
         }
     }
 }
