@@ -168,6 +168,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 },
             )
             addMapFunction(baseType)
+            addMapIndexedFunction(baseType)
             addCompanionObject {
                 addEmptyProperty(baseType)
                 addInvokeOperator(baseType)
@@ -374,7 +375,7 @@ private fun TypeSpec.Builder.addMapFunction(baseType: BaseType) {
         }
         addFunction(
             modifiers = listOf(KModifier.INLINE),
-            kdoc = "Returns an immutable array containing the results of applying the given [transform] function to each element in the original collection.",
+            kdoc = "Returns an immutable array containing the results of applying the given [transform] function to each element.",
             name = "map",
             parameters = {
                 "transform"(
@@ -393,6 +394,44 @@ private fun TypeSpec.Builder.addMapFunction(baseType: BaseType) {
             addCode(
                 """
                     return ${resultType.generatedClassName}(size) { transform(get(it)) }
+                """.trimIndent()
+            )
+        }
+    }
+}
+
+private fun TypeSpec.Builder.addMapIndexedFunction(baseType: BaseType) {
+    for (resultType in BaseType.values()) {
+        val mappedType: TypeName
+        val resultTypeName: TypeName
+        if (resultType == BaseType.GENERIC) {
+            mappedType = TypeVariableName("R")
+            resultTypeName = resultType.getGeneratedClass().parameterizedBy(mappedType)
+        } else {
+            mappedType = resultType.type
+            resultTypeName = resultType.getGeneratedTypeName()
+        }
+        addFunction(
+            modifiers = listOf(KModifier.INLINE),
+            kdoc = "Returns an immutable array containing the results of applying the given [transform] function to each element and its index.",
+            name = "mapIndexed",
+            parameters = {
+                "transform"(
+                    type = lambda(
+                        { "index"<Int>(); "element"(type = baseType.type) },
+                        returnType = mappedType
+                    )
+                )
+            },
+            returns = resultTypeName,
+        ) {
+            addAnnotation(OverloadResolutionByLambdaReturnType::class)
+            if (resultType == BaseType.GENERIC) {
+                addTypeVariable(mappedType as TypeVariableName)
+            }
+            addCode(
+                """
+                    return ${resultType.generatedClassName}(size) { transform(it, get(it)) }
                 """.trimIndent()
             )
         }

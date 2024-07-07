@@ -461,12 +461,23 @@ class ImmutableArrayTest {
 
     @Test
     fun `map validation`() {
-        with(immutableArrayOf("a", "bb", "ccc")) {
-            expectThat(this.map { it[0] })
-                .isEqualTo(immutableArrayOf('a', 'b', 'c'))
+        with(immutableArrayOf("aaa", "bb", "c")) {
+            expectThat(this.map { Pair(it, it.length) })
+                .isEqualTo(immutableArrayOf(Pair("aaa", 3), Pair("bb", 2), Pair("c", 1)))
 
             expectThat(this.map { it.length })
-                .isEqualTo(immutableArrayOf(1, 2, 3))
+                .isEqualTo(immutableArrayOf(3, 2, 1))
+        }
+    }
+
+    @Test
+    fun `mapIndexed validation`() {
+        with(immutableArrayOf("aaa", "bb", "c")) {
+            expectThat(this.mapIndexed { index, element -> Pair(index, element) })
+                .isEqualTo(immutableArrayOf(Pair(0, "aaa"), Pair(1, "bb"), Pair(2, "c")))
+
+            expectThat(this.mapIndexed { index, element -> element.length + 2 * index })
+                .isEqualTo(immutableArrayOf(3, 4, 5))
         }
     }
 }
