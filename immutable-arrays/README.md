@@ -78,7 +78,7 @@ If you're enjoying this library, support us by starring and sharing this repo wi
 See [dependency instructions](../README.md#dependency) for adding this library to your gradle or maven build.
 
 <details>
-<summary>Creation Examples</summary>
+<summary>Creating immutable arrays</summary>
 
 **Empty immutable arrays:**
 
@@ -137,6 +137,64 @@ list.toImmutableArray() // [Integer(1), Integer(2), Integer(3)]
 
 // However, you can choose the more efficient primitive array type instead:
 list.toImmutableIntArray() // [1, 2, 3] primitive int array
+```
+
+</details>
+
+<details>
+<summary>Accessing elements</summary>
+
+**Accessing by index:**
+
+```kotlin
+val names = immutableArrayOf("Dan", "Bob", "Jill")
+
+names[0] // "Dan"
+names.get(1) // "Bob"
+```
+
+**Accessing by destructuring:**
+
+```kotlin
+val names = immutableArrayOf("Dan", "Bob", "Jill", "Jane")
+
+val (first, second) = names // first = "Dan", second = "Bob"
+val (_, second, _, fourth) // second = "Bob", fourth = "Jane"
+```
+
+**Accessing the only element:**
+
+```kotlin
+val names = immutableArrayOf("Dan")
+
+names.single() // "Dan"
+
+// Similarly with `singleOrNull()` for when the array might not have exactly 1 element
+```
+
+**Accessing the first & last elements:**
+
+```kotlin
+val names = immutableArrayOf("Dan", "Bob", "Jill")
+
+names.first() // "Dan"
+names.last() // "Jill"
+
+// Similarly with `firstOrNull()` & `lastOrNull()` for when the array might be empty
+```
+
+**Accessing by condition:**
+```kotlin
+val numbers = immutableArrayOf(1, 2, 3, 4, 5)
+
+names.first { it % 2 == 0 } // 2
+names.last { it % 2 == 0} // 4
+
+names.firstOrNull { it > 5 } // null
+names.lastOrNull { it > 5 } // null
+
+names.single { it % 3 == 0 } // 3
+names.singleOrNull { it % 2 == 0 } // null because multiple elements match
 ```
 
 </details>
