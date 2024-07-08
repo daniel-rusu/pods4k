@@ -1,11 +1,13 @@
-# pods4k
+# pods4k [![Build Status](https://img.shields.io/github/actions/workflow/status/daniel-rusu/pods4k/ci.yml?branch=main&label=CI&logo=github)](https://github.com/daniel-rusu/pods4k/actions/workflows/ci.yml?query=branch%3Amain++)
 
 ## Performance-oriented data structures for Kotlin
 
 A collection of performance-oriented data structures providing performance and efficiency that might appear to be
 impossible at first glance.
 
-If you're enjoying this library, support us by starring and sharing this repo with others.
+If you're enjoying this library, please give it
+a [![GitHub stars](https://img.shields.io/github/stars/daniel-rusu/pods4k?label=Star)](https://github.com/daniel-rusu/pods4k)
+and share it with others.
 
 ## Dependency
 
