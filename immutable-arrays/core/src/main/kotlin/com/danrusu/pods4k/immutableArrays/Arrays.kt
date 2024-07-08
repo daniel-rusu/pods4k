@@ -71,47 +71,46 @@ public fun <T> Array<T>.toImmutableArray(): ImmutableArray<T> = ImmutableArray(s
 /**
  * Returns an [ImmutableBooleanArray] with the contents of this array.
  */
-public fun Array<Boolean>.toImmutableBooleanArray(): ImmutableBooleanArray =
+public fun Array<Boolean>.toImmutableArray(): ImmutableBooleanArray =
         ImmutableBooleanArray(size) { this[it] }
 
 /**
  * Returns an [ImmutableByteArray] with the contents of this array.
  */
-public fun Array<Byte>.toImmutableByteArray(): ImmutableByteArray =
+public fun Array<Byte>.toImmutableArray(): ImmutableByteArray =
         ImmutableByteArray(size) { this[it] }
 
 /**
  * Returns an [ImmutableCharArray] with the contents of this array.
  */
-public fun Array<Char>.toImmutableCharArray(): ImmutableCharArray =
+public fun Array<Char>.toImmutableArray(): ImmutableCharArray =
         ImmutableCharArray(size) { this[it] }
 
 /**
  * Returns an [ImmutableShortArray] with the contents of this array.
  */
-public fun Array<Short>.toImmutableShortArray(): ImmutableShortArray =
+public fun Array<Short>.toImmutableArray(): ImmutableShortArray =
         ImmutableShortArray(size) { this[it] }
 
 /**
  * Returns an [ImmutableIntArray] with the contents of this array.
  */
-public fun Array<Int>.toImmutableIntArray(): ImmutableIntArray =
-        ImmutableIntArray(size) { this[it] }
+public fun Array<Int>.toImmutableArray(): ImmutableIntArray = ImmutableIntArray(size) { this[it] }
 
 /**
  * Returns an [ImmutableLongArray] with the contents of this array.
  */
-public fun Array<Long>.toImmutableLongArray(): ImmutableLongArray =
+public fun Array<Long>.toImmutableArray(): ImmutableLongArray =
         ImmutableLongArray(size) { this[it] }
 
 /**
  * Returns an [ImmutableFloatArray] with the contents of this array.
  */
-public fun Array<Float>.toImmutableFloatArray(): ImmutableFloatArray =
+public fun Array<Float>.toImmutableArray(): ImmutableFloatArray =
         ImmutableFloatArray(size) { this[it] }
 
 /**
  * Returns an [ImmutableDoubleArray] with the contents of this array.
  */
-public fun Array<Double>.toImmutableDoubleArray(): ImmutableDoubleArray =
+public fun Array<Double>.toImmutableArray(): ImmutableDoubleArray =
         ImmutableDoubleArray(size) { this[it] }

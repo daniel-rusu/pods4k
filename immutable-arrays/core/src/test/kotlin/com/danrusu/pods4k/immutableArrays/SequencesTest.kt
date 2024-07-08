@@ -1,24 +1,21 @@
 package com.danrusu.pods4k.immutableArrays
 
-import com.danrusu.pods4k.immutableArrays.ImmutableArray
-import com.danrusu.pods4k.immutableArrays.ImmutableIntArray
-import com.danrusu.pods4k.immutableArrays.toImmutableArray
-import com.danrusu.pods4k.immutableArrays.toImmutableIntArray
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isA
+import strikt.assertions.isEqualTo
 
 class SequencesTest {
     @Test
     fun `toImmutableArray validation`() {
         with(sequenceOf(1, 3, 5)) {
-            val genericImmutableArray = this.toImmutableArray()
-            expectThat(genericImmutableArray).isA<ImmutableArray<Int>>()
-            expectThat(genericImmutableArray).containsExactly(1, 3, 5)
+            expectThat(this.toImmutableArray())
+                .isA<ImmutableIntArray>()
+                .isEqualTo(immutableArrayOf(1, 3, 5))
 
-            val primitiveImmutableArray = this.toImmutableIntArray()
-            expectThat(primitiveImmutableArray).isA<ImmutableIntArray>()
-            expectThat(primitiveImmutableArray).containsExactly(1, 3, 5)
+            expectThat(this.toImmutableArray<Int>())
+                .isA<ImmutableArray<Int>>()
+                .isEqualTo(immutableArrayOf<Int>(1, 3, 5))
         }
     }
 }

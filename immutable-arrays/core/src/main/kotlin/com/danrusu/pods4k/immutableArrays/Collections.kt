@@ -26,7 +26,7 @@ public fun <T> Iterable<T>.toImmutableArray(): ImmutableArray<T> {
 /**
  * Returns an [ImmutableBooleanArray] with the contents of [this] collection.
  */
-public fun Iterable<Boolean>.toImmutableBooleanArray(): ImmutableBooleanArray {
+public fun Iterable<Boolean>.toImmutableArray(): ImmutableBooleanArray {
     if (this is Collection<kotlin.Boolean>) {
         val iterator = this.iterator()
         return ImmutableBooleanArray(size) { iterator.next() }
@@ -38,7 +38,7 @@ public fun Iterable<Boolean>.toImmutableBooleanArray(): ImmutableBooleanArray {
 /**
  * Returns an [ImmutableByteArray] with the contents of [this] collection.
  */
-public fun Iterable<Byte>.toImmutableByteArray(): ImmutableByteArray {
+public fun Iterable<Byte>.toImmutableArray(): ImmutableByteArray {
     if (this is Collection<kotlin.Byte>) {
         val iterator = this.iterator()
         return ImmutableByteArray(size) { iterator.next() }
@@ -50,7 +50,7 @@ public fun Iterable<Byte>.toImmutableByteArray(): ImmutableByteArray {
 /**
  * Returns an [ImmutableCharArray] with the contents of [this] collection.
  */
-public fun Iterable<Char>.toImmutableCharArray(): ImmutableCharArray {
+public fun Iterable<Char>.toImmutableArray(): ImmutableCharArray {
     if (this is Collection<kotlin.Char>) {
         val iterator = this.iterator()
         return ImmutableCharArray(size) { iterator.next() }
@@ -62,7 +62,7 @@ public fun Iterable<Char>.toImmutableCharArray(): ImmutableCharArray {
 /**
  * Returns an [ImmutableShortArray] with the contents of [this] collection.
  */
-public fun Iterable<Short>.toImmutableShortArray(): ImmutableShortArray {
+public fun Iterable<Short>.toImmutableArray(): ImmutableShortArray {
     if (this is Collection<kotlin.Short>) {
         val iterator = this.iterator()
         return ImmutableShortArray(size) { iterator.next() }
@@ -74,7 +74,7 @@ public fun Iterable<Short>.toImmutableShortArray(): ImmutableShortArray {
 /**
  * Returns an [ImmutableIntArray] with the contents of [this] collection.
  */
-public fun Iterable<Int>.toImmutableIntArray(): ImmutableIntArray {
+public fun Iterable<Int>.toImmutableArray(): ImmutableIntArray {
     if (this is Collection<kotlin.Int>) {
         val iterator = this.iterator()
         return ImmutableIntArray(size) { iterator.next() }
@@ -86,7 +86,7 @@ public fun Iterable<Int>.toImmutableIntArray(): ImmutableIntArray {
 /**
  * Returns an [ImmutableLongArray] with the contents of [this] collection.
  */
-public fun Iterable<Long>.toImmutableLongArray(): ImmutableLongArray {
+public fun Iterable<Long>.toImmutableArray(): ImmutableLongArray {
     if (this is Collection<kotlin.Long>) {
         val iterator = this.iterator()
         return ImmutableLongArray(size) { iterator.next() }
@@ -98,7 +98,7 @@ public fun Iterable<Long>.toImmutableLongArray(): ImmutableLongArray {
 /**
  * Returns an [ImmutableFloatArray] with the contents of [this] collection.
  */
-public fun Iterable<Float>.toImmutableFloatArray(): ImmutableFloatArray {
+public fun Iterable<Float>.toImmutableArray(): ImmutableFloatArray {
     if (this is Collection<kotlin.Float>) {
         val iterator = this.iterator()
         return ImmutableFloatArray(size) { iterator.next() }
@@ -110,7 +110,7 @@ public fun Iterable<Float>.toImmutableFloatArray(): ImmutableFloatArray {
 /**
  * Returns an [ImmutableDoubleArray] with the contents of [this] collection.
  */
-public fun Iterable<Double>.toImmutableDoubleArray(): ImmutableDoubleArray {
+public fun Iterable<Double>.toImmutableArray(): ImmutableDoubleArray {
     if (this is Collection<kotlin.Double>) {
         val iterator = this.iterator()
         return ImmutableDoubleArray(size) { iterator.next() }

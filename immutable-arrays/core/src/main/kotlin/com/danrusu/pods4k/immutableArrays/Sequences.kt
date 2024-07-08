@@ -22,7 +22,7 @@ public fun <T> Sequence<T>.toImmutableArray(): ImmutableArray<T> {
 /**
  * Returns an [ImmutableBooleanArray] with the contents of this sequence.
  */
-public fun Sequence<Boolean>.toImmutableBooleanArray(): ImmutableBooleanArray {
+public fun Sequence<Boolean>.toImmutableArray(): ImmutableBooleanArray {
     val elements = this.toList()
     return ImmutableBooleanArray(elements.size) { elements[it] }
 }
@@ -30,7 +30,7 @@ public fun Sequence<Boolean>.toImmutableBooleanArray(): ImmutableBooleanArray {
 /**
  * Returns an [ImmutableByteArray] with the contents of this sequence.
  */
-public fun Sequence<Byte>.toImmutableByteArray(): ImmutableByteArray {
+public fun Sequence<Byte>.toImmutableArray(): ImmutableByteArray {
     val elements = this.toList()
     return ImmutableByteArray(elements.size) { elements[it] }
 }
@@ -38,7 +38,7 @@ public fun Sequence<Byte>.toImmutableByteArray(): ImmutableByteArray {
 /**
  * Returns an [ImmutableCharArray] with the contents of this sequence.
  */
-public fun Sequence<Char>.toImmutableCharArray(): ImmutableCharArray {
+public fun Sequence<Char>.toImmutableArray(): ImmutableCharArray {
     val elements = this.toList()
     return ImmutableCharArray(elements.size) { elements[it] }
 }
@@ -46,7 +46,7 @@ public fun Sequence<Char>.toImmutableCharArray(): ImmutableCharArray {
 /**
  * Returns an [ImmutableShortArray] with the contents of this sequence.
  */
-public fun Sequence<Short>.toImmutableShortArray(): ImmutableShortArray {
+public fun Sequence<Short>.toImmutableArray(): ImmutableShortArray {
     val elements = this.toList()
     return ImmutableShortArray(elements.size) { elements[it] }
 }
@@ -54,7 +54,7 @@ public fun Sequence<Short>.toImmutableShortArray(): ImmutableShortArray {
 /**
  * Returns an [ImmutableIntArray] with the contents of this sequence.
  */
-public fun Sequence<Int>.toImmutableIntArray(): ImmutableIntArray {
+public fun Sequence<Int>.toImmutableArray(): ImmutableIntArray {
     val elements = this.toList()
     return ImmutableIntArray(elements.size) { elements[it] }
 }
@@ -62,7 +62,7 @@ public fun Sequence<Int>.toImmutableIntArray(): ImmutableIntArray {
 /**
  * Returns an [ImmutableLongArray] with the contents of this sequence.
  */
-public fun Sequence<Long>.toImmutableLongArray(): ImmutableLongArray {
+public fun Sequence<Long>.toImmutableArray(): ImmutableLongArray {
     val elements = this.toList()
     return ImmutableLongArray(elements.size) { elements[it] }
 }
@@ -70,7 +70,7 @@ public fun Sequence<Long>.toImmutableLongArray(): ImmutableLongArray {
 /**
  * Returns an [ImmutableFloatArray] with the contents of this sequence.
  */
-public fun Sequence<Float>.toImmutableFloatArray(): ImmutableFloatArray {
+public fun Sequence<Float>.toImmutableArray(): ImmutableFloatArray {
     val elements = this.toList()
     return ImmutableFloatArray(elements.size) { elements[it] }
 }
@@ -78,7 +78,7 @@ public fun Sequence<Float>.toImmutableFloatArray(): ImmutableFloatArray {
 /**
  * Returns an [ImmutableDoubleArray] with the contents of this sequence.
  */
-public fun Sequence<Double>.toImmutableDoubleArray(): ImmutableDoubleArray {
+public fun Sequence<Double>.toImmutableArray(): ImmutableDoubleArray {
     val elements = this.toList()
     return ImmutableDoubleArray(elements.size) { elements[it] }
 }

@@ -24,7 +24,7 @@ private fun FileSpec.Builder.addIterableToImmutableArray() {
         addFunction(
             kdoc = "Returns an [${baseType.generatedClassName}] with the contents of [this] collection.",
             receiver = Iterable::class.asTypeName().parameterizedBy(baseType.type),
-            name = "to${baseType.generatedClassName}",
+            name = "toImmutableArray",
             returns = baseType.getGeneratedTypeName(),
         ) {
             if (baseType == BaseType.GENERIC) {

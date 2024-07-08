@@ -1,13 +1,9 @@
 package com.danrusu.pods4k.immutableArrays
 
-import com.danrusu.pods4k.immutableArrays.ImmutableArray
-import com.danrusu.pods4k.immutableArrays.ImmutableBooleanArray
-import com.danrusu.pods4k.immutableArrays.ImmutableIntArray
-import com.danrusu.pods4k.immutableArrays.toImmutableArray
-import com.danrusu.pods4k.immutableArrays.toImmutableIntArray
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isA
+import strikt.assertions.isEqualTo
 
 class ArraysTest {
     @Test
@@ -28,25 +24,30 @@ class ArraysTest {
     @Test
     fun `generic array toImmutableArray validation`() {
         with(emptyArray<String>()) {
-            val immutable = this.toImmutableArray()
-            expectThat(immutable).isA<ImmutableArray<String>>()
-
-            expectThat(immutable).isEmpty()
+            expectThat(this.toImmutableArray())
+                .isEqualTo(emptyImmutableArray())
         }
         with(arrayOf("one", "two")) {
-            val immutable = this.toImmutableArray()
-            expectThat(immutable).isA<ImmutableArray<String>>()
-            expectThat(immutable).containsExactly("one", "two")
+            expectThat(this.toImmutableArray())
+                .isEqualTo(immutableArrayOf("one", "two"))
         }
         with(emptyArray<Int>()) {
-            val immutable = this.toImmutableIntArray()
-            expectThat(immutable).isA<ImmutableIntArray>()
-            expectThat(immutable).isEmpty()
+            expectThat(this.toImmutableArray())
+                .isA<ImmutableIntArray>()
+                .isEqualTo(emptyImmutableIntArray())
+
+            expectThat(this.toImmutableArray<Int>())
+                .isA<ImmutableArray<Int>>()
+                .isEqualTo(emptyImmutableArray())
         }
         with(arrayOf(1, 3, 5)) {
-            val immutable = this.toImmutableIntArray()
-            expectThat(immutable).isA<ImmutableIntArray>()
-            expectThat(immutable).containsExactly(1, 3, 5)
+            expectThat(this.toImmutableArray())
+                .isA<ImmutableIntArray>()
+                .isEqualTo(immutableArrayOf(1, 3, 5))
+
+            expectThat(this.toImmutableArray<Int>())
+                .isA<ImmutableArray<Int>>()
+                .isEqualTo(immutableArrayOf<Int>(1, 3, 5))
         }
     }
 }

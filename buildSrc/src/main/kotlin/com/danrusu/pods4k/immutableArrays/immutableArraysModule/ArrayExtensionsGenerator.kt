@@ -25,7 +25,7 @@ private fun FileSpec.Builder.addGenericArrayToImmutableArray() {
         addFunction(
             kdoc = "Returns an [${baseType.generatedClassName}] with the contents of this array.",
             receiver = Array::class.asTypeName().parameterizedBy(baseType.type),
-            name = "to${baseType.generatedClassName}",
+            name = "toImmutableArray",
             returns = baseType.getGeneratedTypeName(),
         ) {
             if (baseType == BaseType.GENERIC) {

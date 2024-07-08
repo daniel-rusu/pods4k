@@ -116,27 +116,29 @@ ImmutableBooleanArray(size = 3) { it % 2 == 0 } // [true, false, true]
 **Creating from regular arrays:**
 
 ```kotlin
-val regularArray = arrayOf("Bob", "Jane")
-regularArray.toImmutableArray()
+// Creating from primitive arrays:
+val primitiveInts = intArrayOf(1, 2, 3)
+primitiveInts.toImmutableArray() // [1, 2, 3] ImmutableIntArray
 
-// Creating from arrays of auto-boxed values will maintain the same type keeping those wrapper objects:
+// Creating from arrays of auto-boxed values:
 val autoBoxedBooleans = arrayOf(true, false, true) // [Boolean(true), Boolean(false), Boolean(true)]
-autoBoxedBooleans.toImmutableArray() // [Boolean(true), Boolean(false), Boolean(true)]
+// Auto-boxed values are transformed into a primitive array to reduce memory usage and improve performance:
+autoBoxedBooleans.toImmutableArray() // [true, false, true] primitive boolean array
 
-// However, you can choose the more efficient primitive array type instead:
-autoBoxedBooleans.toImmutableBooleanArray() // [true, false, true]
+// Specifying the generic type forces a generic immutable array which stores references to the existing wrapper objects:
+autoBoxedBooleans.toImmutableArray<Boolean>() // [Boolean(true), Boolean(false), Boolean(true)]
 ```
 
-**Creating from collections:**
+**Creating from iterables, collections, or sequences:**
 
 ```kotlin
 val list = listOf(1, 2, 3)
 
-// Creating from collections of auto-boxed values will maintain the same type keeping those wrapper objects:
-list.toImmutableArray() // [Integer(1), Integer(2), Integer(3)]
+// Auto-boxed values are transformed into a primitive array to reduce memory usage and improve performance:
+list.toImmutableArray() // [1, 2, 3] primitive int array
 
-// However, you can choose the more efficient primitive array type instead:
-list.toImmutableIntArray() // [1, 2, 3] primitive int array
+// Specifying the generic type forces a generic immutable array which stores references to the existing wrapper objects:
+list.toImmutableArray<Int>() // [Integer(1), Integer(2), Integer(3)]
 ```
 
 </details>
@@ -184,11 +186,12 @@ names.last() // "Jill"
 ```
 
 **Accessing by condition:**
+
 ```kotlin
 val numbers = immutableArrayOf(1, 2, 3, 4, 5)
 
 names.first { it % 2 == 0 } // 2
-names.last { it % 2 == 0} // 4
+names.last { it % 2 == 0 } // 4
 
 names.firstOrNull { it > 5 } // null
 names.lastOrNull { it > 5 } // null

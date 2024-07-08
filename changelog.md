@@ -5,6 +5,8 @@ Change Log
 
 ### Immutable Arrays
 
+* Breaking Change: Extension functions `toImmutableIntArray`, `toImmutableFloatArray`, etc. have been renamed
+  to `toImmutableArray` so that the most efficient primitive variant is chosen by default.
 * New: Add `mapIndexed` method
 * New: Add `map` method
 
