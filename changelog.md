@@ -5,6 +5,7 @@ Change Log
 
 ### Immutable Arrays
 
+* Performance: Optimize the creation of immutable arrays from regular arrays
 * Breaking Change: Extension functions `toImmutableIntArray`, `toImmutableFloatArray`, etc. have been renamed
   to `toImmutableArray` so that the most efficient primitive variant is chosen by default.
 * New: Add `mapIndexed` method

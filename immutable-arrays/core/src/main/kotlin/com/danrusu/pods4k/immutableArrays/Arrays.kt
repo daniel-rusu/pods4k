@@ -18,55 +18,89 @@ import kotlin.Long
 import kotlin.LongArray
 import kotlin.Short
 import kotlin.ShortArray
+import kotlin.Suppress
 
 /**
  * Returns an [ImmutableBooleanArray] with the contents of this array.
  */
-public fun BooleanArray.toImmutableArray(): ImmutableBooleanArray =
-        ImmutableBooleanArray(size) { this[it] }
+public fun BooleanArray.toImmutableArray(): ImmutableBooleanArray {
+    val backingArray = BooleanArray(size)
+    System.arraycopy(this, 0, backingArray, 0, size)
+    return ImmutableBooleanArray(backingArray)
+}
 
 /**
  * Returns an [ImmutableByteArray] with the contents of this array.
  */
-public fun ByteArray.toImmutableArray(): ImmutableByteArray = ImmutableByteArray(size) { this[it] }
+public fun ByteArray.toImmutableArray(): ImmutableByteArray {
+    val backingArray = ByteArray(size)
+    System.arraycopy(this, 0, backingArray, 0, size)
+    return ImmutableByteArray(backingArray)
+}
 
 /**
  * Returns an [ImmutableCharArray] with the contents of this array.
  */
-public fun CharArray.toImmutableArray(): ImmutableCharArray = ImmutableCharArray(size) { this[it] }
+public fun CharArray.toImmutableArray(): ImmutableCharArray {
+    val backingArray = CharArray(size)
+    System.arraycopy(this, 0, backingArray, 0, size)
+    return ImmutableCharArray(backingArray)
+}
 
 /**
  * Returns an [ImmutableShortArray] with the contents of this array.
  */
-public fun ShortArray.toImmutableArray(): ImmutableShortArray =
-        ImmutableShortArray(size) { this[it] }
+public fun ShortArray.toImmutableArray(): ImmutableShortArray {
+    val backingArray = ShortArray(size)
+    System.arraycopy(this, 0, backingArray, 0, size)
+    return ImmutableShortArray(backingArray)
+}
 
 /**
  * Returns an [ImmutableIntArray] with the contents of this array.
  */
-public fun IntArray.toImmutableArray(): ImmutableIntArray = ImmutableIntArray(size) { this[it] }
+public fun IntArray.toImmutableArray(): ImmutableIntArray {
+    val backingArray = IntArray(size)
+    System.arraycopy(this, 0, backingArray, 0, size)
+    return ImmutableIntArray(backingArray)
+}
 
 /**
  * Returns an [ImmutableLongArray] with the contents of this array.
  */
-public fun LongArray.toImmutableArray(): ImmutableLongArray = ImmutableLongArray(size) { this[it] }
+public fun LongArray.toImmutableArray(): ImmutableLongArray {
+    val backingArray = LongArray(size)
+    System.arraycopy(this, 0, backingArray, 0, size)
+    return ImmutableLongArray(backingArray)
+}
 
 /**
  * Returns an [ImmutableFloatArray] with the contents of this array.
  */
-public fun FloatArray.toImmutableArray(): ImmutableFloatArray =
-        ImmutableFloatArray(size) { this[it] }
+public fun FloatArray.toImmutableArray(): ImmutableFloatArray {
+    val backingArray = FloatArray(size)
+    System.arraycopy(this, 0, backingArray, 0, size)
+    return ImmutableFloatArray(backingArray)
+}
 
 /**
  * Returns an [ImmutableDoubleArray] with the contents of this array.
  */
-public fun DoubleArray.toImmutableArray(): ImmutableDoubleArray =
-        ImmutableDoubleArray(size) { this[it] }
+public fun DoubleArray.toImmutableArray(): ImmutableDoubleArray {
+    val backingArray = DoubleArray(size)
+    System.arraycopy(this, 0, backingArray, 0, size)
+    return ImmutableDoubleArray(backingArray)
+}
 
 /**
  * Returns an [ImmutableArray] with the contents of this array.
  */
-public fun <T> Array<T>.toImmutableArray(): ImmutableArray<T> = ImmutableArray(size) { this[it] }
+@Suppress("UNCHECKED_CAST")
+public fun <T> Array<T>.toImmutableArray(): ImmutableArray<T> {
+    val backingArray = arrayOfNulls<Any?>(size) as Array<T>
+    System.arraycopy(this, 0, backingArray, 0, size)
+    return ImmutableArray(backingArray)
+}
 
 /**
  * Returns an [ImmutableBooleanArray] with the contents of this array.
