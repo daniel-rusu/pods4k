@@ -10,3 +10,7 @@ internal fun FunSpec.Builder.suppress(warning: String): FunSpec.Builder {
             .build()
     )
 }
+
+internal fun FunSpec.Builder.statement(statement: String, vararg args: Any) {
+    addStatement(statement, *args)
+}

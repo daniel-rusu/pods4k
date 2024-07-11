@@ -4,11 +4,12 @@ import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.Config
 import com.danrusu.pods4k.utils.ParameterDSL
 import com.danrusu.pods4k.utils.addClass
-import com.danrusu.pods4k.utils.addCompanionObject
-import com.danrusu.pods4k.utils.addFunction
 import com.danrusu.pods4k.utils.addPrimaryConstructor
-import com.danrusu.pods4k.utils.addProperty
+import com.danrusu.pods4k.utils.companionObject
 import com.danrusu.pods4k.utils.createFile
+import com.danrusu.pods4k.utils.function
+import com.danrusu.pods4k.utils.property
+import com.danrusu.pods4k.utils.statement
 import com.danrusu.pods4k.utils.suppress
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.KModifier
@@ -49,18 +50,18 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 addTypeVariable(TypeVariableName(typeName, KModifier.OUT))
             }
             addPrimaryConstructor(baseType)
-            addProperty<Int>(
+            property<Int>(
                 name = "size",
                 getModifiers = listOf(KModifier.INLINE),
                 get = "return values.size"
             )
-            addProperty<Int>(
+            property<Int>(
                 kdoc = "Returns the index of the last element or -1 if the array is empty.",
                 name = "lastIndex",
                 getModifiers = listOf(KModifier.INLINE),
                 get = "return values.lastIndex",
             )
-            addProperty<IntRange>(
+            property<IntRange>(
                 kdoc = "Returns the range of valid indices for the array.",
                 name = "indices",
                 getModifiers = listOf(KModifier.INLINE),
@@ -168,7 +169,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             )
             addMapFunction(baseType)
             addMapIndexedFunction(baseType)
-            addCompanionObject {
+            companionObject {
                 if (baseType == BaseType.GENERIC) {
                     suppress("UNCHECKED_CAST")
                 }
@@ -191,7 +192,7 @@ private operator fun String.invoke(
     returns: TypeName = Unit::class.asTypeName(),
 ) {
     val params = ParameterDSL().apply(parameters).build()
-    addFunction(
+    function(
         kdoc = kdoc,
         // Inline all delegated functions so that we get the same performance as if working with a regular array
         modifiers = modifiers + KModifier.INLINE,
@@ -199,7 +200,7 @@ private operator fun String.invoke(
         parameters = parameters,
         returns = returns,
     ) {
-        addStatement("return values.${this@invoke}(${params.joinToString { it.name }})")
+        statement("return values.${this@invoke}(${params.joinToString { it.name }})")
     }
 }
 
@@ -211,7 +212,7 @@ private fun TypeSpec.Builder.addPrimaryConstructor(baseType: BaseType) {
         parameters = { "values"(type = baseType.backingArrayType) },
     ) {
         addAnnotation(PublishedApi::class)
-    }.addProperty(
+    }.property(
         kdoc = """
             This is internal instead of private so we can have inline functions that delegate to the same function on the backing array.  The backing array won't be accessible from Kotlin code since the auto-generarted arrays are in their own module and the internal modifier prevents outside access.  The constructor is also internal preventing anyone from creating an "instance" that points to an array that they have access to.
             
@@ -229,7 +230,7 @@ private fun TypeSpec.Builder.addPrimaryConstructor(baseType: BaseType) {
 }
 
 private fun TypeSpec.Builder.overrideToString() {
-    addFunction(
+    function(
         modifiers = listOf(KModifier.OVERRIDE),
         name = "toString",
         returns = String::class.asTypeName(),
@@ -244,7 +245,7 @@ private fun TypeSpec.Builder.addEqualsOperator(baseType: BaseType) {
         BaseType.GENERIC -> baseType.getGeneratedClass().parameterizedBy(STAR)
         else -> baseType.getGeneratedClass()
     }
-    addFunction(
+    function(
         modifiers = listOf(KModifier.OPERATOR),
         name = "equals",
         parameters = { "other"(type = otherType) },
@@ -263,7 +264,7 @@ private fun TypeSpec.Builder.addEqualsOperator(baseType: BaseType) {
 private fun TypeSpec.Builder.overrideHashCode(baseType: BaseType) {
     val prime1 = 7
     val prime2 = 31
-    addFunction(
+    function(
         modifiers = listOf(KModifier.OVERRIDE),
         name = "hashCode",
         returns = Int::class.asTypeName(),
@@ -287,7 +288,7 @@ private fun TypeSpec.Builder.overrideHashCode(baseType: BaseType) {
 }
 
 private fun TypeSpec.Builder.addArrayIndexOperator(baseType: BaseType) {
-    addFunction(
+    function(
         modifiers = listOf(KModifier.INLINE, KModifier.OPERATOR),
         kdoc = "Returns the element at the specified [index]. This method can be called using the index operator.",
         name = "get",
@@ -299,7 +300,7 @@ private fun TypeSpec.Builder.addArrayIndexOperator(baseType: BaseType) {
 
 private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
     for (n in 1..Config.NUM_COMPONENT_N_FUNCTIONS) {
-        addFunction(
+        function(
             modifiers = listOf(KModifier.OPERATOR),
             name = "component$n",
             returns = baseType.type,
@@ -313,7 +314,7 @@ private fun TypeSpec.Builder.addEmptyProperty(baseType: BaseType) {
         BaseType.GENERIC -> baseType.getGeneratedClass().parameterizedBy(NOTHING)
         else -> baseType.getGeneratedClass()
     }
-    addProperty(
+    property(
         modifiers = listOf(KModifier.INTERNAL),
         name = "EMPTY",
         type = type,
@@ -329,7 +330,7 @@ private fun TypeSpec.Builder.addEmptyProperty(baseType: BaseType) {
 
 private fun TypeSpec.Builder.addInvokeOperator(baseType: BaseType) {
     val returnType = baseType.getGeneratedTypeName()
-    addFunction(
+    function(
         kdoc = """
             Returns an ${baseType.generatedClassName} instance of the specified [size], where each element is calculated by calling the specified [init] function.
             
@@ -349,12 +350,12 @@ private fun TypeSpec.Builder.addInvokeOperator(baseType: BaseType) {
         if (baseType == BaseType.GENERIC) {
             addTypeVariable(baseType.type as TypeVariableName)
         }
-        addStatement("if (size == 0) return EMPTY")
-        addStatement("val backingArray = ${baseType.backingArrayConstructor}(size) { index -> init(index) }")
+        statement("if (size == 0) return EMPTY")
+        statement("val backingArray = ${baseType.backingArrayConstructor}(size) { index -> init(index) }")
         if (baseType == BaseType.GENERIC) {
-            addStatement("return ${baseType.generatedClassName}(backingArray as %T)", baseType.backingArrayType)
+            statement("return ${baseType.generatedClassName}(backingArray as %T)", baseType.backingArrayType)
         } else {
-            addStatement("return ${baseType.generatedClassName}(backingArray)")
+            statement("return ${baseType.generatedClassName}(backingArray)")
         }
     }
 }
@@ -370,7 +371,7 @@ private fun TypeSpec.Builder.addMapFunction(baseType: BaseType) {
             mappedType = resultType.type
             resultTypeName = resultType.getGeneratedTypeName()
         }
-        addFunction(
+        function(
             modifiers = listOf(KModifier.INLINE),
             kdoc = "Returns an immutable array containing the results of applying the given [transform] function to each element.",
             name = "map",
@@ -404,7 +405,7 @@ private fun TypeSpec.Builder.addMapIndexedFunction(baseType: BaseType) {
             mappedType = resultType.type
             resultTypeName = resultType.getGeneratedTypeName()
         }
-        addFunction(
+        function(
             modifiers = listOf(KModifier.INLINE),
             kdoc = "Returns an immutable array containing the results of applying the given [transform] function to each element and its index.",
             name = "mapIndexed",

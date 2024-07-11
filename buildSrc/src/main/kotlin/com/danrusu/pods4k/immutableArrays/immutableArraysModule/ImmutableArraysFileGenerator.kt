@@ -2,8 +2,9 @@ package com.danrusu.pods4k.immutableArrays.immutableArraysModule
 
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.Config
-import com.danrusu.pods4k.utils.addFunction
 import com.danrusu.pods4k.utils.createFile
+import com.danrusu.pods4k.utils.function
+import com.danrusu.pods4k.utils.statement
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
@@ -25,17 +26,17 @@ internal object ImmutableArraysFileGenerator {
 
 private fun FileSpec.Builder.addImmutableArrayOf() {
     // Calling immutableArrayOf() without arguments will delegate to the empty generic factory function
-    addFunction(
+    function(
         kdoc = "Returns an empty [${BaseType.GENERIC.generatedClassName}].",
         name = "immutableArrayOf",
         returns = BaseType.GENERIC.getGeneratedTypeName(),
     ) {
         addTypeVariable(BaseType.GENERIC.type as TypeVariableName)
-        addStatement("return empty${BaseType.GENERIC.generatedClassName}()")
+        statement("return empty${BaseType.GENERIC.generatedClassName}()")
     }
 
     for (baseType in BaseType.values()) {
-        addFunction(
+        function(
             kdoc = "Returns an [${baseType.generatedClassName}] containing the specified [values].",
             name = "immutableArrayOf",
             parameters = { "values"(type = baseType.type, isVararg = true) },
@@ -44,14 +45,14 @@ private fun FileSpec.Builder.addImmutableArrayOf() {
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
-            addStatement("return ${baseType.generatedClassName}(values.size) { values[it] }")
+            statement("return ${baseType.generatedClassName}(values.size) { values[it] }")
         }
     }
 }
 
 private fun FileSpec.Builder.addEmptyFunctions() {
     for (baseType in BaseType.values()) {
-        addFunction(
+        function(
             kdoc = "Returns an empty [${baseType.generatedClassName}].",
             name = "empty${baseType.generatedClassName}",
             returns = baseType.getGeneratedTypeName(),
@@ -59,7 +60,7 @@ private fun FileSpec.Builder.addEmptyFunctions() {
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
-            addStatement("return ${baseType.generatedClassName}.EMPTY")
+            statement("return ${baseType.generatedClassName}.EMPTY")
         }
     }
 }
@@ -68,7 +69,7 @@ private fun FileSpec.Builder.addGenericImmutableArrayToPrimitiveImmutableArray()
     for (baseType in BaseType.values()) {
         if (baseType == BaseType.GENERIC) continue
 
-        addFunction(
+        function(
             kdoc = """
                 Returns an [${baseType.generatedClassName}] containing the values of this array.
                 
@@ -86,7 +87,7 @@ private fun FileSpec.Builder.addPrimitiveImmutableArrayToTypedImmutableArray() {
     for (baseType in BaseType.values()) {
         if (baseType == BaseType.GENERIC) continue
 
-        addFunction(
+        function(
             kdoc = """
                 Returns a typed [${baseType.generatedClassName}] containing the values of this array.
                 
@@ -106,7 +107,7 @@ private fun FileSpec.Builder.addImmutableArrayGetOrElse() {
             BaseType.GENERIC -> baseType.getGeneratedClass().parameterizedBy(baseType.type)
             else -> baseType.getGeneratedClass()
         }
-        addFunction(
+        function(
             kdoc = "See [Array.getOrElse]",
             modifiers = listOf(KModifier.INLINE),
             receiver = receiver,
@@ -120,7 +121,7 @@ private fun FileSpec.Builder.addImmutableArrayGetOrElse() {
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
-            addStatement("return values.getOrElse(index, defaultValue)")
+            statement("return values.getOrElse(index, defaultValue)")
         }
     }
 }

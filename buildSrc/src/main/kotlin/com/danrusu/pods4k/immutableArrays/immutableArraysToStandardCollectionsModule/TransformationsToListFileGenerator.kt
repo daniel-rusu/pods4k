@@ -2,7 +2,7 @@ package com.danrusu.pods4k.immutableArrays.immutableArraysToStandardCollectionsM
 
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.Config
-import com.danrusu.pods4k.utils.addFunction
+import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.createFile
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
@@ -26,7 +26,7 @@ private fun FileSpec.Builder.addToList() {
             BaseType.GENERIC -> baseType.getGeneratedClass().parameterizedBy(baseType.type)
             else -> baseType.getGeneratedClass()
         }
-        addFunction(
+        function(
             kdoc = "See [Array.toList]",
             receiver = receiver,
             name = "toList",
@@ -52,7 +52,7 @@ private fun FileSpec.Builder.addToMutableList() {
             BaseType.GENERIC -> baseType.getGeneratedClass().parameterizedBy(baseType.type)
             else -> baseType.getGeneratedClass()
         }
-        addFunction(
+        function(
             kdoc = "See [Array.toMutableList]",
             receiver = receiver,
             name = "toMutableList",

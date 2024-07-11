@@ -2,8 +2,8 @@ package com.danrusu.pods4k.immutableArrays.immutableArraysModule
 
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.Config
-import com.danrusu.pods4k.utils.addFunction
 import com.danrusu.pods4k.utils.createFile
+import com.danrusu.pods4k.utils.function
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeVariableName
@@ -21,7 +21,7 @@ internal object SequenceExtensionsGenerator {
 
 private fun FileSpec.Builder.addSequenceToImmutableArray() {
     for (baseType in BaseType.values()) {
-        addFunction(
+        function(
             kdoc = "Returns an [${baseType.generatedClassName}] with the contents of this sequence.",
             receiver = Sequence::class.asTypeName().parameterizedBy(baseType.type),
             name = "toImmutableArray",

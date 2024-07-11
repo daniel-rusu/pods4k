@@ -2,7 +2,7 @@ package com.danrusu.pods4k.immutableArrays.immutableArraysModule
 
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.Config
-import com.danrusu.pods4k.utils.addFunction
+import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.createFile
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
@@ -21,7 +21,7 @@ internal object CollectionExtensionsGenerator {
 
 private fun FileSpec.Builder.addIterableToImmutableArray() {
     for (baseType in BaseType.values()) {
-        addFunction(
+        function(
             kdoc = "Returns an [${baseType.generatedClassName}] with the contents of [this] collection.",
             receiver = Iterable::class.asTypeName().parameterizedBy(baseType.type),
             name = "toImmutableArray",

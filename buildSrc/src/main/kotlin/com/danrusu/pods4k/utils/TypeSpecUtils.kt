@@ -30,11 +30,11 @@ internal inline fun TypeSpec.Builder.addPrimaryConstructor(
     )
 }
 
-internal inline fun TypeSpec.Builder.addCompanionObject(body: TypeSpec.Builder.() -> Unit): TypeSpec.Builder {
+internal inline fun TypeSpec.Builder.companionObject(body: TypeSpec.Builder.() -> Unit): TypeSpec.Builder {
     return addType(TypeSpec.companionObjectBuilder().apply(body).build())
 }
 
-internal inline fun <reified T : Any> TypeSpec.Builder.addProperty(
+internal inline fun <reified T : Any> TypeSpec.Builder.property(
     kdoc: String? = null,
     modifiers: List<KModifier> = emptyList(),
     name: String,
@@ -43,10 +43,10 @@ internal inline fun <reified T : Any> TypeSpec.Builder.addProperty(
     get: String? = null,
     body: PropertySpec.Builder.() -> Unit = {},
 ): TypeSpec.Builder {
-    return addProperty(kdoc, modifiers, name, type = T::class.asTypeName(), init, getModifiers, get, body)
+    return property(kdoc, modifiers, name, type = T::class.asTypeName(), init, getModifiers, get, body)
 }
 
-internal inline fun TypeSpec.Builder.addProperty(
+internal inline fun TypeSpec.Builder.property(
     kdoc: String? = null,
     modifiers: List<KModifier> = emptyList(),
     name: String,
@@ -73,7 +73,7 @@ internal inline fun TypeSpec.Builder.addProperty(
     )
 }
 
-internal inline fun TypeSpec.Builder.addFunction(
+internal inline fun TypeSpec.Builder.function(
     kdoc: String? = null,
     modifiers: List<KModifier> = emptyList(),
     name: String,
@@ -81,12 +81,12 @@ internal inline fun TypeSpec.Builder.addFunction(
     returns: TypeName? = null,
     code: String,
 ): TypeSpec.Builder {
-    return addFunction(kdoc, modifiers, name, parameters, returns) {
+    return function(kdoc, modifiers, name, parameters, returns) {
         addCode(code)
     }
 }
 
-internal inline fun TypeSpec.Builder.addFunction(
+internal inline fun TypeSpec.Builder.function(
     kdoc: String? = null,
     modifiers: List<KModifier> = emptyList(),
     name: String,
