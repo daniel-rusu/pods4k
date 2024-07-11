@@ -9,13 +9,11 @@ import kotlin.Float
 import kotlin.Int
 import kotlin.Long
 import kotlin.Short
-import kotlin.Suppress
 
 /**
  * Returns an empty [ImmutableArray].
  */
-@Suppress("UNCHECKED_CAST")
-public fun <T> emptyImmutableArray(): ImmutableArray<T> = ImmutableArray.EMPTY as ImmutableArray<T>
+public fun <T> emptyImmutableArray(): ImmutableArray<T> = ImmutableArray.EMPTY
 
 /**
  * Returns an empty [ImmutableBooleanArray].

@@ -12,6 +12,7 @@ import com.danrusu.pods4k.utils.createFile
 import com.danrusu.pods4k.utils.suppress
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.KModifier
+import com.squareup.kotlinpoet.NOTHING
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.STAR
 import com.squareup.kotlinpoet.TypeName
@@ -45,9 +46,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addAnnotation(JvmInline::class)
             if (baseType == BaseType.GENERIC) {
                 val typeName = (baseType.type as TypeVariableName).name
-                addTypeVariable(
-                    TypeVariableName.invoke(typeName, KModifier.OUT)
-                )
+                addTypeVariable(TypeVariableName(typeName, KModifier.OUT))
             }
             addPrimaryConstructor(baseType)
             addProperty<Int>(
@@ -170,6 +169,9 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addMapFunction(baseType)
             addMapIndexedFunction(baseType)
             addCompanionObject {
+                if (baseType == BaseType.GENERIC) {
+                    suppress("UNCHECKED_CAST")
+                }
                 addEmptyProperty(baseType)
                 addInvokeOperator(baseType)
             }
@@ -267,20 +269,19 @@ private fun TypeSpec.Builder.overrideHashCode(baseType: BaseType) {
         returns = Int::class.asTypeName(),
     ) {
         addComment("Start with non-zero hash so that arrays that start with a different number of zero-hash elements end up with different hashCodes")
+
+        val hashCodeFormula = when (baseType) {
+            BaseType.GENERIC -> "$prime2 * hashCode + (value?.hashCode() ?: 0)"
+            else -> "$prime2 * hashCode + value.hashCode()"
+        }
         addCode(
-            """ 
-            var hashCode = $prime1
-            for (value in values) {
-                ${
-                if (baseType == BaseType.GENERIC) {
-                    "hashCode = $prime2 * hashCode + (value?.hashCode() ?: 0)"
-                } else {
-                    "hashCode = $prime2 * hashCode + value.hashCode()"
+            """
+                var hashCode = $prime1
+                for (value in values) {
+                    hashCode = $hashCodeFormula
                 }
-            }
-            }
-            return hashCode
-        """.trimIndent()
+                return hashCode
+            """.trimIndent()
         )
     }
 }
@@ -309,7 +310,7 @@ private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
 
 private fun TypeSpec.Builder.addEmptyProperty(baseType: BaseType) {
     val type = when (baseType) {
-        BaseType.GENERIC -> baseType.getGeneratedClass().parameterizedBy(Any::class.asTypeName().copy(nullable = true))
+        BaseType.GENERIC -> baseType.getGeneratedClass().parameterizedBy(NOTHING)
         else -> baseType.getGeneratedClass()
     }
     addProperty(
@@ -319,7 +320,7 @@ private fun TypeSpec.Builder.addEmptyProperty(baseType: BaseType) {
     ) {
         addAnnotation(PublishedApi::class)
         if (baseType == BaseType.GENERIC) {
-            initializer("${baseType.generatedClassName}(emptyArray())")
+            initializer("${baseType.generatedClassName}(emptyArray<Any>()) as %T", type)
         } else {
             initializer("${baseType.generatedClassName}(${baseType.backingArrayConstructor}(0))")
         }
@@ -346,13 +347,9 @@ private fun TypeSpec.Builder.addInvokeOperator(baseType: BaseType) {
         returns = returnType,
     ) {
         if (baseType == BaseType.GENERIC) {
-            suppress("UNCHECKED_CAST")
             addTypeVariable(baseType.type as TypeVariableName)
-            addStatement("if (size == 0) return EMPTY as %T", returnType)
-        } else {
-            addStatement("if (size == 0) return EMPTY")
         }
-
+        addStatement("if (size == 0) return EMPTY")
         addStatement("val backingArray = ${baseType.backingArrayConstructor}(size) { index -> init(index) }")
         if (baseType == BaseType.GENERIC) {
             addStatement("return ${baseType.generatedClassName}(backingArray as %T)", baseType.backingArrayType)
@@ -391,11 +388,7 @@ private fun TypeSpec.Builder.addMapFunction(baseType: BaseType) {
             if (resultType == BaseType.GENERIC) {
                 addTypeVariable(mappedType as TypeVariableName)
             }
-            addCode(
-                """
-                    return ${resultType.generatedClassName}(size) { transform(get(it)) }
-                """.trimIndent()
-            )
+            addCode("return ${resultType.generatedClassName}(size) { transform(get(it)) }")
         }
     }
 }
@@ -429,11 +422,7 @@ private fun TypeSpec.Builder.addMapIndexedFunction(baseType: BaseType) {
             if (resultType == BaseType.GENERIC) {
                 addTypeVariable(mappedType as TypeVariableName)
             }
-            addCode(
-                """
-                    return ${resultType.generatedClassName}(size) { transform(it, get(it)) }
-                """.trimIndent()
-            )
+            addCode("return ${resultType.generatedClassName}(size) { transform(it, get(it)) }")
         }
     }
 }

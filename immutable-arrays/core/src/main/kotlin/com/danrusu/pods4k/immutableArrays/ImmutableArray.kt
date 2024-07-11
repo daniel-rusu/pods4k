@@ -1,7 +1,6 @@
 // Auto-generated file. DO NOT EDIT!
 package com.danrusu.pods4k.immutableArrays
 
-import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
 import kotlin.Byte
@@ -10,6 +9,7 @@ import kotlin.Double
 import kotlin.Float
 import kotlin.Int
 import kotlin.Long
+import kotlin.Nothing
 import kotlin.OverloadResolutionByLambdaReturnType
 import kotlin.PublishedApi
 import kotlin.Short
@@ -361,9 +361,11 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     public inline fun mapIndexed(transform: (index: Int, element: T) -> Double):
             ImmutableDoubleArray = ImmutableDoubleArray(size) { transform(it, get(it)) }
 
+    @Suppress("UNCHECKED_CAST")
     public companion object {
         @PublishedApi
-        internal val EMPTY: ImmutableArray<Any?> = ImmutableArray(emptyArray())
+        internal val EMPTY: ImmutableArray<Nothing> = ImmutableArray(emptyArray<Any>()) as
+                ImmutableArray<Nothing>
 
         /**
          * Returns an ImmutableArray instance of the specified [size], where each element is
@@ -376,10 +378,9 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
          * We're using the invoke method instead of a regular constructor so that we can declare it
          * inline.  The call site will look like a regular constructor call.
          */
-        @Suppress("UNCHECKED_CAST")
         public inline operator fun <T> invoke(size: Int, `init`: (index: Int) -> T):
                 ImmutableArray<T> {
-            if (size == 0) return EMPTY as ImmutableArray<T>
+            if (size == 0) return EMPTY
             val backingArray = Array<Any?>(size) { index -> init(index) }
             return ImmutableArray(backingArray as Array<out T>)
         }

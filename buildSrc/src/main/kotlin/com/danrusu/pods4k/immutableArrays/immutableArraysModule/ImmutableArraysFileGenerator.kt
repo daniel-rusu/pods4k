@@ -4,7 +4,6 @@ import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.Config
 import com.danrusu.pods4k.utils.addFunction
 import com.danrusu.pods4k.utils.createFile
-import com.danrusu.pods4k.utils.suppress
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
@@ -58,12 +57,9 @@ private fun FileSpec.Builder.addEmptyFunctions() {
             returns = baseType.getGeneratedTypeName(),
         ) {
             if (baseType == BaseType.GENERIC) {
-                suppress("UNCHECKED_CAST")
                 addTypeVariable(baseType.type as TypeVariableName)
-                addStatement("return ${baseType.generatedClassName}.EMPTY as %T", baseType.getGeneratedTypeName())
-            } else {
-                addStatement("return ${baseType.generatedClassName}.EMPTY")
             }
+            addStatement("return ${baseType.generatedClassName}.EMPTY")
         }
     }
 }
