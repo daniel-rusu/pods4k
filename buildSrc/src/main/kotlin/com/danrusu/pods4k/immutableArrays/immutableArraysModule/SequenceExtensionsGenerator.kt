@@ -4,6 +4,7 @@ import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.Config
 import com.danrusu.pods4k.utils.createFile
 import com.danrusu.pods4k.utils.function
+import com.danrusu.pods4k.utils.statement
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeVariableName
@@ -30,12 +31,8 @@ private fun FileSpec.Builder.addSequenceToImmutableArray() {
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
-            addCode(
-                """
-                    val elements = this.toList()
-                    return ${baseType.generatedClassName}(elements.size) { elements[it] }
-                """.trimIndent()
-            )
+            statement("val elements = this.toList()")
+            statement("return ${baseType.generatedClassName}(elements.size) { elements[it] }")
         }
     }
 }

@@ -2,8 +2,9 @@ package com.danrusu.pods4k.immutableArrays.immutableArraysToStandardCollectionsM
 
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.Config
-import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.createFile
+import com.danrusu.pods4k.utils.function
+import com.danrusu.pods4k.utils.statement
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
@@ -35,13 +36,9 @@ private fun FileSpec.Builder.addToList() {
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
-            addCode(
-                """
-                    val result = ArrayList<${baseType.type}>(size)
-                    forEach { result.add(it) }
-                    return result
-                """.trimIndent()
-            )
+            statement("val result = ArrayList<%T>(size)", baseType.type)
+            statement("forEach { result.add(it) }")
+            statement("return result")
         }
     }
 }
@@ -61,13 +58,9 @@ private fun FileSpec.Builder.addToMutableList() {
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
-            addCode(
-                """
-                    val result = ArrayList<${baseType.type}>(size)
-                    forEach { result.add(it) }
-                    return result
-                """.trimIndent()
-            )
+            statement("val result = ArrayList<%T>(size)", baseType.type)
+            statement("forEach { result.add(it) }")
+            statement("return result")
         }
     }
 }

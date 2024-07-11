@@ -2,8 +2,10 @@ package com.danrusu.pods4k.immutableArrays.immutableArraysModule
 
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.Config
-import com.danrusu.pods4k.utils.function
+import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.createFile
+import com.danrusu.pods4k.utils.function
+import com.danrusu.pods4k.utils.statement
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeVariableName
@@ -30,16 +32,12 @@ private fun FileSpec.Builder.addIterableToImmutableArray() {
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
-            addCode(
-                """
-                    if (this is Collection<${baseType.type}>) {
-                        val iterator = this.iterator()
-                        return ${baseType.generatedClassName}(size) { iterator.next() }
-                    }
-                    val values = this.toList()
-                    return ${baseType.generatedClassName}(values.size) { values[it] }
-                """.trimIndent()
-            )
+            controlFlow("if (this is Collection<%T>)", baseType.type) {
+                statement("val iterator = this.iterator()")
+                statement("return ${baseType.generatedClassName}(size) { iterator.next() }")
+            }
+            statement("val values = this.toList()")
+            statement("return ${baseType.generatedClassName}(values.size) { values[it] }")
         }
     }
 }

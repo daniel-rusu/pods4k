@@ -11,6 +11,18 @@ internal fun FunSpec.Builder.suppress(warning: String): FunSpec.Builder {
     )
 }
 
+internal fun FunSpec.Builder.emptyLine() {
+    statement("")
+}
+
 internal fun FunSpec.Builder.statement(statement: String, vararg args: Any) {
     addStatement(statement, *args)
+}
+
+internal fun FunSpec.Builder.controlFlow(
+    controlFlow: String,
+    vararg args: Any,
+    body: FunSpec.Builder.() -> Unit
+) {
+    beginControlFlow(controlFlow, *args).apply(body).endControlFlow()
 }

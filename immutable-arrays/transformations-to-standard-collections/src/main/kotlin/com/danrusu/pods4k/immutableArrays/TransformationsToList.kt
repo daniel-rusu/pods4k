@@ -25,7 +25,7 @@ public fun <T> ImmutableArray<T>.toList(): List<T> {
  * See [Array.toList]
  */
 public fun ImmutableBooleanArray.toList(): List<Boolean> {
-    val result = ArrayList<kotlin.Boolean>(size)
+    val result = ArrayList<Boolean>(size)
     forEach { result.add(it) }
     return result
 }
@@ -34,7 +34,7 @@ public fun ImmutableBooleanArray.toList(): List<Boolean> {
  * See [Array.toList]
  */
 public fun ImmutableByteArray.toList(): List<Byte> {
-    val result = ArrayList<kotlin.Byte>(size)
+    val result = ArrayList<Byte>(size)
     forEach { result.add(it) }
     return result
 }
@@ -43,7 +43,7 @@ public fun ImmutableByteArray.toList(): List<Byte> {
  * See [Array.toList]
  */
 public fun ImmutableCharArray.toList(): List<Char> {
-    val result = ArrayList<kotlin.Char>(size)
+    val result = ArrayList<Char>(size)
     forEach { result.add(it) }
     return result
 }
@@ -52,7 +52,7 @@ public fun ImmutableCharArray.toList(): List<Char> {
  * See [Array.toList]
  */
 public fun ImmutableShortArray.toList(): List<Short> {
-    val result = ArrayList<kotlin.Short>(size)
+    val result = ArrayList<Short>(size)
     forEach { result.add(it) }
     return result
 }
@@ -61,7 +61,7 @@ public fun ImmutableShortArray.toList(): List<Short> {
  * See [Array.toList]
  */
 public fun ImmutableIntArray.toList(): List<Int> {
-    val result = ArrayList<kotlin.Int>(size)
+    val result = ArrayList<Int>(size)
     forEach { result.add(it) }
     return result
 }
@@ -70,7 +70,7 @@ public fun ImmutableIntArray.toList(): List<Int> {
  * See [Array.toList]
  */
 public fun ImmutableLongArray.toList(): List<Long> {
-    val result = ArrayList<kotlin.Long>(size)
+    val result = ArrayList<Long>(size)
     forEach { result.add(it) }
     return result
 }
@@ -79,7 +79,7 @@ public fun ImmutableLongArray.toList(): List<Long> {
  * See [Array.toList]
  */
 public fun ImmutableFloatArray.toList(): List<Float> {
-    val result = ArrayList<kotlin.Float>(size)
+    val result = ArrayList<Float>(size)
     forEach { result.add(it) }
     return result
 }
@@ -88,7 +88,7 @@ public fun ImmutableFloatArray.toList(): List<Float> {
  * See [Array.toList]
  */
 public fun ImmutableDoubleArray.toList(): List<Double> {
-    val result = ArrayList<kotlin.Double>(size)
+    val result = ArrayList<Double>(size)
     forEach { result.add(it) }
     return result
 }
@@ -106,7 +106,7 @@ public fun <T> ImmutableArray<T>.toMutableList(): MutableList<T> {
  * See [Array.toMutableList]
  */
 public fun ImmutableBooleanArray.toMutableList(): MutableList<Boolean> {
-    val result = ArrayList<kotlin.Boolean>(size)
+    val result = ArrayList<Boolean>(size)
     forEach { result.add(it) }
     return result
 }
@@ -115,7 +115,7 @@ public fun ImmutableBooleanArray.toMutableList(): MutableList<Boolean> {
  * See [Array.toMutableList]
  */
 public fun ImmutableByteArray.toMutableList(): MutableList<Byte> {
-    val result = ArrayList<kotlin.Byte>(size)
+    val result = ArrayList<Byte>(size)
     forEach { result.add(it) }
     return result
 }
@@ -124,7 +124,7 @@ public fun ImmutableByteArray.toMutableList(): MutableList<Byte> {
  * See [Array.toMutableList]
  */
 public fun ImmutableCharArray.toMutableList(): MutableList<Char> {
-    val result = ArrayList<kotlin.Char>(size)
+    val result = ArrayList<Char>(size)
     forEach { result.add(it) }
     return result
 }
@@ -133,7 +133,7 @@ public fun ImmutableCharArray.toMutableList(): MutableList<Char> {
  * See [Array.toMutableList]
  */
 public fun ImmutableShortArray.toMutableList(): MutableList<Short> {
-    val result = ArrayList<kotlin.Short>(size)
+    val result = ArrayList<Short>(size)
     forEach { result.add(it) }
     return result
 }
@@ -142,7 +142,7 @@ public fun ImmutableShortArray.toMutableList(): MutableList<Short> {
  * See [Array.toMutableList]
  */
 public fun ImmutableIntArray.toMutableList(): MutableList<Int> {
-    val result = ArrayList<kotlin.Int>(size)
+    val result = ArrayList<Int>(size)
     forEach { result.add(it) }
     return result
 }
@@ -151,7 +151,7 @@ public fun ImmutableIntArray.toMutableList(): MutableList<Int> {
  * See [Array.toMutableList]
  */
 public fun ImmutableLongArray.toMutableList(): MutableList<Long> {
-    val result = ArrayList<kotlin.Long>(size)
+    val result = ArrayList<Long>(size)
     forEach { result.add(it) }
     return result
 }
@@ -160,7 +160,7 @@ public fun ImmutableLongArray.toMutableList(): MutableList<Long> {
  * See [Array.toMutableList]
  */
 public fun ImmutableFloatArray.toMutableList(): MutableList<Float> {
-    val result = ArrayList<kotlin.Float>(size)
+    val result = ArrayList<Float>(size)
     forEach { result.add(it) }
     return result
 }
@@ -169,7 +169,7 @@ public fun ImmutableFloatArray.toMutableList(): MutableList<Float> {
  * See [Array.toMutableList]
  */
 public fun ImmutableDoubleArray.toMutableList(): MutableList<Double> {
-    val result = ArrayList<kotlin.Double>(size)
+    val result = ArrayList<Double>(size)
     forEach { result.add(it) }
     return result
 }

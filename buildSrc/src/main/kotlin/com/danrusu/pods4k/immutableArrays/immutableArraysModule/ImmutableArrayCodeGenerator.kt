@@ -6,7 +6,9 @@ import com.danrusu.pods4k.utils.ParameterDSL
 import com.danrusu.pods4k.utils.addClass
 import com.danrusu.pods4k.utils.addPrimaryConstructor
 import com.danrusu.pods4k.utils.companionObject
+import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.createFile
+import com.danrusu.pods4k.utils.emptyLine
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.property
 import com.danrusu.pods4k.utils.statement
@@ -250,15 +252,14 @@ private fun TypeSpec.Builder.addEqualsOperator(baseType: BaseType) {
         name = "equals",
         parameters = { "other"(type = otherType) },
         returns = Boolean::class.asTypeName(),
-        code = """
-            if (other.size != this.size) return false
-            
-            forEachIndexed { index, element ->
-                if (other[index] != element) return false
-            }
-            return true
-        """.trimIndent(),
-    )
+    ) {
+        addStatement("if (other.size != this.size) return false")
+        emptyLine()
+        controlFlow("forEachIndexed { index, element ->") {
+            addStatement("if (other[index] != element) return false")
+        }
+        addStatement("return true")
+    }
 }
 
 private fun TypeSpec.Builder.overrideHashCode(baseType: BaseType) {
@@ -271,19 +272,14 @@ private fun TypeSpec.Builder.overrideHashCode(baseType: BaseType) {
     ) {
         addComment("Start with non-zero hash so that arrays that start with a different number of zero-hash elements end up with different hashCodes")
 
-        val hashCodeFormula = when (baseType) {
-            BaseType.GENERIC -> "$prime2 * hashCode + (value?.hashCode() ?: 0)"
-            else -> "$prime2 * hashCode + value.hashCode()"
+        statement("var hashCode = $prime1")
+        controlFlow("for (value in values)") {
+            when (baseType) {
+                BaseType.GENERIC -> statement("hashCode = $prime2 * hashCode + (value?.hashCode() ?: 0)")
+                else -> statement("hashCode = $prime2 * hashCode + value.hashCode()")
+            }
         }
-        addCode(
-            """
-                var hashCode = $prime1
-                for (value in values) {
-                    hashCode = $hashCodeFormula
-                }
-                return hashCode
-            """.trimIndent()
-        )
+        statement("return hashCode")
     }
 }
 
@@ -389,7 +385,7 @@ private fun TypeSpec.Builder.addMapFunction(baseType: BaseType) {
             if (resultType == BaseType.GENERIC) {
                 addTypeVariable(mappedType as TypeVariableName)
             }
-            addCode("return ${resultType.generatedClassName}(size) { transform(get(it)) }")
+            statement("return ${resultType.generatedClassName}(size) { transform(get(it)) }")
         }
     }
 }
@@ -423,7 +419,7 @@ private fun TypeSpec.Builder.addMapIndexedFunction(baseType: BaseType) {
             if (resultType == BaseType.GENERIC) {
                 addTypeVariable(mappedType as TypeVariableName)
             }
-            addCode("return ${resultType.generatedClassName}(size) { transform(it, get(it)) }")
+            statement("return ${resultType.generatedClassName}(size) { transform(it, get(it)) }")
         }
     }
 }
