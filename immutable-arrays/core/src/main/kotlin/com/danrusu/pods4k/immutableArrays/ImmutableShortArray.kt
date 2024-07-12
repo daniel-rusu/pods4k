@@ -379,6 +379,7 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
         public inline operator fun invoke(size: Int, `init`: (index: Int) -> Short):
                 ImmutableShortArray {
             if (size == 0) return EMPTY
+
             val backingArray = ShortArray(size) { index -> init(index) }
             return ImmutableShortArray(backingArray)
         }

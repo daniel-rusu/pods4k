@@ -378,6 +378,7 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
         public inline operator fun invoke(size: Int, `init`: (index: Int) -> Char):
                 ImmutableCharArray {
             if (size == 0) return EMPTY
+
             val backingArray = CharArray(size) { index -> init(index) }
             return ImmutableCharArray(backingArray)
         }

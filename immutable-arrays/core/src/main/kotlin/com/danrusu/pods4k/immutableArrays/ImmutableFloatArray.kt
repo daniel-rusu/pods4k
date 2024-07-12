@@ -379,6 +379,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
         public inline operator fun invoke(size: Int, `init`: (index: Int) -> Float):
                 ImmutableFloatArray {
             if (size == 0) return EMPTY
+
             val backingArray = FloatArray(size) { index -> init(index) }
             return ImmutableFloatArray(backingArray)
         }

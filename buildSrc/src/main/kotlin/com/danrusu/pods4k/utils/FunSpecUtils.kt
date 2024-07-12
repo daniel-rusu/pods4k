@@ -15,6 +15,10 @@ internal fun FunSpec.Builder.emptyLine() {
     statement("")
 }
 
+internal fun FunSpec.Builder.comment(comment: String, vararg args: Any) {
+    addComment(comment, *args)
+}
+
 internal fun FunSpec.Builder.statement(statement: String, vararg args: Any) {
     addStatement(statement, *args)
 }

@@ -380,6 +380,7 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
         public inline operator fun invoke(size: Int, `init`: (index: Int) -> Double):
                 ImmutableDoubleArray {
             if (size == 0) return EMPTY
+
             val backingArray = DoubleArray(size) { index -> init(index) }
             return ImmutableDoubleArray(backingArray)
         }

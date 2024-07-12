@@ -1,7 +1,7 @@
 package com.danrusu.pods4k.immutableArrays.immutableArraysModule
 
 import com.danrusu.pods4k.immutableArrays.BaseType
-import com.danrusu.pods4k.immutableArrays.Config
+import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
 import com.danrusu.pods4k.utils.createFile
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.statement
@@ -14,7 +14,7 @@ import java.io.File
 
 internal object ArrayExtensionsGenerator {
     fun generate(destinationPath: String) {
-        val fileSpec = createFile(Config.packageName, "Arrays") {
+        val fileSpec = createFile(ImmutableArrayConfig.packageName, "Arrays") {
             addPrimitiveArrayToImmutableArray()
             addGenericArrayToImmutableArray()
         }

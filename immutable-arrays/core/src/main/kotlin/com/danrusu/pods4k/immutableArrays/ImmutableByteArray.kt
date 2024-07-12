@@ -378,6 +378,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
         public inline operator fun invoke(size: Int, `init`: (index: Int) -> Byte):
                 ImmutableByteArray {
             if (size == 0) return EMPTY
+
             val backingArray = ByteArray(size) { index -> init(index) }
             return ImmutableByteArray(backingArray)
         }

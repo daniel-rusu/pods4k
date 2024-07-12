@@ -378,6 +378,7 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
         public inline operator fun invoke(size: Int, `init`: (index: Int) -> Long):
                 ImmutableLongArray {
             if (size == 0) return EMPTY
+
             val backingArray = LongArray(size) { index -> init(index) }
             return ImmutableLongArray(backingArray)
         }

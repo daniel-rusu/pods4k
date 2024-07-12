@@ -1,7 +1,7 @@
 package com.danrusu.pods4k.immutableArrays.immutableArraysModule
 
 import com.danrusu.pods4k.immutableArrays.BaseType
-import com.danrusu.pods4k.immutableArrays.Config
+import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.createFile
 import com.danrusu.pods4k.utils.function
@@ -14,7 +14,7 @@ import java.io.File
 
 internal object CollectionExtensionsGenerator {
     fun generate(destinationPath: String) {
-        val fileSpec = createFile(Config.packageName, "Collections") {
+        val fileSpec = createFile(ImmutableArrayConfig.packageName, "Collections") {
             addIterableToImmutableArray()
         }
         fileSpec.writeTo(File(destinationPath, ""))

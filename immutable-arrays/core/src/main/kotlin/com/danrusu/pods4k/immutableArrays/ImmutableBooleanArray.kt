@@ -381,6 +381,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
         public inline operator fun invoke(size: Int, `init`: (index: Int) -> Boolean):
                 ImmutableBooleanArray {
             if (size == 0) return EMPTY
+
             val backingArray = BooleanArray(size) { index -> init(index) }
             return ImmutableBooleanArray(backingArray)
         }

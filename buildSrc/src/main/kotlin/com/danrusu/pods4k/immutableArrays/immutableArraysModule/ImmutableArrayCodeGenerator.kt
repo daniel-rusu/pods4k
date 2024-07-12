@@ -1,10 +1,11 @@
 package com.danrusu.pods4k.immutableArrays.immutableArraysModule
 
 import com.danrusu.pods4k.immutableArrays.BaseType
-import com.danrusu.pods4k.immutableArrays.Config
+import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
 import com.danrusu.pods4k.utils.ParameterDSL
 import com.danrusu.pods4k.utils.addClass
 import com.danrusu.pods4k.utils.addPrimaryConstructor
+import com.danrusu.pods4k.utils.comment
 import com.danrusu.pods4k.utils.companionObject
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.createFile
@@ -34,7 +35,7 @@ internal object ImmutableArrayCodeGenerator {
 }
 
 private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
-    return createFile(Config.packageName, baseType.generatedClassName) {
+    return createFile(ImmutableArrayConfig.packageName, baseType.generatedClassName) {
         addClass(modifiers = listOf(KModifier.VALUE), name = baseType.getGeneratedClass()) {
             addKdoc(
                 """
@@ -270,7 +271,7 @@ private fun TypeSpec.Builder.overrideHashCode(baseType: BaseType) {
         name = "hashCode",
         returns = Int::class.asTypeName(),
     ) {
-        addComment("Start with non-zero hash so that arrays that start with a different number of zero-hash elements end up with different hashCodes")
+        comment("Start with non-zero hash so that arrays that start with a different number of zero-hash elements end up with different hashCodes")
 
         statement("var hashCode = $prime1")
         controlFlow("for (value in values)") {
@@ -295,7 +296,7 @@ private fun TypeSpec.Builder.addArrayIndexOperator(baseType: BaseType) {
 }
 
 private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
-    for (n in 1..Config.NUM_COMPONENT_N_FUNCTIONS) {
+    for (n in 1..ImmutableArrayConfig.NUM_COMPONENT_N_FUNCTIONS) {
         function(
             modifiers = listOf(KModifier.OPERATOR),
             name = "component$n",
@@ -347,6 +348,7 @@ private fun TypeSpec.Builder.addInvokeOperator(baseType: BaseType) {
             addTypeVariable(baseType.type as TypeVariableName)
         }
         statement("if (size == 0) return EMPTY")
+        emptyLine()
         statement("val backingArray = ${baseType.backingArrayConstructor}(size) { index -> init(index) }")
         if (baseType == BaseType.GENERIC) {
             statement("return ${baseType.generatedClassName}(backingArray as %T)", baseType.backingArrayType)
