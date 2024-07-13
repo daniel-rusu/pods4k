@@ -9,6 +9,7 @@ import kotlin.Float
 import kotlin.Int
 import kotlin.Long
 import kotlin.Short
+import kotlin.Unit
 
 /**
  * Returns an empty [ImmutableArray].
@@ -113,6 +114,60 @@ public fun immutableArrayOf(vararg values: Float): ImmutableFloatArray =
  */
 public fun immutableArrayOf(vararg values: Double): ImmutableDoubleArray =
         ImmutableDoubleArray(values.size) { values[it] }
+
+/**
+ * Builds an [ImmutableArray] for when the size isn't known in advance.
+ */
+public fun <T> buildImmutableArray(body: ImmutableArray.Builder<T>.() -> Unit): ImmutableArray<T> =
+        ImmutableArray.Builder<T>().apply(body).build()
+
+/**
+ * Builds an [ImmutableBooleanArray] for when the size isn't known in advance.
+ */
+public fun buildImmutableBooleanArray(body: ImmutableBooleanArray.Builder.() -> Unit):
+        ImmutableBooleanArray = ImmutableBooleanArray.Builder().apply(body).build()
+
+/**
+ * Builds an [ImmutableByteArray] for when the size isn't known in advance.
+ */
+public fun buildImmutableByteArray(body: ImmutableByteArray.Builder.() -> Unit): ImmutableByteArray
+        = ImmutableByteArray.Builder().apply(body).build()
+
+/**
+ * Builds an [ImmutableCharArray] for when the size isn't known in advance.
+ */
+public fun buildImmutableCharArray(body: ImmutableCharArray.Builder.() -> Unit): ImmutableCharArray
+        = ImmutableCharArray.Builder().apply(body).build()
+
+/**
+ * Builds an [ImmutableShortArray] for when the size isn't known in advance.
+ */
+public fun buildImmutableShortArray(body: ImmutableShortArray.Builder.() -> Unit):
+        ImmutableShortArray = ImmutableShortArray.Builder().apply(body).build()
+
+/**
+ * Builds an [ImmutableIntArray] for when the size isn't known in advance.
+ */
+public fun buildImmutableIntArray(body: ImmutableIntArray.Builder.() -> Unit): ImmutableIntArray =
+        ImmutableIntArray.Builder().apply(body).build()
+
+/**
+ * Builds an [ImmutableLongArray] for when the size isn't known in advance.
+ */
+public fun buildImmutableLongArray(body: ImmutableLongArray.Builder.() -> Unit): ImmutableLongArray
+        = ImmutableLongArray.Builder().apply(body).build()
+
+/**
+ * Builds an [ImmutableFloatArray] for when the size isn't known in advance.
+ */
+public fun buildImmutableFloatArray(body: ImmutableFloatArray.Builder.() -> Unit):
+        ImmutableFloatArray = ImmutableFloatArray.Builder().apply(body).build()
+
+/**
+ * Builds an [ImmutableDoubleArray] for when the size isn't known in advance.
+ */
+public fun buildImmutableDoubleArray(body: ImmutableDoubleArray.Builder.() -> Unit):
+        ImmutableDoubleArray = ImmutableDoubleArray.Builder().apply(body).build()
 
 /**
  * Returns an [ImmutableBooleanArray] containing the values of this array.

@@ -5,6 +5,8 @@ Change Log
 
 ### Immutable Arrays
 
+* New: Add dynamic factory functions (eg. `buildImmutableArray`, `buildImmutableBooleanArray` etc.) for when the size
+  isn't known in advance
 * New: Add builders for constructing immutable arrays when the size isn't known in advance
 * Performance: Optimize the creation of immutable arrays from regular arrays
 * Breaking Change: Extension functions `toImmutableIntArray`, `toImmutableFloatArray`, etc. have been renamed

@@ -418,7 +418,7 @@ private fun TypeSpec.Builder.addMapFunction(baseType: BaseType) {
             parameters = {
                 "transform"(
                     type = lambda(
-                        { "element"(type = baseType.type) },
+                        parameters = { "element"(type = baseType.type) },
                         returnType = mappedType
                     )
                 )
@@ -452,7 +452,7 @@ private fun TypeSpec.Builder.addMapIndexedFunction(baseType: BaseType) {
             parameters = {
                 "transform"(
                     type = lambda(
-                        { "index"<Int>(); "element"(type = baseType.type) },
+                        parameters = { "index"<Int>(); "element"(type = baseType.type) },
                         returnType = mappedType
                     )
                 )

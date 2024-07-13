@@ -1,15 +1,9 @@
 package com.danrusu.pods4k.immutableArrays
 
-import com.danrusu.pods4k.immutableArrays.ImmutableArray
-import com.danrusu.pods4k.immutableArrays.ImmutableIntArray
-import com.danrusu.pods4k.immutableArrays.emptyImmutableArray
-import com.danrusu.pods4k.immutableArrays.emptyImmutableIntArray
-import com.danrusu.pods4k.immutableArrays.immutableArrayOf
-import com.danrusu.pods4k.immutableArrays.toImmutableIntArray
-import com.danrusu.pods4k.immutableArrays.toTypedImmutableArray
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isA
+import strikt.assertions.isEqualTo
 
 class ImmutableArraysTest {
     @Test
@@ -40,6 +34,25 @@ class ImmutableArraysTest {
             expectThat(this).isA<ImmutableIntArray>()
             expectThat(this).containsExactly(10, 20, 30)
         }
+    }
+
+    @Test
+    fun `buildImmutableArray validation`() {
+        val names = buildImmutableArray {
+            add("Bob")
+            add("Jill")
+        }
+        expectThat(names)
+            .isEqualTo(immutableArrayOf("Bob", "Jill"))
+
+        val numbers = buildImmutableIntArray {
+            add(3)
+            add(7)
+            add(11)
+        }
+
+        expectThat(numbers)
+            .isEqualTo(immutableArrayOf(3, 7, 11))
     }
 
     @Test

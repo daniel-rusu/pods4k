@@ -28,14 +28,21 @@ internal class ParameterDSL {
         parameters += parameter.build()
     }
 
-    inline fun <reified T : Any> lambda(parameters: ParameterDSL.() -> Unit): LambdaTypeName {
+    inline fun <reified T : Any> lambda(
+        receiver: TypeName? = null,
+        parameters: ParameterDSL.() -> Unit = {}
+    ): LambdaTypeName {
         val params = ParameterDSL().apply(parameters).build()
-        return LambdaTypeName.get(parameters = params, returnType = T::class.asTypeName())
+        return LambdaTypeName.get(receiver = receiver, parameters = params, returnType = T::class.asTypeName())
     }
 
-    inline fun lambda(parameters: ParameterDSL.() -> Unit, returnType: TypeName): LambdaTypeName {
+    inline fun lambda(
+        receiver: TypeName? = null,
+        parameters: ParameterDSL.() -> Unit = {},
+        returnType: TypeName
+    ): LambdaTypeName {
         val params = ParameterDSL().apply(parameters).build()
-        return LambdaTypeName.get(parameters = params, returnType = returnType)
+        return LambdaTypeName.get(receiver = receiver, parameters = params, returnType = returnType)
     }
 
     fun build(): List<ParameterSpec> = parameters
