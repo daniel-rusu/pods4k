@@ -5,6 +5,7 @@ Change Log
 
 ### Immutable Arrays
 
+* New: Add builders for constructing immutable arrays when the size isn't known in advance
 * Performance: Optimize the creation of immutable arrays from regular arrays
 * Breaking Change: Extension functions `toImmutableIntArray`, `toImmutableFloatArray`, etc. have been renamed
   to `toImmutableArray` so that the most efficient primitive variant is chosen by default.
@@ -54,7 +55,5 @@ _2024-06-16_
 * New: Add `lastIndex` property
 * New: Add `toString` method
 * New: Add `iterator` operator to allow regular for-loops
-* New: Add array index access operator
-* New: Add `size` property
 * New: Add `invoke` factory function
 * New: Create `ImmutableArray` + 8 variants for each primitive type

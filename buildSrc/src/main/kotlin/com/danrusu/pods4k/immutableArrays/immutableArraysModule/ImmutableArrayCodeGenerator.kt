@@ -1,6 +1,7 @@
 package com.danrusu.pods4k.immutableArrays.immutableArraysModule
 
 import com.danrusu.pods4k.immutableArrays.BaseType
+import com.danrusu.pods4k.immutableArrays.BaseType.GENERIC
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
 import com.danrusu.pods4k.utils.ParameterDSL
 import com.danrusu.pods4k.utils.addClass
@@ -36,7 +37,7 @@ internal object ImmutableArrayCodeGenerator {
 
 private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
     return createFile(ImmutableArrayConfig.packageName, baseType.generatedClassName) {
-        addClass(modifiers = listOf(KModifier.VALUE), name = baseType.getGeneratedClass()) {
+        addClass(modifiers = listOf(KModifier.VALUE), name = baseType.generatedClassName) {
             addKdoc(
                 """
                     Represents an array that cannot have its elements re-assigned.
@@ -48,7 +49,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             )
             suppress("NOTHING_TO_INLINE")
             addAnnotation(JvmInline::class)
-            if (baseType == BaseType.GENERIC) {
+            if (baseType == GENERIC) {
                 val typeName = (baseType.type as TypeVariableName).name
                 addTypeVariable(TypeVariableName(typeName, KModifier.OUT))
             }
@@ -172,12 +173,51 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             )
             addMapFunction(baseType)
             addMapIndexedFunction(baseType)
+
             companionObject {
-                if (baseType == BaseType.GENERIC) {
+                if (baseType == GENERIC) {
                     suppress("UNCHECKED_CAST")
                 }
-                addEmptyProperty(baseType)
-                addInvokeOperator(baseType)
+                addCompanionObjectEmptyProperty(baseType)
+                addCompanionObjectInvokeOperator(baseType)
+            }
+
+            addClass(name = "Builder") {
+                addKdoc(
+                    """
+                        Builder to construct immutable arrays when the resulting size isn't known in advance.
+                        
+                        @param initialCapacity The initial capacity of the temporary array where the values are accumulated.  A larger value reduces the number of times it's resized as elements get added.
+                    """.trimIndent()
+                )
+                if (baseType == GENERIC) {
+                    addTypeVariable(baseType.type as TypeVariableName)
+                }
+                addPrimaryConstructor(
+                    parameters = { "initialCapacity"<Int>(defaultValue = "10") },
+                )
+                property<Int>(isMutable = true, name = "size", init = "0", privateSetter = true)
+                property(
+                    modifiers = listOf(KModifier.PRIVATE),
+                    isMutable = true,
+                    name = "values",
+                    type = when (baseType) {
+                        GENERIC -> Array::class.asTypeName()
+                            .parameterizedBy(Any::class.asTypeName().copy(nullable = true))
+
+                        else -> baseType.backingArrayType
+                    },
+                ) {
+                    when (baseType) {
+                        GENERIC -> initializer("arrayOfNulls(initialCapacity)")
+                        else -> initializer("${baseType.backingArrayConstructor}(initialCapacity)")
+                    }
+                }
+                addBuilderAddFunction(baseType)
+                addBuilderPlusAssignOperator(baseType)
+                addBuilderAddAllFunctions(baseType)
+                addBuilderBuildFunction(baseType)
+                addBuilderEnsureCapacityFunction(baseType)
             }
         }
     }
@@ -185,11 +225,13 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
 
 /**
  * Delegates to the same function on the backing array.
+ *
+ * @param baseType
  */
 context (TypeSpec.Builder)
 private operator fun String.invoke(
     baseType: BaseType,
-    kdoc: String = "See [${if (baseType == BaseType.GENERIC) "Array" else baseType.backingArrayConstructor}.$this]",
+    kdoc: String = "See [${if (baseType == GENERIC) "Array" else baseType.backingArrayConstructor}.$this]",
     modifiers: List<KModifier> = emptyList(),
     parameters: ParameterDSL.() -> Unit = {},
     returns: TypeName = Unit::class.asTypeName(),
@@ -245,7 +287,7 @@ private fun TypeSpec.Builder.overrideToString() {
 
 private fun TypeSpec.Builder.addEqualsOperator(baseType: BaseType) {
     val otherType = when (baseType) {
-        BaseType.GENERIC -> baseType.getGeneratedClass().parameterizedBy(STAR)
+        GENERIC -> baseType.getGeneratedClass().parameterizedBy(STAR)
         else -> baseType.getGeneratedClass()
     }
     function(
@@ -276,7 +318,7 @@ private fun TypeSpec.Builder.overrideHashCode(baseType: BaseType) {
         statement("var hashCode = $prime1")
         controlFlow("for (value in values)") {
             when (baseType) {
-                BaseType.GENERIC -> statement("hashCode = $prime2 * hashCode + (value?.hashCode() ?: 0)")
+                GENERIC -> statement("hashCode = $prime2 * hashCode + (value?.hashCode() ?: 0)")
                 else -> statement("hashCode = $prime2 * hashCode + value.hashCode()")
             }
         }
@@ -306,9 +348,9 @@ private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
     }
 }
 
-private fun TypeSpec.Builder.addEmptyProperty(baseType: BaseType) {
+private fun TypeSpec.Builder.addCompanionObjectEmptyProperty(baseType: BaseType) {
     val type = when (baseType) {
-        BaseType.GENERIC -> baseType.getGeneratedClass().parameterizedBy(NOTHING)
+        GENERIC -> baseType.getGeneratedClass().parameterizedBy(NOTHING)
         else -> baseType.getGeneratedClass()
     }
     property(
@@ -317,7 +359,7 @@ private fun TypeSpec.Builder.addEmptyProperty(baseType: BaseType) {
         type = type,
     ) {
         addAnnotation(PublishedApi::class)
-        if (baseType == BaseType.GENERIC) {
+        if (baseType == GENERIC) {
             initializer("${baseType.generatedClassName}(emptyArray<Any>()) as %T", type)
         } else {
             initializer("${baseType.generatedClassName}(${baseType.backingArrayConstructor}(0))")
@@ -325,7 +367,7 @@ private fun TypeSpec.Builder.addEmptyProperty(baseType: BaseType) {
     }
 }
 
-private fun TypeSpec.Builder.addInvokeOperator(baseType: BaseType) {
+private fun TypeSpec.Builder.addCompanionObjectInvokeOperator(baseType: BaseType) {
     val returnType = baseType.getGeneratedTypeName()
     function(
         kdoc = """
@@ -344,13 +386,13 @@ private fun TypeSpec.Builder.addInvokeOperator(baseType: BaseType) {
         },
         returns = returnType,
     ) {
-        if (baseType == BaseType.GENERIC) {
+        if (baseType == GENERIC) {
             addTypeVariable(baseType.type as TypeVariableName)
         }
         statement("if (size == 0) return EMPTY")
         emptyLine()
         statement("val backingArray = ${baseType.backingArrayConstructor}(size) { index -> init(index) }")
-        if (baseType == BaseType.GENERIC) {
+        if (baseType == GENERIC) {
             statement("return ${baseType.generatedClassName}(backingArray as %T)", baseType.backingArrayType)
         } else {
             statement("return ${baseType.generatedClassName}(backingArray)")
@@ -362,7 +404,7 @@ private fun TypeSpec.Builder.addMapFunction(baseType: BaseType) {
     for (resultType in BaseType.values()) {
         val mappedType: TypeName
         val resultTypeName: TypeName
-        if (resultType == BaseType.GENERIC) {
+        if (resultType == GENERIC) {
             mappedType = TypeVariableName("R")
             resultTypeName = resultType.getGeneratedClass().parameterizedBy(mappedType)
         } else {
@@ -384,7 +426,7 @@ private fun TypeSpec.Builder.addMapFunction(baseType: BaseType) {
             returns = resultTypeName,
         ) {
             addAnnotation(OverloadResolutionByLambdaReturnType::class)
-            if (resultType == BaseType.GENERIC) {
+            if (resultType == GENERIC) {
                 addTypeVariable(mappedType as TypeVariableName)
             }
             statement("return ${resultType.generatedClassName}(size) { transform(get(it)) }")
@@ -396,7 +438,7 @@ private fun TypeSpec.Builder.addMapIndexedFunction(baseType: BaseType) {
     for (resultType in BaseType.values()) {
         val mappedType: TypeName
         val resultTypeName: TypeName
-        if (resultType == BaseType.GENERIC) {
+        if (resultType == GENERIC) {
             mappedType = TypeVariableName("R")
             resultTypeName = resultType.getGeneratedClass().parameterizedBy(mappedType)
         } else {
@@ -418,10 +460,140 @@ private fun TypeSpec.Builder.addMapIndexedFunction(baseType: BaseType) {
             returns = resultTypeName,
         ) {
             addAnnotation(OverloadResolutionByLambdaReturnType::class)
-            if (resultType == BaseType.GENERIC) {
+            if (resultType == GENERIC) {
                 addTypeVariable(mappedType as TypeVariableName)
             }
             statement("return ${resultType.generatedClassName}(size) { transform(it, get(it)) }")
         }
+    }
+}
+
+private fun TypeSpec.Builder.addBuilderAddFunction(baseType: BaseType) {
+    function(
+        name = "add",
+        parameters = { "element"(type = baseType.type) },
+    ) {
+        statement("ensureCapacity(size + 1)")
+        statement("values[size++] = element")
+    }
+}
+
+private fun TypeSpec.Builder.addBuilderPlusAssignOperator(baseType: BaseType) {
+    function(
+        modifiers = listOf(KModifier.OPERATOR),
+        kdoc = "Adds the [element] to the builder.",
+        name = "plusAssign",
+        parameters = { "element"(type = baseType.type) },
+        code = "add(element)",
+    )
+}
+
+private fun TypeSpec.Builder.addBuilderAddAllFunctions(baseType: BaseType) {
+    function(
+        name = "addAll",
+        parameters = { "elements"(type = baseType.backingArrayType) },
+    ) {
+        statement("ensureCapacity(size + elements.size)")
+        statement("System.arraycopy(elements, 0, values, size, elements.size)")
+        statement("size += elements.size")
+    }
+
+    if (baseType != GENERIC) {
+        function(
+            name = "addAll",
+            parameters = { "elements"(type = Array::class.asTypeName().parameterizedBy(baseType.type)) },
+        ) {
+            statement("ensureCapacity(size + elements.size)")
+            controlFlow("for (element in elements)") {
+                statement("values[size++] = element")
+            }
+        }
+    }
+
+    function(
+        name = "addAll",
+        parameters = { "elements"(type = baseType.getGeneratedTypeName()) },
+    ) {
+        statement("ensureCapacity(size + elements.size)")
+        statement("System.arraycopy(elements.values, 0, values, size, elements.size)")
+        statement("size += elements.size")
+    }
+
+    if (baseType != GENERIC) {
+        function(
+            name = "addAll",
+            parameters = { "elements"(type = GENERIC.getGeneratedClass().parameterizedBy(baseType.type)) },
+        ) {
+            statement("ensureCapacity(size + elements.size)")
+            controlFlow("for (element in elements)") {
+                statement("values[size++] = element")
+            }
+        }
+    }
+
+    function(
+        name = "addAll",
+        parameters = { "elements"(type = Iterable::class.asTypeName().parameterizedBy(baseType.type)) },
+    ) {
+        controlFlow("if (elements is Collection)") {
+            statement("ensureCapacity(size + elements.size)")
+            controlFlow("for (element in elements)") {
+                statement("values[size++] = element")
+            }
+            statement("return")
+        }
+        controlFlow("for (element in elements)") {
+            statement("add(element)")
+        }
+    }
+}
+
+private fun TypeSpec.Builder.addBuilderBuildFunction(baseType: BaseType) {
+    function(
+        kdoc = "Returns an immutable array containing the elements that were added.",
+        name = "build",
+        returns = baseType.getGeneratedTypeName(),
+    ) {
+        statement("if (size == 0) return EMPTY")
+        emptyLine()
+        if (baseType == GENERIC) {
+            statement("val backingArray = arrayOfNulls<Any?>(size) as Array<%T>", baseType.type)
+        } else {
+            statement("val backingArray = ${baseType.backingArrayConstructor}(size)")
+        }
+        statement("System.arraycopy(values, 0, backingArray, 0, size)")
+
+        suppress("UNCHECKED_CAST")
+        statement("return ${baseType.generatedClassName}(backingArray)")
+    }
+}
+
+private fun TypeSpec.Builder.addBuilderEnsureCapacityFunction(baseType: BaseType) {
+    function(
+        modifiers = listOf(KModifier.PRIVATE),
+        name = "ensureCapacity",
+        parameters = { "minCapacity"<Int>() },
+    ) {
+        val maxCapacity = "Int.MAX_VALUE - 8"
+        controlFlow("when") {
+            statement("values.size >= minCapacity -> return")
+            statement("minCapacity < 0 -> throw %T() // overflow", OutOfMemoryError::class)
+            comment("Some VMs reserve header words in the array so this is the max safe value")
+            statement("minCapacity > $maxCapacity -> throw %T()", OutOfMemoryError::class)
+        }
+        comment("increase the size by 50 percent")
+        statement("var newSize = values.size + (values.size shr 1) + 1")
+        controlFlow("newSize = when") {
+            statement("newSize < 0 -> $maxCapacity // overflow")
+            statement("newSize < minCapacity -> minCapacity")
+            statement("else -> newSize")
+        }
+        if (baseType == GENERIC) {
+            statement("val replacement = arrayOfNulls<Any?>(newSize)")
+        } else {
+            statement("val replacement = ${baseType.backingArrayConstructor}(newSize)")
+        }
+        statement("System.arraycopy(values, 0, replacement, 0, size)")
+        statement("values = replacement")
     }
 }

@@ -1,18 +1,29 @@
 package com.danrusu.pods4k.utils
 
-import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.KModifier
+import com.squareup.kotlinpoet.LambdaTypeName
+import com.squareup.kotlinpoet.ParameterSpec
+import com.squareup.kotlinpoet.TypeName
+import com.squareup.kotlinpoet.asTypeName
 
 internal class ParameterDSL {
     private val parameters = mutableListOf<ParameterSpec>()
 
-    inline operator fun <reified T> String.invoke() {
-        invoke(T::class.asTypeName())
+    inline operator fun <reified T> String.invoke(isVararg: Boolean = false, defaultValue: String? = null) {
+        invoke(T::class.asTypeName(), isVararg, defaultValue)
     }
 
-    operator fun String.invoke(type: TypeName, isVararg: Boolean = false) {
+    operator fun String.invoke(
+        type: TypeName,
+        isVararg: Boolean = false,
+        defaultValue: String? = null,
+    ) {
         val parameter = ParameterSpec.builder(this, type)
         if (isVararg) {
             parameter.addModifiers(KModifier.VARARG)
+        }
+        if (defaultValue != null) {
+            parameter.defaultValue(defaultValue)
         }
         parameters += parameter.build()
     }

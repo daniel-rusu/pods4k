@@ -1,6 +1,8 @@
 // Auto-generated file. DO NOT EDIT!
 package com.danrusu.pods4k.immutableArrays
 
+import java.lang.OutOfMemoryError
+import kotlin.Array
 import kotlin.Boolean
 import kotlin.BooleanArray
 import kotlin.Byte
@@ -384,6 +386,103 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
 
             val backingArray = BooleanArray(size) { index -> init(index) }
             return ImmutableBooleanArray(backingArray)
+        }
+    }
+
+    /**
+     * Builder to construct immutable arrays when the resulting size isn't known in advance.
+     *
+     * @param initialCapacity The initial capacity of the temporary array where the values are
+     * accumulated.  A larger value reduces the number of times it's resized as elements get added.
+     */
+    public class Builder(
+        initialCapacity: Int = 10,
+    ) {
+        public var size: Int = 0
+            private set
+
+        private var values: BooleanArray = BooleanArray(initialCapacity)
+
+        public fun add(element: Boolean) {
+            ensureCapacity(size + 1)
+            values[size++] = element
+        }
+
+        /**
+         * Adds the [element] to the builder.
+         */
+        public operator fun plusAssign(element: Boolean) {
+            add(element)
+        }
+
+        public fun addAll(elements: BooleanArray) {
+            ensureCapacity(size + elements.size)
+            System.arraycopy(elements, 0, values, size, elements.size)
+            size += elements.size
+        }
+
+        public fun addAll(elements: Array<Boolean>) {
+            ensureCapacity(size + elements.size)
+            for (element in elements) {
+                values[size++] = element
+            }
+        }
+
+        public fun addAll(elements: ImmutableBooleanArray) {
+            ensureCapacity(size + elements.size)
+            System.arraycopy(elements.values, 0, values, size, elements.size)
+            size += elements.size
+        }
+
+        public fun addAll(elements: ImmutableArray<Boolean>) {
+            ensureCapacity(size + elements.size)
+            for (element in elements) {
+                values[size++] = element
+            }
+        }
+
+        public fun addAll(elements: Iterable<Boolean>) {
+            if (elements is Collection) {
+                ensureCapacity(size + elements.size)
+                for (element in elements) {
+                    values[size++] = element
+                }
+                return
+            }
+            for (element in elements) {
+                add(element)
+            }
+        }
+
+        /**
+         * Returns an immutable array containing the elements that were added.
+         */
+        @Suppress("UNCHECKED_CAST")
+        public fun build(): ImmutableBooleanArray {
+            if (size == 0) return EMPTY
+
+            val backingArray = BooleanArray(size)
+            System.arraycopy(values, 0, backingArray, 0, size)
+            return ImmutableBooleanArray(backingArray)
+        }
+
+        private fun ensureCapacity(minCapacity: Int) {
+            when {
+                values.size >= minCapacity -> return
+                minCapacity < 0 -> throw OutOfMemoryError() // overflow
+                // Some VMs reserve header words in the array so this is the max safe value
+                minCapacity > Int.MAX_VALUE - 8 -> throw OutOfMemoryError()
+            }
+            // increase the size by 50 percent
+            var newSize = values.size + (values.size shr 1) + 1
+            newSize = when {
+                newSize < 0 -> Int.MAX_VALUE - 8 // overflow
+                newSize < minCapacity -> minCapacity
+                else -> newSize
+            }
+            val replacement = BooleanArray(newSize)
+            System.arraycopy(values, 0, replacement, 0, size)
+            values = replacement
         }
     }
 }

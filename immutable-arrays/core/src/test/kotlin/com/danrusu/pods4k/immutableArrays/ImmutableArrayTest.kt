@@ -480,4 +480,98 @@ class ImmutableArrayTest {
                 .isEqualTo(immutableArrayOf(3, 4, 5))
         }
     }
+
+    @Test
+    fun `builder add validation`() {
+        val builder = ImmutableArray.Builder<String>()
+
+        expectThat(builder.size)
+            .isEqualTo(0)
+        expectThat(builder.build())
+            .isEqualTo(emptyImmutableArray())
+
+        builder.add("one")
+
+        expectThat(builder.size)
+            .isEqualTo(1)
+        expectThat(builder.build())
+            .isEqualTo(immutableArrayOf("one"))
+
+        builder.add("two")
+        builder.add("three")
+
+        expectThat(builder.size)
+            .isEqualTo(3)
+        expectThat(builder.build())
+            .isEqualTo(immutableArrayOf("one", "two", "three"))
+    }
+
+    @Test
+    fun `builder plusAssign validation`() {
+        val builder = ImmutableArray.Builder<String>()
+
+        expectThat(builder.size)
+            .isEqualTo(0)
+        expectThat(builder.build())
+            .isEqualTo(emptyImmutableArray())
+
+        builder += "one"
+
+        expectThat(builder.size)
+            .isEqualTo(1)
+        expectThat(builder.build())
+            .isEqualTo(immutableArrayOf("one"))
+
+        builder += "two"
+
+        expectThat(builder.size)
+            .isEqualTo(2)
+        expectThat(builder.build())
+            .isEqualTo(immutableArrayOf("one", "two"))
+    }
+
+    @Test
+    fun `builder resizing validation`() {
+        val builder = ImmutableArray.Builder<String>(initialCapacity = 10)
+
+        val numElementsToAdd = 100
+        for (index in 0..<numElementsToAdd) {
+            builder += index.toString()
+
+            expectThat(builder.size)
+                .isEqualTo(index + 1)
+        }
+
+        expectThat(builder.build())
+            .isEqualTo(ImmutableArray(numElementsToAdd) { it.toString() })
+    }
+
+    @Test
+    fun `builder addAll validation`() {
+        val builder = ImmutableArray.Builder<String>(initialCapacity = 10)
+
+        // Add all from array
+        builder.addAll(arrayOf("0", "1", "2", "3", "4"))
+
+        expectThat(builder.size)
+            .isEqualTo(5)
+        expectThat(builder.build())
+            .isEqualTo(ImmutableArray(5) { it.toString() })
+
+        // Add all from immutable array
+        builder.addAll(immutableArrayOf("5", "6", "7", "8", "9", "10"))
+
+        expectThat(builder.size)
+            .isEqualTo(11)
+        expectThat(builder.build())
+            .isEqualTo(ImmutableArray(11) { it.toString() })
+
+        // Add all from collection
+        builder.addAll(listOf("11", "12", "13", "14"))
+
+        expectThat(builder.size)
+            .isEqualTo(15)
+        expectThat(builder.build())
+            .isEqualTo(ImmutableArray(15) { it.toString() })
+    }
 }

@@ -19,7 +19,7 @@ internal fun TypeSpec.Builder.suppress(warning: String): TypeSpec.Builder {
 internal inline fun TypeSpec.Builder.addPrimaryConstructor(
     modifiers: List<KModifier> = emptyList(),
     parameters: ParameterDSL.() -> Unit = {},
-    body: FunSpec.Builder.() -> Unit
+    body: FunSpec.Builder.() -> Unit = {}
 ): TypeSpec.Builder {
     return primaryConstructor(
         FunSpec.constructorBuilder().apply {
@@ -37,34 +37,57 @@ internal inline fun TypeSpec.Builder.companionObject(body: TypeSpec.Builder.() -
 internal inline fun <reified T : Any> TypeSpec.Builder.property(
     kdoc: String? = null,
     modifiers: List<KModifier> = emptyList(),
+    isMutable: Boolean = false,
     name: String,
     init: String? = null,
     getModifiers: List<KModifier> = emptyList(),
     get: String? = null,
+    privateSetter: Boolean = false,
     body: PropertySpec.Builder.() -> Unit = {},
 ): TypeSpec.Builder {
-    return property(kdoc, modifiers, name, type = T::class.asTypeName(), init, getModifiers, get, body)
+    return property(
+        kdoc = kdoc,
+        modifiers = modifiers,
+        isMutable = isMutable,
+        name = name,
+        type = T::class.asTypeName(),
+        init = init,
+        getModifiers = getModifiers,
+        get = get,
+        privateSetter = privateSetter,
+        body = body
+    )
 }
 
 internal inline fun TypeSpec.Builder.property(
     kdoc: String? = null,
     modifiers: List<KModifier> = emptyList(),
+    isMutable: Boolean = false,
     name: String,
     type: TypeName,
     init: String? = null,
     getModifiers: List<KModifier> = emptyList(),
     get: String? = null,
+    privateSetter: Boolean = false,
     body: PropertySpec.Builder.() -> Unit = {},
 ): TypeSpec.Builder {
     return addProperty(
         PropertySpec.builder(name, type, modifiers).apply {
             kdoc?.let { addKdoc(it) }
+            mutable(isMutable)
             init?.let { initializer(it) }
             get?.let {
                 getter(
                     FunSpec.getterBuilder()
                         .addModifiers(getModifiers)
                         .addStatement(get)
+                        .build()
+                )
+            }
+            if (privateSetter) {
+                setter(
+                    FunSpec.setterBuilder()
+                        .addModifiers(KModifier.PRIVATE)
                         .build()
                 )
             }
@@ -100,6 +123,19 @@ internal inline fun TypeSpec.Builder.function(
             addModifiers(modifiers)
             addParameters(ParameterDSL().apply(parameters).build())
             returns?.let { returns(it) }
+            body()
+        }.build()
+    )
+}
+
+internal inline fun TypeSpec.Builder.addClass(
+    modifiers: List<KModifier> = emptyList(),
+    name: String,
+    body: TypeSpec.Builder.() -> Unit
+): TypeSpec.Builder {
+    return addType(
+        TypeSpec.classBuilder(name).apply {
+            addModifiers(modifiers)
             body()
         }.build()
     )
