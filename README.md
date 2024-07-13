@@ -47,7 +47,7 @@ println(names[0]) // "Dan"
 names[1] = "Jane" // Compile error: No set method providing array access
 ```
 
-On top of the base efficiency improvements, immutable arrays are even more efficient when dealing with the 8 base
+On top of the core efficiency improvements, immutable arrays are even more efficient when dealing with the 8 base
 types as they use between 3 to 24 times less memory than lists and performance can improve by over 10 times!
 
 Surprisingly, immutable arrays are even more efficient than regular arrays as they have hundreds of optimized

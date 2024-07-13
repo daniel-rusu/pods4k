@@ -5,6 +5,7 @@ import com.danrusu.pods4k.immutableArrays.immutableArraysModule.CollectionExtens
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.ImmutableArrayCodeGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.ImmutableArraysFileGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.SequenceExtensionsGenerator
+import com.danrusu.pods4k.immutableArrays.immutableArraysModule.specializations.MapNotNullSpecializationGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysToStandardCollectionsModule.TransformationsToListFileGenerator
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -15,14 +16,14 @@ public open class CodeGenerator : Plugin<Project> {
             task.group = "code generation"
             task.description = "Runs the code generators in pods4k"
             task.doLast {
-                generateImmutableArraysModule(target)
+                generateCoreImmutableArraysModule(target)
                 generateImmutableArraysToStandardCollectionsModule(target)
             }
         }
     }
 }
 
-private fun generateImmutableArraysModule(target: Project) {
+private fun generateCoreImmutableArraysModule(target: Project) {
     val moduleSourcePath = target.childProjects["immutable-arrays"]!!
         .childProjects["core"]!!
         .projectDir.absolutePath + "/src/main/kotlin"
@@ -32,6 +33,12 @@ private fun generateImmutableArraysModule(target: Project) {
     ArrayExtensionsGenerator.generate(destinationPath = moduleSourcePath)
     CollectionExtensionsGenerator.generate(destinationPath = moduleSourcePath)
     SequenceExtensionsGenerator.generate(destinationPath = moduleSourcePath)
+
+    generateImmutableArraySpecializations(moduleSourcePath)
+}
+
+private fun generateImmutableArraySpecializations(moduleSourcePath: String) {
+    MapNotNullSpecializationGenerator.generate(moduleSourcePath)
 }
 
 private fun generateImmutableArraysToStandardCollectionsModule(target: Project) {
