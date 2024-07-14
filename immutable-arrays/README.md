@@ -205,7 +205,7 @@ immutable array.
 <details>
 <summary>Accessing elements</summary>
 
-**Accessing by index:**
+### Accessing by index
 
 ```kotlin
 val names = immutableArrayOf("Dan", "Bob", "Jill")
@@ -214,7 +214,7 @@ names[0] // "Dan"
 names.get(1) // "Bob"
 ```
 
-**Accessing by destructuring:**
+### Accessing by destructuring
 
 ```kotlin
 val names = immutableArrayOf("Dan", "Bob", "Jill", "Jane")
@@ -223,7 +223,7 @@ val (first, second) = names // first = "Dan", second = "Bob"
 val (_, second, _, fourth) // second = "Bob", fourth = "Jane"
 ```
 
-**Accessing the only element:**
+### Accessing the only element
 
 ```kotlin
 val names = immutableArrayOf("Dan")
@@ -233,7 +233,7 @@ names.single() // "Dan"
 // Similarly with `singleOrNull()` for when the array might not have exactly 1 element
 ```
 
-**Accessing the first & last elements:**
+### Accessing the first & last elements
 
 ```kotlin
 val names = immutableArrayOf("Dan", "Bob", "Jill")
@@ -244,7 +244,7 @@ names.last() // "Jill"
 // Similarly with `firstOrNull()` & `lastOrNull()` for when the array might be empty
 ```
 
-**Accessing by condition:**
+### Accessing by condition
 
 ```kotlin
 val numbers = immutableArrayOf(1, 2, 3, 4, 5)
@@ -258,6 +258,89 @@ names.lastOrNull { it > 5 } // null
 names.single { it % 3 == 0 } // 3
 names.singleOrNull { it % 2 == 0 } // null because multiple elements match
 ```
+
+</details>
+
+<details>
+<summary>Iterating through elements</summary>
+
+### Iterating with for-loops
+
+```kotlin
+val names = immutableArrayOf("Dan", "Bob", "Jill")
+
+for (name in names) {
+    println(name)
+}
+
+for (index in 0..names.lastIndex) {
+    println(names[index])
+}
+
+for (index in names.indices) {
+    println(names[index])
+}
+```
+
+### Iterating with forEach
+
+```kotlin
+val names = immutableArrayOf("Dan", "Bob", "Jill")
+
+names.forEach { println(it) }
+
+names.forEachIndexed { index, element ->
+    println("$index: $element")
+}
+```
+
+### Iterating with sequences
+
+```kotlin
+val names = immutableArrayOf("Dan", "Bob", "Jill", ...)
+
+names.asSequence()
+    .filter { it.isInteresting() }
+    .map { ... }
+    .forEach { println(it) }
+```
+
+Note that sequences generally trade performance for reduced memory consumption. The array is processed by passing the
+first element through each operation before moving to the next element. Chaining operations without first
+calling `asSequence()` creates a temporary array for each intermediate operation whereas sequences only use enough
+memory to process a single element at a time.
+
+While memory is reduced, performance is traded due to extra indirection and fewer low-level optimizations. Things like
+the CPU caches, CPU branch predictor, etc. perform better when repeating the same operation on multiple values as it can
+better predict results and memory access patterns. Sequences jump between different operations for each value, so they
+don't benefit from these types of optimizations. Additionally, sequences are generic so using them on primitive
+variants, like `ImmutableFloatArray`, will auto-box each value as it gets processed, further reducing performance.
+
+However, note that using too much memory can also reduce performance as it reduces CPU cache effectiveness and adds more
+pressure on the garbage collector. So sequences can both reduce memory consumption and improve performance at the same
+time when performing multiple operations on large arrays. These effects are further amplified in server workloads with
+hundreds of threads so keeping the memory pressure low can improve overall performance.
+
+### Iterating with iterator and iterable
+
+```kotlin
+val names = immutableArrayOf("Dan", "Bob", "Jill")
+
+val iterator = names.iterator()
+while (iterator.hasNext()) {
+    println(iterator.next())
+}
+
+// We can also generate Iterable instances which create iterators for interacting with other APIs
+names.asIterable() // Iterable<String>
+names.withIndex() // Iterable<IndexedValue<String>>
+```
+
+Note that using iterators incurs extra overhead compared to using `forEach` because:
+
+1. A new iterator instance is created each time `iterator()` is called.
+2. `Iterator` is a generic type so using it with a primitive immutable array variant, like `ImmutableBooleanArray`, will
+   auto-box each value when calling `next()`.
 
 </details>
 
