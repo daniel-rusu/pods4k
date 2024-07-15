@@ -6,9 +6,9 @@ import com.danrusu.pods4k.utils.createFile
 import com.squareup.kotlinpoet.FileSpec
 import java.io.File
 
-internal abstract class SpecializationGenerator {
+internal abstract class SpecializationGenerator(private val fileName: String) {
     fun generate(destinationPath: String) {
-        val fileSpec = createFile(ImmutableArrayConfig.specializationPackageName, this::class.simpleName.toString()) {
+        val fileSpec = createFile(ImmutableArrayConfig.specializationPackageName, fileName) {
             for (fromType in BaseType.values()) {
                 for (toType in BaseType.values()) {
                     generateSpecialization(this, fromType, toType)

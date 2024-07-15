@@ -171,7 +171,6 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                     "action"(type = lambda<Unit> { "index"<Int>(); "element"(type = baseType.type) })
                 },
             )
-            addMapIndexedFunction(baseType)
 
             companionObject {
                 if (baseType == GENERIC) {
@@ -395,40 +394,6 @@ private fun TypeSpec.Builder.addCompanionObjectInvokeOperator(baseType: BaseType
             statement("return ${baseType.generatedClassName}(backingArray as %T)", baseType.backingArrayType)
         } else {
             statement("return ${baseType.generatedClassName}(backingArray)")
-        }
-    }
-}
-
-private fun TypeSpec.Builder.addMapIndexedFunction(baseType: BaseType) {
-    for (resultType in BaseType.values()) {
-        val mappedType: TypeName
-        val resultTypeName: TypeName
-        if (resultType == GENERIC) {
-            mappedType = TypeVariableName("R")
-            resultTypeName = resultType.getGeneratedClass().parameterizedBy(mappedType)
-        } else {
-            mappedType = resultType.type
-            resultTypeName = resultType.getGeneratedTypeName()
-        }
-        function(
-            modifiers = listOf(KModifier.INLINE),
-            kdoc = "Returns an immutable array containing the results of applying the given [transform] function to each element and its index.",
-            name = "mapIndexed",
-            parameters = {
-                "transform"(
-                    type = lambda(
-                        parameters = { "index"<Int>(); "element"(type = baseType.type) },
-                        returnType = mappedType
-                    )
-                )
-            },
-            returns = resultTypeName,
-        ) {
-            addAnnotation(OverloadResolutionByLambdaReturnType::class)
-            if (resultType == GENERIC) {
-                addTypeVariable(mappedType as TypeVariableName)
-            }
-            statement("return ${resultType.generatedClassName}(size) { transform(it, get(it)) }")
         }
     }
 }

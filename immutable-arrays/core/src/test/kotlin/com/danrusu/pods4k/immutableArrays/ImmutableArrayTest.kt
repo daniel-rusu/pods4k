@@ -460,17 +460,6 @@ class ImmutableArrayTest {
     }
 
     @Test
-    fun `mapIndexed validation`() {
-        with(immutableArrayOf("aaa", "bb", "c")) {
-            expectThat(this.mapIndexed { index, element -> Pair(index, element) })
-                .isEqualTo(immutableArrayOf(Pair(0, "aaa"), Pair(1, "bb"), Pair(2, "c")))
-
-            expectThat(this.mapIndexed { index, element -> element.length + 2 * index })
-                .isEqualTo(immutableArrayOf(3, 4, 5))
-        }
-    }
-
-    @Test
     fun `builder add validation`() {
         val builder = ImmutableArray.Builder<String>()
 

@@ -4,16 +4,10 @@ package com.danrusu.pods4k.immutableArrays
 import java.lang.OutOfMemoryError
 import kotlin.Array
 import kotlin.Boolean
-import kotlin.Byte
-import kotlin.Char
-import kotlin.Double
 import kotlin.Float
 import kotlin.FloatArray
 import kotlin.Int
-import kotlin.Long
-import kotlin.OverloadResolutionByLambdaReturnType
 import kotlin.PublishedApi
-import kotlin.Short
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Unit
@@ -218,78 +212,6 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
      */
     public inline fun forEachIndexed(action: (index: Int, element: Float) -> Unit): Unit =
             values.forEachIndexed(action)
-
-    /**
-     * Returns an immutable array containing the results of applying the given [transform] function
-     * to each element and its index.
-     */
-    @OverloadResolutionByLambdaReturnType
-    public inline fun <R> mapIndexed(transform: (index: Int, element: Float) -> R):
-            ImmutableArray<R> = ImmutableArray(size) { transform(it, get(it)) }
-
-    /**
-     * Returns an immutable array containing the results of applying the given [transform] function
-     * to each element and its index.
-     */
-    @OverloadResolutionByLambdaReturnType
-    public inline fun mapIndexed(transform: (index: Int, element: Float) -> Boolean):
-            ImmutableBooleanArray = ImmutableBooleanArray(size) { transform(it, get(it)) }
-
-    /**
-     * Returns an immutable array containing the results of applying the given [transform] function
-     * to each element and its index.
-     */
-    @OverloadResolutionByLambdaReturnType
-    public inline fun mapIndexed(transform: (index: Int, element: Float) -> Byte):
-            ImmutableByteArray = ImmutableByteArray(size) { transform(it, get(it)) }
-
-    /**
-     * Returns an immutable array containing the results of applying the given [transform] function
-     * to each element and its index.
-     */
-    @OverloadResolutionByLambdaReturnType
-    public inline fun mapIndexed(transform: (index: Int, element: Float) -> Char):
-            ImmutableCharArray = ImmutableCharArray(size) { transform(it, get(it)) }
-
-    /**
-     * Returns an immutable array containing the results of applying the given [transform] function
-     * to each element and its index.
-     */
-    @OverloadResolutionByLambdaReturnType
-    public inline fun mapIndexed(transform: (index: Int, element: Float) -> Short):
-            ImmutableShortArray = ImmutableShortArray(size) { transform(it, get(it)) }
-
-    /**
-     * Returns an immutable array containing the results of applying the given [transform] function
-     * to each element and its index.
-     */
-    @OverloadResolutionByLambdaReturnType
-    public inline fun mapIndexed(transform: (index: Int, element: Float) -> Int): ImmutableIntArray
-            = ImmutableIntArray(size) { transform(it, get(it)) }
-
-    /**
-     * Returns an immutable array containing the results of applying the given [transform] function
-     * to each element and its index.
-     */
-    @OverloadResolutionByLambdaReturnType
-    public inline fun mapIndexed(transform: (index: Int, element: Float) -> Long):
-            ImmutableLongArray = ImmutableLongArray(size) { transform(it, get(it)) }
-
-    /**
-     * Returns an immutable array containing the results of applying the given [transform] function
-     * to each element and its index.
-     */
-    @OverloadResolutionByLambdaReturnType
-    public inline fun mapIndexed(transform: (index: Int, element: Float) -> Float):
-            ImmutableFloatArray = ImmutableFloatArray(size) { transform(it, get(it)) }
-
-    /**
-     * Returns an immutable array containing the results of applying the given [transform] function
-     * to each element and its index.
-     */
-    @OverloadResolutionByLambdaReturnType
-    public inline fun mapIndexed(transform: (index: Int, element: Float) -> Double):
-            ImmutableDoubleArray = ImmutableDoubleArray(size) { transform(it, get(it)) }
 
     public companion object {
         @PublishedApi

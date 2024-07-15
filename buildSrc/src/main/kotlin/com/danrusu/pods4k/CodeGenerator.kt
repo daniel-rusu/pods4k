@@ -5,8 +5,9 @@ import com.danrusu.pods4k.immutableArrays.immutableArraysModule.CollectionExtens
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.ImmutableArrayCodeGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.ImmutableArraysFileGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.SequenceExtensionsGenerator
-import com.danrusu.pods4k.immutableArrays.immutableArraysModule.specializations.MapNotNullSpecializations
-import com.danrusu.pods4k.immutableArrays.immutableArraysModule.specializations.MapSpecializations
+import com.danrusu.pods4k.immutableArrays.immutableArraysModule.specializations.MapIndexedSpecializationGenerator
+import com.danrusu.pods4k.immutableArrays.immutableArraysModule.specializations.MapNotNullSpecializationGenerator
+import com.danrusu.pods4k.immutableArrays.immutableArraysModule.specializations.MapSpecializationGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysToStandardCollectionsModule.TransformationsToListFileGenerator
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -39,8 +40,9 @@ private fun generateCoreImmutableArraysModule(target: Project) {
 }
 
 private fun generateImmutableArraySpecializations(moduleSourcePath: String) {
-    MapSpecializations.generate(moduleSourcePath)
-    MapNotNullSpecializations.generate(moduleSourcePath)
+    MapSpecializationGenerator.generate(moduleSourcePath)
+    MapIndexedSpecializationGenerator.generate(moduleSourcePath)
+    MapNotNullSpecializationGenerator.generate(moduleSourcePath)
 }
 
 private fun generateImmutableArraysToStandardCollectionsModule(target: Project) {

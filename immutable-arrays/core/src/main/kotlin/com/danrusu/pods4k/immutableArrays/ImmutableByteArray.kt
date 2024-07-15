@@ -6,14 +6,8 @@ import kotlin.Array
 import kotlin.Boolean
 import kotlin.Byte
 import kotlin.ByteArray
-import kotlin.Char
-import kotlin.Double
-import kotlin.Float
 import kotlin.Int
-import kotlin.Long
-import kotlin.OverloadResolutionByLambdaReturnType
 import kotlin.PublishedApi
-import kotlin.Short
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Unit
@@ -217,78 +211,6 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
      */
     public inline fun forEachIndexed(action: (index: Int, element: Byte) -> Unit): Unit =
             values.forEachIndexed(action)
-
-    /**
-     * Returns an immutable array containing the results of applying the given [transform] function
-     * to each element and its index.
-     */
-    @OverloadResolutionByLambdaReturnType
-    public inline fun <R> mapIndexed(transform: (index: Int, element: Byte) -> R): ImmutableArray<R>
-            = ImmutableArray(size) { transform(it, get(it)) }
-
-    /**
-     * Returns an immutable array containing the results of applying the given [transform] function
-     * to each element and its index.
-     */
-    @OverloadResolutionByLambdaReturnType
-    public inline fun mapIndexed(transform: (index: Int, element: Byte) -> Boolean):
-            ImmutableBooleanArray = ImmutableBooleanArray(size) { transform(it, get(it)) }
-
-    /**
-     * Returns an immutable array containing the results of applying the given [transform] function
-     * to each element and its index.
-     */
-    @OverloadResolutionByLambdaReturnType
-    public inline fun mapIndexed(transform: (index: Int, element: Byte) -> Byte): ImmutableByteArray
-            = ImmutableByteArray(size) { transform(it, get(it)) }
-
-    /**
-     * Returns an immutable array containing the results of applying the given [transform] function
-     * to each element and its index.
-     */
-    @OverloadResolutionByLambdaReturnType
-    public inline fun mapIndexed(transform: (index: Int, element: Byte) -> Char): ImmutableCharArray
-            = ImmutableCharArray(size) { transform(it, get(it)) }
-
-    /**
-     * Returns an immutable array containing the results of applying the given [transform] function
-     * to each element and its index.
-     */
-    @OverloadResolutionByLambdaReturnType
-    public inline fun mapIndexed(transform: (index: Int, element: Byte) -> Short):
-            ImmutableShortArray = ImmutableShortArray(size) { transform(it, get(it)) }
-
-    /**
-     * Returns an immutable array containing the results of applying the given [transform] function
-     * to each element and its index.
-     */
-    @OverloadResolutionByLambdaReturnType
-    public inline fun mapIndexed(transform: (index: Int, element: Byte) -> Int): ImmutableIntArray =
-            ImmutableIntArray(size) { transform(it, get(it)) }
-
-    /**
-     * Returns an immutable array containing the results of applying the given [transform] function
-     * to each element and its index.
-     */
-    @OverloadResolutionByLambdaReturnType
-    public inline fun mapIndexed(transform: (index: Int, element: Byte) -> Long): ImmutableLongArray
-            = ImmutableLongArray(size) { transform(it, get(it)) }
-
-    /**
-     * Returns an immutable array containing the results of applying the given [transform] function
-     * to each element and its index.
-     */
-    @OverloadResolutionByLambdaReturnType
-    public inline fun mapIndexed(transform: (index: Int, element: Byte) -> Float):
-            ImmutableFloatArray = ImmutableFloatArray(size) { transform(it, get(it)) }
-
-    /**
-     * Returns an immutable array containing the results of applying the given [transform] function
-     * to each element and its index.
-     */
-    @OverloadResolutionByLambdaReturnType
-    public inline fun mapIndexed(transform: (index: Int, element: Byte) -> Double):
-            ImmutableDoubleArray = ImmutableDoubleArray(size) { transform(it, get(it)) }
 
     public companion object {
         @PublishedApi

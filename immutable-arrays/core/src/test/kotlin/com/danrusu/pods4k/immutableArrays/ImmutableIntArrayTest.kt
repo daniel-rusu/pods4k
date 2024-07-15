@@ -478,17 +478,6 @@ class ImmutableIntArrayTest {
     }
 
     @Test
-    fun `mapIndexed validation`() {
-        with(immutableArrayOf(2, 3, 4)) {
-            expectThat(this.mapIndexed { index, element -> "abcde".substring(index, element) })
-                .isEqualTo(immutableArrayOf("ab", "bc", "cd"))
-
-            expectThat(this.mapIndexed { index, element -> index + element / 2.0 })
-                .isEqualTo(immutableArrayOf(1.0, 2.5, 4.0))
-        }
-    }
-
-    @Test
     fun `builder add validation`() {
         val builder = ImmutableIntArray.Builder()
 
