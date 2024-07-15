@@ -76,4 +76,25 @@ class ImmutableArraysTest {
             expectThat(genericVersion).containsExactly(1, 3, 5)
         }
     }
+
+    @Test
+    fun `sorted validation`() {
+        with(immutableArrayOf("dogs", "apples", "pineapples")) {
+            expectThat(sorted())
+                .isEqualTo(immutableArrayOf("apples", "dogs", "pineapples"))
+
+            // original is left unchanged
+            expectThat(this)
+                .isEqualTo(immutableArrayOf("dogs", "apples", "pineapples"))
+        }
+
+        with(immutableArrayOf(1, 2, 5, 4, 3)) {
+            expectThat(sorted())
+                .isEqualTo(immutableArrayOf(1, 2, 3, 4, 5))
+
+            // original is left unchanged
+            expectThat(this)
+                .isEqualTo(immutableArrayOf(1, 2, 5, 4, 3))
+        }
+    }
 }

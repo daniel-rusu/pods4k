@@ -8,6 +8,7 @@ Change Log
 Breaking Change: Extension functions `toImmutableIntArray`, `toImmutableFloatArray`, etc. have been renamed
 to `toImmutableArray` so that the most efficient primitive variant is chosen by default.
 
+* New: Add `sorted` extension functions
 * New: Add `mapIndexedNotNull` specializations
 * New: Add `mapNotNull` specializations
 * New: Add dynamic factory functions (eg. `buildImmutableArray`, `buildImmutableBooleanArray` etc.) for when the size

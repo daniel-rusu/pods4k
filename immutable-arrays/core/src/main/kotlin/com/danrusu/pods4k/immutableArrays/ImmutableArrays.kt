@@ -1,14 +1,17 @@
 // Auto-generated file. DO NOT EDIT!
 package com.danrusu.pods4k.immutableArrays
 
+import java.util.Arrays
 import kotlin.Boolean
 import kotlin.Byte
 import kotlin.Char
+import kotlin.Comparable
 import kotlin.Double
 import kotlin.Float
 import kotlin.Int
 import kotlin.Long
 import kotlin.Short
+import kotlin.Suppress
 import kotlin.Unit
 
 /**
@@ -366,3 +369,117 @@ public inline fun ImmutableFloatArray.getOrElse(index: Int, defaultValue: (index
  */
 public inline fun ImmutableDoubleArray.getOrElse(index: Int, defaultValue: (index: Int) -> Double):
         Double = values.getOrElse(index, defaultValue)
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableArray] with all elements sorted
+ * according to their natural sort order.
+ *
+ * The sort is _stable_ so equal elements preserve their order relative to each other after sorting.
+ */
+@Suppress("UNCHECKED_CAST")
+public fun <T : Comparable<T>> ImmutableArray<T>.sorted(): ImmutableArray<T> {
+    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
+    if (size <= 1) return this
+
+    val backingArray = Array<Any?>(size) { get(it) }
+    Arrays.sort(backingArray)
+    return ImmutableArray(backingArray) as ImmutableArray<T>
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableByteArray] with all elements sorted
+ * according to their natural sort order.
+ */
+public fun ImmutableByteArray.sorted(): ImmutableByteArray {
+    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
+    if (size <= 1) return this
+
+    val backingArray = ByteArray(size)
+    System.arraycopy(values, 0, backingArray, 0, size)
+    Arrays.sort(backingArray)
+    return ImmutableByteArray(backingArray)
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableCharArray] with all elements sorted
+ * according to their natural sort order.
+ */
+public fun ImmutableCharArray.sorted(): ImmutableCharArray {
+    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
+    if (size <= 1) return this
+
+    val backingArray = CharArray(size)
+    System.arraycopy(values, 0, backingArray, 0, size)
+    Arrays.sort(backingArray)
+    return ImmutableCharArray(backingArray)
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableShortArray] with all elements sorted
+ * according to their natural sort order.
+ */
+public fun ImmutableShortArray.sorted(): ImmutableShortArray {
+    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
+    if (size <= 1) return this
+
+    val backingArray = ShortArray(size)
+    System.arraycopy(values, 0, backingArray, 0, size)
+    Arrays.sort(backingArray)
+    return ImmutableShortArray(backingArray)
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableIntArray] with all elements sorted
+ * according to their natural sort order.
+ */
+public fun ImmutableIntArray.sorted(): ImmutableIntArray {
+    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
+    if (size <= 1) return this
+
+    val backingArray = IntArray(size)
+    System.arraycopy(values, 0, backingArray, 0, size)
+    Arrays.sort(backingArray)
+    return ImmutableIntArray(backingArray)
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableLongArray] with all elements sorted
+ * according to their natural sort order.
+ */
+public fun ImmutableLongArray.sorted(): ImmutableLongArray {
+    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
+    if (size <= 1) return this
+
+    val backingArray = LongArray(size)
+    System.arraycopy(values, 0, backingArray, 0, size)
+    Arrays.sort(backingArray)
+    return ImmutableLongArray(backingArray)
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableFloatArray] with all elements sorted
+ * according to their natural sort order.
+ */
+public fun ImmutableFloatArray.sorted(): ImmutableFloatArray {
+    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
+    if (size <= 1) return this
+
+    val backingArray = FloatArray(size)
+    System.arraycopy(values, 0, backingArray, 0, size)
+    Arrays.sort(backingArray)
+    return ImmutableFloatArray(backingArray)
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableDoubleArray] with all elements
+ * sorted according to their natural sort order.
+ */
+public fun ImmutableDoubleArray.sorted(): ImmutableDoubleArray {
+    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
+    if (size <= 1) return this
+
+    val backingArray = DoubleArray(size)
+    System.arraycopy(values, 0, backingArray, 0, size)
+    Arrays.sort(backingArray)
+    return ImmutableDoubleArray(backingArray)
+}
