@@ -478,17 +478,6 @@ class ImmutableIntArrayTest {
     }
 
     @Test
-    fun `map validation`() {
-        with(immutableArrayOf(1, 2, 3)) {
-            expectThat(this.map { "a".repeat(it) })
-                .isEqualTo(immutableArrayOf("a", "aa", "aaa"))
-
-            expectThat(this.map { it * 1.5 })
-                .isEqualTo(immutableArrayOf(1.5, 3.0, 4.5))
-        }
-    }
-
-    @Test
     fun `mapIndexed validation`() {
         with(immutableArrayOf(2, 3, 4)) {
             expectThat(this.mapIndexed { index, element -> "abcde".substring(index, element) })

@@ -171,9 +171,9 @@ val luckyNumbers = buildImmutableIntArray {
 Using build functions is more efficient than accumulating the values in a collection and then converting that into
 an immutable array.
 
-### Creating with builders for complex build logic
+### Creating with builders
 
-We can use immutable array builders when accumulating values in more complex scenarios such as when delegating to helper
+We can use immutable-array builders when accumulating values in more complex scenarios such as when delegating to helper
 functions:
 
 ```kotlin
