@@ -23,6 +23,7 @@ import com.squareup.kotlinpoet.STAR
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.TypeVariableName
+import com.squareup.kotlinpoet.WildcardTypeName
 import com.squareup.kotlinpoet.asTypeName
 import java.io.File
 
@@ -171,6 +172,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                     "action"(type = lambda<Unit> { "index"<Int>(); "element"(type = baseType.type) })
                 },
             )
+            addSortedWith(baseType)
 
             companionObject {
                 if (baseType == GENERIC) {
@@ -343,6 +345,40 @@ private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
             returns = baseType.type,
             code = "return get(${n - 1})",
         )
+    }
+}
+
+private fun TypeSpec.Builder.addSortedWith(baseType: BaseType) {
+    val returnType = when (baseType) {
+        GENERIC -> baseType.getGeneratedClass().parameterizedBy(baseType.type)
+        else -> baseType.getGeneratedClass()
+    }
+    function(
+        kdoc = "Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with all elements sorted according to the specified [comparator].",
+        name = "sortedWith",
+        parameters = {
+            "comparator"(
+                type = Comparator::class.asTypeName().parameterizedBy(WildcardTypeName.consumerOf(baseType.type))
+            )
+        },
+        returns = returnType,
+    ) {
+        comment("Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change")
+        statement("if (size <= 1) return this")
+        emptyLine()
+        if (baseType == GENERIC) {
+            suppress("UNCHECKED_CAST")
+            statement(
+                "val backingArray = ${baseType.backingArrayConstructor}(size) { get(it) } as Array<%T>",
+                baseType.type
+            )
+            statement("%T.sort(backingArray, comparator)", java.util.Arrays::class)
+            statement("return ${baseType.generatedClassName}(backingArray)")
+        } else {
+            statement("val temp = values.toTypedArray()")
+            statement("%T.sort(temp, comparator)", java.util.Arrays::class)
+            statement("return temp.toImmutableArray()")
+        }
     }
 }
 

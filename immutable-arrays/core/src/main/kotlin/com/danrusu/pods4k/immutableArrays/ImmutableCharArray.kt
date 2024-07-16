@@ -2,6 +2,8 @@
 package com.danrusu.pods4k.immutableArrays
 
 import java.lang.OutOfMemoryError
+import java.util.Arrays
+import java.util.Comparator
 import kotlin.Array
 import kotlin.Boolean
 import kotlin.Char
@@ -211,6 +213,19 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
      */
     public inline fun forEachIndexed(action: (index: Int, element: Char) -> Unit): Unit =
             values.forEachIndexed(action)
+
+    /**
+     * Leaves [this] immutable array as is and returns an [ImmutableCharArray] with all elements
+     * sorted according to the specified [comparator].
+     */
+    public fun sortedWith(comparator: Comparator<in Char>): ImmutableCharArray {
+        // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
+        if (size <= 1) return this
+
+        val temp = values.toTypedArray()
+        Arrays.sort(temp, comparator)
+        return temp.toImmutableArray()
+    }
 
     public companion object {
         @PublishedApi

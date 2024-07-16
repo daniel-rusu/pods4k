@@ -460,6 +460,23 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `sortedWith validation`() {
+        with(immutableArrayOf("dogs", "apples", "pineapples")) {
+            val comparator = Comparator<String> { o1, o2 -> o1.compareTo(o2) }
+
+            expectThat(sortedWith(comparator))
+                .isEqualTo(immutableArrayOf("apples", "dogs", "pineapples"))
+
+            expectThat(sortedWith(comparator.reversed()))
+                .isEqualTo(immutableArrayOf("pineapples", "dogs", "apples"))
+
+            // original is left unchanged
+            expectThat(this)
+                .isEqualTo(immutableArrayOf("dogs", "apples", "pineapples"))
+        }
+    }
+
+    @Test
     fun `builder add validation`() {
         val builder = ImmutableArray.Builder<String>()
 
