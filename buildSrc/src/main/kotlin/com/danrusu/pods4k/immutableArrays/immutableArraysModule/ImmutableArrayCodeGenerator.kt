@@ -542,8 +542,8 @@ private fun TypeSpec.Builder.addBuilderEnsureCapacityFunction(baseType: BaseType
     ) {
         val maxCapacity = "Int.MAX_VALUE - 8"
         controlFlow("when") {
-            statement("values.size >= minCapacity -> return")
             statement("minCapacity < 0 -> throw %T() // overflow", OutOfMemoryError::class)
+            statement("values.size >= minCapacity -> return")
             comment("Some VMs reserve header words in the array so this is the max safe value")
             statement("minCapacity > $maxCapacity -> throw %T()", OutOfMemoryError::class)
         }

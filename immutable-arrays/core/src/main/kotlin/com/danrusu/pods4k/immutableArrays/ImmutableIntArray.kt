@@ -329,8 +329,8 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
 
         private fun ensureCapacity(minCapacity: Int) {
             when {
-                values.size >= minCapacity -> return
                 minCapacity < 0 -> throw OutOfMemoryError() // overflow
+                values.size >= minCapacity -> return
                 // Some VMs reserve header words in the array so this is the max safe value
                 minCapacity > Int.MAX_VALUE - 8 -> throw OutOfMemoryError()
             }
