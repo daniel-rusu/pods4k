@@ -222,6 +222,11 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     public inline fun all(predicate: (predicate: Short) -> Boolean): Boolean = values.all(predicate)
 
     /**
+     * See [ShortArray.any]
+     */
+    public inline fun any(predicate: (predicate: Short) -> Boolean): Boolean = values.any(predicate)
+
+    /**
      * Leaves this immutable array as is and returns an ImmutableShortArray with all elements sorted
      * according to the natural sort order of the value returned by the [selector].
      *

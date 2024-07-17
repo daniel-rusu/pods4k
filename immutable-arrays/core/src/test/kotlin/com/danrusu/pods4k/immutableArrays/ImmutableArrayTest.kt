@@ -448,7 +448,18 @@ class ImmutableArrayTest {
             expectThat(all { it.contains('o') })
                 .isTrue()
 
-            expectThat(all { it.length == 3})
+            expectThat(all { it.length == 3 })
+                .isFalse()
+        }
+    }
+
+    @Test
+    fun `any validation`() {
+        with(immutableArrayOf("one", "two", "four")) {
+            expectThat(any { it.contains('w') })
+                .isTrue()
+
+            expectThat(any { it.length == 1 })
                 .isFalse()
         }
     }

@@ -10,6 +10,7 @@ _Release Date TBD_
 **New Features:**
 
 * Add `all(predicate)` method
+* Add `any(predicate)` method
 
 ## 0.2.0
 

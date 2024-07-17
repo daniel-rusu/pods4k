@@ -224,6 +224,12 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
             values.all(predicate)
 
     /**
+     * See [BooleanArray.any]
+     */
+    public inline fun any(predicate: (predicate: Boolean) -> Boolean): Boolean =
+            values.any(predicate)
+
+    /**
      * Leaves this immutable array as is and returns an ImmutableBooleanArray with all elements
      * sorted according to the natural sort order of the value returned by the [selector].
      *
