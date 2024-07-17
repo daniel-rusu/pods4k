@@ -173,6 +173,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 },
             )
             addSortedBy(baseType)
+            addSortedByDescending(baseType)
             addSortedWith(baseType)
 
             companionObject {
@@ -359,7 +360,7 @@ private fun TypeSpec.Builder.addSortedBy(baseType: BaseType) {
     val genericType = TypeVariableName(genericVariableName)
     function(
         kdoc = """
-            Leaves this immutable array as is and returns an ${baseType.generatedClassName} with all elements sorted according to the natural sort order of the value returned by specified [selector].
+            Leaves this immutable array as is and returns an ${baseType.generatedClassName} with all elements sorted according to the natural sort order of the value returned by the [selector].
             
             The sort is _stable_ so equal elements preserve their order relative to each other after sorting.
         """.trimIndent(),
@@ -380,6 +381,40 @@ private fun TypeSpec.Builder.addSortedBy(baseType: BaseType) {
             TypeVariableName(genericVariableName, Comparable::class.asTypeName().parameterizedBy(genericType))
         )
         statement("return sortedWith(compareBy(selector))")
+    }
+}
+
+private fun TypeSpec.Builder.addSortedByDescending(baseType: BaseType) {
+    val returnType = when (baseType) {
+        GENERIC -> baseType.getGeneratedClass().parameterizedBy(baseType.type)
+        else -> baseType.getGeneratedClass()
+    }
+
+    val genericVariableName = "R"
+    val genericType = TypeVariableName(genericVariableName)
+    function(
+        kdoc = """
+            Leaves this immutable array as is and returns an ${baseType.generatedClassName} with all elements sorted according to the reverse natural sort order of the value returned by the [selector].
+            
+            The sort is _stable_ so equal elements preserve their order relative to each other after sorting.
+        """.trimIndent(),
+        modifiers = listOf(KModifier.INLINE),
+        name = "sortedByDescending",
+        parameters = {
+            "selector"(
+                modifiers = listOf(KModifier.CROSSINLINE),
+                type = lambda(
+                    parameters = { "element"(type = baseType.type) },
+                    returnType = genericType.copy(nullable = true)
+                )
+            )
+        },
+        returns = returnType,
+    ) {
+        addTypeVariable(
+            TypeVariableName(genericVariableName, Comparable::class.asTypeName().parameterizedBy(genericType))
+        )
+        statement("return sortedWith(compareByDescending(selector))")
     }
 }
 

@@ -217,13 +217,24 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
 
     /**
      * Leaves this immutable array as is and returns an ImmutableLongArray with all elements sorted
-     * according to the natural sort order of the value returned by specified [selector].
+     * according to the natural sort order of the value returned by the [selector].
      *
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
     public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Long) -> R?):
             ImmutableLongArray = sortedWith(compareBy(selector))
+
+    /**
+     * Leaves this immutable array as is and returns an ImmutableLongArray with all elements sorted
+     * according to the reverse natural sort order of the value returned by the [selector].
+     *
+     * The sort is _stable_ so equal elements preserve their order relative to each other after
+     * sorting.
+     */
+    public inline fun <R : Comparable<R>> sortedByDescending(crossinline
+            selector: (element: Long) -> R?): ImmutableLongArray =
+            sortedWith(compareByDescending(selector))
 
     /**
      * Leaves this immutable array as is and returns an [ImmutableLongArray] with all elements

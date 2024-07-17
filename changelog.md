@@ -12,6 +12,7 @@ Change Log
 
 **New Features:**
 
+* Add `sortedByDescending` method
 * Add `sortedBy` method
 * Add `sortedDescending` extension functions
 * Add `sortedWith` method

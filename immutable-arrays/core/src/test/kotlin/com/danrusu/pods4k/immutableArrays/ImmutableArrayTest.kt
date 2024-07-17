@@ -472,6 +472,18 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `sortedByDescending validation`() {
+        with(immutableArrayOf("apples", "pineapples", "dogs")) {
+            expectThat(sortedByDescending { it.length })
+                .isEqualTo(immutableArrayOf("pineapples", "apples", "dogs"))
+
+            // original is left unchanged
+            expectThat(this)
+                .isEqualTo(immutableArrayOf("apples", "pineapples", "dogs"))
+        }
+    }
+
+    @Test
     fun `sortedWith validation`() {
         with(immutableArrayOf("dogs", "apples", "pineapples")) {
             val comparator = Comparator<String> { o1, o2 -> o1.compareTo(o2) }
