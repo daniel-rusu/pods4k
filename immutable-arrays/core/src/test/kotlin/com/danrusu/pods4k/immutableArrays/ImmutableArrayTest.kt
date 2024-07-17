@@ -443,6 +443,17 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `all validation`() {
+        with(immutableArrayOf("one", "two", "four")) {
+            expectThat(all { it.contains('o') })
+                .isTrue()
+
+            expectThat(all { it.length == 3})
+                .isFalse()
+        }
+    }
+
+    @Test
     fun `forEachIndexed validation`() {
         with(ImmutableArray(3) { "element $it" }) {
             val elements = mutableMapOf<Int, String>()

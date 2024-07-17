@@ -172,6 +172,11 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                     "action"(type = lambda<Unit> { "index"<Int>(); "element"(type = baseType.type) })
                 },
             )
+            "all"(
+                baseType = baseType,
+                parameters = { "predicate"(type = lambda<Boolean> { "predicate"(type = baseType.type) }) },
+                returns = Boolean::class.asTypeName(),
+            )
             addSortedBy(baseType)
             addSortedByDescending(baseType)
             addSortedWith(baseType)

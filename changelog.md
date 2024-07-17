@@ -1,6 +1,16 @@
 Change Log
 ==========
 
+## Unreleased
+
+_Release Date TBD_
+
+### Immutable Arrays
+
+**New Features:**
+
+* Add `all(predicate)` method
+
 ## 0.2.0
 
 _2024-07-16_

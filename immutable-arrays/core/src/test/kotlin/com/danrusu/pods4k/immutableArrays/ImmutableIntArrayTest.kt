@@ -478,6 +478,17 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `all validation`() {
+        with(immutableArrayOf(2, 4, 6)) {
+            expectThat(all { it % 2 == 0 })
+                .isTrue()
+
+            expectThat(all { it <= 5 })
+                .isFalse()
+        }
+    }
+
+    @Test
     fun `sortedBy validation`() {
         with(immutableArrayOf(3, 17, 11)) {
             expectThat(sortedBy { it.toString() })

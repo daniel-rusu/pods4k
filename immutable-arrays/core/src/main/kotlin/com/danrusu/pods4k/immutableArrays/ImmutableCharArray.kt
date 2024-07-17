@@ -216,6 +216,11 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
             values.forEachIndexed(action)
 
     /**
+     * See [CharArray.all]
+     */
+    public inline fun all(predicate: (predicate: Char) -> Boolean): Boolean = values.all(predicate)
+
+    /**
      * Leaves this immutable array as is and returns an ImmutableCharArray with all elements sorted
      * according to the natural sort order of the value returned by the [selector].
      *
