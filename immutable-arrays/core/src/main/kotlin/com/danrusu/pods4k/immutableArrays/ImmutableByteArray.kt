@@ -226,6 +226,12 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     public inline fun any(predicate: (predicate: Byte) -> Boolean): Boolean = values.any(predicate)
 
     /**
+     * See [ByteArray.none]
+     */
+    public inline fun none(predicate: (predicate: Byte) -> Boolean): Boolean =
+            values.none(predicate)
+
+    /**
      * Leaves this immutable array as is and returns an ImmutableByteArray with all elements sorted
      * according to the natural sort order of the value returned by the [selector].
      *

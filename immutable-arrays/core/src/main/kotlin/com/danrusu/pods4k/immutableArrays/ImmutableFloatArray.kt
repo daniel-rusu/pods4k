@@ -227,6 +227,12 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     public inline fun any(predicate: (predicate: Float) -> Boolean): Boolean = values.any(predicate)
 
     /**
+     * See [FloatArray.none]
+     */
+    public inline fun none(predicate: (predicate: Float) -> Boolean): Boolean =
+            values.none(predicate)
+
+    /**
      * Leaves this immutable array as is and returns an ImmutableFloatArray with all elements sorted
      * according to the natural sort order of the value returned by the [selector].
      *

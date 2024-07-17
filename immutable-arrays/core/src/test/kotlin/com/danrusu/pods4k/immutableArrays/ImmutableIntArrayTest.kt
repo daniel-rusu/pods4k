@@ -494,7 +494,18 @@ class ImmutableIntArrayTest {
             expectThat(any { it % 4 == 0 })
                 .isTrue()
 
-            expectThat(all { it > 10 })
+            expectThat(any { it > 10 })
+                .isFalse()
+        }
+    }
+
+    @Test
+    fun `none validation`() {
+        with(immutableArrayOf(2, 4, 6)) {
+            expectThat(none { it % 5 == 0 })
+                .isTrue()
+
+            expectThat(none { it % 4 == 0 })
                 .isFalse()
         }
     }

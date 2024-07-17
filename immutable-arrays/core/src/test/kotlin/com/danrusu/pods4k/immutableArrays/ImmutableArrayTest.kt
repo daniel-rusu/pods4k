@@ -465,6 +465,17 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `none validation`() {
+        with(immutableArrayOf("one", "two", "four")) {
+            expectThat(none { it.contains('x') })
+                .isTrue()
+
+            expectThat(none { it.length == 4 })
+                .isFalse()
+        }
+    }
+
+    @Test
     fun `forEachIndexed validation`() {
         with(ImmutableArray(3) { "element $it" }) {
             val elements = mutableMapOf<Int, String>()

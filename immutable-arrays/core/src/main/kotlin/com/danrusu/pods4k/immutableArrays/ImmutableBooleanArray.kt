@@ -230,6 +230,12 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
             values.any(predicate)
 
     /**
+     * See [BooleanArray.none]
+     */
+    public inline fun none(predicate: (predicate: Boolean) -> Boolean): Boolean =
+            values.none(predicate)
+
+    /**
      * Leaves this immutable array as is and returns an ImmutableBooleanArray with all elements
      * sorted according to the natural sort order of the value returned by the [selector].
      *
