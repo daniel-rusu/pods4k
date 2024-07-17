@@ -67,56 +67,84 @@ public fun <T> immutableArrayOf(): ImmutableArray<T> = emptyImmutableArray()
 /**
  * Returns an [ImmutableArray] containing the specified [values].
  */
-public fun <T> immutableArrayOf(vararg values: T): ImmutableArray<T> = ImmutableArray(values.size) {
-        values[it] }
+@Suppress("UNCHECKED_CAST")
+public fun <T> immutableArrayOf(vararg values: T): ImmutableArray<T> {
+    val backingArray = arrayOfNulls<Any?>(values.size) as Array<T>
+    System.arraycopy(values, 0, backingArray, 0, values.size)
+    return ImmutableArray(backingArray)
+}
 
 /**
  * Returns an [ImmutableBooleanArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Boolean): ImmutableBooleanArray =
-        ImmutableBooleanArray(values.size) { values[it] }
+public fun immutableArrayOf(vararg values: Boolean): ImmutableBooleanArray {
+    val backingArray = BooleanArray(values.size)
+    System.arraycopy(values, 0, backingArray, 0, values.size)
+    return ImmutableBooleanArray(backingArray)
+}
 
 /**
  * Returns an [ImmutableByteArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Byte): ImmutableByteArray =
-        ImmutableByteArray(values.size) { values[it] }
+public fun immutableArrayOf(vararg values: Byte): ImmutableByteArray {
+    val backingArray = ByteArray(values.size)
+    System.arraycopy(values, 0, backingArray, 0, values.size)
+    return ImmutableByteArray(backingArray)
+}
 
 /**
  * Returns an [ImmutableCharArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Char): ImmutableCharArray =
-        ImmutableCharArray(values.size) { values[it] }
+public fun immutableArrayOf(vararg values: Char): ImmutableCharArray {
+    val backingArray = CharArray(values.size)
+    System.arraycopy(values, 0, backingArray, 0, values.size)
+    return ImmutableCharArray(backingArray)
+}
 
 /**
  * Returns an [ImmutableShortArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Short): ImmutableShortArray =
-        ImmutableShortArray(values.size) { values[it] }
+public fun immutableArrayOf(vararg values: Short): ImmutableShortArray {
+    val backingArray = ShortArray(values.size)
+    System.arraycopy(values, 0, backingArray, 0, values.size)
+    return ImmutableShortArray(backingArray)
+}
 
 /**
  * Returns an [ImmutableIntArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Int): ImmutableIntArray = ImmutableIntArray(values.size)
-        { values[it] }
+public fun immutableArrayOf(vararg values: Int): ImmutableIntArray {
+    val backingArray = IntArray(values.size)
+    System.arraycopy(values, 0, backingArray, 0, values.size)
+    return ImmutableIntArray(backingArray)
+}
 
 /**
  * Returns an [ImmutableLongArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Long): ImmutableLongArray =
-        ImmutableLongArray(values.size) { values[it] }
+public fun immutableArrayOf(vararg values: Long): ImmutableLongArray {
+    val backingArray = LongArray(values.size)
+    System.arraycopy(values, 0, backingArray, 0, values.size)
+    return ImmutableLongArray(backingArray)
+}
 
 /**
  * Returns an [ImmutableFloatArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Float): ImmutableFloatArray =
-        ImmutableFloatArray(values.size) { values[it] }
+public fun immutableArrayOf(vararg values: Float): ImmutableFloatArray {
+    val backingArray = FloatArray(values.size)
+    System.arraycopy(values, 0, backingArray, 0, values.size)
+    return ImmutableFloatArray(backingArray)
+}
 
 /**
  * Returns an [ImmutableDoubleArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Double): ImmutableDoubleArray =
-        ImmutableDoubleArray(values.size) { values[it] }
+public fun immutableArrayOf(vararg values: Double): ImmutableDoubleArray {
+    val backingArray = DoubleArray(values.size)
+    System.arraycopy(values, 0, backingArray, 0, values.size)
+    return ImmutableDoubleArray(backingArray)
+}
 
 /**
  * Builds an [ImmutableArray] for when the size isn't known in advance.

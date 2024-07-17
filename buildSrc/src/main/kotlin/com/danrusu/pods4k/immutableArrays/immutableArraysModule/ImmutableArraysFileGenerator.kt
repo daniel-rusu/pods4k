@@ -52,8 +52,13 @@ private fun FileSpec.Builder.addImmutableArrayOf() {
         ) {
             if (baseType == GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
+                suppress("UNCHECKED_CAST")
+                statement("val backingArray = arrayOfNulls<Any?>(values.size) as Array<%T>", baseType.type)
+            } else {
+                statement("val backingArray = ${baseType.backingArrayConstructor}(values.size)")
             }
-            statement("return ${baseType.generatedClassName}(values.size) { values[it] }")
+            statement("System.arraycopy(values, 0, backingArray, 0, values.size)")
+            statement("return ${baseType.generatedClassName}(backingArray)")
         }
     }
 }

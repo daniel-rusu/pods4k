@@ -5,19 +5,27 @@ Change Log
 
 ### Immutable Arrays
 
-Breaking Change: Extension functions `toImmutableIntArray`, `toImmutableFloatArray`, etc. have been renamed
-to `toImmutableArray` so that the most efficient primitive variant is chosen by default.
+**Breaking Changes:**
 
-* New: Add `sortedWith` method
-* New: Add `sorted` extension functions
-* New: Add `mapIndexedNotNull` specializations
-* New: Add `mapNotNull` specializations
-* New: Add dynamic factory functions (eg. `buildImmutableArray`, `buildImmutableBooleanArray` etc.) for when the size
+* Extension functions `toImmutableIntArray`, `toImmutableFloatArray`, etc. have been renamed
+  to `toImmutableArray` so that the most efficient primitive variant is chosen by default.
+
+**New Features:**
+
+* Add `sortedWith` method
+* Add `sorted` extension functions
+* Add `mapIndexedNotNull` specializations
+* Add `mapNotNull` specializations
+* Add dynamic factory functions (eg. `buildImmutableArray`, `buildImmutableBooleanArray` etc.) for when the size
   isn't known in advance
-* New: Add builders for constructing immutable arrays when the size isn't known in advance
-* Performance: Optimize the creation of immutable arrays from regular arrays
-* New: Add `mapIndexed` specializations
-* New: Add `map` specializations
+* Add builders for constructing immutable arrays when the size isn't known in advance
+* Add `mapIndexed` specializations
+* Add `map` specializations
+
+**Performance Improvements:**
+
+* Optimized `immutableArrayOf` factory functions
+* Optimized the creation of immutable arrays from regular arrays
 
 ## 0.1.0
 
