@@ -27,6 +27,7 @@ internal object ImmutableArraysFileGenerator {
             addPrimitiveImmutableArrayToTypedImmutableArray()
             addImmutableArrayGetOrElse()
             addImmutableArraySorted()
+            addImmutableArraySortedDescending()
         }
         fileSpec.writeTo(File(destinationPath, ""))
     }
@@ -210,6 +211,51 @@ private fun FileSpec.Builder.addImmutableArraySorted() {
             if (baseType == GENERIC) {
                 statement("return ${baseType.generatedClassName}(backingArray) as %T", receiver)
             } else {
+                statement("return ${baseType.generatedClassName}(backingArray)")
+            }
+        }
+    }
+}
+
+private fun FileSpec.Builder.addImmutableArraySortedDescending() {
+    val genericVariableName = "T"
+    val genericType = TypeVariableName(genericVariableName)
+
+    for (baseType in BaseType.values()) {
+        // both Kotlin & Java standard libraries don't provide sorting abilities for primitive boolean arrays
+        if (baseType == BOOLEAN) continue
+
+        val kdoc = when (baseType) {
+            GENERIC -> """
+                Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with all elements sorted according to their natural sort order.
+                
+                The sort is _stable_ so equal elements preserve their order relative to each other after sorting.
+            """.trimIndent()
+
+            else -> "Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with all elements sorted according to their natural sort order."
+        }
+        val receiver = when (baseType) {
+            GENERIC -> baseType.getGeneratedClass().parameterizedBy(genericType)
+            else -> baseType.getGeneratedClass()
+        }
+        function(
+            kdoc = kdoc,
+            receiver = receiver,
+            name = "sortedDescending",
+            returns = receiver,
+        ) {
+            if (baseType == GENERIC) {
+                addTypeVariable(
+                    TypeVariableName(genericVariableName, Comparable::class.asTypeName().parameterizedBy(genericType))
+                )
+                statement("return sortedWith(reverseOrder())")
+            } else {
+                comment("Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change")
+                statement("if (size <= 1) return this")
+                emptyLine()
+                statement("val backingArray = ${baseType.backingArrayConstructor}(size) { get(it) }")
+                statement("%T.sort(backingArray)", java.util.Arrays::class)
+                statement("backingArray.reverse()")
                 statement("return ${baseType.generatedClassName}(backingArray)")
             }
         }

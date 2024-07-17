@@ -12,6 +12,7 @@ Change Log
 
 **New Features:**
 
+* Add `sortedDescending` extension functions
 * Add `sortedWith` method
 * Add `sorted` extension functions
 * Add `mapIndexedNotNull` specializations

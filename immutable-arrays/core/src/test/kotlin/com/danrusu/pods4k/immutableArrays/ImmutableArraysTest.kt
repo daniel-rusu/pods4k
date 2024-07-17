@@ -97,4 +97,25 @@ class ImmutableArraysTest {
                 .isEqualTo(immutableArrayOf(1, 2, 5, 4, 3))
         }
     }
+
+    @Test
+    fun `sortedDescending validation`() {
+        with(immutableArrayOf("dogs", "apples", "pineapples")) {
+            expectThat(sortedDescending())
+                .isEqualTo(immutableArrayOf("pineapples", "dogs", "apples"))
+
+            // original is left unchanged
+            expectThat(this)
+                .isEqualTo(immutableArrayOf("dogs", "apples", "pineapples"))
+        }
+
+        with(immutableArrayOf(1, 2, 5, 4, 3)) {
+            expectThat(sortedDescending())
+                .isEqualTo(immutableArrayOf(5, 4, 3, 2, 1))
+
+            // original is left unchanged
+            expectThat(this)
+                .isEqualTo(immutableArrayOf(1, 2, 5, 4, 3))
+        }
+    }
 }
