@@ -514,7 +514,7 @@ public fun ImmutableDoubleArray.sorted(): ImmutableDoubleArray {
 
 /**
  * Leaves [this] immutable array as is and returns an [ImmutableArray] with all elements sorted
- * according to their natural sort order.
+ * according to their reverse natural sort order.
  *
  * The sort is _stable_ so equal elements preserve their order relative to each other after sorting.
  */
@@ -523,7 +523,7 @@ public fun <T : Comparable<T>> ImmutableArray<T>.sortedDescending(): ImmutableAr
 
 /**
  * Leaves [this] immutable array as is and returns an [ImmutableByteArray] with all elements sorted
- * according to their natural sort order.
+ * according to their reverse natural sort order.
  */
 public fun ImmutableByteArray.sortedDescending(): ImmutableByteArray {
     // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
@@ -537,7 +537,7 @@ public fun ImmutableByteArray.sortedDescending(): ImmutableByteArray {
 
 /**
  * Leaves [this] immutable array as is and returns an [ImmutableCharArray] with all elements sorted
- * according to their natural sort order.
+ * according to their reverse natural sort order.
  */
 public fun ImmutableCharArray.sortedDescending(): ImmutableCharArray {
     // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
@@ -551,7 +551,7 @@ public fun ImmutableCharArray.sortedDescending(): ImmutableCharArray {
 
 /**
  * Leaves [this] immutable array as is and returns an [ImmutableShortArray] with all elements sorted
- * according to their natural sort order.
+ * according to their reverse natural sort order.
  */
 public fun ImmutableShortArray.sortedDescending(): ImmutableShortArray {
     // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
@@ -565,7 +565,7 @@ public fun ImmutableShortArray.sortedDescending(): ImmutableShortArray {
 
 /**
  * Leaves [this] immutable array as is and returns an [ImmutableIntArray] with all elements sorted
- * according to their natural sort order.
+ * according to their reverse natural sort order.
  */
 public fun ImmutableIntArray.sortedDescending(): ImmutableIntArray {
     // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
@@ -579,7 +579,7 @@ public fun ImmutableIntArray.sortedDescending(): ImmutableIntArray {
 
 /**
  * Leaves [this] immutable array as is and returns an [ImmutableLongArray] with all elements sorted
- * according to their natural sort order.
+ * according to their reverse natural sort order.
  */
 public fun ImmutableLongArray.sortedDescending(): ImmutableLongArray {
     // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
@@ -593,7 +593,7 @@ public fun ImmutableLongArray.sortedDescending(): ImmutableLongArray {
 
 /**
  * Leaves [this] immutable array as is and returns an [ImmutableFloatArray] with all elements sorted
- * according to their natural sort order.
+ * according to their reverse natural sort order.
  */
 public fun ImmutableFloatArray.sortedDescending(): ImmutableFloatArray {
     // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
@@ -607,7 +607,7 @@ public fun ImmutableFloatArray.sortedDescending(): ImmutableFloatArray {
 
 /**
  * Leaves [this] immutable array as is and returns an [ImmutableDoubleArray] with all elements
- * sorted according to their natural sort order.
+ * sorted according to their reverse natural sort order.
  */
 public fun ImmutableDoubleArray.sortedDescending(): ImmutableDoubleArray {
     // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change

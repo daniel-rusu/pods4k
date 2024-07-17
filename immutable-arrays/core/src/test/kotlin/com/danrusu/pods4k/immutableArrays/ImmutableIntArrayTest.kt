@@ -478,6 +478,18 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `sortedBy validation`() {
+        with(immutableArrayOf(3, 17, 11)) {
+            expectThat(sortedBy { it.toString() })
+                .isEqualTo(immutableArrayOf(11, 17, 3))
+
+            // original is left unchanged
+            expectThat(this)
+                .isEqualTo(immutableArrayOf(3, 17, 11))
+        }
+    }
+
+    @Test
     fun `sortedWith validation`() {
         with(immutableArrayOf(1, 5, 3, 4)) {
             val comparator = Comparator<Int> { o1, o2 -> o1.compareTo(o2) }

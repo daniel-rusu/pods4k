@@ -9,16 +9,22 @@ import com.squareup.kotlinpoet.asTypeName
 internal class ParameterDSL {
     private val parameters = mutableListOf<ParameterSpec>()
 
-    inline operator fun <reified T> String.invoke(isVararg: Boolean = false, defaultValue: String? = null) {
-        invoke(T::class.asTypeName(), isVararg, defaultValue)
+    inline operator fun <reified T> String.invoke(
+        modifiers: List<KModifier> = emptyList(),
+        isVararg: Boolean = false,
+        defaultValue: String? = null
+    ) {
+        invoke(modifiers, T::class.asTypeName(), isVararg, defaultValue)
     }
 
     operator fun String.invoke(
+        modifiers: List<KModifier> = emptyList(),
         type: TypeName,
         isVararg: Boolean = false,
         defaultValue: String? = null,
     ) {
         val parameter = ParameterSpec.builder(this, type)
+        parameter.addModifiers(modifiers)
         if (isVararg) {
             parameter.addModifiers(KModifier.VARARG)
         }

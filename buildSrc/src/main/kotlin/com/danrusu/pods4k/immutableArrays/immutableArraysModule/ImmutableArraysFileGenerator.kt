@@ -227,12 +227,12 @@ private fun FileSpec.Builder.addImmutableArraySortedDescending() {
 
         val kdoc = when (baseType) {
             GENERIC -> """
-                Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with all elements sorted according to their natural sort order.
+                Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with all elements sorted according to their reverse natural sort order.
                 
                 The sort is _stable_ so equal elements preserve their order relative to each other after sorting.
             """.trimIndent()
 
-            else -> "Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with all elements sorted according to their natural sort order."
+            else -> "Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with all elements sorted according to their reverse natural sort order."
         }
         val receiver = when (baseType) {
             GENERIC -> baseType.getGeneratedClass().parameterizedBy(genericType)

@@ -172,6 +172,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                     "action"(type = lambda<Unit> { "index"<Int>(); "element"(type = baseType.type) })
                 },
             )
+            addSortedBy(baseType)
             addSortedWith(baseType)
 
             companionObject {
@@ -348,13 +349,47 @@ private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
     }
 }
 
+private fun TypeSpec.Builder.addSortedBy(baseType: BaseType) {
+    val returnType = when (baseType) {
+        GENERIC -> baseType.getGeneratedClass().parameterizedBy(baseType.type)
+        else -> baseType.getGeneratedClass()
+    }
+
+    val genericVariableName = "R"
+    val genericType = TypeVariableName(genericVariableName)
+    function(
+        kdoc = """
+            Leaves this immutable array as is and returns an ${baseType.generatedClassName} with all elements sorted according to the natural sort order of the value returned by specified [selector].
+            
+            The sort is _stable_ so equal elements preserve their order relative to each other after sorting.
+        """.trimIndent(),
+        modifiers = listOf(KModifier.INLINE),
+        name = "sortedBy",
+        parameters = {
+            "selector"(
+                modifiers = listOf(KModifier.CROSSINLINE),
+                type = lambda(
+                    parameters = { "element"(type = baseType.type) },
+                    returnType = genericType.copy(nullable = true)
+                )
+            )
+        },
+        returns = returnType,
+    ) {
+        addTypeVariable(
+            TypeVariableName(genericVariableName, Comparable::class.asTypeName().parameterizedBy(genericType))
+        )
+        statement("return sortedWith(compareBy(selector))")
+    }
+}
+
 private fun TypeSpec.Builder.addSortedWith(baseType: BaseType) {
     val returnType = when (baseType) {
         GENERIC -> baseType.getGeneratedClass().parameterizedBy(baseType.type)
         else -> baseType.getGeneratedClass()
     }
     function(
-        kdoc = "Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with all elements sorted according to the specified [comparator].",
+        kdoc = "Leaves this immutable array as is and returns an [${baseType.generatedClassName}] with all elements sorted according to the specified [comparator].",
         name = "sortedWith",
         parameters = {
             "comparator"(

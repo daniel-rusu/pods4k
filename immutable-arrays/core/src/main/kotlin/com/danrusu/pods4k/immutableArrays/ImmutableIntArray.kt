@@ -6,6 +6,7 @@ import java.util.Arrays
 import java.util.Comparator
 import kotlin.Array
 import kotlin.Boolean
+import kotlin.Comparable
 import kotlin.Int
 import kotlin.IntArray
 import kotlin.PublishedApi
@@ -214,8 +215,18 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
             values.forEachIndexed(action)
 
     /**
-     * Leaves [this] immutable array as is and returns an [ImmutableIntArray] with all elements
-     * sorted according to the specified [comparator].
+     * Leaves this immutable array as is and returns an ImmutableIntArray with all elements sorted
+     * according to the natural sort order of the value returned by specified [selector].
+     *
+     * The sort is _stable_ so equal elements preserve their order relative to each other after
+     * sorting.
+     */
+    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Int) -> R?):
+            ImmutableIntArray = sortedWith(compareBy(selector))
+
+    /**
+     * Leaves this immutable array as is and returns an [ImmutableIntArray] with all elements sorted
+     * according to the specified [comparator].
      */
     public fun sortedWith(comparator: Comparator<in Int>): ImmutableIntArray {
         // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change

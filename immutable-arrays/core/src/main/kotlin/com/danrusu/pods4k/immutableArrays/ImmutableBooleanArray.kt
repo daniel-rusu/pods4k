@@ -7,6 +7,7 @@ import java.util.Comparator
 import kotlin.Array
 import kotlin.Boolean
 import kotlin.BooleanArray
+import kotlin.Comparable
 import kotlin.Int
 import kotlin.PublishedApi
 import kotlin.String
@@ -217,7 +218,17 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
             values.forEachIndexed(action)
 
     /**
-     * Leaves [this] immutable array as is and returns an [ImmutableBooleanArray] with all elements
+     * Leaves this immutable array as is and returns an ImmutableBooleanArray with all elements
+     * sorted according to the natural sort order of the value returned by specified [selector].
+     *
+     * The sort is _stable_ so equal elements preserve their order relative to each other after
+     * sorting.
+     */
+    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Boolean) -> R?):
+            ImmutableBooleanArray = sortedWith(compareBy(selector))
+
+    /**
+     * Leaves this immutable array as is and returns an [ImmutableBooleanArray] with all elements
      * sorted according to the specified [comparator].
      */
     public fun sortedWith(comparator: Comparator<in Boolean>): ImmutableBooleanArray {

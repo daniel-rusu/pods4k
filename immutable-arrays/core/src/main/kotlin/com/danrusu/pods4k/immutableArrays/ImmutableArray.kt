@@ -7,6 +7,7 @@ import java.util.Comparator
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
+import kotlin.Comparable
 import kotlin.Int
 import kotlin.Nothing
 import kotlin.PublishedApi
@@ -215,7 +216,17 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
             values.forEachIndexed(action)
 
     /**
-     * Leaves [this] immutable array as is and returns an [ImmutableArray] with all elements sorted
+     * Leaves this immutable array as is and returns an ImmutableArray with all elements sorted
+     * according to the natural sort order of the value returned by specified [selector].
+     *
+     * The sort is _stable_ so equal elements preserve their order relative to each other after
+     * sorting.
+     */
+    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: T) -> R?):
+            ImmutableArray<T> = sortedWith(compareBy(selector))
+
+    /**
+     * Leaves this immutable array as is and returns an [ImmutableArray] with all elements sorted
      * according to the specified [comparator].
      */
     @Suppress("UNCHECKED_CAST")

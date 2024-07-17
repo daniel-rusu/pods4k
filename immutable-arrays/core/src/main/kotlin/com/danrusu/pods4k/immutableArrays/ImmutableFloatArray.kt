@@ -6,6 +6,7 @@ import java.util.Arrays
 import java.util.Comparator
 import kotlin.Array
 import kotlin.Boolean
+import kotlin.Comparable
 import kotlin.Float
 import kotlin.FloatArray
 import kotlin.Int
@@ -216,7 +217,17 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
             values.forEachIndexed(action)
 
     /**
-     * Leaves [this] immutable array as is and returns an [ImmutableFloatArray] with all elements
+     * Leaves this immutable array as is and returns an ImmutableFloatArray with all elements sorted
+     * according to the natural sort order of the value returned by specified [selector].
+     *
+     * The sort is _stable_ so equal elements preserve their order relative to each other after
+     * sorting.
+     */
+    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Float) -> R?):
+            ImmutableFloatArray = sortedWith(compareBy(selector))
+
+    /**
+     * Leaves this immutable array as is and returns an [ImmutableFloatArray] with all elements
      * sorted according to the specified [comparator].
      */
     public fun sortedWith(comparator: Comparator<in Float>): ImmutableFloatArray {
