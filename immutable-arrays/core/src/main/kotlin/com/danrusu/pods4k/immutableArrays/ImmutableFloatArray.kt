@@ -233,6 +233,11 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
             values.none(predicate)
 
     /**
+     * See [FloatArray.count]
+     */
+    public inline fun count(predicate: (predicate: Float) -> Boolean): Int = values.count(predicate)
+
+    /**
      * Leaves this immutable array as is and returns an ImmutableFloatArray with all elements sorted
      * according to the natural sort order of the value returned by the [selector].
      *

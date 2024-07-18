@@ -232,6 +232,11 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
             values.none(predicate)
 
     /**
+     * See [ByteArray.count]
+     */
+    public inline fun count(predicate: (predicate: Byte) -> Boolean): Int = values.count(predicate)
+
+    /**
      * Leaves this immutable array as is and returns an ImmutableByteArray with all elements sorted
      * according to the natural sort order of the value returned by the [selector].
      *

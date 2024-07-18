@@ -59,7 +59,8 @@ val people = immutableArrayOf(
     Person(name = "Bob", age = 4),
 ) // ImmutableArray<Person>
 
-// Since age is a non-nullable Int, mapping ages uses an efficient ImmutableIntArray storing primitive int values
+// Since age is a non-nullable Int, this creates an efficient
+// ImmutableIntArray storing primitive int values
 val ages = people.map { it.age }
 performStatisticalAnalysis(ages)
 ```

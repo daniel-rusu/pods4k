@@ -232,6 +232,11 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
             values.none(predicate)
 
     /**
+     * See [LongArray.count]
+     */
+    public inline fun count(predicate: (predicate: Long) -> Boolean): Int = values.count(predicate)
+
+    /**
      * Leaves this immutable array as is and returns an ImmutableLongArray with all elements sorted
      * according to the natural sort order of the value returned by the [selector].
      *

@@ -230,6 +230,11 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     public inline fun none(predicate: (predicate: Int) -> Boolean): Boolean = values.none(predicate)
 
     /**
+     * See [IntArray.count]
+     */
+    public inline fun count(predicate: (predicate: Int) -> Boolean): Int = values.count(predicate)
+
+    /**
      * Leaves this immutable array as is and returns an ImmutableIntArray with all elements sorted
      * according to the natural sort order of the value returned by the [selector].
      *

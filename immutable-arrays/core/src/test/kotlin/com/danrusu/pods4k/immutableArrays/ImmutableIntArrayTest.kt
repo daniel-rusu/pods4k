@@ -511,6 +511,14 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `count validation`() {
+        with(immutableArrayOf(2, 4, 6)) {
+            expectThat(count { it <= 4 })
+                .isEqualTo(2)
+        }
+    }
+
+    @Test
     fun `sortedBy validation`() {
         with(immutableArrayOf(3, 17, 11)) {
             expectThat(sortedBy { it.toString() })

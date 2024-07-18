@@ -236,6 +236,12 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
             values.none(predicate)
 
     /**
+     * See [BooleanArray.count]
+     */
+    public inline fun count(predicate: (predicate: Boolean) -> Boolean): Int =
+            values.count(predicate)
+
+    /**
      * Leaves this immutable array as is and returns an ImmutableBooleanArray with all elements
      * sorted according to the natural sort order of the value returned by the [selector].
      *

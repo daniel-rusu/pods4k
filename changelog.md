@@ -9,6 +9,7 @@ _Release Date TBD_
 
 **New Features:**
 
+* Add `count(predicate)` method
 * Add `none(predicate)` method
 * Add `any(predicate)` method
 * Add `all(predicate)` method

@@ -236,6 +236,12 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
             values.none(predicate)
 
     /**
+     * See [DoubleArray.count]
+     */
+    public inline fun count(predicate: (predicate: Double) -> Boolean): Int =
+            values.count(predicate)
+
+    /**
      * Leaves this immutable array as is and returns an ImmutableDoubleArray with all elements
      * sorted according to the natural sort order of the value returned by the [selector].
      *
