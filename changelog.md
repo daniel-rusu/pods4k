@@ -7,6 +7,11 @@ _Release Date TBD_
 
 ### Immutable Arrays
 
+**Breaking Changes:**
+
+* Factory functions (like `emptyImmutableArray`, `immutableArrayOf`, `buildImmutableArray`, etc.) have been moved
+  to `ImmutableArrayFactory.kt` to improve code organization
+
 **New Features:**
 
 * Add `count(predicate)` method

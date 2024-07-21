@@ -40,9 +40,9 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     /**
      * This is internal instead of private so we can have inline functions that delegate to the same
      * function on the backing array.  The backing array won't be accessible from Kotlin code since the
-     * auto-generarted arrays are in their own module and the internal modifier prevents outside
-     * access.  The constructor is also internal preventing anyone from creating an "instance" that
-     * points to an array that they have access to.
+     * auto-generated arrays are in their own module and the internal modifier prevents outside access.
+     *  The constructor is also internal preventing anyone from creating an "instance" that points to
+     * an array that they have access to.
      *
      * Attempting to bypass the internal visibility from java won't work since this is an inline
      * class so both the field and constructor are mangled by the Kotlin compiler.  While these might

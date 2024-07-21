@@ -2,8 +2,9 @@ package com.danrusu.pods4k
 
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.ArrayExtensionsGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.CollectionExtensionsGenerator
-import com.danrusu.pods4k.immutableArrays.immutableArraysModule.ImmutableArrayCodeGenerator
-import com.danrusu.pods4k.immutableArrays.immutableArraysModule.ImmutableArraysFileGenerator
+import com.danrusu.pods4k.immutableArrays.immutableArraysModule.ImmutableArrayGenerator
+import com.danrusu.pods4k.immutableArrays.immutableArraysModule.ImmutableArrayFactoryGenerator
+import com.danrusu.pods4k.immutableArrays.immutableArraysModule.ImmutableArrayExtensionsGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.SequenceExtensionsGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.specializations.MapIndexedNotNullSpecializationGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.specializations.MapIndexedSpecializationGenerator
@@ -31,8 +32,9 @@ private fun generateCoreImmutableArraysModule(target: Project) {
         .childProjects["core"]!!
         .projectDir.absolutePath + "/src/main/kotlin"
 
-    ImmutableArrayCodeGenerator.generate(destinationPath = moduleSourcePath)
-    ImmutableArraysFileGenerator.generate(destinationPath = moduleSourcePath)
+    ImmutableArrayGenerator.generate(destinationPath = moduleSourcePath)
+    ImmutableArrayExtensionsGenerator.generate(destinationPath = moduleSourcePath)
+    ImmutableArrayFactoryGenerator.generate(destinationPath = moduleSourcePath)
     ArrayExtensionsGenerator.generate(destinationPath = moduleSourcePath)
     CollectionExtensionsGenerator.generate(destinationPath = moduleSourcePath)
     SequenceExtensionsGenerator.generate(destinationPath = moduleSourcePath)

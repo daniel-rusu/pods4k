@@ -17,96 +17,20 @@ import com.squareup.kotlinpoet.TypeVariableName
 import com.squareup.kotlinpoet.asTypeName
 import java.io.File
 
-internal object ImmutableArraysFileGenerator {
+internal object ImmutableArrayExtensionsGenerator {
     fun generate(destinationPath: String) {
         val fileSpec = createFile(ImmutableArrayConfig.packageName, "ImmutableArrays") {
-            addEmptyFunctions()
-            addImmutableArrayOf()
-            addBuilderFunctions()
-            addGenericImmutableArrayToPrimitiveImmutableArray()
-            addPrimitiveImmutableArrayToTypedImmutableArray()
-            addImmutableArrayGetOrElse()
-            addImmutableArraySorted()
-            addImmutableArraySortedDescending()
+            addToPrimitiveImmutableArray()
+            addToTypedImmutableArray()
+            addGetOrElse()
+            addSorted()
+            addSortedDescending()
         }
         fileSpec.writeTo(File(destinationPath, ""))
     }
 }
 
-private fun FileSpec.Builder.addImmutableArrayOf() {
-    // Calling immutableArrayOf() without arguments will delegate to the empty generic factory function
-    function(
-        kdoc = "Returns an empty [${GENERIC.generatedClassName}].",
-        name = "immutableArrayOf",
-        returns = GENERIC.getGeneratedTypeName(),
-    ) {
-        addTypeVariable(GENERIC.type as TypeVariableName)
-        statement("return empty${GENERIC.generatedClassName}()")
-    }
-
-    for (baseType in BaseType.values()) {
-        function(
-            kdoc = "Returns an [${baseType.generatedClassName}] containing the specified [values].",
-            name = "immutableArrayOf",
-            parameters = { "values"(type = baseType.type, isVararg = true) },
-            returns = baseType.getGeneratedTypeName(),
-        ) {
-            if (baseType == GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-                suppress("UNCHECKED_CAST")
-                statement("val backingArray = arrayOfNulls<Any?>(values.size) as Array<%T>", baseType.type)
-            } else {
-                statement("val backingArray = ${baseType.backingArrayConstructor}(values.size)")
-            }
-            statement("System.arraycopy(values, 0, backingArray, 0, values.size)")
-            statement("return ${baseType.generatedClassName}(backingArray)")
-        }
-    }
-}
-
-private fun FileSpec.Builder.addBuilderFunctions() {
-    "ars".apply { }
-    for (baseType in BaseType.values()) {
-        val receiver = when (baseType) {
-            GENERIC -> baseType.getGeneratedClass().nestedClass("Builder").parameterizedBy(baseType.type)
-            else -> baseType.getGeneratedClass().nestedClass("Builder")
-        }
-        function(
-            kdoc = "Builds an [${baseType.generatedClassName}] for when the size isn't known in advance.",
-            name = "build${baseType.generatedClassName}",
-            parameters = {
-                "body"(
-                    type = lambda<Unit>(receiver = receiver)
-                )
-            },
-            returns = baseType.getGeneratedTypeName(),
-        ) {
-            if (baseType == GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-                statement("return ${baseType.generatedClassName}.Builder<%T>().apply(body).build()", baseType.type)
-            } else {
-                statement("return ${baseType.generatedClassName}.Builder().apply(body).build()")
-            }
-        }
-    }
-}
-
-private fun FileSpec.Builder.addEmptyFunctions() {
-    for (baseType in BaseType.values()) {
-        function(
-            kdoc = "Returns an empty [${baseType.generatedClassName}].",
-            name = "empty${baseType.generatedClassName}",
-            returns = baseType.getGeneratedTypeName(),
-        ) {
-            if (baseType == GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
-            statement("return ${baseType.generatedClassName}.EMPTY")
-        }
-    }
-}
-
-private fun FileSpec.Builder.addGenericImmutableArrayToPrimitiveImmutableArray() {
+private fun FileSpec.Builder.addToPrimitiveImmutableArray() {
     for (baseType in BaseType.values()) {
         if (baseType == GENERIC) continue
 
@@ -124,7 +48,7 @@ private fun FileSpec.Builder.addGenericImmutableArrayToPrimitiveImmutableArray()
     }
 }
 
-private fun FileSpec.Builder.addPrimitiveImmutableArrayToTypedImmutableArray() {
+private fun FileSpec.Builder.addToTypedImmutableArray() {
     for (baseType in BaseType.values()) {
         if (baseType == GENERIC) continue
 
@@ -142,7 +66,7 @@ private fun FileSpec.Builder.addPrimitiveImmutableArrayToTypedImmutableArray() {
     }
 }
 
-private fun FileSpec.Builder.addImmutableArrayGetOrElse() {
+private fun FileSpec.Builder.addGetOrElse() {
     for (baseType in BaseType.values()) {
         val receiver = when (baseType) {
             GENERIC -> baseType.getGeneratedClass().parameterizedBy(baseType.type)
@@ -167,7 +91,7 @@ private fun FileSpec.Builder.addImmutableArrayGetOrElse() {
     }
 }
 
-private fun FileSpec.Builder.addImmutableArraySorted() {
+private fun FileSpec.Builder.addSorted() {
     val genericVariableName = "T"
     val genericType = TypeVariableName(genericVariableName)
 
@@ -217,7 +141,7 @@ private fun FileSpec.Builder.addImmutableArraySorted() {
     }
 }
 
-private fun FileSpec.Builder.addImmutableArraySortedDescending() {
+private fun FileSpec.Builder.addSortedDescending() {
     val genericVariableName = "T"
     val genericType = TypeVariableName(genericVariableName)
 
