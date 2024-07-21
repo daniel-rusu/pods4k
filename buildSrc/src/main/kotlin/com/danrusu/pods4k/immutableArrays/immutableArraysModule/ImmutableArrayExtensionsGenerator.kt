@@ -36,7 +36,7 @@ private fun FileSpec.Builder.addToPrimitiveImmutableArray() {
 
         function(
             kdoc = """
-                Returns an [${baseType.generatedClassName}] containing the values of this array.
+                Returns an [${baseType.generatedClassName}] containing the unboxed values of this array.
                 
                 [${baseType.generatedClassName}] uses less memory and is faster to access as it stores the primitive values directly without needing to store them in wrapper objects.
             """.trimIndent(),
@@ -54,7 +54,7 @@ private fun FileSpec.Builder.addToTypedImmutableArray() {
 
         function(
             kdoc = """
-                Returns a typed [${baseType.generatedClassName}] containing the values of this array.
+                Returns a typed [${GENERIC.generatedClassName}] containing the values of this array.
                 
                 Note that [${GENERIC.generatedClassName}] uses more memory and is slower to access as each primitive value will be auto-boxed in a wrapper object.
             """.trimIndent(),
