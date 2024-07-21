@@ -24,6 +24,8 @@ import kotlin.Suppress
  * Returns an [ImmutableBooleanArray] with the contents of this array.
  */
 public fun BooleanArray.toImmutableArray(): ImmutableBooleanArray {
+    if (isEmpty()) return ImmutableBooleanArray.EMPTY
+
     val backingArray = BooleanArray(size)
     System.arraycopy(this, 0, backingArray, 0, size)
     return ImmutableBooleanArray(backingArray)
@@ -33,6 +35,8 @@ public fun BooleanArray.toImmutableArray(): ImmutableBooleanArray {
  * Returns an [ImmutableByteArray] with the contents of this array.
  */
 public fun ByteArray.toImmutableArray(): ImmutableByteArray {
+    if (isEmpty()) return ImmutableByteArray.EMPTY
+
     val backingArray = ByteArray(size)
     System.arraycopy(this, 0, backingArray, 0, size)
     return ImmutableByteArray(backingArray)
@@ -42,6 +46,8 @@ public fun ByteArray.toImmutableArray(): ImmutableByteArray {
  * Returns an [ImmutableCharArray] with the contents of this array.
  */
 public fun CharArray.toImmutableArray(): ImmutableCharArray {
+    if (isEmpty()) return ImmutableCharArray.EMPTY
+
     val backingArray = CharArray(size)
     System.arraycopy(this, 0, backingArray, 0, size)
     return ImmutableCharArray(backingArray)
@@ -51,6 +57,8 @@ public fun CharArray.toImmutableArray(): ImmutableCharArray {
  * Returns an [ImmutableShortArray] with the contents of this array.
  */
 public fun ShortArray.toImmutableArray(): ImmutableShortArray {
+    if (isEmpty()) return ImmutableShortArray.EMPTY
+
     val backingArray = ShortArray(size)
     System.arraycopy(this, 0, backingArray, 0, size)
     return ImmutableShortArray(backingArray)
@@ -60,6 +68,8 @@ public fun ShortArray.toImmutableArray(): ImmutableShortArray {
  * Returns an [ImmutableIntArray] with the contents of this array.
  */
 public fun IntArray.toImmutableArray(): ImmutableIntArray {
+    if (isEmpty()) return ImmutableIntArray.EMPTY
+
     val backingArray = IntArray(size)
     System.arraycopy(this, 0, backingArray, 0, size)
     return ImmutableIntArray(backingArray)
@@ -69,6 +79,8 @@ public fun IntArray.toImmutableArray(): ImmutableIntArray {
  * Returns an [ImmutableLongArray] with the contents of this array.
  */
 public fun LongArray.toImmutableArray(): ImmutableLongArray {
+    if (isEmpty()) return ImmutableLongArray.EMPTY
+
     val backingArray = LongArray(size)
     System.arraycopy(this, 0, backingArray, 0, size)
     return ImmutableLongArray(backingArray)
@@ -78,6 +90,8 @@ public fun LongArray.toImmutableArray(): ImmutableLongArray {
  * Returns an [ImmutableFloatArray] with the contents of this array.
  */
 public fun FloatArray.toImmutableArray(): ImmutableFloatArray {
+    if (isEmpty()) return ImmutableFloatArray.EMPTY
+
     val backingArray = FloatArray(size)
     System.arraycopy(this, 0, backingArray, 0, size)
     return ImmutableFloatArray(backingArray)
@@ -87,6 +101,8 @@ public fun FloatArray.toImmutableArray(): ImmutableFloatArray {
  * Returns an [ImmutableDoubleArray] with the contents of this array.
  */
 public fun DoubleArray.toImmutableArray(): ImmutableDoubleArray {
+    if (isEmpty()) return ImmutableDoubleArray.EMPTY
+
     val backingArray = DoubleArray(size)
     System.arraycopy(this, 0, backingArray, 0, size)
     return ImmutableDoubleArray(backingArray)
@@ -97,6 +113,8 @@ public fun DoubleArray.toImmutableArray(): ImmutableDoubleArray {
  */
 @Suppress("UNCHECKED_CAST")
 public fun <T> Array<T>.toImmutableArray(): ImmutableArray<T> {
+    if (isEmpty()) return ImmutableArray.EMPTY
+
     val backingArray = arrayOfNulls<Any?>(size) as Array<T>
     System.arraycopy(this, 0, backingArray, 0, size)
     return ImmutableArray(backingArray)

@@ -19,6 +19,10 @@ _Release Date TBD_
 * Add `any(predicate)` method
 * Add `all(predicate)` method
 
+**Performance Improvements:**
+
+* Return `EMPTY` singleton when converting an empty regular array to an immutable array
+
 ## 0.2.0
 
 _2024-07-16_

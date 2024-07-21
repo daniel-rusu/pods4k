@@ -3,6 +3,7 @@ package com.danrusu.pods4k.immutableArrays.immutableArraysModule
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
 import com.danrusu.pods4k.utils.createFile
+import com.danrusu.pods4k.utils.emptyLine
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.statement
 import com.danrusu.pods4k.utils.suppress
@@ -33,6 +34,9 @@ private fun FileSpec.Builder.addGenericArrayToImmutableArray() {
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
 
+                statement("if (isEmpty()) return ${baseType.generatedClassName}.EMPTY")
+                emptyLine()
+
                 // Generic to generic can use the fast arraycopy
                 suppress("UNCHECKED_CAST")
                 statement("val backingArray = arrayOfNulls<Any?>(size) as Array<%T>", baseType.type)
@@ -56,6 +60,9 @@ private fun FileSpec.Builder.addPrimitiveArrayToImmutableArray() {
             name = "toImmutableArray",
             returns = baseType.getGeneratedTypeName(),
         ) {
+            statement("if (isEmpty()) return ${baseType.generatedClassName}.EMPTY")
+            emptyLine()
+
             statement("val backingArray = ${baseType.backingArrayConstructor}(size)")
             statement("System.arraycopy(this, 0, backingArray, 0, size)")
             statement("return ${baseType.generatedClassName}(backingArray)")
