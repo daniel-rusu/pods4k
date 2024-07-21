@@ -22,6 +22,11 @@ import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
 
 /**
+ * Some VMs reserve header words in the array so this is the max safe array size
+ */
+private const val MAX_ARRAY_SIZE: Int = Int.MAX_VALUE - 8
+
+/**
  * Represents an array that cannot have its elements re-assigned.
  *
  * Although this is a class that wraps a regular array, it's really a zero-cost abstraction that
@@ -375,13 +380,12 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
             when {
                 minCapacity < 0 -> throw OutOfMemoryError() // overflow
                 values.size >= minCapacity -> return
-                // Some VMs reserve header words in the array so this is the max safe value
-                minCapacity > Int.MAX_VALUE - 8 -> throw OutOfMemoryError()
+                minCapacity > MAX_ARRAY_SIZE -> throw OutOfMemoryError()
             }
             // increase the size by 50 percent
             var newSize = values.size + (values.size shr 1) + 1
             newSize = when {
-                newSize < 0 -> Int.MAX_VALUE - 8 // overflow
+                newSize < 0 -> MAX_ARRAY_SIZE // overflow
                 newSize < minCapacity -> minCapacity
                 else -> newSize
             }

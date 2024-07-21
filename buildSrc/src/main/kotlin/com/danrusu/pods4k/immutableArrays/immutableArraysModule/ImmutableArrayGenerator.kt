@@ -38,6 +38,12 @@ internal object ImmutableArrayGenerator {
 
 private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
     return createFile(ImmutableArrayConfig.packageName, baseType.generatedClassName) {
+        property<Int>(
+            kdoc = "Some VMs reserve header words in the array so this is the max safe array size",
+            modifiers = listOf(KModifier.PRIVATE, KModifier.CONST),
+            name = "MAX_ARRAY_SIZE",
+            init = "Int.MAX_VALUE - 8",
+        )
         addClass(modifiers = listOf(KModifier.VALUE), name = baseType.generatedClassName) {
             addKdoc(
                 """
@@ -631,17 +637,15 @@ private fun TypeSpec.Builder.addBuilderEnsureCapacityFunction(baseType: BaseType
         name = "ensureCapacity",
         parameters = { "minCapacity"<Int>() },
     ) {
-        val maxCapacity = "Int.MAX_VALUE - 8"
         controlFlow("when") {
             statement("minCapacity < 0 -> throw %T() // overflow", OutOfMemoryError::class)
             statement("values.size >= minCapacity -> return")
-            comment("Some VMs reserve header words in the array so this is the max safe value")
-            statement("minCapacity > $maxCapacity -> throw %T()", OutOfMemoryError::class)
+            statement("minCapacity > MAX_ARRAY_SIZE -> throw %T()", OutOfMemoryError::class)
         }
         comment("increase the size by 50 percent")
         statement("var newSize = values.size + (values.size shr 1) + 1")
         controlFlow("newSize = when") {
-            statement("newSize < 0 -> $maxCapacity // overflow")
+            statement("newSize < 0 -> MAX_ARRAY_SIZE // overflow")
             statement("newSize < minCapacity -> minCapacity")
             statement("else -> newSize")
         }

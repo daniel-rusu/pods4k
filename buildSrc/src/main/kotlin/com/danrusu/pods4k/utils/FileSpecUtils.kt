@@ -3,8 +3,10 @@ package com.danrusu.pods4k.utils
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.KModifier
+import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeSpec
+import com.squareup.kotlinpoet.asTypeName
 
 internal inline fun createFile(packageName: String, fileName: String, body: FileSpec.Builder.() -> Unit): FileSpec {
     return FileSpec.builder(packageName, fileName).apply {
@@ -57,6 +59,40 @@ internal inline fun FileSpec.Builder.function(
             receiver?.let { receiver(it) }
             addParameters(ParameterDSL().apply(parameters).build())
             returns?.let { returns(it) }
+            body()
+        }.build()
+    )
+}
+
+internal inline fun <reified T : Any> FileSpec.Builder.property(
+    kdoc: String? = null,
+    modifiers: List<KModifier> = emptyList(),
+    name: String,
+    init: String? = null,
+    body: PropertySpec.Builder.() -> Unit = {},
+): FileSpec.Builder {
+    return property(
+        kdoc = kdoc,
+        modifiers = modifiers,
+        name = name,
+        type = T::class.asTypeName(),
+        init = init,
+        body = body
+    )
+}
+
+internal inline fun FileSpec.Builder.property(
+    kdoc: String? = null,
+    modifiers: List<KModifier> = emptyList(),
+    name: String,
+    type: TypeName,
+    init: String? = null,
+    body: PropertySpec.Builder.() -> Unit = {},
+): FileSpec.Builder {
+    return addProperty(
+        PropertySpec.builder(name, type, modifiers).apply {
+            kdoc?.let { addKdoc(it) }
+            init?.let { initializer(it) }
             body()
         }.build()
     )
