@@ -16,13 +16,26 @@ internal inline fun createFile(packageName: String, fileName: String, body: File
     }.build()
 }
 
-internal inline fun FileSpec.Builder.addClass(
+internal inline fun FileSpec.Builder.declareClass(
     modifiers: List<KModifier> = emptyList(),
     name: String,
     body: TypeSpec.Builder.() -> Unit
 ): FileSpec.Builder {
     return addType(
         TypeSpec.classBuilder(name).apply {
+            addModifiers(modifiers)
+            body()
+        }.build()
+    )
+}
+
+internal inline fun FileSpec.Builder.declareObject(
+    modifiers: List<KModifier> = emptyList(),
+    name: String,
+    body: TypeSpec.Builder.() -> Unit,
+): FileSpec.Builder {
+    return addType(
+        TypeSpec.objectBuilder(name).apply {
             addModifiers(modifiers)
             body()
         }.build()

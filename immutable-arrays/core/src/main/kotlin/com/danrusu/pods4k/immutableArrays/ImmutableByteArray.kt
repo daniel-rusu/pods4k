@@ -1,7 +1,6 @@
 // Auto-generated file. DO NOT EDIT!
 package com.danrusu.pods4k.immutableArrays
 
-import java.lang.OutOfMemoryError
 import java.util.Arrays
 import java.util.Comparator
 import kotlin.Array
@@ -20,11 +19,6 @@ import kotlin.collections.Iterator
 import kotlin.jvm.JvmInline
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
-
-/**
- * Some VMs reserve header words in the array so this is the max safe array size
- */
-private const val MAX_ARRAY_SIZE: Int = Int.MAX_VALUE - 8
 
 /**
  * Represents an array that cannot have its elements re-assigned.
@@ -377,19 +371,10 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
         }
 
         private fun ensureCapacity(minCapacity: Int) {
-            when {
-                minCapacity < 0 -> throw OutOfMemoryError() // overflow
-                values.size >= minCapacity -> return
-                minCapacity > MAX_ARRAY_SIZE -> throw OutOfMemoryError()
-            }
-            // increase the size by 50 percent
-            var newSize = values.size + (values.size shr 1) + 1
-            newSize = when {
-                newSize < 0 -> MAX_ARRAY_SIZE // overflow
-                newSize < minCapacity -> minCapacity
-                else -> newSize
-            }
-            val replacement = ByteArray(newSize)
+            val newCapacity = BuilderUtils.computeNewCapacity(values.size, minCapacity)
+            if (newCapacity == values.size) return
+
+            val replacement = ByteArray(newCapacity)
             System.arraycopy(values, 0, replacement, 0, size)
             values = replacement
         }

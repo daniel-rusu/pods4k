@@ -128,7 +128,7 @@ internal inline fun TypeSpec.Builder.function(
     )
 }
 
-internal inline fun TypeSpec.Builder.addClass(
+internal inline fun TypeSpec.Builder.declareClass(
     modifiers: List<KModifier> = emptyList(),
     name: String,
     body: TypeSpec.Builder.() -> Unit

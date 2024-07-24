@@ -1,6 +1,7 @@
 // Auto-generated file. DO NOT EDIT!
 package com.danrusu.pods4k.immutableArrays
 
+import java.lang.OutOfMemoryError
 import kotlin.Boolean
 import kotlin.Byte
 import kotlin.Char
@@ -197,3 +198,33 @@ public fun buildImmutableFloatArray(body: ImmutableFloatArray.Builder.() -> Unit
  */
 public fun buildImmutableDoubleArray(body: ImmutableDoubleArray.Builder.() -> Unit):
         ImmutableDoubleArray = ImmutableDoubleArray.Builder().apply(body).build()
+
+internal object BuilderUtils {
+    /**
+     * Some VMs reserve header words in the array so this is the max safe array size
+     */
+    public const val MAX_ARRAY_SIZE: Int = Int.MAX_VALUE - 8
+
+    /**
+     * Returns a larger capacity when [currentCapacity] is less than [minCapacity] otherwise returns
+     * [currentCapacity].
+     *
+     * The strategy of choosing the new capacity attempts to balance the negative performance impact
+     * of repeated resizing operations with the negative memory impact of ending up with too much
+     * unused capacity.
+     */
+    public fun computeNewCapacity(currentCapacity: Int, minCapacity: Int): Int {
+        when {
+            minCapacity < 0 -> throw OutOfMemoryError() // overflow
+            currentCapacity >= minCapacity -> return currentCapacity
+            minCapacity > MAX_ARRAY_SIZE -> throw OutOfMemoryError()
+        }
+        // increase the size by at least 50 percent
+        var newCapacity = currentCapacity + (currentCapacity shr 1) + 1
+        return when {
+            newCapacity < 0 -> MAX_ARRAY_SIZE // handle overflow
+            newCapacity < minCapacity -> minCapacity
+            else -> newCapacity
+        }
+    }
+}

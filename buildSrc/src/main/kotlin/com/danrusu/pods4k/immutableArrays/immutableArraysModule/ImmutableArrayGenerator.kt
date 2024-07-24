@@ -4,12 +4,12 @@ import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.BaseType.GENERIC
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
 import com.danrusu.pods4k.utils.ParameterDSL
-import com.danrusu.pods4k.utils.addClass
 import com.danrusu.pods4k.utils.addPrimaryConstructor
 import com.danrusu.pods4k.utils.comment
 import com.danrusu.pods4k.utils.companionObject
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.createFile
+import com.danrusu.pods4k.utils.declareClass
 import com.danrusu.pods4k.utils.emptyLine
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.property
@@ -38,13 +38,7 @@ internal object ImmutableArrayGenerator {
 
 private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
     return createFile(ImmutableArrayConfig.packageName, baseType.generatedClassName) {
-        property<Int>(
-            kdoc = "Some VMs reserve header words in the array so this is the max safe array size",
-            modifiers = listOf(KModifier.PRIVATE, KModifier.CONST),
-            name = "MAX_ARRAY_SIZE",
-            init = "Int.MAX_VALUE - 8",
-        )
-        addClass(modifiers = listOf(KModifier.VALUE), name = baseType.generatedClassName) {
+        declareClass(modifiers = listOf(KModifier.VALUE), name = baseType.generatedClassName) {
             addKdoc(
                 """
                     Represents an array that cannot have its elements re-assigned.
@@ -210,7 +204,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 addCompanionObjectInvokeOperator(baseType)
             }
 
-            addClass(name = "Builder") {
+            declareClass(name = "Builder") {
                 addKdoc(
                     """
                         Builder to construct immutable arrays when the resulting size isn't known in advance.
@@ -637,22 +631,12 @@ private fun TypeSpec.Builder.addBuilderEnsureCapacityFunction(baseType: BaseType
         name = "ensureCapacity",
         parameters = { "minCapacity"<Int>() },
     ) {
-        controlFlow("when") {
-            statement("minCapacity < 0 -> throw %T() // overflow", OutOfMemoryError::class)
-            statement("values.size >= minCapacity -> return")
-            statement("minCapacity > MAX_ARRAY_SIZE -> throw %T()", OutOfMemoryError::class)
-        }
-        comment("increase the size by 50 percent")
-        statement("var newSize = values.size + (values.size shr 1) + 1")
-        controlFlow("newSize = when") {
-            statement("newSize < 0 -> MAX_ARRAY_SIZE // overflow")
-            statement("newSize < minCapacity -> minCapacity")
-            statement("else -> newSize")
-        }
-        if (baseType == GENERIC) {
-            statement("val replacement = arrayOfNulls<Any?>(newSize)")
-        } else {
-            statement("val replacement = ${baseType.backingArrayConstructor}(newSize)")
+        statement("val newCapacity = BuilderUtils.computeNewCapacity(values.size, minCapacity)")
+        statement("if (newCapacity == values.size) return")
+        emptyLine()
+        when (baseType) {
+            GENERIC -> statement("val replacement = arrayOfNulls<Any?>(newCapacity)")
+            else -> statement("val replacement = ${baseType.backingArrayConstructor}(newCapacity)")
         }
         statement("System.arraycopy(values, 0, replacement, 0, size)")
         statement("values = replacement")
