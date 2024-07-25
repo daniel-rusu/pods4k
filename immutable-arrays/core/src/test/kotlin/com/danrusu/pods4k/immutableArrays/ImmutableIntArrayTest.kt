@@ -539,6 +539,19 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `partition validation`() {
+        with(emptyImmutableIntArray()) {
+            expectThat(partition { it % 2 == 0 })
+                .isEqualTo(Pair(emptyImmutableIntArray(), emptyImmutableIntArray()))
+        }
+
+        with(immutableArrayOf(1, 2, 3, 4)) {
+            expectThat(partition { it % 2 == 0 })
+                .isEqualTo(Pair(immutableArrayOf(2, 4), immutableArrayOf(1, 3)))
+        }
+    }
+
+    @Test
     fun `sortedByDescending validation`() {
         with(immutableArrayOf(3, 17, 11)) {
             expectThat(sortedByDescending { it.toString() })

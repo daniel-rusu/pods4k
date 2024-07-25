@@ -14,6 +14,7 @@ _Release Date TBD_
 
 **New Features:**
 
+* Add `partition` method
 * Add `asList` method
 * Add `MutableCollection.addAll(immutableArray)` extension function
 * Add `+` operator overload for concatenating an immutable array with an additional value
@@ -25,6 +26,7 @@ _Release Date TBD_
 
 **Performance Improvements:**
 
+* Reduce the memory usage of converting immutable arrays to lists by adding all the elements in a single step
 * Return `EMPTY` singleton when converting an empty regular array to an immutable array
 * Immutable array builders: Avoid copying the backing array when the final size matches the array size
 

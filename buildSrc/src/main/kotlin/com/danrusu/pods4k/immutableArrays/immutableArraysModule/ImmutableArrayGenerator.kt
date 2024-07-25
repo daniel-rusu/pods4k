@@ -207,6 +207,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 parameters = { "predicate"(type = lambda<Boolean> { "predicate"(type = baseType.type) }) },
                 returns = Int::class.asTypeName(),
             )
+            addPartition(baseType)
             addSortedBy(baseType)
             addSortedByDescending(baseType)
             addSortedWith(baseType)
@@ -382,6 +383,33 @@ private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
             returns = baseType.type,
             code = "return get(${n - 1})",
         )
+    }
+}
+
+private fun TypeSpec.Builder.addPartition(baseType: BaseType) {
+    function(
+        kdoc = """
+            Creates a pair of immutable arrays, where the first contains elements for which predicate yielded true, and the second contains the other elements.
+        """.trimIndent(),
+        name = "partition",
+        parameters = { "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) }) },
+        returns = Pair::class.asTypeName()
+            .parameterizedBy(baseType.getGeneratedTypeName(), baseType.getGeneratedTypeName())
+    ) {
+        if (baseType == GENERIC) {
+            statement("val first = Builder<%T>()", baseType.type)
+            statement("val second = Builder<%T>()", baseType.type)
+        } else {
+            statement("val first = Builder()")
+            statement("val second = Builder()")
+        }
+        controlFlow("for (element in values)") {
+            controlFlow("when (predicate(element))") {
+                statement("true -> first.add(element)")
+                statement("else -> second.add(element)")
+            }
+        }
+        statement("return Pair(first.build(), second.build())")
     }
 }
 

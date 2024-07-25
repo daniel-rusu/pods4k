@@ -8,6 +8,7 @@ import kotlin.Boolean
 import kotlin.Comparable
 import kotlin.Int
 import kotlin.IntArray
+import kotlin.Pair
 import kotlin.PublishedApi
 import kotlin.String
 import kotlin.Suppress
@@ -245,6 +246,23 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
      * See [IntArray.count]
      */
     public inline fun count(predicate: (predicate: Int) -> Boolean): Int = values.count(predicate)
+
+    /**
+     * Creates a pair of immutable arrays, where the first contains elements for which predicate
+     * yielded true, and the second contains the other elements.
+     */
+    public fun partition(predicate: (element: Int) -> Boolean):
+            Pair<ImmutableIntArray, ImmutableIntArray> {
+        val first = Builder()
+        val second = Builder()
+        for (element in values) {
+            when (predicate(element)) {
+                true -> first.add(element)
+                else -> second.add(element)
+            }
+        }
+        return Pair(first.build(), second.build())
+    }
 
     /**
      * Leaves this immutable array as is and returns an ImmutableIntArray with all elements sorted
