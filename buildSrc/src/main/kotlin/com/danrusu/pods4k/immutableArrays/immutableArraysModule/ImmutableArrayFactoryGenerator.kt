@@ -9,7 +9,6 @@ import com.danrusu.pods4k.utils.declareObject
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.property
 import com.danrusu.pods4k.utils.statement
-import com.danrusu.pods4k.utils.suppress
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
@@ -76,13 +75,8 @@ private fun FileSpec.Builder.addImmutableArrayOf() {
         ) {
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
-                suppress("UNCHECKED_CAST")
-                statement("val backingArray = arrayOfNulls<Any?>(values.size) as Array<%T>", baseType.type)
-            } else {
-                statement("val backingArray = ${baseType.backingArrayConstructor}(values.size)")
             }
-            statement("System.arraycopy(values, 0, backingArray, 0, values.size)")
-            statement("return ${baseType.generatedClassName}(backingArray)")
+            statement("return build${baseType.generatedClassName}(initialCapacity = values.size) { addAll(values) }")
         }
     }
 }

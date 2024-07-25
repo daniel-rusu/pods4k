@@ -10,7 +10,6 @@ import kotlin.Float
 import kotlin.Int
 import kotlin.Long
 import kotlin.Short
-import kotlin.Suppress
 import kotlin.Unit
 
 /**
@@ -66,84 +65,56 @@ public fun <T> immutableArrayOf(): ImmutableArray<T> = emptyImmutableArray()
 /**
  * Returns an [ImmutableArray] containing the specified [values].
  */
-@Suppress("UNCHECKED_CAST")
-public fun <T> immutableArrayOf(vararg values: T): ImmutableArray<T> {
-    val backingArray = arrayOfNulls<Any?>(values.size) as Array<T>
-    System.arraycopy(values, 0, backingArray, 0, values.size)
-    return ImmutableArray(backingArray)
-}
+public fun <T> immutableArrayOf(vararg values: T): ImmutableArray<T> =
+        buildImmutableArray(initialCapacity = values.size) { addAll(values) }
 
 /**
  * Returns an [ImmutableBooleanArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Boolean): ImmutableBooleanArray {
-    val backingArray = BooleanArray(values.size)
-    System.arraycopy(values, 0, backingArray, 0, values.size)
-    return ImmutableBooleanArray(backingArray)
-}
+public fun immutableArrayOf(vararg values: Boolean): ImmutableBooleanArray =
+        buildImmutableBooleanArray(initialCapacity = values.size) { addAll(values) }
 
 /**
  * Returns an [ImmutableByteArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Byte): ImmutableByteArray {
-    val backingArray = ByteArray(values.size)
-    System.arraycopy(values, 0, backingArray, 0, values.size)
-    return ImmutableByteArray(backingArray)
-}
+public fun immutableArrayOf(vararg values: Byte): ImmutableByteArray =
+        buildImmutableByteArray(initialCapacity = values.size) { addAll(values) }
 
 /**
  * Returns an [ImmutableCharArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Char): ImmutableCharArray {
-    val backingArray = CharArray(values.size)
-    System.arraycopy(values, 0, backingArray, 0, values.size)
-    return ImmutableCharArray(backingArray)
-}
+public fun immutableArrayOf(vararg values: Char): ImmutableCharArray =
+        buildImmutableCharArray(initialCapacity = values.size) { addAll(values) }
 
 /**
  * Returns an [ImmutableShortArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Short): ImmutableShortArray {
-    val backingArray = ShortArray(values.size)
-    System.arraycopy(values, 0, backingArray, 0, values.size)
-    return ImmutableShortArray(backingArray)
-}
+public fun immutableArrayOf(vararg values: Short): ImmutableShortArray =
+        buildImmutableShortArray(initialCapacity = values.size) { addAll(values) }
 
 /**
  * Returns an [ImmutableIntArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Int): ImmutableIntArray {
-    val backingArray = IntArray(values.size)
-    System.arraycopy(values, 0, backingArray, 0, values.size)
-    return ImmutableIntArray(backingArray)
-}
+public fun immutableArrayOf(vararg values: Int): ImmutableIntArray =
+        buildImmutableIntArray(initialCapacity = values.size) { addAll(values) }
 
 /**
  * Returns an [ImmutableLongArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Long): ImmutableLongArray {
-    val backingArray = LongArray(values.size)
-    System.arraycopy(values, 0, backingArray, 0, values.size)
-    return ImmutableLongArray(backingArray)
-}
+public fun immutableArrayOf(vararg values: Long): ImmutableLongArray =
+        buildImmutableLongArray(initialCapacity = values.size) { addAll(values) }
 
 /**
  * Returns an [ImmutableFloatArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Float): ImmutableFloatArray {
-    val backingArray = FloatArray(values.size)
-    System.arraycopy(values, 0, backingArray, 0, values.size)
-    return ImmutableFloatArray(backingArray)
-}
+public fun immutableArrayOf(vararg values: Float): ImmutableFloatArray =
+        buildImmutableFloatArray(initialCapacity = values.size) { addAll(values) }
 
 /**
  * Returns an [ImmutableDoubleArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Double): ImmutableDoubleArray {
-    val backingArray = DoubleArray(values.size)
-    System.arraycopy(values, 0, backingArray, 0, values.size)
-    return ImmutableDoubleArray(backingArray)
-}
+public fun immutableArrayOf(vararg values: Double): ImmutableDoubleArray =
+        buildImmutableDoubleArray(initialCapacity = values.size) { addAll(values) }
 
 /**
  * Builds an [ImmutableArray] for when the size isn't known in advance.
