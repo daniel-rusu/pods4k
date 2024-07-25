@@ -372,11 +372,6 @@ private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
 }
 
 private fun TypeSpec.Builder.addSortedBy(baseType: BaseType) {
-    val returnType = when (baseType) {
-        GENERIC -> baseType.getGeneratedClass().parameterizedBy(baseType.type)
-        else -> baseType.getGeneratedClass()
-    }
-
     val genericVariableName = "R"
     val genericType = TypeVariableName(genericVariableName)
     function(
@@ -396,7 +391,7 @@ private fun TypeSpec.Builder.addSortedBy(baseType: BaseType) {
                 )
             )
         },
-        returns = returnType,
+        returns = baseType.getGeneratedTypeName(),
     ) {
         addTypeVariable(
             TypeVariableName(genericVariableName, Comparable::class.asTypeName().parameterizedBy(genericType))
@@ -406,11 +401,6 @@ private fun TypeSpec.Builder.addSortedBy(baseType: BaseType) {
 }
 
 private fun TypeSpec.Builder.addSortedByDescending(baseType: BaseType) {
-    val returnType = when (baseType) {
-        GENERIC -> baseType.getGeneratedClass().parameterizedBy(baseType.type)
-        else -> baseType.getGeneratedClass()
-    }
-
     val genericVariableName = "R"
     val genericType = TypeVariableName(genericVariableName)
     function(
@@ -430,7 +420,7 @@ private fun TypeSpec.Builder.addSortedByDescending(baseType: BaseType) {
                 )
             )
         },
-        returns = returnType,
+        returns = baseType.getGeneratedTypeName(),
     ) {
         addTypeVariable(
             TypeVariableName(genericVariableName, Comparable::class.asTypeName().parameterizedBy(genericType))
@@ -440,10 +430,6 @@ private fun TypeSpec.Builder.addSortedByDescending(baseType: BaseType) {
 }
 
 private fun TypeSpec.Builder.addSortedWith(baseType: BaseType) {
-    val returnType = when (baseType) {
-        GENERIC -> baseType.getGeneratedClass().parameterizedBy(baseType.type)
-        else -> baseType.getGeneratedClass()
-    }
     function(
         kdoc = "Leaves this immutable array as is and returns an [${baseType.generatedClassName}] with all elements sorted according to the specified [comparator].",
         name = "sortedWith",
@@ -452,7 +438,7 @@ private fun TypeSpec.Builder.addSortedWith(baseType: BaseType) {
                 type = Comparator::class.asTypeName().parameterizedBy(WildcardTypeName.consumerOf(baseType.type))
             )
         },
-        returns = returnType,
+        returns = baseType.getGeneratedTypeName(),
     ) {
         comment("Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change")
         statement("if (size <= 1) return this")

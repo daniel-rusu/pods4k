@@ -43,10 +43,8 @@ internal enum class BaseType(
 
     fun getGeneratedClass(): ClassName = ClassName(ImmutableArrayConfig.packageName, generatedClassName)
 
-    fun getGeneratedTypeName(): TypeName {
-        if (this == GENERIC) {
-            return getGeneratedClass().parameterizedBy(type)
-        }
-        return getGeneratedClass()
+    fun getGeneratedTypeName(): TypeName = when (this) {
+        GENERIC -> getGeneratedClass().parameterizedBy(type)
+        else -> getGeneratedClass()
     }
 }

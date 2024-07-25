@@ -35,14 +35,10 @@ internal object ImmutableArrayExtensionsGenerator {
 
 private fun FileSpec.Builder.addGetOrElse() {
     for (baseType in BaseType.values()) {
-        val receiver = when (baseType) {
-            GENERIC -> baseType.getGeneratedClass().parameterizedBy(baseType.type)
-            else -> baseType.getGeneratedClass()
-        }
         function(
             kdoc = "See [Array.getOrElse]",
             modifiers = listOf(KModifier.INLINE),
-            receiver = receiver,
+            receiver = baseType.getGeneratedTypeName(),
             name = "getOrElse",
             parameters = {
                 "index"<Int>()

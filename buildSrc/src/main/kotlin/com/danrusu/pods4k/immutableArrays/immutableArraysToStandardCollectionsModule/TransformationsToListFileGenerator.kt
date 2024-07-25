@@ -23,13 +23,9 @@ internal object TransformationsToListFileGenerator {
 
 private fun FileSpec.Builder.addToList() {
     for (baseType in BaseType.values()) {
-        val receiver = when (baseType) {
-            BaseType.GENERIC -> baseType.getGeneratedClass().parameterizedBy(baseType.type)
-            else -> baseType.getGeneratedClass()
-        }
         function(
             kdoc = "See [Array.toList]",
-            receiver = receiver,
+            receiver = baseType.getGeneratedTypeName(),
             name = "toList",
             returns = ClassName("kotlin.collections", "List").parameterizedBy(baseType.type),
         ) {
@@ -45,13 +41,9 @@ private fun FileSpec.Builder.addToList() {
 
 private fun FileSpec.Builder.addToMutableList() {
     for (baseType in BaseType.values()) {
-        val receiver = when (baseType) {
-            BaseType.GENERIC -> baseType.getGeneratedClass().parameterizedBy(baseType.type)
-            else -> baseType.getGeneratedClass()
-        }
         function(
             kdoc = "See [Array.toMutableList]",
-            receiver = receiver,
+            receiver = baseType.getGeneratedTypeName(),
             name = "toMutableList",
             returns = ClassName("kotlin.collections", "MutableList").parameterizedBy(baseType.type),
         ) {
