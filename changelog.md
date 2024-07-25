@@ -14,6 +14,7 @@ _Release Date TBD_
 
 **New Features:**
 
+* Add `MutableCollection.addAll(immutableArray)` extension function
 * Add `+` operator overload for concatenating an immutable array with an additional value
 * Add `+` operator overload for concatenating two immutable arrays
 * Add `count(predicate)` method

@@ -3,6 +3,7 @@ package com.danrusu.pods4k.immutableArrays
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isA
+import strikt.assertions.isEmpty
 import strikt.assertions.isEqualTo
 
 class CollectionsTest {
@@ -30,5 +31,18 @@ class CollectionsTest {
                 .isA<ImmutableArray<Int>>()
                 .isEqualTo(immutableArrayOf<Int>(3, 4, 5))
         }
+    }
+
+    @Test
+    fun `addAll validation`() {
+        val list = mutableListOf<String>()
+
+        list.addAll(immutableArrayOf())
+        expectThat(list)
+            .isEmpty()
+
+        list.addAll(immutableArrayOf("one", "two"))
+        expectThat(list)
+            .isEqualTo(mutableListOf("one", "two"))
     }
 }

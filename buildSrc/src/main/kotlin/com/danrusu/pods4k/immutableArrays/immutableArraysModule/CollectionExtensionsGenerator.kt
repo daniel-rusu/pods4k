@@ -2,10 +2,12 @@ package com.danrusu.pods4k.immutableArrays.immutableArraysModule
 
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
+import com.danrusu.pods4k.utils.comment
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.createFile
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.statement
+import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeVariableName
@@ -16,6 +18,7 @@ internal object CollectionExtensionsGenerator {
     fun generate(destinationPath: String) {
         val fileSpec = createFile(ImmutableArrayConfig.packageName, "Collections") {
             addIterableToImmutableArray()
+            addMutableCollectionAddAll()
         }
         fileSpec.writeTo(File(destinationPath, ""))
     }
@@ -38,6 +41,23 @@ private fun FileSpec.Builder.addIterableToImmutableArray() {
             }
             statement("val values = this.toList()")
             statement("return ${baseType.generatedClassName}(values.size) { values[it] }")
+        }
+    }
+}
+
+private fun FileSpec.Builder.addMutableCollectionAddAll() {
+    for (baseType in BaseType.values()) {
+        function(
+            kdoc = "Adds all the elements to [this] collection.",
+            receiver = ClassName("kotlin.collections", "MutableCollection").parameterizedBy(baseType.type),
+            name = "addAll",
+            parameters = { "elements"(type = baseType.getGeneratedTypeName()) },
+        ) {
+            if (baseType == BaseType.GENERIC) {
+                addTypeVariable(baseType.type as TypeVariableName)
+            }
+            comment("Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step")
+            statement("addAll(elements.values.asList())")
         }
     }
 }

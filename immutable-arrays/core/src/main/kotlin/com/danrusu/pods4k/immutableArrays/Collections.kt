@@ -10,6 +10,7 @@ import kotlin.Int
 import kotlin.Long
 import kotlin.Short
 import kotlin.collections.Iterable
+import kotlin.collections.MutableCollection
 
 /**
  * Returns an [ImmutableArray] with the contents of [this] collection.
@@ -117,4 +118,76 @@ public fun Iterable<Double>.toImmutableArray(): ImmutableDoubleArray {
     }
     val values = this.toList()
     return ImmutableDoubleArray(values.size) { values[it] }
+}
+
+/**
+ * Adds all the elements to [this] collection.
+ */
+public fun <T> MutableCollection<T>.addAll(elements: ImmutableArray<T>) {
+    // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
+    addAll(elements.values.asList())
+}
+
+/**
+ * Adds all the elements to [this] collection.
+ */
+public fun MutableCollection<Boolean>.addAll(elements: ImmutableBooleanArray) {
+    // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
+    addAll(elements.values.asList())
+}
+
+/**
+ * Adds all the elements to [this] collection.
+ */
+public fun MutableCollection<Byte>.addAll(elements: ImmutableByteArray) {
+    // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
+    addAll(elements.values.asList())
+}
+
+/**
+ * Adds all the elements to [this] collection.
+ */
+public fun MutableCollection<Char>.addAll(elements: ImmutableCharArray) {
+    // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
+    addAll(elements.values.asList())
+}
+
+/**
+ * Adds all the elements to [this] collection.
+ */
+public fun MutableCollection<Short>.addAll(elements: ImmutableShortArray) {
+    // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
+    addAll(elements.values.asList())
+}
+
+/**
+ * Adds all the elements to [this] collection.
+ */
+public fun MutableCollection<Int>.addAll(elements: ImmutableIntArray) {
+    // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
+    addAll(elements.values.asList())
+}
+
+/**
+ * Adds all the elements to [this] collection.
+ */
+public fun MutableCollection<Long>.addAll(elements: ImmutableLongArray) {
+    // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
+    addAll(elements.values.asList())
+}
+
+/**
+ * Adds all the elements to [this] collection.
+ */
+public fun MutableCollection<Float>.addAll(elements: ImmutableFloatArray) {
+    // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
+    addAll(elements.values.asList())
+}
+
+/**
+ * Adds all the elements to [this] collection.
+ */
+public fun MutableCollection<Double>.addAll(elements: ImmutableDoubleArray) {
+    // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
+    addAll(elements.values.asList())
 }
