@@ -351,8 +351,10 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
          */
         @Suppress("UNCHECKED_CAST")
         public fun build(): ImmutableArray<T> {
-            if (size == 0) return EMPTY
-
+            when (size) {
+                0 -> return EMPTY
+                values.size -> return ImmutableArray(values as Array<T>)
+            }
             val backingArray = arrayOfNulls<Any?>(size) as Array<T>
             System.arraycopy(values, 0, backingArray, 0, size)
             return ImmutableArray(backingArray)

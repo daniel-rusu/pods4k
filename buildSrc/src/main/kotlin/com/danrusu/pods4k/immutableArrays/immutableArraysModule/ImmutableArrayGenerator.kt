@@ -484,10 +484,9 @@ private fun TypeSpec.Builder.addCompanionObjectEmptyProperty(baseType: BaseType)
         type = type,
     ) {
         addAnnotation(PublishedApi::class)
-        if (baseType == GENERIC) {
-            initializer("${baseType.generatedClassName}(emptyArray<Any>()) as %T", type)
-        } else {
-            initializer("${baseType.generatedClassName}(${baseType.backingArrayConstructor}(0))")
+        when (baseType) {
+            GENERIC -> initializer("${baseType.generatedClassName}(emptyArray<Any>()) as %T", type)
+            else -> initializer("${baseType.generatedClassName}(${baseType.backingArrayConstructor}(0))")
         }
     }
 }
@@ -611,16 +610,25 @@ private fun TypeSpec.Builder.addBuilderBuildFunction(baseType: BaseType) {
         name = "build",
         returns = baseType.getGeneratedTypeName(),
     ) {
-        statement("if (size == 0) return EMPTY")
-        emptyLine()
+        controlFlow("when (size)") {
+            statement("0 -> return EMPTY")
+
+            // Avoiding copying the array again when the size matches the capacity is important for when the initial
+            // capacity was set appropriately.  Other capabilities of this library depend on this optimization
+            if (baseType == GENERIC) {
+                statement("values.size -> return ${baseType.generatedClassName}(values as Array<%T>)", baseType.type)
+            } else {
+                statement("values.size -> return ${baseType.generatedClassName}(values)")
+            }
+        }
         if (baseType == GENERIC) {
+            suppress("UNCHECKED_CAST")
             statement("val backingArray = arrayOfNulls<Any?>(size) as Array<%T>", baseType.type)
         } else {
             statement("val backingArray = ${baseType.backingArrayConstructor}(size)")
         }
         statement("System.arraycopy(values, 0, backingArray, 0, size)")
 
-        suppress("UNCHECKED_CAST")
         statement("return ${baseType.generatedClassName}(backingArray)")
     }
 }

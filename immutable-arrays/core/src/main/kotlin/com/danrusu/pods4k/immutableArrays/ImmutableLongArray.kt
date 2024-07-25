@@ -361,10 +361,11 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
         /**
          * Returns an immutable array containing the elements that were added.
          */
-        @Suppress("UNCHECKED_CAST")
         public fun build(): ImmutableLongArray {
-            if (size == 0) return EMPTY
-
+            when (size) {
+                0 -> return EMPTY
+                values.size -> return ImmutableLongArray(values)
+            }
             val backingArray = LongArray(size)
             System.arraycopy(values, 0, backingArray, 0, size)
             return ImmutableLongArray(backingArray)

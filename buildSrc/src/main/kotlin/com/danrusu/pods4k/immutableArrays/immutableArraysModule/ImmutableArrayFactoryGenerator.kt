@@ -97,6 +97,7 @@ private fun FileSpec.Builder.addBuilderFunctions() {
             kdoc = "Builds an [${baseType.generatedClassName}] for when the size isn't known in advance.",
             name = "build${baseType.generatedClassName}",
             parameters = {
+                "initialCapacity"<Int>(defaultValue = "10")
                 "body"(
                     type = lambda<Unit>(receiver = receiver)
                 )
@@ -105,9 +106,12 @@ private fun FileSpec.Builder.addBuilderFunctions() {
         ) {
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
-                statement("return ${baseType.generatedClassName}.Builder<%T>().apply(body).build()", baseType.type)
+                statement(
+                    "return ${baseType.generatedClassName}.Builder<%T>(initialCapacity).apply(body).build()",
+                    baseType.type
+                )
             } else {
-                statement("return ${baseType.generatedClassName}.Builder().apply(body).build()")
+                statement("return ${baseType.generatedClassName}.Builder(initialCapacity).apply(body).build()")
             }
         }
     }

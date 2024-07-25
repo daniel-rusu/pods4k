@@ -148,56 +148,65 @@ public fun immutableArrayOf(vararg values: Double): ImmutableDoubleArray {
 /**
  * Builds an [ImmutableArray] for when the size isn't known in advance.
  */
-public fun <T> buildImmutableArray(body: ImmutableArray.Builder<T>.() -> Unit): ImmutableArray<T> =
-        ImmutableArray.Builder<T>().apply(body).build()
+public fun <T> buildImmutableArray(initialCapacity: Int = 10,
+        body: ImmutableArray.Builder<T>.() -> Unit): ImmutableArray<T> =
+        ImmutableArray.Builder<T>(initialCapacity).apply(body).build()
 
 /**
  * Builds an [ImmutableBooleanArray] for when the size isn't known in advance.
  */
-public fun buildImmutableBooleanArray(body: ImmutableBooleanArray.Builder.() -> Unit):
-        ImmutableBooleanArray = ImmutableBooleanArray.Builder().apply(body).build()
+public fun buildImmutableBooleanArray(initialCapacity: Int = 10,
+        body: ImmutableBooleanArray.Builder.() -> Unit): ImmutableBooleanArray =
+        ImmutableBooleanArray.Builder(initialCapacity).apply(body).build()
 
 /**
  * Builds an [ImmutableByteArray] for when the size isn't known in advance.
  */
-public fun buildImmutableByteArray(body: ImmutableByteArray.Builder.() -> Unit): ImmutableByteArray
-        = ImmutableByteArray.Builder().apply(body).build()
+public fun buildImmutableByteArray(initialCapacity: Int = 10,
+        body: ImmutableByteArray.Builder.() -> Unit): ImmutableByteArray =
+        ImmutableByteArray.Builder(initialCapacity).apply(body).build()
 
 /**
  * Builds an [ImmutableCharArray] for when the size isn't known in advance.
  */
-public fun buildImmutableCharArray(body: ImmutableCharArray.Builder.() -> Unit): ImmutableCharArray
-        = ImmutableCharArray.Builder().apply(body).build()
+public fun buildImmutableCharArray(initialCapacity: Int = 10,
+        body: ImmutableCharArray.Builder.() -> Unit): ImmutableCharArray =
+        ImmutableCharArray.Builder(initialCapacity).apply(body).build()
 
 /**
  * Builds an [ImmutableShortArray] for when the size isn't known in advance.
  */
-public fun buildImmutableShortArray(body: ImmutableShortArray.Builder.() -> Unit):
-        ImmutableShortArray = ImmutableShortArray.Builder().apply(body).build()
+public fun buildImmutableShortArray(initialCapacity: Int = 10,
+        body: ImmutableShortArray.Builder.() -> Unit): ImmutableShortArray =
+        ImmutableShortArray.Builder(initialCapacity).apply(body).build()
 
 /**
  * Builds an [ImmutableIntArray] for when the size isn't known in advance.
  */
-public fun buildImmutableIntArray(body: ImmutableIntArray.Builder.() -> Unit): ImmutableIntArray =
-        ImmutableIntArray.Builder().apply(body).build()
+public fun buildImmutableIntArray(initialCapacity: Int = 10,
+        body: ImmutableIntArray.Builder.() -> Unit): ImmutableIntArray =
+        ImmutableIntArray.Builder(initialCapacity).apply(body).build()
 
 /**
  * Builds an [ImmutableLongArray] for when the size isn't known in advance.
  */
-public fun buildImmutableLongArray(body: ImmutableLongArray.Builder.() -> Unit): ImmutableLongArray
-        = ImmutableLongArray.Builder().apply(body).build()
+public fun buildImmutableLongArray(initialCapacity: Int = 10,
+        body: ImmutableLongArray.Builder.() -> Unit): ImmutableLongArray =
+        ImmutableLongArray.Builder(initialCapacity).apply(body).build()
 
 /**
  * Builds an [ImmutableFloatArray] for when the size isn't known in advance.
  */
-public fun buildImmutableFloatArray(body: ImmutableFloatArray.Builder.() -> Unit):
-        ImmutableFloatArray = ImmutableFloatArray.Builder().apply(body).build()
+public fun buildImmutableFloatArray(initialCapacity: Int = 10,
+        body: ImmutableFloatArray.Builder.() -> Unit): ImmutableFloatArray =
+        ImmutableFloatArray.Builder(initialCapacity).apply(body).build()
 
 /**
  * Builds an [ImmutableDoubleArray] for when the size isn't known in advance.
  */
-public fun buildImmutableDoubleArray(body: ImmutableDoubleArray.Builder.() -> Unit):
-        ImmutableDoubleArray = ImmutableDoubleArray.Builder().apply(body).build()
+public fun buildImmutableDoubleArray(initialCapacity: Int = 10,
+        body: ImmutableDoubleArray.Builder.() -> Unit): ImmutableDoubleArray =
+        ImmutableDoubleArray.Builder(initialCapacity).apply(body).build()
 
 internal object BuilderUtils {
     /**

@@ -359,10 +359,11 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
         /**
          * Returns an immutable array containing the elements that were added.
          */
-        @Suppress("UNCHECKED_CAST")
         public fun build(): ImmutableIntArray {
-            if (size == 0) return EMPTY
-
+            when (size) {
+                0 -> return EMPTY
+                values.size -> return ImmutableIntArray(values)
+            }
             val backingArray = IntArray(size)
             System.arraycopy(values, 0, backingArray, 0, size)
             return ImmutableIntArray(backingArray)

@@ -362,10 +362,11 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
         /**
          * Returns an immutable array containing the elements that were added.
          */
-        @Suppress("UNCHECKED_CAST")
         public fun build(): ImmutableFloatArray {
-            if (size == 0) return EMPTY
-
+            when (size) {
+                0 -> return EMPTY
+                values.size -> return ImmutableFloatArray(values)
+            }
             val backingArray = FloatArray(size)
             System.arraycopy(values, 0, backingArray, 0, size)
             return ImmutableFloatArray(backingArray)

@@ -362,10 +362,11 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
         /**
          * Returns an immutable array containing the elements that were added.
          */
-        @Suppress("UNCHECKED_CAST")
         public fun build(): ImmutableShortArray {
-            if (size == 0) return EMPTY
-
+            when (size) {
+                0 -> return EMPTY
+                values.size -> return ImmutableShortArray(values)
+            }
             val backingArray = ShortArray(size)
             System.arraycopy(values, 0, backingArray, 0, size)
             return ImmutableShortArray(backingArray)

@@ -22,6 +22,7 @@ _Release Date TBD_
 **Performance Improvements:**
 
 * Return `EMPTY` singleton when converting an empty regular array to an immutable array
+* Immutable array builders: Avoid copying the backing array when the final size matches the array size
 
 ## 0.2.0
 
