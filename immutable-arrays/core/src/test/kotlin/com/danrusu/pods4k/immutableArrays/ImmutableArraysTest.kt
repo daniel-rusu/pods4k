@@ -139,4 +139,19 @@ class ImmutableArraysTest {
         expectThat(immutableArrayOf(1, 2, 3) + immutableArrayOf(4, 5))
             .isEqualTo(immutableArrayOf(1, 2, 3, 4, 5))
     }
+
+    @Test
+    fun `plus value validation`() {
+        expectThat(emptyImmutableArray<String>() + "one")
+            .isEqualTo(immutableArrayOf("one"))
+
+        expectThat(immutableArrayOf("a", "b", "c") + "d")
+            .isEqualTo(immutableArrayOf("a", "b", "c", "d"))
+
+        expectThat(emptyImmutableIntArray() + 1)
+            .isEqualTo(immutableArrayOf(1))
+
+        expectThat(immutableArrayOf(1, 2, 3) + 4)
+            .isEqualTo(immutableArrayOf(1, 2, 3, 4))
+    }
 }

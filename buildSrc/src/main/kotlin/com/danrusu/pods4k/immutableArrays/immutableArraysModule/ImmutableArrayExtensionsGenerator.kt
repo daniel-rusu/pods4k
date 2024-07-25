@@ -27,6 +27,7 @@ internal object ImmutableArrayExtensionsGenerator {
             addSorted()
             addSortedDescending()
             addPlusImmutableArray()
+            addPlusValue()
         }
         fileSpec.writeTo(File(destinationPath, ""))
     }
@@ -210,6 +211,32 @@ private fun FileSpec.Builder.addPlusImmutableArray() {
             controlFlow("return build${baseType.generatedClassName}(initialCapacity = size + other.size)") {
                 statement("addAll(this@plus)")
                 statement("addAll(other)")
+            }
+        }
+    }
+}
+
+private fun FileSpec.Builder.addPlusValue() {
+    for (baseType in BaseType.values()) {
+        function(
+            kdoc = """
+                Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with the elements of [this] followed by the specified [element].
+                
+                Important:  
+                When needing to add multiple elements individually, use the buildImmutableArray methods or immutable array builders as that's much more efficient instead of calling this function repeatedly.
+            """.trimIndent(),
+            modifiers = listOf(KModifier.OPERATOR),
+            receiver = baseType.getGeneratedTypeName(),
+            name = "plus",
+            parameters = { "element"(type = baseType.type) },
+            returns = baseType.getGeneratedTypeName(),
+        ) {
+            if (baseType == GENERIC) {
+                addTypeVariable(baseType.type as TypeVariableName)
+            }
+            controlFlow("return build${baseType.generatedClassName}(initialCapacity = size + 1)") {
+                statement("addAll(this@plus)")
+                statement("add(element)")
             }
         }
     }

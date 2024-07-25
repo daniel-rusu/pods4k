@@ -567,3 +567,129 @@ public operator fun ImmutableDoubleArray.plus(other: ImmutableDoubleArray): Immu
         addAll(other)
     }
 }
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableArray] with the elements of [this]
+ * followed by the specified [element].
+ *
+ * Important:  
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or
+ * immutable array builders as that's much more efficient instead of calling this function repeatedly.
+ */
+public operator fun <T> ImmutableArray<T>.plus(element: T): ImmutableArray<T> =
+        buildImmutableArray(initialCapacity = size + 1) {
+    addAll(this@plus)
+    add(element)
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableBooleanArray] with the elements of
+ * [this] followed by the specified [element].
+ *
+ * Important:  
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or
+ * immutable array builders as that's much more efficient instead of calling this function repeatedly.
+ */
+public operator fun ImmutableBooleanArray.plus(element: Boolean): ImmutableBooleanArray =
+        buildImmutableBooleanArray(initialCapacity = size + 1) {
+    addAll(this@plus)
+    add(element)
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableByteArray] with the elements of
+ * [this] followed by the specified [element].
+ *
+ * Important:  
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or
+ * immutable array builders as that's much more efficient instead of calling this function repeatedly.
+ */
+public operator fun ImmutableByteArray.plus(element: Byte): ImmutableByteArray =
+        buildImmutableByteArray(initialCapacity = size + 1) {
+    addAll(this@plus)
+    add(element)
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableCharArray] with the elements of
+ * [this] followed by the specified [element].
+ *
+ * Important:  
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or
+ * immutable array builders as that's much more efficient instead of calling this function repeatedly.
+ */
+public operator fun ImmutableCharArray.plus(element: Char): ImmutableCharArray =
+        buildImmutableCharArray(initialCapacity = size + 1) {
+    addAll(this@plus)
+    add(element)
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableShortArray] with the elements of
+ * [this] followed by the specified [element].
+ *
+ * Important:  
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or
+ * immutable array builders as that's much more efficient instead of calling this function repeatedly.
+ */
+public operator fun ImmutableShortArray.plus(element: Short): ImmutableShortArray =
+        buildImmutableShortArray(initialCapacity = size + 1) {
+    addAll(this@plus)
+    add(element)
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableIntArray] with the elements of
+ * [this] followed by the specified [element].
+ *
+ * Important:  
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or
+ * immutable array builders as that's much more efficient instead of calling this function repeatedly.
+ */
+public operator fun ImmutableIntArray.plus(element: Int): ImmutableIntArray =
+        buildImmutableIntArray(initialCapacity = size + 1) {
+    addAll(this@plus)
+    add(element)
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableLongArray] with the elements of
+ * [this] followed by the specified [element].
+ *
+ * Important:  
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or
+ * immutable array builders as that's much more efficient instead of calling this function repeatedly.
+ */
+public operator fun ImmutableLongArray.plus(element: Long): ImmutableLongArray =
+        buildImmutableLongArray(initialCapacity = size + 1) {
+    addAll(this@plus)
+    add(element)
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableFloatArray] with the elements of
+ * [this] followed by the specified [element].
+ *
+ * Important:  
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or
+ * immutable array builders as that's much more efficient instead of calling this function repeatedly.
+ */
+public operator fun ImmutableFloatArray.plus(element: Float): ImmutableFloatArray =
+        buildImmutableFloatArray(initialCapacity = size + 1) {
+    addAll(this@plus)
+    add(element)
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableDoubleArray] with the elements of
+ * [this] followed by the specified [element].
+ *
+ * Important:  
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or
+ * immutable array builders as that's much more efficient instead of calling this function repeatedly.
+ */
+public operator fun ImmutableDoubleArray.plus(element: Double): ImmutableDoubleArray =
+        buildImmutableDoubleArray(initialCapacity = size + 1) {
+    addAll(this@plus)
+    add(element)
+}
