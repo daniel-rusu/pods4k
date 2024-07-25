@@ -118,4 +118,25 @@ class ImmutableArraysTest {
                 .isEqualTo(immutableArrayOf(1, 2, 5, 4, 3))
         }
     }
+
+    @Test
+    fun `plus immutableArray validation`() {
+        expectThat(emptyImmutableArray<String>() + emptyImmutableArray())
+            .isEqualTo(emptyImmutableArray())
+
+        expectThat(emptyImmutableArray<String>() + immutableArrayOf("one", "two"))
+            .isEqualTo(immutableArrayOf("one", "two"))
+
+        expectThat(immutableArrayOf("a", "b", "c") + immutableArrayOf("d", "e"))
+            .isEqualTo(immutableArrayOf("a", "b", "c", "d", "e"))
+
+        expectThat(emptyImmutableIntArray() + emptyImmutableIntArray())
+            .isEqualTo(emptyImmutableIntArray())
+
+        expectThat(emptyImmutableIntArray() + immutableArrayOf(1, 2))
+            .isEqualTo(immutableArrayOf(1, 2))
+
+        expectThat(immutableArrayOf(1, 2, 3) + immutableArrayOf(4, 5))
+            .isEqualTo(immutableArrayOf(1, 2, 3, 4, 5))
+    }
 }

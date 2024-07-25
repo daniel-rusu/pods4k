@@ -431,3 +431,139 @@ public fun ImmutableDoubleArray.sortedDescending(): ImmutableDoubleArray {
     backingArray.reverse()
     return ImmutableDoubleArray(backingArray)
 }
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableArray] with the elements of [this]
+ * followed by the elements of [other]
+ */
+public operator fun <T> ImmutableArray<T>.plus(other: ImmutableArray<T>): ImmutableArray<T> {
+    when {
+        isEmpty() -> return other
+        other.isEmpty() -> return this
+    }
+    return buildImmutableArray(initialCapacity = size + other.size) {
+        addAll(this@plus)
+        addAll(other)
+    }
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableBooleanArray] with the elements of
+ * [this] followed by the elements of [other]
+ */
+public operator fun ImmutableBooleanArray.plus(other: ImmutableBooleanArray):
+        ImmutableBooleanArray {
+    when {
+        isEmpty() -> return other
+        other.isEmpty() -> return this
+    }
+    return buildImmutableBooleanArray(initialCapacity = size + other.size) {
+        addAll(this@plus)
+        addAll(other)
+    }
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableByteArray] with the elements of
+ * [this] followed by the elements of [other]
+ */
+public operator fun ImmutableByteArray.plus(other: ImmutableByteArray): ImmutableByteArray {
+    when {
+        isEmpty() -> return other
+        other.isEmpty() -> return this
+    }
+    return buildImmutableByteArray(initialCapacity = size + other.size) {
+        addAll(this@plus)
+        addAll(other)
+    }
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableCharArray] with the elements of
+ * [this] followed by the elements of [other]
+ */
+public operator fun ImmutableCharArray.plus(other: ImmutableCharArray): ImmutableCharArray {
+    when {
+        isEmpty() -> return other
+        other.isEmpty() -> return this
+    }
+    return buildImmutableCharArray(initialCapacity = size + other.size) {
+        addAll(this@plus)
+        addAll(other)
+    }
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableShortArray] with the elements of
+ * [this] followed by the elements of [other]
+ */
+public operator fun ImmutableShortArray.plus(other: ImmutableShortArray): ImmutableShortArray {
+    when {
+        isEmpty() -> return other
+        other.isEmpty() -> return this
+    }
+    return buildImmutableShortArray(initialCapacity = size + other.size) {
+        addAll(this@plus)
+        addAll(other)
+    }
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableIntArray] with the elements of
+ * [this] followed by the elements of [other]
+ */
+public operator fun ImmutableIntArray.plus(other: ImmutableIntArray): ImmutableIntArray {
+    when {
+        isEmpty() -> return other
+        other.isEmpty() -> return this
+    }
+    return buildImmutableIntArray(initialCapacity = size + other.size) {
+        addAll(this@plus)
+        addAll(other)
+    }
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableLongArray] with the elements of
+ * [this] followed by the elements of [other]
+ */
+public operator fun ImmutableLongArray.plus(other: ImmutableLongArray): ImmutableLongArray {
+    when {
+        isEmpty() -> return other
+        other.isEmpty() -> return this
+    }
+    return buildImmutableLongArray(initialCapacity = size + other.size) {
+        addAll(this@plus)
+        addAll(other)
+    }
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableFloatArray] with the elements of
+ * [this] followed by the elements of [other]
+ */
+public operator fun ImmutableFloatArray.plus(other: ImmutableFloatArray): ImmutableFloatArray {
+    when {
+        isEmpty() -> return other
+        other.isEmpty() -> return this
+    }
+    return buildImmutableFloatArray(initialCapacity = size + other.size) {
+        addAll(this@plus)
+        addAll(other)
+    }
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableDoubleArray] with the elements of
+ * [this] followed by the elements of [other]
+ */
+public operator fun ImmutableDoubleArray.plus(other: ImmutableDoubleArray): ImmutableDoubleArray {
+    when {
+        isEmpty() -> return other
+        other.isEmpty() -> return this
+    }
+    return buildImmutableDoubleArray(initialCapacity = size + other.size) {
+        addAll(this@plus)
+        addAll(other)
+    }
+}

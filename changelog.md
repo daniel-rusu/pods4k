@@ -14,6 +14,7 @@ _Release Date TBD_
 
 **New Features:**
 
+* Add `+` operator overload for concatenating two immutable arrays
 * Add `count(predicate)` method
 * Add `none(predicate)` method
 * Add `any(predicate)` method

@@ -5,6 +5,7 @@ import com.danrusu.pods4k.immutableArrays.BaseType.BOOLEAN
 import com.danrusu.pods4k.immutableArrays.BaseType.GENERIC
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
 import com.danrusu.pods4k.utils.comment
+import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.createFile
 import com.danrusu.pods4k.utils.emptyLine
 import com.danrusu.pods4k.utils.function
@@ -25,6 +26,7 @@ internal object ImmutableArrayExtensionsGenerator {
             addGetOrElse()
             addSorted()
             addSortedDescending()
+            addPlusImmutableArray()
         }
         fileSpec.writeTo(File(destinationPath, ""))
     }
@@ -181,6 +183,33 @@ private fun FileSpec.Builder.addSortedDescending() {
                 statement("%T.sort(backingArray)", java.util.Arrays::class)
                 statement("backingArray.reverse()")
                 statement("return ${baseType.generatedClassName}(backingArray)")
+            }
+        }
+    }
+}
+
+private fun FileSpec.Builder.addPlusImmutableArray() {
+    for (baseType in BaseType.values()) {
+        function(
+            kdoc = "Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with the elements of [this] followed by the elements of [other]",
+            modifiers = listOf(KModifier.OPERATOR),
+            receiver = baseType.getGeneratedTypeName(),
+            name = "plus",
+            parameters = {
+                "other"(type = baseType.getGeneratedTypeName())
+            },
+            returns = baseType.getGeneratedTypeName(),
+        ) {
+            if (baseType == GENERIC) {
+                addTypeVariable(baseType.type as TypeVariableName)
+            }
+            controlFlow("when") {
+                statement("isEmpty() -> return other")
+                statement("other.isEmpty() -> return this")
+            }
+            controlFlow("return build${baseType.generatedClassName}(initialCapacity = size + other.size)") {
+                statement("addAll(this@plus)")
+                statement("addAll(other)")
             }
         }
     }
