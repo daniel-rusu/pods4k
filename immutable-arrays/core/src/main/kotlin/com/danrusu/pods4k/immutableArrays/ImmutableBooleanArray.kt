@@ -312,9 +312,10 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
 
         private var values: BooleanArray = BooleanArray(initialCapacity)
 
-        public fun add(element: Boolean) {
+        public fun add(element: Boolean): ImmutableBooleanArray.Builder {
             ensureCapacity(size + 1)
             values[size++] = element
+            return this
         }
 
         /**
@@ -324,43 +325,48 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
             add(element)
         }
 
-        public fun addAll(elements: BooleanArray) {
+        public fun addAll(elements: BooleanArray): ImmutableBooleanArray.Builder {
             ensureCapacity(size + elements.size)
             System.arraycopy(elements, 0, values, size, elements.size)
             size += elements.size
+            return this
         }
 
-        public fun addAll(elements: Array<Boolean>) {
+        public fun addAll(elements: Array<Boolean>): ImmutableBooleanArray.Builder {
             ensureCapacity(size + elements.size)
             for (element in elements) {
                 values[size++] = element
             }
+            return this
         }
 
-        public fun addAll(elements: ImmutableBooleanArray) {
+        public fun addAll(elements: ImmutableBooleanArray): ImmutableBooleanArray.Builder {
             ensureCapacity(size + elements.size)
             System.arraycopy(elements.values, 0, values, size, elements.size)
             size += elements.size
+            return this
         }
 
-        public fun addAll(elements: ImmutableArray<Boolean>) {
+        public fun addAll(elements: ImmutableArray<Boolean>): ImmutableBooleanArray.Builder {
             ensureCapacity(size + elements.size)
             for (element in elements) {
                 values[size++] = element
             }
+            return this
         }
 
-        public fun addAll(elements: Iterable<Boolean>) {
+        public fun addAll(elements: Iterable<Boolean>): ImmutableBooleanArray.Builder {
             if (elements is Collection) {
                 ensureCapacity(size + elements.size)
                 for (element in elements) {
                     values[size++] = element
                 }
-                return
+                return this
             }
             for (element in elements) {
                 add(element)
             }
+            return this
         }
 
         /**

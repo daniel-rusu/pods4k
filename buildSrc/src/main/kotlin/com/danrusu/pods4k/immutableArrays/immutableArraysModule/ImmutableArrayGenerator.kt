@@ -15,6 +15,7 @@ import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.property
 import com.danrusu.pods4k.utils.statement
 import com.danrusu.pods4k.utils.suppress
+import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.NOTHING
@@ -525,12 +526,22 @@ private fun TypeSpec.Builder.addCompanionObjectInvokeOperator(baseType: BaseType
 }
 
 private fun TypeSpec.Builder.addBuilderAddFunction(baseType: BaseType) {
+    val returnType = when (baseType) {
+        GENERIC -> ClassName(
+            ImmutableArrayConfig.packageName,
+            "${baseType.generatedClassName}.Builder"
+        ).parameterizedBy(baseType.type)
+
+        else -> ClassName(ImmutableArrayConfig.packageName, "${baseType.generatedClassName}.Builder")
+    }
     function(
         name = "add",
         parameters = { "element"(type = baseType.type) },
+        returns = returnType,
     ) {
         statement("ensureCapacity(size + 1)")
         statement("values[size++] = element")
+        statement("return this")
     }
 }
 
@@ -545,62 +556,80 @@ private fun TypeSpec.Builder.addBuilderPlusAssignOperator(baseType: BaseType) {
 }
 
 private fun TypeSpec.Builder.addBuilderAddAllFunctions(baseType: BaseType) {
+    val returnType = when (baseType) {
+        GENERIC -> {
+            ClassName(ImmutableArrayConfig.packageName, "${baseType.generatedClassName}.Builder")
+                .parameterizedBy(baseType.type)
+        }
+
+        else -> ClassName(ImmutableArrayConfig.packageName, "${baseType.generatedClassName}.Builder")
+    }
     function(
         name = "addAll",
         parameters = { "elements"(type = baseType.backingArrayType) },
+        returns = returnType,
     ) {
         statement("ensureCapacity(size + elements.size)")
         statement("System.arraycopy(elements, 0, values, size, elements.size)")
         statement("size += elements.size")
+        statement("return this")
     }
 
     if (baseType != GENERIC) {
         function(
             name = "addAll",
             parameters = { "elements"(type = Array::class.asTypeName().parameterizedBy(baseType.type)) },
+            returns = returnType,
         ) {
             statement("ensureCapacity(size + elements.size)")
             controlFlow("for (element in elements)") {
                 statement("values[size++] = element")
             }
+            statement("return this")
         }
     }
 
     function(
         name = "addAll",
         parameters = { "elements"(type = baseType.getGeneratedTypeName()) },
+        returns = returnType,
     ) {
         statement("ensureCapacity(size + elements.size)")
         statement("System.arraycopy(elements.values, 0, values, size, elements.size)")
         statement("size += elements.size")
+        statement("return this")
     }
 
     if (baseType != GENERIC) {
         function(
             name = "addAll",
             parameters = { "elements"(type = GENERIC.getGeneratedClass().parameterizedBy(baseType.type)) },
+            returns = returnType,
         ) {
             statement("ensureCapacity(size + elements.size)")
             controlFlow("for (element in elements)") {
                 statement("values[size++] = element")
             }
+            statement("return this")
         }
     }
 
     function(
         name = "addAll",
         parameters = { "elements"(type = Iterable::class.asTypeName().parameterizedBy(baseType.type)) },
+        returns = returnType,
     ) {
         controlFlow("if (elements is Collection)") {
             statement("ensureCapacity(size + elements.size)")
             controlFlow("for (element in elements)") {
                 statement("values[size++] = element")
             }
-            statement("return")
+            statement("return this")
         }
         controlFlow("for (element in elements)") {
             statement("add(element)")
         }
+        statement("return this")
     }
 }
 

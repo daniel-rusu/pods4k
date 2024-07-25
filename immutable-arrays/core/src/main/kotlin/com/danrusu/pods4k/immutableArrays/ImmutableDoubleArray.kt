@@ -312,9 +312,10 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
 
         private var values: DoubleArray = DoubleArray(initialCapacity)
 
-        public fun add(element: Double) {
+        public fun add(element: Double): ImmutableDoubleArray.Builder {
             ensureCapacity(size + 1)
             values[size++] = element
+            return this
         }
 
         /**
@@ -324,43 +325,48 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
             add(element)
         }
 
-        public fun addAll(elements: DoubleArray) {
+        public fun addAll(elements: DoubleArray): ImmutableDoubleArray.Builder {
             ensureCapacity(size + elements.size)
             System.arraycopy(elements, 0, values, size, elements.size)
             size += elements.size
+            return this
         }
 
-        public fun addAll(elements: Array<Double>) {
+        public fun addAll(elements: Array<Double>): ImmutableDoubleArray.Builder {
             ensureCapacity(size + elements.size)
             for (element in elements) {
                 values[size++] = element
             }
+            return this
         }
 
-        public fun addAll(elements: ImmutableDoubleArray) {
+        public fun addAll(elements: ImmutableDoubleArray): ImmutableDoubleArray.Builder {
             ensureCapacity(size + elements.size)
             System.arraycopy(elements.values, 0, values, size, elements.size)
             size += elements.size
+            return this
         }
 
-        public fun addAll(elements: ImmutableArray<Double>) {
+        public fun addAll(elements: ImmutableArray<Double>): ImmutableDoubleArray.Builder {
             ensureCapacity(size + elements.size)
             for (element in elements) {
                 values[size++] = element
             }
+            return this
         }
 
-        public fun addAll(elements: Iterable<Double>) {
+        public fun addAll(elements: Iterable<Double>): ImmutableDoubleArray.Builder {
             if (elements is Collection) {
                 ensureCapacity(size + elements.size)
                 for (element in elements) {
                     values[size++] = element
                 }
-                return
+                return this
             }
             for (element in elements) {
                 add(element)
             }
+            return this
         }
 
         /**
