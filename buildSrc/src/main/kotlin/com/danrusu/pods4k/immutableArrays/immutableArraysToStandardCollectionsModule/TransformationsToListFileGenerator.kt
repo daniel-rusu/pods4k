@@ -32,9 +32,7 @@ private fun FileSpec.Builder.addToList() {
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
-            statement("val result = ArrayList<%T>(size)", baseType.type)
-            statement("forEach { result.add(it) }")
-            statement("return result")
+            statement("return ArrayList(this.asList())")
         }
     }
 }
@@ -50,9 +48,7 @@ private fun FileSpec.Builder.addToMutableList() {
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
-            statement("val result = ArrayList<%T>(size)", baseType.type)
-            statement("forEach { result.add(it) }")
-            statement("return result")
+            statement("return ArrayList(this.asList())")
         }
     }
 }

@@ -15,161 +15,89 @@ import kotlin.collections.MutableList
 /**
  * See [Array.toList]
  */
-public fun <T> ImmutableArray<T>.toList(): List<T> {
-    val result = ArrayList<T>(size)
-    forEach { result.add(it) }
-    return result
-}
+public fun <T> ImmutableArray<T>.toList(): List<T> = ArrayList(this.asList())
 
 /**
  * See [Array.toList]
  */
-public fun ImmutableBooleanArray.toList(): List<Boolean> {
-    val result = ArrayList<Boolean>(size)
-    forEach { result.add(it) }
-    return result
-}
+public fun ImmutableBooleanArray.toList(): List<Boolean> = ArrayList(this.asList())
 
 /**
  * See [Array.toList]
  */
-public fun ImmutableByteArray.toList(): List<Byte> {
-    val result = ArrayList<Byte>(size)
-    forEach { result.add(it) }
-    return result
-}
+public fun ImmutableByteArray.toList(): List<Byte> = ArrayList(this.asList())
 
 /**
  * See [Array.toList]
  */
-public fun ImmutableCharArray.toList(): List<Char> {
-    val result = ArrayList<Char>(size)
-    forEach { result.add(it) }
-    return result
-}
+public fun ImmutableCharArray.toList(): List<Char> = ArrayList(this.asList())
 
 /**
  * See [Array.toList]
  */
-public fun ImmutableShortArray.toList(): List<Short> {
-    val result = ArrayList<Short>(size)
-    forEach { result.add(it) }
-    return result
-}
+public fun ImmutableShortArray.toList(): List<Short> = ArrayList(this.asList())
 
 /**
  * See [Array.toList]
  */
-public fun ImmutableIntArray.toList(): List<Int> {
-    val result = ArrayList<Int>(size)
-    forEach { result.add(it) }
-    return result
-}
+public fun ImmutableIntArray.toList(): List<Int> = ArrayList(this.asList())
 
 /**
  * See [Array.toList]
  */
-public fun ImmutableLongArray.toList(): List<Long> {
-    val result = ArrayList<Long>(size)
-    forEach { result.add(it) }
-    return result
-}
+public fun ImmutableLongArray.toList(): List<Long> = ArrayList(this.asList())
 
 /**
  * See [Array.toList]
  */
-public fun ImmutableFloatArray.toList(): List<Float> {
-    val result = ArrayList<Float>(size)
-    forEach { result.add(it) }
-    return result
-}
+public fun ImmutableFloatArray.toList(): List<Float> = ArrayList(this.asList())
 
 /**
  * See [Array.toList]
  */
-public fun ImmutableDoubleArray.toList(): List<Double> {
-    val result = ArrayList<Double>(size)
-    forEach { result.add(it) }
-    return result
-}
+public fun ImmutableDoubleArray.toList(): List<Double> = ArrayList(this.asList())
 
 /**
  * See [Array.toMutableList]
  */
-public fun <T> ImmutableArray<T>.toMutableList(): MutableList<T> {
-    val result = ArrayList<T>(size)
-    forEach { result.add(it) }
-    return result
-}
+public fun <T> ImmutableArray<T>.toMutableList(): MutableList<T> = ArrayList(this.asList())
 
 /**
  * See [Array.toMutableList]
  */
-public fun ImmutableBooleanArray.toMutableList(): MutableList<Boolean> {
-    val result = ArrayList<Boolean>(size)
-    forEach { result.add(it) }
-    return result
-}
+public fun ImmutableBooleanArray.toMutableList(): MutableList<Boolean> = ArrayList(this.asList())
 
 /**
  * See [Array.toMutableList]
  */
-public fun ImmutableByteArray.toMutableList(): MutableList<Byte> {
-    val result = ArrayList<Byte>(size)
-    forEach { result.add(it) }
-    return result
-}
+public fun ImmutableByteArray.toMutableList(): MutableList<Byte> = ArrayList(this.asList())
 
 /**
  * See [Array.toMutableList]
  */
-public fun ImmutableCharArray.toMutableList(): MutableList<Char> {
-    val result = ArrayList<Char>(size)
-    forEach { result.add(it) }
-    return result
-}
+public fun ImmutableCharArray.toMutableList(): MutableList<Char> = ArrayList(this.asList())
 
 /**
  * See [Array.toMutableList]
  */
-public fun ImmutableShortArray.toMutableList(): MutableList<Short> {
-    val result = ArrayList<Short>(size)
-    forEach { result.add(it) }
-    return result
-}
+public fun ImmutableShortArray.toMutableList(): MutableList<Short> = ArrayList(this.asList())
 
 /**
  * See [Array.toMutableList]
  */
-public fun ImmutableIntArray.toMutableList(): MutableList<Int> {
-    val result = ArrayList<Int>(size)
-    forEach { result.add(it) }
-    return result
-}
+public fun ImmutableIntArray.toMutableList(): MutableList<Int> = ArrayList(this.asList())
 
 /**
  * See [Array.toMutableList]
  */
-public fun ImmutableLongArray.toMutableList(): MutableList<Long> {
-    val result = ArrayList<Long>(size)
-    forEach { result.add(it) }
-    return result
-}
+public fun ImmutableLongArray.toMutableList(): MutableList<Long> = ArrayList(this.asList())
 
 /**
  * See [Array.toMutableList]
  */
-public fun ImmutableFloatArray.toMutableList(): MutableList<Float> {
-    val result = ArrayList<Float>(size)
-    forEach { result.add(it) }
-    return result
-}
+public fun ImmutableFloatArray.toMutableList(): MutableList<Float> = ArrayList(this.asList())
 
 /**
  * See [Array.toMutableList]
  */
-public fun ImmutableDoubleArray.toMutableList(): MutableList<Double> {
-    val result = ArrayList<Double>(size)
-    forEach { result.add(it) }
-    return result
-}
+public fun ImmutableDoubleArray.toMutableList(): MutableList<Double> = ArrayList(this.asList())
