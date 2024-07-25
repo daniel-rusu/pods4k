@@ -21,51 +21,15 @@ import java.io.File
 internal object ImmutableArrayExtensionsGenerator {
     fun generate(destinationPath: String) {
         val fileSpec = createFile(ImmutableArrayConfig.packageName, "ImmutableArrays") {
-            addToPrimitiveImmutableArray()
-            addToTypedImmutableArray()
             addGetOrElse()
             addSorted()
             addSortedDescending()
             addPlusImmutableArray()
             addPlusValue()
+            addToPrimitiveImmutableArray()
+            addToTypedImmutableArray()
         }
         fileSpec.writeTo(File(destinationPath, ""))
-    }
-}
-
-private fun FileSpec.Builder.addToPrimitiveImmutableArray() {
-    for (baseType in BaseType.values()) {
-        if (baseType == GENERIC) continue
-
-        function(
-            kdoc = """
-                Returns an [${baseType.generatedClassName}] containing the unboxed values of this array.
-                
-                [${baseType.generatedClassName}] uses less memory and is faster to access as it stores the primitive values directly without needing to store them in wrapper objects.
-            """.trimIndent(),
-            receiver = GENERIC.getGeneratedClass().parameterizedBy(baseType.type),
-            name = "to${baseType.generatedClassName}",
-            returns = baseType.getGeneratedTypeName(),
-            code = "return ${baseType.generatedClassName}(size)·{·this[it]·}"
-        )
-    }
-}
-
-private fun FileSpec.Builder.addToTypedImmutableArray() {
-    for (baseType in BaseType.values()) {
-        if (baseType == GENERIC) continue
-
-        function(
-            kdoc = """
-                Returns a typed [${GENERIC.generatedClassName}] containing the values of this array.
-                
-                Note that [${GENERIC.generatedClassName}] uses more memory and is slower to access as each primitive value will be auto-boxed in a wrapper object.
-            """.trimIndent(),
-            receiver = baseType.getGeneratedClass(),
-            name = "toTyped${GENERIC.generatedClassName}",
-            returns = GENERIC.getGeneratedClass().parameterizedBy(baseType.type),
-            code = "return ${GENERIC.generatedClassName}(size)·{·this[it]·}"
-        )
     }
 }
 
@@ -239,5 +203,41 @@ private fun FileSpec.Builder.addPlusValue() {
                 statement("add(element)")
             }
         }
+    }
+}
+
+private fun FileSpec.Builder.addToPrimitiveImmutableArray() {
+    for (baseType in BaseType.values()) {
+        if (baseType == GENERIC) continue
+
+        function(
+            kdoc = """
+                Returns an [${baseType.generatedClassName}] containing the unboxed values of this array.
+                
+                [${baseType.generatedClassName}] uses less memory and is faster to access as it stores the primitive values directly without needing to store them in wrapper objects.
+            """.trimIndent(),
+            receiver = GENERIC.getGeneratedClass().parameterizedBy(baseType.type),
+            name = "to${baseType.generatedClassName}",
+            returns = baseType.getGeneratedTypeName(),
+            code = "return ${baseType.generatedClassName}(size)·{·this[it]·}"
+        )
+    }
+}
+
+private fun FileSpec.Builder.addToTypedImmutableArray() {
+    for (baseType in BaseType.values()) {
+        if (baseType == GENERIC) continue
+
+        function(
+            kdoc = """
+                Returns a typed [${GENERIC.generatedClassName}] containing the values of this array.
+                
+                Note that [${GENERIC.generatedClassName}] uses more memory and is slower to access as each primitive value will be auto-boxed in a wrapper object.
+            """.trimIndent(),
+            receiver = baseType.getGeneratedClass(),
+            name = "toTyped${GENERIC.generatedClassName}",
+            returns = GENERIC.getGeneratedClass().parameterizedBy(baseType.type),
+            code = "return ${GENERIC.generatedClassName}(size)·{·this[it]·}"
+        )
     }
 }
