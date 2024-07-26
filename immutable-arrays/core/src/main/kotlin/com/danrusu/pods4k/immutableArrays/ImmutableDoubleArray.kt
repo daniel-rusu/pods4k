@@ -16,6 +16,7 @@ import kotlin.Unit
 import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
 import kotlin.collections.Iterator
+import kotlin.collections.List
 import kotlin.jvm.JvmInline
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
@@ -204,6 +205,18 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
      * See [DoubleArray.asSequence]
      */
     public inline fun asSequence(): Sequence<Double> = values.asSequence()
+
+    /**
+     * Wraps the backing array in a class that implements the read-only [List] interface by
+     * referencing the same backing array without copying the elements.
+     *
+     * Note that [ImmutableDoubleArray] stores primitive values whereas [List] operates on generic
+     * types so this will auto-box the value that is accessed on every access.  If the total number of
+     * accesses is expected to be multiple times larger than the total number of elements then you
+     * might want to consider converting it into a list instead as that will auto-box all the elements
+     * only once at the cost of allocating a separate backing array.
+     */
+    public inline fun asList(): List<Double> = values.asList()
 
     /**
      * See [DoubleArray.forEach]

@@ -14,6 +14,7 @@ _Release Date TBD_
 
 **New Features:**
 
+* Add `asList` method
 * Add `MutableCollection.addAll(immutableArray)` extension function
 * Add `+` operator overload for concatenating an immutable array with an additional value
 * Add `+` operator overload for concatenating two immutable arrays
@@ -55,8 +56,8 @@ _2024-07-16_
 
 **Performance Improvements:**
 
-* Optimized `immutableArrayOf` factory functions
-* Optimized the creation of immutable arrays from regular arrays
+* Use System.arraycopy in `immutableArrayOf` factory functions
+* Use System.arraycopy when creating immutable arrays from regular arrays
 
 ## 0.1.0
 

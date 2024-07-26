@@ -432,6 +432,14 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `asList validation`() {
+        with(immutableArrayOf("one", "two", "three")) {
+            expectThat(asList())
+                .isEqualTo(listOf("one", "two", "three"))
+        }
+    }
+
+    @Test
     fun `forEach validation`() {
         with(ImmutableArray(3) { "element $it" }) {
             val elements = mutableListOf<String>()

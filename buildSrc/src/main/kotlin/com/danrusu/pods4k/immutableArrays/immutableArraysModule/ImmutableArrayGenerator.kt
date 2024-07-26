@@ -161,6 +161,20 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 baseType = baseType,
                 returns = Sequence::class.asTypeName().parameterizedBy(baseType.type),
             )
+            "asList"(
+                baseType = baseType,
+                kdoc = when (baseType) {
+                    GENERIC -> "Wraps the backing array in a class that implements the read-only [List] interface by referencing the same backing array without copying the elements."
+                    else -> {
+                        """
+                            Wraps the backing array in a class that implements the read-only [List] interface by referencing the same backing array without copying the elements.
+                            
+                            Note that [${baseType.generatedClassName}] stores primitive values whereas [List] operates on generic types so this will auto-box the value that is accessed on every access.  If the total number of accesses is expected to be multiple times larger than the total number of elements then you might want to consider converting it into a list instead as that will auto-box all the elements only once at the cost of allocating a separate backing array.
+                        """.trimIndent()
+                    }
+                },
+                returns = List::class.asTypeName().parameterizedBy(baseType.type)
+            )
             "forEach"(
                 baseType = baseType,
                 parameters = {
