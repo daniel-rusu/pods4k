@@ -2,10 +2,11 @@ package com.danrusu.pods4k
 
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.ArrayExtensionsGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.CollectionExtensionsGenerator
-import com.danrusu.pods4k.immutableArrays.immutableArraysModule.ImmutableArrayGenerator
-import com.danrusu.pods4k.immutableArrays.immutableArraysModule.ImmutableArrayFactoryGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.ImmutableArrayExtensionsGenerator
+import com.danrusu.pods4k.immutableArrays.immutableArraysModule.ImmutableArrayFactoryGenerator
+import com.danrusu.pods4k.immutableArrays.immutableArraysModule.ImmutableArrayGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.SequenceExtensionsGenerator
+import com.danrusu.pods4k.immutableArrays.immutableArraysModule.specializations.FlatMapSpecializationGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.specializations.MapIndexedNotNullSpecializationGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.specializations.MapIndexedSpecializationGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.specializations.MapNotNullSpecializationGenerator
@@ -47,6 +48,7 @@ private fun generateImmutableArraySpecializations(moduleSourcePath: String) {
     MapIndexedSpecializationGenerator.generate(moduleSourcePath)
     MapNotNullSpecializationGenerator.generate(moduleSourcePath)
     MapIndexedNotNullSpecializationGenerator.generate(moduleSourcePath)
+    FlatMapSpecializationGenerator.generate(moduleSourcePath)
 }
 
 private fun generateImmutableArraysToStandardCollectionsModule(target: Project) {

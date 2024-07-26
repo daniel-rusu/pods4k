@@ -14,6 +14,7 @@ _Release Date TBD_
 
 **New Features:**
 
+* Add `flatMap` specializations
 * Add `partition` method
 * Add `asList` method
 * Add `MutableCollection.addAll(immutableArray)` extension function
