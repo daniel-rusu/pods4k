@@ -11,6 +11,7 @@ import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeVariableName
+import com.squareup.kotlinpoet.WildcardTypeName
 import com.squareup.kotlinpoet.asTypeName
 import java.io.File
 
@@ -49,7 +50,8 @@ private fun FileSpec.Builder.addMutableCollectionAddAll() {
     for (baseType in BaseType.values()) {
         function(
             kdoc = "Adds all the elements to [this] collection.",
-            receiver = ClassName("kotlin.collections", "MutableCollection").parameterizedBy(baseType.type),
+            receiver = ClassName("kotlin.collections", "MutableCollection")
+                .parameterizedBy(WildcardTypeName.consumerOf(baseType.type)),
             name = "addAll",
             parameters = { "elements"(type = baseType.getGeneratedTypeName()) },
         ) {

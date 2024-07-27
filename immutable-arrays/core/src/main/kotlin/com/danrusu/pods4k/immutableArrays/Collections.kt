@@ -123,7 +123,7 @@ public fun Iterable<Double>.toImmutableArray(): ImmutableDoubleArray {
 /**
  * Adds all the elements to [this] collection.
  */
-public fun <T> MutableCollection<T>.addAll(elements: ImmutableArray<T>) {
+public fun <T> MutableCollection<in T>.addAll(elements: ImmutableArray<T>) {
     // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
     addAll(elements.values.asList())
 }
@@ -131,7 +131,7 @@ public fun <T> MutableCollection<T>.addAll(elements: ImmutableArray<T>) {
 /**
  * Adds all the elements to [this] collection.
  */
-public fun MutableCollection<Boolean>.addAll(elements: ImmutableBooleanArray) {
+public fun MutableCollection<in Boolean>.addAll(elements: ImmutableBooleanArray) {
     // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
     addAll(elements.values.asList())
 }
@@ -139,7 +139,7 @@ public fun MutableCollection<Boolean>.addAll(elements: ImmutableBooleanArray) {
 /**
  * Adds all the elements to [this] collection.
  */
-public fun MutableCollection<Byte>.addAll(elements: ImmutableByteArray) {
+public fun MutableCollection<in Byte>.addAll(elements: ImmutableByteArray) {
     // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
     addAll(elements.values.asList())
 }
@@ -147,7 +147,7 @@ public fun MutableCollection<Byte>.addAll(elements: ImmutableByteArray) {
 /**
  * Adds all the elements to [this] collection.
  */
-public fun MutableCollection<Char>.addAll(elements: ImmutableCharArray) {
+public fun MutableCollection<in Char>.addAll(elements: ImmutableCharArray) {
     // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
     addAll(elements.values.asList())
 }
@@ -155,7 +155,7 @@ public fun MutableCollection<Char>.addAll(elements: ImmutableCharArray) {
 /**
  * Adds all the elements to [this] collection.
  */
-public fun MutableCollection<Short>.addAll(elements: ImmutableShortArray) {
+public fun MutableCollection<in Short>.addAll(elements: ImmutableShortArray) {
     // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
     addAll(elements.values.asList())
 }
@@ -163,7 +163,7 @@ public fun MutableCollection<Short>.addAll(elements: ImmutableShortArray) {
 /**
  * Adds all the elements to [this] collection.
  */
-public fun MutableCollection<Int>.addAll(elements: ImmutableIntArray) {
+public fun MutableCollection<in Int>.addAll(elements: ImmutableIntArray) {
     // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
     addAll(elements.values.asList())
 }
@@ -171,7 +171,7 @@ public fun MutableCollection<Int>.addAll(elements: ImmutableIntArray) {
 /**
  * Adds all the elements to [this] collection.
  */
-public fun MutableCollection<Long>.addAll(elements: ImmutableLongArray) {
+public fun MutableCollection<in Long>.addAll(elements: ImmutableLongArray) {
     // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
     addAll(elements.values.asList())
 }
@@ -179,7 +179,7 @@ public fun MutableCollection<Long>.addAll(elements: ImmutableLongArray) {
 /**
  * Adds all the elements to [this] collection.
  */
-public fun MutableCollection<Float>.addAll(elements: ImmutableFloatArray) {
+public fun MutableCollection<in Float>.addAll(elements: ImmutableFloatArray) {
     // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
     addAll(elements.values.asList())
 }
@@ -187,7 +187,7 @@ public fun MutableCollection<Float>.addAll(elements: ImmutableFloatArray) {
 /**
  * Adds all the elements to [this] collection.
  */
-public fun MutableCollection<Double>.addAll(elements: ImmutableDoubleArray) {
+public fun MutableCollection<in Double>.addAll(elements: ImmutableDoubleArray) {
     // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
     addAll(elements.values.asList())
 }

@@ -35,14 +35,39 @@ class CollectionsTest {
 
     @Test
     fun `addAll validation`() {
-        val list = mutableListOf<String>()
+        with(mutableListOf<String>()) {
+            addAll(immutableArrayOf())
+            expectThat(this)
+                .isEmpty()
 
-        list.addAll(immutableArrayOf())
-        expectThat(list)
-            .isEmpty()
+            addAll(immutableArrayOf("one", "two"))
+            expectThat(this)
+                .isEqualTo(mutableListOf("one", "two"))
+        }
 
-        list.addAll(immutableArrayOf("one", "two"))
-        expectThat(list)
-            .isEqualTo(mutableListOf("one", "two"))
+        with(mutableListOf<Int>()) {
+            // with generic array
+            addAll(immutableArrayOf<Int>(1, 2, 3))
+            expectThat(this)
+                .isEqualTo(mutableListOf(1, 2, 3))
+
+            // with primitive array
+            addAll(immutableArrayOf(4, 5, 6))
+            expectThat(this)
+                .isEqualTo(mutableListOf(1, 2, 3, 4, 5, 6))
+        }
+
+        // adding subclass types
+        with(mutableListOf<Any>()) {
+            addAll(immutableArrayOf("one", "two"))
+            expectThat(this)
+                .isEqualTo(mutableListOf("one", "two"))
+
+            // primitive arrays are also allowed
+            addAll(immutableArrayOf(1, 2, 3))
+
+            expectThat(this)
+                .isEqualTo(mutableListOf("one", "two", 1, 2, 3))
+        }
     }
 }
