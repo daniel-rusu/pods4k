@@ -131,7 +131,7 @@ private fun TypeSpec.Builder.addBuilderUtilsEnsureCapacity() {
             statement("minCapacity > MAX_ARRAY_SIZE -> throw %T()", OutOfMemoryError::class)
         }
         comment("increase the size by at least 50 percent")
-        statement("var newCapacity = currentCapacity + (currentCapacity shr 1) + 1")
+        statement("val newCapacity = currentCapacity + (currentCapacity shr 1) + 1")
         controlFlow("return when") {
             statement("newCapacity < 0 -> MAX_ARRAY_SIZE // handle overflow")
             statement("newCapacity < minCapacity -> minCapacity")

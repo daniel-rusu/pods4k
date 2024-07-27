@@ -200,7 +200,7 @@ internal object BuilderUtils {
             minCapacity > MAX_ARRAY_SIZE -> throw OutOfMemoryError()
         }
         // increase the size by at least 50 percent
-        var newCapacity = currentCapacity + (currentCapacity shr 1) + 1
+        val newCapacity = currentCapacity + (currentCapacity shr 1) + 1
         return when {
             newCapacity < 0 -> MAX_ARRAY_SIZE // handle overflow
             newCapacity < minCapacity -> minCapacity

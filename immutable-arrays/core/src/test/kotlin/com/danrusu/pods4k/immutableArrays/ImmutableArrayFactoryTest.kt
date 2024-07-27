@@ -2,8 +2,11 @@ package com.danrusu.pods4k.immutableArrays
 
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
+import strikt.api.expectThrows
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
+import strikt.assertions.isGreaterThan
+import strikt.assertions.isGreaterThanOrEqualTo
 
 class ImmutableArrayFactoryTest {
     @Test
@@ -53,5 +56,50 @@ class ImmutableArrayFactoryTest {
 
         expectThat(numbers)
             .isEqualTo(immutableArrayOf(3, 7, 11))
+    }
+
+    @Test
+    fun `builderUtils computeNewCapacity validation`() {
+        // happy path
+        with(BuilderUtils) {
+            // capacity doesn't change when it's already sufficient
+            expectThat(computeNewCapacity(currentCapacity = 10, minCapacity = 9))
+                .isEqualTo(10)
+
+            // 0 initial capacity doesn't get stuck at 0
+            expectThat(computeNewCapacity(currentCapacity = 0, minCapacity = 1))
+                .isGreaterThan(0)
+
+            // capacity increases by at least 50%
+            expectThat(computeNewCapacity(currentCapacity = 10, minCapacity = 11))
+                .isGreaterThanOrEqualTo(15)
+
+            // new capacity respects minCapacity
+            expectThat(computeNewCapacity(currentCapacity = 10, minCapacity = 1_000_000))
+                .isGreaterThanOrEqualTo(1_000_000)
+        }
+
+        // Overflow handling
+        with(BuilderUtils) {
+            val currentCapacity = Int.MAX_VALUE - 20
+
+            // Overflow from the array growth handles overflow gracefully when current size is close to max array size
+            expectThat(computeNewCapacity(currentCapacity = currentCapacity, minCapacity = currentCapacity + 1))
+                .isEqualTo(MAX_ARRAY_SIZE)
+
+            // Specifying a minCapacity that has overflowed
+            expectThrows<OutOfMemoryError> {
+                computeNewCapacity(currentCapacity = currentCapacity, minCapacity = currentCapacity + 21)
+            }
+
+            // Requesting a capacity equal to the max array size is allowed
+            expectThat(computeNewCapacity(currentCapacity = currentCapacity, minCapacity = MAX_ARRAY_SIZE))
+                .isEqualTo(MAX_ARRAY_SIZE)
+
+            // Specifying a minCapacity that exceeds the max array size
+            expectThrows<OutOfMemoryError> {
+                computeNewCapacity(currentCapacity = currentCapacity, minCapacity = MAX_ARRAY_SIZE + 1)
+            }
+        }
     }
 }
