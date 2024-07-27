@@ -555,12 +555,10 @@ private fun TypeSpec.Builder.addCompanionObjectInvokeOperator(baseType: BaseType
 
 private fun TypeSpec.Builder.addBuilderAddFunction(baseType: BaseType) {
     val returnType = when (baseType) {
-        GENERIC -> ClassName(
-            ImmutableArrayConfig.packageName,
-            "${baseType.generatedClassName}.Builder"
-        ).parameterizedBy(baseType.type)
+        GENERIC -> ClassName(ImmutableArrayConfig.packageName, baseType.generatedClassName, "Builder")
+            .parameterizedBy(baseType.type)
 
-        else -> ClassName(ImmutableArrayConfig.packageName, "${baseType.generatedClassName}.Builder")
+        else -> ClassName(ImmutableArrayConfig.packageName, baseType.generatedClassName, "Builder")
     }
     function(
         name = "add",
@@ -585,12 +583,10 @@ private fun TypeSpec.Builder.addBuilderPlusAssignOperator(baseType: BaseType) {
 
 private fun TypeSpec.Builder.addBuilderAddAllFunctions(baseType: BaseType) {
     val returnType = when (baseType) {
-        GENERIC -> {
-            ClassName(ImmutableArrayConfig.packageName, "${baseType.generatedClassName}.Builder")
-                .parameterizedBy(baseType.type)
-        }
+        GENERIC -> ClassName(ImmutableArrayConfig.packageName, baseType.generatedClassName, "Builder")
+            .parameterizedBy(baseType.type)
 
-        else -> ClassName(ImmutableArrayConfig.packageName, "${baseType.generatedClassName}.Builder")
+        else -> ClassName(ImmutableArrayConfig.packageName, baseType.generatedClassName, "Builder")
     }
     function(
         name = "addAll",

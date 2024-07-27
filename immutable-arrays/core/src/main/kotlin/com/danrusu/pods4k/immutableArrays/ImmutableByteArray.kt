@@ -338,7 +338,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
 
         private var values: ByteArray = ByteArray(initialCapacity)
 
-        public fun add(element: Byte): ImmutableByteArray.Builder {
+        public fun add(element: Byte): Builder {
             ensureCapacity(size + 1)
             values[size++] = element
             return this
@@ -351,14 +351,14 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
             add(element)
         }
 
-        public fun addAll(elements: ByteArray): ImmutableByteArray.Builder {
+        public fun addAll(elements: ByteArray): Builder {
             ensureCapacity(size + elements.size)
             System.arraycopy(elements, 0, values, size, elements.size)
             size += elements.size
             return this
         }
 
-        public fun addAll(elements: Array<Byte>): ImmutableByteArray.Builder {
+        public fun addAll(elements: Array<Byte>): Builder {
             ensureCapacity(size + elements.size)
             for (element in elements) {
                 values[size++] = element
@@ -366,14 +366,14 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
             return this
         }
 
-        public fun addAll(elements: ImmutableByteArray): ImmutableByteArray.Builder {
+        public fun addAll(elements: ImmutableByteArray): Builder {
             ensureCapacity(size + elements.size)
             System.arraycopy(elements.values, 0, values, size, elements.size)
             size += elements.size
             return this
         }
 
-        public fun addAll(elements: ImmutableArray<Byte>): ImmutableByteArray.Builder {
+        public fun addAll(elements: ImmutableArray<Byte>): Builder {
             ensureCapacity(size + elements.size)
             for (element in elements) {
                 values[size++] = element
@@ -381,7 +381,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
             return this
         }
 
-        public fun addAll(elements: Iterable<Byte>): ImmutableByteArray.Builder {
+        public fun addAll(elements: Iterable<Byte>): Builder {
             if (elements is Collection) {
                 ensureCapacity(size + elements.size)
                 for (element in elements) {

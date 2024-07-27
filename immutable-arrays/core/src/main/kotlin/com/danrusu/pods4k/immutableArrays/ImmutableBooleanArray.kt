@@ -343,7 +343,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
 
         private var values: BooleanArray = BooleanArray(initialCapacity)
 
-        public fun add(element: Boolean): ImmutableBooleanArray.Builder {
+        public fun add(element: Boolean): Builder {
             ensureCapacity(size + 1)
             values[size++] = element
             return this
@@ -356,14 +356,14 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
             add(element)
         }
 
-        public fun addAll(elements: BooleanArray): ImmutableBooleanArray.Builder {
+        public fun addAll(elements: BooleanArray): Builder {
             ensureCapacity(size + elements.size)
             System.arraycopy(elements, 0, values, size, elements.size)
             size += elements.size
             return this
         }
 
-        public fun addAll(elements: Array<Boolean>): ImmutableBooleanArray.Builder {
+        public fun addAll(elements: Array<Boolean>): Builder {
             ensureCapacity(size + elements.size)
             for (element in elements) {
                 values[size++] = element
@@ -371,14 +371,14 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
             return this
         }
 
-        public fun addAll(elements: ImmutableBooleanArray): ImmutableBooleanArray.Builder {
+        public fun addAll(elements: ImmutableBooleanArray): Builder {
             ensureCapacity(size + elements.size)
             System.arraycopy(elements.values, 0, values, size, elements.size)
             size += elements.size
             return this
         }
 
-        public fun addAll(elements: ImmutableArray<Boolean>): ImmutableBooleanArray.Builder {
+        public fun addAll(elements: ImmutableArray<Boolean>): Builder {
             ensureCapacity(size + elements.size)
             for (element in elements) {
                 values[size++] = element
@@ -386,7 +386,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
             return this
         }
 
-        public fun addAll(elements: Iterable<Boolean>): ImmutableBooleanArray.Builder {
+        public fun addAll(elements: Iterable<Boolean>): Builder {
             if (elements is Collection) {
                 ensureCapacity(size + elements.size)
                 for (element in elements) {

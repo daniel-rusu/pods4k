@@ -339,7 +339,7 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
 
         private var values: ShortArray = ShortArray(initialCapacity)
 
-        public fun add(element: Short): ImmutableShortArray.Builder {
+        public fun add(element: Short): Builder {
             ensureCapacity(size + 1)
             values[size++] = element
             return this
@@ -352,14 +352,14 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
             add(element)
         }
 
-        public fun addAll(elements: ShortArray): ImmutableShortArray.Builder {
+        public fun addAll(elements: ShortArray): Builder {
             ensureCapacity(size + elements.size)
             System.arraycopy(elements, 0, values, size, elements.size)
             size += elements.size
             return this
         }
 
-        public fun addAll(elements: Array<Short>): ImmutableShortArray.Builder {
+        public fun addAll(elements: Array<Short>): Builder {
             ensureCapacity(size + elements.size)
             for (element in elements) {
                 values[size++] = element
@@ -367,14 +367,14 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
             return this
         }
 
-        public fun addAll(elements: ImmutableShortArray): ImmutableShortArray.Builder {
+        public fun addAll(elements: ImmutableShortArray): Builder {
             ensureCapacity(size + elements.size)
             System.arraycopy(elements.values, 0, values, size, elements.size)
             size += elements.size
             return this
         }
 
-        public fun addAll(elements: ImmutableArray<Short>): ImmutableShortArray.Builder {
+        public fun addAll(elements: ImmutableArray<Short>): Builder {
             ensureCapacity(size + elements.size)
             for (element in elements) {
                 values[size++] = element
@@ -382,7 +382,7 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
             return this
         }
 
-        public fun addAll(elements: Iterable<Short>): ImmutableShortArray.Builder {
+        public fun addAll(elements: Iterable<Short>): Builder {
             if (elements is Collection) {
                 ensureCapacity(size + elements.size)
                 for (element in elements) {

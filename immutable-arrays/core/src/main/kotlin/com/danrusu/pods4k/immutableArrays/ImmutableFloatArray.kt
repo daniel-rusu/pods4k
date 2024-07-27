@@ -339,7 +339,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
 
         private var values: FloatArray = FloatArray(initialCapacity)
 
-        public fun add(element: Float): ImmutableFloatArray.Builder {
+        public fun add(element: Float): Builder {
             ensureCapacity(size + 1)
             values[size++] = element
             return this
@@ -352,14 +352,14 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
             add(element)
         }
 
-        public fun addAll(elements: FloatArray): ImmutableFloatArray.Builder {
+        public fun addAll(elements: FloatArray): Builder {
             ensureCapacity(size + elements.size)
             System.arraycopy(elements, 0, values, size, elements.size)
             size += elements.size
             return this
         }
 
-        public fun addAll(elements: Array<Float>): ImmutableFloatArray.Builder {
+        public fun addAll(elements: Array<Float>): Builder {
             ensureCapacity(size + elements.size)
             for (element in elements) {
                 values[size++] = element
@@ -367,14 +367,14 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
             return this
         }
 
-        public fun addAll(elements: ImmutableFloatArray): ImmutableFloatArray.Builder {
+        public fun addAll(elements: ImmutableFloatArray): Builder {
             ensureCapacity(size + elements.size)
             System.arraycopy(elements.values, 0, values, size, elements.size)
             size += elements.size
             return this
         }
 
-        public fun addAll(elements: ImmutableArray<Float>): ImmutableFloatArray.Builder {
+        public fun addAll(elements: ImmutableArray<Float>): Builder {
             ensureCapacity(size + elements.size)
             for (element in elements) {
                 values[size++] = element
@@ -382,7 +382,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
             return this
         }
 
-        public fun addAll(elements: Iterable<Float>): ImmutableFloatArray.Builder {
+        public fun addAll(elements: Iterable<Float>): Builder {
             if (elements is Collection) {
                 ensureCapacity(size + elements.size)
                 for (element in elements) {

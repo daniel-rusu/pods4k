@@ -343,7 +343,7 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
 
         private var values: DoubleArray = DoubleArray(initialCapacity)
 
-        public fun add(element: Double): ImmutableDoubleArray.Builder {
+        public fun add(element: Double): Builder {
             ensureCapacity(size + 1)
             values[size++] = element
             return this
@@ -356,14 +356,14 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
             add(element)
         }
 
-        public fun addAll(elements: DoubleArray): ImmutableDoubleArray.Builder {
+        public fun addAll(elements: DoubleArray): Builder {
             ensureCapacity(size + elements.size)
             System.arraycopy(elements, 0, values, size, elements.size)
             size += elements.size
             return this
         }
 
-        public fun addAll(elements: Array<Double>): ImmutableDoubleArray.Builder {
+        public fun addAll(elements: Array<Double>): Builder {
             ensureCapacity(size + elements.size)
             for (element in elements) {
                 values[size++] = element
@@ -371,14 +371,14 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
             return this
         }
 
-        public fun addAll(elements: ImmutableDoubleArray): ImmutableDoubleArray.Builder {
+        public fun addAll(elements: ImmutableDoubleArray): Builder {
             ensureCapacity(size + elements.size)
             System.arraycopy(elements.values, 0, values, size, elements.size)
             size += elements.size
             return this
         }
 
-        public fun addAll(elements: ImmutableArray<Double>): ImmutableDoubleArray.Builder {
+        public fun addAll(elements: ImmutableArray<Double>): Builder {
             ensureCapacity(size + elements.size)
             for (element in elements) {
                 values[size++] = element
@@ -386,7 +386,7 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
             return this
         }
 
-        public fun addAll(elements: Iterable<Double>): ImmutableDoubleArray.Builder {
+        public fun addAll(elements: Iterable<Double>): Builder {
             if (elements is Collection) {
                 ensureCapacity(size + elements.size)
                 for (element in elements) {

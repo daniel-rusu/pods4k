@@ -334,7 +334,7 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
 
         private var values: Array<Any?> = arrayOfNulls(initialCapacity)
 
-        public fun add(element: T): ImmutableArray.Builder<T> {
+        public fun add(element: T): Builder<T> {
             ensureCapacity(size + 1)
             values[size++] = element
             return this
@@ -347,21 +347,21 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
             add(element)
         }
 
-        public fun addAll(elements: Array<out T>): ImmutableArray.Builder<T> {
+        public fun addAll(elements: Array<out T>): Builder<T> {
             ensureCapacity(size + elements.size)
             System.arraycopy(elements, 0, values, size, elements.size)
             size += elements.size
             return this
         }
 
-        public fun addAll(elements: ImmutableArray<T>): ImmutableArray.Builder<T> {
+        public fun addAll(elements: ImmutableArray<T>): Builder<T> {
             ensureCapacity(size + elements.size)
             System.arraycopy(elements.values, 0, values, size, elements.size)
             size += elements.size
             return this
         }
 
-        public fun addAll(elements: Iterable<T>): ImmutableArray.Builder<T> {
+        public fun addAll(elements: Iterable<T>): Builder<T> {
             if (elements is Collection) {
                 ensureCapacity(size + elements.size)
                 for (element in elements) {
