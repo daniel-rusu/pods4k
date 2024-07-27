@@ -6,6 +6,7 @@ import com.danrusu.pods4k.immutableArrays.immutableArraysModule.ImmutableArrayEx
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.ImmutableArrayFactoryGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.ImmutableArrayGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.SequenceExtensionsGenerator
+import com.danrusu.pods4k.immutableArrays.immutableArraysModule.specializations.FlatMapIndexedSpecializationGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.specializations.FlatMapSpecializationGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.specializations.MapIndexedNotNullSpecializationGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysModule.specializations.MapIndexedSpecializationGenerator
@@ -49,6 +50,7 @@ private fun generateImmutableArraySpecializations(moduleSourcePath: String) {
     MapNotNullSpecializationGenerator.generate(moduleSourcePath)
     MapIndexedNotNullSpecializationGenerator.generate(moduleSourcePath)
     FlatMapSpecializationGenerator.generate(moduleSourcePath)
+    FlatMapIndexedSpecializationGenerator.generate(moduleSourcePath)
 }
 
 private fun generateImmutableArraysToStandardCollectionsModule(target: Project) {
