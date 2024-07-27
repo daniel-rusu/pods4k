@@ -20,6 +20,7 @@ and share it with others.
     * [Versus read-only lists](#benefits-over-read-only-lists)
     * [Versus unmodifiable lists](#benefits-over-unmodifiable-lists)
     * [Versus immutable lists](#benefits-over-immutable-lists)
+* [Caveats](#caveats)
 
 ## Key Features
 
@@ -675,6 +676,31 @@ Immutable lists have the same performance drawbacks as read-only lists
 </details>
 
 ## Caveats
+
+<details>
+<summary>Relies on experimental Kotlin features</summary>
+
+The following experimental features are used which could change in future Kotlin releases:
+
+* [Inline value classes](https://kotlinlang.org/docs/inline-classes.html)
+    * These enable zero cost abstractions that are eliminated at compile time. The immutable array classes are inline
+      value classes.
+    * This feature was introduced in Kotlin 1.3 and is used by some standard library features
+      like [unsigned integer types](https://kotlinlang.org/docs/unsigned-integer-types.html).
+* [Overload resolution by lambda return type](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-overload-resolution-by-lambda-return-type/)
+    * This enables the hundreds of optimized specializations that make use of overloaded functions containing parameters
+      with different lambda return types. Without this feature, these overloaded functions would result in a runtime
+      signature clash on the JVM.
+    * This feature was introduced in Kotlin 1.4 and is used extensively throughout the Kotlin standard library.
+* [Custom equals in value classes](https://youtrack.jetbrains.com/issue/KT-24874/Support-custom-equals-and-hashCode-for-value-classes)
+    * This enables overriding the equals & hashcode methods for inline value classes.
+    * This feature was added for the JVM IR backend (which handles both Android & regular JVM development) in Kotlin 1.9
+      but hasn't been announced yet because the other backends were not ready. Since this isn't a Kotlin multiplatform
+      library, the lack of support in the other backends won't affect us.
+
+Since this library relies on experimental Kotlin features, it should be regarded as being in beta.
+
+</details>
 
 <details>
 <summary>Shallow immutability</summary>
