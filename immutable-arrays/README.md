@@ -4,7 +4,17 @@ Immutable Arrays offer a safer and more efficient alternative to read-only lists
 immutability with the performance of primitive arrays while maintaining familiar operations. They compile to regular
 arrays in the bytecode while eliminating mutating capabilities and introducing hundreds of optimized specializations.
 
-### Key Benefits
+If you find this library useful, please consider giving it
+a [![GitHub stars](https://img.shields.io/github/stars/daniel-rusu/pods4k?label=Star)](https://github.com/daniel-rusu/pods4k)
+on [GitHub](https://github.com/daniel-rusu/pods4k) and sharing it with others.
+
+* [Key Benefits](#key-benefits)
+* [Usage](#usage)
+* [Memory Layout](#memory-layout)
+* [Benefits vs Alternatives](#benefits-vs-alternatives)
+* [Caveats](#caveats)
+
+## Key Benefits
 
 * **True Immutability:**
     * Unlike read-only lists, Immutable Arrays cannot be mutated through casting.
@@ -22,19 +32,6 @@ arrays in the bytecode while eliminating mutating capabilities and introducing h
 Whether you're working on performance-critical applications, dealing with large datasets, working in
 efficiency-constrained environments, or simply want the added data integrity of true immutability, Immutable Arrays are
 a great addition to Android and JVM-based projects.
-
-If you find this library useful, please consider giving it
-a [![GitHub stars](https://img.shields.io/github/stars/daniel-rusu/pods4k?label=Star)](https://github.com/daniel-rusu/pods4k)
-on GitHub and sharing it with others.
-
-* [Usage](#usage)
-* [Memory Layout](#memory-layout)
-* [Benefits over alternatives](#benefits-over-alternatives)
-    * [Versus regular arrays](#benefits-over-regular-arrays)
-    * [Versus read-only lists](#benefits-over-read-only-lists)
-    * [Versus unmodifiable lists](#benefits-over-unmodifiable-lists)
-    * [Versus immutable lists](#benefits-over-immutable-lists)
-* [Caveats](#caveats)
 
 ## Usage
 
@@ -98,7 +95,7 @@ val luckyNumbers = buildImmutableIntArray {
 Using build functions is more efficient than accumulating the values in a collection and then converting that into
 an immutable array.
 
-### Creating with builders
+### With Builders
 
 We can use immutable-array builders when accumulating values in more complex scenarios such as when delegating to helper
 functions:
@@ -117,7 +114,7 @@ fun addTrendingStocks(builder: ImmutableArray.Builder<Stock>) {
     fetchInterestingStocks().forEach { if (it.trendingScore > 80) builder.add(it) }
 }
 
-// primitive variants also have builders eg. ImmutableBooleanArray.Builder()
+// primitive variants also have builders e.g. ImmutableBooleanArray.Builder()
 ```
 
 Using the builders is more efficient than accumulating the values in a collection and then converting that into an
@@ -170,6 +167,7 @@ val names = immutableArrayOf("Dan", "Bob", "Jill")
 // For loops
 for (name in names) { /* ... */
 }
+
 for (index in names.indices) { /* ... */
 }
 
@@ -250,7 +248,7 @@ scenes (note that this is a simplified explanation of the main steps):
 3. Fetch the memory at the address specified by the `elementData` variable from the `ArrayList` class to load the
    backing array object.
 4. Ensure that `index` is smaller than the array size. This second check is enforced by the JVM for array accesses.
-5. Compute the array address of that element into the array (ie. `offset + elementSize * index`)
+5. Compute the array address of that element into the array (i.e. `offset + elementSize * index`)
 6. Fetch the memory at that computed location into the array, interpreting it as a pointer, and return that pointer
    back up the chain to the caller of `readOnlyList.get(index)`.
 7. Fetch the memory specified by that pointer to get the `Integer` wrapper object.
@@ -275,7 +273,7 @@ improvements ranging from 3.5x to 12x faster: [YouTube presentation](https://you
 
 </details>
 
-## Benefits over alternatives
+## Benefits vs Alternatives
 
 ### Benefits over regular arrays
 
