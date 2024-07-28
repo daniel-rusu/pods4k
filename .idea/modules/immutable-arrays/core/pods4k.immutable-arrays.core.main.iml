@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module version="4">
-  <component name="NewModuleRootManager">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
     <content url="file://$MODULE_DIR$/../../../../immutable-arrays/core/src/main">
       <sourceFolder url="file://$MODULE_DIR$/../../../../immutable-arrays/core/src/main/kotlin" isTestSource="false" />
     </content>
+    <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
