@@ -128,58 +128,35 @@ immutable array.
 <details>
 <summary>Accessing elements</summary>
 
-### Accessing by index
+### By Position
 
 ```kotlin
 val names = immutableArrayOf("Dan", "Bob", "Jill")
 
-names[0] // "Dan"
-names.get(1) // "Bob"
+// By index
+names[0]
+names.get(1)
+
+// By destructuring
+val (first, second) = names
+
+// Special access methods
+names.single() // & singleOrNull()
+names.first() // & firstOrNUll()
+names.last() // & lastOrNull()
 ```
 
-### Accessing by destructuring
-
-```kotlin
-val names = immutableArrayOf("Dan", "Bob", "Jill", "Jane")
-
-val (first, second) = names // first = "Dan", second = "Bob"
-val (_, second, _, fourth) // second = "Bob", fourth = "Jane"
-```
-
-### Accessing the only element
-
-```kotlin
-val names = immutableArrayOf("Dan")
-
-names.single() // "Dan"
-
-// Similarly with `singleOrNull()` for when the array might not have exactly 1 element
-```
-
-### Accessing the first & last elements
-
-```kotlin
-val names = immutableArrayOf("Dan", "Bob", "Jill")
-
-names.first() // "Dan"
-names.last() // "Jill"
-
-// Similarly with `firstOrNull()` & `lastOrNull()` for when the array might be empty
-```
-
-### Accessing by condition
+### By Condition
 
 ```kotlin
 val numbers = immutableArrayOf(1, 2, 3, 4, 5)
 
 names.first { it % 2 == 0 } // 2
 names.last { it % 2 == 0 } // 4
-
-names.firstOrNull { it > 5 } // null
-names.lastOrNull { it > 5 } // null
+// similarly with firstOrNull & lastOrNull
 
 names.single { it % 3 == 0 } // 3
-names.singleOrNull { it % 2 == 0 } // null because multiple elements match
+// similarly with singleOrNull
 ```
 
 </details>
