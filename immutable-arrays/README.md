@@ -43,92 +43,56 @@ See [dependency instructions](../README.md#dependency) for adding this library t
 <details>
 <summary>Creating immutable arrays</summary>
 
-### Empty immutable arrays
+### Empty Arrays
 
 ```kotlin
-// Creating empty immutable arrays references 1 of the 9 pre-allocated empty singletons:
+// generic arrays
 emptyImmutableArray<String>()
+
+// primitive arrays
 emptyImmutableBooleanArray()
 emptyImmutableFloatArray()
-...
+// ...
 ```
 
-### Immutable array of values
+### From Values
 
 ```kotlin
-immutableArrayOf("Bob", "Jane") // ["Bob", "Jane"]
-
-// Providing values of one of the 8 base types will automatically result in an efficient primitive array
-immutableArrayOf(1, 2, 3) // [1, 2, 3] primitive int array
-
-// Specifying the generic type forces a generic array, so the 8 base types will be auto-boxed
-immutableArrayOf<Int>(1, 2, 3) // [Integer(1), Integer(2), Integer(3)]
+immutableArrayOf("Bob", "Jane") // ImmutableArray<String>
+immutableArrayOf(1, 2, 3) // primitive int array
+immutableArrayOf<Int>(1, 2, 3) // generic array with boxed integers
 ```
 
-### Immutable array with generated elements
+### Generated Elements
 
 ```kotlin
 ImmutableArray(size = 3) { index -> index.toString() } // ["0", "1", "2"]
-
 ImmutableIntArray(size = 5) { it * it } // [0, 1, 4, 9, 16]
-
 ImmutableBooleanArray(size = 3) { it % 2 == 0 } // [true, false, true]
 ```
 
-### Creating immutable arrays from regular arrays
+### From Existing Structures
 
 ```kotlin
-// Creating from primitive arrays:
-val primitiveInts = intArrayOf(1, 2, 3)
-primitiveInts.toImmutableArray() // [1, 2, 3] ImmutableIntArray
-
-// Creating from arrays of auto-boxed values:
-val autoBoxedBooleans = arrayOf(true, false, true) // [Boolean(true), Boolean(false), Boolean(true)]
-// Auto-boxed values are transformed into a primitive array to reduce memory usage and improve performance:
-autoBoxedBooleans.toImmutableArray() // [true, false, true] primitive boolean array
-
-// Specifying the generic type forces a generic immutable array which stores references to the existing wrapper objects:
-autoBoxedBooleans.toImmutableArray<Boolean>() // [Boolean(true), Boolean(false), Boolean(true)]
+arrayOf("Bob", "Dan").toImmutableArray() // ImmutableArray<String>
+listOf(1, 2, 3).toImmutableArray() // primitive int array
+listOf(1, 2, 3).toImmutableArray<Int>() // generic array with boxed integers
 ```
 
-### Creating from iterables, collections, or sequences
-
-```kotlin
-val list = listOf(1, 2, 3)
-
-// Auto-boxed values are transformed into a primitive array to reduce memory usage and improve performance:
-list.toImmutableArray() // [1, 2, 3] primitive int array
-
-// Specifying the generic type forces a generic immutable array which stores references to the existing wrapper objects:
-list.toImmutableArray<Int>() // [Integer(1), Integer(2), Integer(3)]
-```
-
-### Creating with build functions
+### With Build Functions
 
 We can use the build functions when we don't know the resulting size in advance:
 
 ```kotlin
-// Creates ImmutableArray<Person>
+// Creates generic ImmutableArray<Person>
 val adults = buildImmutableArray<Person> {
-    for (person in people) {
-        if (person.age >= 18) {
-            add(person) // adds to the eventual immutable array
-        }
-    }
+    people.forEach { if (it.age >= 18) add(it) }
 }
 
-// Creates ImmutableIntArray
+// Creates primitive ImmutableIntArray
 val luckyNumbers = buildImmutableIntArray {
-    for (person in people) {
-        if (person.isLuck()) {
-            add(person.age)
-            addAll(person.favoriteNumbers)
-            // addAll accepts arrays, immutable arrays, and iterables such as collections
-        }
-    }
+    people.forEach { if (it.isLucky()) addAll(it.favoriteNumbers) }
 }
-
-// Similarly for all base types: buildImmutableBooleanArray, etc.
 ```
 
 Using build functions is more efficient than accumulating the values in a collection and then converting that into
@@ -150,14 +114,10 @@ fun getTopStocks(): ImmutableArray<Stock> {
 }
 
 fun addTrendingStocks(builder: ImmutableArray.Builder<Stock>) {
-    for (stock in fetchInterestingStocks()) {
-        if (stock.trendingScore > 80) {
-            builder += stock
-        }
-    }
+    fetchInterestingStocks().forEach { if (it.trendingScore > 80) builder.add(it) }
 }
 
-// The primitive immutable array variants like ImmutableBooleanArray etc. also have specialized builders
+// primitive variants also have builders eg. ImmutableBooleanArray.Builder()
 ```
 
 Using the builders is more efficient than accumulating the values in a collection and then converting that into an
@@ -260,11 +220,11 @@ names.forEachIndexed { index, element ->
 ### Iterating with sequences
 
 ```kotlin
-val names = immutableArrayOf("Dan", "Bob", "Jill", ...)
+val names = immutableArrayOf("Dan", "Bob", "Jill")
 
 names.asSequence()
     .filter { it.isInteresting() }
-    .map { ... }
+    .map { pretify(it) }
     .forEach { println(it) }
 ```
 
@@ -727,9 +687,9 @@ println(names)
 val arrays = ArrayList<ImmutableArray<String>>()
 arrays += names // auto-boxing due to generics
 
-// auto-boxing due as the immutable array is used as a generic receiver
+// auto-boxing because the immutable array is used as a generic receiver
 fun <T> T.genericExtensionFunction() {
-    ...
+    // ...
 }
 
 names.genericExtensionFunction()
