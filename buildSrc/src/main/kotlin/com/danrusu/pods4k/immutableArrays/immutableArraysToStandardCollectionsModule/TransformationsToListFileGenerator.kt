@@ -22,7 +22,7 @@ internal object TransformationsToListFileGenerator {
 }
 
 private fun FileSpec.Builder.addToList() {
-    for (baseType in BaseType.values()) {
+    for (baseType in BaseType.entries) {
         function(
             kdoc = "See [Array.toList]",
             receiver = baseType.getGeneratedTypeName(),
@@ -38,7 +38,7 @@ private fun FileSpec.Builder.addToList() {
 }
 
 private fun FileSpec.Builder.addToMutableList() {
-    for (baseType in BaseType.values()) {
+    for (baseType in BaseType.entries) {
         function(
             kdoc = "See [Array.toMutableList]",
             receiver = baseType.getGeneratedTypeName(),

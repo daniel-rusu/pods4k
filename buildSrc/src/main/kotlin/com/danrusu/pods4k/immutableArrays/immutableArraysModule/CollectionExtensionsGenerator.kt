@@ -26,7 +26,7 @@ internal object CollectionExtensionsGenerator {
 }
 
 private fun FileSpec.Builder.addIterableToImmutableArray() {
-    for (baseType in BaseType.values()) {
+    for (baseType in BaseType.entries) {
         function(
             kdoc = "Returns an [${baseType.generatedClassName}] with the contents of [this] collection.",
             receiver = Iterable::class.asTypeName().parameterizedBy(baseType.type),
@@ -47,7 +47,7 @@ private fun FileSpec.Builder.addIterableToImmutableArray() {
 }
 
 private fun FileSpec.Builder.addMutableCollectionAddAll() {
-    for (baseType in BaseType.values()) {
+    for (baseType in BaseType.entries) {
         function(
             kdoc = "Adds all the elements to [this] collection.",
             receiver = ClassName("kotlin.collections", "MutableCollection")

@@ -41,7 +41,7 @@ internal object ImmutableArrayFactoryGenerator {
 }
 
 private fun FileSpec.Builder.addEmptyFunctions() {
-    for (baseType in BaseType.values()) {
+    for (baseType in BaseType.entries) {
         function(
             kdoc = "Returns an empty [${baseType.generatedClassName}].",
             name = "empty${baseType.generatedClassName}",
@@ -66,7 +66,7 @@ private fun FileSpec.Builder.addImmutableArrayOf() {
         statement("return empty${BaseType.GENERIC.generatedClassName}()")
     }
 
-    for (baseType in BaseType.values()) {
+    for (baseType in BaseType.entries) {
         function(
             kdoc = "Returns an [${baseType.generatedClassName}] containing the specified [values].",
             name = "immutableArrayOf",
@@ -82,7 +82,7 @@ private fun FileSpec.Builder.addImmutableArrayOf() {
 }
 
 private fun FileSpec.Builder.addBuilderFunctions() {
-    for (baseType in BaseType.values()) {
+    for (baseType in BaseType.entries) {
         val receiver = when (baseType) {
             BaseType.GENERIC -> baseType.getGeneratedClass().nestedClass("Builder").parameterizedBy(baseType.type)
             else -> baseType.getGeneratedClass().nestedClass("Builder")

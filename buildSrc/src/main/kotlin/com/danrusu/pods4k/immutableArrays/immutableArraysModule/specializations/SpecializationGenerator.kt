@@ -9,8 +9,8 @@ import java.io.File
 internal abstract class SpecializationGenerator(private val fileName: String) {
     fun generate(destinationPath: String) {
         val fileSpec = createFile(ImmutableArrayConfig.specializationPackageName, fileName) {
-            for (fromType in BaseType.values()) {
-                for (toType in BaseType.values()) {
+            for (fromType in BaseType.entries) {
+                for (toType in BaseType.entries) {
                     generateSpecialization(this, fromType, toType)
                 }
             }

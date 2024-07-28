@@ -30,7 +30,7 @@ import java.io.File
 
 internal object ImmutableArrayGenerator {
     fun generate(destinationPath: String) {
-        for (baseType in BaseType.values()) {
+        for (baseType in BaseType.entries) {
             val fileSpec = generateImmutableArrayFile(baseType)
             fileSpec.writeTo(File(destinationPath, ""))
         }

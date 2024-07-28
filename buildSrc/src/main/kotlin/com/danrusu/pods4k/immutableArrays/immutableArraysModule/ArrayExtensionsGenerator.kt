@@ -24,7 +24,7 @@ internal object ArrayExtensionsGenerator {
 }
 
 private fun FileSpec.Builder.addGenericArrayToImmutableArray() {
-    for (baseType in BaseType.values()) {
+    for (baseType in BaseType.entries) {
         function(
             kdoc = "Returns an [${baseType.generatedClassName}] with the contents of this array.",
             receiver = Array::class.asTypeName().parameterizedBy(baseType.type),
@@ -51,7 +51,7 @@ private fun FileSpec.Builder.addGenericArrayToImmutableArray() {
 }
 
 private fun FileSpec.Builder.addPrimitiveArrayToImmutableArray() {
-    for (baseType in BaseType.values()) {
+    for (baseType in BaseType.entries) {
         if (baseType == BaseType.GENERIC) continue
 
         function(

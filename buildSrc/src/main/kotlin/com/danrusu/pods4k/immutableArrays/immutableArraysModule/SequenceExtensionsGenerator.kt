@@ -21,7 +21,7 @@ internal object SequenceExtensionsGenerator {
 }
 
 private fun FileSpec.Builder.addSequenceToImmutableArray() {
-    for (baseType in BaseType.values()) {
+    for (baseType in BaseType.entries) {
         function(
             kdoc = "Returns an [${baseType.generatedClassName}] with the contents of this sequence.",
             receiver = Sequence::class.asTypeName().parameterizedBy(baseType.type),

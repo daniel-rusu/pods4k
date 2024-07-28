@@ -34,7 +34,7 @@ internal object ImmutableArrayExtensionsGenerator {
 }
 
 private fun FileSpec.Builder.addGetOrElse() {
-    for (baseType in BaseType.values()) {
+    for (baseType in BaseType.entries) {
         function(
             kdoc = "See [Array.getOrElse]",
             modifiers = listOf(KModifier.INLINE),
@@ -58,7 +58,7 @@ private fun FileSpec.Builder.addSorted() {
     val genericVariableName = "T"
     val genericType = TypeVariableName(genericVariableName)
 
-    for (baseType in BaseType.values()) {
+    for (baseType in BaseType.entries) {
         // both Java and Kotlin standard libraries don't provide sorting abilities for primitive boolean arrays
         if (baseType == BOOLEAN) continue
 
@@ -108,7 +108,7 @@ private fun FileSpec.Builder.addSortedDescending() {
     val genericVariableName = "T"
     val genericType = TypeVariableName(genericVariableName)
 
-    for (baseType in BaseType.values()) {
+    for (baseType in BaseType.entries) {
         // both Kotlin & Java standard libraries don't provide sorting abilities for primitive boolean arrays
         if (baseType == BOOLEAN) continue
 
@@ -150,7 +150,7 @@ private fun FileSpec.Builder.addSortedDescending() {
 }
 
 private fun FileSpec.Builder.addPlusImmutableArray() {
-    for (baseType in BaseType.values()) {
+    for (baseType in BaseType.entries) {
         function(
             kdoc = "Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with the elements of [this] followed by the elements of [other]",
             modifiers = listOf(KModifier.OPERATOR),
@@ -177,7 +177,7 @@ private fun FileSpec.Builder.addPlusImmutableArray() {
 }
 
 private fun FileSpec.Builder.addPlusValue() {
-    for (baseType in BaseType.values()) {
+    for (baseType in BaseType.entries) {
         function(
             kdoc = """
                 Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with the elements of [this] followed by the specified [element].
@@ -203,7 +203,7 @@ private fun FileSpec.Builder.addPlusValue() {
 }
 
 private fun FileSpec.Builder.addToPrimitiveImmutableArray() {
-    for (baseType in BaseType.values()) {
+    for (baseType in BaseType.entries) {
         if (baseType == GENERIC) continue
 
         function(
@@ -221,7 +221,7 @@ private fun FileSpec.Builder.addToPrimitiveImmutableArray() {
 }
 
 private fun FileSpec.Builder.addToTypedImmutableArray() {
-    for (baseType in BaseType.values()) {
+    for (baseType in BaseType.entries) {
         if (baseType == GENERIC) continue
 
         function(
