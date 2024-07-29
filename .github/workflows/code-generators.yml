@@ -1,0 +1,36 @@
+name: Code-Generation
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: gradle/wrapper-validation-action@v2
+
+      - name: Setup JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'adopt'
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v3
+
+      - name: Generate code
+        run: ./gradlew generateCode --no-daemon
+
+      - name: Check for changes in generated code
+        id: diff
+        run: |
+          git diff --exit-code >/dev/null 2>&1
+
+      - name: Fail if submission doesn't include the latest generated code
+        if: ${{ always() && steps.diff.outcome != 'success' }}
+        run: |
+          echo "Generated files changed. Run './gradlew generateCode' after changing the code generators and include the updated files with your submission."
+          exit 1
