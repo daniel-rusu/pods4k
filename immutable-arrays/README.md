@@ -275,6 +275,19 @@ improvements ranging from 3.5x to 12x faster: [YouTube presentation](https://you
 
 ## Benefits vs Alternatives
 
+Here's a quick overview of how immutable arrays compare to alternatives:
+
+| Feature                  | Immutable Arrays | Regular Arrays         | Read-only Lists                      | Unmodifiable Lists          | Immutable Lists           |
+|--------------------------|------------------|------------------------|--------------------------------------|-----------------------------|---------------------------|
+| True Immutability        | ✅                | ❌                      | ❌ <br/>Casting enables mutation      | ❌ <br/>Mutable backing list | ✅                         |
+| Memory Efficiency        | ✅✅               | ✅                      | ❌                                    | ❌                           | ❌                         |
+| Performance              | ✅✅               | ✅                      | ❌                                    | ❌                           | ❌                         |
+| Compile-time Safety      | ✅                | ❌ <br/> Can be mutated | ✅ / ❌ <br/> Casting enables mutation | ❌ <br/> Throws exceptions   | ❌ <br/> Throws exceptions |
+| Proper equals & hashCode | ✅                | ❌                      | ✅                                    | ✅                           | ✅                         |
+| Meaningful toString()    | ✅                | ❌                      | ✅                                    | ✅                           | ✅                         |
+
+<br>
+
 ### Benefits over regular arrays
 
 <details>
@@ -385,6 +398,8 @@ val rejectedOrders = mutableSetOf<Order>()
 
 </details>
 
+<br>
+
 ### Benefits over read-only lists
 
 <details>
@@ -439,6 +454,8 @@ time.
 
 </details>
 
+<br>
+
 ### Benefits over unmodifiable lists
 
 <details>
@@ -483,6 +500,8 @@ indirection caused by the wrapper object.
 
 </details>
 
+<br>
+
 ### Benefits over immutable lists
 
 <details>
@@ -513,6 +532,8 @@ Immutable lists have the same performance drawbacks as read-only lists
 (see [Benefits over read-only lists](#benefits-over-read-only-lists)).
 
 </details>
+
+<br>
 
 ## Caveats
 
