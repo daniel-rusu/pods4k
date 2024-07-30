@@ -76,17 +76,31 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             overrideToString()
             addEqualsOperator(baseType)
             overrideHashCode(baseType)
-            "isEmpty"(baseType = baseType, returns = Boolean::class.asTypeName())
-            "isNotEmpty"(baseType = baseType, returns = Boolean::class.asTypeName())
+            "isEmpty"(
+                typeSpecBuilder = this,
+                baseType = baseType,
+                returns = Boolean::class.asTypeName()
+            )
+            "isNotEmpty"(
+                typeSpecBuilder = this,
+                baseType = baseType,
+                returns = Boolean::class.asTypeName()
+            )
             addArrayIndexOperator(baseType)
             "getOrNull"(
+                typeSpecBuilder = this,
                 baseType = baseType,
                 parameters = { "index"<Int>() },
                 returns = baseType.type.copy(nullable = true),
             )
             addComponentNFunctions(baseType)
-            "single"(baseType = baseType, returns = baseType.type)
             "single"(
+                typeSpecBuilder = this,
+                baseType = baseType,
+                returns = baseType.type
+            )
+            "single"(
+                typeSpecBuilder = this,
                 baseType = baseType,
                 parameters = {
                     "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
@@ -94,18 +108,25 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 returns = baseType.type
             )
             "singleOrNull"(
+                typeSpecBuilder = this,
                 baseType = baseType,
                 returns = baseType.type.copy(nullable = true)
             )
             "singleOrNull"(
+                typeSpecBuilder = this,
                 baseType = baseType,
                 parameters = {
                     "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
                 },
                 returns = baseType.type.copy(nullable = true)
             )
-            "first"(baseType = baseType, returns = baseType.type)
             "first"(
+                typeSpecBuilder = this,
+                baseType = baseType,
+                returns = baseType.type
+            )
+            "first"(
+                typeSpecBuilder = this,
                 baseType = baseType,
                 parameters = {
                     "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
@@ -113,18 +134,25 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 returns = baseType.type
             )
             "firstOrNull"(
+                typeSpecBuilder = this,
                 baseType = baseType,
                 returns = baseType.type.copy(nullable = true),
             )
             "firstOrNull"(
+                typeSpecBuilder = this,
                 baseType = baseType,
                 parameters = {
                     "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
                 },
                 returns = baseType.type.copy(nullable = true)
             )
-            "last"(baseType = baseType, returns = baseType.type)
             "last"(
+                typeSpecBuilder = this,
+                baseType = baseType,
+                returns = baseType.type
+            )
+            "last"(
+                typeSpecBuilder = this,
                 baseType = baseType,
                 parameters = {
                     "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
@@ -132,10 +160,12 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 returns = baseType.type
             )
             "lastOrNull"(
+                typeSpecBuilder = this,
                 baseType = baseType,
                 returns = baseType.type.copy(nullable = true),
             )
             "lastOrNull"(
+                typeSpecBuilder = this,
                 baseType = baseType,
                 parameters = {
                     "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
@@ -143,25 +173,30 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 returns = baseType.type.copy(nullable = true)
             )
             "iterator"(
+                typeSpecBuilder = this,
                 baseType = baseType,
                 modifiers = listOf(KModifier.OPERATOR),
                 returns = Iterator::class.asTypeName().parameterizedBy(baseType.type),
             )
             "asIterable"(
+                typeSpecBuilder = this,
                 baseType = baseType,
                 returns = Iterable::class.asTypeName().parameterizedBy(baseType.type),
             )
             "withIndex"(
+                typeSpecBuilder = this,
                 baseType = baseType,
                 returns = Iterable::class.asTypeName().parameterizedBy(
                     IndexedValue::class.asTypeName().parameterizedBy(baseType.type)
                 ),
             )
             "asSequence"(
+                typeSpecBuilder = this,
                 baseType = baseType,
                 returns = Sequence::class.asTypeName().parameterizedBy(baseType.type),
             )
             "asList"(
+                typeSpecBuilder = this,
                 baseType = baseType,
                 kdoc = when (baseType) {
                     GENERIC -> "Wraps the backing array in a class that implements the read-only [List] interface by referencing the same backing array without copying the elements."
@@ -176,33 +211,39 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 returns = List::class.asTypeName().parameterizedBy(baseType.type)
             )
             "forEach"(
+                typeSpecBuilder = this,
                 baseType = baseType,
                 parameters = {
                     "action"(type = lambda<Unit> { "element"(type = baseType.type) })
                 },
             )
             "forEachIndexed"(
+                typeSpecBuilder = this,
                 baseType = baseType,
                 parameters = {
                     "action"(type = lambda<Unit> { "index"<Int>(); "element"(type = baseType.type) })
                 },
             )
             "all"(
+                typeSpecBuilder = this,
                 baseType = baseType,
                 parameters = { "predicate"(type = lambda<Boolean> { "predicate"(type = baseType.type) }) },
                 returns = Boolean::class.asTypeName(),
             )
             "any"(
+                typeSpecBuilder = this,
                 baseType = baseType,
                 parameters = { "predicate"(type = lambda<Boolean> { "predicate"(type = baseType.type) }) },
                 returns = Boolean::class.asTypeName(),
             )
             "none"(
+                typeSpecBuilder = this,
                 baseType = baseType,
                 parameters = { "predicate"(type = lambda<Boolean> { "predicate"(type = baseType.type) }) },
                 returns = Boolean::class.asTypeName(),
             )
             "count"(
+                typeSpecBuilder = this,
                 baseType = baseType,
                 parameters = { "predicate"(type = lambda<Boolean> { "predicate"(type = baseType.type) }) },
                 returns = Int::class.asTypeName(),
@@ -266,8 +307,8 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
  *
  * @param baseType
  */
-context (TypeSpec.Builder)
 private operator fun String.invoke(
+    typeSpecBuilder: TypeSpec.Builder,
     baseType: BaseType,
     kdoc: String = "See [${if (baseType == GENERIC) "Array" else baseType.backingArrayConstructor}.$this]",
     modifiers: List<KModifier> = emptyList(),
@@ -275,7 +316,7 @@ private operator fun String.invoke(
     returns: TypeName = Unit::class.asTypeName(),
 ) {
     val params = ParameterDSL().apply(parameters).build()
-    function(
+    typeSpecBuilder.function(
         kdoc = kdoc,
         // Inline all delegated functions so that we get the same performance as if working with a regular array
         modifiers = modifiers + KModifier.INLINE,
