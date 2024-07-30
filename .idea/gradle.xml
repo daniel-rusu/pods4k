@@ -15,7 +15,6 @@
             </builds>
           </compositeBuild>
         </compositeConfiguration>
-        <option name="distributionType" value="WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleJvm" value="temurin-11" />
         <option name="modules">
