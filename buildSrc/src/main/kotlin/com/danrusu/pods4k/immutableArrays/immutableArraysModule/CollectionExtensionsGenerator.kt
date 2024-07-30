@@ -49,17 +49,22 @@ private fun FileSpec.Builder.addIterableToImmutableArray() {
 private fun FileSpec.Builder.addMutableCollectionAddAll() {
     for (baseType in BaseType.entries) {
         function(
-            kdoc = "Adds all the elements to [this] collection.",
+            kdoc = """
+                Adds all the elements to [this] collection.
+                
+                @return true if the collection changed.
+            """.trimIndent(),
             receiver = ClassName("kotlin.collections", "MutableCollection")
                 .parameterizedBy(WildcardTypeName.consumerOf(baseType.type)),
             name = "addAll",
             parameters = { "elements"(type = baseType.getGeneratedTypeName()) },
+            returns = Boolean::class.asTypeName(),
         ) {
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
             comment("Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step")
-            statement("addAll(elements.values.asList())")
+            statement("return addAll(elements.asList())")
         }
     }
 }

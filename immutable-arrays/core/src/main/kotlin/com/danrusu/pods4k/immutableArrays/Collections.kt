@@ -122,72 +122,90 @@ public fun Iterable<Double>.toImmutableArray(): ImmutableDoubleArray {
 
 /**
  * Adds all the elements to [this] collection.
+ *
+ * @return true if the collection changed.
  */
-public fun <T> MutableCollection<in T>.addAll(elements: ImmutableArray<T>) {
+public fun <T> MutableCollection<in T>.addAll(elements: ImmutableArray<T>): Boolean {
     // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
-    addAll(elements.values.asList())
+    return addAll(elements.asList())
 }
 
 /**
  * Adds all the elements to [this] collection.
+ *
+ * @return true if the collection changed.
  */
-public fun MutableCollection<in Boolean>.addAll(elements: ImmutableBooleanArray) {
+public fun MutableCollection<in Boolean>.addAll(elements: ImmutableBooleanArray): Boolean {
     // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
-    addAll(elements.values.asList())
+    return addAll(elements.asList())
 }
 
 /**
  * Adds all the elements to [this] collection.
+ *
+ * @return true if the collection changed.
  */
-public fun MutableCollection<in Byte>.addAll(elements: ImmutableByteArray) {
+public fun MutableCollection<in Byte>.addAll(elements: ImmutableByteArray): Boolean {
     // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
-    addAll(elements.values.asList())
+    return addAll(elements.asList())
 }
 
 /**
  * Adds all the elements to [this] collection.
+ *
+ * @return true if the collection changed.
  */
-public fun MutableCollection<in Char>.addAll(elements: ImmutableCharArray) {
+public fun MutableCollection<in Char>.addAll(elements: ImmutableCharArray): Boolean {
     // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
-    addAll(elements.values.asList())
+    return addAll(elements.asList())
 }
 
 /**
  * Adds all the elements to [this] collection.
+ *
+ * @return true if the collection changed.
  */
-public fun MutableCollection<in Short>.addAll(elements: ImmutableShortArray) {
+public fun MutableCollection<in Short>.addAll(elements: ImmutableShortArray): Boolean {
     // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
-    addAll(elements.values.asList())
+    return addAll(elements.asList())
 }
 
 /**
  * Adds all the elements to [this] collection.
+ *
+ * @return true if the collection changed.
  */
-public fun MutableCollection<in Int>.addAll(elements: ImmutableIntArray) {
+public fun MutableCollection<in Int>.addAll(elements: ImmutableIntArray): Boolean {
     // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
-    addAll(elements.values.asList())
+    return addAll(elements.asList())
 }
 
 /**
  * Adds all the elements to [this] collection.
+ *
+ * @return true if the collection changed.
  */
-public fun MutableCollection<in Long>.addAll(elements: ImmutableLongArray) {
+public fun MutableCollection<in Long>.addAll(elements: ImmutableLongArray): Boolean {
     // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
-    addAll(elements.values.asList())
+    return addAll(elements.asList())
 }
 
 /**
  * Adds all the elements to [this] collection.
+ *
+ * @return true if the collection changed.
  */
-public fun MutableCollection<in Float>.addAll(elements: ImmutableFloatArray) {
+public fun MutableCollection<in Float>.addAll(elements: ImmutableFloatArray): Boolean {
     // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
-    addAll(elements.values.asList())
+    return addAll(elements.asList())
 }
 
 /**
  * Adds all the elements to [this] collection.
+ *
+ * @return true if the collection changed.
  */
-public fun MutableCollection<in Double>.addAll(elements: ImmutableDoubleArray) {
+public fun MutableCollection<in Double>.addAll(elements: ImmutableDoubleArray): Boolean {
     // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
-    addAll(elements.values.asList())
+    return addAll(elements.asList())
 }

@@ -16,15 +16,15 @@ on [GitHub](https://github.com/daniel-rusu/pods4k) and sharing it with others.
 
 ## Key Benefits
 
-* **True Immutability:**
+* **True Immutability**
     * Unlike read-only lists, Immutable Arrays cannot be mutated through casting.
-* **Memory Efficiency:**
+* **Memory Efficiency**
     * Uses up to 24 times less memory than lists when working with one of the 8 base types.
-* **Performance:**
+* **Performance**
     * Up to 12 times faster than lists when operating on one of the 8 base types.
     * Hundreds of specializations makes it significantly more efficient than even regular arrays for dozens of
       commonly used operations.
-* **Type Safety:**
+* **Type Safety**
     * Leverages Kotlin's type system to prevent mutation attempts at compile time.
 * **Clean & Readable**
     * Usages look almost identical to the way we use read-only lists resulting in clean and readable code.
