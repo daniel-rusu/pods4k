@@ -22,6 +22,7 @@ internal object ImmutableArrayExtensionsGenerator {
     fun generate(destinationPath: String) {
         val fileSpec = createFile(ImmutableArrayConfig.packageName, "ImmutableArrays") {
             addContains()
+            addIndexOf()
             addGetOrElse()
             addSorted()
             addSortedDescending()
@@ -37,7 +38,7 @@ internal object ImmutableArrayExtensionsGenerator {
 private fun FileSpec.Builder.addContains() {
     for (baseType in BaseType.entries) {
         function(
-            kdoc = "@return true if [this] immutable array contains the [element]",
+            kdoc = "Returns true if [this] immutable array contains the [element]",
             modifiers = listOf(KModifier.OPERATOR),
             receiver = baseType.getGeneratedTypeName(),
             name = "contains",
@@ -48,6 +49,24 @@ private fun FileSpec.Builder.addContains() {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
             statement("return any { it == element }")
+        }
+    }
+}
+
+private fun FileSpec.Builder.addIndexOf() {
+    for (baseType in BaseType.entries) {
+        function(
+            kdoc = "Returns the index of the first occurrence of the [element], or -1 if it's not contained in the [this] immutable array.",
+            receiver = baseType.getGeneratedTypeName(),
+            name = "indexOf",
+            parameters = { "element"(type = baseType.type) },
+            returns = Int::class.asTypeName()
+        ) {
+            if (baseType == GENERIC) {
+                addTypeVariable(baseType.type as TypeVariableName)
+            }
+            statement("forEachIndexed { index, value -> if (value == element) return index }")
+            statement("return -1")
         }
     }
 }

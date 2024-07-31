@@ -14,50 +14,131 @@ import kotlin.Short
 import kotlin.Suppress
 
 /**
- * @return true if [this] immutable array contains the [element]
+ * Returns true if [this] immutable array contains the [element]
  */
 public operator fun <T> ImmutableArray<T>.contains(element: T): Boolean = any { it == element }
 
 /**
- * @return true if [this] immutable array contains the [element]
+ * Returns true if [this] immutable array contains the [element]
  */
 public operator fun ImmutableBooleanArray.contains(element: Boolean): Boolean = any { it == element
         }
 
 /**
- * @return true if [this] immutable array contains the [element]
+ * Returns true if [this] immutable array contains the [element]
  */
 public operator fun ImmutableByteArray.contains(element: Byte): Boolean = any { it == element }
 
 /**
- * @return true if [this] immutable array contains the [element]
+ * Returns true if [this] immutable array contains the [element]
  */
 public operator fun ImmutableCharArray.contains(element: Char): Boolean = any { it == element }
 
 /**
- * @return true if [this] immutable array contains the [element]
+ * Returns true if [this] immutable array contains the [element]
  */
 public operator fun ImmutableShortArray.contains(element: Short): Boolean = any { it == element }
 
 /**
- * @return true if [this] immutable array contains the [element]
+ * Returns true if [this] immutable array contains the [element]
  */
 public operator fun ImmutableIntArray.contains(element: Int): Boolean = any { it == element }
 
 /**
- * @return true if [this] immutable array contains the [element]
+ * Returns true if [this] immutable array contains the [element]
  */
 public operator fun ImmutableLongArray.contains(element: Long): Boolean = any { it == element }
 
 /**
- * @return true if [this] immutable array contains the [element]
+ * Returns true if [this] immutable array contains the [element]
  */
 public operator fun ImmutableFloatArray.contains(element: Float): Boolean = any { it == element }
 
 /**
- * @return true if [this] immutable array contains the [element]
+ * Returns true if [this] immutable array contains the [element]
  */
 public operator fun ImmutableDoubleArray.contains(element: Double): Boolean = any { it == element }
+
+/**
+ * Returns the index of the first occurrence of the [element], or -1 if it's not contained in the
+ * [this] immutable array.
+ */
+public fun <T> ImmutableArray<T>.indexOf(element: T): Int {
+    forEachIndexed { index, value -> if (value == element) return index }
+    return -1
+}
+
+/**
+ * Returns the index of the first occurrence of the [element], or -1 if it's not contained in the
+ * [this] immutable array.
+ */
+public fun ImmutableBooleanArray.indexOf(element: Boolean): Int {
+    forEachIndexed { index, value -> if (value == element) return index }
+    return -1
+}
+
+/**
+ * Returns the index of the first occurrence of the [element], or -1 if it's not contained in the
+ * [this] immutable array.
+ */
+public fun ImmutableByteArray.indexOf(element: Byte): Int {
+    forEachIndexed { index, value -> if (value == element) return index }
+    return -1
+}
+
+/**
+ * Returns the index of the first occurrence of the [element], or -1 if it's not contained in the
+ * [this] immutable array.
+ */
+public fun ImmutableCharArray.indexOf(element: Char): Int {
+    forEachIndexed { index, value -> if (value == element) return index }
+    return -1
+}
+
+/**
+ * Returns the index of the first occurrence of the [element], or -1 if it's not contained in the
+ * [this] immutable array.
+ */
+public fun ImmutableShortArray.indexOf(element: Short): Int {
+    forEachIndexed { index, value -> if (value == element) return index }
+    return -1
+}
+
+/**
+ * Returns the index of the first occurrence of the [element], or -1 if it's not contained in the
+ * [this] immutable array.
+ */
+public fun ImmutableIntArray.indexOf(element: Int): Int {
+    forEachIndexed { index, value -> if (value == element) return index }
+    return -1
+}
+
+/**
+ * Returns the index of the first occurrence of the [element], or -1 if it's not contained in the
+ * [this] immutable array.
+ */
+public fun ImmutableLongArray.indexOf(element: Long): Int {
+    forEachIndexed { index, value -> if (value == element) return index }
+    return -1
+}
+
+/**
+ * Returns the index of the first occurrence of the [element], or -1 if it's not contained in the
+ * [this] immutable array.
+ */
+public fun ImmutableFloatArray.indexOf(element: Float): Int {
+    forEachIndexed { index, value -> if (value == element) return index }
+    return -1
+}
+
+/**
+ * Returns the index of the first occurrence of the [element], or -1 if it's not contained in the
+ * [this] immutable array.
+ */
+public fun ImmutableDoubleArray.indexOf(element: Double): Int {
+    forEachIndexed { index, value -> if (value == element) return index }
+    return -1
+}
 
 /**
  * See [Array.getOrElse]

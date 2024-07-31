@@ -37,6 +37,27 @@ class ImmutableArraysTest {
     }
 
     @Test
+    fun `indexOf validation`() {
+        // generic array
+        with(immutableArrayOf<Number>(3, 2.5, 2.5f)) {
+            // can use `in` operator
+            expectThat(indexOf(2.5))
+                .isEqualTo(1)
+
+            expectThat(indexOf(4))
+                .isEqualTo(-1)
+        }
+        // primitive array
+        with(immutableArrayOf(1, 2, 3)) {
+            expectThat(indexOf(3))
+                .isEqualTo(2)
+
+            expectThat(indexOf(4))
+                .isEqualTo(-1)
+        }
+    }
+
+    @Test
     fun `getOrElse validation`() {
         with(ImmutableArray(3) { "element $it" }) {
             expectThat(this.getOrElse(2) { "else" })

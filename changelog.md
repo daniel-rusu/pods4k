@@ -9,6 +9,7 @@ _Date TBD_
 
 **New Features:**
 
+* Add `indexOf(element)` extension function
 * Add `contains` operator
 
 ## 0.3.0
