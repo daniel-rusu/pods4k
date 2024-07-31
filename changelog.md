@@ -1,6 +1,16 @@
 Change Log
 ==========
 
+## Unreleased
+
+_Date TBD_
+
+### Immutable Arrays
+
+**New Features:**
+
+* Add `contains` operator
+
 ## 0.3.0
 
 _2024-07-29_

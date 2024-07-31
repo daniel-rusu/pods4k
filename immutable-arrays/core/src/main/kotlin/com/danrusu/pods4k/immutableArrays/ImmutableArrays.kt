@@ -14,6 +14,52 @@ import kotlin.Short
 import kotlin.Suppress
 
 /**
+ * @return true if [this] immutable array contains the [element]
+ */
+public operator fun <T> ImmutableArray<T>.contains(element: T): Boolean = any { it == element }
+
+/**
+ * @return true if [this] immutable array contains the [element]
+ */
+public operator fun ImmutableBooleanArray.contains(element: Boolean): Boolean = any { it == element
+        }
+
+/**
+ * @return true if [this] immutable array contains the [element]
+ */
+public operator fun ImmutableByteArray.contains(element: Byte): Boolean = any { it == element }
+
+/**
+ * @return true if [this] immutable array contains the [element]
+ */
+public operator fun ImmutableCharArray.contains(element: Char): Boolean = any { it == element }
+
+/**
+ * @return true if [this] immutable array contains the [element]
+ */
+public operator fun ImmutableShortArray.contains(element: Short): Boolean = any { it == element }
+
+/**
+ * @return true if [this] immutable array contains the [element]
+ */
+public operator fun ImmutableIntArray.contains(element: Int): Boolean = any { it == element }
+
+/**
+ * @return true if [this] immutable array contains the [element]
+ */
+public operator fun ImmutableLongArray.contains(element: Long): Boolean = any { it == element }
+
+/**
+ * @return true if [this] immutable array contains the [element]
+ */
+public operator fun ImmutableFloatArray.contains(element: Float): Boolean = any { it == element }
+
+/**
+ * @return true if [this] immutable array contains the [element]
+ */
+public operator fun ImmutableDoubleArray.contains(element: Double): Boolean = any { it == element }
+
+/**
  * See [Array.getOrElse]
  */
 public inline fun <T> ImmutableArray<T>.getOrElse(index: Int, defaultValue: (index: Int) -> T): T =

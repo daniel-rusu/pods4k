@@ -21,6 +21,7 @@ import java.io.File
 internal object ImmutableArrayExtensionsGenerator {
     fun generate(destinationPath: String) {
         val fileSpec = createFile(ImmutableArrayConfig.packageName, "ImmutableArrays") {
+            addContains()
             addGetOrElse()
             addSorted()
             addSortedDescending()
@@ -30,6 +31,24 @@ internal object ImmutableArrayExtensionsGenerator {
             addToTypedImmutableArray()
         }
         fileSpec.writeTo(File(destinationPath, ""))
+    }
+}
+
+private fun FileSpec.Builder.addContains() {
+    for (baseType in BaseType.entries) {
+        function(
+            kdoc = "@return true if [this] immutable array contains the [element]",
+            modifiers = listOf(KModifier.OPERATOR),
+            receiver = baseType.getGeneratedTypeName(),
+            name = "contains",
+            parameters = { "element"(type = baseType.type) },
+            returns = Boolean::class.asTypeName()
+        ) {
+            if (baseType == GENERIC) {
+                addTypeVariable(baseType.type as TypeVariableName)
+            }
+            statement("return any { it == element }")
+        }
     }
 }
 

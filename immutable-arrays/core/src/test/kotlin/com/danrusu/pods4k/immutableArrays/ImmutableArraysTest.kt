@@ -4,10 +4,38 @@ import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
+import strikt.assertions.isFalse
+import strikt.assertions.isTrue
 
 private val primitiveIntClass = 3::class.java
 
 class ImmutableArraysTest {
+    @Test
+    fun `contains validation`() {
+        // generic array
+        with(immutableArrayOf<Number>(3, 2.5, 2.5f)) {
+            // can use `in` operator
+            expectThat(2.5 in this)
+                .isTrue()
+            expectThat(contains(3))
+                .isTrue()
+
+            expectThat(contains(2.6))
+                .isFalse()
+        }
+        // primitive array
+        with(immutableArrayOf(1, 2, 3)) {
+            expectThat(2 in this)
+                .isTrue()
+
+            expectThat(contains(3))
+                .isTrue()
+
+            expectThat(contains(4))
+                .isFalse()
+        }
+    }
+
     @Test
     fun `getOrElse validation`() {
         with(ImmutableArray(3) { "element $it" }) {
