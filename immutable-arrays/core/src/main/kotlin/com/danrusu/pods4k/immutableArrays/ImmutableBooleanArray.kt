@@ -222,13 +222,16 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.forEach]
      */
-    public inline fun forEach(action: (element: Boolean) -> Unit): Unit = values.forEach(action)
+    public inline fun forEach(action: (element: Boolean) -> Unit) {
+        values.forEach(action)
+    }
 
     /**
      * See [BooleanArray.forEachIndexed]
      */
-    public inline fun forEachIndexed(action: (index: Int, element: Boolean) -> Unit): Unit =
-            values.forEachIndexed(action)
+    public inline fun forEachIndexed(action: (index: Int, element: Boolean) -> Unit) {
+        values.forEachIndexed(action)
+    }
 
     /**
      * See [BooleanArray.all]

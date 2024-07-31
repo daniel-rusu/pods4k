@@ -219,13 +219,16 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.forEach]
      */
-    public inline fun forEach(action: (element: Int) -> Unit): Unit = values.forEach(action)
+    public inline fun forEach(action: (element: Int) -> Unit) {
+        values.forEach(action)
+    }
 
     /**
      * See [IntArray.forEachIndexed]
      */
-    public inline fun forEachIndexed(action: (index: Int, element: Int) -> Unit): Unit =
-            values.forEachIndexed(action)
+    public inline fun forEachIndexed(action: (index: Int, element: Int) -> Unit) {
+        values.forEachIndexed(action)
+    }
 
     /**
      * See [IntArray.all]

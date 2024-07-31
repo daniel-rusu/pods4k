@@ -220,13 +220,16 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.forEach]
      */
-    public inline fun forEach(action: (element: Long) -> Unit): Unit = values.forEach(action)
+    public inline fun forEach(action: (element: Long) -> Unit) {
+        values.forEach(action)
+    }
 
     /**
      * See [LongArray.forEachIndexed]
      */
-    public inline fun forEachIndexed(action: (index: Int, element: Long) -> Unit): Unit =
-            values.forEachIndexed(action)
+    public inline fun forEachIndexed(action: (index: Int, element: Long) -> Unit) {
+        values.forEachIndexed(action)
+    }
 
     /**
      * See [LongArray.all]

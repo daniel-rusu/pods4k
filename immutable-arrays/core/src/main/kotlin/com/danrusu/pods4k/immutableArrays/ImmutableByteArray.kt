@@ -220,13 +220,16 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.forEach]
      */
-    public inline fun forEach(action: (element: Byte) -> Unit): Unit = values.forEach(action)
+    public inline fun forEach(action: (element: Byte) -> Unit) {
+        values.forEach(action)
+    }
 
     /**
      * See [ByteArray.forEachIndexed]
      */
-    public inline fun forEachIndexed(action: (index: Int, element: Byte) -> Unit): Unit =
-            values.forEachIndexed(action)
+    public inline fun forEachIndexed(action: (index: Int, element: Byte) -> Unit) {
+        values.forEachIndexed(action)
+    }
 
     /**
      * See [ByteArray.all]

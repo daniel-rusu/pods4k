@@ -315,7 +315,7 @@ private operator fun String.invoke(
     parameters: ParameterDSL.() -> Unit = {},
     returns: TypeName = Unit::class.asTypeName(),
 ) {
-    val params = ParameterDSL().apply(parameters).build()
+    val params = ParameterDSL().apply(parameters).build().joinToString { it.name }
     typeSpecBuilder.function(
         kdoc = kdoc,
         // Inline all delegated functions so that we get the same performance as if working with a regular array
@@ -324,7 +324,11 @@ private operator fun String.invoke(
         parameters = parameters,
         returns = returns,
     ) {
-        statement("return values.${this@invoke}(${params.joinToString { it.name }})")
+        if (returns == Unit::class.asTypeName()) {
+            statement("values.${this@invoke}($params)")
+        } else {
+            statement("return values.${this@invoke}($params)")
+        }
     }
 }
 

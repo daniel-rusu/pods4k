@@ -221,13 +221,16 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.forEach]
      */
-    public inline fun forEach(action: (element: Float) -> Unit): Unit = values.forEach(action)
+    public inline fun forEach(action: (element: Float) -> Unit) {
+        values.forEach(action)
+    }
 
     /**
      * See [FloatArray.forEachIndexed]
      */
-    public inline fun forEachIndexed(action: (index: Int, element: Float) -> Unit): Unit =
-            values.forEachIndexed(action)
+    public inline fun forEachIndexed(action: (index: Int, element: Float) -> Unit) {
+        values.forEachIndexed(action)
+    }
 
     /**
      * See [FloatArray.all]

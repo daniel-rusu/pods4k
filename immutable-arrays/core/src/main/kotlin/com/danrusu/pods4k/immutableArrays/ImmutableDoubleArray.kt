@@ -222,13 +222,16 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.forEach]
      */
-    public inline fun forEach(action: (element: Double) -> Unit): Unit = values.forEach(action)
+    public inline fun forEach(action: (element: Double) -> Unit) {
+        values.forEach(action)
+    }
 
     /**
      * See [DoubleArray.forEachIndexed]
      */
-    public inline fun forEachIndexed(action: (index: Int, element: Double) -> Unit): Unit =
-            values.forEachIndexed(action)
+    public inline fun forEachIndexed(action: (index: Int, element: Double) -> Unit) {
+        values.forEachIndexed(action)
+    }
 
     /**
      * See [DoubleArray.all]

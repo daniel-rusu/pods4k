@@ -221,13 +221,16 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.forEach]
      */
-    public inline fun forEach(action: (element: Short) -> Unit): Unit = values.forEach(action)
+    public inline fun forEach(action: (element: Short) -> Unit) {
+        values.forEach(action)
+    }
 
     /**
      * See [ShortArray.forEachIndexed]
      */
-    public inline fun forEachIndexed(action: (index: Int, element: Short) -> Unit): Unit =
-            values.forEachIndexed(action)
+    public inline fun forEachIndexed(action: (index: Int, element: Short) -> Unit) {
+        values.forEachIndexed(action)
+    }
 
     /**
      * See [ShortArray.all]

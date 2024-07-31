@@ -220,13 +220,16 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.forEach]
      */
-    public inline fun forEach(action: (element: Char) -> Unit): Unit = values.forEach(action)
+    public inline fun forEach(action: (element: Char) -> Unit) {
+        values.forEach(action)
+    }
 
     /**
      * See [CharArray.forEachIndexed]
      */
-    public inline fun forEachIndexed(action: (index: Int, element: Char) -> Unit): Unit =
-            values.forEachIndexed(action)
+    public inline fun forEachIndexed(action: (index: Int, element: Char) -> Unit) {
+        values.forEachIndexed(action)
+    }
 
     /**
      * See [CharArray.all]
