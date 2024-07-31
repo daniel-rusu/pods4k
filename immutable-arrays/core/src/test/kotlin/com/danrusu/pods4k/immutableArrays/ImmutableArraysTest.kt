@@ -5,26 +5,25 @@ import strikt.api.expectThat
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 
+private val primitiveIntClass = 3::class.java
+
 class ImmutableArraysTest {
     @Test
-    fun `generic ImmutableArray to primitive immutable array validation`() {
-        with(immutableArrayOf<Int>(1, 3, 5)) {
-            expectThat(this).isA<ImmutableArray<Int>>()
-
-            val primitiveVersion = this.toImmutableIntArray()
-            expectThat(primitiveVersion).isA<ImmutableIntArray>()
-            expectThat(primitiveVersion).containsExactly(1, 3, 5)
+    fun `getOrElse validation`() {
+        with(ImmutableArray(3) { "element $it" }) {
+            expectThat(this.getOrElse(2) { "else" })
+                .isEqualTo("element 2")
+            expectThat(this.getOrElse(3) { "else" })
+                .isEqualTo("else")
         }
-    }
 
-    @Test
-    fun `primitive immutable array to generic ImmutableArray validation`() {
-        with(immutableArrayOf(1, 3, 5)) {
-            expectThat(this).isA<ImmutableIntArray>()
-
-            val genericVersion = this.toTypedImmutableArray()
-            expectThat(genericVersion).isA<ImmutableArray<Int>>()
-            expectThat(genericVersion).containsExactly(1, 3, 5)
+        with(ImmutableIntArray(3) { it }) {
+            expectThat(this.getOrElse(2) { 100 }::class.java)
+                .isEqualTo(primitiveIntClass)
+            expectThat(this.getOrElse(2) { 100 })
+                .isEqualTo(2)
+            expectThat(this.getOrElse(3) { 100 })
+                .isEqualTo(100)
         }
     }
 
@@ -104,5 +103,27 @@ class ImmutableArraysTest {
 
         expectThat(immutableArrayOf(1, 2, 3) + 4)
             .isEqualTo(immutableArrayOf(1, 2, 3, 4))
+    }
+
+    @Test
+    fun `generic ImmutableArray to primitive immutable array validation`() {
+        with(immutableArrayOf<Int>(1, 3, 5)) {
+            expectThat(this).isA<ImmutableArray<Int>>()
+
+            val primitiveVersion = this.toImmutableIntArray()
+            expectThat(primitiveVersion).isA<ImmutableIntArray>()
+            expectThat(primitiveVersion).containsExactly(1, 3, 5)
+        }
+    }
+
+    @Test
+    fun `primitive immutable array to generic ImmutableArray validation`() {
+        with(immutableArrayOf(1, 3, 5)) {
+            expectThat(this).isA<ImmutableIntArray>()
+
+            val genericVersion = this.toTypedImmutableArray()
+            expectThat(genericVersion).isA<ImmutableArray<Int>>()
+            expectThat(genericVersion).containsExactly(1, 3, 5)
+        }
     }
 }
