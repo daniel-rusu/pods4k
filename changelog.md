@@ -13,6 +13,11 @@ _Date TBD_
 * Add `indexOf(element)` extension function
 * Add `contains` operator
 
+**Performance Improvements:**
+
+* When converting sequences to immutable arrays, use immutable array builders instead of accumulating the values in a
+  temporary list as that's much more efficient.
+
 ## 0.3.0
 
 _2024-07-29_
