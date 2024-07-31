@@ -378,6 +378,11 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
             return this
         }
 
+        public fun addAll(elements: Sequence<T>): Builder<T> {
+            elements.forEach { add(it) }
+            return this
+        }
+
         /**
          * Returns an immutable array containing the elements that were added.
          */

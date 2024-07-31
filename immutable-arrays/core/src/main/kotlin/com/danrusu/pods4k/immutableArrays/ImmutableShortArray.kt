@@ -399,6 +399,11 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
             return this
         }
 
+        public fun addAll(elements: Sequence<Short>): Builder {
+            elements.forEach { add(it) }
+            return this
+        }
+
         /**
          * Returns an immutable array containing the elements that were added.
          */

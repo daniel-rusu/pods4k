@@ -627,7 +627,7 @@ private fun TypeSpec.Builder.addBuilderPlusAssignOperator(baseType: BaseType) {
 }
 
 private fun TypeSpec.Builder.addBuilderAddAllFunctions(baseType: BaseType) {
-    val returnType = when (baseType) {
+    val builderType = when (baseType) {
         GENERIC -> ClassName(ImmutableArrayConfig.packageName, baseType.generatedClassName, "Builder")
             .parameterizedBy(baseType.type)
 
@@ -636,7 +636,7 @@ private fun TypeSpec.Builder.addBuilderAddAllFunctions(baseType: BaseType) {
     function(
         name = "addAll",
         parameters = { "elements"(type = baseType.backingArrayType) },
-        returns = returnType,
+        returns = builderType,
     ) {
         statement("ensureCapacity(size + elements.size)")
         statement("System.arraycopy(elements, 0, values, size, elements.size)")
@@ -645,10 +645,11 @@ private fun TypeSpec.Builder.addBuilderAddAllFunctions(baseType: BaseType) {
     }
 
     if (baseType != GENERIC) {
+        // Supports boxed values.  Eg. adding Array<Int> to ImmutableIntArray.Builder
         function(
             name = "addAll",
             parameters = { "elements"(type = Array::class.asTypeName().parameterizedBy(baseType.type)) },
-            returns = returnType,
+            returns = builderType,
         ) {
             statement("ensureCapacity(size + elements.size)")
             controlFlow("for (element in elements)") {
@@ -661,7 +662,7 @@ private fun TypeSpec.Builder.addBuilderAddAllFunctions(baseType: BaseType) {
     function(
         name = "addAll",
         parameters = { "elements"(type = baseType.getGeneratedTypeName()) },
-        returns = returnType,
+        returns = builderType,
     ) {
         statement("ensureCapacity(size + elements.size)")
         statement("System.arraycopy(elements.values, 0, values, size, elements.size)")
@@ -670,10 +671,11 @@ private fun TypeSpec.Builder.addBuilderAddAllFunctions(baseType: BaseType) {
     }
 
     if (baseType != GENERIC) {
+        // Supports boxed values.  Eg. adding ImmutableArray<Int> to ImmutableIntArray.Builder
         function(
             name = "addAll",
             parameters = { "elements"(type = GENERIC.getGeneratedClass().parameterizedBy(baseType.type)) },
-            returns = returnType,
+            returns = builderType,
         ) {
             statement("ensureCapacity(size + elements.size)")
             controlFlow("for (element in elements)") {
@@ -686,7 +688,7 @@ private fun TypeSpec.Builder.addBuilderAddAllFunctions(baseType: BaseType) {
     function(
         name = "addAll",
         parameters = { "elements"(type = Iterable::class.asTypeName().parameterizedBy(baseType.type)) },
-        returns = returnType,
+        returns = builderType,
     ) {
         controlFlow("if (elements is Collection)") {
             statement("ensureCapacity(size + elements.size)")
@@ -698,6 +700,15 @@ private fun TypeSpec.Builder.addBuilderAddAllFunctions(baseType: BaseType) {
         controlFlow("for (element in elements)") {
             statement("add(element)")
         }
+        statement("return this")
+    }
+
+    function(
+        name = "addAll",
+        parameters = { "elements"(type = Sequence::class.asTypeName().parameterizedBy(baseType.type)) },
+        returns = builderType,
+    ) {
+        statement("elements.forEach { add(it) }")
         statement("return this")
     }
 }

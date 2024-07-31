@@ -642,5 +642,13 @@ class ImmutableArrayTest {
             .isEqualTo(15)
         expectThat(builder.build())
             .isEqualTo(ImmutableArray(15) { it.toString() })
+
+        // Add all from sequence
+        builder.addAll((15..19).asSequence().map { "$it" })
+
+        expectThat(builder.size)
+            .isEqualTo(20)
+        expectThat(builder.build())
+            .isEqualTo(ImmutableArray(20) { it.toString() })
     }
 }

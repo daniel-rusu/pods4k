@@ -403,6 +403,11 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
             return this
         }
 
+        public fun addAll(elements: Sequence<Boolean>): Builder {
+            elements.forEach { add(it) }
+            return this
+        }
+
         /**
          * Returns an immutable array containing the elements that were added.
          */
