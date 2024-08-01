@@ -39,7 +39,7 @@ class ImmutableArraysTest {
     @Test
     fun `indexOf validation`() {
         // generic array
-        with(immutableArrayOf<Number>(3, 2.5, 2.5f)) {
+        with(immutableArrayOf<Number>(3, 2.5, 3.5f, 2.5)) {
             // can use `in` operator
             expectThat(indexOf(2.5))
                 .isEqualTo(1)
@@ -48,11 +48,32 @@ class ImmutableArraysTest {
                 .isEqualTo(-1)
         }
         // primitive array
-        with(immutableArrayOf(1, 2, 3)) {
+        with(immutableArrayOf(1, 2, 3, 3)) {
             expectThat(indexOf(3))
                 .isEqualTo(2)
 
             expectThat(indexOf(4))
+                .isEqualTo(-1)
+        }
+    }
+
+    @Test
+    fun `lastIndexOf validation`() {
+        // generic array
+        with(immutableArrayOf<Number>(3, 2.5, 3.5f, 2.5)) {
+            // can use `in` operator
+            expectThat(lastIndexOf(2.5))
+                .isEqualTo(3)
+
+            expectThat(lastIndexOf(4))
+                .isEqualTo(-1)
+        }
+        // primitive array
+        with(immutableArrayOf(1, 2, 3, 3)) {
+            expectThat(lastIndexOf(3))
+                .isEqualTo(3)
+
+            expectThat(lastIndexOf(4))
                 .isEqualTo(-1)
         }
     }

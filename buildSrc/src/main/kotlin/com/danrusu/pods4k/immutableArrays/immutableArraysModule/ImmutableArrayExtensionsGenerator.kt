@@ -23,6 +23,7 @@ internal object ImmutableArrayExtensionsGenerator {
         val fileSpec = createFile(ImmutableArrayConfig.packageName, "ImmutableArrays") {
             addContains()
             addIndexOf()
+            addLastIndexOf()
             addGetOrElse()
             addSorted()
             addSortedDescending()
@@ -66,6 +67,26 @@ private fun FileSpec.Builder.addIndexOf() {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
             statement("forEachIndexed { index, value -> if (value == element) return index }")
+            statement("return -1")
+        }
+    }
+}
+
+private fun FileSpec.Builder.addLastIndexOf() {
+    for (baseType in BaseType.entries) {
+        function(
+            kdoc = "Returns the index of the last occurrence of the [element], or -1 if it's not contained in the [this] immutable array.",
+            receiver = baseType.getGeneratedTypeName(),
+            name = "lastIndexOf",
+            parameters = { "element"(type = baseType.type) },
+            returns = Int::class.asTypeName()
+        ) {
+            if (baseType == GENERIC) {
+                addTypeVariable(baseType.type as TypeVariableName)
+            }
+            controlFlow("for (index in lastIndex downTo 0)") {
+                statement("if (get(index) == element) return index")
+            }
             statement("return -1")
         }
     }
