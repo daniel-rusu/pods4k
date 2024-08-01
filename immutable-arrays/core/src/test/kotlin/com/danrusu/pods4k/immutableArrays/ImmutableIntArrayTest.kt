@@ -79,6 +79,21 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `joinToString validation`() {
+        with(immutableArrayOf(1, 2, 3, 4)) {
+            expectThat(
+                joinToString(
+                    separator = "->",
+                    prefix = "#",
+                    postfix = "#",
+                    limit = 3, // only the first 3 elements
+                    truncated = "<>"
+                ) { (it * 10).toString() }
+            ).isEqualTo("#10->20->30-><>#")
+        }
+    }
+
+    @Test
     fun `equals validation`() {
         // Comprehensive testing is required here since equals in inline classes are experimental (as of Kotlin 1.9.23)
         // Note that we're purposely using expectThat(a == b).isTrue() instead of expectThat(a).isEqualTo(b) in order

@@ -36,16 +36,25 @@ internal class ParameterDSL {
 
     inline fun <reified T : Any> lambda(
         receiver: TypeName? = null,
-        parameters: ParameterDSL.() -> Unit = {}
+        parameters: ParameterDSL.() -> Unit = {},
     ): LambdaTypeName {
         val params = ParameterDSL().apply(parameters).build()
         return LambdaTypeName.get(receiver = receiver, parameters = params, returnType = T::class.asTypeName())
     }
 
+    inline fun <reified T : Any> nullableLambda(
+        receiver: TypeName? = null,
+        parameters: ParameterDSL.() -> Unit = {},
+    ): LambdaTypeName {
+        val params = ParameterDSL().apply(parameters).build()
+        return LambdaTypeName.get(receiver = receiver, parameters = params, returnType = T::class.asTypeName())
+            .copy(nullable = true) as LambdaTypeName
+    }
+
     inline fun lambda(
         receiver: TypeName? = null,
         parameters: ParameterDSL.() -> Unit = {},
-        returnType: TypeName
+        returnType: TypeName,
     ): LambdaTypeName {
         val params = ParameterDSL().apply(parameters).build()
         return LambdaTypeName.get(receiver = receiver, parameters = params, returnType = returnType)

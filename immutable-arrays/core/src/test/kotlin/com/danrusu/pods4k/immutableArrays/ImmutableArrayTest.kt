@@ -90,6 +90,23 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `joinToString validation`() {
+        with(immutableArrayOf("one", "two", "three")) {
+            expectThat(
+                joinToString(
+                    separator = "+",
+                    prefix = "***",
+                    postfix = "###",
+                    limit = 2, // only the first 2 elements
+                    truncated = "___"
+                ) { element ->
+                    element.replaceFirstChar { it.uppercaseChar() }
+                }
+            ).isEqualTo("***One+Two+___###")
+        }
+    }
+
+    @Test
     fun `equals validation`() {
         // Comprehensive testing is required here since equals in inline classes are experimental (as of Kotlin 1.9.23)
         // Note that we're purposely using expectThat(a == b).isTrue() instead of expectThat(a).isEqualTo(b) in order

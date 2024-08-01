@@ -7,6 +7,7 @@ import kotlin.Array
 import kotlin.Boolean
 import kotlin.Byte
 import kotlin.ByteArray
+import kotlin.CharSequence
 import kotlin.Comparable
 import kotlin.Int
 import kotlin.Pair
@@ -72,6 +73,18 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
         get() = values.indices
 
     override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
+
+    /**
+     * See [ByteArray.joinToString]
+     */
+    public fun joinToString(
+        separator: CharSequence = ", ",
+        prefix: CharSequence = "",
+        postfix: CharSequence = "",
+        limit: Int = -1,
+        truncated: CharSequence = "...",
+        transform: ((element: Byte) -> CharSequence)? = null,
+    ): String = values.joinToString(separator, prefix, postfix, limit, truncated, transform)
 
     public operator fun equals(other: ImmutableByteArray): Boolean {
         if (other.size != this.size) return false

@@ -6,6 +6,7 @@ import java.util.Comparator
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
+import kotlin.CharSequence
 import kotlin.Comparable
 import kotlin.Int
 import kotlin.Nothing
@@ -72,6 +73,18 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
         get() = values.indices
 
     override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
+
+    /**
+     * See [Array.joinToString]
+     */
+    public fun joinToString(
+        separator: CharSequence = ", ",
+        prefix: CharSequence = "",
+        postfix: CharSequence = "",
+        limit: Int = -1,
+        truncated: CharSequence = "...",
+        transform: ((element: T) -> CharSequence)? = null,
+    ): String = values.joinToString(separator, prefix, postfix, limit, truncated, transform)
 
     public operator fun equals(other: ImmutableArray<*>): Boolean {
         if (other.size != this.size) return false

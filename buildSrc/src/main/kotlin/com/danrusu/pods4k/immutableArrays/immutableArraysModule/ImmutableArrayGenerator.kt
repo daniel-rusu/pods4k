@@ -74,6 +74,25 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 get = "return values.indices",
             )
             overrideToString()
+
+            "joinToString"(
+                typeSpecBuilder = this,
+                baseType = baseType,
+                makeInline = false, // because the lambda is nullable
+                parameters = {
+                    "separator"<CharSequence>(defaultValue = "\", \"")
+                    "prefix"<CharSequence>(defaultValue = "\"\"")
+                    "postfix"<CharSequence>(defaultValue = "\"\"")
+                    "limit"<Int>(defaultValue = "-1")
+                    "truncated"<CharSequence>(defaultValue = "\"...\"")
+                    "transform"(
+                        type = nullableLambda<CharSequence>(parameters = { "element"(type = baseType.type) }),
+                        defaultValue = "null"
+                    )
+                },
+                returns = String::class.asTypeName()
+            )
+
             addEqualsOperator(baseType)
             overrideHashCode(baseType)
             "isEmpty"(
@@ -311,6 +330,7 @@ private operator fun String.invoke(
     typeSpecBuilder: TypeSpec.Builder,
     baseType: BaseType,
     kdoc: String = "See [${if (baseType == GENERIC) "Array" else baseType.backingArrayConstructor}.$this]",
+    makeInline: Boolean = true,
     modifiers: List<KModifier> = emptyList(),
     parameters: ParameterDSL.() -> Unit = {},
     returns: TypeName = Unit::class.asTypeName(),
@@ -319,7 +339,7 @@ private operator fun String.invoke(
     typeSpecBuilder.function(
         kdoc = kdoc,
         // Inline all delegated functions so that we get the same performance as if working with a regular array
-        modifiers = modifiers + KModifier.INLINE,
+        modifiers = if (makeInline) modifiers + KModifier.INLINE else modifiers,
         name = this,
         parameters = parameters,
         returns = returns,
