@@ -18,6 +18,6 @@ mavenPublishing {
     configure(
         KotlinJvm(
             javadocJar = JavadocJar.None(),
-        )
+        ),
     )
 }
