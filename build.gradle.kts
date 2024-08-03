@@ -5,6 +5,7 @@ plugins {
     kotlin("jvm") version libs.versions.kotlin
     `jvm-test-suite`
     id("pods4k-code-generator")
+    alias(libs.plugins.spotless)
 }
 
 allprojects {
@@ -50,4 +51,31 @@ allprojects {
             }
         }
     }
+}
+
+val ktlintEditorConfigOverride = mapOf(
+    "ktlint_standard_discouraged-comment-location" to "disabled",
+    "ktlint_standard_value-argument-comment" to "disabled",
+)
+
+spotless {
+    kotlin {
+        target("**/*.kt")
+        targetExclude("**/build/**/*.*")
+        ktlint()
+            .editorConfigOverride(ktlintEditorConfigOverride)
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+    kotlinGradle {
+        target("**/*.gradle.kts")
+        ktlint()
+            .editorConfigOverride(ktlintEditorConfigOverride)
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+}
+
+tasks.named("generateCode").configure {
+    finalizedBy("spotlessApply")
 }
