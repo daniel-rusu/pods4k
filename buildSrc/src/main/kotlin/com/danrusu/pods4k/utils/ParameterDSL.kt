@@ -12,7 +12,7 @@ internal class ParameterDSL {
     inline operator fun <reified T> String.invoke(
         modifiers: List<KModifier> = emptyList(),
         isVararg: Boolean = false,
-        defaultValue: String? = null
+        defaultValue: String? = null,
     ) {
         invoke(modifiers, T::class.asTypeName(), isVararg, defaultValue)
     }
