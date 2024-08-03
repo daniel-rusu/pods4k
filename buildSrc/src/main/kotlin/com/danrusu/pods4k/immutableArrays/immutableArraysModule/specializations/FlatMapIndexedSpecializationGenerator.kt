@@ -29,7 +29,7 @@ private fun FileSpec.Builder.addFlatMapIndexedFunction(fromType: BaseType, toTyp
     function(
         kdoc = """
             Calls [transform] on each element to produce collections and appends all those collections in a single ${toType.generatedClassName}.
-            
+
             Note that if [transform] is producing an array or immutable array then you'll want to use the [asList] function for optimal performance as it wraps those results instead of copying them into a temporary list.
         """.trimIndent(),
         modifiers = listOf(KModifier.INLINE),
@@ -38,9 +38,12 @@ private fun FileSpec.Builder.addFlatMapIndexedFunction(fromType: BaseType, toTyp
         parameters = {
             "transform"(
                 type = lambda(
-                    parameters = { "index"<Int>(); "element"(type = fromType.type) },
-                    returnType = Iterable::class.asTypeName().parameterizedBy(mappedType)
-                )
+                    parameters = {
+                        "index"<Int>()
+                        "element"(type = fromType.type)
+                    },
+                    returnType = Iterable::class.asTypeName().parameterizedBy(mappedType),
+                ),
             )
         },
         returns = resultType,

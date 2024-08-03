@@ -12,21 +12,21 @@ internal fun TypeSpec.Builder.suppress(warning: String): TypeSpec.Builder {
     return addAnnotation(
         AnnotationSpec.builder(Suppress::class)
             .addMember("%S", warning)
-            .build()
+            .build(),
     )
 }
 
 internal inline fun TypeSpec.Builder.addPrimaryConstructor(
     modifiers: List<KModifier> = emptyList(),
     parameters: ParameterDSL.() -> Unit = {},
-    body: FunSpec.Builder.() -> Unit = {}
+    body: FunSpec.Builder.() -> Unit = {},
 ): TypeSpec.Builder {
     return primaryConstructor(
         FunSpec.constructorBuilder().apply {
             addModifiers(modifiers)
             addParameters(ParameterDSL().apply(parameters).build())
             body()
-        }.build()
+        }.build(),
     )
 }
 
@@ -55,7 +55,7 @@ internal inline fun <reified T : Any> TypeSpec.Builder.property(
         getModifiers = getModifiers,
         get = get,
         privateSetter = privateSetter,
-        body = body
+        body = body,
     )
 }
 
@@ -81,18 +81,18 @@ internal inline fun TypeSpec.Builder.property(
                     FunSpec.getterBuilder()
                         .addModifiers(getModifiers)
                         .addStatement(get)
-                        .build()
+                        .build(),
                 )
             }
             if (privateSetter) {
                 setter(
                     FunSpec.setterBuilder()
                         .addModifiers(KModifier.PRIVATE)
-                        .build()
+                        .build(),
                 )
             }
             body()
-        }.build()
+        }.build(),
     )
 }
 
@@ -115,7 +115,7 @@ internal inline fun TypeSpec.Builder.function(
     name: String,
     parameters: ParameterDSL.() -> Unit = {},
     returns: TypeName? = null,
-    body: FunSpec.Builder.() -> Unit
+    body: FunSpec.Builder.() -> Unit,
 ): TypeSpec.Builder {
     return addFunction(
         FunSpec.builder(name).apply {
@@ -124,19 +124,19 @@ internal inline fun TypeSpec.Builder.function(
             addParameters(ParameterDSL().apply(parameters).build())
             returns?.let { returns(it) }
             body()
-        }.build()
+        }.build(),
     )
 }
 
 internal inline fun TypeSpec.Builder.declareClass(
     modifiers: List<KModifier> = emptyList(),
     name: String,
-    body: TypeSpec.Builder.() -> Unit
+    body: TypeSpec.Builder.() -> Unit,
 ): TypeSpec.Builder {
     return addType(
         TypeSpec.classBuilder(name).apply {
             addModifiers(modifiers)
             body()
-        }.build()
+        }.build(),
     )
 }

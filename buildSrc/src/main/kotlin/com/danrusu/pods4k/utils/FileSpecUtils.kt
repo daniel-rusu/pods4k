@@ -19,13 +19,13 @@ internal inline fun createFile(packageName: String, fileName: String, body: File
 internal inline fun FileSpec.Builder.declareClass(
     modifiers: List<KModifier> = emptyList(),
     name: String,
-    body: TypeSpec.Builder.() -> Unit
+    body: TypeSpec.Builder.() -> Unit,
 ): FileSpec.Builder {
     return addType(
         TypeSpec.classBuilder(name).apply {
             addModifiers(modifiers)
             body()
-        }.build()
+        }.build(),
     )
 }
 
@@ -38,7 +38,7 @@ internal inline fun FileSpec.Builder.declareObject(
         TypeSpec.objectBuilder(name).apply {
             addModifiers(modifiers)
             body()
-        }.build()
+        }.build(),
     )
 }
 
@@ -63,7 +63,7 @@ internal inline fun FileSpec.Builder.function(
     name: String,
     parameters: ParameterDSL.() -> Unit = {},
     returns: TypeName? = null,
-    body: FunSpec.Builder.() -> Unit
+    body: FunSpec.Builder.() -> Unit,
 ): FileSpec.Builder {
     return addFunction(
         FunSpec.builder(name).apply {
@@ -73,7 +73,7 @@ internal inline fun FileSpec.Builder.function(
             addParameters(ParameterDSL().apply(parameters).build())
             returns?.let { returns(it) }
             body()
-        }.build()
+        }.build(),
     )
 }
 
@@ -90,7 +90,7 @@ internal inline fun <reified T : Any> FileSpec.Builder.property(
         name = name,
         type = T::class.asTypeName(),
         init = init,
-        body = body
+        body = body,
     )
 }
 
@@ -107,6 +107,6 @@ internal inline fun FileSpec.Builder.property(
             kdoc?.let { addKdoc(it) }
             init?.let { initializer(it) }
             body()
-        }.build()
+        }.build(),
     )
 }

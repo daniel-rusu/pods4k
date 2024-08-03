@@ -51,7 +51,7 @@ private fun FileSpec.Builder.addMutableCollectionAddAll() {
         function(
             kdoc = """
                 Adds all the elements to [this] collection.
-                
+
                 @return true if the collection changed.
             """.trimIndent(),
             receiver = ClassName("kotlin.collections", "MutableCollection")

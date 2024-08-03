@@ -20,7 +20,7 @@ internal enum class BaseType(
         type = genericType,
         backingArrayType = Array::class.asTypeName().parameterizedBy(WildcardTypeName.producerOf(genericType)),
         backingArrayConstructor = "Array<Any?>",
-        generatedClassName = "ImmutableArray"
+        generatedClassName = "ImmutableArray",
     ),
     BOOLEAN(Boolean::class, BooleanArray::class),
     BYTE(Byte::class, ByteArray::class),
@@ -29,16 +29,17 @@ internal enum class BaseType(
     INT(Int::class, IntArray::class),
     LONG(Long::class, LongArray::class),
     FLOAT(Float::class, FloatArray::class),
-    DOUBLE(Double::class, DoubleArray::class);
+    DOUBLE(Double::class, DoubleArray::class),
+    ;
 
     constructor(
         type: KClass<*>,
-        arrayType: KClass<*>
+        arrayType: KClass<*>,
     ) : this(
         type = type.asTypeName(),
         backingArrayType = arrayType.asTypeName(),
         backingArrayConstructor = arrayType.simpleName!!,
-        generatedClassName = "Immutable${type.simpleName}Array"
+        generatedClassName = "Immutable${type.simpleName}Array",
     )
 
     fun getGeneratedClass(): ClassName = ClassName(ImmutableArrayConfig.packageName, generatedClassName)

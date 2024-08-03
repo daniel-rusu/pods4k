@@ -36,7 +36,7 @@ private fun FileSpec.Builder.addMapNotNullFunction(fromType: BaseType, toType: B
                 type = lambda(
                     parameters = { "element"(type = fromType.type) },
                     returnType = mappedType.copy(nullable = true),
-                )
+                ),
             )
         },
         returns = resultTypeName,

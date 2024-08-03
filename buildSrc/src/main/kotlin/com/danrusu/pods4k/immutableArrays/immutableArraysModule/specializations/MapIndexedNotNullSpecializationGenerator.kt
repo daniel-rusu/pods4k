@@ -36,9 +36,12 @@ private fun FileSpec.Builder.addMapIndexedNotNullFunction(fromType: BaseType, to
         parameters = {
             "transform"(
                 type = lambda(
-                    parameters = { "index"<Int>(); "element"(type = fromType.type) },
+                    parameters = {
+                        "index"<Int>()
+                        "element"(type = fromType.type)
+                    },
                     returnType = mappedType.copy(nullable = true),
-                )
+                ),
             )
         },
         returns = resultTypeName,

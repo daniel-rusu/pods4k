@@ -44,7 +44,7 @@ private fun FileSpec.Builder.addContains() {
             receiver = baseType.getGeneratedTypeName(),
             name = "contains",
             parameters = { "element"(type = baseType.type) },
-            returns = Boolean::class.asTypeName()
+            returns = Boolean::class.asTypeName(),
         ) {
             if (baseType == GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
@@ -61,7 +61,7 @@ private fun FileSpec.Builder.addIndexOf() {
             receiver = baseType.getGeneratedTypeName(),
             name = "indexOf",
             parameters = { "element"(type = baseType.type) },
-            returns = Int::class.asTypeName()
+            returns = Int::class.asTypeName(),
         ) {
             if (baseType == GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
@@ -79,7 +79,7 @@ private fun FileSpec.Builder.addLastIndexOf() {
             receiver = baseType.getGeneratedTypeName(),
             name = "lastIndexOf",
             parameters = { "element"(type = baseType.type) },
-            returns = Int::class.asTypeName()
+            returns = Int::class.asTypeName(),
         ) {
             if (baseType == GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
@@ -124,7 +124,7 @@ private fun FileSpec.Builder.addSorted() {
         val kdoc = when (baseType) {
             GENERIC -> """
                 Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with all elements sorted according to their natural sort order.
-                
+
                 The sort is _stable_ so equal elements preserve their order relative to each other after sorting.
             """.trimIndent()
 
@@ -145,7 +145,7 @@ private fun FileSpec.Builder.addSorted() {
             emptyLine()
             if (baseType == GENERIC) {
                 addTypeVariable(
-                    TypeVariableName(genericVariableName, Comparable::class.asTypeName().parameterizedBy(genericType))
+                    TypeVariableName(genericVariableName, Comparable::class.asTypeName().parameterizedBy(genericType)),
                 )
                 suppress("UNCHECKED_CAST")
                 statement("val backingArray = ${baseType.backingArrayConstructor}(size) { get(it) }")
@@ -174,7 +174,7 @@ private fun FileSpec.Builder.addSortedDescending() {
         val kdoc = when (baseType) {
             GENERIC -> """
                 Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with all elements sorted according to their reverse natural sort order.
-                
+
                 The sort is _stable_ so equal elements preserve their order relative to each other after sorting.
             """.trimIndent()
 
@@ -192,7 +192,7 @@ private fun FileSpec.Builder.addSortedDescending() {
         ) {
             if (baseType == GENERIC) {
                 addTypeVariable(
-                    TypeVariableName(genericVariableName, Comparable::class.asTypeName().parameterizedBy(genericType))
+                    TypeVariableName(genericVariableName, Comparable::class.asTypeName().parameterizedBy(genericType)),
                 )
                 statement("return sortedWith(reverseOrder())")
             } else {
@@ -240,8 +240,8 @@ private fun FileSpec.Builder.addPlusValue() {
         function(
             kdoc = """
                 Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with the elements of [this] followed by the specified [element].
-                
-                Important:  
+
+                Important:
                 When needing to add multiple elements individually, use the buildImmutableArray methods or immutable array builders as that's much more efficient instead of calling this function repeatedly.
             """.trimIndent(),
             modifiers = listOf(KModifier.OPERATOR),
@@ -268,13 +268,13 @@ private fun FileSpec.Builder.addToPrimitiveImmutableArray() {
         function(
             kdoc = """
                 Returns an [${baseType.generatedClassName}] containing the unboxed values of this array.
-                
+
                 [${baseType.generatedClassName}] uses less memory and is faster to access as it stores the primitive values directly without needing to store them in wrapper objects.
             """.trimIndent(),
             receiver = GENERIC.getGeneratedClass().parameterizedBy(baseType.type),
             name = "to${baseType.generatedClassName}",
             returns = baseType.getGeneratedTypeName(),
-            code = "return ${baseType.generatedClassName}(size)·{·this[it]·}"
+            code = "return ${baseType.generatedClassName}(size)·{·this[it]·}",
         )
     }
 }
@@ -286,13 +286,13 @@ private fun FileSpec.Builder.addToTypedImmutableArray() {
         function(
             kdoc = """
                 Returns a typed [${GENERIC.generatedClassName}] containing the values of this array.
-                
+
                 Note that [${GENERIC.generatedClassName}] uses more memory and is slower to access as each primitive value will be auto-boxed in a wrapper object.
             """.trimIndent(),
             receiver = baseType.getGeneratedClass(),
             name = "toTyped${GENERIC.generatedClassName}",
             returns = GENERIC.getGeneratedClass().parameterizedBy(baseType.type),
-            code = "return ${GENERIC.generatedClassName}(size)·{·this[it]·}"
+            code = "return ${GENERIC.generatedClassName}(size)·{·this[it]·}",
         )
     }
 }

@@ -7,7 +7,7 @@ internal fun FunSpec.Builder.suppress(warning: String): FunSpec.Builder {
     return addAnnotation(
         AnnotationSpec.builder(Suppress::class)
             .addMember("%S", warning)
-            .build()
+            .build(),
     )
 }
 
@@ -26,7 +26,7 @@ internal fun FunSpec.Builder.statement(statement: String, vararg args: Any) {
 internal fun FunSpec.Builder.controlFlow(
     controlFlow: String,
     vararg args: Any,
-    body: FunSpec.Builder.() -> Unit
+    body: FunSpec.Builder.() -> Unit,
 ) {
     beginControlFlow(controlFlow, *args).apply(body).endControlFlow()
 }

@@ -34,8 +34,8 @@ private fun FileSpec.Builder.addMapFunction(fromType: BaseType, toType: BaseType
             "transform"(
                 type = lambda(
                     parameters = { "element"(type = fromType.type) },
-                    returnType = mappedType
-                )
+                    returnType = mappedType,
+                ),
             )
         },
         returns = resultTypeName,

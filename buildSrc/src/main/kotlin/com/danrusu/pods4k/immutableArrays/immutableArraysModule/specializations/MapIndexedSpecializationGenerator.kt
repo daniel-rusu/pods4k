@@ -33,9 +33,12 @@ private fun FileSpec.Builder.addMapIndexedFunction(fromType: BaseType, toType: B
         parameters = {
             "transform"(
                 type = lambda(
-                    parameters = { "index"<Int>(); "element"(type = fromType.type) },
-                    returnType = mappedType
-                )
+                    parameters = {
+                        "index"<Int>()
+                        "element"(type = fromType.type)
+                    },
+                    returnType = mappedType,
+                ),
             )
         },
         returns = resultTypeName,

@@ -93,7 +93,7 @@ private fun FileSpec.Builder.addBuilderFunctions() {
             parameters = {
                 "initialCapacity"<Int>(defaultValue = "10")
                 "body"(
-                    type = lambda<Unit>(receiver = receiver)
+                    type = lambda<Unit>(receiver = receiver),
                 )
             },
             returns = baseType.getGeneratedTypeName(),
@@ -102,7 +102,7 @@ private fun FileSpec.Builder.addBuilderFunctions() {
                 addTypeVariable(baseType.type as TypeVariableName)
                 statement(
                     "return ${baseType.generatedClassName}.Builder<%T>(initialCapacity).apply(body).build()",
-                    baseType.type
+                    baseType.type,
                 )
             } else {
                 statement("return ${baseType.generatedClassName}.Builder(initialCapacity).apply(body).build()")
@@ -115,7 +115,7 @@ private fun TypeSpec.Builder.addBuilderUtilsEnsureCapacity() {
     function(
         kdoc = """
             Returns a larger capacity when [currentCapacity] is less than [minCapacity] otherwise returns [currentCapacity].
-            
+
             The strategy of choosing the new capacity attempts to balance the negative performance impact of repeated resizing operations with the negative memory impact of ending up with too much unused capacity.
         """.trimIndent(),
         name = "computeNewCapacity",
