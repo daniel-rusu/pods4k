@@ -54,7 +54,7 @@ class FlatMapIndexedSpecializationsTest {
             expectThat(
                 flatMapIndexed { index, element ->
                     DoubleArray(element) { (index + it).toDouble() / element }.toList()
-                }
+                },
             ).isEqualTo(emptyImmutableDoubleArray())
         }
 
@@ -62,7 +62,7 @@ class FlatMapIndexedSpecializationsTest {
             expectThat(
                 flatMapIndexed { index, element ->
                     DoubleArray(element) { (index + it).toDouble() / element }.toList()
-                }
+                },
             ).isEqualTo(immutableArrayOf(0.0, 1.0 / 3, 2.0 / 3, 1.0 / 4, 2.0 / 4, 3.0 / 4, 4.0 / 4))
         }
     }

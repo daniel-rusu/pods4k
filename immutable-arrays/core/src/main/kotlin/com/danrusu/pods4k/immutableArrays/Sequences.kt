@@ -22,9 +22,9 @@ public fun <T> Sequence<T>.toImmutableArray(): ImmutableArray<T> = buildImmutabl
  * Returns an [ImmutableBooleanArray] with the contents of this sequence.
  */
 public fun Sequence<Boolean>.toImmutableArray(): ImmutableBooleanArray =
-        buildImmutableBooleanArray {
-    addAll(this@toImmutableArray)
-}
+    buildImmutableBooleanArray {
+        addAll(this@toImmutableArray)
+    }
 
 /**
  * Returns an [ImmutableByteArray] with the contents of this sequence.

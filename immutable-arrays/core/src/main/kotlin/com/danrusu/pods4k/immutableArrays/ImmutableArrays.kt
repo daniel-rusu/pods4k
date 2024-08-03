@@ -21,8 +21,9 @@ public operator fun <T> ImmutableArray<T>.contains(element: T): Boolean = any { 
 /**
  * Returns true if [this] immutable array contains the [element]
  */
-public operator fun ImmutableBooleanArray.contains(element: Boolean): Boolean = any { it == element
-        }
+public operator fun ImmutableBooleanArray.contains(element: Boolean): Boolean = any {
+    it == element
+}
 
 /**
  * Returns true if [this] immutable array contains the [element]
@@ -243,55 +244,51 @@ public fun ImmutableDoubleArray.lastIndexOf(element: Double): Int {
  * See [Array.getOrElse]
  */
 public inline fun <T> ImmutableArray<T>.getOrElse(index: Int, defaultValue: (index: Int) -> T): T =
-        values.getOrElse(index, defaultValue)
+    values.getOrElse(index, defaultValue)
 
 /**
  * See [Array.getOrElse]
  */
-public inline fun ImmutableBooleanArray.getOrElse(index: Int,
-        defaultValue: (index: Int) -> Boolean): Boolean = values.getOrElse(index, defaultValue)
+public inline fun ImmutableBooleanArray.getOrElse(
+    index: Int,
+    defaultValue: (index: Int) -> Boolean,
+): Boolean = values.getOrElse(index, defaultValue)
 
 /**
  * See [Array.getOrElse]
  */
-public inline fun ImmutableByteArray.getOrElse(index: Int, defaultValue: (index: Int) -> Byte): Byte
-        = values.getOrElse(index, defaultValue)
+public inline fun ImmutableByteArray.getOrElse(index: Int, defaultValue: (index: Int) -> Byte): Byte = values.getOrElse(index, defaultValue)
 
 /**
  * See [Array.getOrElse]
  */
-public inline fun ImmutableCharArray.getOrElse(index: Int, defaultValue: (index: Int) -> Char): Char
-        = values.getOrElse(index, defaultValue)
+public inline fun ImmutableCharArray.getOrElse(index: Int, defaultValue: (index: Int) -> Char): Char = values.getOrElse(index, defaultValue)
 
 /**
  * See [Array.getOrElse]
  */
-public inline fun ImmutableShortArray.getOrElse(index: Int, defaultValue: (index: Int) -> Short):
-        Short = values.getOrElse(index, defaultValue)
+public inline fun ImmutableShortArray.getOrElse(index: Int, defaultValue: (index: Int) -> Short): Short = values.getOrElse(index, defaultValue)
 
 /**
  * See [Array.getOrElse]
  */
 public inline fun ImmutableIntArray.getOrElse(index: Int, defaultValue: (index: Int) -> Int): Int =
-        values.getOrElse(index, defaultValue)
+    values.getOrElse(index, defaultValue)
 
 /**
  * See [Array.getOrElse]
  */
-public inline fun ImmutableLongArray.getOrElse(index: Int, defaultValue: (index: Int) -> Long): Long
-        = values.getOrElse(index, defaultValue)
+public inline fun ImmutableLongArray.getOrElse(index: Int, defaultValue: (index: Int) -> Long): Long = values.getOrElse(index, defaultValue)
 
 /**
  * See [Array.getOrElse]
  */
-public inline fun ImmutableFloatArray.getOrElse(index: Int, defaultValue: (index: Int) -> Float):
-        Float = values.getOrElse(index, defaultValue)
+public inline fun ImmutableFloatArray.getOrElse(index: Int, defaultValue: (index: Int) -> Float): Float = values.getOrElse(index, defaultValue)
 
 /**
  * See [Array.getOrElse]
  */
-public inline fun ImmutableDoubleArray.getOrElse(index: Int, defaultValue: (index: Int) -> Double):
-        Double = values.getOrElse(index, defaultValue)
+public inline fun ImmutableDoubleArray.getOrElse(index: Int, defaultValue: (index: Int) -> Double): Double = values.getOrElse(index, defaultValue)
 
 /**
  * Leaves [this] immutable array as is and returns an [ImmutableArray] with all elements sorted
@@ -414,7 +411,7 @@ public fun ImmutableDoubleArray.sorted(): ImmutableDoubleArray {
  * The sort is _stable_ so equal elements preserve their order relative to each other after sorting.
  */
 public fun <T : Comparable<T>> ImmutableArray<T>.sortedDescending(): ImmutableArray<T> =
-        sortedWith(reverseOrder())
+    sortedWith(reverseOrder())
 
 /**
  * Leaves [this] immutable array as is and returns an [ImmutableByteArray] with all elements sorted
@@ -533,8 +530,7 @@ public operator fun <T> ImmutableArray<T>.plus(other: ImmutableArray<T>): Immuta
  * Leaves [this] immutable array as is and returns an [ImmutableBooleanArray] with the elements of
  * [this] followed by the elements of [other]
  */
-public operator fun ImmutableBooleanArray.plus(other: ImmutableBooleanArray):
-        ImmutableBooleanArray {
+public operator fun ImmutableBooleanArray.plus(other: ImmutableBooleanArray): ImmutableBooleanArray {
     when {
         isEmpty() -> return other
         other.isEmpty() -> return this
@@ -654,127 +650,127 @@ public operator fun ImmutableDoubleArray.plus(other: ImmutableDoubleArray): Immu
  * Leaves [this] immutable array as is and returns an [ImmutableArray] with the elements of [this]
  * followed by the specified [element].
  *
- * Important:  
+ * Important:
  * When needing to add multiple elements individually, use the buildImmutableArray methods or
  * immutable array builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun <T> ImmutableArray<T>.plus(element: T): ImmutableArray<T> =
-        buildImmutableArray(initialCapacity = size + 1) {
-    addAll(this@plus)
-    add(element)
-}
+    buildImmutableArray(initialCapacity = size + 1) {
+        addAll(this@plus)
+        add(element)
+    }
 
 /**
  * Leaves [this] immutable array as is and returns an [ImmutableBooleanArray] with the elements of
  * [this] followed by the specified [element].
  *
- * Important:  
+ * Important:
  * When needing to add multiple elements individually, use the buildImmutableArray methods or
  * immutable array builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableBooleanArray.plus(element: Boolean): ImmutableBooleanArray =
-        buildImmutableBooleanArray(initialCapacity = size + 1) {
-    addAll(this@plus)
-    add(element)
-}
+    buildImmutableBooleanArray(initialCapacity = size + 1) {
+        addAll(this@plus)
+        add(element)
+    }
 
 /**
  * Leaves [this] immutable array as is and returns an [ImmutableByteArray] with the elements of
  * [this] followed by the specified [element].
  *
- * Important:  
+ * Important:
  * When needing to add multiple elements individually, use the buildImmutableArray methods or
  * immutable array builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableByteArray.plus(element: Byte): ImmutableByteArray =
-        buildImmutableByteArray(initialCapacity = size + 1) {
-    addAll(this@plus)
-    add(element)
-}
+    buildImmutableByteArray(initialCapacity = size + 1) {
+        addAll(this@plus)
+        add(element)
+    }
 
 /**
  * Leaves [this] immutable array as is and returns an [ImmutableCharArray] with the elements of
  * [this] followed by the specified [element].
  *
- * Important:  
+ * Important:
  * When needing to add multiple elements individually, use the buildImmutableArray methods or
  * immutable array builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableCharArray.plus(element: Char): ImmutableCharArray =
-        buildImmutableCharArray(initialCapacity = size + 1) {
-    addAll(this@plus)
-    add(element)
-}
+    buildImmutableCharArray(initialCapacity = size + 1) {
+        addAll(this@plus)
+        add(element)
+    }
 
 /**
  * Leaves [this] immutable array as is and returns an [ImmutableShortArray] with the elements of
  * [this] followed by the specified [element].
  *
- * Important:  
+ * Important:
  * When needing to add multiple elements individually, use the buildImmutableArray methods or
  * immutable array builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableShortArray.plus(element: Short): ImmutableShortArray =
-        buildImmutableShortArray(initialCapacity = size + 1) {
-    addAll(this@plus)
-    add(element)
-}
+    buildImmutableShortArray(initialCapacity = size + 1) {
+        addAll(this@plus)
+        add(element)
+    }
 
 /**
  * Leaves [this] immutable array as is and returns an [ImmutableIntArray] with the elements of
  * [this] followed by the specified [element].
  *
- * Important:  
+ * Important:
  * When needing to add multiple elements individually, use the buildImmutableArray methods or
  * immutable array builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableIntArray.plus(element: Int): ImmutableIntArray =
-        buildImmutableIntArray(initialCapacity = size + 1) {
-    addAll(this@plus)
-    add(element)
-}
+    buildImmutableIntArray(initialCapacity = size + 1) {
+        addAll(this@plus)
+        add(element)
+    }
 
 /**
  * Leaves [this] immutable array as is and returns an [ImmutableLongArray] with the elements of
  * [this] followed by the specified [element].
  *
- * Important:  
+ * Important:
  * When needing to add multiple elements individually, use the buildImmutableArray methods or
  * immutable array builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableLongArray.plus(element: Long): ImmutableLongArray =
-        buildImmutableLongArray(initialCapacity = size + 1) {
-    addAll(this@plus)
-    add(element)
-}
+    buildImmutableLongArray(initialCapacity = size + 1) {
+        addAll(this@plus)
+        add(element)
+    }
 
 /**
  * Leaves [this] immutable array as is and returns an [ImmutableFloatArray] with the elements of
  * [this] followed by the specified [element].
  *
- * Important:  
+ * Important:
  * When needing to add multiple elements individually, use the buildImmutableArray methods or
  * immutable array builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableFloatArray.plus(element: Float): ImmutableFloatArray =
-        buildImmutableFloatArray(initialCapacity = size + 1) {
-    addAll(this@plus)
-    add(element)
-}
+    buildImmutableFloatArray(initialCapacity = size + 1) {
+        addAll(this@plus)
+        add(element)
+    }
 
 /**
  * Leaves [this] immutable array as is and returns an [ImmutableDoubleArray] with the elements of
  * [this] followed by the specified [element].
  *
- * Important:  
+ * Important:
  * When needing to add multiple elements individually, use the buildImmutableArray methods or
  * immutable array builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableDoubleArray.plus(element: Double): ImmutableDoubleArray =
-        buildImmutableDoubleArray(initialCapacity = size + 1) {
-    addAll(this@plus)
-    add(element)
-}
+    buildImmutableDoubleArray(initialCapacity = size + 1) {
+        addAll(this@plus)
+        add(element)
+    }
 
 /**
  * Returns an [ImmutableBooleanArray] containing the unboxed values of this array.
@@ -783,7 +779,7 @@ public operator fun ImmutableDoubleArray.plus(element: Double): ImmutableDoubleA
  * values directly without needing to store them in wrapper objects.
  */
 public fun ImmutableArray<Boolean>.toImmutableBooleanArray(): ImmutableBooleanArray =
-        ImmutableBooleanArray(size) { this[it] }
+    ImmutableBooleanArray(size) { this[it] }
 
 /**
  * Returns an [ImmutableByteArray] containing the unboxed values of this array.
@@ -792,7 +788,7 @@ public fun ImmutableArray<Boolean>.toImmutableBooleanArray(): ImmutableBooleanAr
  * directly without needing to store them in wrapper objects.
  */
 public fun ImmutableArray<Byte>.toImmutableByteArray(): ImmutableByteArray =
-        ImmutableByteArray(size) { this[it] }
+    ImmutableByteArray(size) { this[it] }
 
 /**
  * Returns an [ImmutableCharArray] containing the unboxed values of this array.
@@ -801,7 +797,7 @@ public fun ImmutableArray<Byte>.toImmutableByteArray(): ImmutableByteArray =
  * directly without needing to store them in wrapper objects.
  */
 public fun ImmutableArray<Char>.toImmutableCharArray(): ImmutableCharArray =
-        ImmutableCharArray(size) { this[it] }
+    ImmutableCharArray(size) { this[it] }
 
 /**
  * Returns an [ImmutableShortArray] containing the unboxed values of this array.
@@ -810,7 +806,7 @@ public fun ImmutableArray<Char>.toImmutableCharArray(): ImmutableCharArray =
  * directly without needing to store them in wrapper objects.
  */
 public fun ImmutableArray<Short>.toImmutableShortArray(): ImmutableShortArray =
-        ImmutableShortArray(size) { this[it] }
+    ImmutableShortArray(size) { this[it] }
 
 /**
  * Returns an [ImmutableIntArray] containing the unboxed values of this array.
@@ -819,7 +815,7 @@ public fun ImmutableArray<Short>.toImmutableShortArray(): ImmutableShortArray =
  * directly without needing to store them in wrapper objects.
  */
 public fun ImmutableArray<Int>.toImmutableIntArray(): ImmutableIntArray =
-        ImmutableIntArray(size) { this[it] }
+    ImmutableIntArray(size) { this[it] }
 
 /**
  * Returns an [ImmutableLongArray] containing the unboxed values of this array.
@@ -828,7 +824,7 @@ public fun ImmutableArray<Int>.toImmutableIntArray(): ImmutableIntArray =
  * directly without needing to store them in wrapper objects.
  */
 public fun ImmutableArray<Long>.toImmutableLongArray(): ImmutableLongArray =
-        ImmutableLongArray(size) { this[it] }
+    ImmutableLongArray(size) { this[it] }
 
 /**
  * Returns an [ImmutableFloatArray] containing the unboxed values of this array.
@@ -837,7 +833,7 @@ public fun ImmutableArray<Long>.toImmutableLongArray(): ImmutableLongArray =
  * directly without needing to store them in wrapper objects.
  */
 public fun ImmutableArray<Float>.toImmutableFloatArray(): ImmutableFloatArray =
-        ImmutableFloatArray(size) { this[it] }
+    ImmutableFloatArray(size) { this[it] }
 
 /**
  * Returns an [ImmutableDoubleArray] containing the unboxed values of this array.
@@ -846,7 +842,7 @@ public fun ImmutableArray<Float>.toImmutableFloatArray(): ImmutableFloatArray =
  * directly without needing to store them in wrapper objects.
  */
 public fun ImmutableArray<Double>.toImmutableDoubleArray(): ImmutableDoubleArray =
-        ImmutableDoubleArray(size) { this[it] }
+    ImmutableDoubleArray(size) { this[it] }
 
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
@@ -855,7 +851,7 @@ public fun ImmutableArray<Double>.toImmutableDoubleArray(): ImmutableDoubleArray
  * be auto-boxed in a wrapper object.
  */
 public fun ImmutableBooleanArray.toTypedImmutableArray(): ImmutableArray<Boolean> =
-        ImmutableArray(size) { this[it] }
+    ImmutableArray(size) { this[it] }
 
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
@@ -864,7 +860,7 @@ public fun ImmutableBooleanArray.toTypedImmutableArray(): ImmutableArray<Boolean
  * be auto-boxed in a wrapper object.
  */
 public fun ImmutableByteArray.toTypedImmutableArray(): ImmutableArray<Byte> =
-        ImmutableArray(size) { this[it] }
+    ImmutableArray(size) { this[it] }
 
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
@@ -873,7 +869,7 @@ public fun ImmutableByteArray.toTypedImmutableArray(): ImmutableArray<Byte> =
  * be auto-boxed in a wrapper object.
  */
 public fun ImmutableCharArray.toTypedImmutableArray(): ImmutableArray<Char> =
-        ImmutableArray(size) { this[it] }
+    ImmutableArray(size) { this[it] }
 
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
@@ -882,7 +878,7 @@ public fun ImmutableCharArray.toTypedImmutableArray(): ImmutableArray<Char> =
  * be auto-boxed in a wrapper object.
  */
 public fun ImmutableShortArray.toTypedImmutableArray(): ImmutableArray<Short> =
-        ImmutableArray(size) { this[it] }
+    ImmutableArray(size) { this[it] }
 
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
@@ -891,7 +887,7 @@ public fun ImmutableShortArray.toTypedImmutableArray(): ImmutableArray<Short> =
  * be auto-boxed in a wrapper object.
  */
 public fun ImmutableIntArray.toTypedImmutableArray(): ImmutableArray<Int> =
-        ImmutableArray(size) { this[it] }
+    ImmutableArray(size) { this[it] }
 
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
@@ -900,7 +896,7 @@ public fun ImmutableIntArray.toTypedImmutableArray(): ImmutableArray<Int> =
  * be auto-boxed in a wrapper object.
  */
 public fun ImmutableLongArray.toTypedImmutableArray(): ImmutableArray<Long> =
-        ImmutableArray(size) { this[it] }
+    ImmutableArray(size) { this[it] }
 
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
@@ -909,7 +905,7 @@ public fun ImmutableLongArray.toTypedImmutableArray(): ImmutableArray<Long> =
  * be auto-boxed in a wrapper object.
  */
 public fun ImmutableFloatArray.toTypedImmutableArray(): ImmutableArray<Float> =
-        ImmutableArray(size) { this[it] }
+    ImmutableArray(size) { this[it] }
 
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
@@ -918,4 +914,4 @@ public fun ImmutableFloatArray.toTypedImmutableArray(): ImmutableArray<Float> =
  * be auto-boxed in a wrapper object.
  */
 public fun ImmutableDoubleArray.toTypedImmutableArray(): ImmutableArray<Double> =
-        ImmutableArray(size) { this[it] }
+    ImmutableArray(size) { this[it] }

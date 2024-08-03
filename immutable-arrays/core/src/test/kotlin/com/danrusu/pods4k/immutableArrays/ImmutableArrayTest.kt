@@ -98,10 +98,10 @@ class ImmutableArrayTest {
                     prefix = "***",
                     postfix = "###",
                     limit = 2, // only the first 2 elements
-                    truncated = "___"
+                    truncated = "___",
                 ) { element ->
                     element.replaceFirstChar { it.uppercaseChar() }
-                }
+                },
             ).isEqualTo("***One+Two+___###")
         }
     }
@@ -300,7 +300,7 @@ class ImmutableArrayTest {
     fun `singleOrNull with predicate validation`() {
         with(ImmutableArray(3) { "element $it" }) {
             expectThat(
-                this.singleOrNull { it.contains("element") }
+                this.singleOrNull { it.contains("element") },
             ).isNull()
         }
         with(ImmutableArray(3) { "element $it" }) {
@@ -319,7 +319,7 @@ class ImmutableArrayTest {
     fun `first with predicate validation`() {
         with(ImmutableArray(7) { "${2 * it}" }) {
             expectThat(
-                this.first { it.contains("2") }
+                this.first { it.contains("2") },
             ).isEqualTo("2")
         }
     }
@@ -338,11 +338,11 @@ class ImmutableArrayTest {
     fun `firstOrNull with predicate validation`() {
         with(ImmutableArray(7) { "${2 * it}" }) {
             expectThat(
-                this.firstOrNull { it.contains("2") }
+                this.firstOrNull { it.contains("2") },
             ).isEqualTo("2")
 
             expectThat(
-                this.firstOrNull { it.contains("3") }
+                this.firstOrNull { it.contains("3") },
             ).isNull()
         }
     }
@@ -358,7 +358,7 @@ class ImmutableArrayTest {
     fun `last with predicate validation`() {
         with(ImmutableArray(7) { "${2 * it}" }) {
             expectThat(
-                this.last { it.contains("2") }
+                this.last { it.contains("2") },
             ).isEqualTo("12")
         }
     }
@@ -367,11 +367,11 @@ class ImmutableArrayTest {
     fun `lastOrNull with predicate validation`() {
         with(ImmutableArray(7) { "${2 * it}" }) {
             expectThat(
-                this.lastOrNull { it.contains("2") }
+                this.lastOrNull { it.contains("2") },
             ).isEqualTo("12")
 
             expectThat(
-                this.lastOrNull { it.contains("3") }
+                this.lastOrNull { it.contains("3") },
             ).isNull()
         }
     }
@@ -423,7 +423,7 @@ class ImmutableArrayTest {
     fun `withIndex validation`() {
         with(ImmutableArray(2) { "element $it" }) {
             expectThat(this.withIndex().toList()).isEqualTo(
-                listOf(IndexedValue(0, "element 0"), IndexedValue(1, "element 1"))
+                listOf(IndexedValue(0, "element 0"), IndexedValue(1, "element 1")),
             )
         }
     }
@@ -508,7 +508,7 @@ class ImmutableArrayTest {
                     0 to "element 0",
                     1 to "element 1",
                     2 to "element 2",
-                )
+                ),
             )
         }
     }

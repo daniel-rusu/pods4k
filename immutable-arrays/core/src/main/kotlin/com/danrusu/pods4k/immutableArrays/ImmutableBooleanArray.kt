@@ -143,7 +143,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
      * See [BooleanArray.single]
      */
     public inline fun single(predicate: (element: Boolean) -> Boolean): Boolean =
-            values.single(predicate)
+        values.single(predicate)
 
     /**
      * See [BooleanArray.singleOrNull]
@@ -154,7 +154,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
      * See [BooleanArray.singleOrNull]
      */
     public inline fun singleOrNull(predicate: (element: Boolean) -> Boolean): Boolean? =
-            values.singleOrNull(predicate)
+        values.singleOrNull(predicate)
 
     /**
      * See [BooleanArray.first]
@@ -165,7 +165,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
      * See [BooleanArray.first]
      */
     public inline fun first(predicate: (element: Boolean) -> Boolean): Boolean =
-            values.first(predicate)
+        values.first(predicate)
 
     /**
      * See [BooleanArray.firstOrNull]
@@ -176,7 +176,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
      * See [BooleanArray.firstOrNull]
      */
     public inline fun firstOrNull(predicate: (element: Boolean) -> Boolean): Boolean? =
-            values.firstOrNull(predicate)
+        values.firstOrNull(predicate)
 
     /**
      * See [BooleanArray.last]
@@ -187,7 +187,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
      * See [BooleanArray.last]
      */
     public inline fun last(predicate: (element: Boolean) -> Boolean): Boolean =
-            values.last(predicate)
+        values.last(predicate)
 
     /**
      * See [BooleanArray.lastOrNull]
@@ -198,7 +198,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
      * See [BooleanArray.lastOrNull]
      */
     public inline fun lastOrNull(predicate: (element: Boolean) -> Boolean): Boolean? =
-            values.lastOrNull(predicate)
+        values.lastOrNull(predicate)
 
     /**
      * See [BooleanArray.iterator]
@@ -250,32 +250,31 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
      * See [BooleanArray.all]
      */
     public inline fun all(predicate: (predicate: Boolean) -> Boolean): Boolean =
-            values.all(predicate)
+        values.all(predicate)
 
     /**
      * See [BooleanArray.any]
      */
     public inline fun any(predicate: (predicate: Boolean) -> Boolean): Boolean =
-            values.any(predicate)
+        values.any(predicate)
 
     /**
      * See [BooleanArray.none]
      */
     public inline fun none(predicate: (predicate: Boolean) -> Boolean): Boolean =
-            values.none(predicate)
+        values.none(predicate)
 
     /**
      * See [BooleanArray.count]
      */
     public inline fun count(predicate: (predicate: Boolean) -> Boolean): Int =
-            values.count(predicate)
+        values.count(predicate)
 
     /**
      * Creates a pair of immutable arrays, where the first contains elements for which predicate
      * yielded true, and the second contains the other elements.
      */
-    public fun partition(predicate: (element: Boolean) -> Boolean):
-            Pair<ImmutableBooleanArray, ImmutableBooleanArray> {
+    public fun partition(predicate: (element: Boolean) -> Boolean): Pair<ImmutableBooleanArray, ImmutableBooleanArray> {
         val first = Builder()
         val second = Builder()
         for (element in values) {
@@ -294,8 +293,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Boolean) -> R?):
-            ImmutableBooleanArray = sortedWith(compareBy(selector))
+    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Boolean) -> R?): ImmutableBooleanArray = sortedWith(compareBy(selector))
 
     /**
      * Leaves this immutable array as is and returns an ImmutableBooleanArray with all elements
@@ -304,9 +302,8 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedByDescending(crossinline
-            selector: (element: Boolean) -> R?): ImmutableBooleanArray =
-            sortedWith(compareByDescending(selector))
+    public inline fun <R : Comparable<R>> sortedByDescending(crossinline selector: (element: Boolean) -> R?): ImmutableBooleanArray =
+        sortedWith(compareByDescending(selector))
 
     /**
      * Leaves this immutable array as is and returns an [ImmutableBooleanArray] with all elements
@@ -336,8 +333,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
          * We're using the invoke method instead of a regular constructor so that we can declare it
          * inline.  The call site will look like a regular constructor call.
          */
-        public inline operator fun invoke(size: Int, `init`: (index: Int) -> Boolean):
-                ImmutableBooleanArray {
+        public inline operator fun invoke(size: Int, `init`: (index: Int) -> Boolean): ImmutableBooleanArray {
             if (size == 0) return EMPTY
 
             val backingArray = BooleanArray(size) { index -> init(index) }

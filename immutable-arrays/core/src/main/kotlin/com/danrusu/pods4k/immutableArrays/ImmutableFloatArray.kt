@@ -144,7 +144,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
      * See [FloatArray.single]
      */
     public inline fun single(predicate: (element: Float) -> Boolean): Float =
-            values.single(predicate)
+        values.single(predicate)
 
     /**
      * See [FloatArray.singleOrNull]
@@ -155,7 +155,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
      * See [FloatArray.singleOrNull]
      */
     public inline fun singleOrNull(predicate: (element: Float) -> Boolean): Float? =
-            values.singleOrNull(predicate)
+        values.singleOrNull(predicate)
 
     /**
      * See [FloatArray.first]
@@ -176,7 +176,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
      * See [FloatArray.firstOrNull]
      */
     public inline fun firstOrNull(predicate: (element: Float) -> Boolean): Float? =
-            values.firstOrNull(predicate)
+        values.firstOrNull(predicate)
 
     /**
      * See [FloatArray.last]
@@ -197,7 +197,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
      * See [FloatArray.lastOrNull]
      */
     public inline fun lastOrNull(predicate: (element: Float) -> Boolean): Float? =
-            values.lastOrNull(predicate)
+        values.lastOrNull(predicate)
 
     /**
      * See [FloatArray.iterator]
@@ -259,7 +259,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
      * See [FloatArray.none]
      */
     public inline fun none(predicate: (predicate: Float) -> Boolean): Boolean =
-            values.none(predicate)
+        values.none(predicate)
 
     /**
      * See [FloatArray.count]
@@ -270,8 +270,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
      * Creates a pair of immutable arrays, where the first contains elements for which predicate
      * yielded true, and the second contains the other elements.
      */
-    public fun partition(predicate: (element: Float) -> Boolean):
-            Pair<ImmutableFloatArray, ImmutableFloatArray> {
+    public fun partition(predicate: (element: Float) -> Boolean): Pair<ImmutableFloatArray, ImmutableFloatArray> {
         val first = Builder()
         val second = Builder()
         for (element in values) {
@@ -290,8 +289,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Float) -> R?):
-            ImmutableFloatArray = sortedWith(compareBy(selector))
+    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Float) -> R?): ImmutableFloatArray = sortedWith(compareBy(selector))
 
     /**
      * Leaves this immutable array as is and returns an ImmutableFloatArray with all elements sorted
@@ -300,9 +298,8 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedByDescending(crossinline
-            selector: (element: Float) -> R?): ImmutableFloatArray =
-            sortedWith(compareByDescending(selector))
+    public inline fun <R : Comparable<R>> sortedByDescending(crossinline selector: (element: Float) -> R?): ImmutableFloatArray =
+        sortedWith(compareByDescending(selector))
 
     /**
      * Leaves this immutable array as is and returns an [ImmutableFloatArray] with all elements
@@ -332,8 +329,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
          * We're using the invoke method instead of a regular constructor so that we can declare it
          * inline.  The call site will look like a regular constructor call.
          */
-        public inline operator fun invoke(size: Int, `init`: (index: Int) -> Float):
-                ImmutableFloatArray {
+        public inline operator fun invoke(size: Int, `init`: (index: Int) -> Float): ImmutableFloatArray {
             if (size == 0) return EMPTY
 
             val backingArray = FloatArray(size) { index -> init(index) }

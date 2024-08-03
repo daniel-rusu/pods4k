@@ -144,7 +144,7 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
      * See [DoubleArray.single]
      */
     public inline fun single(predicate: (element: Double) -> Boolean): Double =
-            values.single(predicate)
+        values.single(predicate)
 
     /**
      * See [DoubleArray.singleOrNull]
@@ -155,7 +155,7 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
      * See [DoubleArray.singleOrNull]
      */
     public inline fun singleOrNull(predicate: (element: Double) -> Boolean): Double? =
-            values.singleOrNull(predicate)
+        values.singleOrNull(predicate)
 
     /**
      * See [DoubleArray.first]
@@ -166,7 +166,7 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
      * See [DoubleArray.first]
      */
     public inline fun first(predicate: (element: Double) -> Boolean): Double =
-            values.first(predicate)
+        values.first(predicate)
 
     /**
      * See [DoubleArray.firstOrNull]
@@ -177,7 +177,7 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
      * See [DoubleArray.firstOrNull]
      */
     public inline fun firstOrNull(predicate: (element: Double) -> Boolean): Double? =
-            values.firstOrNull(predicate)
+        values.firstOrNull(predicate)
 
     /**
      * See [DoubleArray.last]
@@ -198,7 +198,7 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
      * See [DoubleArray.lastOrNull]
      */
     public inline fun lastOrNull(predicate: (element: Double) -> Boolean): Double? =
-            values.lastOrNull(predicate)
+        values.lastOrNull(predicate)
 
     /**
      * See [DoubleArray.iterator]
@@ -250,32 +250,31 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
      * See [DoubleArray.all]
      */
     public inline fun all(predicate: (predicate: Double) -> Boolean): Boolean =
-            values.all(predicate)
+        values.all(predicate)
 
     /**
      * See [DoubleArray.any]
      */
     public inline fun any(predicate: (predicate: Double) -> Boolean): Boolean =
-            values.any(predicate)
+        values.any(predicate)
 
     /**
      * See [DoubleArray.none]
      */
     public inline fun none(predicate: (predicate: Double) -> Boolean): Boolean =
-            values.none(predicate)
+        values.none(predicate)
 
     /**
      * See [DoubleArray.count]
      */
     public inline fun count(predicate: (predicate: Double) -> Boolean): Int =
-            values.count(predicate)
+        values.count(predicate)
 
     /**
      * Creates a pair of immutable arrays, where the first contains elements for which predicate
      * yielded true, and the second contains the other elements.
      */
-    public fun partition(predicate: (element: Double) -> Boolean):
-            Pair<ImmutableDoubleArray, ImmutableDoubleArray> {
+    public fun partition(predicate: (element: Double) -> Boolean): Pair<ImmutableDoubleArray, ImmutableDoubleArray> {
         val first = Builder()
         val second = Builder()
         for (element in values) {
@@ -294,8 +293,7 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Double) -> R?):
-            ImmutableDoubleArray = sortedWith(compareBy(selector))
+    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Double) -> R?): ImmutableDoubleArray = sortedWith(compareBy(selector))
 
     /**
      * Leaves this immutable array as is and returns an ImmutableDoubleArray with all elements
@@ -304,9 +302,8 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedByDescending(crossinline
-            selector: (element: Double) -> R?): ImmutableDoubleArray =
-            sortedWith(compareByDescending(selector))
+    public inline fun <R : Comparable<R>> sortedByDescending(crossinline selector: (element: Double) -> R?): ImmutableDoubleArray =
+        sortedWith(compareByDescending(selector))
 
     /**
      * Leaves this immutable array as is and returns an [ImmutableDoubleArray] with all elements
@@ -336,8 +333,7 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
          * We're using the invoke method instead of a regular constructor so that we can declare it
          * inline.  The call site will look like a regular constructor call.
          */
-        public inline operator fun invoke(size: Int, `init`: (index: Int) -> Double):
-                ImmutableDoubleArray {
+        public inline operator fun invoke(size: Int, `init`: (index: Int) -> Double): ImmutableDoubleArray {
             if (size == 0) return EMPTY
 
             val backingArray = DoubleArray(size) { index -> init(index) }

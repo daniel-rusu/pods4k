@@ -13,7 +13,7 @@ class MapNotNullSpecializationsTest {
         val input = immutableArrayOf(
             Pair("one", 1),
             Pair("two", 2),
-            Pair("three", 3)
+            Pair("three", 3),
         )
 
         // all null

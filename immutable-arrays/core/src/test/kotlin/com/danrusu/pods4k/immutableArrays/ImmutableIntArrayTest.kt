@@ -87,8 +87,8 @@ class ImmutableIntArrayTest {
                     prefix = "#",
                     postfix = "#",
                     limit = 3, // only the first 3 elements
-                    truncated = "<>"
-                ) { (it * 10).toString() }
+                    truncated = "<>",
+                ) { (it * 10).toString() },
             ).isEqualTo("#10->20->30-><>#")
         }
     }
@@ -296,7 +296,7 @@ class ImmutableIntArrayTest {
     fun `singleOrNull with predicate validation`() {
         with(ImmutableIntArray(3) { it }) {
             expectThat(
-                this.singleOrNull { it > 0 }
+                this.singleOrNull { it > 0 },
             ).isNull()
         }
         with(ImmutableIntArray(3) { it }) {
@@ -391,7 +391,7 @@ class ImmutableIntArrayTest {
             expectThat(last).isEqualTo(8)
 
             expectThat(
-                this.lastOrNull { it > 0 && it % 7 == 0 }
+                this.lastOrNull { it > 0 && it % 7 == 0 },
             ).isNull()
         }
     }
@@ -434,7 +434,7 @@ class ImmutableIntArrayTest {
     fun `withIndex validation`() {
         with(ImmutableIntArray(2) { 10 * it }) {
             expectThat(this.withIndex().toList()).isEqualTo(
-                listOf(IndexedValue(index = 0, value = 0), IndexedValue(index = 1, value = 10))
+                listOf(IndexedValue(index = 0, value = 0), IndexedValue(index = 1, value = 10)),
             )
         }
     }
@@ -480,7 +480,7 @@ class ImmutableIntArrayTest {
                     0 to 0,
                     1 to 10,
                     2 to 20,
-                )
+                ),
             )
         }
     }

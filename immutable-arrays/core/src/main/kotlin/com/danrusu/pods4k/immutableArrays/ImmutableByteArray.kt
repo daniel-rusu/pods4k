@@ -154,7 +154,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
      * See [ByteArray.singleOrNull]
      */
     public inline fun singleOrNull(predicate: (element: Byte) -> Boolean): Byte? =
-            values.singleOrNull(predicate)
+        values.singleOrNull(predicate)
 
     /**
      * See [ByteArray.first]
@@ -175,7 +175,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
      * See [ByteArray.firstOrNull]
      */
     public inline fun firstOrNull(predicate: (element: Byte) -> Boolean): Byte? =
-            values.firstOrNull(predicate)
+        values.firstOrNull(predicate)
 
     /**
      * See [ByteArray.last]
@@ -196,7 +196,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
      * See [ByteArray.lastOrNull]
      */
     public inline fun lastOrNull(predicate: (element: Byte) -> Boolean): Byte? =
-            values.lastOrNull(predicate)
+        values.lastOrNull(predicate)
 
     /**
      * See [ByteArray.iterator]
@@ -258,7 +258,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
      * See [ByteArray.none]
      */
     public inline fun none(predicate: (predicate: Byte) -> Boolean): Boolean =
-            values.none(predicate)
+        values.none(predicate)
 
     /**
      * See [ByteArray.count]
@@ -269,8 +269,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
      * Creates a pair of immutable arrays, where the first contains elements for which predicate
      * yielded true, and the second contains the other elements.
      */
-    public fun partition(predicate: (element: Byte) -> Boolean):
-            Pair<ImmutableByteArray, ImmutableByteArray> {
+    public fun partition(predicate: (element: Byte) -> Boolean): Pair<ImmutableByteArray, ImmutableByteArray> {
         val first = Builder()
         val second = Builder()
         for (element in values) {
@@ -289,8 +288,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Byte) -> R?):
-            ImmutableByteArray = sortedWith(compareBy(selector))
+    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Byte) -> R?): ImmutableByteArray = sortedWith(compareBy(selector))
 
     /**
      * Leaves this immutable array as is and returns an ImmutableByteArray with all elements sorted
@@ -299,9 +297,8 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedByDescending(crossinline
-            selector: (element: Byte) -> R?): ImmutableByteArray =
-            sortedWith(compareByDescending(selector))
+    public inline fun <R : Comparable<R>> sortedByDescending(crossinline selector: (element: Byte) -> R?): ImmutableByteArray =
+        sortedWith(compareByDescending(selector))
 
     /**
      * Leaves this immutable array as is and returns an [ImmutableByteArray] with all elements
@@ -331,8 +328,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
          * We're using the invoke method instead of a regular constructor so that we can declare it
          * inline.  The call site will look like a regular constructor call.
          */
-        public inline operator fun invoke(size: Int, `init`: (index: Int) -> Byte):
-                ImmutableByteArray {
+        public inline operator fun invoke(size: Int, `init`: (index: Int) -> Byte): ImmutableByteArray {
             if (size == 0) return EMPTY
 
             val backingArray = ByteArray(size) { index -> init(index) }

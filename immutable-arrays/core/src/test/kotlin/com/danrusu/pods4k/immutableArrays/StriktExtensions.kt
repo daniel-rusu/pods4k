@@ -1,14 +1,5 @@
 package com.danrusu.pods4k.immutableArrays
 
-import com.danrusu.pods4k.immutableArrays.ImmutableArray
-import com.danrusu.pods4k.immutableArrays.ImmutableBooleanArray
-import com.danrusu.pods4k.immutableArrays.ImmutableByteArray
-import com.danrusu.pods4k.immutableArrays.ImmutableCharArray
-import com.danrusu.pods4k.immutableArrays.ImmutableDoubleArray
-import com.danrusu.pods4k.immutableArrays.ImmutableFloatArray
-import com.danrusu.pods4k.immutableArrays.ImmutableIntArray
-import com.danrusu.pods4k.immutableArrays.ImmutableLongArray
-import com.danrusu.pods4k.immutableArrays.ImmutableShortArray
 import strikt.api.Assertion
 
 @JvmName("immutableArray_containsExactly")
@@ -28,7 +19,7 @@ fun <T> Assertion.Builder<ImmutableArray<T>>.containsExactly(vararg values: T): 
 
 @JvmName("immutableBooleanArray_containsExactly")
 fun Assertion.Builder<ImmutableBooleanArray>.containsExactly(
-    vararg values: Boolean
+    vararg values: Boolean,
 ): Assertion.Builder<ImmutableBooleanArray> {
     return assert("contains exactly") {
         if (subject.size != values.size) {
@@ -75,7 +66,7 @@ fun Assertion.Builder<ImmutableCharArray>.containsExactly(vararg values: Char): 
 
 @JvmName("immutableDoubleArray_containsExactly")
 fun Assertion.Builder<ImmutableDoubleArray>.containsExactly(
-    vararg values: Double
+    vararg values: Double,
 ): Assertion.Builder<ImmutableDoubleArray> {
     return assert("contains exactly") {
         if (subject.size != values.size) {
@@ -92,7 +83,7 @@ fun Assertion.Builder<ImmutableDoubleArray>.containsExactly(
 
 @JvmName("immutableFloatArray_containsExactly")
 fun Assertion.Builder<ImmutableFloatArray>.containsExactly(
-    vararg values: Float
+    vararg values: Float,
 ): Assertion.Builder<ImmutableFloatArray> {
     return assert("contains exactly") {
         if (subject.size != values.size) {
@@ -139,7 +130,7 @@ fun Assertion.Builder<ImmutableLongArray>.containsExactly(vararg values: Long): 
 
 @JvmName("immutableShortArray_containsExactly")
 fun Assertion.Builder<ImmutableShortArray>.containsExactly(
-    vararg values: Short
+    vararg values: Short,
 ): Assertion.Builder<ImmutableShortArray> {
     return assert("contains exactly") {
         if (subject.size != values.size) {

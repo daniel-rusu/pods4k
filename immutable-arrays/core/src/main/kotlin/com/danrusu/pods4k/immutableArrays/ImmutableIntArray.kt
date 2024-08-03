@@ -153,7 +153,7 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
      * See [IntArray.singleOrNull]
      */
     public inline fun singleOrNull(predicate: (element: Int) -> Boolean): Int? =
-            values.singleOrNull(predicate)
+        values.singleOrNull(predicate)
 
     /**
      * See [IntArray.first]
@@ -174,7 +174,7 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
      * See [IntArray.firstOrNull]
      */
     public inline fun firstOrNull(predicate: (element: Int) -> Boolean): Int? =
-            values.firstOrNull(predicate)
+        values.firstOrNull(predicate)
 
     /**
      * See [IntArray.last]
@@ -195,7 +195,7 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
      * See [IntArray.lastOrNull]
      */
     public inline fun lastOrNull(predicate: (element: Int) -> Boolean): Int? =
-            values.lastOrNull(predicate)
+        values.lastOrNull(predicate)
 
     /**
      * See [IntArray.iterator]
@@ -267,8 +267,7 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
      * Creates a pair of immutable arrays, where the first contains elements for which predicate
      * yielded true, and the second contains the other elements.
      */
-    public fun partition(predicate: (element: Int) -> Boolean):
-            Pair<ImmutableIntArray, ImmutableIntArray> {
+    public fun partition(predicate: (element: Int) -> Boolean): Pair<ImmutableIntArray, ImmutableIntArray> {
         val first = Builder()
         val second = Builder()
         for (element in values) {
@@ -287,8 +286,7 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Int) -> R?):
-            ImmutableIntArray = sortedWith(compareBy(selector))
+    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Int) -> R?): ImmutableIntArray = sortedWith(compareBy(selector))
 
     /**
      * Leaves this immutable array as is and returns an ImmutableIntArray with all elements sorted
@@ -297,9 +295,8 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedByDescending(crossinline
-            selector: (element: Int) -> R?): ImmutableIntArray =
-            sortedWith(compareByDescending(selector))
+    public inline fun <R : Comparable<R>> sortedByDescending(crossinline selector: (element: Int) -> R?): ImmutableIntArray =
+        sortedWith(compareByDescending(selector))
 
     /**
      * Leaves this immutable array as is and returns an [ImmutableIntArray] with all elements sorted
@@ -329,8 +326,7 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
          * We're using the invoke method instead of a regular constructor so that we can declare it
          * inline.  The call site will look like a regular constructor call.
          */
-        public inline operator fun invoke(size: Int, `init`: (index: Int) -> Int):
-                ImmutableIntArray {
+        public inline operator fun invoke(size: Int, `init`: (index: Int) -> Int): ImmutableIntArray {
             if (size == 0) return EMPTY
 
             val backingArray = IntArray(size) { index -> init(index) }
