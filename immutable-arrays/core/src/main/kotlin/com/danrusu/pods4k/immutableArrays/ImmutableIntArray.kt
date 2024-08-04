@@ -288,6 +288,13 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     }
 
     /**
+     * See [IntArray.indexOfLast]
+     */
+    public inline fun indexOfLast(predicate: (element: Int) -> Boolean): Int {
+        return values.indexOfLast(predicate)
+    }
+
+    /**
      * Creates a pair of immutable arrays, where the first contains elements for which predicate
      * yielded true, and the second contains the other elements.
      */

@@ -525,6 +525,17 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `indexOfLast validation`() {
+        with(immutableArrayOf("a", "bb", "ccc", "ddd")) {
+            expectThat(indexOfLast { it.length == 3 })
+                .isEqualTo(3)
+
+            expectThat(indexOfLast { it.length == 5 })
+                .isEqualTo(-1)
+        }
+    }
+
+    @Test
     fun `partition validation`() {
         with(emptyImmutableArray<String>()) {
             expectThat(partition { it.length % 2 == 0 })
