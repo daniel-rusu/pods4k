@@ -456,6 +456,23 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `forEachIndexed validation`() {
+        with(ImmutableArray(3) { "element $it" }) {
+            val elements = mutableMapOf<Int, String>()
+            this.forEachIndexed { index, element ->
+                elements[index] = element
+            }
+            expectThat(elements).isEqualTo(
+                mutableMapOf(
+                    0 to "element 0",
+                    1 to "element 1",
+                    2 to "element 2",
+                ),
+            )
+        }
+    }
+
+    @Test
     fun `all validation`() {
         with(immutableArrayOf("one", "two", "four")) {
             expectThat(all { it.contains('o') })
@@ -497,19 +514,13 @@ class ImmutableArrayTest {
     }
 
     @Test
-    fun `forEachIndexed validation`() {
-        with(ImmutableArray(3) { "element $it" }) {
-            val elements = mutableMapOf<Int, String>()
-            this.forEachIndexed { index, element ->
-                elements[index] = element
-            }
-            expectThat(elements).isEqualTo(
-                mutableMapOf(
-                    0 to "element 0",
-                    1 to "element 1",
-                    2 to "element 2",
-                ),
-            )
+    fun `indexOfFirst validation`() {
+        with(immutableArrayOf("a", "bb", "ccc", "ddd")) {
+            expectThat(indexOfFirst { it.length == 3 })
+                .isEqualTo(2)
+
+            expectThat(indexOfFirst { it.length == 5 })
+                .isEqualTo(-1)
         }
     }
 

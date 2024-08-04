@@ -281,6 +281,13 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     }
 
     /**
+     * See [IntArray.indexOfFirst]
+     */
+    public inline fun indexOfFirst(predicate: (element: Int) -> Boolean): Int {
+        return values.indexOfFirst(predicate)
+    }
+
+    /**
      * Creates a pair of immutable arrays, where the first contains elements for which predicate
      * yielded true, and the second contains the other elements.
      */

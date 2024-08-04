@@ -282,6 +282,15 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 returns = Int::class.asTypeName(),
                 forceFunctionBody = true,
             )
+            "indexOfFirst"(
+                typeSpecBuilder = this,
+                baseType = baseType,
+                parameters = {
+                    "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
+                },
+                returns = Int::class.asTypeName(),
+                forceFunctionBody = true,
+            )
             addPartition(baseType)
             addSortedBy(baseType)
             addSortedByDescending(baseType)

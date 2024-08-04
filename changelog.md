@@ -9,6 +9,7 @@ _Date TBD_
 
 **New Features:**
 
+* Add `indexOfFirst(predicate)` method
 * Add `joinToString` method
 * Add `lastIndexOf(element)` extension function
 * Add `addAll(sequence)` to the immutable array builders

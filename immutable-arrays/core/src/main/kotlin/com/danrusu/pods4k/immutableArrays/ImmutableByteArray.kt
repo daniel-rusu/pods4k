@@ -282,6 +282,13 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     }
 
     /**
+     * See [ByteArray.indexOfFirst]
+     */
+    public inline fun indexOfFirst(predicate: (element: Byte) -> Boolean): Int {
+        return values.indexOfFirst(predicate)
+    }
+
+    /**
      * Creates a pair of immutable arrays, where the first contains elements for which predicate
      * yielded true, and the second contains the other elements.
      */

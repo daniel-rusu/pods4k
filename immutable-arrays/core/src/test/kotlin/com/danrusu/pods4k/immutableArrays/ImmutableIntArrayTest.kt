@@ -527,6 +527,17 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `indexOfFirst validation`() {
+        with(immutableArrayOf(1, 2, 3, 4)) {
+            expectThat(indexOfFirst { it % 2 == 0 })
+                .isEqualTo(1)
+
+            expectThat(indexOfFirst { it % 5 == 0 })
+                .isEqualTo(-1)
+        }
+    }
+
+    @Test
     fun `sortedBy validation`() {
         with(immutableArrayOf(3, 17, 11)) {
             expectThat(sortedBy { it.toString() })
