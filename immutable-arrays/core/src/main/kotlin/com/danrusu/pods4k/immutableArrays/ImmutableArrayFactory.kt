@@ -65,56 +65,65 @@ public fun <T> immutableArrayOf(): ImmutableArray<T> = emptyImmutableArray()
 /**
  * Returns an [ImmutableArray] containing the specified [values].
  */
-public fun <T> immutableArrayOf(vararg values: T): ImmutableArray<T> =
-    buildImmutableArray(initialCapacity = values.size) { addAll(values) }
+public fun <T> immutableArrayOf(vararg values: T): ImmutableArray<T> {
+    return buildImmutableArray(initialCapacity = values.size) { addAll(values) }
+}
 
 /**
  * Returns an [ImmutableBooleanArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Boolean): ImmutableBooleanArray =
-    buildImmutableBooleanArray(initialCapacity = values.size) { addAll(values) }
+public fun immutableArrayOf(vararg values: Boolean): ImmutableBooleanArray {
+    return buildImmutableBooleanArray(initialCapacity = values.size) { addAll(values) }
+}
 
 /**
  * Returns an [ImmutableByteArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Byte): ImmutableByteArray =
-    buildImmutableByteArray(initialCapacity = values.size) { addAll(values) }
+public fun immutableArrayOf(vararg values: Byte): ImmutableByteArray {
+    return buildImmutableByteArray(initialCapacity = values.size) { addAll(values) }
+}
 
 /**
  * Returns an [ImmutableCharArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Char): ImmutableCharArray =
-    buildImmutableCharArray(initialCapacity = values.size) { addAll(values) }
+public fun immutableArrayOf(vararg values: Char): ImmutableCharArray {
+    return buildImmutableCharArray(initialCapacity = values.size) { addAll(values) }
+}
 
 /**
  * Returns an [ImmutableShortArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Short): ImmutableShortArray =
-    buildImmutableShortArray(initialCapacity = values.size) { addAll(values) }
+public fun immutableArrayOf(vararg values: Short): ImmutableShortArray {
+    return buildImmutableShortArray(initialCapacity = values.size) { addAll(values) }
+}
 
 /**
  * Returns an [ImmutableIntArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Int): ImmutableIntArray =
-    buildImmutableIntArray(initialCapacity = values.size) { addAll(values) }
+public fun immutableArrayOf(vararg values: Int): ImmutableIntArray {
+    return buildImmutableIntArray(initialCapacity = values.size) { addAll(values) }
+}
 
 /**
  * Returns an [ImmutableLongArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Long): ImmutableLongArray =
-    buildImmutableLongArray(initialCapacity = values.size) { addAll(values) }
+public fun immutableArrayOf(vararg values: Long): ImmutableLongArray {
+    return buildImmutableLongArray(initialCapacity = values.size) { addAll(values) }
+}
 
 /**
  * Returns an [ImmutableFloatArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Float): ImmutableFloatArray =
-    buildImmutableFloatArray(initialCapacity = values.size) { addAll(values) }
+public fun immutableArrayOf(vararg values: Float): ImmutableFloatArray {
+    return buildImmutableFloatArray(initialCapacity = values.size) { addAll(values) }
+}
 
 /**
  * Returns an [ImmutableDoubleArray] containing the specified [values].
  */
-public fun immutableArrayOf(vararg values: Double): ImmutableDoubleArray =
-    buildImmutableDoubleArray(initialCapacity = values.size) { addAll(values) }
+public fun immutableArrayOf(vararg values: Double): ImmutableDoubleArray {
+    return buildImmutableDoubleArray(initialCapacity = values.size) { addAll(values) }
+}
 
 /**
  * Builds an [ImmutableArray] for when the size isn't known in advance.
@@ -122,8 +131,9 @@ public fun immutableArrayOf(vararg values: Double): ImmutableDoubleArray =
 public fun <T> buildImmutableArray(
     initialCapacity: Int = 10,
     body: ImmutableArray.Builder<T>.() -> Unit,
-): ImmutableArray<T> =
-    ImmutableArray.Builder<T>(initialCapacity).apply(body).build()
+): ImmutableArray<T> {
+    return ImmutableArray.Builder<T>(initialCapacity).apply(body).build()
+}
 
 /**
  * Builds an [ImmutableBooleanArray] for when the size isn't known in advance.
@@ -131,8 +141,9 @@ public fun <T> buildImmutableArray(
 public fun buildImmutableBooleanArray(
     initialCapacity: Int = 10,
     body: ImmutableBooleanArray.Builder.() -> Unit,
-): ImmutableBooleanArray =
-    ImmutableBooleanArray.Builder(initialCapacity).apply(body).build()
+): ImmutableBooleanArray {
+    return ImmutableBooleanArray.Builder(initialCapacity).apply(body).build()
+}
 
 /**
  * Builds an [ImmutableByteArray] for when the size isn't known in advance.
@@ -140,8 +151,9 @@ public fun buildImmutableBooleanArray(
 public fun buildImmutableByteArray(
     initialCapacity: Int = 10,
     body: ImmutableByteArray.Builder.() -> Unit,
-): ImmutableByteArray =
-    ImmutableByteArray.Builder(initialCapacity).apply(body).build()
+): ImmutableByteArray {
+    return ImmutableByteArray.Builder(initialCapacity).apply(body).build()
+}
 
 /**
  * Builds an [ImmutableCharArray] for when the size isn't known in advance.
@@ -149,8 +161,9 @@ public fun buildImmutableByteArray(
 public fun buildImmutableCharArray(
     initialCapacity: Int = 10,
     body: ImmutableCharArray.Builder.() -> Unit,
-): ImmutableCharArray =
-    ImmutableCharArray.Builder(initialCapacity).apply(body).build()
+): ImmutableCharArray {
+    return ImmutableCharArray.Builder(initialCapacity).apply(body).build()
+}
 
 /**
  * Builds an [ImmutableShortArray] for when the size isn't known in advance.
@@ -158,8 +171,9 @@ public fun buildImmutableCharArray(
 public fun buildImmutableShortArray(
     initialCapacity: Int = 10,
     body: ImmutableShortArray.Builder.() -> Unit,
-): ImmutableShortArray =
-    ImmutableShortArray.Builder(initialCapacity).apply(body).build()
+): ImmutableShortArray {
+    return ImmutableShortArray.Builder(initialCapacity).apply(body).build()
+}
 
 /**
  * Builds an [ImmutableIntArray] for when the size isn't known in advance.
@@ -167,8 +181,9 @@ public fun buildImmutableShortArray(
 public fun buildImmutableIntArray(
     initialCapacity: Int = 10,
     body: ImmutableIntArray.Builder.() -> Unit,
-): ImmutableIntArray =
-    ImmutableIntArray.Builder(initialCapacity).apply(body).build()
+): ImmutableIntArray {
+    return ImmutableIntArray.Builder(initialCapacity).apply(body).build()
+}
 
 /**
  * Builds an [ImmutableLongArray] for when the size isn't known in advance.
@@ -176,8 +191,9 @@ public fun buildImmutableIntArray(
 public fun buildImmutableLongArray(
     initialCapacity: Int = 10,
     body: ImmutableLongArray.Builder.() -> Unit,
-): ImmutableLongArray =
-    ImmutableLongArray.Builder(initialCapacity).apply(body).build()
+): ImmutableLongArray {
+    return ImmutableLongArray.Builder(initialCapacity).apply(body).build()
+}
 
 /**
  * Builds an [ImmutableFloatArray] for when the size isn't known in advance.
@@ -185,8 +201,9 @@ public fun buildImmutableLongArray(
 public fun buildImmutableFloatArray(
     initialCapacity: Int = 10,
     body: ImmutableFloatArray.Builder.() -> Unit,
-): ImmutableFloatArray =
-    ImmutableFloatArray.Builder(initialCapacity).apply(body).build()
+): ImmutableFloatArray {
+    return ImmutableFloatArray.Builder(initialCapacity).apply(body).build()
+}
 
 /**
  * Builds an [ImmutableDoubleArray] for when the size isn't known in advance.
@@ -194,8 +211,9 @@ public fun buildImmutableFloatArray(
 public fun buildImmutableDoubleArray(
     initialCapacity: Int = 10,
     body: ImmutableDoubleArray.Builder.() -> Unit,
-): ImmutableDoubleArray =
-    ImmutableDoubleArray.Builder(initialCapacity).apply(body).build()
+): ImmutableDoubleArray {
+    return ImmutableDoubleArray.Builder(initialCapacity).apply(body).build()
+}
 
 internal object BuilderUtils {
     /**

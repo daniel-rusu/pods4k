@@ -72,6 +72,7 @@ private fun FileSpec.Builder.addImmutableArrayOf() {
             name = "immutableArrayOf",
             parameters = { "values"(type = baseType.type, isVararg = true) },
             returns = baseType.getGeneratedTypeName(),
+            forceFunctionBody = true,
         ) {
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
@@ -97,6 +98,7 @@ private fun FileSpec.Builder.addBuilderFunctions() {
                 )
             },
             returns = baseType.getGeneratedTypeName(),
+            forceFunctionBody = true,
         ) {
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
