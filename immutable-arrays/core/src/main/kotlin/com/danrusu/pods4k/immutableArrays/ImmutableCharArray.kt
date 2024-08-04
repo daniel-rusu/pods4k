@@ -143,7 +143,9 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.single]
      */
-    public inline fun single(predicate: (element: Char) -> Boolean): Char = values.single(predicate)
+    public inline fun single(predicate: (element: Char) -> Boolean): Char {
+        return values.single(predicate)
+    }
 
     /**
      * See [CharArray.singleOrNull]
@@ -153,8 +155,9 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.singleOrNull]
      */
-    public inline fun singleOrNull(predicate: (element: Char) -> Boolean): Char? =
-        values.singleOrNull(predicate)
+    public inline fun singleOrNull(predicate: (element: Char) -> Boolean): Char? {
+        return values.singleOrNull(predicate)
+    }
 
     /**
      * See [CharArray.first]
@@ -164,7 +167,9 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.first]
      */
-    public inline fun first(predicate: (element: Char) -> Boolean): Char = values.first(predicate)
+    public inline fun first(predicate: (element: Char) -> Boolean): Char {
+        return values.first(predicate)
+    }
 
     /**
      * See [CharArray.firstOrNull]
@@ -174,8 +179,9 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.firstOrNull]
      */
-    public inline fun firstOrNull(predicate: (element: Char) -> Boolean): Char? =
-        values.firstOrNull(predicate)
+    public inline fun firstOrNull(predicate: (element: Char) -> Boolean): Char? {
+        return values.firstOrNull(predicate)
+    }
 
     /**
      * See [CharArray.last]
@@ -185,7 +191,9 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.last]
      */
-    public inline fun last(predicate: (element: Char) -> Boolean): Char = values.last(predicate)
+    public inline fun last(predicate: (element: Char) -> Boolean): Char {
+        return values.last(predicate)
+    }
 
     /**
      * See [CharArray.lastOrNull]
@@ -195,8 +203,9 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.lastOrNull]
      */
-    public inline fun lastOrNull(predicate: (element: Char) -> Boolean): Char? =
-        values.lastOrNull(predicate)
+    public inline fun lastOrNull(predicate: (element: Char) -> Boolean): Char? {
+        return values.lastOrNull(predicate)
+    }
 
     /**
      * See [CharArray.iterator]
@@ -247,23 +256,30 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.all]
      */
-    public inline fun all(predicate: (predicate: Char) -> Boolean): Boolean = values.all(predicate)
+    public inline fun all(predicate: (predicate: Char) -> Boolean): Boolean {
+        return values.all(predicate)
+    }
 
     /**
      * See [CharArray.any]
      */
-    public inline fun any(predicate: (predicate: Char) -> Boolean): Boolean = values.any(predicate)
+    public inline fun any(predicate: (predicate: Char) -> Boolean): Boolean {
+        return values.any(predicate)
+    }
 
     /**
      * See [CharArray.none]
      */
-    public inline fun none(predicate: (predicate: Char) -> Boolean): Boolean =
-        values.none(predicate)
+    public inline fun none(predicate: (predicate: Char) -> Boolean): Boolean {
+        return values.none(predicate)
+    }
 
     /**
      * See [CharArray.count]
      */
-    public inline fun count(predicate: (predicate: Char) -> Boolean): Int = values.count(predicate)
+    public inline fun count(predicate: (predicate: Char) -> Boolean): Int {
+        return values.count(predicate)
+    }
 
     /**
      * Creates a pair of immutable arrays, where the first contains elements for which predicate

@@ -143,7 +143,9 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.single]
      */
-    public inline fun single(predicate: (element: Long) -> Boolean): Long = values.single(predicate)
+    public inline fun single(predicate: (element: Long) -> Boolean): Long {
+        return values.single(predicate)
+    }
 
     /**
      * See [LongArray.singleOrNull]
@@ -153,8 +155,9 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.singleOrNull]
      */
-    public inline fun singleOrNull(predicate: (element: Long) -> Boolean): Long? =
-        values.singleOrNull(predicate)
+    public inline fun singleOrNull(predicate: (element: Long) -> Boolean): Long? {
+        return values.singleOrNull(predicate)
+    }
 
     /**
      * See [LongArray.first]
@@ -164,7 +167,9 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.first]
      */
-    public inline fun first(predicate: (element: Long) -> Boolean): Long = values.first(predicate)
+    public inline fun first(predicate: (element: Long) -> Boolean): Long {
+        return values.first(predicate)
+    }
 
     /**
      * See [LongArray.firstOrNull]
@@ -174,8 +179,9 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.firstOrNull]
      */
-    public inline fun firstOrNull(predicate: (element: Long) -> Boolean): Long? =
-        values.firstOrNull(predicate)
+    public inline fun firstOrNull(predicate: (element: Long) -> Boolean): Long? {
+        return values.firstOrNull(predicate)
+    }
 
     /**
      * See [LongArray.last]
@@ -185,7 +191,9 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.last]
      */
-    public inline fun last(predicate: (element: Long) -> Boolean): Long = values.last(predicate)
+    public inline fun last(predicate: (element: Long) -> Boolean): Long {
+        return values.last(predicate)
+    }
 
     /**
      * See [LongArray.lastOrNull]
@@ -195,8 +203,9 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.lastOrNull]
      */
-    public inline fun lastOrNull(predicate: (element: Long) -> Boolean): Long? =
-        values.lastOrNull(predicate)
+    public inline fun lastOrNull(predicate: (element: Long) -> Boolean): Long? {
+        return values.lastOrNull(predicate)
+    }
 
     /**
      * See [LongArray.iterator]
@@ -247,23 +256,30 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.all]
      */
-    public inline fun all(predicate: (predicate: Long) -> Boolean): Boolean = values.all(predicate)
+    public inline fun all(predicate: (predicate: Long) -> Boolean): Boolean {
+        return values.all(predicate)
+    }
 
     /**
      * See [LongArray.any]
      */
-    public inline fun any(predicate: (predicate: Long) -> Boolean): Boolean = values.any(predicate)
+    public inline fun any(predicate: (predicate: Long) -> Boolean): Boolean {
+        return values.any(predicate)
+    }
 
     /**
      * See [LongArray.none]
      */
-    public inline fun none(predicate: (predicate: Long) -> Boolean): Boolean =
-        values.none(predicate)
+    public inline fun none(predicate: (predicate: Long) -> Boolean): Boolean {
+        return values.none(predicate)
+    }
 
     /**
      * See [LongArray.count]
      */
-    public inline fun count(predicate: (predicate: Long) -> Boolean): Int = values.count(predicate)
+    public inline fun count(predicate: (predicate: Long) -> Boolean): Int {
+        return values.count(predicate)
+    }
 
     /**
      * Creates a pair of immutable arrays, where the first contains elements for which predicate

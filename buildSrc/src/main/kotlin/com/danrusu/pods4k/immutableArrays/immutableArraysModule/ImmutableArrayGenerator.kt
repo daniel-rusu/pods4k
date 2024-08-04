@@ -125,6 +125,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                     "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
                 },
                 returns = baseType.type,
+                forceFunctionBody = true,
             )
             "singleOrNull"(
                 typeSpecBuilder = this,
@@ -138,6 +139,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                     "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
                 },
                 returns = baseType.type.copy(nullable = true),
+                forceFunctionBody = true,
             )
             "first"(
                 typeSpecBuilder = this,
@@ -151,6 +153,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                     "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
                 },
                 returns = baseType.type,
+                forceFunctionBody = true,
             )
             "firstOrNull"(
                 typeSpecBuilder = this,
@@ -164,6 +167,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                     "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
                 },
                 returns = baseType.type.copy(nullable = true),
+                forceFunctionBody = true,
             )
             "last"(
                 typeSpecBuilder = this,
@@ -177,6 +181,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                     "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
                 },
                 returns = baseType.type,
+                forceFunctionBody = true,
             )
             "lastOrNull"(
                 typeSpecBuilder = this,
@@ -190,6 +195,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                     "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) })
                 },
                 returns = baseType.type.copy(nullable = true),
+                forceFunctionBody = true,
             )
             "iterator"(
                 typeSpecBuilder = this,
@@ -253,24 +259,28 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 baseType = baseType,
                 parameters = { "predicate"(type = lambda<Boolean> { "predicate"(type = baseType.type) }) },
                 returns = Boolean::class.asTypeName(),
+                forceFunctionBody = true,
             )
             "any"(
                 typeSpecBuilder = this,
                 baseType = baseType,
                 parameters = { "predicate"(type = lambda<Boolean> { "predicate"(type = baseType.type) }) },
                 returns = Boolean::class.asTypeName(),
+                forceFunctionBody = true,
             )
             "none"(
                 typeSpecBuilder = this,
                 baseType = baseType,
                 parameters = { "predicate"(type = lambda<Boolean> { "predicate"(type = baseType.type) }) },
                 returns = Boolean::class.asTypeName(),
+                forceFunctionBody = true,
             )
             "count"(
                 typeSpecBuilder = this,
                 baseType = baseType,
                 parameters = { "predicate"(type = lambda<Boolean> { "predicate"(type = baseType.type) }) },
                 returns = Int::class.asTypeName(),
+                forceFunctionBody = true,
             )
             addPartition(baseType)
             addSortedBy(baseType)
@@ -339,6 +349,7 @@ private operator fun String.invoke(
     modifiers: List<KModifier> = emptyList(),
     parameters: ParameterDSL.() -> Unit = {},
     returns: TypeName = Unit::class.asTypeName(),
+    forceFunctionBody: Boolean = false,
 ) {
     val params = ParameterDSL().apply(parameters).build().joinToString { it.name }
     typeSpecBuilder.function(
@@ -348,6 +359,7 @@ private operator fun String.invoke(
         name = this,
         parameters = parameters,
         returns = returns,
+        forceFunctionBody = forceFunctionBody,
     ) {
         if (returns == Unit::class.asTypeName()) {
             statement("values.${this@invoke}($params)")

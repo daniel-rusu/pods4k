@@ -143,7 +143,9 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.single]
      */
-    public inline fun single(predicate: (element: Byte) -> Boolean): Byte = values.single(predicate)
+    public inline fun single(predicate: (element: Byte) -> Boolean): Byte {
+        return values.single(predicate)
+    }
 
     /**
      * See [ByteArray.singleOrNull]
@@ -153,8 +155,9 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.singleOrNull]
      */
-    public inline fun singleOrNull(predicate: (element: Byte) -> Boolean): Byte? =
-        values.singleOrNull(predicate)
+    public inline fun singleOrNull(predicate: (element: Byte) -> Boolean): Byte? {
+        return values.singleOrNull(predicate)
+    }
 
     /**
      * See [ByteArray.first]
@@ -164,7 +167,9 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.first]
      */
-    public inline fun first(predicate: (element: Byte) -> Boolean): Byte = values.first(predicate)
+    public inline fun first(predicate: (element: Byte) -> Boolean): Byte {
+        return values.first(predicate)
+    }
 
     /**
      * See [ByteArray.firstOrNull]
@@ -174,8 +179,9 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.firstOrNull]
      */
-    public inline fun firstOrNull(predicate: (element: Byte) -> Boolean): Byte? =
-        values.firstOrNull(predicate)
+    public inline fun firstOrNull(predicate: (element: Byte) -> Boolean): Byte? {
+        return values.firstOrNull(predicate)
+    }
 
     /**
      * See [ByteArray.last]
@@ -185,7 +191,9 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.last]
      */
-    public inline fun last(predicate: (element: Byte) -> Boolean): Byte = values.last(predicate)
+    public inline fun last(predicate: (element: Byte) -> Boolean): Byte {
+        return values.last(predicate)
+    }
 
     /**
      * See [ByteArray.lastOrNull]
@@ -195,8 +203,9 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.lastOrNull]
      */
-    public inline fun lastOrNull(predicate: (element: Byte) -> Boolean): Byte? =
-        values.lastOrNull(predicate)
+    public inline fun lastOrNull(predicate: (element: Byte) -> Boolean): Byte? {
+        return values.lastOrNull(predicate)
+    }
 
     /**
      * See [ByteArray.iterator]
@@ -247,23 +256,30 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.all]
      */
-    public inline fun all(predicate: (predicate: Byte) -> Boolean): Boolean = values.all(predicate)
+    public inline fun all(predicate: (predicate: Byte) -> Boolean): Boolean {
+        return values.all(predicate)
+    }
 
     /**
      * See [ByteArray.any]
      */
-    public inline fun any(predicate: (predicate: Byte) -> Boolean): Boolean = values.any(predicate)
+    public inline fun any(predicate: (predicate: Byte) -> Boolean): Boolean {
+        return values.any(predicate)
+    }
 
     /**
      * See [ByteArray.none]
      */
-    public inline fun none(predicate: (predicate: Byte) -> Boolean): Boolean =
-        values.none(predicate)
+    public inline fun none(predicate: (predicate: Byte) -> Boolean): Boolean {
+        return values.none(predicate)
+    }
 
     /**
      * See [ByteArray.count]
      */
-    public inline fun count(predicate: (predicate: Byte) -> Boolean): Int = values.count(predicate)
+    public inline fun count(predicate: (predicate: Byte) -> Boolean): Int {
+        return values.count(predicate)
+    }
 
     /**
      * Creates a pair of immutable arrays, where the first contains elements for which predicate

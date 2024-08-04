@@ -143,8 +143,9 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.single]
      */
-    public inline fun single(predicate: (element: Short) -> Boolean): Short =
-        values.single(predicate)
+    public inline fun single(predicate: (element: Short) -> Boolean): Short {
+        return values.single(predicate)
+    }
 
     /**
      * See [ShortArray.singleOrNull]
@@ -154,8 +155,9 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.singleOrNull]
      */
-    public inline fun singleOrNull(predicate: (element: Short) -> Boolean): Short? =
-        values.singleOrNull(predicate)
+    public inline fun singleOrNull(predicate: (element: Short) -> Boolean): Short? {
+        return values.singleOrNull(predicate)
+    }
 
     /**
      * See [ShortArray.first]
@@ -165,7 +167,9 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.first]
      */
-    public inline fun first(predicate: (element: Short) -> Boolean): Short = values.first(predicate)
+    public inline fun first(predicate: (element: Short) -> Boolean): Short {
+        return values.first(predicate)
+    }
 
     /**
      * See [ShortArray.firstOrNull]
@@ -175,8 +179,9 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.firstOrNull]
      */
-    public inline fun firstOrNull(predicate: (element: Short) -> Boolean): Short? =
-        values.firstOrNull(predicate)
+    public inline fun firstOrNull(predicate: (element: Short) -> Boolean): Short? {
+        return values.firstOrNull(predicate)
+    }
 
     /**
      * See [ShortArray.last]
@@ -186,7 +191,9 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.last]
      */
-    public inline fun last(predicate: (element: Short) -> Boolean): Short = values.last(predicate)
+    public inline fun last(predicate: (element: Short) -> Boolean): Short {
+        return values.last(predicate)
+    }
 
     /**
      * See [ShortArray.lastOrNull]
@@ -196,8 +203,9 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.lastOrNull]
      */
-    public inline fun lastOrNull(predicate: (element: Short) -> Boolean): Short? =
-        values.lastOrNull(predicate)
+    public inline fun lastOrNull(predicate: (element: Short) -> Boolean): Short? {
+        return values.lastOrNull(predicate)
+    }
 
     /**
      * See [ShortArray.iterator]
@@ -248,23 +256,30 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.all]
      */
-    public inline fun all(predicate: (predicate: Short) -> Boolean): Boolean = values.all(predicate)
+    public inline fun all(predicate: (predicate: Short) -> Boolean): Boolean {
+        return values.all(predicate)
+    }
 
     /**
      * See [ShortArray.any]
      */
-    public inline fun any(predicate: (predicate: Short) -> Boolean): Boolean = values.any(predicate)
+    public inline fun any(predicate: (predicate: Short) -> Boolean): Boolean {
+        return values.any(predicate)
+    }
 
     /**
      * See [ShortArray.none]
      */
-    public inline fun none(predicate: (predicate: Short) -> Boolean): Boolean =
-        values.none(predicate)
+    public inline fun none(predicate: (predicate: Short) -> Boolean): Boolean {
+        return values.none(predicate)
+    }
 
     /**
      * See [ShortArray.count]
      */
-    public inline fun count(predicate: (predicate: Short) -> Boolean): Int = values.count(predicate)
+    public inline fun count(predicate: (predicate: Short) -> Boolean): Int {
+        return values.count(predicate)
+    }
 
     /**
      * Creates a pair of immutable arrays, where the first contains elements for which predicate

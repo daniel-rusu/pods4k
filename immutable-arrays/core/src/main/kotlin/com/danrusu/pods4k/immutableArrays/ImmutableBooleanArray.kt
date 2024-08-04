@@ -142,8 +142,9 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.single]
      */
-    public inline fun single(predicate: (element: Boolean) -> Boolean): Boolean =
-        values.single(predicate)
+    public inline fun single(predicate: (element: Boolean) -> Boolean): Boolean {
+        return values.single(predicate)
+    }
 
     /**
      * See [BooleanArray.singleOrNull]
@@ -153,8 +154,9 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.singleOrNull]
      */
-    public inline fun singleOrNull(predicate: (element: Boolean) -> Boolean): Boolean? =
-        values.singleOrNull(predicate)
+    public inline fun singleOrNull(predicate: (element: Boolean) -> Boolean): Boolean? {
+        return values.singleOrNull(predicate)
+    }
 
     /**
      * See [BooleanArray.first]
@@ -164,8 +166,9 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.first]
      */
-    public inline fun first(predicate: (element: Boolean) -> Boolean): Boolean =
-        values.first(predicate)
+    public inline fun first(predicate: (element: Boolean) -> Boolean): Boolean {
+        return values.first(predicate)
+    }
 
     /**
      * See [BooleanArray.firstOrNull]
@@ -175,8 +178,9 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.firstOrNull]
      */
-    public inline fun firstOrNull(predicate: (element: Boolean) -> Boolean): Boolean? =
-        values.firstOrNull(predicate)
+    public inline fun firstOrNull(predicate: (element: Boolean) -> Boolean): Boolean? {
+        return values.firstOrNull(predicate)
+    }
 
     /**
      * See [BooleanArray.last]
@@ -186,8 +190,9 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.last]
      */
-    public inline fun last(predicate: (element: Boolean) -> Boolean): Boolean =
-        values.last(predicate)
+    public inline fun last(predicate: (element: Boolean) -> Boolean): Boolean {
+        return values.last(predicate)
+    }
 
     /**
      * See [BooleanArray.lastOrNull]
@@ -197,8 +202,9 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.lastOrNull]
      */
-    public inline fun lastOrNull(predicate: (element: Boolean) -> Boolean): Boolean? =
-        values.lastOrNull(predicate)
+    public inline fun lastOrNull(predicate: (element: Boolean) -> Boolean): Boolean? {
+        return values.lastOrNull(predicate)
+    }
 
     /**
      * See [BooleanArray.iterator]
@@ -249,26 +255,30 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.all]
      */
-    public inline fun all(predicate: (predicate: Boolean) -> Boolean): Boolean =
-        values.all(predicate)
+    public inline fun all(predicate: (predicate: Boolean) -> Boolean): Boolean {
+        return values.all(predicate)
+    }
 
     /**
      * See [BooleanArray.any]
      */
-    public inline fun any(predicate: (predicate: Boolean) -> Boolean): Boolean =
-        values.any(predicate)
+    public inline fun any(predicate: (predicate: Boolean) -> Boolean): Boolean {
+        return values.any(predicate)
+    }
 
     /**
      * See [BooleanArray.none]
      */
-    public inline fun none(predicate: (predicate: Boolean) -> Boolean): Boolean =
-        values.none(predicate)
+    public inline fun none(predicate: (predicate: Boolean) -> Boolean): Boolean {
+        return values.none(predicate)
+    }
 
     /**
      * See [BooleanArray.count]
      */
-    public inline fun count(predicate: (predicate: Boolean) -> Boolean): Int =
-        values.count(predicate)
+    public inline fun count(predicate: (predicate: Boolean) -> Boolean): Int {
+        return values.count(predicate)
+    }
 
     /**
      * Creates a pair of immutable arrays, where the first contains elements for which predicate

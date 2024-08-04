@@ -143,8 +143,9 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.single]
      */
-    public inline fun single(predicate: (element: Double) -> Boolean): Double =
-        values.single(predicate)
+    public inline fun single(predicate: (element: Double) -> Boolean): Double {
+        return values.single(predicate)
+    }
 
     /**
      * See [DoubleArray.singleOrNull]
@@ -154,8 +155,9 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.singleOrNull]
      */
-    public inline fun singleOrNull(predicate: (element: Double) -> Boolean): Double? =
-        values.singleOrNull(predicate)
+    public inline fun singleOrNull(predicate: (element: Double) -> Boolean): Double? {
+        return values.singleOrNull(predicate)
+    }
 
     /**
      * See [DoubleArray.first]
@@ -165,8 +167,9 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.first]
      */
-    public inline fun first(predicate: (element: Double) -> Boolean): Double =
-        values.first(predicate)
+    public inline fun first(predicate: (element: Double) -> Boolean): Double {
+        return values.first(predicate)
+    }
 
     /**
      * See [DoubleArray.firstOrNull]
@@ -176,8 +179,9 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.firstOrNull]
      */
-    public inline fun firstOrNull(predicate: (element: Double) -> Boolean): Double? =
-        values.firstOrNull(predicate)
+    public inline fun firstOrNull(predicate: (element: Double) -> Boolean): Double? {
+        return values.firstOrNull(predicate)
+    }
 
     /**
      * See [DoubleArray.last]
@@ -187,7 +191,9 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.last]
      */
-    public inline fun last(predicate: (element: Double) -> Boolean): Double = values.last(predicate)
+    public inline fun last(predicate: (element: Double) -> Boolean): Double {
+        return values.last(predicate)
+    }
 
     /**
      * See [DoubleArray.lastOrNull]
@@ -197,8 +203,9 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.lastOrNull]
      */
-    public inline fun lastOrNull(predicate: (element: Double) -> Boolean): Double? =
-        values.lastOrNull(predicate)
+    public inline fun lastOrNull(predicate: (element: Double) -> Boolean): Double? {
+        return values.lastOrNull(predicate)
+    }
 
     /**
      * See [DoubleArray.iterator]
@@ -249,26 +256,30 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.all]
      */
-    public inline fun all(predicate: (predicate: Double) -> Boolean): Boolean =
-        values.all(predicate)
+    public inline fun all(predicate: (predicate: Double) -> Boolean): Boolean {
+        return values.all(predicate)
+    }
 
     /**
      * See [DoubleArray.any]
      */
-    public inline fun any(predicate: (predicate: Double) -> Boolean): Boolean =
-        values.any(predicate)
+    public inline fun any(predicate: (predicate: Double) -> Boolean): Boolean {
+        return values.any(predicate)
+    }
 
     /**
      * See [DoubleArray.none]
      */
-    public inline fun none(predicate: (predicate: Double) -> Boolean): Boolean =
-        values.none(predicate)
+    public inline fun none(predicate: (predicate: Double) -> Boolean): Boolean {
+        return values.none(predicate)
+    }
 
     /**
      * See [DoubleArray.count]
      */
-    public inline fun count(predicate: (predicate: Double) -> Boolean): Int =
-        values.count(predicate)
+    public inline fun count(predicate: (predicate: Double) -> Boolean): Int {
+        return values.count(predicate)
+    }
 
     /**
      * Creates a pair of immutable arrays, where the first contains elements for which predicate

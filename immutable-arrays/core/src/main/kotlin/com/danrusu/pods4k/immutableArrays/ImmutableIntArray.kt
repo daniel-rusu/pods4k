@@ -142,7 +142,9 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.single]
      */
-    public inline fun single(predicate: (element: Int) -> Boolean): Int = values.single(predicate)
+    public inline fun single(predicate: (element: Int) -> Boolean): Int {
+        return values.single(predicate)
+    }
 
     /**
      * See [IntArray.singleOrNull]
@@ -152,8 +154,9 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.singleOrNull]
      */
-    public inline fun singleOrNull(predicate: (element: Int) -> Boolean): Int? =
-        values.singleOrNull(predicate)
+    public inline fun singleOrNull(predicate: (element: Int) -> Boolean): Int? {
+        return values.singleOrNull(predicate)
+    }
 
     /**
      * See [IntArray.first]
@@ -163,7 +166,9 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.first]
      */
-    public inline fun first(predicate: (element: Int) -> Boolean): Int = values.first(predicate)
+    public inline fun first(predicate: (element: Int) -> Boolean): Int {
+        return values.first(predicate)
+    }
 
     /**
      * See [IntArray.firstOrNull]
@@ -173,8 +178,9 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.firstOrNull]
      */
-    public inline fun firstOrNull(predicate: (element: Int) -> Boolean): Int? =
-        values.firstOrNull(predicate)
+    public inline fun firstOrNull(predicate: (element: Int) -> Boolean): Int? {
+        return values.firstOrNull(predicate)
+    }
 
     /**
      * See [IntArray.last]
@@ -184,7 +190,9 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.last]
      */
-    public inline fun last(predicate: (element: Int) -> Boolean): Int = values.last(predicate)
+    public inline fun last(predicate: (element: Int) -> Boolean): Int {
+        return values.last(predicate)
+    }
 
     /**
      * See [IntArray.lastOrNull]
@@ -194,8 +202,9 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.lastOrNull]
      */
-    public inline fun lastOrNull(predicate: (element: Int) -> Boolean): Int? =
-        values.lastOrNull(predicate)
+    public inline fun lastOrNull(predicate: (element: Int) -> Boolean): Int? {
+        return values.lastOrNull(predicate)
+    }
 
     /**
      * See [IntArray.iterator]
@@ -246,22 +255,30 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.all]
      */
-    public inline fun all(predicate: (predicate: Int) -> Boolean): Boolean = values.all(predicate)
+    public inline fun all(predicate: (predicate: Int) -> Boolean): Boolean {
+        return values.all(predicate)
+    }
 
     /**
      * See [IntArray.any]
      */
-    public inline fun any(predicate: (predicate: Int) -> Boolean): Boolean = values.any(predicate)
+    public inline fun any(predicate: (predicate: Int) -> Boolean): Boolean {
+        return values.any(predicate)
+    }
 
     /**
      * See [IntArray.none]
      */
-    public inline fun none(predicate: (predicate: Int) -> Boolean): Boolean = values.none(predicate)
+    public inline fun none(predicate: (predicate: Int) -> Boolean): Boolean {
+        return values.none(predicate)
+    }
 
     /**
      * See [IntArray.count]
      */
-    public inline fun count(predicate: (predicate: Int) -> Boolean): Int = values.count(predicate)
+    public inline fun count(predicate: (predicate: Int) -> Boolean): Int {
+        return values.count(predicate)
+    }
 
     /**
      * Creates a pair of immutable arrays, where the first contains elements for which predicate

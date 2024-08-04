@@ -143,8 +143,9 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.single]
      */
-    public inline fun single(predicate: (element: Float) -> Boolean): Float =
-        values.single(predicate)
+    public inline fun single(predicate: (element: Float) -> Boolean): Float {
+        return values.single(predicate)
+    }
 
     /**
      * See [FloatArray.singleOrNull]
@@ -154,8 +155,9 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.singleOrNull]
      */
-    public inline fun singleOrNull(predicate: (element: Float) -> Boolean): Float? =
-        values.singleOrNull(predicate)
+    public inline fun singleOrNull(predicate: (element: Float) -> Boolean): Float? {
+        return values.singleOrNull(predicate)
+    }
 
     /**
      * See [FloatArray.first]
@@ -165,7 +167,9 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.first]
      */
-    public inline fun first(predicate: (element: Float) -> Boolean): Float = values.first(predicate)
+    public inline fun first(predicate: (element: Float) -> Boolean): Float {
+        return values.first(predicate)
+    }
 
     /**
      * See [FloatArray.firstOrNull]
@@ -175,8 +179,9 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.firstOrNull]
      */
-    public inline fun firstOrNull(predicate: (element: Float) -> Boolean): Float? =
-        values.firstOrNull(predicate)
+    public inline fun firstOrNull(predicate: (element: Float) -> Boolean): Float? {
+        return values.firstOrNull(predicate)
+    }
 
     /**
      * See [FloatArray.last]
@@ -186,7 +191,9 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.last]
      */
-    public inline fun last(predicate: (element: Float) -> Boolean): Float = values.last(predicate)
+    public inline fun last(predicate: (element: Float) -> Boolean): Float {
+        return values.last(predicate)
+    }
 
     /**
      * See [FloatArray.lastOrNull]
@@ -196,8 +203,9 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.lastOrNull]
      */
-    public inline fun lastOrNull(predicate: (element: Float) -> Boolean): Float? =
-        values.lastOrNull(predicate)
+    public inline fun lastOrNull(predicate: (element: Float) -> Boolean): Float? {
+        return values.lastOrNull(predicate)
+    }
 
     /**
      * See [FloatArray.iterator]
@@ -248,23 +256,30 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
      * See [FloatArray.all]
      */
-    public inline fun all(predicate: (predicate: Float) -> Boolean): Boolean = values.all(predicate)
+    public inline fun all(predicate: (predicate: Float) -> Boolean): Boolean {
+        return values.all(predicate)
+    }
 
     /**
      * See [FloatArray.any]
      */
-    public inline fun any(predicate: (predicate: Float) -> Boolean): Boolean = values.any(predicate)
+    public inline fun any(predicate: (predicate: Float) -> Boolean): Boolean {
+        return values.any(predicate)
+    }
 
     /**
      * See [FloatArray.none]
      */
-    public inline fun none(predicate: (predicate: Float) -> Boolean): Boolean =
-        values.none(predicate)
+    public inline fun none(predicate: (predicate: Float) -> Boolean): Boolean {
+        return values.none(predicate)
+    }
 
     /**
      * See [FloatArray.count]
      */
-    public inline fun count(predicate: (predicate: Float) -> Boolean): Int = values.count(predicate)
+    public inline fun count(predicate: (predicate: Float) -> Boolean): Int {
+        return values.count(predicate)
+    }
 
     /**
      * Creates a pair of immutable arrays, where the first contains elements for which predicate

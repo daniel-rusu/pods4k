@@ -143,7 +143,9 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     /**
      * See [Array.single]
      */
-    public inline fun single(predicate: (element: T) -> Boolean): T = values.single(predicate)
+    public inline fun single(predicate: (element: T) -> Boolean): T {
+        return values.single(predicate)
+    }
 
     /**
      * See [Array.singleOrNull]
@@ -153,8 +155,9 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     /**
      * See [Array.singleOrNull]
      */
-    public inline fun singleOrNull(predicate: (element: T) -> Boolean): T? =
-        values.singleOrNull(predicate)
+    public inline fun singleOrNull(predicate: (element: T) -> Boolean): T? {
+        return values.singleOrNull(predicate)
+    }
 
     /**
      * See [Array.first]
@@ -164,7 +167,9 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     /**
      * See [Array.first]
      */
-    public inline fun first(predicate: (element: T) -> Boolean): T = values.first(predicate)
+    public inline fun first(predicate: (element: T) -> Boolean): T {
+        return values.first(predicate)
+    }
 
     /**
      * See [Array.firstOrNull]
@@ -174,8 +179,9 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     /**
      * See [Array.firstOrNull]
      */
-    public inline fun firstOrNull(predicate: (element: T) -> Boolean): T? =
-        values.firstOrNull(predicate)
+    public inline fun firstOrNull(predicate: (element: T) -> Boolean): T? {
+        return values.firstOrNull(predicate)
+    }
 
     /**
      * See [Array.last]
@@ -185,7 +191,9 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     /**
      * See [Array.last]
      */
-    public inline fun last(predicate: (element: T) -> Boolean): T = values.last(predicate)
+    public inline fun last(predicate: (element: T) -> Boolean): T {
+        return values.last(predicate)
+    }
 
     /**
      * See [Array.lastOrNull]
@@ -195,8 +203,9 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     /**
      * See [Array.lastOrNull]
      */
-    public inline fun lastOrNull(predicate: (element: T) -> Boolean): T? =
-        values.lastOrNull(predicate)
+    public inline fun lastOrNull(predicate: (element: T) -> Boolean): T? {
+        return values.lastOrNull(predicate)
+    }
 
     /**
      * See [Array.iterator]
@@ -241,22 +250,30 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     /**
      * See [Array.all]
      */
-    public inline fun all(predicate: (predicate: T) -> Boolean): Boolean = values.all(predicate)
+    public inline fun all(predicate: (predicate: T) -> Boolean): Boolean {
+        return values.all(predicate)
+    }
 
     /**
      * See [Array.any]
      */
-    public inline fun any(predicate: (predicate: T) -> Boolean): Boolean = values.any(predicate)
+    public inline fun any(predicate: (predicate: T) -> Boolean): Boolean {
+        return values.any(predicate)
+    }
 
     /**
      * See [Array.none]
      */
-    public inline fun none(predicate: (predicate: T) -> Boolean): Boolean = values.none(predicate)
+    public inline fun none(predicate: (predicate: T) -> Boolean): Boolean {
+        return values.none(predicate)
+    }
 
     /**
      * See [Array.count]
      */
-    public inline fun count(predicate: (predicate: T) -> Boolean): Int = values.count(predicate)
+    public inline fun count(predicate: (predicate: T) -> Boolean): Int {
+        return values.count(predicate)
+    }
 
     /**
      * Creates a pair of immutable arrays, where the first contains elements for which predicate
