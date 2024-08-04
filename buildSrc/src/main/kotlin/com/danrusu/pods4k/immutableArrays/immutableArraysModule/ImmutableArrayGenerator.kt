@@ -504,6 +504,7 @@ private fun TypeSpec.Builder.addSortedBy(baseType: BaseType) {
             )
         },
         returns = baseType.getGeneratedTypeName(),
+        forceFunctionBody = true,
     ) {
         addTypeVariable(
             TypeVariableName(genericVariableName, Comparable::class.asTypeName().parameterizedBy(genericType)),
@@ -533,6 +534,7 @@ private fun TypeSpec.Builder.addSortedByDescending(baseType: BaseType) {
             )
         },
         returns = baseType.getGeneratedTypeName(),
+        forceFunctionBody = true,
     ) {
         addTypeVariable(
             TypeVariableName(genericVariableName, Comparable::class.asTypeName().parameterizedBy(genericType)),

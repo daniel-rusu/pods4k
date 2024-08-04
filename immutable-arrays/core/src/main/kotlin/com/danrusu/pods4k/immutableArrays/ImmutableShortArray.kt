@@ -289,7 +289,9 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Short) -> R?): ImmutableShortArray = sortedWith(compareBy(selector))
+    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Short) -> R?): ImmutableShortArray {
+        return sortedWith(compareBy(selector))
+    }
 
     /**
      * Leaves this immutable array as is and returns an ImmutableShortArray with all elements sorted
@@ -298,8 +300,9 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedByDescending(crossinline selector: (element: Short) -> R?): ImmutableShortArray =
-        sortedWith(compareByDescending(selector))
+    public inline fun <R : Comparable<R>> sortedByDescending(crossinline selector: (element: Short) -> R?): ImmutableShortArray {
+        return sortedWith(compareByDescending(selector))
+    }
 
     /**
      * Leaves this immutable array as is and returns an [ImmutableShortArray] with all elements

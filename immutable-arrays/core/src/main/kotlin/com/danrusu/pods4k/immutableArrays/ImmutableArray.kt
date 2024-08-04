@@ -281,7 +281,9 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: T) -> R?): ImmutableArray<T> = sortedWith(compareBy(selector))
+    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: T) -> R?): ImmutableArray<T> {
+        return sortedWith(compareBy(selector))
+    }
 
     /**
      * Leaves this immutable array as is and returns an ImmutableArray with all elements sorted
@@ -290,8 +292,9 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedByDescending(crossinline selector: (element: T) -> R?): ImmutableArray<T> =
-        sortedWith(compareByDescending(selector))
+    public inline fun <R : Comparable<R>> sortedByDescending(crossinline selector: (element: T) -> R?): ImmutableArray<T> {
+        return sortedWith(compareByDescending(selector))
+    }
 
     /**
      * Leaves this immutable array as is and returns an [ImmutableArray] with all elements sorted

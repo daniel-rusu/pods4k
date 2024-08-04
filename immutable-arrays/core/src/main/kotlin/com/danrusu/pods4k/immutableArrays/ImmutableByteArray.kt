@@ -288,7 +288,9 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Byte) -> R?): ImmutableByteArray = sortedWith(compareBy(selector))
+    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Byte) -> R?): ImmutableByteArray {
+        return sortedWith(compareBy(selector))
+    }
 
     /**
      * Leaves this immutable array as is and returns an ImmutableByteArray with all elements sorted
@@ -297,8 +299,9 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedByDescending(crossinline selector: (element: Byte) -> R?): ImmutableByteArray =
-        sortedWith(compareByDescending(selector))
+    public inline fun <R : Comparable<R>> sortedByDescending(crossinline selector: (element: Byte) -> R?): ImmutableByteArray {
+        return sortedWith(compareByDescending(selector))
+    }
 
     /**
      * Leaves this immutable array as is and returns an [ImmutableByteArray] with all elements

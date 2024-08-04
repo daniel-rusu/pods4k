@@ -289,7 +289,9 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Float) -> R?): ImmutableFloatArray = sortedWith(compareBy(selector))
+    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Float) -> R?): ImmutableFloatArray {
+        return sortedWith(compareBy(selector))
+    }
 
     /**
      * Leaves this immutable array as is and returns an ImmutableFloatArray with all elements sorted
@@ -298,8 +300,9 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedByDescending(crossinline selector: (element: Float) -> R?): ImmutableFloatArray =
-        sortedWith(compareByDescending(selector))
+    public inline fun <R : Comparable<R>> sortedByDescending(crossinline selector: (element: Float) -> R?): ImmutableFloatArray {
+        return sortedWith(compareByDescending(selector))
+    }
 
     /**
      * Leaves this immutable array as is and returns an [ImmutableFloatArray] with all elements

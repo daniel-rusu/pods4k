@@ -293,7 +293,9 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Boolean) -> R?): ImmutableBooleanArray = sortedWith(compareBy(selector))
+    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Boolean) -> R?): ImmutableBooleanArray {
+        return sortedWith(compareBy(selector))
+    }
 
     /**
      * Leaves this immutable array as is and returns an ImmutableBooleanArray with all elements
@@ -302,8 +304,9 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedByDescending(crossinline selector: (element: Boolean) -> R?): ImmutableBooleanArray =
-        sortedWith(compareByDescending(selector))
+    public inline fun <R : Comparable<R>> sortedByDescending(crossinline selector: (element: Boolean) -> R?): ImmutableBooleanArray {
+        return sortedWith(compareByDescending(selector))
+    }
 
     /**
      * Leaves this immutable array as is and returns an [ImmutableBooleanArray] with all elements
