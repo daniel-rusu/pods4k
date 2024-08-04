@@ -810,8 +810,9 @@ public operator fun ImmutableDoubleArray.plus(element: Double): ImmutableDoubleA
  * [ImmutableBooleanArray] uses less memory and is faster to access as it stores the primitive
  * values directly without needing to store them in wrapper objects.
  */
-public fun ImmutableArray<Boolean>.toImmutableBooleanArray(): ImmutableBooleanArray =
-    ImmutableBooleanArray(size) { this[it] }
+public fun ImmutableArray<Boolean>.toImmutableBooleanArray(): ImmutableBooleanArray {
+    return ImmutableBooleanArray(size) { this[it] }
+}
 
 /**
  * Returns an [ImmutableByteArray] containing the unboxed values of this array.
@@ -819,8 +820,9 @@ public fun ImmutableArray<Boolean>.toImmutableBooleanArray(): ImmutableBooleanAr
  * [ImmutableByteArray] uses less memory and is faster to access as it stores the primitive values
  * directly without needing to store them in wrapper objects.
  */
-public fun ImmutableArray<Byte>.toImmutableByteArray(): ImmutableByteArray =
-    ImmutableByteArray(size) { this[it] }
+public fun ImmutableArray<Byte>.toImmutableByteArray(): ImmutableByteArray {
+    return ImmutableByteArray(size) { this[it] }
+}
 
 /**
  * Returns an [ImmutableCharArray] containing the unboxed values of this array.
@@ -828,8 +830,9 @@ public fun ImmutableArray<Byte>.toImmutableByteArray(): ImmutableByteArray =
  * [ImmutableCharArray] uses less memory and is faster to access as it stores the primitive values
  * directly without needing to store them in wrapper objects.
  */
-public fun ImmutableArray<Char>.toImmutableCharArray(): ImmutableCharArray =
-    ImmutableCharArray(size) { this[it] }
+public fun ImmutableArray<Char>.toImmutableCharArray(): ImmutableCharArray {
+    return ImmutableCharArray(size) { this[it] }
+}
 
 /**
  * Returns an [ImmutableShortArray] containing the unboxed values of this array.
@@ -837,8 +840,9 @@ public fun ImmutableArray<Char>.toImmutableCharArray(): ImmutableCharArray =
  * [ImmutableShortArray] uses less memory and is faster to access as it stores the primitive values
  * directly without needing to store them in wrapper objects.
  */
-public fun ImmutableArray<Short>.toImmutableShortArray(): ImmutableShortArray =
-    ImmutableShortArray(size) { this[it] }
+public fun ImmutableArray<Short>.toImmutableShortArray(): ImmutableShortArray {
+    return ImmutableShortArray(size) { this[it] }
+}
 
 /**
  * Returns an [ImmutableIntArray] containing the unboxed values of this array.
@@ -846,8 +850,9 @@ public fun ImmutableArray<Short>.toImmutableShortArray(): ImmutableShortArray =
  * [ImmutableIntArray] uses less memory and is faster to access as it stores the primitive values
  * directly without needing to store them in wrapper objects.
  */
-public fun ImmutableArray<Int>.toImmutableIntArray(): ImmutableIntArray =
-    ImmutableIntArray(size) { this[it] }
+public fun ImmutableArray<Int>.toImmutableIntArray(): ImmutableIntArray {
+    return ImmutableIntArray(size) { this[it] }
+}
 
 /**
  * Returns an [ImmutableLongArray] containing the unboxed values of this array.
@@ -855,8 +860,9 @@ public fun ImmutableArray<Int>.toImmutableIntArray(): ImmutableIntArray =
  * [ImmutableLongArray] uses less memory and is faster to access as it stores the primitive values
  * directly without needing to store them in wrapper objects.
  */
-public fun ImmutableArray<Long>.toImmutableLongArray(): ImmutableLongArray =
-    ImmutableLongArray(size) { this[it] }
+public fun ImmutableArray<Long>.toImmutableLongArray(): ImmutableLongArray {
+    return ImmutableLongArray(size) { this[it] }
+}
 
 /**
  * Returns an [ImmutableFloatArray] containing the unboxed values of this array.
@@ -864,8 +870,9 @@ public fun ImmutableArray<Long>.toImmutableLongArray(): ImmutableLongArray =
  * [ImmutableFloatArray] uses less memory and is faster to access as it stores the primitive values
  * directly without needing to store them in wrapper objects.
  */
-public fun ImmutableArray<Float>.toImmutableFloatArray(): ImmutableFloatArray =
-    ImmutableFloatArray(size) { this[it] }
+public fun ImmutableArray<Float>.toImmutableFloatArray(): ImmutableFloatArray {
+    return ImmutableFloatArray(size) { this[it] }
+}
 
 /**
  * Returns an [ImmutableDoubleArray] containing the unboxed values of this array.
@@ -873,8 +880,9 @@ public fun ImmutableArray<Float>.toImmutableFloatArray(): ImmutableFloatArray =
  * [ImmutableDoubleArray] uses less memory and is faster to access as it stores the primitive values
  * directly without needing to store them in wrapper objects.
  */
-public fun ImmutableArray<Double>.toImmutableDoubleArray(): ImmutableDoubleArray =
-    ImmutableDoubleArray(size) { this[it] }
+public fun ImmutableArray<Double>.toImmutableDoubleArray(): ImmutableDoubleArray {
+    return ImmutableDoubleArray(size) { this[it] }
+}
 
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
@@ -882,8 +890,9 @@ public fun ImmutableArray<Double>.toImmutableDoubleArray(): ImmutableDoubleArray
  * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
  * be auto-boxed in a wrapper object.
  */
-public fun ImmutableBooleanArray.toTypedImmutableArray(): ImmutableArray<Boolean> =
-    ImmutableArray(size) { this[it] }
+public fun ImmutableBooleanArray.toTypedImmutableArray(): ImmutableArray<Boolean> {
+    return ImmutableArray(size) { this[it] }
+}
 
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
@@ -891,8 +900,9 @@ public fun ImmutableBooleanArray.toTypedImmutableArray(): ImmutableArray<Boolean
  * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
  * be auto-boxed in a wrapper object.
  */
-public fun ImmutableByteArray.toTypedImmutableArray(): ImmutableArray<Byte> =
-    ImmutableArray(size) { this[it] }
+public fun ImmutableByteArray.toTypedImmutableArray(): ImmutableArray<Byte> {
+    return ImmutableArray(size) { this[it] }
+}
 
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
@@ -900,8 +910,9 @@ public fun ImmutableByteArray.toTypedImmutableArray(): ImmutableArray<Byte> =
  * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
  * be auto-boxed in a wrapper object.
  */
-public fun ImmutableCharArray.toTypedImmutableArray(): ImmutableArray<Char> =
-    ImmutableArray(size) { this[it] }
+public fun ImmutableCharArray.toTypedImmutableArray(): ImmutableArray<Char> {
+    return ImmutableArray(size) { this[it] }
+}
 
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
@@ -909,8 +920,9 @@ public fun ImmutableCharArray.toTypedImmutableArray(): ImmutableArray<Char> =
  * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
  * be auto-boxed in a wrapper object.
  */
-public fun ImmutableShortArray.toTypedImmutableArray(): ImmutableArray<Short> =
-    ImmutableArray(size) { this[it] }
+public fun ImmutableShortArray.toTypedImmutableArray(): ImmutableArray<Short> {
+    return ImmutableArray(size) { this[it] }
+}
 
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
@@ -918,8 +930,9 @@ public fun ImmutableShortArray.toTypedImmutableArray(): ImmutableArray<Short> =
  * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
  * be auto-boxed in a wrapper object.
  */
-public fun ImmutableIntArray.toTypedImmutableArray(): ImmutableArray<Int> =
-    ImmutableArray(size) { this[it] }
+public fun ImmutableIntArray.toTypedImmutableArray(): ImmutableArray<Int> {
+    return ImmutableArray(size) { this[it] }
+}
 
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
@@ -927,8 +940,9 @@ public fun ImmutableIntArray.toTypedImmutableArray(): ImmutableArray<Int> =
  * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
  * be auto-boxed in a wrapper object.
  */
-public fun ImmutableLongArray.toTypedImmutableArray(): ImmutableArray<Long> =
-    ImmutableArray(size) { this[it] }
+public fun ImmutableLongArray.toTypedImmutableArray(): ImmutableArray<Long> {
+    return ImmutableArray(size) { this[it] }
+}
 
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
@@ -936,8 +950,9 @@ public fun ImmutableLongArray.toTypedImmutableArray(): ImmutableArray<Long> =
  * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
  * be auto-boxed in a wrapper object.
  */
-public fun ImmutableFloatArray.toTypedImmutableArray(): ImmutableArray<Float> =
-    ImmutableArray(size) { this[it] }
+public fun ImmutableFloatArray.toTypedImmutableArray(): ImmutableArray<Float> {
+    return ImmutableArray(size) { this[it] }
+}
 
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
@@ -945,5 +960,6 @@ public fun ImmutableFloatArray.toTypedImmutableArray(): ImmutableArray<Float> =
  * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
  * be auto-boxed in a wrapper object.
  */
-public fun ImmutableDoubleArray.toTypedImmutableArray(): ImmutableArray<Double> =
-    ImmutableArray(size) { this[it] }
+public fun ImmutableDoubleArray.toTypedImmutableArray(): ImmutableArray<Double> {
+    return ImmutableArray(size) { this[it] }
+}

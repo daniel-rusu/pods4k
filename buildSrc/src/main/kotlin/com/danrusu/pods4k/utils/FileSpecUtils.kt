@@ -49,9 +49,10 @@ internal inline fun FileSpec.Builder.function(
     name: String,
     parameters: ParameterDSL.() -> Unit = {},
     returns: TypeName? = null,
+    forceFunctionBody: Boolean = false,
     code: String,
 ): FileSpec.Builder {
-    return function(kdoc, modifiers, receiver, name, parameters, returns) {
+    return function(kdoc, modifiers, receiver, name, parameters, returns, forceFunctionBody) {
         statement(code)
     }
 }

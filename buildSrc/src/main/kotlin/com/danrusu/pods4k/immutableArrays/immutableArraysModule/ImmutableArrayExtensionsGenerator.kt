@@ -276,6 +276,7 @@ private fun FileSpec.Builder.addToPrimitiveImmutableArray() {
             receiver = GENERIC.getGeneratedClass().parameterizedBy(baseType.type),
             name = "to${baseType.generatedClassName}",
             returns = baseType.getGeneratedTypeName(),
+            forceFunctionBody = true,
             code = "return ${baseType.generatedClassName}(size)·{·this[it]·}",
         )
     }
@@ -294,6 +295,7 @@ private fun FileSpec.Builder.addToTypedImmutableArray() {
             receiver = baseType.getGeneratedClass(),
             name = "toTyped${GENERIC.generatedClassName}",
             returns = GENERIC.getGeneratedClass().parameterizedBy(baseType.type),
+            forceFunctionBody = true,
             code = "return ${GENERIC.generatedClassName}(size)·{·this[it]·}",
         )
     }
