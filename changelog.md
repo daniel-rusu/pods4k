@@ -9,6 +9,7 @@ _Date TBD_
 
 **New Features:**
 
+* Add `requireNoNulls` extension function
 * Add `indexOfLast(predicate)` method
 * Add `indexOfFirst(predicate)` method
 * Add `joinToString` method

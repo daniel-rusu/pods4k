@@ -1,6 +1,7 @@
 // Auto-generated file. DO NOT EDIT!
 package com.danrusu.pods4k.immutableArrays
 
+import java.lang.IllegalArgumentException
 import java.util.Arrays
 import kotlin.Boolean
 import kotlin.Byte
@@ -962,4 +963,16 @@ public fun ImmutableFloatArray.toTypedImmutableArray(): ImmutableArray<Float> {
  */
 public fun ImmutableDoubleArray.toTypedImmutableArray(): ImmutableArray<Double> {
     return ImmutableArray(size) { this[it] }
+}
+
+/**
+ * Ensures that none of the elements are null otherwise an [IllegalArgumentException] is thrown.
+ *
+ * Returns the same [ImmutableArray] instance cast with a non-null generic type.
+ */
+@Suppress("UNCHECKED_CAST")
+public fun <T> ImmutableArray<T?>.requireNoNulls(): ImmutableArray<T> {
+    if (contains(null)) throw IllegalArgumentException("null element found in $this")
+
+    return this as ImmutableArray<T>
 }

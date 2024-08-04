@@ -31,6 +31,7 @@ internal object ImmutableArrayExtensionsGenerator {
             addPlusValue()
             addToPrimitiveImmutableArray()
             addToTypedImmutableArray()
+            addRequireNoNulls()
         }
         fileSpec.writeTo(File(destinationPath, ""))
     }
@@ -300,5 +301,26 @@ private fun FileSpec.Builder.addToTypedImmutableArray() {
         ) {
             statement("return ${GENERIC.generatedClassName}(size)·{·this[it]·}")
         }
+    }
+}
+
+private fun FileSpec.Builder.addRequireNoNulls() {
+    val typeVariable = TypeVariableName("T", Any::class)
+
+    function(
+        kdoc = """
+            Ensures that none of the elements are null otherwise an [IllegalArgumentException] is thrown.
+
+            Returns the same [ImmutableArray] instance cast with a non-null generic type.
+        """.trimIndent(),
+        receiver = GENERIC.getGeneratedClass().parameterizedBy(typeVariable.copy(nullable = true)),
+        name = "requireNoNulls",
+        returns = GENERIC.getGeneratedClass().parameterizedBy(typeVariable),
+    ) {
+        addTypeVariable(GENERIC.type as TypeVariableName)
+        statement("if (contains(null)) throw %T(\"null element found in \$this\")", IllegalArgumentException::class)
+        emptyLine()
+        suppress("UNCHECKED_CAST")
+        statement("return this as ${GENERIC.generatedClassName}<%T>", GENERIC.type)
     }
 }

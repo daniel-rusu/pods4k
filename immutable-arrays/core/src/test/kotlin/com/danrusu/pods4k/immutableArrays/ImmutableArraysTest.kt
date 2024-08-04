@@ -2,10 +2,12 @@ package com.danrusu.pods4k.immutableArrays
 
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
+import strikt.api.expectThrows
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 import strikt.assertions.isFalse
 import strikt.assertions.isTrue
+import strikt.assertions.message
 
 private val primitiveIntClass = 3::class.java
 
@@ -195,5 +197,17 @@ class ImmutableArraysTest {
             expectThat(genericVersion).isA<ImmutableArray<Int>>()
             expectThat(genericVersion).containsExactly(1, 3, 5)
         }
+    }
+
+    @Test
+    fun `requireNoNulls validation`() {
+        with(immutableArrayOf<String?>("one", "two")) {
+            expectThat(requireNoNulls())
+                .isEqualTo(immutableArrayOf("one", "two"))
+        }
+
+        expectThrows<IllegalArgumentException> {
+            immutableArrayOf("one", null).requireNoNulls()
+        }.message.isEqualTo("null element found in [one, null]")
     }
 }
