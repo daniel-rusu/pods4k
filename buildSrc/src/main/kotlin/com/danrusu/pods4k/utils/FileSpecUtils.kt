@@ -50,21 +50,6 @@ internal inline fun FileSpec.Builder.function(
     parameters: ParameterDSL.() -> Unit = {},
     returns: TypeName? = null,
     forceFunctionBody: Boolean = false,
-    code: String,
-): FileSpec.Builder {
-    return function(kdoc, modifiers, receiver, name, parameters, returns, forceFunctionBody) {
-        statement(code)
-    }
-}
-
-internal inline fun FileSpec.Builder.function(
-    kdoc: String? = null,
-    modifiers: List<KModifier> = emptyList(),
-    receiver: TypeName? = null,
-    name: String,
-    parameters: ParameterDSL.() -> Unit = {},
-    returns: TypeName? = null,
-    forceFunctionBody: Boolean = false,
     body: FunSpec.Builder.() -> Unit,
 ): FileSpec.Builder {
     return addFunction(

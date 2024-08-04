@@ -277,8 +277,9 @@ private fun FileSpec.Builder.addToPrimitiveImmutableArray() {
             name = "to${baseType.generatedClassName}",
             returns = baseType.getGeneratedTypeName(),
             forceFunctionBody = true,
-            code = "return ${baseType.generatedClassName}(size)·{·this[it]·}",
-        )
+        ) {
+            statement("return ${baseType.generatedClassName}(size)·{·this[it]·}")
+        }
     }
 }
 
@@ -296,7 +297,8 @@ private fun FileSpec.Builder.addToTypedImmutableArray() {
             name = "toTyped${GENERIC.generatedClassName}",
             returns = GENERIC.getGeneratedClass().parameterizedBy(baseType.type),
             forceFunctionBody = true,
-            code = "return ${GENERIC.generatedClassName}(size)·{·this[it]·}",
-        )
+        ) {
+            statement("return ${GENERIC.generatedClassName}(size)·{·this[it]·}")
+        }
     }
 }

@@ -102,19 +102,6 @@ internal inline fun TypeSpec.Builder.function(
     name: String,
     parameters: ParameterDSL.() -> Unit = {},
     returns: TypeName? = null,
-    code: String,
-): TypeSpec.Builder {
-    return function(kdoc, modifiers, name, parameters, returns) {
-        addCode(code)
-    }
-}
-
-internal inline fun TypeSpec.Builder.function(
-    kdoc: String? = null,
-    modifiers: List<KModifier> = emptyList(),
-    name: String,
-    parameters: ParameterDSL.() -> Unit = {},
-    returns: TypeName? = null,
     forceFunctionBody: Boolean = false,
     body: FunSpec.Builder.() -> Unit,
 ): TypeSpec.Builder {

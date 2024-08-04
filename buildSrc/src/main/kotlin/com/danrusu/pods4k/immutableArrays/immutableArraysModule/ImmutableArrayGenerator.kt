@@ -399,10 +399,13 @@ private fun TypeSpec.Builder.overrideToString() {
         modifiers = listOf(KModifier.OVERRIDE),
         name = "toString",
         returns = String::class.asTypeName(),
-        code = """
-            return values.joinToString(prefix = "[", postfix = "]")
-        """.trimIndent(),
-    )
+    ) {
+        statement(
+            """
+                return values.joinToString(prefix = "[", postfix = "]")
+            """.trimIndent(),
+        )
+    }
 }
 
 private fun TypeSpec.Builder.addEqualsOperator(baseType: BaseType) {
@@ -453,8 +456,9 @@ private fun TypeSpec.Builder.addArrayIndexOperator(baseType: BaseType) {
         name = "get",
         parameters = { "index"<Int>() },
         returns = baseType.type,
-        code = "return values[index]",
-    )
+    ) {
+        statement("return values[index]")
+    }
 }
 
 private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
@@ -463,8 +467,9 @@ private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
             modifiers = listOf(KModifier.OPERATOR),
             name = "component$n",
             returns = baseType.type,
-            code = "return get(${n - 1})",
-        )
+        ) {
+            statement("return get(${n - 1})")
+        }
     }
 }
 
@@ -661,8 +666,9 @@ private fun TypeSpec.Builder.addBuilderPlusAssignOperator(baseType: BaseType) {
         kdoc = "Adds the [element] to the builder.",
         name = "plusAssign",
         parameters = { "element"(type = baseType.type) },
-        code = "add(element)",
-    )
+    ) {
+        statement("add(element)")
+    }
 }
 
 private fun TypeSpec.Builder.addBuilderAddAllFunctions(baseType: BaseType) {
