@@ -45,6 +45,7 @@ private fun FileSpec.Builder.addContains() {
             name = "contains",
             parameters = { "element"(type = baseType.type) },
             returns = Boolean::class.asTypeName(),
+            forceFunctionBody = true,
         ) {
             if (baseType == GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
@@ -104,6 +105,7 @@ private fun FileSpec.Builder.addGetOrElse() {
                 "defaultValue"(type = lambda(parameters = { "index"<Int>() }, returnType = baseType.type))
             },
             returns = baseType.type,
+            forceFunctionBody = true,
         ) {
             if (baseType == GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)

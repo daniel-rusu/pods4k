@@ -16,49 +16,65 @@ import kotlin.Suppress
 /**
  * Returns true if [this] immutable array contains the [element]
  */
-public operator fun <T> ImmutableArray<T>.contains(element: T): Boolean = any { it == element }
-
-/**
- * Returns true if [this] immutable array contains the [element]
- */
-public operator fun ImmutableBooleanArray.contains(element: Boolean): Boolean = any {
-    it == element
+public operator fun <T> ImmutableArray<T>.contains(element: T): Boolean {
+    return any { it == element }
 }
 
 /**
  * Returns true if [this] immutable array contains the [element]
  */
-public operator fun ImmutableByteArray.contains(element: Byte): Boolean = any { it == element }
+public operator fun ImmutableBooleanArray.contains(element: Boolean): Boolean {
+    return any { it == element }
+}
 
 /**
  * Returns true if [this] immutable array contains the [element]
  */
-public operator fun ImmutableCharArray.contains(element: Char): Boolean = any { it == element }
+public operator fun ImmutableByteArray.contains(element: Byte): Boolean {
+    return any { it == element }
+}
 
 /**
  * Returns true if [this] immutable array contains the [element]
  */
-public operator fun ImmutableShortArray.contains(element: Short): Boolean = any { it == element }
+public operator fun ImmutableCharArray.contains(element: Char): Boolean {
+    return any { it == element }
+}
 
 /**
  * Returns true if [this] immutable array contains the [element]
  */
-public operator fun ImmutableIntArray.contains(element: Int): Boolean = any { it == element }
+public operator fun ImmutableShortArray.contains(element: Short): Boolean {
+    return any { it == element }
+}
 
 /**
  * Returns true if [this] immutable array contains the [element]
  */
-public operator fun ImmutableLongArray.contains(element: Long): Boolean = any { it == element }
+public operator fun ImmutableIntArray.contains(element: Int): Boolean {
+    return any { it == element }
+}
 
 /**
  * Returns true if [this] immutable array contains the [element]
  */
-public operator fun ImmutableFloatArray.contains(element: Float): Boolean = any { it == element }
+public operator fun ImmutableLongArray.contains(element: Long): Boolean {
+    return any { it == element }
+}
 
 /**
  * Returns true if [this] immutable array contains the [element]
  */
-public operator fun ImmutableDoubleArray.contains(element: Double): Boolean = any { it == element }
+public operator fun ImmutableFloatArray.contains(element: Float): Boolean {
+    return any { it == element }
+}
+
+/**
+ * Returns true if [this] immutable array contains the [element]
+ */
+public operator fun ImmutableDoubleArray.contains(element: Double): Boolean {
+    return any { it == element }
+}
 
 /**
  * Returns the index of the first occurrence of the [element], or -1 if it's not contained in the
@@ -243,8 +259,9 @@ public fun ImmutableDoubleArray.lastIndexOf(element: Double): Int {
 /**
  * See [Array.getOrElse]
  */
-public inline fun <T> ImmutableArray<T>.getOrElse(index: Int, defaultValue: (index: Int) -> T): T =
-    values.getOrElse(index, defaultValue)
+public inline fun <T> ImmutableArray<T>.getOrElse(index: Int, defaultValue: (index: Int) -> T): T {
+    return values.getOrElse(index, defaultValue)
+}
 
 /**
  * See [Array.getOrElse]
@@ -252,43 +269,58 @@ public inline fun <T> ImmutableArray<T>.getOrElse(index: Int, defaultValue: (ind
 public inline fun ImmutableBooleanArray.getOrElse(
     index: Int,
     defaultValue: (index: Int) -> Boolean,
-): Boolean = values.getOrElse(index, defaultValue)
+): Boolean {
+    return values.getOrElse(index, defaultValue)
+}
 
 /**
  * See [Array.getOrElse]
  */
-public inline fun ImmutableByteArray.getOrElse(index: Int, defaultValue: (index: Int) -> Byte): Byte = values.getOrElse(index, defaultValue)
+public inline fun ImmutableByteArray.getOrElse(index: Int, defaultValue: (index: Int) -> Byte): Byte {
+    return values.getOrElse(index, defaultValue)
+}
 
 /**
  * See [Array.getOrElse]
  */
-public inline fun ImmutableCharArray.getOrElse(index: Int, defaultValue: (index: Int) -> Char): Char = values.getOrElse(index, defaultValue)
+public inline fun ImmutableCharArray.getOrElse(index: Int, defaultValue: (index: Int) -> Char): Char {
+    return values.getOrElse(index, defaultValue)
+}
 
 /**
  * See [Array.getOrElse]
  */
-public inline fun ImmutableShortArray.getOrElse(index: Int, defaultValue: (index: Int) -> Short): Short = values.getOrElse(index, defaultValue)
+public inline fun ImmutableShortArray.getOrElse(index: Int, defaultValue: (index: Int) -> Short): Short {
+    return values.getOrElse(index, defaultValue)
+}
 
 /**
  * See [Array.getOrElse]
  */
-public inline fun ImmutableIntArray.getOrElse(index: Int, defaultValue: (index: Int) -> Int): Int =
-    values.getOrElse(index, defaultValue)
+public inline fun ImmutableIntArray.getOrElse(index: Int, defaultValue: (index: Int) -> Int): Int {
+    return values.getOrElse(index, defaultValue)
+}
 
 /**
  * See [Array.getOrElse]
  */
-public inline fun ImmutableLongArray.getOrElse(index: Int, defaultValue: (index: Int) -> Long): Long = values.getOrElse(index, defaultValue)
+public inline fun ImmutableLongArray.getOrElse(index: Int, defaultValue: (index: Int) -> Long): Long {
+    return values.getOrElse(index, defaultValue)
+}
 
 /**
  * See [Array.getOrElse]
  */
-public inline fun ImmutableFloatArray.getOrElse(index: Int, defaultValue: (index: Int) -> Float): Float = values.getOrElse(index, defaultValue)
+public inline fun ImmutableFloatArray.getOrElse(index: Int, defaultValue: (index: Int) -> Float): Float {
+    return values.getOrElse(index, defaultValue)
+}
 
 /**
  * See [Array.getOrElse]
  */
-public inline fun ImmutableDoubleArray.getOrElse(index: Int, defaultValue: (index: Int) -> Double): Double = values.getOrElse(index, defaultValue)
+public inline fun ImmutableDoubleArray.getOrElse(index: Int, defaultValue: (index: Int) -> Double): Double {
+    return values.getOrElse(index, defaultValue)
+}
 
 /**
  * Leaves [this] immutable array as is and returns an [ImmutableArray] with all elements sorted
