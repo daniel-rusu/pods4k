@@ -4,7 +4,6 @@ import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.createFile
-import com.danrusu.pods4k.utils.emptyLine
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.statement
 import com.squareup.kotlinpoet.FileSpec
@@ -30,11 +29,11 @@ private fun FileSpec.Builder.addGenericArrayToImmutableArray() {
             receiver = Array::class.asTypeName().parameterizedBy(baseType.type),
             name = "toImmutableArray",
             returns = baseType.getGeneratedTypeName(),
+            forceFunctionBody = true,
         ) {
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
-            emptyLine() // force regular function body.  Spotless formatting will remove the empty line
             controlFlow("return build${baseType.generatedClassName}(size)") {
                 statement("addAll(this@toImmutableArray)")
             }
@@ -51,8 +50,8 @@ private fun FileSpec.Builder.addPrimitiveArrayToImmutableArray() {
             receiver = baseType.backingArrayType,
             name = "toImmutableArray",
             returns = baseType.getGeneratedTypeName(),
+            forceFunctionBody = true,
         ) {
-            emptyLine() // force regular function body.  Spotless formatting will remove the empty line
             controlFlow("return build${baseType.generatedClassName}(size)") {
                 statement("addAll(this@toImmutableArray)")
             }

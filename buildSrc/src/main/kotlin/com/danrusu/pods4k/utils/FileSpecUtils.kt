@@ -63,10 +63,14 @@ internal inline fun FileSpec.Builder.function(
     name: String,
     parameters: ParameterDSL.() -> Unit = {},
     returns: TypeName? = null,
+    forceFunctionBody: Boolean = false,
     body: FunSpec.Builder.() -> Unit,
 ): FileSpec.Builder {
     return addFunction(
         FunSpec.builder(name).apply {
+            if (forceFunctionBody) {
+                emptyLine() // Empty line prevents expression body.  Spotless formatting will remove the empty line
+            }
             kdoc?.let { addKdoc(it) }
             addModifiers(modifiers)
             receiver?.let { receiver(it) }

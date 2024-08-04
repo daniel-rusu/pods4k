@@ -17,6 +17,8 @@ _Date TBD_
 
 **Performance Improvements:**
 
+* When converting iterables to immutable arrays, use immutable array builders instead of accumulating the values in a
+  temporary list as that's much more efficient.
 * When converting sequences to immutable arrays, use immutable array builders instead of accumulating the values in a
   temporary list as that's much more efficient.
 

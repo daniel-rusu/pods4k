@@ -36,12 +36,13 @@ private fun FileSpec.Builder.addIterableToImmutableArray() {
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
-            controlFlow("if (this is Collection<%T>)", baseType.type) {
-                statement("val iterator = this.iterator()")
-                statement("return ${baseType.generatedClassName}(size) { iterator.next() }")
+            controlFlow("val initialCapacity = when (this)") {
+                statement("is Collection<%T> -> size", baseType.type)
+                statement("else -> 10")
             }
-            statement("val values = this.toList()")
-            statement("return ${baseType.generatedClassName}(values.size) { values[it] }")
+            controlFlow("return build${baseType.generatedClassName}(initialCapacity)") {
+                statement("addAll(this@toImmutableArray)")
+            }
         }
     }
 }

@@ -1,7 +1,6 @@
 package com.danrusu.pods4k.immutableArrays.immutableArraysModule.specializations
 
 import com.danrusu.pods4k.immutableArrays.BaseType
-import com.danrusu.pods4k.utils.emptyLine
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.statement
 import com.squareup.kotlinpoet.FileSpec
@@ -43,6 +42,7 @@ private fun FileSpec.Builder.addMapIndexedFunction(fromType: BaseType, toType: B
             )
         },
         returns = resultTypeName,
+        forceFunctionBody = true,
     ) {
         addAnnotation(OverloadResolutionByLambdaReturnType::class)
         if (fromType == BaseType.GENERIC) {
@@ -51,7 +51,6 @@ private fun FileSpec.Builder.addMapIndexedFunction(fromType: BaseType, toType: B
         if (toType == BaseType.GENERIC) {
             addTypeVariable(mappedType as TypeVariableName)
         }
-        emptyLine() // force regular function body.  Spotless formatting will remove the empty line
         statement("return ${toType.generatedClassName}(size) { transform(it, get(it)) }")
     }
 }
