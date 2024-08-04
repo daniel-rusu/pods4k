@@ -2,11 +2,11 @@ package com.danrusu.pods4k.immutableArrays.immutableArraysModule
 
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
+import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.createFile
 import com.danrusu.pods4k.utils.emptyLine
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.statement
-import com.danrusu.pods4k.utils.suppress
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeVariableName
@@ -33,18 +33,10 @@ private fun FileSpec.Builder.addGenericArrayToImmutableArray() {
         ) {
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
-
-                statement("if (isEmpty()) return ${baseType.generatedClassName}.EMPTY")
-                emptyLine()
-
-                // Generic to generic can use the fast arraycopy
-                suppress("UNCHECKED_CAST")
-                statement("val backingArray = arrayOfNulls<Any?>(size) as Array<%T>", baseType.type)
-                statement("System.arraycopy(this, 0, backingArray, 0, size)")
-                statement("return ${baseType.generatedClassName}(backingArray)")
-            } else {
-                // Generic to primitive type needs to unbox each value individually
-                statement("return ${baseType.generatedClassName}(size)·{·this[it]·}")
+            }
+            emptyLine() // force regular function body.  Spotless formatting will remove the empty line
+            controlFlow("return build${baseType.generatedClassName}(size)") {
+                statement("addAll(this@toImmutableArray)")
             }
         }
     }
@@ -60,12 +52,10 @@ private fun FileSpec.Builder.addPrimitiveArrayToImmutableArray() {
             name = "toImmutableArray",
             returns = baseType.getGeneratedTypeName(),
         ) {
-            statement("if (isEmpty()) return ${baseType.generatedClassName}.EMPTY")
-            emptyLine()
-
-            statement("val backingArray = ${baseType.backingArrayConstructor}(size)")
-            statement("System.arraycopy(this, 0, backingArray, 0, size)")
-            statement("return ${baseType.generatedClassName}(backingArray)")
+            emptyLine() // force regular function body.  Spotless formatting will remove the empty line
+            controlFlow("return build${baseType.generatedClassName}(size)") {
+                statement("addAll(this@toImmutableArray)")
+            }
         }
     }
 }

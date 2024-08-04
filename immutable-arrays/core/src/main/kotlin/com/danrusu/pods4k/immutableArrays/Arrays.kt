@@ -18,151 +18,156 @@ import kotlin.Long
 import kotlin.LongArray
 import kotlin.Short
 import kotlin.ShortArray
-import kotlin.Suppress
 
 /**
  * Returns an [ImmutableBooleanArray] with the contents of this array.
  */
 public fun BooleanArray.toImmutableArray(): ImmutableBooleanArray {
-    if (isEmpty()) return ImmutableBooleanArray.EMPTY
-
-    val backingArray = BooleanArray(size)
-    System.arraycopy(this, 0, backingArray, 0, size)
-    return ImmutableBooleanArray(backingArray)
+    return buildImmutableBooleanArray(size) {
+        addAll(this@toImmutableArray)
+    }
 }
 
 /**
  * Returns an [ImmutableByteArray] with the contents of this array.
  */
 public fun ByteArray.toImmutableArray(): ImmutableByteArray {
-    if (isEmpty()) return ImmutableByteArray.EMPTY
-
-    val backingArray = ByteArray(size)
-    System.arraycopy(this, 0, backingArray, 0, size)
-    return ImmutableByteArray(backingArray)
+    return buildImmutableByteArray(size) {
+        addAll(this@toImmutableArray)
+    }
 }
 
 /**
  * Returns an [ImmutableCharArray] with the contents of this array.
  */
 public fun CharArray.toImmutableArray(): ImmutableCharArray {
-    if (isEmpty()) return ImmutableCharArray.EMPTY
-
-    val backingArray = CharArray(size)
-    System.arraycopy(this, 0, backingArray, 0, size)
-    return ImmutableCharArray(backingArray)
+    return buildImmutableCharArray(size) {
+        addAll(this@toImmutableArray)
+    }
 }
 
 /**
  * Returns an [ImmutableShortArray] with the contents of this array.
  */
 public fun ShortArray.toImmutableArray(): ImmutableShortArray {
-    if (isEmpty()) return ImmutableShortArray.EMPTY
-
-    val backingArray = ShortArray(size)
-    System.arraycopy(this, 0, backingArray, 0, size)
-    return ImmutableShortArray(backingArray)
+    return buildImmutableShortArray(size) {
+        addAll(this@toImmutableArray)
+    }
 }
 
 /**
  * Returns an [ImmutableIntArray] with the contents of this array.
  */
 public fun IntArray.toImmutableArray(): ImmutableIntArray {
-    if (isEmpty()) return ImmutableIntArray.EMPTY
-
-    val backingArray = IntArray(size)
-    System.arraycopy(this, 0, backingArray, 0, size)
-    return ImmutableIntArray(backingArray)
+    return buildImmutableIntArray(size) {
+        addAll(this@toImmutableArray)
+    }
 }
 
 /**
  * Returns an [ImmutableLongArray] with the contents of this array.
  */
 public fun LongArray.toImmutableArray(): ImmutableLongArray {
-    if (isEmpty()) return ImmutableLongArray.EMPTY
-
-    val backingArray = LongArray(size)
-    System.arraycopy(this, 0, backingArray, 0, size)
-    return ImmutableLongArray(backingArray)
+    return buildImmutableLongArray(size) {
+        addAll(this@toImmutableArray)
+    }
 }
 
 /**
  * Returns an [ImmutableFloatArray] with the contents of this array.
  */
 public fun FloatArray.toImmutableArray(): ImmutableFloatArray {
-    if (isEmpty()) return ImmutableFloatArray.EMPTY
-
-    val backingArray = FloatArray(size)
-    System.arraycopy(this, 0, backingArray, 0, size)
-    return ImmutableFloatArray(backingArray)
+    return buildImmutableFloatArray(size) {
+        addAll(this@toImmutableArray)
+    }
 }
 
 /**
  * Returns an [ImmutableDoubleArray] with the contents of this array.
  */
 public fun DoubleArray.toImmutableArray(): ImmutableDoubleArray {
-    if (isEmpty()) return ImmutableDoubleArray.EMPTY
-
-    val backingArray = DoubleArray(size)
-    System.arraycopy(this, 0, backingArray, 0, size)
-    return ImmutableDoubleArray(backingArray)
+    return buildImmutableDoubleArray(size) {
+        addAll(this@toImmutableArray)
+    }
 }
 
 /**
  * Returns an [ImmutableArray] with the contents of this array.
  */
-@Suppress("UNCHECKED_CAST")
 public fun <T> Array<T>.toImmutableArray(): ImmutableArray<T> {
-    if (isEmpty()) return ImmutableArray.EMPTY
-
-    val backingArray = arrayOfNulls<Any?>(size) as Array<T>
-    System.arraycopy(this, 0, backingArray, 0, size)
-    return ImmutableArray(backingArray)
+    return buildImmutableArray(size) {
+        addAll(this@toImmutableArray)
+    }
 }
 
 /**
  * Returns an [ImmutableBooleanArray] with the contents of this array.
  */
-public fun Array<Boolean>.toImmutableArray(): ImmutableBooleanArray =
-    ImmutableBooleanArray(size) { this[it] }
+public fun Array<Boolean>.toImmutableArray(): ImmutableBooleanArray {
+    return buildImmutableBooleanArray(size) {
+        addAll(this@toImmutableArray)
+    }
+}
 
 /**
  * Returns an [ImmutableByteArray] with the contents of this array.
  */
-public fun Array<Byte>.toImmutableArray(): ImmutableByteArray =
-    ImmutableByteArray(size) { this[it] }
+public fun Array<Byte>.toImmutableArray(): ImmutableByteArray {
+    return buildImmutableByteArray(size) {
+        addAll(this@toImmutableArray)
+    }
+}
 
 /**
  * Returns an [ImmutableCharArray] with the contents of this array.
  */
-public fun Array<Char>.toImmutableArray(): ImmutableCharArray =
-    ImmutableCharArray(size) { this[it] }
+public fun Array<Char>.toImmutableArray(): ImmutableCharArray {
+    return buildImmutableCharArray(size) {
+        addAll(this@toImmutableArray)
+    }
+}
 
 /**
  * Returns an [ImmutableShortArray] with the contents of this array.
  */
-public fun Array<Short>.toImmutableArray(): ImmutableShortArray =
-    ImmutableShortArray(size) { this[it] }
+public fun Array<Short>.toImmutableArray(): ImmutableShortArray {
+    return buildImmutableShortArray(size) {
+        addAll(this@toImmutableArray)
+    }
+}
 
 /**
  * Returns an [ImmutableIntArray] with the contents of this array.
  */
-public fun Array<Int>.toImmutableArray(): ImmutableIntArray = ImmutableIntArray(size) { this[it] }
+public fun Array<Int>.toImmutableArray(): ImmutableIntArray {
+    return buildImmutableIntArray(size) {
+        addAll(this@toImmutableArray)
+    }
+}
 
 /**
  * Returns an [ImmutableLongArray] with the contents of this array.
  */
-public fun Array<Long>.toImmutableArray(): ImmutableLongArray =
-    ImmutableLongArray(size) { this[it] }
+public fun Array<Long>.toImmutableArray(): ImmutableLongArray {
+    return buildImmutableLongArray(size) {
+        addAll(this@toImmutableArray)
+    }
+}
 
 /**
  * Returns an [ImmutableFloatArray] with the contents of this array.
  */
-public fun Array<Float>.toImmutableArray(): ImmutableFloatArray =
-    ImmutableFloatArray(size) { this[it] }
+public fun Array<Float>.toImmutableArray(): ImmutableFloatArray {
+    return buildImmutableFloatArray(size) {
+        addAll(this@toImmutableArray)
+    }
+}
 
 /**
  * Returns an [ImmutableDoubleArray] with the contents of this array.
  */
-public fun Array<Double>.toImmutableArray(): ImmutableDoubleArray =
-    ImmutableDoubleArray(size) { this[it] }
+public fun Array<Double>.toImmutableArray(): ImmutableDoubleArray {
+    return buildImmutableDoubleArray(size) {
+        addAll(this@toImmutableArray)
+    }
+}
