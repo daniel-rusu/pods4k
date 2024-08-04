@@ -28,6 +28,7 @@ private fun FileSpec.Builder.addSequenceToImmutableArray() {
             receiver = Sequence::class.asTypeName().parameterizedBy(baseType.type),
             name = "toImmutableArray",
             returns = baseType.getGeneratedTypeName(),
+            forceFunctionBody = true,
         ) {
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
