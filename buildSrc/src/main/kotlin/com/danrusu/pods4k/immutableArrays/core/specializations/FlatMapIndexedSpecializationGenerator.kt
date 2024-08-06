@@ -1,4 +1,4 @@
-package com.danrusu.pods4k.immutableArrays.immutableArraysModule.specializations
+package com.danrusu.pods4k.immutableArrays.core.specializations
 
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.utils.function
@@ -10,13 +10,13 @@ import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeVariableName
 import com.squareup.kotlinpoet.asTypeName
 
-internal object FlatMapSpecializationGenerator : SpecializationGenerator("FlatMapSpecializations") {
+internal object FlatMapIndexedSpecializationGenerator : SpecializationGenerator("FlatMapIndexedSpecializations") {
     override fun generateSpecialization(fileSpec: FileSpec.Builder, fromType: BaseType, toType: BaseType) {
-        fileSpec.addFlatMapFunction(fromType, toType)
+        fileSpec.addFlatMapIndexedFunction(fromType, toType)
     }
 }
 
-private fun FileSpec.Builder.addFlatMapFunction(fromType: BaseType, toType: BaseType) {
+private fun FileSpec.Builder.addFlatMapIndexedFunction(fromType: BaseType, toType: BaseType) {
     val mappedType: TypeName
     val resultType: TypeName
     if (toType == BaseType.GENERIC) {
@@ -34,11 +34,14 @@ private fun FileSpec.Builder.addFlatMapFunction(fromType: BaseType, toType: Base
         """.trimIndent(),
         modifiers = listOf(KModifier.INLINE),
         receiver = fromType.getGeneratedTypeName(),
-        name = "flatMap",
+        name = "flatMapIndexed",
         parameters = {
             "transform"(
                 type = lambda(
-                    parameters = { "element"(type = fromType.type) },
+                    parameters = {
+                        "index"<Int>()
+                        "element"(type = fromType.type)
+                    },
                     returnType = Iterable::class.asTypeName().parameterizedBy(mappedType),
                 ),
             )
@@ -55,7 +58,7 @@ private fun FileSpec.Builder.addFlatMapFunction(fromType: BaseType, toType: Base
         } else {
             statement("val builder = ${toType.generatedClassName}.Builder()")
         }
-        statement("forEach { builder.addAll(transform(it)) }")
+        statement("forEachIndexed { index, element -> builder.addAll(transform(index, element)) }")
         statement("return builder.build()")
     }
 }

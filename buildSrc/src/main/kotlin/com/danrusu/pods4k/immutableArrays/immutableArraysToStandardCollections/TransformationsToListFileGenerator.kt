@@ -1,4 +1,4 @@
-package com.danrusu.pods4k.immutableArrays.immutableArraysToStandardCollectionsModule
+package com.danrusu.pods4k.immutableArrays.immutableArraysToStandardCollections
 
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig

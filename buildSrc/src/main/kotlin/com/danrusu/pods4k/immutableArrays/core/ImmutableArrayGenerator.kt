@@ -1,4 +1,4 @@
-package com.danrusu.pods4k.immutableArrays.immutableArraysModule
+package com.danrusu.pods4k.immutableArrays.core
 
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.BaseType.GENERIC

@@ -1,4 +1,4 @@
-package com.danrusu.pods4k.immutableArrays.immutableArraysModule.specializations
+package com.danrusu.pods4k.immutableArrays.core.specializations
 
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.utils.function
@@ -9,13 +9,13 @@ import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeVariableName
 
-internal object MapSpecializationGenerator : SpecializationGenerator("MapSpecializations") {
+internal object MapIndexedSpecializationGenerator : SpecializationGenerator("MapIndexedSpecializations") {
     override fun generateSpecialization(fileSpec: FileSpec.Builder, fromType: BaseType, toType: BaseType) {
-        fileSpec.addMapFunction(fromType, toType)
+        fileSpec.addMapIndexedFunction(fromType, toType)
     }
 }
 
-private fun FileSpec.Builder.addMapFunction(fromType: BaseType, toType: BaseType) {
+private fun FileSpec.Builder.addMapIndexedFunction(fromType: BaseType, toType: BaseType) {
     val mappedType: TypeName
     val resultTypeName: TypeName
     if (toType == BaseType.GENERIC) {
@@ -26,14 +26,17 @@ private fun FileSpec.Builder.addMapFunction(fromType: BaseType, toType: BaseType
         resultTypeName = toType.getGeneratedTypeName()
     }
     function(
-        kdoc = "Returns an immutable array containing the results of applying [transform] to each element.",
+        kdoc = "Returns an immutable array containing the results of applying [transform] to each element and its index.",
         modifiers = listOf(KModifier.INLINE),
         receiver = fromType.getGeneratedTypeName(),
-        name = "map",
+        name = "mapIndexed",
         parameters = {
             "transform"(
                 type = lambda(
-                    parameters = { "element"(type = fromType.type) },
+                    parameters = {
+                        "index"<Int>()
+                        "element"(type = fromType.type)
+                    },
                     returnType = mappedType,
                 ),
             )
@@ -48,6 +51,6 @@ private fun FileSpec.Builder.addMapFunction(fromType: BaseType, toType: BaseType
         if (toType == BaseType.GENERIC) {
             addTypeVariable(mappedType as TypeVariableName)
         }
-        statement("return ${toType.generatedClassName}(size) { transform(get(it)) }")
+        statement("return ${toType.generatedClassName}(size) { transform(it, get(it)) }")
     }
 }

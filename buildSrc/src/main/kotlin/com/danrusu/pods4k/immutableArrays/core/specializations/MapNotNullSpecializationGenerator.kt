@@ -1,6 +1,7 @@
-package com.danrusu.pods4k.immutableArrays.immutableArraysModule.specializations
+package com.danrusu.pods4k.immutableArrays.core.specializations
 
 import com.danrusu.pods4k.immutableArrays.BaseType
+import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.statement
 import com.squareup.kotlinpoet.FileSpec
@@ -9,13 +10,13 @@ import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeVariableName
 
-internal object MapIndexedSpecializationGenerator : SpecializationGenerator("MapIndexedSpecializations") {
+internal object MapNotNullSpecializationGenerator : SpecializationGenerator("MapNotNullSpecializations") {
     override fun generateSpecialization(fileSpec: FileSpec.Builder, fromType: BaseType, toType: BaseType) {
-        fileSpec.addMapIndexedFunction(fromType, toType)
+        fileSpec.addMapNotNullFunction(fromType, toType)
     }
 }
 
-private fun FileSpec.Builder.addMapIndexedFunction(fromType: BaseType, toType: BaseType) {
+private fun FileSpec.Builder.addMapNotNullFunction(fromType: BaseType, toType: BaseType) {
     val mappedType: TypeName
     val resultTypeName: TypeName
     if (toType == BaseType.GENERIC) {
@@ -26,23 +27,19 @@ private fun FileSpec.Builder.addMapIndexedFunction(fromType: BaseType, toType: B
         resultTypeName = toType.getGeneratedTypeName()
     }
     function(
-        kdoc = "Returns an immutable array containing the results of applying [transform] to each element and its index.",
+        kdoc = "Transforms each element and returns an immutable array with the non-null results.",
         modifiers = listOf(KModifier.INLINE),
         receiver = fromType.getGeneratedTypeName(),
-        name = "mapIndexed",
+        name = "mapNotNull",
         parameters = {
             "transform"(
                 type = lambda(
-                    parameters = {
-                        "index"<Int>()
-                        "element"(type = fromType.type)
-                    },
-                    returnType = mappedType,
+                    parameters = { "element"(type = fromType.type) },
+                    returnType = mappedType.copy(nullable = true),
                 ),
             )
         },
         returns = resultTypeName,
-        forceFunctionBody = true,
     ) {
         addAnnotation(OverloadResolutionByLambdaReturnType::class)
         if (fromType == BaseType.GENERIC) {
@@ -50,7 +47,13 @@ private fun FileSpec.Builder.addMapIndexedFunction(fromType: BaseType, toType: B
         }
         if (toType == BaseType.GENERIC) {
             addTypeVariable(mappedType as TypeVariableName)
+            statement("val builder = ${toType.generatedClassName}.Builder<%T>()", mappedType)
+        } else {
+            statement("val builder = ${toType.generatedClassName}.Builder()")
         }
-        statement("return ${toType.generatedClassName}(size) { transform(it, get(it)) }")
+        controlFlow("forEach { element ->") {
+            statement("transform(element)?.let { builder.add(it) }")
+        }
+        statement("return builder.build()")
     }
 }
