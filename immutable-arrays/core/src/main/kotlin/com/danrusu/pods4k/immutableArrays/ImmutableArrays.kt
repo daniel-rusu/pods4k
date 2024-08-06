@@ -15,71 +15,70 @@ import kotlin.Short
 import kotlin.Suppress
 
 /**
- * Returns true if [this] immutable array contains the [element]
+ * See [Array.contains]
  */
 public operator fun <T> ImmutableArray<T>.contains(element: T): Boolean {
     return any { it == element }
 }
 
 /**
- * Returns true if [this] immutable array contains the [element]
+ * See [Array.contains]
  */
 public operator fun ImmutableBooleanArray.contains(element: Boolean): Boolean {
     return any { it == element }
 }
 
 /**
- * Returns true if [this] immutable array contains the [element]
+ * See [Array.contains]
  */
 public operator fun ImmutableByteArray.contains(element: Byte): Boolean {
     return any { it == element }
 }
 
 /**
- * Returns true if [this] immutable array contains the [element]
+ * See [Array.contains]
  */
 public operator fun ImmutableCharArray.contains(element: Char): Boolean {
     return any { it == element }
 }
 
 /**
- * Returns true if [this] immutable array contains the [element]
+ * See [Array.contains]
  */
 public operator fun ImmutableShortArray.contains(element: Short): Boolean {
     return any { it == element }
 }
 
 /**
- * Returns true if [this] immutable array contains the [element]
+ * See [Array.contains]
  */
 public operator fun ImmutableIntArray.contains(element: Int): Boolean {
     return any { it == element }
 }
 
 /**
- * Returns true if [this] immutable array contains the [element]
+ * See [Array.contains]
  */
 public operator fun ImmutableLongArray.contains(element: Long): Boolean {
     return any { it == element }
 }
 
 /**
- * Returns true if [this] immutable array contains the [element]
+ * See [Array.contains]
  */
 public operator fun ImmutableFloatArray.contains(element: Float): Boolean {
     return any { it == element }
 }
 
 /**
- * Returns true if [this] immutable array contains the [element]
+ * See [Array.contains]
  */
 public operator fun ImmutableDoubleArray.contains(element: Double): Boolean {
     return any { it == element }
 }
 
 /**
- * Returns the index of the first occurrence of the [element], or -1 if it's not contained in the
- * [this] immutable array.
+ * See [Array.indexOf]
  */
 public fun <T> ImmutableArray<T>.indexOf(element: T): Int {
     forEachIndexed { index, value -> if (value == element) return index }
@@ -87,8 +86,7 @@ public fun <T> ImmutableArray<T>.indexOf(element: T): Int {
 }
 
 /**
- * Returns the index of the first occurrence of the [element], or -1 if it's not contained in the
- * [this] immutable array.
+ * See [Array.indexOf]
  */
 public fun ImmutableBooleanArray.indexOf(element: Boolean): Int {
     forEachIndexed { index, value -> if (value == element) return index }
@@ -96,8 +94,7 @@ public fun ImmutableBooleanArray.indexOf(element: Boolean): Int {
 }
 
 /**
- * Returns the index of the first occurrence of the [element], or -1 if it's not contained in the
- * [this] immutable array.
+ * See [Array.indexOf]
  */
 public fun ImmutableByteArray.indexOf(element: Byte): Int {
     forEachIndexed { index, value -> if (value == element) return index }
@@ -105,8 +102,7 @@ public fun ImmutableByteArray.indexOf(element: Byte): Int {
 }
 
 /**
- * Returns the index of the first occurrence of the [element], or -1 if it's not contained in the
- * [this] immutable array.
+ * See [Array.indexOf]
  */
 public fun ImmutableCharArray.indexOf(element: Char): Int {
     forEachIndexed { index, value -> if (value == element) return index }
@@ -114,8 +110,7 @@ public fun ImmutableCharArray.indexOf(element: Char): Int {
 }
 
 /**
- * Returns the index of the first occurrence of the [element], or -1 if it's not contained in the
- * [this] immutable array.
+ * See [Array.indexOf]
  */
 public fun ImmutableShortArray.indexOf(element: Short): Int {
     forEachIndexed { index, value -> if (value == element) return index }
@@ -123,8 +118,7 @@ public fun ImmutableShortArray.indexOf(element: Short): Int {
 }
 
 /**
- * Returns the index of the first occurrence of the [element], or -1 if it's not contained in the
- * [this] immutable array.
+ * See [Array.indexOf]
  */
 public fun ImmutableIntArray.indexOf(element: Int): Int {
     forEachIndexed { index, value -> if (value == element) return index }
@@ -132,8 +126,7 @@ public fun ImmutableIntArray.indexOf(element: Int): Int {
 }
 
 /**
- * Returns the index of the first occurrence of the [element], or -1 if it's not contained in the
- * [this] immutable array.
+ * See [Array.indexOf]
  */
 public fun ImmutableLongArray.indexOf(element: Long): Int {
     forEachIndexed { index, value -> if (value == element) return index }
@@ -141,8 +134,7 @@ public fun ImmutableLongArray.indexOf(element: Long): Int {
 }
 
 /**
- * Returns the index of the first occurrence of the [element], or -1 if it's not contained in the
- * [this] immutable array.
+ * See [Array.indexOf]
  */
 public fun ImmutableFloatArray.indexOf(element: Float): Int {
     forEachIndexed { index, value -> if (value == element) return index }
@@ -150,8 +142,7 @@ public fun ImmutableFloatArray.indexOf(element: Float): Int {
 }
 
 /**
- * Returns the index of the first occurrence of the [element], or -1 if it's not contained in the
- * [this] immutable array.
+ * See [Array.indexOf]
  */
 public fun ImmutableDoubleArray.indexOf(element: Double): Int {
     forEachIndexed { index, value -> if (value == element) return index }
@@ -159,8 +150,7 @@ public fun ImmutableDoubleArray.indexOf(element: Double): Int {
 }
 
 /**
- * Returns the index of the last occurrence of the [element], or -1 if it's not contained in the
- * [this] immutable array.
+ * See [Array.lastIndexOf]
  */
 public fun <T> ImmutableArray<T>.lastIndexOf(element: T): Int {
     for (index in lastIndex downTo 0) {
@@ -170,8 +160,7 @@ public fun <T> ImmutableArray<T>.lastIndexOf(element: T): Int {
 }
 
 /**
- * Returns the index of the last occurrence of the [element], or -1 if it's not contained in the
- * [this] immutable array.
+ * See [Array.lastIndexOf]
  */
 public fun ImmutableBooleanArray.lastIndexOf(element: Boolean): Int {
     for (index in lastIndex downTo 0) {
@@ -181,8 +170,7 @@ public fun ImmutableBooleanArray.lastIndexOf(element: Boolean): Int {
 }
 
 /**
- * Returns the index of the last occurrence of the [element], or -1 if it's not contained in the
- * [this] immutable array.
+ * See [Array.lastIndexOf]
  */
 public fun ImmutableByteArray.lastIndexOf(element: Byte): Int {
     for (index in lastIndex downTo 0) {
@@ -192,8 +180,7 @@ public fun ImmutableByteArray.lastIndexOf(element: Byte): Int {
 }
 
 /**
- * Returns the index of the last occurrence of the [element], or -1 if it's not contained in the
- * [this] immutable array.
+ * See [Array.lastIndexOf]
  */
 public fun ImmutableCharArray.lastIndexOf(element: Char): Int {
     for (index in lastIndex downTo 0) {
@@ -203,8 +190,7 @@ public fun ImmutableCharArray.lastIndexOf(element: Char): Int {
 }
 
 /**
- * Returns the index of the last occurrence of the [element], or -1 if it's not contained in the
- * [this] immutable array.
+ * See [Array.lastIndexOf]
  */
 public fun ImmutableShortArray.lastIndexOf(element: Short): Int {
     for (index in lastIndex downTo 0) {
@@ -214,8 +200,7 @@ public fun ImmutableShortArray.lastIndexOf(element: Short): Int {
 }
 
 /**
- * Returns the index of the last occurrence of the [element], or -1 if it's not contained in the
- * [this] immutable array.
+ * See [Array.lastIndexOf]
  */
 public fun ImmutableIntArray.lastIndexOf(element: Int): Int {
     for (index in lastIndex downTo 0) {
@@ -225,8 +210,7 @@ public fun ImmutableIntArray.lastIndexOf(element: Int): Int {
 }
 
 /**
- * Returns the index of the last occurrence of the [element], or -1 if it's not contained in the
- * [this] immutable array.
+ * See [Array.lastIndexOf]
  */
 public fun ImmutableLongArray.lastIndexOf(element: Long): Int {
     for (index in lastIndex downTo 0) {
@@ -236,8 +220,7 @@ public fun ImmutableLongArray.lastIndexOf(element: Long): Int {
 }
 
 /**
- * Returns the index of the last occurrence of the [element], or -1 if it's not contained in the
- * [this] immutable array.
+ * See [Array.lastIndexOf]
  */
 public fun ImmutableFloatArray.lastIndexOf(element: Float): Int {
     for (index in lastIndex downTo 0) {
@@ -247,8 +230,7 @@ public fun ImmutableFloatArray.lastIndexOf(element: Float): Int {
 }
 
 /**
- * Returns the index of the last occurrence of the [element], or -1 if it's not contained in the
- * [this] immutable array.
+ * See [Array.lastIndexOf]
  */
 public fun ImmutableDoubleArray.lastIndexOf(element: Double): Int {
     for (index in lastIndex downTo 0) {

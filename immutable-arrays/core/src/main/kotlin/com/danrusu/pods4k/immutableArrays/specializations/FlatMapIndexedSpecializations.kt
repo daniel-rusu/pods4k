@@ -22,12 +22,12 @@ import kotlin.Short
 import kotlin.collections.Iterable
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T, R> ImmutableArray<T>.flatMapIndexed(
@@ -42,12 +42,12 @@ public inline fun <T, R> ImmutableArray<T>.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableBooleanArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableBooleanArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.flatMapIndexed(
@@ -62,12 +62,12 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableByteArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableByteArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.flatMapIndexed(
@@ -82,12 +82,12 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableCharArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableCharArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.flatMapIndexed(
@@ -102,12 +102,12 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableShortArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableShortArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.flatMapIndexed(
@@ -122,12 +122,12 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableIntArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableIntArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.flatMapIndexed(
@@ -142,12 +142,12 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableLongArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableLongArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.flatMapIndexed(
@@ -162,12 +162,12 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableFloatArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableFloatArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.flatMapIndexed(
@@ -182,12 +182,12 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableDoubleArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableDoubleArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.flatMapIndexed(
@@ -202,12 +202,12 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableBooleanArray.flatMapIndexed(
@@ -222,12 +222,12 @@ public inline fun <R> ImmutableBooleanArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableBooleanArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableBooleanArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.flatMapIndexed(
@@ -242,12 +242,12 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableByteArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableByteArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.flatMapIndexed(
@@ -262,12 +262,12 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableCharArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableCharArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.flatMapIndexed(
@@ -282,12 +282,12 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableShortArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableShortArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.flatMapIndexed(
@@ -302,12 +302,12 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableIntArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableIntArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.flatMapIndexed(
@@ -322,12 +322,12 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableLongArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableLongArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.flatMapIndexed(
@@ -342,12 +342,12 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableFloatArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableFloatArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.flatMapIndexed(
@@ -362,12 +362,12 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableDoubleArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableDoubleArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.flatMapIndexed(
@@ -382,12 +382,12 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableByteArray.flatMapIndexed(
@@ -402,12 +402,12 @@ public inline fun <R> ImmutableByteArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableBooleanArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableBooleanArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.flatMapIndexed(
@@ -422,12 +422,12 @@ public inline fun ImmutableByteArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableByteArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableByteArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.flatMapIndexed(
@@ -442,12 +442,12 @@ public inline fun ImmutableByteArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableCharArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableCharArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.flatMapIndexed(
@@ -462,12 +462,12 @@ public inline fun ImmutableByteArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableShortArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableShortArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.flatMapIndexed(
@@ -482,12 +482,12 @@ public inline fun ImmutableByteArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableIntArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableIntArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.flatMapIndexed(
@@ -502,12 +502,12 @@ public inline fun ImmutableByteArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableLongArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableLongArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.flatMapIndexed(
@@ -522,12 +522,12 @@ public inline fun ImmutableByteArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableFloatArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableFloatArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.flatMapIndexed(
@@ -542,12 +542,12 @@ public inline fun ImmutableByteArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableDoubleArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableDoubleArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.flatMapIndexed(
@@ -562,12 +562,12 @@ public inline fun ImmutableByteArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableCharArray.flatMapIndexed(
@@ -582,12 +582,12 @@ public inline fun <R> ImmutableCharArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableBooleanArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableBooleanArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.flatMapIndexed(
@@ -602,12 +602,12 @@ public inline fun ImmutableCharArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableByteArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableByteArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.flatMapIndexed(
@@ -622,12 +622,12 @@ public inline fun ImmutableCharArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableCharArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableCharArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.flatMapIndexed(
@@ -642,12 +642,12 @@ public inline fun ImmutableCharArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableShortArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableShortArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.flatMapIndexed(
@@ -662,12 +662,12 @@ public inline fun ImmutableCharArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableIntArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableIntArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.flatMapIndexed(
@@ -682,12 +682,12 @@ public inline fun ImmutableCharArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableLongArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableLongArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.flatMapIndexed(
@@ -702,12 +702,12 @@ public inline fun ImmutableCharArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableFloatArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableFloatArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.flatMapIndexed(
@@ -722,12 +722,12 @@ public inline fun ImmutableCharArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableDoubleArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableDoubleArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.flatMapIndexed(
@@ -742,12 +742,12 @@ public inline fun ImmutableCharArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableShortArray.flatMapIndexed(
@@ -762,12 +762,12 @@ public inline fun <R> ImmutableShortArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableBooleanArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableBooleanArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.flatMapIndexed(
@@ -782,12 +782,12 @@ public inline fun ImmutableShortArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableByteArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableByteArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.flatMapIndexed(
@@ -802,12 +802,12 @@ public inline fun ImmutableShortArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableCharArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableCharArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.flatMapIndexed(
@@ -822,12 +822,12 @@ public inline fun ImmutableShortArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableShortArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableShortArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.flatMapIndexed(
@@ -842,12 +842,12 @@ public inline fun ImmutableShortArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableIntArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableIntArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.flatMapIndexed(
@@ -862,12 +862,12 @@ public inline fun ImmutableShortArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableLongArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableLongArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.flatMapIndexed(
@@ -882,12 +882,12 @@ public inline fun ImmutableShortArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableFloatArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableFloatArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.flatMapIndexed(
@@ -902,12 +902,12 @@ public inline fun ImmutableShortArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableDoubleArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableDoubleArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.flatMapIndexed(
@@ -922,12 +922,12 @@ public inline fun ImmutableShortArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableIntArray.flatMapIndexed(
@@ -942,12 +942,12 @@ public inline fun <R> ImmutableIntArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableBooleanArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableBooleanArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.flatMapIndexed(
@@ -962,12 +962,12 @@ public inline fun ImmutableIntArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableByteArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableByteArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.flatMapIndexed(
@@ -982,12 +982,12 @@ public inline fun ImmutableIntArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableCharArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableCharArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.flatMapIndexed(
@@ -1002,12 +1002,12 @@ public inline fun ImmutableIntArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableShortArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableShortArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.flatMapIndexed(
@@ -1022,12 +1022,12 @@ public inline fun ImmutableIntArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableIntArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableIntArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.flatMapIndexed(
@@ -1042,12 +1042,12 @@ public inline fun ImmutableIntArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableLongArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableLongArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.flatMapIndexed(
@@ -1062,12 +1062,12 @@ public inline fun ImmutableIntArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableFloatArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableFloatArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.flatMapIndexed(
@@ -1082,12 +1082,12 @@ public inline fun ImmutableIntArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableDoubleArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableDoubleArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.flatMapIndexed(
@@ -1102,12 +1102,12 @@ public inline fun ImmutableIntArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableLongArray.flatMapIndexed(
@@ -1122,12 +1122,12 @@ public inline fun <R> ImmutableLongArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableBooleanArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableBooleanArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.flatMapIndexed(
@@ -1142,12 +1142,12 @@ public inline fun ImmutableLongArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableByteArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableByteArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.flatMapIndexed(
@@ -1162,12 +1162,12 @@ public inline fun ImmutableLongArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableCharArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableCharArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.flatMapIndexed(
@@ -1182,12 +1182,12 @@ public inline fun ImmutableLongArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableShortArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableShortArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.flatMapIndexed(
@@ -1202,12 +1202,12 @@ public inline fun ImmutableLongArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableIntArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableIntArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.flatMapIndexed(
@@ -1222,12 +1222,12 @@ public inline fun ImmutableLongArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableLongArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableLongArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.flatMapIndexed(
@@ -1242,12 +1242,12 @@ public inline fun ImmutableLongArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableFloatArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableFloatArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.flatMapIndexed(
@@ -1262,12 +1262,12 @@ public inline fun ImmutableLongArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableDoubleArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableDoubleArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.flatMapIndexed(
@@ -1282,12 +1282,12 @@ public inline fun ImmutableLongArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableFloatArray.flatMapIndexed(
@@ -1302,12 +1302,12 @@ public inline fun <R> ImmutableFloatArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableBooleanArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableBooleanArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.flatMapIndexed(
@@ -1322,12 +1322,12 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableByteArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableByteArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.flatMapIndexed(
@@ -1342,12 +1342,12 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableCharArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableCharArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.flatMapIndexed(
@@ -1362,12 +1362,12 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableShortArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableShortArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.flatMapIndexed(
@@ -1382,12 +1382,12 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableIntArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableIntArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.flatMapIndexed(
@@ -1402,12 +1402,12 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableLongArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableLongArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.flatMapIndexed(
@@ -1422,12 +1422,12 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableFloatArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableFloatArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.flatMapIndexed(
@@ -1442,12 +1442,12 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableDoubleArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableDoubleArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.flatMapIndexed(
@@ -1462,12 +1462,12 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableDoubleArray.flatMapIndexed(
@@ -1482,12 +1482,12 @@ public inline fun <R> ImmutableDoubleArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableBooleanArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableBooleanArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.flatMapIndexed(
@@ -1502,12 +1502,12 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableByteArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableByteArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.flatMapIndexed(
@@ -1522,12 +1522,12 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableCharArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableCharArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.flatMapIndexed(
@@ -1542,12 +1542,12 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableShortArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableShortArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.flatMapIndexed(
@@ -1562,12 +1562,12 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableIntArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableIntArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.flatMapIndexed(
@@ -1582,12 +1582,12 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableLongArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableLongArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.flatMapIndexed(
@@ -1602,12 +1602,12 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableFloatArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableFloatArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.flatMapIndexed(
@@ -1622,12 +1622,12 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
 }
 
 /**
- * Calls [transform] on each element to produce collections and appends all those collections in a
- * single ImmutableDoubleArray.
+ * Transforms each element into a collection and appends those collections in a single
+ * ImmutableDoubleArray.
  *
- * Note that if [transform] is producing an array or immutable array then you'll want to use the
- * [asList] function for optimal performance as it wraps those results instead of copying them into a
- * temporary list.
+ * Note that if [transform] produces an array then you'll want to use the [asList] function for
+ * optimal performance instead of copying the elements into a temporary list.  That's because [asList]
+ * wraps the array without copying the elements.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.flatMapIndexed(

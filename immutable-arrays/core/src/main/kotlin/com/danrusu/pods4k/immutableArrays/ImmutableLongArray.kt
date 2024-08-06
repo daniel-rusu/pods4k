@@ -30,21 +30,20 @@ import kotlin.sequences.Sequence
  * gets eliminated at compile time so that variables of this type end up pointing directly at the
  * underlying array.
  *
- * In order to preserve the same performance as regular arrays, all methods that delegate to the
- * same method on the backing array are marked with inline so that call sites end up calling the
- * underlying methods directly.  Note that this won't have any negative performance impacts as it
- * doesn't result in duplicate code or anything as it just replaces the wrapper method call with the
- * underlying method call.
+ * To preserve the same performance as regular arrays, all functions that simply delegate to the
+ * same function on the backing array are marked inline.  This won't result in code duplication as it's
+ * a direct substitution replacing calls to the wrapper with direct calls to the underlying functions
+ * on the backing array.
  */
 @Suppress("NOTHING_TO_INLINE")
 @JvmInline
 public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
-     * This is internal instead of private so we can have inline functions that delegate to the same
-     * function on the backing array.  The backing array won't be accessible from Kotlin code since the
-     * auto-generated arrays are in their own module and the internal modifier prevents outside access.
-     *  The constructor is also internal preventing anyone from creating an "instance" that points to
-     * an array that they have access to.
+     * The backing array is internal instead of private so that we can have inline functions that
+     * delegate to the same function on the backing array.  The backing array won't be accessible from
+     * Kotlin code since the auto-generated arrays are in their own module and the internal modifier
+     * prevents outside access.  The constructor is also internal preventing anyone from creating an
+     * "instance" that points to an array that they have access to.
      *
      * Attempting to bypass the internal visibility from java won't work since this is an inline
      * class so both the field and constructor are mangled by the Kotlin compiler.  While these might
@@ -115,8 +114,7 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     public inline fun isNotEmpty(): Boolean = values.isNotEmpty()
 
     /**
-     * Returns the element at the specified [index]. This method can be called using the index
-     * operator.
+     * Returns the element at [index]. This method can be called using the index operator.
      */
     public inline operator fun `get`(index: Int): Long = values[index]
 
@@ -296,7 +294,7 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     }
 
     /**
-     * Creates a pair of immutable arrays, where the first contains elements for which predicate
+     * Creates a pair of immutable arrays, where the first contains elements for which the predicate
      * yielded true, and the second contains the other elements.
      */
     public fun partition(predicate: (element: Long) -> Boolean): Pair<ImmutableLongArray, ImmutableLongArray> {
@@ -352,14 +350,14 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
 
         /**
          * Returns an ImmutableLongArray instance of the specified [size], where each element is
-         * calculated by calling the specified [init] function.
+         * calculated by calling the [init] function.
          *
-         * [init] is called sequentially starting at index 0 to initialize the array with each
+         * [init] is called sequentially, starting at index 0, to initialize the array with each
          * element at its given index.
          *
          * Implementation:
-         * We're using the invoke method instead of a regular constructor so that we can declare it
-         * inline.  The call site will look like a regular constructor call.
+         * We're using the invoke operator instead of a regular constructor so that we can declare
+         * it inline.  The call site will look like a regular constructor call.
          */
         public inline operator fun invoke(size: Int, `init`: (index: Int) -> Long): ImmutableLongArray {
             if (size == 0) return EMPTY
@@ -370,7 +368,7 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     }
 
     /**
-     * Builder to construct immutable arrays when the resulting size isn't known in advance.
+     * Builder to create immutable arrays when the resulting size isn't known in advance.
      *
      * @param initialCapacity The initial capacity of the temporary array where the values are
      * accumulated.  A larger value reduces the number of times it's resized as elements get added.

@@ -40,7 +40,7 @@ internal object ImmutableArrayExtensionsGenerator {
 private fun FileSpec.Builder.addContains() {
     for (baseType in BaseType.entries) {
         function(
-            kdoc = "Returns true if [this] immutable array contains the [element]",
+            kdoc = "See [Array.contains]",
             modifiers = listOf(KModifier.OPERATOR),
             receiver = baseType.getGeneratedTypeName(),
             name = "contains",
@@ -59,7 +59,7 @@ private fun FileSpec.Builder.addContains() {
 private fun FileSpec.Builder.addIndexOf() {
     for (baseType in BaseType.entries) {
         function(
-            kdoc = "Returns the index of the first occurrence of the [element], or -1 if it's not contained in the [this] immutable array.",
+            kdoc = "See [Array.indexOf]",
             receiver = baseType.getGeneratedTypeName(),
             name = "indexOf",
             parameters = { "element"(type = baseType.type) },
@@ -77,7 +77,7 @@ private fun FileSpec.Builder.addIndexOf() {
 private fun FileSpec.Builder.addLastIndexOf() {
     for (baseType in BaseType.entries) {
         function(
-            kdoc = "Returns the index of the last occurrence of the [element], or -1 if it's not contained in the [this] immutable array.",
+            kdoc = "See [Array.lastIndexOf]",
             receiver = baseType.getGeneratedTypeName(),
             name = "lastIndexOf",
             parameters = { "element"(type = baseType.type) },

@@ -116,7 +116,7 @@ private fun FileSpec.Builder.addBuilderFunctions() {
 private fun TypeSpec.Builder.addBuilderUtilsEnsureCapacity() {
     function(
         kdoc = """
-            Returns a larger capacity when [currentCapacity] is less than [minCapacity] otherwise returns [currentCapacity].
+            Returns a capacity that's greater than or equal to [minCapacity].  If [currentCapacity] is already sufficient then [currentCapacity] is returned.
 
             The strategy of choosing the new capacity attempts to balance the negative performance impact of repeated resizing operations with the negative memory impact of ending up with too much unused capacity.
         """.trimIndent(),

@@ -28,9 +28,9 @@ private fun FileSpec.Builder.addFlatMapFunction(fromType: BaseType, toType: Base
     }
     function(
         kdoc = """
-            Calls [transform] on each element to produce collections and appends all those collections in a single ${toType.generatedClassName}.
+            Transforms each element into a collection and appends those collections in a single ${toType.generatedClassName}.
 
-            Note that if [transform] is producing an array or immutable array then you'll want to use the [asList] function for optimal performance as it wraps those results instead of copying them into a temporary list.
+            Note that if [transform] produces an array then you'll want to use the [asList] function for optimal performance instead of copying the elements into a temporary list.  That's because [asList] wraps the array without copying the elements.
         """.trimIndent(),
         modifiers = listOf(KModifier.INLINE),
         receiver = fromType.getGeneratedTypeName(),
