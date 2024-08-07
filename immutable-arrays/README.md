@@ -188,14 +188,14 @@ names.asSequence()
 
 Performing some operation that results in an `ImmutableIntArray` ends up with the following memory layout:
 
-![Memory Layout of immutable arrays](src/main/resources/immutable-array-memory-layout.drawio.png)
+![Memory Layout of immutable arrays](./resources/immutable-array-memory-layout.drawio.png)
 
 Note that the `values` variable of type `ImmutableIntArray` actually references a regular primitive int array in the
 bytecode.
 
 Here is the same example but operating on a regular primitive array and ending up with a read-only list:
 
-![Memory Layout of Read-only Lists](src/main/resources/list-memory-layout.drawio.png)
+![Memory Layout of Read-only Lists](./resources/list-memory-layout.drawio.png)
 
 Classes that operate on generics, such as lists, can't store primitive types directly. Each 32-bit integer gets
 auto-boxed into an `Integer` wrapper object and a pointer to that wrapper is passed to the resulting list. The garbage
