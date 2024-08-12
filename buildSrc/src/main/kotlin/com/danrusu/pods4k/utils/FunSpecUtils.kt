@@ -11,6 +11,14 @@ internal fun FunSpec.Builder.suppress(warning: String): FunSpec.Builder {
     )
 }
 
+internal fun FunSpec.Builder.jvmName(name: String): FunSpec.Builder {
+    return addAnnotation(
+        AnnotationSpec.builder(JvmName::class)
+            .addMember("%S", name)
+            .build(),
+    )
+}
+
 internal fun FunSpec.Builder.emptyLine() {
     statement("")
 }

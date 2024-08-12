@@ -9,6 +9,7 @@ _Date TBD_
 
 **New Features:**
 
+* Add `flatMap` specializations for flattening immutable arrays
 * Add `requireNoNulls` extension function
 * Add `indexOfLast(predicate)` method
 * Add `indexOfFirst(predicate)` method
@@ -38,8 +39,8 @@ _2024-07-29_
 
 **New Features:**
 
-* Add `flatMapIndexed` specializations
-* Add `flatMap` specializations
+* Add `flatMapIndexed` specializations for flattening iterables
+* Add `flatMap` specializations for flattening iterables
 * Add `partition` method
 * Add `asList` method
 * Add `MutableCollection.addAll(immutableArray)` extension function

@@ -12,12 +12,14 @@ private val genericType = TypeVariableName("T")
 
 internal enum class BaseType(
     val type: TypeName,
+    val typeClass: KClass<*>,
     val backingArrayType: TypeName,
     val backingArrayConstructor: String,
     val generatedClassName: String,
 ) {
     GENERIC(
         type = genericType,
+        typeClass = Any::class,
         backingArrayType = Array::class.asTypeName().parameterizedBy(WildcardTypeName.producerOf(genericType)),
         backingArrayConstructor = "Array<Any?>",
         generatedClassName = "ImmutableArray",
@@ -37,6 +39,7 @@ internal enum class BaseType(
         arrayType: KClass<*>,
     ) : this(
         type = type.asTypeName(),
+        typeClass = type,
         backingArrayType = arrayType.asTypeName(),
         backingArrayConstructor = arrayType.simpleName!!,
         generatedClassName = "Immutable${type.simpleName}Array",
