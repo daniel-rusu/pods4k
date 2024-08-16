@@ -33,9 +33,13 @@ private fun FileSpec.Builder.addGenericArrayToImmutableArray() {
         ) {
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
-            }
-            controlFlow("return build${baseType.generatedClassName}(size)") {
-                statement("addAll(this@toImmutableArray)")
+                // delegate to the builder to keep the code clean and take advantage of System.arraycopy
+                controlFlow("return build${baseType.generatedClassName}(size)") {
+                    statement("addAll(this@toImmutableArray)")
+                }
+            } else {
+                // Each element needs to be unboxed so use the factory function to avoid creating the temporary builder
+                statement("return ${baseType.generatedClassName}(size)·{·this[it]·}")
             }
         }
     }

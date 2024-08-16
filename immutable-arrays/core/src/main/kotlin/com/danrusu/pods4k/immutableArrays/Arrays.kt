@@ -104,70 +104,54 @@ public fun <T> Array<T>.toImmutableArray(): ImmutableArray<T> {
  * Returns an [ImmutableBooleanArray] with the contents of this array.
  */
 public fun Array<Boolean>.toImmutableArray(): ImmutableBooleanArray {
-    return buildImmutableBooleanArray(size) {
-        addAll(this@toImmutableArray)
-    }
+    return ImmutableBooleanArray(size) { this[it] }
 }
 
 /**
  * Returns an [ImmutableByteArray] with the contents of this array.
  */
 public fun Array<Byte>.toImmutableArray(): ImmutableByteArray {
-    return buildImmutableByteArray(size) {
-        addAll(this@toImmutableArray)
-    }
+    return ImmutableByteArray(size) { this[it] }
 }
 
 /**
  * Returns an [ImmutableCharArray] with the contents of this array.
  */
 public fun Array<Char>.toImmutableArray(): ImmutableCharArray {
-    return buildImmutableCharArray(size) {
-        addAll(this@toImmutableArray)
-    }
+    return ImmutableCharArray(size) { this[it] }
 }
 
 /**
  * Returns an [ImmutableShortArray] with the contents of this array.
  */
 public fun Array<Short>.toImmutableArray(): ImmutableShortArray {
-    return buildImmutableShortArray(size) {
-        addAll(this@toImmutableArray)
-    }
+    return ImmutableShortArray(size) { this[it] }
 }
 
 /**
  * Returns an [ImmutableIntArray] with the contents of this array.
  */
 public fun Array<Int>.toImmutableArray(): ImmutableIntArray {
-    return buildImmutableIntArray(size) {
-        addAll(this@toImmutableArray)
-    }
+    return ImmutableIntArray(size) { this[it] }
 }
 
 /**
  * Returns an [ImmutableLongArray] with the contents of this array.
  */
 public fun Array<Long>.toImmutableArray(): ImmutableLongArray {
-    return buildImmutableLongArray(size) {
-        addAll(this@toImmutableArray)
-    }
+    return ImmutableLongArray(size) { this[it] }
 }
 
 /**
  * Returns an [ImmutableFloatArray] with the contents of this array.
  */
 public fun Array<Float>.toImmutableArray(): ImmutableFloatArray {
-    return buildImmutableFloatArray(size) {
-        addAll(this@toImmutableArray)
-    }
+    return ImmutableFloatArray(size) { this[it] }
 }
 
 /**
  * Returns an [ImmutableDoubleArray] with the contents of this array.
  */
 public fun Array<Double>.toImmutableArray(): ImmutableDoubleArray {
-    return buildImmutableDoubleArray(size) {
-        addAll(this@toImmutableArray)
-    }
+    return ImmutableDoubleArray(size) { this[it] }
 }
