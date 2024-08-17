@@ -1,5 +1,5 @@
 // Auto-generated file. DO NOT EDIT!
-package com.danrusu.pods4k.immutableArrays.specializations
+package com.danrusu.pods4k.immutableArrays.multiplicativeSpecializations
 
 import com.danrusu.pods4k.immutableArrays.ImmutableArray
 import com.danrusu.pods4k.immutableArrays.ImmutableBooleanArray

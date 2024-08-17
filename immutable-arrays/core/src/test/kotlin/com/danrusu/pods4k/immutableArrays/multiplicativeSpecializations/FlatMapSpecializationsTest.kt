@@ -1,4 +1,4 @@
-package com.danrusu.pods4k.immutableArrays.specializations
+package com.danrusu.pods4k.immutableArrays.multiplicativeSpecializations
 
 import com.danrusu.pods4k.immutableArrays.emptyImmutableArray
 import com.danrusu.pods4k.immutableArrays.emptyImmutableDoubleArray

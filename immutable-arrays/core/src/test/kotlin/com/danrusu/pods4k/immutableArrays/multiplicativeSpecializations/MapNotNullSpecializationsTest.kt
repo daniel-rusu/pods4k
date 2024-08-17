@@ -1,4 +1,4 @@
-package com.danrusu.pods4k.immutableArrays.specializations
+package com.danrusu.pods4k.immutableArrays.multiplicativeSpecializations
 
 import com.danrusu.pods4k.immutableArrays.emptyImmutableArray
 import com.danrusu.pods4k.immutableArrays.emptyImmutableIntArray
@@ -7,21 +7,25 @@ import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
 
-class MapIndexedNotNullSpecializationsTest {
+class MapNotNullSpecializationsTest {
     @Test
     fun `generic to generic validation`() {
-        val input = immutableArrayOf("one", "two", "three")
+        val input = immutableArrayOf(
+            Pair("one", 1),
+            Pair("two", 2),
+            Pair("three", 3),
+        )
 
         // all null
-        expectThat(input.mapIndexedNotNull { index, element -> if (index > 10) element else null })
+        expectThat(input.mapNotNull { if (it.second > 10) it.first else null })
             .isEqualTo(emptyImmutableArray())
 
         // some null
-        expectThat(input.mapIndexedNotNull { index, element -> if (index % 2 == 0) element else null })
+        expectThat(input.mapNotNull { if (it.second % 2 != 0) it.first else null })
             .isEqualTo(immutableArrayOf("one", "three"))
 
         // none null
-        expectThat(input.mapIndexedNotNull { index, element -> if (index >= 0) element else null })
+        expectThat(input.mapNotNull { if (it.second > 0) it.first else null })
             .isEqualTo(immutableArrayOf("one", "two", "three"))
     }
 
@@ -30,15 +34,15 @@ class MapIndexedNotNullSpecializationsTest {
         val input = immutableArrayOf("a", "bb", "ccc")
 
         // all null
-        expectThat(input.mapIndexedNotNull { index, element -> if (index > 10) element.length else null })
+        expectThat(input.mapNotNull { if (it.length > 10) it.length else null })
             .isEqualTo(emptyImmutableIntArray())
 
         // some null
-        expectThat(input.mapIndexedNotNull { index, element -> if (index >= 1) element.length else null })
+        expectThat(input.mapNotNull { if (it.length > 1) it.length else null })
             .isEqualTo(immutableArrayOf(2, 3))
 
         // none null
-        expectThat(input.mapIndexedNotNull { index, element -> if (index >= 0) element.length else null })
+        expectThat(input.mapNotNull { if (it.isNotEmpty()) it.length else null })
             .isEqualTo(immutableArrayOf(1, 2, 3))
     }
 
@@ -47,15 +51,15 @@ class MapIndexedNotNullSpecializationsTest {
         val input = immutableArrayOf(1, 2, 3)
 
         // all null
-        expectThat(input.mapIndexedNotNull { index, element -> if (index > 10) element.toString() else null })
+        expectThat(input.mapNotNull { if (it > 10) it.toString() else null })
             .isEqualTo(emptyImmutableArray())
 
         // some null
-        expectThat(input.mapIndexedNotNull { index, element -> if (index % 2 == 0) element.toString() else null })
+        expectThat(input.mapNotNull { if (it % 2 == 1) it.toString() else null })
             .isEqualTo(immutableArrayOf("1", "3"))
 
         // none null
-        expectThat(input.mapIndexedNotNull { index, element -> if (index >= 0) element.toString() else null })
+        expectThat(input.mapNotNull { if (it > 0) it.toString() else null })
             .isEqualTo(immutableArrayOf("1", "2", "3"))
     }
 
@@ -64,15 +68,15 @@ class MapIndexedNotNullSpecializationsTest {
         val input = immutableArrayOf(1, 2, 3)
 
         // all null
-        expectThat(input.mapIndexedNotNull { index, element -> if (index > 10) 2 * element else null })
+        expectThat(input.mapNotNull { if (it > 10) 2 * it else null })
             .isEqualTo(emptyImmutableIntArray())
 
         // some null
-        expectThat(input.mapIndexedNotNull { index, element -> if (index % 2 == 0) 5 * element else null })
+        expectThat(input.mapNotNull { if (it % 2 == 1) 5 * it else null })
             .isEqualTo(immutableArrayOf(5, 15))
 
         // none null
-        expectThat(input.mapIndexedNotNull { index, element -> if (index >= 0) 5 * element else null })
+        expectThat(input.mapNotNull { if (it > 0) 5 * it else null })
             .isEqualTo(immutableArrayOf(5, 10, 15))
     }
 }

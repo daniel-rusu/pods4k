@@ -1,4 +1,4 @@
-package com.danrusu.pods4k.immutableArrays.core.specializations
+package com.danrusu.pods4k.immutableArrays.core.multiplicativeSpecializations
 
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.utils.function
