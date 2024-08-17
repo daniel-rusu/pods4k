@@ -13,6 +13,7 @@ import com.danrusu.pods4k.immutableArrays.core.multiplicativeSpecializations.Map
 import com.danrusu.pods4k.immutableArrays.core.multiplicativeSpecializations.MapNotNullSpecializationGenerator
 import com.danrusu.pods4k.immutableArrays.core.multiplicativeSpecializations.MapSpecializationGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysToStandardCollections.TransformationsToListFileGenerator
+import com.danrusu.pods4k.immutableArrays.immutableArraysToStandardCollections.TransformationsToSetFileGenerator
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -41,10 +42,10 @@ private fun generateCoreImmutableArraysModule(target: Project) {
     CollectionExtensionsGenerator.generate(destinationPath = moduleSourcePath)
     SequenceExtensionsGenerator.generate(destinationPath = moduleSourcePath)
 
-    generateImmutableArraySpecializations(moduleSourcePath)
+    generateImmutableArrayMultiplicativeSpecializations(moduleSourcePath)
 }
 
-private fun generateImmutableArraySpecializations(moduleSourcePath: String) {
+private fun generateImmutableArrayMultiplicativeSpecializations(moduleSourcePath: String) {
     MapSpecializationGenerator.generate(moduleSourcePath)
     MapIndexedSpecializationGenerator.generate(moduleSourcePath)
     MapNotNullSpecializationGenerator.generate(moduleSourcePath)
@@ -59,4 +60,5 @@ private fun generateImmutableArraysToStandardCollectionsModule(target: Project) 
         .projectDir.absolutePath + "/src/main/kotlin"
 
     TransformationsToListFileGenerator.generate(moduleSourcePath)
+    TransformationsToSetFileGenerator.generate(moduleSourcePath)
 }
