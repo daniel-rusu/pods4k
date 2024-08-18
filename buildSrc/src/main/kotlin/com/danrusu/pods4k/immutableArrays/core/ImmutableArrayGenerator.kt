@@ -601,7 +601,8 @@ private fun TypeSpec.Builder.addSortedWith(baseType: BaseType) {
             statement("%T.sort(backingArray, comparator)", java.util.Arrays::class)
             statement("return ${baseType.generatedClassName}(backingArray)")
         } else {
-            // The standard library comparator-based sort algorithms only operate on generic arrays
+            // The standard library comparator-based sort utilities only operate on generic arrays.
+            // This is probably to avoid auto-boxing each value everytime it's compared
             statement("val temp = values.toTypedArray()")
             statement("%T.sort(temp, comparator)", java.util.Arrays::class)
             statement("return temp.toImmutableArray()")

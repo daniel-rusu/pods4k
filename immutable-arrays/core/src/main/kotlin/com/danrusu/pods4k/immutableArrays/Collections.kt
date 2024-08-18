@@ -1,6 +1,7 @@
 // Auto-generated file. DO NOT EDIT!
 package com.danrusu.pods4k.immutableArrays
 
+import kotlin.Any
 import kotlin.Boolean
 import kotlin.Byte
 import kotlin.Char
@@ -9,6 +10,7 @@ import kotlin.Float
 import kotlin.Int
 import kotlin.Long
 import kotlin.Short
+import kotlin.collections.Collection
 import kotlin.collections.Iterable
 import kotlin.collections.MutableCollection
 
@@ -217,4 +219,67 @@ public fun MutableCollection<in Float>.addAll(elements: ImmutableFloatArray): Bo
 public fun MutableCollection<in Double>.addAll(elements: ImmutableDoubleArray): Boolean {
     // Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step
     return addAll(elements.asList())
+}
+
+/**
+ * Checks whether [this] collection contains all the elements from the specified immutable array
+ */
+public fun <T> Collection<T>.containsAll(elements: ImmutableArray<T>): Boolean {
+    return containsAll(elements.asList())
+}
+
+/**
+ * Checks whether [this] collection contains all the elements from the specified immutable array
+ */
+public fun Collection<Any?>.containsAll(elements: ImmutableBooleanArray): Boolean {
+    return containsAll(elements.asList())
+}
+
+/**
+ * Checks whether [this] collection contains all the elements from the specified immutable array
+ */
+public fun Collection<Any?>.containsAll(elements: ImmutableByteArray): Boolean {
+    return containsAll(elements.asList())
+}
+
+/**
+ * Checks whether [this] collection contains all the elements from the specified immutable array
+ */
+public fun Collection<Any?>.containsAll(elements: ImmutableCharArray): Boolean {
+    return containsAll(elements.asList())
+}
+
+/**
+ * Checks whether [this] collection contains all the elements from the specified immutable array
+ */
+public fun Collection<Any?>.containsAll(elements: ImmutableShortArray): Boolean {
+    return containsAll(elements.asList())
+}
+
+/**
+ * Checks whether [this] collection contains all the elements from the specified immutable array
+ */
+public fun Collection<Any?>.containsAll(elements: ImmutableIntArray): Boolean {
+    return containsAll(elements.asList())
+}
+
+/**
+ * Checks whether [this] collection contains all the elements from the specified immutable array
+ */
+public fun Collection<Any?>.containsAll(elements: ImmutableLongArray): Boolean {
+    return containsAll(elements.asList())
+}
+
+/**
+ * Checks whether [this] collection contains all the elements from the specified immutable array
+ */
+public fun Collection<Any?>.containsAll(elements: ImmutableFloatArray): Boolean {
+    return containsAll(elements.asList())
+}
+
+/**
+ * Checks whether [this] collection contains all the elements from the specified immutable array
+ */
+public fun Collection<Any?>.containsAll(elements: ImmutableDoubleArray): Boolean {
+    return containsAll(elements.asList())
 }

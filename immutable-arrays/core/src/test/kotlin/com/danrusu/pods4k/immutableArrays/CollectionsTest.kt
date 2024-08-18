@@ -5,6 +5,8 @@ import strikt.api.expectThat
 import strikt.assertions.isA
 import strikt.assertions.isEmpty
 import strikt.assertions.isEqualTo
+import strikt.assertions.isFalse
+import strikt.assertions.isTrue
 
 class CollectionsTest {
     @Test
@@ -68,6 +70,20 @@ class CollectionsTest {
 
             expectThat(this)
                 .isEqualTo(mutableListOf("one", "two", 1, 2, 3))
+        }
+    }
+
+    @Test
+    fun `containsAll validation`() {
+        with(listOf(1, 2.5, 3)) {
+            expectThat(containsAll(immutableArrayOf(3, 1)))
+                .isTrue()
+
+            expectThat(containsAll(immutableArrayOf<Int>(3, 1)))
+                .isTrue()
+
+            expectThat(containsAll(immutableArrayOf(3, 4)))
+                .isFalse()
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.danrusu.pods4k.immutableArrays.core
 
 import com.danrusu.pods4k.immutableArrays.BaseType
+import com.danrusu.pods4k.immutableArrays.BaseType.GENERIC
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
 import com.danrusu.pods4k.utils.comment
 import com.danrusu.pods4k.utils.controlFlow
@@ -20,6 +21,7 @@ internal object CollectionExtensionsGenerator {
         val fileSpec = createFile(ImmutableArrayConfig.packageName, "Collections") {
             addIterableToImmutableArray()
             addMutableCollectionAddAll()
+            addCollectionContainsAll()
         }
         fileSpec.writeTo(File(destinationPath, ""))
     }
@@ -33,7 +35,7 @@ private fun FileSpec.Builder.addIterableToImmutableArray() {
             name = "toImmutableArray",
             returns = baseType.getGeneratedTypeName(),
         ) {
-            if (baseType == BaseType.GENERIC) {
+            if (baseType == GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
             controlFlow("val initialCapacity = when (this)") {
@@ -61,11 +63,37 @@ private fun FileSpec.Builder.addMutableCollectionAddAll() {
             parameters = { "elements"(type = baseType.getGeneratedTypeName()) },
             returns = Boolean::class.asTypeName(),
         ) {
-            if (baseType == BaseType.GENERIC) {
+            if (baseType == GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
             comment("Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step")
             statement("return addAll(elements.asList())")
+        }
+    }
+}
+
+private fun FileSpec.Builder.addCollectionContainsAll() {
+    for (baseType in BaseType.entries) {
+        // Use Any? for primitive arrays to allow calling it on collections of supertypes.
+        // The generic version is fine since ImmutableArray is covariant so
+        // Collection<T>.containsAll(ImmutableArray<ChildT>) will be allowed
+        val collectionType = when (baseType) {
+            GENERIC -> baseType.type
+            else -> Any::class.asTypeName().copy(nullable = true)
+        }
+        function(
+            kdoc = "Checks whether [this] collection contains all the elements from the specified immutable array",
+            receiver = ClassName("kotlin.collections", "Collection")
+                .parameterizedBy(collectionType),
+            name = "containsAll",
+            parameters = { "elements"(type = baseType.getGeneratedTypeName()) },
+            returns = Boolean::class.asTypeName(),
+            forceFunctionBody = true,
+        ) {
+            if (baseType == GENERIC) {
+                addTypeVariable(baseType.type as TypeVariableName)
+            }
+            statement("return containsAll(elements.asList())")
         }
     }
 }
