@@ -132,6 +132,69 @@ public fun Iterable<Double>.toImmutableArray(): ImmutableDoubleArray {
 }
 
 /**
+ * Checks whether [this] collection contains all the elements from the specified immutable array
+ */
+public fun <T> Collection<T>.containsAll(elements: ImmutableArray<T>): Boolean {
+    return containsAll(elements.asList())
+}
+
+/**
+ * Checks whether [this] collection contains all the elements from the specified immutable array
+ */
+public fun Collection<Any?>.containsAll(elements: ImmutableBooleanArray): Boolean {
+    return containsAll(elements.asList())
+}
+
+/**
+ * Checks whether [this] collection contains all the elements from the specified immutable array
+ */
+public fun Collection<Any?>.containsAll(elements: ImmutableByteArray): Boolean {
+    return containsAll(elements.asList())
+}
+
+/**
+ * Checks whether [this] collection contains all the elements from the specified immutable array
+ */
+public fun Collection<Any?>.containsAll(elements: ImmutableCharArray): Boolean {
+    return containsAll(elements.asList())
+}
+
+/**
+ * Checks whether [this] collection contains all the elements from the specified immutable array
+ */
+public fun Collection<Any?>.containsAll(elements: ImmutableShortArray): Boolean {
+    return containsAll(elements.asList())
+}
+
+/**
+ * Checks whether [this] collection contains all the elements from the specified immutable array
+ */
+public fun Collection<Any?>.containsAll(elements: ImmutableIntArray): Boolean {
+    return containsAll(elements.asList())
+}
+
+/**
+ * Checks whether [this] collection contains all the elements from the specified immutable array
+ */
+public fun Collection<Any?>.containsAll(elements: ImmutableLongArray): Boolean {
+    return containsAll(elements.asList())
+}
+
+/**
+ * Checks whether [this] collection contains all the elements from the specified immutable array
+ */
+public fun Collection<Any?>.containsAll(elements: ImmutableFloatArray): Boolean {
+    return containsAll(elements.asList())
+}
+
+/**
+ * Checks whether [this] collection contains all the elements from the specified immutable array
+ */
+public fun Collection<Any?>.containsAll(elements: ImmutableDoubleArray): Boolean {
+    return containsAll(elements.asList())
+}
+
+/**
  * Adds all the elements to [this] collection.
  *
  * @return true if the collection changed.
@@ -222,64 +285,109 @@ public fun MutableCollection<in Double>.addAll(elements: ImmutableDoubleArray): 
 }
 
 /**
- * Checks whether [this] collection contains all the elements from the specified immutable array
+ * Removes all the elements from [this] collection.
+ *
+ * Note that if the immutable array contains duplicate elements then it might be more efficient to
+ * convert the immutable array to a set first and remove the set from the collection instead.
+ *
+ * @return true if the collection changed.
  */
-public fun <T> Collection<T>.containsAll(elements: ImmutableArray<T>): Boolean {
-    return containsAll(elements.asList())
+public fun <T> MutableCollection<in T>.removeAll(elements: ImmutableArray<T>): Boolean {
+    return removeAll(elements.asList())
 }
 
 /**
- * Checks whether [this] collection contains all the elements from the specified immutable array
+ * Removes all the elements from [this] collection.
+ *
+ * Note that if the immutable array contains duplicate elements then it might be more efficient to
+ * convert the immutable array to a set first and remove the set from the collection instead.
+ *
+ * @return true if the collection changed.
  */
-public fun Collection<Any?>.containsAll(elements: ImmutableBooleanArray): Boolean {
-    return containsAll(elements.asList())
+public fun MutableCollection<in Boolean>.removeAll(elements: ImmutableBooleanArray): Boolean {
+    return removeAll(elements.asList())
 }
 
 /**
- * Checks whether [this] collection contains all the elements from the specified immutable array
+ * Removes all the elements from [this] collection.
+ *
+ * Note that if the immutable array contains duplicate elements then it might be more efficient to
+ * convert the immutable array to a set first and remove the set from the collection instead.
+ *
+ * @return true if the collection changed.
  */
-public fun Collection<Any?>.containsAll(elements: ImmutableByteArray): Boolean {
-    return containsAll(elements.asList())
+public fun MutableCollection<in Byte>.removeAll(elements: ImmutableByteArray): Boolean {
+    return removeAll(elements.asList())
 }
 
 /**
- * Checks whether [this] collection contains all the elements from the specified immutable array
+ * Removes all the elements from [this] collection.
+ *
+ * Note that if the immutable array contains duplicate elements then it might be more efficient to
+ * convert the immutable array to a set first and remove the set from the collection instead.
+ *
+ * @return true if the collection changed.
  */
-public fun Collection<Any?>.containsAll(elements: ImmutableCharArray): Boolean {
-    return containsAll(elements.asList())
+public fun MutableCollection<in Char>.removeAll(elements: ImmutableCharArray): Boolean {
+    return removeAll(elements.asList())
 }
 
 /**
- * Checks whether [this] collection contains all the elements from the specified immutable array
+ * Removes all the elements from [this] collection.
+ *
+ * Note that if the immutable array contains duplicate elements then it might be more efficient to
+ * convert the immutable array to a set first and remove the set from the collection instead.
+ *
+ * @return true if the collection changed.
  */
-public fun Collection<Any?>.containsAll(elements: ImmutableShortArray): Boolean {
-    return containsAll(elements.asList())
+public fun MutableCollection<in Short>.removeAll(elements: ImmutableShortArray): Boolean {
+    return removeAll(elements.asList())
 }
 
 /**
- * Checks whether [this] collection contains all the elements from the specified immutable array
+ * Removes all the elements from [this] collection.
+ *
+ * Note that if the immutable array contains duplicate elements then it might be more efficient to
+ * convert the immutable array to a set first and remove the set from the collection instead.
+ *
+ * @return true if the collection changed.
  */
-public fun Collection<Any?>.containsAll(elements: ImmutableIntArray): Boolean {
-    return containsAll(elements.asList())
+public fun MutableCollection<in Int>.removeAll(elements: ImmutableIntArray): Boolean {
+    return removeAll(elements.asList())
 }
 
 /**
- * Checks whether [this] collection contains all the elements from the specified immutable array
+ * Removes all the elements from [this] collection.
+ *
+ * Note that if the immutable array contains duplicate elements then it might be more efficient to
+ * convert the immutable array to a set first and remove the set from the collection instead.
+ *
+ * @return true if the collection changed.
  */
-public fun Collection<Any?>.containsAll(elements: ImmutableLongArray): Boolean {
-    return containsAll(elements.asList())
+public fun MutableCollection<in Long>.removeAll(elements: ImmutableLongArray): Boolean {
+    return removeAll(elements.asList())
 }
 
 /**
- * Checks whether [this] collection contains all the elements from the specified immutable array
+ * Removes all the elements from [this] collection.
+ *
+ * Note that if the immutable array contains duplicate elements then it might be more efficient to
+ * convert the immutable array to a set first and remove the set from the collection instead.
+ *
+ * @return true if the collection changed.
  */
-public fun Collection<Any?>.containsAll(elements: ImmutableFloatArray): Boolean {
-    return containsAll(elements.asList())
+public fun MutableCollection<in Float>.removeAll(elements: ImmutableFloatArray): Boolean {
+    return removeAll(elements.asList())
 }
 
 /**
- * Checks whether [this] collection contains all the elements from the specified immutable array
+ * Removes all the elements from [this] collection.
+ *
+ * Note that if the immutable array contains duplicate elements then it might be more efficient to
+ * convert the immutable array to a set first and remove the set from the collection instead.
+ *
+ * @return true if the collection changed.
  */
-public fun Collection<Any?>.containsAll(elements: ImmutableDoubleArray): Boolean {
-    return containsAll(elements.asList())
+public fun MutableCollection<in Double>.removeAll(elements: ImmutableDoubleArray): Boolean {
+    return removeAll(elements.asList())
 }

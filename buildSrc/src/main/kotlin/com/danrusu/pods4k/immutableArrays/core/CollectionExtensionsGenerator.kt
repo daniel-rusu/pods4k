@@ -20,8 +20,9 @@ internal object CollectionExtensionsGenerator {
     fun generate(destinationPath: String) {
         val fileSpec = createFile(ImmutableArrayConfig.packageName, "Collections") {
             addIterableToImmutableArray()
-            addMutableCollectionAddAll()
             addCollectionContainsAll()
+            addMutableCollectionAddAll()
+            addMutableCollectionRemoveAll()
         }
         fileSpec.writeTo(File(destinationPath, ""))
     }
@@ -49,6 +50,32 @@ private fun FileSpec.Builder.addIterableToImmutableArray() {
     }
 }
 
+private fun FileSpec.Builder.addCollectionContainsAll() {
+    for (baseType in BaseType.entries) {
+        // Use Any? for primitive arrays to allow calling it on collections of supertypes.
+        // The generic version is fine since ImmutableArray is covariant so
+        // Collection<T>.containsAll(ImmutableArray<ChildT>) will be allowed
+        val collectionType = when (baseType) {
+            GENERIC -> baseType.type
+            else -> Any::class.asTypeName().copy(nullable = true)
+        }
+        function(
+            kdoc = "Checks whether [this] collection contains all the elements from the specified immutable array",
+            receiver = ClassName("kotlin.collections", "Collection")
+                .parameterizedBy(collectionType),
+            name = "containsAll",
+            parameters = { "elements"(type = baseType.getGeneratedTypeName()) },
+            returns = Boolean::class.asTypeName(),
+            forceFunctionBody = true,
+        ) {
+            if (baseType == GENERIC) {
+                addTypeVariable(baseType.type as TypeVariableName)
+            }
+            statement("return containsAll(elements.asList())")
+        }
+    }
+}
+
 private fun FileSpec.Builder.addMutableCollectionAddAll() {
     for (baseType in BaseType.entries) {
         function(
@@ -72,20 +99,19 @@ private fun FileSpec.Builder.addMutableCollectionAddAll() {
     }
 }
 
-private fun FileSpec.Builder.addCollectionContainsAll() {
+private fun FileSpec.Builder.addMutableCollectionRemoveAll() {
     for (baseType in BaseType.entries) {
-        // Use Any? for primitive arrays to allow calling it on collections of supertypes.
-        // The generic version is fine since ImmutableArray is covariant so
-        // Collection<T>.containsAll(ImmutableArray<ChildT>) will be allowed
-        val collectionType = when (baseType) {
-            GENERIC -> baseType.type
-            else -> Any::class.asTypeName().copy(nullable = true)
-        }
         function(
-            kdoc = "Checks whether [this] collection contains all the elements from the specified immutable array",
-            receiver = ClassName("kotlin.collections", "Collection")
-                .parameterizedBy(collectionType),
-            name = "containsAll",
+            kdoc = """
+                Removes all the elements from [this] collection.
+
+                Note that if the immutable array contains duplicate elements then it might be more efficient to convert the immutable array to a set first and remove the set from the collection instead.
+
+                @return true if the collection changed.
+            """.trimIndent(),
+            receiver = ClassName("kotlin.collections", "MutableCollection")
+                .parameterizedBy(WildcardTypeName.consumerOf(baseType.type)),
+            name = "removeAll",
             parameters = { "elements"(type = baseType.getGeneratedTypeName()) },
             returns = Boolean::class.asTypeName(),
             forceFunctionBody = true,
@@ -93,7 +119,7 @@ private fun FileSpec.Builder.addCollectionContainsAll() {
             if (baseType == GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
-            statement("return containsAll(elements.asList())")
+            statement("return removeAll(elements.asList())")
         }
     }
 }

@@ -36,6 +36,20 @@ class CollectionsTest {
     }
 
     @Test
+    fun `containsAll validation`() {
+        with(listOf(1, 2.5, 3)) {
+            expectThat(containsAll(immutableArrayOf(3, 1)))
+                .isTrue()
+
+            expectThat(containsAll(immutableArrayOf<Int>(3, 1)))
+                .isTrue()
+
+            expectThat(containsAll(immutableArrayOf(3, 4)))
+                .isFalse()
+        }
+    }
+
+    @Test
     fun `addAll validation`() {
         with(mutableListOf<String>()) {
             addAll(immutableArrayOf())
@@ -74,15 +88,34 @@ class CollectionsTest {
     }
 
     @Test
-    fun `containsAll validation`() {
-        with(listOf(1, 2.5, 3)) {
-            expectThat(containsAll(immutableArrayOf(3, 1)))
+    fun `removeAll validation`() {
+        with(mutableListOf<String>()) {
+            expectThat(removeAll(emptyImmutableArray()))
+                .isFalse()
+
+            expectThat(this)
+                .isEmpty()
+        }
+
+        with(mutableListOf(1, 2, 3, 4, 5, 6.5)) {
+            // with generic array
+            expectThat(removeAll(immutableArrayOf<Int>(0, 1, 3)))
                 .isTrue()
 
-            expectThat(containsAll(immutableArrayOf<Int>(3, 1)))
+            expectThat(this)
+                .isEqualTo(mutableListOf(2, 4, 5, 6.5))
+
+            expectThat(removeAll(immutableArrayOf<Int>(10, 11)))
+                .isFalse()
+
+            // with primitive array
+            expectThat(removeAll(immutableArrayOf(4, 5)))
                 .isTrue()
 
-            expectThat(containsAll(immutableArrayOf(3, 4)))
+            expectThat(this)
+                .isEqualTo(mutableListOf(2, 6.5))
+
+            expectThat(removeAll(immutableArrayOf(10, 11)))
                 .isFalse()
         }
     }

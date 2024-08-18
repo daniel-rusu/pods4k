@@ -16,6 +16,7 @@ _Date TBD_
 
 **New Features:**
 
+* Add `Collection.removeAll(immutableArray)` extension function
 * Add `Collection.containsAll(immutableArray)` extension function
 * Add `toHashSet` extension function
 * Add `toMutableSet` extension function
@@ -33,10 +34,8 @@ _Date TBD_
 
 **Performance Improvements:**
 
-* When converting iterables to immutable arrays, use immutable array builders instead of accumulating the values in a
-  temporary list as that's much more efficient.
-* When converting sequences to immutable arrays, use immutable array builders instead of accumulating the values in a
-  temporary list as that's much more efficient.
+* When converting iterables or sequences to immutable arrays, use immutable array builders instead of accumulating the
+  values in a temporary list as that's much more efficient.
 
 ## 0.3.0
 
