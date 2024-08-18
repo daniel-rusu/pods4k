@@ -50,4 +50,28 @@ class TransformationsToSetTest {
                 .isEqualTo(mutableSetOf(7, 15))
         }
     }
+
+    @Test
+    fun `toHashSet validation`() {
+        // empty
+        with(emptyImmutableArray<String>()) {
+            expectThat(toHashSet())
+                .isA<HashSet<String>>()
+                .isEmpty()
+        }
+        with(emptyImmutableIntArray()) {
+            expectThat(toHashSet())
+                .isA<HashSet<String>>()
+                .isEmpty()
+        }
+        // multiple elements
+        with(immutableArrayOf("Bob", "Jill", "Bob")) {
+            expectThat(toHashSet())
+                .isEqualTo(hashSetOf("Bob", "Jill"))
+        }
+        with(immutableArrayOf(7, 15, 15)) {
+            expectThat(toHashSet())
+                .isEqualTo(hashSetOf(7, 15))
+        }
+    }
 }

@@ -16,6 +16,7 @@ _Date TBD_
 
 **New Features:**
 
+* Add `toHashSet` extension function
 * Add `toMutableSet` extension function
 * Add `toSet` extension function
 * Add `flatMapIndexed` specializations for flattening immutable arrays
