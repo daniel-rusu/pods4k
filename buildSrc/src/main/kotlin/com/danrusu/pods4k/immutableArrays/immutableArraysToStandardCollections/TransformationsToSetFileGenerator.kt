@@ -15,6 +15,7 @@ internal object TransformationsToSetFileGenerator {
     fun generate(destinationPath: String) {
         val fileSpec = createFile(ImmutableArrayConfig.packageName, "TransformationsToSet") {
             addToSet()
+            addToMutableSet()
         }
         fileSpec.writeTo(File(destinationPath, ""))
     }
@@ -34,6 +35,24 @@ private fun FileSpec.Builder.addToSet() {
             // Important: This needs to meet the same contract as what's promised by the standard library to maintain
             // iteration order since this library is documented as a replacement for read-only lists.
             statement("return asList().toSet()")
+        }
+    }
+}
+
+private fun FileSpec.Builder.addToMutableSet() {
+    for (baseType in BaseType.entries) {
+        function(
+            kdoc = "See [Array.toMutableSet]",
+            receiver = baseType.getGeneratedTypeName(),
+            name = "toMutableSet",
+            returns = ClassName("kotlin.collections", "MutableSet").parameterizedBy(baseType.type),
+        ) {
+            if (baseType == BaseType.GENERIC) {
+                addTypeVariable(baseType.type as TypeVariableName)
+            }
+            // Important: This needs to meet the same contract as what's promised by the standard library to maintain
+            // iteration order since this library is documented as a replacement for read-only lists.
+            statement("return asList().toMutableSet()")
         }
     }
 }
