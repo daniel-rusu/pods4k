@@ -12,6 +12,77 @@ import strikt.assertions.message
 private val primitiveIntClass = 3::class.java
 
 class ImmutableArraysTest {
+
+    @Suppress("KotlinConstantConditions")
+    @Test
+    fun `asList validation`() {
+        // Suppressing the constant-condition inspection as it's a false positive thinking that a List is always a MutableList
+        // Submitted: https://youtrack.jetbrains.com/issue/IDEA-357859/False-positive-for-KotlinConstantConditions-inspection-for-primitiveArray.asList-is-MutableList
+
+        // generic array
+        with(immutableArrayOf("one", "two", "three", "two")) {
+            val list = asList()
+            expectThat(list is MutableList<String>)
+                .isFalse()
+
+            expectThat(list.size)
+                .isEqualTo(4)
+
+            expectThat(list.isEmpty())
+                .isFalse()
+
+            expectThat(list.contains("one"))
+                .isTrue()
+
+            expectThat(list.contains("four"))
+                .isFalse()
+
+            expectThat(get(1))
+                .isEqualTo("two")
+
+            expectThat(indexOf("two"))
+                .isEqualTo(1)
+
+            expectThat(lastIndexOf("two"))
+                .isEqualTo(3)
+
+            expectThat(list)
+                .isEqualTo(listOf("one", "two", "three", "two"))
+        }
+
+        // primitive array
+        with(immutableArrayOf(1, 2, 1)) {
+            val list = asList()
+
+            expectThat(list is MutableList<Int>)
+                .isFalse()
+
+            expectThat(list.size)
+                .isEqualTo(3)
+
+            expectThat(list.isEmpty())
+                .isFalse()
+
+            expectThat(list.contains(2))
+                .isTrue()
+
+            expectThat(list.contains(4))
+                .isFalse()
+
+            expectThat(get(1))
+                .isEqualTo(2)
+
+            expectThat(indexOf(1))
+                .isEqualTo(0)
+
+            expectThat(lastIndexOf(1))
+                .isEqualTo(2)
+
+            expectThat(list)
+                .isEqualTo(listOf(1, 2, 1))
+        }
+    }
+
     @Test
     fun `contains validation`() {
         // generic array

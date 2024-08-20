@@ -18,7 +18,6 @@ import kotlin.Unit
 import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
 import kotlin.collections.Iterator
-import kotlin.collections.List
 import kotlin.jvm.JvmInline
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
@@ -224,12 +223,6 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
      * See [Array.asSequence]
      */
     public inline fun asSequence(): Sequence<T> = values.asSequence()
-
-    /**
-     * Wraps the backing array in a class that implements the read-only [List] interface by
-     * referencing the same backing array without copying the elements.
-     */
-    public inline fun asList(): List<T> = values.asList()
 
     /**
      * See [Array.forEach]

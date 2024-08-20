@@ -21,6 +21,7 @@ import java.io.File
 internal object ImmutableArrayExtensionsGenerator {
     fun generate(destinationPath: String) {
         val fileSpec = createFile(ImmutableArrayConfig.packageName, "ImmutableArrays") {
+            addAsList()
             addContains()
             addIndexOf()
             addLastIndexOf()
@@ -34,6 +35,53 @@ internal object ImmutableArrayExtensionsGenerator {
             addRequireNoNulls()
         }
         fileSpec.writeTo(File(destinationPath, ""))
+    }
+}
+
+private fun FileSpec.Builder.addAsList() {
+    val standardKdoc = "Returns an immutable list that wraps the same backing array without copying the elements."
+
+    for (baseType in BaseType.entries) {
+        function(
+            kdoc = when (baseType) {
+                GENERIC -> standardKdoc
+                else -> {
+                    """
+                    $standardKdoc
+
+                    Note that accessing values from the resulting list will auto-box them everytime they are accessed.  This is because [${baseType.generatedClassName}] stores primitive values whereas [List] is defined as a generic type.  If the number of accesses is expected to be multiple times larger than the size of this array, then you might want to consider using [toList] instead in order to copy all the elements into a standalone list and only auto-box each element once.
+                    """.trimIndent()
+                }
+            },
+            receiver = baseType.getGeneratedTypeName(),
+            name = "asList",
+            returns = List::class.asTypeName().parameterizedBy(baseType.type),
+        ) {
+            if (baseType == GENERIC) {
+                addTypeVariable(baseType.type as TypeVariableName)
+            }
+            // IMPORTANT: Don't attempt to delegate to the backing array (eg. "return values.asList()") because that can allow an outsider to mutate the backing array via the list wrapper
+            // See https://youtrack.jetbrains.com/issue/KT-70779/Array.asList-exposes-mutation-back-door
+            addCode(
+                """
+                    return object : %T<%T>(), %T {
+                        override val size: Int get() = this@asList.size
+                        override fun isEmpty(): Boolean = this@asList.isEmpty()
+                        override fun contains(element: %T): Boolean = this@asList.contains(element)
+                        override fun get(index: Int): %T = this@asList[index]
+                        override fun indexOf(element: %T): Int = this@asList.indexOf(element)
+                        override fun lastIndexOf(element: %T): Int = this@asList.lastIndexOf(element)
+                    }
+                """.trimIndent(),
+                AbstractList::class.asTypeName(),
+                baseType.type,
+                RandomAccess::class.asTypeName(),
+                baseType.type,
+                baseType.type,
+                baseType.type,
+                baseType.type,
+            )
+        }
     }
 }
 
@@ -192,6 +240,7 @@ private fun FileSpec.Builder.addSortedDescending() {
             receiver = receiver,
             name = "sortedDescending",
             returns = receiver,
+            forceFunctionBody = true,
         ) {
             if (baseType == GENERIC) {
                 addTypeVariable(
