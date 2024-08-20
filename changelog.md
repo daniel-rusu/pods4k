@@ -5,6 +5,12 @@ Change Log
 
 _Date TBD_
 
+*
+
+## 0.4.0
+
+_2024-08-19_
+
 ### Immutable Arrays
 
 **Breaking Changes:**

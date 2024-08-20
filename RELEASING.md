@@ -14,10 +14,14 @@ Releasing
     * **Description**: Copy the changes from [changelog.md](changelog.md) for this release
         * Copy the raw contents to avoid formatting issues due to escaped characters etc.
 4. Release artifacts in Maven Central:
-    * Make sure the `Trigger Release` action completed successfully
-    * Check the artifacts in [Sonatype](https://central.sonatype.com/)
+    * The previous step should have automatically triggered the release workflow
+    * Make sure the [`Trigger Release` action](https://github.com/daniel-rusu/pods4k/actions/workflows/release.yml)
+      completed successfully
+    * Check the artifacts in [Sonatype](https://central.sonatype.com/) (navigate to `Publish` -> `Deployments`)
     * Release the publication if everything looks good
-    * Wait and refresh the deployment until the status shows `PUBLISHED` before proceeding to the next step
+    * Wait and refresh the deployment until the status shows `PUBLISHED` before proceeding to the next step. It can take
+      a long time for the artifact status to go from `PUBLISHING` to `PUBLISHED` so I recommend checking back every 30
+      minutes or so.
 5. Create a `Finalize release X.Y.Z` commit with the following changes:
     * Update [README.md](README.md#dependency) to reference the newly-released version in the gradle & maven dependency
     * Document the new release version & date in the [changelog.md](changelog.md)
