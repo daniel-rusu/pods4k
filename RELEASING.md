@@ -1,7 +1,8 @@
 Releasing
 =========
 
-1. Make sure that CI is green (builds & all tests pass)
+1. Make sure that CI is green on
+   the [`main` branch](https://github.com/daniel-rusu/pods4k/actions?query=branch%3Amain) (builds & all tests pass)
 2. Create a `Prepare for release X.Y.Z` commit with the following changes:
     * Update [changelog.md](changelog.md) with anything that's missing but don't document the new release version yet
     * Update the `VERSION_NAME` property in [gradle.properties](gradle.properties) for the new release using semantic
