@@ -329,6 +329,12 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                         else -> initializer("${baseType.backingArrayConstructor}(initialCapacity)")
                     }
                 }
+
+                /**
+                 * IMPORTANT: See the warning in [addBuilderBuildFunction] before considering adding mutating
+                 * capabilities that clear, remove, or re-assign previous elements.  Adding these types of capabilities
+                 * would require that optimization to be removed.
+                 */
                 addBuilderAddFunction(baseType)
                 addBuilderPlusAssignOperator(baseType)
                 addBuilderAddAllFunctions(baseType)
@@ -771,8 +777,23 @@ private fun TypeSpec.Builder.addBuilderBuildFunction(baseType: BaseType) {
         controlFlow("when (size)") {
             statement("0 -> return EMPTY")
 
-            // Avoiding copying the array again when the size matches the capacity is important for when the initial
-            // capacity was set appropriately.  Other capabilities of this library depend on this optimization
+            /*
+            Avoiding copying the array again when the size matches the capacity is important for when the initial
+            capacity was set appropriately.  Other capabilities of this library depend on this optimization for optimal
+            efficiency.
+
+            *** IMPORTANT ***
+            This optimization is only safe as long as the builder can only append elements without the ability to
+            remove or re-assign previously-added elements.  Allowing the ability to modify previously-assigned array
+            positions would introduce a mutation backdoor:
+             1. Call build() when the array is exactly full so that the immutable array uses the same backing array
+             2. Continue using the builder to remove or re-assign previous elements modifying the immutable array
+
+            This optimization is safe when only reading & appending is allowed because:
+             1. Reading doesn't modify the immutable array anyway
+             2. Continuing to use the builder to append more elements would end up creating a new backing array because
+             this optimization only applies when calling build() with the array exactly full.
+             */
             if (baseType == GENERIC) {
                 statement("values.size -> return ${baseType.generatedClassName}(values as Array<%T>)", baseType.type)
             } else {
@@ -791,6 +812,14 @@ private fun TypeSpec.Builder.addBuilderBuildFunction(baseType: BaseType) {
     }
 }
 
+/**
+ * Ensures that the backing array is large enough to add more elements.
+ *
+ * IMPORTANT:
+ * When creating a larger backing array, don't modify the existing array because build() may have been called on a full
+ * array which ends up sharing the same backing array with the generated immutable array.  See the warning in
+ * [addBuilderBuildFunction] for more specifics.
+ */
 private fun TypeSpec.Builder.addBuilderEnsureCapacityFunction(baseType: BaseType) {
     function(
         modifiers = listOf(KModifier.PRIVATE),
