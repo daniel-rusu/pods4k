@@ -5,7 +5,9 @@ Change Log
 
 _Date TBD_
 
-*
+**New Features:**
+
+* Add `MutableCollection.retainAll(immutableArray)` extension function
 
 ## 0.4.0
 
@@ -26,7 +28,7 @@ _2024-08-19_
 
 **New Features:**
 
-* Add `Collection.removeAll(immutableArray)` extension function
+* Add `MutableCollection.removeAll(immutableArray)` extension function
 * Add `Collection.containsAll(immutableArray)` extension function
 * Add `toHashSet` extension function
 * Add `toMutableSet` extension function

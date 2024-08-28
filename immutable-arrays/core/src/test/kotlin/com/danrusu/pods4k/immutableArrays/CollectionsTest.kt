@@ -119,4 +119,40 @@ class CollectionsTest {
                 .isFalse()
         }
     }
+
+    @Test
+    fun `retainAll validation`() {
+        with(mutableListOf<String>()) {
+            expectThat(retainAll(emptyImmutableArray()))
+                .isFalse()
+
+            expectThat(this)
+                .isEmpty()
+        }
+
+        with(mutableListOf<Number>(1, 2, 3, 4, 5, 6.5)) {
+            // with generic array
+            expectThat(retainAll(immutableArrayOf<Number>(-1, 0, 4, 5, 6.5)))
+                .isTrue()
+
+            expectThat(this)
+                .isEqualTo(mutableListOf(4, 5, 6.5))
+
+            expectThat(retainAll(immutableArrayOf<Int>(4, 5)))
+                .isTrue()
+
+            expectThat(this)
+                .isEqualTo(mutableListOf(4, 5))
+
+            expectThat(retainAll(immutableArrayOf<Int>(4, 5)))
+                .isFalse()
+
+            // with primitive array
+            expectThat(retainAll(immutableArrayOf(4)))
+                .isTrue()
+
+            expectThat(this)
+                .isEqualTo(mutableListOf(4))
+        }
+    }
 }

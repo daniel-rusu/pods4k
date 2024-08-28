@@ -782,7 +782,7 @@ private fun TypeSpec.Builder.addBuilderBuildFunction(baseType: BaseType) {
             capacity was set appropriately.  Other capabilities of this library depend on this optimization for optimal
             efficiency.
 
-            *** IMPORTANT ***
+             *** IMPORTANT ***
             This optimization is only safe as long as the builder can only append elements without the ability to
             remove or re-assign previously-added elements.  Allowing the ability to modify previously-assigned array
             positions would introduce a mutation backdoor:

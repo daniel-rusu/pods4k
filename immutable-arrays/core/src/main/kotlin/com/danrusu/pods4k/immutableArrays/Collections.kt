@@ -391,3 +391,93 @@ public fun MutableCollection<in Float>.removeAll(elements: ImmutableFloatArray):
 public fun MutableCollection<in Double>.removeAll(elements: ImmutableDoubleArray): Boolean {
     return removeAll(elements.asList())
 }
+
+/**
+ * Retains only the elements in [this] collection that are contained in the specified immutable
+ * array.
+ *
+ * @return true if the collection changed.
+ */
+public fun <T> MutableCollection<in T>.retainAll(elements: ImmutableArray<T>): Boolean {
+    return retainAll(elements.asList())
+}
+
+/**
+ * Retains only the elements in [this] collection that are contained in the specified immutable
+ * array.
+ *
+ * @return true if the collection changed.
+ */
+public fun MutableCollection<in Boolean>.retainAll(elements: ImmutableBooleanArray): Boolean {
+    return retainAll(elements.asList())
+}
+
+/**
+ * Retains only the elements in [this] collection that are contained in the specified immutable
+ * array.
+ *
+ * @return true if the collection changed.
+ */
+public fun MutableCollection<in Byte>.retainAll(elements: ImmutableByteArray): Boolean {
+    return retainAll(elements.asList())
+}
+
+/**
+ * Retains only the elements in [this] collection that are contained in the specified immutable
+ * array.
+ *
+ * @return true if the collection changed.
+ */
+public fun MutableCollection<in Char>.retainAll(elements: ImmutableCharArray): Boolean {
+    return retainAll(elements.asList())
+}
+
+/**
+ * Retains only the elements in [this] collection that are contained in the specified immutable
+ * array.
+ *
+ * @return true if the collection changed.
+ */
+public fun MutableCollection<in Short>.retainAll(elements: ImmutableShortArray): Boolean {
+    return retainAll(elements.asList())
+}
+
+/**
+ * Retains only the elements in [this] collection that are contained in the specified immutable
+ * array.
+ *
+ * @return true if the collection changed.
+ */
+public fun MutableCollection<in Int>.retainAll(elements: ImmutableIntArray): Boolean {
+    return retainAll(elements.asList())
+}
+
+/**
+ * Retains only the elements in [this] collection that are contained in the specified immutable
+ * array.
+ *
+ * @return true if the collection changed.
+ */
+public fun MutableCollection<in Long>.retainAll(elements: ImmutableLongArray): Boolean {
+    return retainAll(elements.asList())
+}
+
+/**
+ * Retains only the elements in [this] collection that are contained in the specified immutable
+ * array.
+ *
+ * @return true if the collection changed.
+ */
+public fun MutableCollection<in Float>.retainAll(elements: ImmutableFloatArray): Boolean {
+    return retainAll(elements.asList())
+}
+
+/**
+ * Retains only the elements in [this] collection that are contained in the specified immutable
+ * array.
+ *
+ * @return true if the collection changed.
+ */
+public fun MutableCollection<in Double>.retainAll(elements: ImmutableDoubleArray): Boolean {
+    return retainAll(elements.asList())
+}

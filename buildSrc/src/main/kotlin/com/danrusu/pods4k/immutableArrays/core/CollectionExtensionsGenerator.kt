@@ -23,6 +23,7 @@ internal object CollectionExtensionsGenerator {
             addCollectionContainsAll()
             addMutableCollectionAddAll()
             addMutableCollectionRemoveAll()
+            addMutableCollectionRetainAll()
         }
         fileSpec.writeTo(File(destinationPath, ""))
     }
@@ -120,6 +121,29 @@ private fun FileSpec.Builder.addMutableCollectionRemoveAll() {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
             statement("return removeAll(elements.asList())")
+        }
+    }
+}
+
+private fun FileSpec.Builder.addMutableCollectionRetainAll() {
+    for (baseType in BaseType.entries) {
+        function(
+            kdoc = """
+                Retains only the elements in [this] collection that are contained in the specified immutable array.
+
+                @return true if the collection changed.
+            """.trimIndent(),
+            receiver = ClassName("kotlin.collections", "MutableCollection")
+                .parameterizedBy(WildcardTypeName.consumerOf(baseType.type)),
+            name = "retainAll",
+            parameters = { "elements"(type = baseType.getGeneratedTypeName()) },
+            returns = Boolean::class.asTypeName(),
+            forceFunctionBody = true,
+        ) {
+            if (baseType == GENERIC) {
+                addTypeVariable(baseType.type as TypeVariableName)
+            }
+            statement("return retainAll(elements.asList())")
         }
     }
 }
