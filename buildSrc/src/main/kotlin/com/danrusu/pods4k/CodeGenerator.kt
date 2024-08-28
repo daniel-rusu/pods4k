@@ -13,6 +13,7 @@ import com.danrusu.pods4k.immutableArrays.core.multiplicativeSpecializations.Map
 import com.danrusu.pods4k.immutableArrays.core.multiplicativeSpecializations.MapNotNullSpecializationGenerator
 import com.danrusu.pods4k.immutableArrays.core.multiplicativeSpecializations.MapSpecializationGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysToStandardCollections.TransformationsToListFileGenerator
+import com.danrusu.pods4k.immutableArrays.immutableArraysToStandardCollections.TransformationsToMapFileGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysToStandardCollections.TransformationsToSetFileGenerator
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -61,4 +62,5 @@ private fun generateImmutableArraysToStandardCollectionsModule(target: Project) 
 
     TransformationsToListFileGenerator.generate(moduleSourcePath)
     TransformationsToSetFileGenerator.generate(moduleSourcePath)
+    TransformationsToMapFileGenerator.generate(moduleSourcePath)
 }
