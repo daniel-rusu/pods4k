@@ -1,6 +1,7 @@
 package com.danrusu.pods4k.immutableArrays.core
 
 import com.danrusu.pods4k.immutableArrays.BaseType
+import com.danrusu.pods4k.immutableArrays.BaseType.GENERIC
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
 import com.danrusu.pods4k.utils.comment
 import com.danrusu.pods4k.utils.controlFlow
@@ -15,6 +16,7 @@ import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.TypeVariableName
 import com.squareup.kotlinpoet.asTypeName
+import com.squareup.kotlinpoet.jvm.jvmName
 import java.io.File
 
 internal object ImmutableArrayFactoryGenerator {
@@ -22,6 +24,7 @@ internal object ImmutableArrayFactoryGenerator {
         val fileSpec = createFile(ImmutableArrayConfig.packageName, "ImmutableArrayFactory") {
             addEmptyFunctions()
             addImmutableArrayOf()
+            addImmutableArrayOfNotNull()
             addBuilderFunctions()
             declareObject(
                 modifiers = listOf(KModifier.INTERNAL),
@@ -47,7 +50,7 @@ private fun FileSpec.Builder.addEmptyFunctions() {
             name = "empty${baseType.generatedClassName}",
             returns = baseType.getGeneratedTypeName(),
         ) {
-            if (baseType == BaseType.GENERIC) {
+            if (baseType == GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
             statement("return ${baseType.generatedClassName}.EMPTY")
@@ -58,12 +61,12 @@ private fun FileSpec.Builder.addEmptyFunctions() {
 private fun FileSpec.Builder.addImmutableArrayOf() {
     // Calling immutableArrayOf() without arguments will delegate to the empty generic factory function
     function(
-        kdoc = "Returns an empty [${BaseType.GENERIC.generatedClassName}].",
+        kdoc = "Returns an empty [${GENERIC.generatedClassName}].",
         name = "immutableArrayOf",
-        returns = BaseType.GENERIC.getGeneratedTypeName(),
+        returns = GENERIC.getGeneratedTypeName(),
     ) {
-        addTypeVariable(BaseType.GENERIC.type as TypeVariableName)
-        statement("return empty${BaseType.GENERIC.generatedClassName}()")
+        addTypeVariable(GENERIC.type as TypeVariableName)
+        statement("return empty${GENERIC.generatedClassName}()")
     }
 
     for (baseType in BaseType.entries) {
@@ -74,7 +77,7 @@ private fun FileSpec.Builder.addImmutableArrayOf() {
             returns = baseType.getGeneratedTypeName(),
             forceFunctionBody = true,
         ) {
-            if (baseType == BaseType.GENERIC) {
+            if (baseType == GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
             statement("return build${baseType.generatedClassName}(initialCapacity = values.size) { addAll(values) }")
@@ -82,10 +85,44 @@ private fun FileSpec.Builder.addImmutableArrayOf() {
     }
 }
 
+private fun FileSpec.Builder.addImmutableArrayOfNotNull() {
+    for (baseType in BaseType.entries) {
+        val nonNullType = when (baseType) {
+            GENERIC -> TypeVariableName("T", Any::class.asTypeName())
+            else -> baseType.type
+        }
+        val returnType = when (baseType) {
+            GENERIC -> baseType.getGeneratedClass().parameterizedBy(nonNullType)
+            else -> baseType.getGeneratedTypeName()
+        }
+        function(
+            kdoc = "Returns an [${baseType.generatedClassName}] containing only the non-null values.",
+            name = "immutableArrayOfNotNull",
+            parameters = { "values"(type = nonNullType.copy(nullable = true), isVararg = true) },
+            returns = returnType,
+            forceFunctionBody = true,
+        ) {
+            if (baseType == GENERIC) {
+                addTypeVariable(nonNullType as TypeVariableName)
+                jvmName("immutableArrayOfNotNull")
+            } else {
+                jvmName("immutableArrayOfNotNull_${baseType.typeClass.simpleName}")
+            }
+            controlFlow("return build${baseType.generatedClassName}") {
+                controlFlow("for (value in values)") {
+                    controlFlow("if (value != null)") {
+                        statement("add(value)")
+                    }
+                }
+            }
+        }
+    }
+}
+
 private fun FileSpec.Builder.addBuilderFunctions() {
     for (baseType in BaseType.entries) {
         val receiver = when (baseType) {
-            BaseType.GENERIC -> baseType.getGeneratedClass().nestedClass("Builder").parameterizedBy(baseType.type)
+            GENERIC -> baseType.getGeneratedClass().nestedClass("Builder").parameterizedBy(baseType.type)
             else -> baseType.getGeneratedClass().nestedClass("Builder")
         }
         function(
@@ -100,7 +137,7 @@ private fun FileSpec.Builder.addBuilderFunctions() {
             returns = baseType.getGeneratedTypeName(),
             forceFunctionBody = true,
         ) {
-            if (baseType == BaseType.GENERIC) {
+            if (baseType == GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
                 statement(
                     "return ${baseType.generatedClassName}.Builder<%T>(initialCapacity).apply(body).build()",

@@ -40,6 +40,29 @@ class ImmutableArrayFactoryTest {
     }
 
     @Test
+    fun `immutableArrayOfNotNull validation`() {
+        // Nobody would purposely attempt to pass explicit nulls to these functions since they would always be ignored.
+        // Instead, these nulls come from nullable variables
+        val nullString: String? = null
+        val nullInt: Int? = null
+
+        expectThat(immutableArrayOfNotNull<String>())
+            .isEqualTo(emptyImmutableArray())
+
+        expectThat(immutableArrayOfNotNull(nullString, nullString))
+            .isEqualTo(emptyImmutableArray())
+
+        expectThat(immutableArrayOfNotNull(nullInt))
+            .isEqualTo(emptyImmutableIntArray())
+
+        expectThat(immutableArrayOfNotNull(nullString, "one", nullString, "two", nullString, nullString))
+            .isEqualTo(immutableArrayOf("one", "two"))
+
+        expectThat(immutableArrayOfNotNull(1, nullInt, 2))
+            .isEqualTo(immutableArrayOf(1, 2))
+    }
+
+    @Test
     fun `buildImmutableArray validation`() {
         val names = buildImmutableArray {
             add("Bob")

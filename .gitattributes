@@ -5,4 +5,5 @@
 
 # Define auto-generated files with LF line endings since they're generated that way so that re-generating them with no changes shouldn't show as changed
 immutable-arrays/core/src/main/kotlin/com/danrusu/pods4k/immutableArrays/*.kt eol=lf
+immutable-arrays/core/src/main/kotlin/com/danrusu/pods4k/immutableArrays/multiplicativeSpecializations/*.kt eol=lf
 immutable-arrays/transformations-to-standard-collections/src/main/kotlin/com/danrusu/pods4k/immutableArrays/*.kt eol=lf

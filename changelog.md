@@ -7,6 +7,7 @@ _Date TBD_
 
 **New Features:**
 
+* Add `immutableArrayOfNotNull` factory functions
 * Add `ImmutableArray<Pair<K, V>>.toMap()` extension function
 * Add `MutableCollection.retainAll(immutableArray)` extension function
 

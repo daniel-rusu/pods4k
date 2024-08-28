@@ -2,6 +2,7 @@
 package com.danrusu.pods4k.immutableArrays
 
 import java.lang.OutOfMemoryError
+import kotlin.Any
 import kotlin.Boolean
 import kotlin.Byte
 import kotlin.Char
@@ -11,6 +12,7 @@ import kotlin.Int
 import kotlin.Long
 import kotlin.Short
 import kotlin.Unit
+import kotlin.jvm.JvmName
 
 /**
  * Returns an empty [ImmutableArray].
@@ -123,6 +125,132 @@ public fun immutableArrayOf(vararg values: Float): ImmutableFloatArray {
  */
 public fun immutableArrayOf(vararg values: Double): ImmutableDoubleArray {
     return buildImmutableDoubleArray(initialCapacity = values.size) { addAll(values) }
+}
+
+/**
+ * Returns an [ImmutableArray] containing only the non-null values.
+ */
+@JvmName("immutableArrayOfNotNull")
+public fun <T : Any> immutableArrayOfNotNull(vararg values: T?): ImmutableArray<T> {
+    return buildImmutableArray {
+        for (value in values) {
+            if (value != null) {
+                add(value)
+            }
+        }
+    }
+}
+
+/**
+ * Returns an [ImmutableBooleanArray] containing only the non-null values.
+ */
+@JvmName("immutableArrayOfNotNull_Boolean")
+public fun immutableArrayOfNotNull(vararg values: Boolean?): ImmutableBooleanArray {
+    return buildImmutableBooleanArray {
+        for (value in values) {
+            if (value != null) {
+                add(value)
+            }
+        }
+    }
+}
+
+/**
+ * Returns an [ImmutableByteArray] containing only the non-null values.
+ */
+@JvmName("immutableArrayOfNotNull_Byte")
+public fun immutableArrayOfNotNull(vararg values: Byte?): ImmutableByteArray {
+    return buildImmutableByteArray {
+        for (value in values) {
+            if (value != null) {
+                add(value)
+            }
+        }
+    }
+}
+
+/**
+ * Returns an [ImmutableCharArray] containing only the non-null values.
+ */
+@JvmName("immutableArrayOfNotNull_Char")
+public fun immutableArrayOfNotNull(vararg values: Char?): ImmutableCharArray {
+    return buildImmutableCharArray {
+        for (value in values) {
+            if (value != null) {
+                add(value)
+            }
+        }
+    }
+}
+
+/**
+ * Returns an [ImmutableShortArray] containing only the non-null values.
+ */
+@JvmName("immutableArrayOfNotNull_Short")
+public fun immutableArrayOfNotNull(vararg values: Short?): ImmutableShortArray {
+    return buildImmutableShortArray {
+        for (value in values) {
+            if (value != null) {
+                add(value)
+            }
+        }
+    }
+}
+
+/**
+ * Returns an [ImmutableIntArray] containing only the non-null values.
+ */
+@JvmName("immutableArrayOfNotNull_Int")
+public fun immutableArrayOfNotNull(vararg values: Int?): ImmutableIntArray {
+    return buildImmutableIntArray {
+        for (value in values) {
+            if (value != null) {
+                add(value)
+            }
+        }
+    }
+}
+
+/**
+ * Returns an [ImmutableLongArray] containing only the non-null values.
+ */
+@JvmName("immutableArrayOfNotNull_Long")
+public fun immutableArrayOfNotNull(vararg values: Long?): ImmutableLongArray {
+    return buildImmutableLongArray {
+        for (value in values) {
+            if (value != null) {
+                add(value)
+            }
+        }
+    }
+}
+
+/**
+ * Returns an [ImmutableFloatArray] containing only the non-null values.
+ */
+@JvmName("immutableArrayOfNotNull_Float")
+public fun immutableArrayOfNotNull(vararg values: Float?): ImmutableFloatArray {
+    return buildImmutableFloatArray {
+        for (value in values) {
+            if (value != null) {
+                add(value)
+            }
+        }
+    }
+}
+
+/**
+ * Returns an [ImmutableDoubleArray] containing only the non-null values.
+ */
+@JvmName("immutableArrayOfNotNull_Double")
+public fun immutableArrayOfNotNull(vararg values: Double?): ImmutableDoubleArray {
+    return buildImmutableDoubleArray {
+        for (value in values) {
+            if (value != null) {
+                add(value)
+            }
+        }
+    }
 }
 
 /**
