@@ -7,6 +7,7 @@ _Date TBD_
 
 **New Features:**
 
+* Add `Sequence<ImmutableArray>.flatten()`, extension function
 * Add `filter` method
 * Add `immutableArrayOfNotNull` factory functions
 * Add `ImmutableArray<Pair<K, V>>.toMap()` extension function

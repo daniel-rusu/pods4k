@@ -18,4 +18,25 @@ class SequencesTest {
                 .isEqualTo(immutableArrayOf<Int>(1, 3, 5))
         }
     }
+
+    @Test
+    fun `flatten validation`() {
+        // sequence of generic arrays
+        with(sequenceOf(immutableArrayOf("a", "bb"), immutableArrayOf("ccc", "dddd"))) {
+            expectThat(flatten())
+                .isA<Sequence<String>>()
+
+            expectThat(flatten().toList())
+                .isEqualTo(listOf("a", "bb", "ccc", "dddd"))
+        }
+
+        // sequence of primitive arrays
+        with(sequenceOf(immutableArrayOf(1, 2), immutableArrayOf(3, 4))) {
+            expectThat(flatten())
+                .isA<Sequence<Int>>()
+
+            expectThat(flatten().toList())
+                .isEqualTo(listOf(1, 2, 3, 4))
+        }
+    }
 }

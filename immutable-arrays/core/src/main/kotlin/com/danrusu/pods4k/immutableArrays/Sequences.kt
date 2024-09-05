@@ -9,6 +9,7 @@ import kotlin.Float
 import kotlin.Int
 import kotlin.Long
 import kotlin.Short
+import kotlin.jvm.JvmName
 import kotlin.sequences.Sequence
 
 /**
@@ -90,4 +91,94 @@ public fun Sequence<Double>.toImmutableArray(): ImmutableDoubleArray {
     return buildImmutableDoubleArray {
         addAll(this@toImmutableArray)
     }
+}
+
+/**
+ * Returns a sequence of all elements from all immutable arrays in this sequence.
+ *
+ * The operation is _intermediate_ and _stateless_.
+ */
+@JvmName("flatten_ImmutableArray")
+public fun <T> Sequence<ImmutableArray<T>>.flatten(): Sequence<T> {
+    return map { it.asIterable() }.flatten()
+}
+
+/**
+ * Returns a sequence of all elements from all immutable arrays in this sequence.
+ *
+ * The operation is _intermediate_ and _stateless_.
+ */
+@JvmName("flatten_ImmutableBooleanArray")
+public fun Sequence<ImmutableBooleanArray>.flatten(): Sequence<Boolean> {
+    return map { it.asIterable() }.flatten()
+}
+
+/**
+ * Returns a sequence of all elements from all immutable arrays in this sequence.
+ *
+ * The operation is _intermediate_ and _stateless_.
+ */
+@JvmName("flatten_ImmutableByteArray")
+public fun Sequence<ImmutableByteArray>.flatten(): Sequence<Byte> {
+    return map { it.asIterable() }.flatten()
+}
+
+/**
+ * Returns a sequence of all elements from all immutable arrays in this sequence.
+ *
+ * The operation is _intermediate_ and _stateless_.
+ */
+@JvmName("flatten_ImmutableCharArray")
+public fun Sequence<ImmutableCharArray>.flatten(): Sequence<Char> {
+    return map { it.asIterable() }.flatten()
+}
+
+/**
+ * Returns a sequence of all elements from all immutable arrays in this sequence.
+ *
+ * The operation is _intermediate_ and _stateless_.
+ */
+@JvmName("flatten_ImmutableShortArray")
+public fun Sequence<ImmutableShortArray>.flatten(): Sequence<Short> {
+    return map { it.asIterable() }.flatten()
+}
+
+/**
+ * Returns a sequence of all elements from all immutable arrays in this sequence.
+ *
+ * The operation is _intermediate_ and _stateless_.
+ */
+@JvmName("flatten_ImmutableIntArray")
+public fun Sequence<ImmutableIntArray>.flatten(): Sequence<Int> {
+    return map { it.asIterable() }.flatten()
+}
+
+/**
+ * Returns a sequence of all elements from all immutable arrays in this sequence.
+ *
+ * The operation is _intermediate_ and _stateless_.
+ */
+@JvmName("flatten_ImmutableLongArray")
+public fun Sequence<ImmutableLongArray>.flatten(): Sequence<Long> {
+    return map { it.asIterable() }.flatten()
+}
+
+/**
+ * Returns a sequence of all elements from all immutable arrays in this sequence.
+ *
+ * The operation is _intermediate_ and _stateless_.
+ */
+@JvmName("flatten_ImmutableFloatArray")
+public fun Sequence<ImmutableFloatArray>.flatten(): Sequence<Float> {
+    return map { it.asIterable() }.flatten()
+}
+
+/**
+ * Returns a sequence of all elements from all immutable arrays in this sequence.
+ *
+ * The operation is _intermediate_ and _stateless_.
+ */
+@JvmName("flatten_ImmutableDoubleArray")
+public fun Sequence<ImmutableDoubleArray>.flatten(): Sequence<Double> {
+    return map { it.asIterable() }.flatten()
 }
