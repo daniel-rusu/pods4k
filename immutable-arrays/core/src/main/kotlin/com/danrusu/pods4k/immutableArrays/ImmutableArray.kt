@@ -281,6 +281,19 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     }
 
     /**
+     * Returns an immutable array containing only the elements matching the given [predicate].
+     */
+    public inline fun filter(predicate: (element: T) -> Boolean): ImmutableArray<T> {
+        val result = Builder<T>()
+        for (element in values) {
+            if (predicate(element)) {
+                result.add(element)
+            }
+        }
+        return result.build()
+    }
+
+    /**
      * Creates a pair of immutable arrays, where the first contains elements for which the predicate
      * yielded true, and the second contains the other elements.
      */

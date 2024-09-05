@@ -528,6 +528,19 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `filter validation`() {
+        with(emptyImmutableArray<String>()) {
+            expectThat(filter { it.length % 2 == 0 })
+                .isEqualTo(emptyImmutableArray())
+        }
+
+        with(immutableArrayOf("a", "bb", "ccc", "dddd")) {
+            expectThat(filter { it.length % 2 == 0 })
+                .isEqualTo(immutableArrayOf("bb", "dddd"))
+        }
+    }
+
+    @Test
     fun `partition validation`() {
         with(emptyImmutableArray<String>()) {
             expectThat(partition { it.length % 2 == 0 })
