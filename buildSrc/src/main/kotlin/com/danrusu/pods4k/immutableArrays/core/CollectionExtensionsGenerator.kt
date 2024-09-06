@@ -153,7 +153,7 @@ private fun FileSpec.Builder.addMutableCollectionRetainAll() {
 private fun FileSpec.Builder.addIterableFlatten() {
     for (baseType in BaseType.entries) {
         function(
-            kdoc = "Returns a single immutable array with all the elements from all arrays in [this] collection.",
+            kdoc = "Returns a single immutable array with all the elements from all nested arrays.",
             receiver = Iterable::class.asTypeName().parameterizedBy(baseType.getGeneratedTypeName()),
             name = "flatten",
             returns = baseType.getGeneratedTypeName(),

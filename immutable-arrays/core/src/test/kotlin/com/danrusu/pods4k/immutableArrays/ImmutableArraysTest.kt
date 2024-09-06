@@ -281,4 +281,43 @@ class ImmutableArraysTest {
             immutableArrayOf("one", null).requireNoNulls()
         }.message.isEqualTo("null element found in [one, null]")
     }
+
+    @Test
+    fun `flatten validation`() {
+        // nested iterable
+        with(
+            immutableArrayOf(
+                listOf("a", "b"),
+                listOf("c", "d", "e"),
+                emptyList(),
+            ),
+        ) {
+            expectThat(flatten())
+                .isEqualTo(immutableArrayOf("a", "b", "c", "d", "e"))
+        }
+
+        // nested generic array
+        with(
+            immutableArrayOf(
+                immutableArrayOf("a", "b"),
+                immutableArrayOf("c", "d", "e"),
+                emptyImmutableArray(),
+            ),
+        ) {
+            expectThat(flatten())
+                .isEqualTo(immutableArrayOf("a", "b", "c", "d", "e"))
+        }
+
+        // nested primitive array
+        with(
+            immutableArrayOf(
+                immutableArrayOf(1, 2),
+                immutableArrayOf(3, 4, 5),
+                emptyImmutableIntArray(),
+            ),
+        ) {
+            expectThat(flatten())
+                .isEqualTo(immutableArrayOf(1, 2, 3, 4, 5))
+        }
+    }
 }

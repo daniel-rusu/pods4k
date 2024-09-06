@@ -15,7 +15,9 @@ import kotlin.Long
 import kotlin.Short
 import kotlin.Suppress
 import kotlin.collections.AbstractList
+import kotlin.collections.Iterable
 import kotlin.collections.List
+import kotlin.jvm.JvmName
 
 /**
  * Returns an immutable list that wraps the same backing array without copying the elements.
@@ -1121,4 +1123,124 @@ public fun <T> ImmutableArray<T?>.requireNoNulls(): ImmutableArray<T> {
     if (contains(null)) throw IllegalArgumentException("null element found in $this")
 
     return this as ImmutableArray<T>
+}
+
+/**
+ * Returns a single immutable array with all the elements from all nested collections.
+ */
+@JvmName("flattenIterable")
+public fun <T> ImmutableArray<Iterable<T>>.flatten(): ImmutableArray<T> {
+    return buildImmutableArray {
+        for (nestedCollection in this@flatten) {
+            this@buildImmutableArray.addAll(nestedCollection)
+        }
+    }
+}
+
+/**
+ * Returns a single immutable array with all the elements from all nested arrays.
+ */
+@JvmName("flattenImmutableArray")
+public fun <T> ImmutableArray<ImmutableArray<T>>.flatten(): ImmutableArray<T> {
+    return buildImmutableArray {
+        for (nestedArray in this@flatten) {
+            this@buildImmutableArray.addAll(nestedArray)
+        }
+    }
+}
+
+/**
+ * Returns a single immutable array with all the elements from all nested arrays.
+ */
+@JvmName("flattenImmutableBooleanArray")
+public fun ImmutableArray<ImmutableBooleanArray>.flatten(): ImmutableBooleanArray {
+    return buildImmutableBooleanArray {
+        for (nestedArray in this@flatten) {
+            this@buildImmutableBooleanArray.addAll(nestedArray)
+        }
+    }
+}
+
+/**
+ * Returns a single immutable array with all the elements from all nested arrays.
+ */
+@JvmName("flattenImmutableByteArray")
+public fun ImmutableArray<ImmutableByteArray>.flatten(): ImmutableByteArray {
+    return buildImmutableByteArray {
+        for (nestedArray in this@flatten) {
+            this@buildImmutableByteArray.addAll(nestedArray)
+        }
+    }
+}
+
+/**
+ * Returns a single immutable array with all the elements from all nested arrays.
+ */
+@JvmName("flattenImmutableCharArray")
+public fun ImmutableArray<ImmutableCharArray>.flatten(): ImmutableCharArray {
+    return buildImmutableCharArray {
+        for (nestedArray in this@flatten) {
+            this@buildImmutableCharArray.addAll(nestedArray)
+        }
+    }
+}
+
+/**
+ * Returns a single immutable array with all the elements from all nested arrays.
+ */
+@JvmName("flattenImmutableShortArray")
+public fun ImmutableArray<ImmutableShortArray>.flatten(): ImmutableShortArray {
+    return buildImmutableShortArray {
+        for (nestedArray in this@flatten) {
+            this@buildImmutableShortArray.addAll(nestedArray)
+        }
+    }
+}
+
+/**
+ * Returns a single immutable array with all the elements from all nested arrays.
+ */
+@JvmName("flattenImmutableIntArray")
+public fun ImmutableArray<ImmutableIntArray>.flatten(): ImmutableIntArray {
+    return buildImmutableIntArray {
+        for (nestedArray in this@flatten) {
+            this@buildImmutableIntArray.addAll(nestedArray)
+        }
+    }
+}
+
+/**
+ * Returns a single immutable array with all the elements from all nested arrays.
+ */
+@JvmName("flattenImmutableLongArray")
+public fun ImmutableArray<ImmutableLongArray>.flatten(): ImmutableLongArray {
+    return buildImmutableLongArray {
+        for (nestedArray in this@flatten) {
+            this@buildImmutableLongArray.addAll(nestedArray)
+        }
+    }
+}
+
+/**
+ * Returns a single immutable array with all the elements from all nested arrays.
+ */
+@JvmName("flattenImmutableFloatArray")
+public fun ImmutableArray<ImmutableFloatArray>.flatten(): ImmutableFloatArray {
+    return buildImmutableFloatArray {
+        for (nestedArray in this@flatten) {
+            this@buildImmutableFloatArray.addAll(nestedArray)
+        }
+    }
+}
+
+/**
+ * Returns a single immutable array with all the elements from all nested arrays.
+ */
+@JvmName("flattenImmutableDoubleArray")
+public fun ImmutableArray<ImmutableDoubleArray>.flatten(): ImmutableDoubleArray {
+    return buildImmutableDoubleArray {
+        for (nestedArray in this@flatten) {
+            this@buildImmutableDoubleArray.addAll(nestedArray)
+        }
+    }
 }

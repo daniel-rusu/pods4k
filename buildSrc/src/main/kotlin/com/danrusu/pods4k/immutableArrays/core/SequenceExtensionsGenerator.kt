@@ -47,7 +47,7 @@ private fun FileSpec.Builder.addFlatten() {
     for (baseType in BaseType.entries) {
         function(
             kdoc = """
-                Returns a sequence of all elements from all immutable arrays in this sequence.
+                Returns a sequence of all elements from all nested immutable arrays in this sequence.
 
                 The operation is _intermediate_ and _stateless_.
             """.trimIndent(),

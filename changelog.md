@@ -7,7 +7,7 @@ _Date TBD_
 
 **New Features:**
 
-* Add `flatten` extension functions for sequences or iterables of immutable arrays
+* Add `flatten` extension functions for immutable arrays, sequences, or iterables that contain nested immutable arrays
 * Add `filter` method
 * Add `immutableArrayOfNotNull` factory functions
 * Add `ImmutableArray<Pair<K, V>>.toMap()` extension function

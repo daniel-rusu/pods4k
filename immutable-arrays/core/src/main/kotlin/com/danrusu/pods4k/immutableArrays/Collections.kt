@@ -484,7 +484,7 @@ public fun MutableCollection<in Double>.retainAll(elements: ImmutableDoubleArray
 }
 
 /**
- * Returns a single immutable array with all the elements from all arrays in [this] collection.
+ * Returns a single immutable array with all the elements from all nested arrays.
  */
 @JvmName("flattenIterableOfImmutableArray")
 public fun <T> Iterable<ImmutableArray<T>>.flatten(): ImmutableArray<T> {
@@ -496,7 +496,7 @@ public fun <T> Iterable<ImmutableArray<T>>.flatten(): ImmutableArray<T> {
 }
 
 /**
- * Returns a single immutable array with all the elements from all arrays in [this] collection.
+ * Returns a single immutable array with all the elements from all nested arrays.
  */
 @JvmName("flattenIterableOfImmutableBooleanArray")
 public fun Iterable<ImmutableBooleanArray>.flatten(): ImmutableBooleanArray {
@@ -508,7 +508,7 @@ public fun Iterable<ImmutableBooleanArray>.flatten(): ImmutableBooleanArray {
 }
 
 /**
- * Returns a single immutable array with all the elements from all arrays in [this] collection.
+ * Returns a single immutable array with all the elements from all nested arrays.
  */
 @JvmName("flattenIterableOfImmutableByteArray")
 public fun Iterable<ImmutableByteArray>.flatten(): ImmutableByteArray {
@@ -520,7 +520,7 @@ public fun Iterable<ImmutableByteArray>.flatten(): ImmutableByteArray {
 }
 
 /**
- * Returns a single immutable array with all the elements from all arrays in [this] collection.
+ * Returns a single immutable array with all the elements from all nested arrays.
  */
 @JvmName("flattenIterableOfImmutableCharArray")
 public fun Iterable<ImmutableCharArray>.flatten(): ImmutableCharArray {
@@ -532,7 +532,7 @@ public fun Iterable<ImmutableCharArray>.flatten(): ImmutableCharArray {
 }
 
 /**
- * Returns a single immutable array with all the elements from all arrays in [this] collection.
+ * Returns a single immutable array with all the elements from all nested arrays.
  */
 @JvmName("flattenIterableOfImmutableShortArray")
 public fun Iterable<ImmutableShortArray>.flatten(): ImmutableShortArray {
@@ -544,7 +544,7 @@ public fun Iterable<ImmutableShortArray>.flatten(): ImmutableShortArray {
 }
 
 /**
- * Returns a single immutable array with all the elements from all arrays in [this] collection.
+ * Returns a single immutable array with all the elements from all nested arrays.
  */
 @JvmName("flattenIterableOfImmutableIntArray")
 public fun Iterable<ImmutableIntArray>.flatten(): ImmutableIntArray {
@@ -556,7 +556,7 @@ public fun Iterable<ImmutableIntArray>.flatten(): ImmutableIntArray {
 }
 
 /**
- * Returns a single immutable array with all the elements from all arrays in [this] collection.
+ * Returns a single immutable array with all the elements from all nested arrays.
  */
 @JvmName("flattenIterableOfImmutableLongArray")
 public fun Iterable<ImmutableLongArray>.flatten(): ImmutableLongArray {
@@ -568,7 +568,7 @@ public fun Iterable<ImmutableLongArray>.flatten(): ImmutableLongArray {
 }
 
 /**
- * Returns a single immutable array with all the elements from all arrays in [this] collection.
+ * Returns a single immutable array with all the elements from all nested arrays.
  */
 @JvmName("flattenIterableOfImmutableFloatArray")
 public fun Iterable<ImmutableFloatArray>.flatten(): ImmutableFloatArray {
@@ -580,7 +580,7 @@ public fun Iterable<ImmutableFloatArray>.flatten(): ImmutableFloatArray {
 }
 
 /**
- * Returns a single immutable array with all the elements from all arrays in [this] collection.
+ * Returns a single immutable array with all the elements from all nested arrays.
  */
 @JvmName("flattenIterableOfImmutableDoubleArray")
 public fun Iterable<ImmutableDoubleArray>.flatten(): ImmutableDoubleArray {

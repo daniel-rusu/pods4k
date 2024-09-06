@@ -9,6 +9,7 @@ import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.createFile
 import com.danrusu.pods4k.utils.emptyLine
 import com.danrusu.pods4k.utils.function
+import com.danrusu.pods4k.utils.jvmName
 import com.danrusu.pods4k.utils.statement
 import com.danrusu.pods4k.utils.suppress
 import com.squareup.kotlinpoet.FileSpec
@@ -33,6 +34,7 @@ internal object ImmutableArrayExtensionsGenerator {
             addToPrimitiveImmutableArray()
             addToTypedImmutableArray()
             addRequireNoNulls()
+            addFlatten()
         }
         fileSpec.writeTo(File(destinationPath, ""))
     }
@@ -371,5 +373,44 @@ private fun FileSpec.Builder.addRequireNoNulls() {
         emptyLine()
         suppress("UNCHECKED_CAST")
         statement("return this as ${GENERIC.generatedClassName}<%T>", GENERIC.type)
+    }
+}
+
+private fun FileSpec.Builder.addFlatten() {
+    function(
+        kdoc = "Returns a single immutable array with all the elements from all nested collections.",
+        receiver = GENERIC.getGeneratedClass()
+            .parameterizedBy(Iterable::class.asTypeName().parameterizedBy(GENERIC.type)),
+        name = "flatten",
+        returns = GENERIC.getGeneratedTypeName(),
+        forceFunctionBody = true,
+    ) {
+        jvmName("flattenIterable")
+        addTypeVariable(GENERIC.type as TypeVariableName)
+        controlFlow("return build${GENERIC.generatedClassName}()") {
+            controlFlow("for (nestedCollection in this@flatten)") {
+                statement("this@build${GENERIC.generatedClassName}.addAll(nestedCollection)")
+            }
+        }
+    }
+
+    for (baseType in BaseType.entries) {
+        function(
+            kdoc = "Returns a single immutable array with all the elements from all nested arrays.",
+            receiver = GENERIC.getGeneratedClass().parameterizedBy(baseType.getGeneratedTypeName()),
+            name = "flatten",
+            returns = baseType.getGeneratedTypeName(),
+            forceFunctionBody = true,
+        ) {
+            jvmName("flatten${baseType.generatedClassName}")
+            if (baseType == GENERIC) {
+                addTypeVariable(baseType.type as TypeVariableName)
+            }
+            controlFlow("return build${baseType.generatedClassName}()") {
+                controlFlow("for (nestedArray in this@flatten)") {
+                    statement("this@build${baseType.generatedClassName}.addAll(nestedArray)")
+                }
+            }
+        }
     }
 }
