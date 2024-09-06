@@ -7,7 +7,7 @@ _Date TBD_
 
 **New Features:**
 
-* Add `Sequence<ImmutableArray>.flatten()`, extension function
+* Add `flatten` extension functions for sequences or iterables of immutable arrays
 * Add `filter` method
 * Add `immutableArrayOfNotNull` factory functions
 * Add `ImmutableArray<Pair<K, V>>.toMap()` extension function
@@ -121,8 +121,8 @@ _2024-06-16_
 
 ### Immutable Arrays
 
-* New: Add declaration-site variance so that a variable of type ImmutableArray\<Parent> can accept an
-  ImmutableArray\<Child> when Child extends Parent
+* New: Add declaration-site variance so that a variable of type `ImmutableArray<Parent>` can accept an
+  `ImmutableArray<Child>` when `Child` extends `Parent`
 * New: Add `equals` & `hashCode` methods
 * New: Add Sequence `toImmutableArray` extension functions
 * New: Add ImmutablePrimitiveArray `toTypedImmutableArray` extension functions

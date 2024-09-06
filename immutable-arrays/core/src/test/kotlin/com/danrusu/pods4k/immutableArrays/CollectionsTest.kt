@@ -155,4 +155,31 @@ class CollectionsTest {
                 .isEqualTo(mutableListOf(4))
         }
     }
+
+    @Test
+    fun `flatten validation`() {
+        // iterable of generic arrays
+        with(
+            listOf(
+                immutableArrayOf("a", "b"),
+                immutableArrayOf("c", "d", "e"),
+                emptyImmutableArray<String>(),
+            ),
+        ) {
+            expectThat(flatten())
+                .isEqualTo(immutableArrayOf("a", "b", "c", "d", "e"))
+        }
+
+        // iterable of primitive arrays
+        with(
+            listOf(
+                immutableArrayOf(1, 2),
+                immutableArrayOf(3, 4, 5),
+                emptyImmutableIntArray(),
+            ),
+        ) {
+            expectThat(flatten())
+                .isEqualTo(immutableArrayOf(1, 2, 3, 4, 5))
+        }
+    }
 }

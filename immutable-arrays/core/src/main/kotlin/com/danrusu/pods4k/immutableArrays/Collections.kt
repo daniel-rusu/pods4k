@@ -13,6 +13,7 @@ import kotlin.Short
 import kotlin.collections.Collection
 import kotlin.collections.Iterable
 import kotlin.collections.MutableCollection
+import kotlin.jvm.JvmName
 
 /**
  * Returns an [ImmutableArray] with the contents of [this] collection.
@@ -480,4 +481,112 @@ public fun MutableCollection<in Float>.retainAll(elements: ImmutableFloatArray):
  */
 public fun MutableCollection<in Double>.retainAll(elements: ImmutableDoubleArray): Boolean {
     return retainAll(elements.asList())
+}
+
+/**
+ * Returns a single immutable array with all the elements from all arrays in [this] collection.
+ */
+@JvmName("flattenIterableOfImmutableArray")
+public fun <T> Iterable<ImmutableArray<T>>.flatten(): ImmutableArray<T> {
+    return buildImmutableArray {
+        for (nestedArray in this@flatten) {
+            this@buildImmutableArray.addAll(nestedArray)
+        }
+    }
+}
+
+/**
+ * Returns a single immutable array with all the elements from all arrays in [this] collection.
+ */
+@JvmName("flattenIterableOfImmutableBooleanArray")
+public fun Iterable<ImmutableBooleanArray>.flatten(): ImmutableBooleanArray {
+    return buildImmutableBooleanArray {
+        for (nestedArray in this@flatten) {
+            this@buildImmutableBooleanArray.addAll(nestedArray)
+        }
+    }
+}
+
+/**
+ * Returns a single immutable array with all the elements from all arrays in [this] collection.
+ */
+@JvmName("flattenIterableOfImmutableByteArray")
+public fun Iterable<ImmutableByteArray>.flatten(): ImmutableByteArray {
+    return buildImmutableByteArray {
+        for (nestedArray in this@flatten) {
+            this@buildImmutableByteArray.addAll(nestedArray)
+        }
+    }
+}
+
+/**
+ * Returns a single immutable array with all the elements from all arrays in [this] collection.
+ */
+@JvmName("flattenIterableOfImmutableCharArray")
+public fun Iterable<ImmutableCharArray>.flatten(): ImmutableCharArray {
+    return buildImmutableCharArray {
+        for (nestedArray in this@flatten) {
+            this@buildImmutableCharArray.addAll(nestedArray)
+        }
+    }
+}
+
+/**
+ * Returns a single immutable array with all the elements from all arrays in [this] collection.
+ */
+@JvmName("flattenIterableOfImmutableShortArray")
+public fun Iterable<ImmutableShortArray>.flatten(): ImmutableShortArray {
+    return buildImmutableShortArray {
+        for (nestedArray in this@flatten) {
+            this@buildImmutableShortArray.addAll(nestedArray)
+        }
+    }
+}
+
+/**
+ * Returns a single immutable array with all the elements from all arrays in [this] collection.
+ */
+@JvmName("flattenIterableOfImmutableIntArray")
+public fun Iterable<ImmutableIntArray>.flatten(): ImmutableIntArray {
+    return buildImmutableIntArray {
+        for (nestedArray in this@flatten) {
+            this@buildImmutableIntArray.addAll(nestedArray)
+        }
+    }
+}
+
+/**
+ * Returns a single immutable array with all the elements from all arrays in [this] collection.
+ */
+@JvmName("flattenIterableOfImmutableLongArray")
+public fun Iterable<ImmutableLongArray>.flatten(): ImmutableLongArray {
+    return buildImmutableLongArray {
+        for (nestedArray in this@flatten) {
+            this@buildImmutableLongArray.addAll(nestedArray)
+        }
+    }
+}
+
+/**
+ * Returns a single immutable array with all the elements from all arrays in [this] collection.
+ */
+@JvmName("flattenIterableOfImmutableFloatArray")
+public fun Iterable<ImmutableFloatArray>.flatten(): ImmutableFloatArray {
+    return buildImmutableFloatArray {
+        for (nestedArray in this@flatten) {
+            this@buildImmutableFloatArray.addAll(nestedArray)
+        }
+    }
+}
+
+/**
+ * Returns a single immutable array with all the elements from all arrays in [this] collection.
+ */
+@JvmName("flattenIterableOfImmutableDoubleArray")
+public fun Iterable<ImmutableDoubleArray>.flatten(): ImmutableDoubleArray {
+    return buildImmutableDoubleArray {
+        for (nestedArray in this@flatten) {
+            this@buildImmutableDoubleArray.addAll(nestedArray)
+        }
+    }
 }

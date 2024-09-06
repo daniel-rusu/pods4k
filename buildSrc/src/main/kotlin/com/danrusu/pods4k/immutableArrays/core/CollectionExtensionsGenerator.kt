@@ -7,6 +7,7 @@ import com.danrusu.pods4k.utils.comment
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.createFile
 import com.danrusu.pods4k.utils.function
+import com.danrusu.pods4k.utils.jvmName
 import com.danrusu.pods4k.utils.statement
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
@@ -24,6 +25,7 @@ internal object CollectionExtensionsGenerator {
             addMutableCollectionAddAll()
             addMutableCollectionRemoveAll()
             addMutableCollectionRetainAll()
+            addIterableFlatten()
         }
         fileSpec.writeTo(File(destinationPath, ""))
     }
@@ -144,6 +146,28 @@ private fun FileSpec.Builder.addMutableCollectionRetainAll() {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
             statement("return retainAll(elements.asList())")
+        }
+    }
+}
+
+private fun FileSpec.Builder.addIterableFlatten() {
+    for (baseType in BaseType.entries) {
+        function(
+            kdoc = "Returns a single immutable array with all the elements from all arrays in [this] collection.",
+            receiver = Iterable::class.asTypeName().parameterizedBy(baseType.getGeneratedTypeName()),
+            name = "flatten",
+            returns = baseType.getGeneratedTypeName(),
+            forceFunctionBody = true,
+        ) {
+            jvmName("flattenIterableOf${baseType.generatedClassName}")
+            if (baseType == GENERIC) {
+                addTypeVariable(baseType.type as TypeVariableName)
+            }
+            controlFlow("return build${baseType.generatedClassName}()") {
+                controlFlow("for (nestedArray in this@flatten)") {
+                    statement("this@build${baseType.generatedClassName}.addAll(nestedArray)")
+                }
+            }
         }
     }
 }

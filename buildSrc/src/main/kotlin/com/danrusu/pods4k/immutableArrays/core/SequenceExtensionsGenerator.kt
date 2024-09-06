@@ -56,7 +56,7 @@ private fun FileSpec.Builder.addFlatten() {
             returns = Sequence::class.asTypeName().parameterizedBy(baseType.type),
             forceFunctionBody = true,
         ) {
-            jvmName("flatten_${baseType.generatedClassName}")
+            jvmName("flattenSequenceOf${baseType.generatedClassName}")
             if (baseType == GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
