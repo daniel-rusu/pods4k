@@ -2,7 +2,7 @@
 kotlin = "1.9.25" # https://kotlinlang.org/docs/releases.html#release-details
 jUnit = "5.11.0" # https://github.com/junit-team/junit5
 jUnitPlatformLauncher = "1.11.0" # https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
-kotlinPoet = "1.16.0" # https://github.com/square/kotlinpoet
+kotlinPoet = "1.17.0" # https://github.com/square/kotlinpoet
 strikt = "0.34.1" # https://github.com/robfletcher/strikt/releases/latest
 gradleMavenPublishPlugin = "0.28.0" # https://github.com/vanniktech/gradle-maven-publish-plugin
 spotless = "6.25.0"
