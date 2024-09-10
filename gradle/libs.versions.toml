@@ -5,7 +5,7 @@ jUnitPlatformLauncher = "1.11.0" # https://mvnrepository.com/artifact/org.junit.
 kotlinPoet = "1.17.0" # https://github.com/square/kotlinpoet
 strikt = "0.34.1" # https://github.com/robfletcher/strikt/releases/latest
 gradleMavenPublishPlugin = "0.28.0" # https://github.com/vanniktech/gradle-maven-publish-plugin
-spotless = "6.25.0"
+spotless = "6.25.0" # https://mvnrepository.com/artifact/com.diffplug.spotless/spotless-plugin-gradle
 
 [libraries]
 jUnit = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jUnit" }
