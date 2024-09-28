@@ -13,6 +13,10 @@ _Date TBD_
 * Add `ImmutableArray<Pair<K, V>>.toMap()` extension function
 * Add `MutableCollection.retainAll(immutableArray)` extension function
 
+**Performance Improvements:**
+
+* Pre-allocate a perfectly-sized backing array for `flatMap` when operating on nested immutable arrays
+
 ## 0.4.0
 
 _2024-08-19_
