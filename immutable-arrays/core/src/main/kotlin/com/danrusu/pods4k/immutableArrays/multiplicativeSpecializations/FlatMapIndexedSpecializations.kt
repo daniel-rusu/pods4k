@@ -10,6 +10,15 @@ import com.danrusu.pods4k.immutableArrays.ImmutableFloatArray
 import com.danrusu.pods4k.immutableArrays.ImmutableIntArray
 import com.danrusu.pods4k.immutableArrays.ImmutableLongArray
 import com.danrusu.pods4k.immutableArrays.ImmutableShortArray
+import com.danrusu.pods4k.immutableArrays.buildImmutableArray
+import com.danrusu.pods4k.immutableArrays.buildImmutableBooleanArray
+import com.danrusu.pods4k.immutableArrays.buildImmutableByteArray
+import com.danrusu.pods4k.immutableArrays.buildImmutableCharArray
+import com.danrusu.pods4k.immutableArrays.buildImmutableDoubleArray
+import com.danrusu.pods4k.immutableArrays.buildImmutableFloatArray
+import com.danrusu.pods4k.immutableArrays.buildImmutableIntArray
+import com.danrusu.pods4k.immutableArrays.buildImmutableLongArray
+import com.danrusu.pods4k.immutableArrays.buildImmutableShortArray
 import kotlin.Boolean
 import kotlin.Byte
 import kotlin.Char
@@ -51,9 +60,13 @@ public inline fun <T, R> ImmutableArray<T>.flatMapIndexed(
         element: T,
     ) -> ImmutableArray<R>,
 ): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -85,9 +98,13 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
         element: T,
     ) -> ImmutableBooleanArray,
 ): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableBooleanArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -119,9 +136,13 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
         element: T,
     ) -> ImmutableByteArray,
 ): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableByteArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -153,9 +174,13 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
         element: T,
     ) -> ImmutableCharArray,
 ): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableCharArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -187,9 +212,13 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
         element: T,
     ) -> ImmutableShortArray,
 ): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableShortArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -221,9 +250,13 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
         element: T,
     ) -> ImmutableIntArray,
 ): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableIntArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -255,9 +288,13 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
         element: T,
     ) -> ImmutableLongArray,
 ): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableLongArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -289,9 +326,13 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
         element: T,
     ) -> ImmutableFloatArray,
 ): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableFloatArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -323,9 +364,13 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
         element: T,
     ) -> ImmutableDoubleArray,
 ): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableDoubleArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -357,9 +402,13 @@ public inline fun <R> ImmutableBooleanArray.flatMapIndexed(
         element: Boolean,
     ) -> ImmutableArray<R>,
 ): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -391,9 +440,13 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
         element: Boolean,
     ) -> ImmutableBooleanArray,
 ): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableBooleanArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -425,9 +478,13 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
         element: Boolean,
     ) -> ImmutableByteArray,
 ): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableByteArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -459,9 +516,13 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
         element: Boolean,
     ) -> ImmutableCharArray,
 ): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableCharArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -493,9 +554,13 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
         element: Boolean,
     ) -> ImmutableShortArray,
 ): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableShortArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -527,9 +592,13 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
         element: Boolean,
     ) -> ImmutableIntArray,
 ): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableIntArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -561,9 +630,13 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
         element: Boolean,
     ) -> ImmutableLongArray,
 ): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableLongArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -595,9 +668,13 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
         element: Boolean,
     ) -> ImmutableFloatArray,
 ): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableFloatArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -629,9 +706,13 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
         element: Boolean,
     ) -> ImmutableDoubleArray,
 ): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableDoubleArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -663,9 +744,13 @@ public inline fun <R> ImmutableByteArray.flatMapIndexed(
         element: Byte,
     ) -> ImmutableArray<R>,
 ): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -697,9 +782,13 @@ public inline fun ImmutableByteArray.flatMapIndexed(
         element: Byte,
     ) -> ImmutableBooleanArray,
 ): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableBooleanArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -731,9 +820,13 @@ public inline fun ImmutableByteArray.flatMapIndexed(
         element: Byte,
     ) -> ImmutableByteArray,
 ): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableByteArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -765,9 +858,13 @@ public inline fun ImmutableByteArray.flatMapIndexed(
         element: Byte,
     ) -> ImmutableCharArray,
 ): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableCharArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -799,9 +896,13 @@ public inline fun ImmutableByteArray.flatMapIndexed(
         element: Byte,
     ) -> ImmutableShortArray,
 ): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableShortArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -833,9 +934,13 @@ public inline fun ImmutableByteArray.flatMapIndexed(
         element: Byte,
     ) -> ImmutableIntArray,
 ): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableIntArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -867,9 +972,13 @@ public inline fun ImmutableByteArray.flatMapIndexed(
         element: Byte,
     ) -> ImmutableLongArray,
 ): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableLongArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -901,9 +1010,13 @@ public inline fun ImmutableByteArray.flatMapIndexed(
         element: Byte,
     ) -> ImmutableFloatArray,
 ): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableFloatArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -935,9 +1048,13 @@ public inline fun ImmutableByteArray.flatMapIndexed(
         element: Byte,
     ) -> ImmutableDoubleArray,
 ): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableDoubleArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -969,9 +1086,13 @@ public inline fun <R> ImmutableCharArray.flatMapIndexed(
         element: Char,
     ) -> ImmutableArray<R>,
 ): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1003,9 +1124,13 @@ public inline fun ImmutableCharArray.flatMapIndexed(
         element: Char,
     ) -> ImmutableBooleanArray,
 ): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableBooleanArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1037,9 +1162,13 @@ public inline fun ImmutableCharArray.flatMapIndexed(
         element: Char,
     ) -> ImmutableByteArray,
 ): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableByteArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1071,9 +1200,13 @@ public inline fun ImmutableCharArray.flatMapIndexed(
         element: Char,
     ) -> ImmutableCharArray,
 ): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableCharArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1105,9 +1238,13 @@ public inline fun ImmutableCharArray.flatMapIndexed(
         element: Char,
     ) -> ImmutableShortArray,
 ): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableShortArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1139,9 +1276,13 @@ public inline fun ImmutableCharArray.flatMapIndexed(
         element: Char,
     ) -> ImmutableIntArray,
 ): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableIntArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1173,9 +1314,13 @@ public inline fun ImmutableCharArray.flatMapIndexed(
         element: Char,
     ) -> ImmutableLongArray,
 ): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableLongArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1207,9 +1352,13 @@ public inline fun ImmutableCharArray.flatMapIndexed(
         element: Char,
     ) -> ImmutableFloatArray,
 ): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableFloatArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1241,9 +1390,13 @@ public inline fun ImmutableCharArray.flatMapIndexed(
         element: Char,
     ) -> ImmutableDoubleArray,
 ): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableDoubleArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1275,9 +1428,13 @@ public inline fun <R> ImmutableShortArray.flatMapIndexed(
         element: Short,
     ) -> ImmutableArray<R>,
 ): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1309,9 +1466,13 @@ public inline fun ImmutableShortArray.flatMapIndexed(
         element: Short,
     ) -> ImmutableBooleanArray,
 ): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableBooleanArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1343,9 +1504,13 @@ public inline fun ImmutableShortArray.flatMapIndexed(
         element: Short,
     ) -> ImmutableByteArray,
 ): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableByteArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1377,9 +1542,13 @@ public inline fun ImmutableShortArray.flatMapIndexed(
         element: Short,
     ) -> ImmutableCharArray,
 ): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableCharArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1411,9 +1580,13 @@ public inline fun ImmutableShortArray.flatMapIndexed(
         element: Short,
     ) -> ImmutableShortArray,
 ): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableShortArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1445,9 +1618,13 @@ public inline fun ImmutableShortArray.flatMapIndexed(
         element: Short,
     ) -> ImmutableIntArray,
 ): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableIntArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1479,9 +1656,13 @@ public inline fun ImmutableShortArray.flatMapIndexed(
         element: Short,
     ) -> ImmutableLongArray,
 ): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableLongArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1513,9 +1694,13 @@ public inline fun ImmutableShortArray.flatMapIndexed(
         element: Short,
     ) -> ImmutableFloatArray,
 ): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableFloatArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1547,9 +1732,13 @@ public inline fun ImmutableShortArray.flatMapIndexed(
         element: Short,
     ) -> ImmutableDoubleArray,
 ): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableDoubleArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1581,9 +1770,13 @@ public inline fun <R> ImmutableIntArray.flatMapIndexed(
         element: Int,
     ) -> ImmutableArray<R>,
 ): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1615,9 +1808,13 @@ public inline fun ImmutableIntArray.flatMapIndexed(
         element: Int,
     ) -> ImmutableBooleanArray,
 ): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableBooleanArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1649,9 +1846,13 @@ public inline fun ImmutableIntArray.flatMapIndexed(
         element: Int,
     ) -> ImmutableByteArray,
 ): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableByteArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1683,9 +1884,13 @@ public inline fun ImmutableIntArray.flatMapIndexed(
         element: Int,
     ) -> ImmutableCharArray,
 ): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableCharArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1717,9 +1922,13 @@ public inline fun ImmutableIntArray.flatMapIndexed(
         element: Int,
     ) -> ImmutableShortArray,
 ): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableShortArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1751,9 +1960,13 @@ public inline fun ImmutableIntArray.flatMapIndexed(
         element: Int,
     ) -> ImmutableIntArray,
 ): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableIntArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1785,9 +1998,13 @@ public inline fun ImmutableIntArray.flatMapIndexed(
         element: Int,
     ) -> ImmutableLongArray,
 ): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableLongArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1819,9 +2036,13 @@ public inline fun ImmutableIntArray.flatMapIndexed(
         element: Int,
     ) -> ImmutableFloatArray,
 ): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableFloatArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1853,9 +2074,13 @@ public inline fun ImmutableIntArray.flatMapIndexed(
         element: Int,
     ) -> ImmutableDoubleArray,
 ): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableDoubleArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1887,9 +2112,13 @@ public inline fun <R> ImmutableLongArray.flatMapIndexed(
         element: Long,
     ) -> ImmutableArray<R>,
 ): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1921,9 +2150,13 @@ public inline fun ImmutableLongArray.flatMapIndexed(
         element: Long,
     ) -> ImmutableBooleanArray,
 ): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableBooleanArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1955,9 +2188,13 @@ public inline fun ImmutableLongArray.flatMapIndexed(
         element: Long,
     ) -> ImmutableByteArray,
 ): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableByteArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -1989,9 +2226,13 @@ public inline fun ImmutableLongArray.flatMapIndexed(
         element: Long,
     ) -> ImmutableCharArray,
 ): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableCharArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2023,9 +2264,13 @@ public inline fun ImmutableLongArray.flatMapIndexed(
         element: Long,
     ) -> ImmutableShortArray,
 ): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableShortArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2057,9 +2302,13 @@ public inline fun ImmutableLongArray.flatMapIndexed(
         element: Long,
     ) -> ImmutableIntArray,
 ): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableIntArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2091,9 +2340,13 @@ public inline fun ImmutableLongArray.flatMapIndexed(
         element: Long,
     ) -> ImmutableLongArray,
 ): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableLongArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2125,9 +2378,13 @@ public inline fun ImmutableLongArray.flatMapIndexed(
         element: Long,
     ) -> ImmutableFloatArray,
 ): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableFloatArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2159,9 +2416,13 @@ public inline fun ImmutableLongArray.flatMapIndexed(
         element: Long,
     ) -> ImmutableDoubleArray,
 ): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableDoubleArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2193,9 +2454,13 @@ public inline fun <R> ImmutableFloatArray.flatMapIndexed(
         element: Float,
     ) -> ImmutableArray<R>,
 ): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2227,9 +2492,13 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
         element: Float,
     ) -> ImmutableBooleanArray,
 ): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableBooleanArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2261,9 +2530,13 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
         element: Float,
     ) -> ImmutableByteArray,
 ): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableByteArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2295,9 +2568,13 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
         element: Float,
     ) -> ImmutableCharArray,
 ): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableCharArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2329,9 +2606,13 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
         element: Float,
     ) -> ImmutableShortArray,
 ): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableShortArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2363,9 +2644,13 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
         element: Float,
     ) -> ImmutableIntArray,
 ): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableIntArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2397,9 +2682,13 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
         element: Float,
     ) -> ImmutableLongArray,
 ): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableLongArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2431,9 +2720,13 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
         element: Float,
     ) -> ImmutableFloatArray,
 ): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableFloatArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2465,9 +2758,13 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
         element: Float,
     ) -> ImmutableDoubleArray,
 ): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableDoubleArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2499,9 +2796,13 @@ public inline fun <R> ImmutableDoubleArray.flatMapIndexed(
         element: Double,
     ) -> ImmutableArray<R>,
 ): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2533,9 +2834,13 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
         element: Double,
     ) -> ImmutableBooleanArray,
 ): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableBooleanArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2567,9 +2872,13 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
         element: Double,
     ) -> ImmutableByteArray,
 ): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableByteArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2601,9 +2910,13 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
         element: Double,
     ) -> ImmutableCharArray,
 ): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableCharArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2635,9 +2948,13 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
         element: Double,
     ) -> ImmutableShortArray,
 ): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableShortArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2669,9 +2986,13 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
         element: Double,
     ) -> ImmutableIntArray,
 ): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableIntArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2703,9 +3024,13 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
         element: Double,
     ) -> ImmutableLongArray,
 ): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableLongArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2737,9 +3062,13 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
         element: Double,
     ) -> ImmutableFloatArray,
 ): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableFloatArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }
 
 /**
@@ -2771,7 +3100,11 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
         element: Double,
     ) -> ImmutableDoubleArray,
 ): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
-    forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
-    return builder.build()
+    var numElements = 0
+    val arrays = mapIndexed { index, element ->
+        transform(index, element).values.also { numElements += it.size }
+    }
+    return buildImmutableDoubleArray(initialCapacity = numElements) {
+        arrays.forEach { addAll(it) }
+    }
 }

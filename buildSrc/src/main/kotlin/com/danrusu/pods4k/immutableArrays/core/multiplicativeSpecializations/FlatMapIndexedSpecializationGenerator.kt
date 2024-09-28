@@ -1,11 +1,12 @@
 package com.danrusu.pods4k.immutableArrays.core.multiplicativeSpecializations
 
 import com.danrusu.pods4k.immutableArrays.BaseType
+import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.statement
 import com.squareup.kotlinpoet.FileSpec
-import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.KModifier
+import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeVariableName
@@ -49,7 +50,18 @@ private fun FileSpec.Builder.addFlatMapIndexedFunction(fromType: BaseType, toTyp
         returns = resultType,
     ) {
         jvmName("flatMapIndexed${toType.typeClass.simpleName}Iterable")
-        flatMapIndexedBody(fromType, toType, mappedType)
+        addAnnotation(OverloadResolutionByLambdaReturnType::class)
+        if (fromType == BaseType.GENERIC) {
+            addTypeVariable(fromType.type as TypeVariableName)
+        }
+        if (toType == BaseType.GENERIC) {
+            addTypeVariable(mappedType as TypeVariableName)
+            statement("val builder = ${toType.generatedClassName}.Builder<%T>()", mappedType)
+        } else {
+            statement("val builder = ${toType.generatedClassName}.Builder()")
+        }
+        statement("forEachIndexed { index, element -> builder.addAll(transform(index, element)) }")
+        statement("return builder.build()")
     }
 
     // flatMapIndexed joining immutable arrays
@@ -72,25 +84,27 @@ private fun FileSpec.Builder.addFlatMapIndexedFunction(fromType: BaseType, toTyp
         returns = resultType,
     ) {
         jvmName("flatMapIndexed${toType.generatedClassName}")
-        flatMapIndexedBody(fromType, toType, mappedType)
+        addAnnotation(OverloadResolutionByLambdaReturnType::class)
+        if (fromType == BaseType.GENERIC) {
+            addTypeVariable(fromType.type as TypeVariableName)
+        }
+        if (toType == BaseType.GENERIC) {
+            addTypeVariable(mappedType as TypeVariableName)
+        }
+        /**
+         * Mapping the elements into an array of sub-arrays is more memory efficient and also improves performance based
+         * on JMH benchmarks.  See the equivalent function in [FlatMapSpecializationGenerator] for explanation.
+         */
+        statement("var numElements = 0")
+        controlFlow("val arrays = mapIndexed { index, element ->") {
+            // reference the underlying array directly to avoid auto-boxing the immutable array
+            statement("transform(index, element).values.also { numElements += it.size }")
+        }
+        controlFlow(
+            "return %M(initialCapacity = numElements)",
+            MemberName("com.danrusu.pods4k.immutableArrays", "build${toType.generatedClassName}"),
+        ) {
+            statement("arrays.forEach { addAll(it) }")
+        }
     }
-}
-
-private fun FunSpec.Builder.flatMapIndexedBody(
-    fromType: BaseType,
-    toType: BaseType,
-    mappedType: TypeName,
-) {
-    addAnnotation(OverloadResolutionByLambdaReturnType::class)
-    if (fromType == BaseType.GENERIC) {
-        addTypeVariable(fromType.type as TypeVariableName)
-    }
-    if (toType == BaseType.GENERIC) {
-        addTypeVariable(mappedType as TypeVariableName)
-        statement("val builder = ${toType.generatedClassName}.Builder<%T>()", mappedType)
-    } else {
-        statement("val builder = ${toType.generatedClassName}.Builder()")
-    }
-    statement("forEachIndexed { index, element -> builder.addAll(transform(index, element)) }")
-    statement("return builder.build()")
 }
