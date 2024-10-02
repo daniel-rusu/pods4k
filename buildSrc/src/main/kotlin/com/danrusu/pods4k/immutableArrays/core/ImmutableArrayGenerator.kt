@@ -508,6 +508,7 @@ private fun TypeSpec.Builder.addFilter(baseType: BaseType) {
 }
 
 private fun TypeSpec.Builder.addPartition(baseType: BaseType) {
+    // Validated with JMH benchmarks that this function is faster as a regular non-inlined function
     function(
         kdoc = """
             Creates a pair of immutable arrays, where the first contains elements for which the predicate yielded true, and the second contains the other elements.
@@ -517,20 +518,39 @@ private fun TypeSpec.Builder.addPartition(baseType: BaseType) {
         returns = Pair::class.asTypeName()
             .parameterizedBy(baseType.getGeneratedTypeName(), baseType.getGeneratedTypeName()),
     ) {
+        /*
+        Create a perfectly-sized double-ended buffer.  Add the elements that yielded true starting from the beginning of
+        the buffer and the other elements from the end.  The only trick is to remember to copy the elements from the end
+        in reverse order so that they maintain their original ordering.
+
+        This uses less memory and is much faster based on JMH benchmarks compared to the traditional approach of
+        maintaining separate builders.  That's because unlike the builders, the buffer never needs to be resized so the
+        elements don't need to be copied multiple times into larger replacements as it gets resized along the way.
+         */
+        statement("var firstIndex = 0")
+        statement("var secondIndex = size - 1")
         if (baseType == GENERIC) {
-            statement("val first = Builder<%T>()", baseType.type)
-            statement("val second = Builder<%T>()", baseType.type)
+            suppress("UNCHECKED_CAST")
+            statement("val buffer = arrayOfNulls<Any?>(size) as Array<T>")
         } else {
-            statement("val first = Builder()")
-            statement("val second = Builder()")
+            statement("val buffer = ${baseType.backingArrayConstructor}(size)")
         }
         controlFlow("for (element in values)") {
-            controlFlow("when (predicate(element))") {
-                statement("true -> first.add(element)")
-                statement("else -> second.add(element)")
-            }
+            addCode(
+                """
+                    if (predicate(element)) {
+                        buffer[firstIndex] = element
+                        firstIndex++
+                    } else {
+                        buffer[secondIndex] = element
+                        secondIndex--
+                    }
+                """.trimIndent(),
+            )
         }
-        statement("return Pair(first.build(), second.build())")
+        statement("val first = ${baseType.generatedClassName}(firstIndex) { buffer[it] }")
+        statement("val second = ${baseType.generatedClassName}(size - first.size) { buffer[size - it - 1] }")
+        statement("return Pair(first, second)")
     }
 }
 

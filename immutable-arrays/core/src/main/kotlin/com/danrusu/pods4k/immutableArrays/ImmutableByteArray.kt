@@ -298,15 +298,21 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
      * yielded true, and the second contains the other elements.
      */
     public fun partition(predicate: (element: Byte) -> Boolean): Pair<ImmutableByteArray, ImmutableByteArray> {
-        val first = Builder()
-        val second = Builder()
+        var firstIndex = 0
+        var secondIndex = size - 1
+        val buffer = ByteArray(size)
         for (element in values) {
-            when (predicate(element)) {
-                true -> first.add(element)
-                else -> second.add(element)
+            if (predicate(element)) {
+                buffer[firstIndex] = element
+                firstIndex++
+            } else {
+                buffer[secondIndex] = element
+                secondIndex--
             }
         }
-        return Pair(first.build(), second.build())
+        val first = ImmutableByteArray(firstIndex) { buffer[it] }
+        val second = ImmutableByteArray(size - first.size) { buffer[size - it - 1] }
+        return Pair(first, second)
     }
 
     /**

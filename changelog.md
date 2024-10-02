@@ -15,6 +15,7 @@ _Date TBD_
 
 **Performance Improvements:**
 
+* Pre-allocate a perfectly-sized buffer for `partition` by populating the buffer array from both ends.
 * Pre-allocate a perfectly-sized backing array for `flatMap` & `flatMapIndexed` when operating on nested immutable
   arrays.
 

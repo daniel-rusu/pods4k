@@ -297,16 +297,23 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
      * Creates a pair of immutable arrays, where the first contains elements for which the predicate
      * yielded true, and the second contains the other elements.
      */
+    @Suppress("UNCHECKED_CAST")
     public fun partition(predicate: (element: T) -> Boolean): Pair<ImmutableArray<T>, ImmutableArray<T>> {
-        val first = Builder<T>()
-        val second = Builder<T>()
+        var firstIndex = 0
+        var secondIndex = size - 1
+        val buffer = arrayOfNulls<Any?>(size) as Array<T>
         for (element in values) {
-            when (predicate(element)) {
-                true -> first.add(element)
-                else -> second.add(element)
+            if (predicate(element)) {
+                buffer[firstIndex] = element
+                firstIndex++
+            } else {
+                buffer[secondIndex] = element
+                secondIndex--
             }
         }
-        return Pair(first.build(), second.build())
+        val first = ImmutableArray(firstIndex) { buffer[it] }
+        val second = ImmutableArray(size - first.size) { buffer[size - it - 1] }
+        return Pair(first, second)
     }
 
     /**
