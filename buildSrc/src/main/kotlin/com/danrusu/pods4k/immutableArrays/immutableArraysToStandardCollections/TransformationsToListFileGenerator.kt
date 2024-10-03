@@ -2,6 +2,7 @@ package com.danrusu.pods4k.immutableArrays.immutableArraysToStandardCollections
 
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
+import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.createFile
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.statement
@@ -32,7 +33,18 @@ private fun FileSpec.Builder.addToList() {
             if (baseType == BaseType.GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
-            statement("return ArrayList(this.asList())")
+            controlFlow("return when (size)") {
+                statement("0 -> emptyList()")
+                statement("1 -> listOf(this[0])") // Defer to SingletonList
+                if (baseType == BaseType.GENERIC) {
+                    // Share the same backing array because ImmutableArray.asList() is guaranteed to be immutable
+                    statement("else -> this.asList()")
+                } else {
+                    // Don't return asList() directly when dealing with primitive types because the generated wrapper that
+                    // asList() returns auto-boxes the values each time they are accessed
+                    statement("else -> ArrayList(this.asList())")
+                }
+            }
         }
     }
 }

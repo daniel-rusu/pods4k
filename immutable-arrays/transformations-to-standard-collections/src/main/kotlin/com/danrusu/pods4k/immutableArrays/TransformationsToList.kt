@@ -15,47 +15,83 @@ import kotlin.collections.MutableList
 /**
  * See [Array.toList]
  */
-public fun <T> ImmutableArray<T>.toList(): List<T> = ArrayList(this.asList())
+public fun <T> ImmutableArray<T>.toList(): List<T> = when (size) {
+    0 -> emptyList()
+    1 -> listOf(this[0])
+    else -> this.asList()
+}
 
 /**
  * See [Array.toList]
  */
-public fun ImmutableBooleanArray.toList(): List<Boolean> = ArrayList(this.asList())
+public fun ImmutableBooleanArray.toList(): List<Boolean> = when (size) {
+    0 -> emptyList()
+    1 -> listOf(this[0])
+    else -> ArrayList(this.asList())
+}
 
 /**
  * See [Array.toList]
  */
-public fun ImmutableByteArray.toList(): List<Byte> = ArrayList(this.asList())
+public fun ImmutableByteArray.toList(): List<Byte> = when (size) {
+    0 -> emptyList()
+    1 -> listOf(this[0])
+    else -> ArrayList(this.asList())
+}
 
 /**
  * See [Array.toList]
  */
-public fun ImmutableCharArray.toList(): List<Char> = ArrayList(this.asList())
+public fun ImmutableCharArray.toList(): List<Char> = when (size) {
+    0 -> emptyList()
+    1 -> listOf(this[0])
+    else -> ArrayList(this.asList())
+}
 
 /**
  * See [Array.toList]
  */
-public fun ImmutableShortArray.toList(): List<Short> = ArrayList(this.asList())
+public fun ImmutableShortArray.toList(): List<Short> = when (size) {
+    0 -> emptyList()
+    1 -> listOf(this[0])
+    else -> ArrayList(this.asList())
+}
 
 /**
  * See [Array.toList]
  */
-public fun ImmutableIntArray.toList(): List<Int> = ArrayList(this.asList())
+public fun ImmutableIntArray.toList(): List<Int> = when (size) {
+    0 -> emptyList()
+    1 -> listOf(this[0])
+    else -> ArrayList(this.asList())
+}
 
 /**
  * See [Array.toList]
  */
-public fun ImmutableLongArray.toList(): List<Long> = ArrayList(this.asList())
+public fun ImmutableLongArray.toList(): List<Long> = when (size) {
+    0 -> emptyList()
+    1 -> listOf(this[0])
+    else -> ArrayList(this.asList())
+}
 
 /**
  * See [Array.toList]
  */
-public fun ImmutableFloatArray.toList(): List<Float> = ArrayList(this.asList())
+public fun ImmutableFloatArray.toList(): List<Float> = when (size) {
+    0 -> emptyList()
+    1 -> listOf(this[0])
+    else -> ArrayList(this.asList())
+}
 
 /**
  * See [Array.toList]
  */
-public fun ImmutableDoubleArray.toList(): List<Double> = ArrayList(this.asList())
+public fun ImmutableDoubleArray.toList(): List<Double> = when (size) {
+    0 -> emptyList()
+    1 -> listOf(this[0])
+    else -> ArrayList(this.asList())
+}
 
 /**
  * See [Array.toMutableList]

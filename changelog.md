@@ -15,6 +15,8 @@ _Date TBD_
 
 **Performance Improvements:**
 
+* Optimize `toList` to return empty singleton when the size is 0, singleton-list when 1, and share backing array when
+  working with generic types.
 * Pre-allocate a perfectly-sized buffer for `partition` by populating the buffer array from both ends.
 * Pre-allocate a perfectly-sized backing array for `flatMap` & `flatMapIndexed` when operating on nested immutable
   arrays.
