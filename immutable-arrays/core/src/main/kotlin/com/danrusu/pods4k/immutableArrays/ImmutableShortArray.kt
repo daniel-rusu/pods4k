@@ -85,6 +85,7 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     ): String = values.joinToString(separator, prefix, postfix, limit, truncated, transform)
 
     public operator fun equals(other: ImmutableShortArray): Boolean {
+        if (other.values === this.values) return true
         if (other.size != this.size) return false
 
         forEachIndexed { index, element ->

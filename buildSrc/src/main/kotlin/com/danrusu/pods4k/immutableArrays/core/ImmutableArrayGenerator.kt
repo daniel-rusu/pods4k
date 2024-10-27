@@ -429,6 +429,8 @@ private fun TypeSpec.Builder.addEqualsOperator(baseType: BaseType) {
         parameters = { "other"(type = otherType) },
         returns = Boolean::class.asTypeName(),
     ) {
+        // IMPORTANT: Check referential equality of backing array (not `other === this`) to handle auto-boxing scenarios
+        addStatement("if (other.values === this.values) return true")
         addStatement("if (other.size != this.size) return false")
         emptyLine()
         controlFlow("forEachIndexed { index, element ->") {

@@ -20,9 +20,6 @@ allprojects {
             // generate default methods in interfaces without the DefaultImpls
             freeCompilerArgs.add("-Xjvm-default=all")
 
-            freeCompilerArgs.add("-XXLanguage:+CustomEqualsInValueClasses")
-            freeCompilerArgs.add("-opt-in=kotlin.experimental.ExperimentalTypeInference")
-
             // enforce redundant visibility modifiers
             kotlin.explicitApi()
 
@@ -30,6 +27,10 @@ allprojects {
             if (name != "compileTestKotlin") {
                 allWarningsAsErrors.set(true)
             }
+
+            // experimental features
+            freeCompilerArgs.add("-XXLanguage:+CustomEqualsInValueClasses")
+            freeCompilerArgs.add("-opt-in=kotlin.experimental.ExperimentalTypeInference")
         }
     }
 
