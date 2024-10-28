@@ -566,6 +566,19 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `filterNot validation`() {
+        with(emptyImmutableIntArray()) {
+            expectThat(filterNot { it % 2 == 0 })
+                .isEqualTo(emptyImmutableIntArray())
+        }
+
+        with(immutableArrayOf(1, 2, 3, 4)) {
+            expectThat(filterNot { it % 2 == 0 })
+                .isEqualTo(immutableArrayOf(1, 3))
+        }
+    }
+
+    @Test
     fun `partition validation`() {
         with(emptyImmutableIntArray()) {
             expectThat(partition { it % 2 == 0 })

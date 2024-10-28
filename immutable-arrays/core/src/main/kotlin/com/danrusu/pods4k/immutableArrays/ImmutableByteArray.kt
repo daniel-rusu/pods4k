@@ -295,6 +295,19 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     }
 
     /**
+     * Returns an immutable array containing only the elements that don't match the [predicate].
+     */
+    public inline fun filterNot(predicate: (element: Byte) -> Boolean): ImmutableByteArray {
+        val result = Builder()
+        for (element in values) {
+            if (!predicate(element)) {
+                result.add(element)
+            }
+        }
+        return result.build()
+    }
+
+    /**
      * Creates a pair of immutable arrays, where the first contains elements for which the predicate
      * yielded true, and the second contains the other elements.
      */
