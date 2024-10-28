@@ -96,7 +96,10 @@ private fun FileSpec.Builder.addMutableCollectionAddAll() {
             if (baseType == GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
-            comment("Wrap the backing array without copying the contents so we can delegate to the existing addAll method which ensures sufficient capacity in a single step")
+            comment(
+                "Wrap the backing array without copying the contents so we can delegate to the existing addAll " +
+                    "method which ensures sufficient capacity in a single step",
+            )
             statement("return addAll(elements.asList())")
         }
     }

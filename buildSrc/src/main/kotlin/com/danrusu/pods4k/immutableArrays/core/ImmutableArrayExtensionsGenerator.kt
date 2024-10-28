@@ -193,7 +193,10 @@ private fun FileSpec.Builder.addSorted() {
             name = "sorted",
             returns = receiver,
         ) {
-            comment("Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change")
+            comment(
+                "Immutable arrays can't be mutated, so it's safe to return the same array when the ordering " +
+                        "won't change"
+            )
             statement("if (size <= 1) return this")
             emptyLine()
             if (baseType == GENERIC) {
@@ -231,7 +234,8 @@ private fun FileSpec.Builder.addSortedDescending() {
                 The sort is _stable_ so equal elements preserve their order relative to each other after sorting.
             """.trimIndent()
 
-            else -> "Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with all elements sorted according to their reverse natural sort order."
+            else -> "Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with all " +
+                    "elements sorted according to their reverse natural sort order."
         }
         val receiver = when (baseType) {
             GENERIC -> baseType.getGeneratedClass().parameterizedBy(genericType)
@@ -265,7 +269,8 @@ private fun FileSpec.Builder.addSortedDescending() {
 private fun FileSpec.Builder.addPlusImmutableArray() {
     for (baseType in BaseType.entries) {
         function(
-            kdoc = "Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with the elements of [this] followed by the elements of [other]",
+            kdoc = "Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with the " +
+                    "elements of [this] followed by the elements of [other]",
             modifiers = listOf(KModifier.OPERATOR),
             receiver = baseType.getGeneratedTypeName(),
             name = "plus",

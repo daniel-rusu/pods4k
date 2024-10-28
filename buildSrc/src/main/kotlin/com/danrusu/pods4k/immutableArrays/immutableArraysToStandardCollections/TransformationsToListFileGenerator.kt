@@ -40,8 +40,8 @@ private fun FileSpec.Builder.addToList() {
                     // Share the same backing array because ImmutableArray.asList() is guaranteed to be immutable
                     statement("else -> this.asList()")
                 } else {
-                    // Don't return asList() directly when dealing with primitive types because the generated wrapper that
-                    // asList() returns auto-boxes the values each time they are accessed
+                    // Don't return asList() directly when dealing with primitive types because the generated wrapper
+                    // that asList() returns auto-boxes the values each time they are accessed
                     statement("else -> ArrayList(this.asList())")
                 }
             }

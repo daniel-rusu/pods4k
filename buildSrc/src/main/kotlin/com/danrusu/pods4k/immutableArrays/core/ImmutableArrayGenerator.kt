@@ -348,11 +348,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
     }
 }
 
-/**
- * Delegates to the same function on the backing array.
- *
- * @param baseType
- */
+/** Delegates to the same function on the backing array */
 private operator fun String.invoke(
     typeSpecBuilder: TypeSpec.Builder,
     baseType: BaseType,
@@ -450,7 +446,10 @@ private fun TypeSpec.Builder.overrideHashCode(baseType: BaseType) {
         name = "hashCode",
         returns = Int::class.asTypeName(),
     ) {
-        comment("Start with non-zero hash so that arrays that start with a different number of zero-hash elements end up with different hashCodes")
+        comment(
+            "Start with non-zero hash so that arrays that start with a different number of zero-hash elements end " +
+                "up with different hashCodes",
+        )
 
         statement("var hashCode = $prime1")
         controlFlow("for (value in values)") {
@@ -489,9 +488,7 @@ private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
 
 private fun TypeSpec.Builder.addFilter(baseType: BaseType) {
     function(
-        kdoc = """
-            Returns an immutable array containing only the elements matching the given [predicate].
-        """.trimIndent(),
+        kdoc = "Returns an immutable array containing only the elements matching the given [predicate].",
         modifiers = listOf(KModifier.INLINE),
         name = "filter",
         parameters = { "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) }) },
@@ -513,9 +510,7 @@ private fun TypeSpec.Builder.addFilter(baseType: BaseType) {
 
 private fun TypeSpec.Builder.addFilterIndexed(baseType: BaseType) {
     function(
-        kdoc = """
-            Returns an immutable array containing only the elements matching the given [predicate].
-        """.trimIndent(),
+        kdoc = "Returns an immutable array containing only the elements matching the given [predicate].",
         modifiers = listOf(KModifier.INLINE),
         name = "filterIndexed",
         parameters = {
@@ -544,9 +539,7 @@ private fun TypeSpec.Builder.addFilterIndexed(baseType: BaseType) {
 
 private fun TypeSpec.Builder.addFilterNot(baseType: BaseType) {
     function(
-        kdoc = """
-            Returns an immutable array containing only the elements that don't match the [predicate].
-        """.trimIndent(),
+        kdoc = "Returns an immutable array containing only the elements that don't match the [predicate].",
         modifiers = listOf(KModifier.INLINE),
         name = "filterNot",
         parameters = { "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) }) },
@@ -569,9 +562,8 @@ private fun TypeSpec.Builder.addFilterNot(baseType: BaseType) {
 private fun TypeSpec.Builder.addPartition(baseType: BaseType) {
     // Validated with JMH benchmarks that this function is faster as a regular non-inlined function
     function(
-        kdoc = """
-            Creates a pair of immutable arrays, where the first contains elements for which the predicate yielded true, and the second contains the other elements.
-        """.trimIndent(),
+        kdoc = "Creates a pair of immutable arrays, where the first contains elements for which the predicate " +
+            "yielded true, and the second contains the other elements.",
         name = "partition",
         parameters = { "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) }) },
         returns = Pair::class.asTypeName()
@@ -675,7 +667,8 @@ private fun TypeSpec.Builder.addSortedByDescending(baseType: BaseType) {
 
 private fun TypeSpec.Builder.addSortedWith(baseType: BaseType) {
     function(
-        kdoc = "Leaves this immutable array as is and returns an [${baseType.generatedClassName}] with all elements sorted according to the specified [comparator].",
+        kdoc = "Leaves this immutable array as is and returns an [${baseType.generatedClassName}] with all elements " +
+            "sorted according to the specified [comparator].",
         name = "sortedWith",
         parameters = {
             "comparator"(
@@ -684,7 +677,9 @@ private fun TypeSpec.Builder.addSortedWith(baseType: BaseType) {
         },
         returns = baseType.getGeneratedTypeName(),
     ) {
-        comment("Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change")
+        comment(
+            "Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change",
+        )
         statement("if (size <= 1) return this")
         emptyLine()
         if (baseType == GENERIC) {
