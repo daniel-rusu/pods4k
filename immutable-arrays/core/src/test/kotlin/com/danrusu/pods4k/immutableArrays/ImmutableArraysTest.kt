@@ -182,6 +182,11 @@ class ImmutableArraysTest {
                 .isEqualTo(immutableArrayOf("one", "two"))
         }
 
+        with(immutableArrayOf("one", "two")) {
+            expectThat(filterNotNull())
+                .isEqualTo(this)
+        }
+
         with(emptyImmutableArray<Int?>()) {
             expectThat(filterNotNull())
                 .isEqualTo(emptyImmutableIntArray())

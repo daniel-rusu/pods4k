@@ -306,6 +306,8 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
 
             result.add(value)
         }
+        if (result.size == size) return this
+
         return result.build()
     }
 
@@ -319,6 +321,8 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
                 result.add(element)
             }
         }
+        if (result.size == size) return this
+
         return result.build()
     }
 
@@ -332,6 +336,8 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
                 result.add(element)
             }
         }
+        if (result.size == size) return this
+
         return result.build()
     }
 
@@ -345,6 +351,8 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
                 result.add(element)
             }
         }
+        if (result.size == size) return this
+
         return result.build()
     }
 
@@ -365,6 +373,9 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
                 secondIndex--
             }
         }
+        if (firstIndex == 0) return Pair(emptyImmutableLongArray(), this)
+        if (firstIndex == size) return Pair(this, emptyImmutableLongArray())
+
         val first = ImmutableLongArray(firstIndex) { buffer[it] }
         val second = ImmutableLongArray(size - first.size) { buffer[size - it - 1] }
         return Pair(first, second)

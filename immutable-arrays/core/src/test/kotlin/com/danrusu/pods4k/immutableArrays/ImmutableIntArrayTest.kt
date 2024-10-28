@@ -600,6 +600,9 @@ class ImmutableIntArrayTest {
         with(immutableArrayOf(1, 2, 3, 4)) {
             expectThat(filter { it % 2 == 0 })
                 .isEqualTo(immutableArrayOf(2, 4))
+
+            expectThat(filter { it >= 0 })
+                .isEqualTo(this)
         }
     }
 
@@ -613,6 +616,9 @@ class ImmutableIntArrayTest {
         with(immutableArrayOf(0, 3, 2, 4)) {
             expectThat(filterIndexed { index, element -> element == index })
                 .isEqualTo(immutableArrayOf(0, 2))
+
+            expectThat(filterIndexed { index, element -> index + element >= 0 })
+                .isEqualTo(this)
         }
     }
 
@@ -626,6 +632,9 @@ class ImmutableIntArrayTest {
         with(immutableArrayOf(1, 2, 3, 4)) {
             expectThat(filterNot { it % 2 == 0 })
                 .isEqualTo(immutableArrayOf(1, 3))
+
+            expectThat(filterNot { it < 0 })
+                .isEqualTo(this)
         }
     }
 
@@ -639,6 +648,12 @@ class ImmutableIntArrayTest {
         with(immutableArrayOf(1, 2, 3, 4)) {
             expectThat(partition { it % 2 == 0 })
                 .isEqualTo(Pair(immutableArrayOf(2, 4), immutableArrayOf(1, 3)))
+
+            expectThat(partition { it < 0 })
+                .isEqualTo(Pair(emptyImmutableIntArray(), this))
+
+            expectThat(partition { it > 0 })
+                .isEqualTo(Pair(this, emptyImmutableIntArray()))
         }
     }
 

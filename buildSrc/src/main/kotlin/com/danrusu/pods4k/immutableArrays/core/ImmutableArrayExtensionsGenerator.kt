@@ -188,16 +188,24 @@ private fun FileSpec.Builder.addFilterNotNull() {
             if (baseType == GENERIC) {
                 addTypeVariable(nonNullType as TypeVariableName)
                 jvmName("immutableArrayFilterNotNull")
+                statement("val result = ${baseType.generatedClassName}.Builder<%T>()", nonNullType)
             } else {
                 jvmName("immutableArrayFilterNotNull_${baseType.typeClass.simpleName}")
+                statement("val result = ${baseType.generatedClassName}.Builder()")
             }
-            controlFlow("return build${baseType.generatedClassName}") {
-                controlFlow("forEach { value ->") {
-                    controlFlow("if (value != null)") {
-                        statement("add(value)")
-                    }
+            controlFlow("forEach { value ->") {
+                controlFlow("if (value != null)") {
+                    statement("result.add(value)")
                 }
             }
+            if (baseType == GENERIC) {
+                suppress("UNCHECKED_CAST")
+                val castType = baseType.getGeneratedClass().parameterizedBy(nonNullType)
+                statement("if (result.size == size) return this as %T", castType)
+                emptyLine()
+            }
+
+            statement("return result.build()")
         }
     }
 }

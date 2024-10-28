@@ -536,6 +536,8 @@ private fun TypeSpec.Builder.addTakeWhile(baseType: BaseType) {
             emptyLine()
             statement("result.add(value)")
         }
+        statement("if (result.size == size) return this")
+        emptyLine()
         statement("return result.build()")
     }
 }
@@ -558,6 +560,8 @@ private fun TypeSpec.Builder.addFilter(baseType: BaseType) {
                 statement("result.add(element)")
             }
         }
+        statement("if (result.size == size) return this")
+        emptyLine()
         statement("return result.build()")
     }
 }
@@ -587,6 +591,8 @@ private fun TypeSpec.Builder.addFilterIndexed(baseType: BaseType) {
                 statement("result.add(element)")
             }
         }
+        statement("if (result.size == size) return this")
+        emptyLine()
         statement("return result.build()")
     }
 }
@@ -609,6 +615,8 @@ private fun TypeSpec.Builder.addFilterNot(baseType: BaseType) {
                 statement("result.add(element)")
             }
         }
+        statement("if (result.size == size) return this")
+        emptyLine()
         statement("return result.build()")
     }
 }
@@ -653,6 +661,9 @@ private fun TypeSpec.Builder.addPartition(baseType: BaseType) {
                 """.trimIndent(),
             )
         }
+        statement("if (firstIndex == 0) return Pair(empty${baseType.generatedClassName}(), this)")
+        statement("if (firstIndex == size) return Pair(this, empty${baseType.generatedClassName}())")
+        emptyLine()
         statement("val first = ${baseType.generatedClassName}(firstIndex) { buffer[it] }")
         statement("val second = ${baseType.generatedClassName}(size - first.size) { buffer[size - it - 1] }")
         statement("return Pair(first, second)")

@@ -475,14 +475,17 @@ public inline fun ImmutableDoubleArray.getOrElse(index: Int, defaultValue: (inde
  * Returns an immutable array containing only the non-null elements
  */
 @JvmName("immutableArrayFilterNotNull")
+@Suppress("UNCHECKED_CAST")
 public fun <T : Any> ImmutableArray<T?>.filterNotNull(): ImmutableArray<T> {
-    return buildImmutableArray {
-        forEach { value ->
-            if (value != null) {
-                add(value)
-            }
+    val result = ImmutableArray.Builder<T>()
+    forEach { value ->
+        if (value != null) {
+            result.add(value)
         }
     }
+    if (result.size == size) return this as ImmutableArray<T>
+
+    return result.build()
 }
 
 /**
@@ -490,13 +493,13 @@ public fun <T : Any> ImmutableArray<T?>.filterNotNull(): ImmutableArray<T> {
  */
 @JvmName("immutableArrayFilterNotNull_Boolean")
 public fun ImmutableArray<Boolean?>.filterNotNull(): ImmutableBooleanArray {
-    return buildImmutableBooleanArray {
-        forEach { value ->
-            if (value != null) {
-                add(value)
-            }
+    val result = ImmutableBooleanArray.Builder()
+    forEach { value ->
+        if (value != null) {
+            result.add(value)
         }
     }
+    return result.build()
 }
 
 /**
@@ -504,13 +507,13 @@ public fun ImmutableArray<Boolean?>.filterNotNull(): ImmutableBooleanArray {
  */
 @JvmName("immutableArrayFilterNotNull_Byte")
 public fun ImmutableArray<Byte?>.filterNotNull(): ImmutableByteArray {
-    return buildImmutableByteArray {
-        forEach { value ->
-            if (value != null) {
-                add(value)
-            }
+    val result = ImmutableByteArray.Builder()
+    forEach { value ->
+        if (value != null) {
+            result.add(value)
         }
     }
+    return result.build()
 }
 
 /**
@@ -518,13 +521,13 @@ public fun ImmutableArray<Byte?>.filterNotNull(): ImmutableByteArray {
  */
 @JvmName("immutableArrayFilterNotNull_Char")
 public fun ImmutableArray<Char?>.filterNotNull(): ImmutableCharArray {
-    return buildImmutableCharArray {
-        forEach { value ->
-            if (value != null) {
-                add(value)
-            }
+    val result = ImmutableCharArray.Builder()
+    forEach { value ->
+        if (value != null) {
+            result.add(value)
         }
     }
+    return result.build()
 }
 
 /**
@@ -532,13 +535,13 @@ public fun ImmutableArray<Char?>.filterNotNull(): ImmutableCharArray {
  */
 @JvmName("immutableArrayFilterNotNull_Short")
 public fun ImmutableArray<Short?>.filterNotNull(): ImmutableShortArray {
-    return buildImmutableShortArray {
-        forEach { value ->
-            if (value != null) {
-                add(value)
-            }
+    val result = ImmutableShortArray.Builder()
+    forEach { value ->
+        if (value != null) {
+            result.add(value)
         }
     }
+    return result.build()
 }
 
 /**
@@ -546,13 +549,13 @@ public fun ImmutableArray<Short?>.filterNotNull(): ImmutableShortArray {
  */
 @JvmName("immutableArrayFilterNotNull_Int")
 public fun ImmutableArray<Int?>.filterNotNull(): ImmutableIntArray {
-    return buildImmutableIntArray {
-        forEach { value ->
-            if (value != null) {
-                add(value)
-            }
+    val result = ImmutableIntArray.Builder()
+    forEach { value ->
+        if (value != null) {
+            result.add(value)
         }
     }
+    return result.build()
 }
 
 /**
@@ -560,13 +563,13 @@ public fun ImmutableArray<Int?>.filterNotNull(): ImmutableIntArray {
  */
 @JvmName("immutableArrayFilterNotNull_Long")
 public fun ImmutableArray<Long?>.filterNotNull(): ImmutableLongArray {
-    return buildImmutableLongArray {
-        forEach { value ->
-            if (value != null) {
-                add(value)
-            }
+    val result = ImmutableLongArray.Builder()
+    forEach { value ->
+        if (value != null) {
+            result.add(value)
         }
     }
+    return result.build()
 }
 
 /**
@@ -574,13 +577,13 @@ public fun ImmutableArray<Long?>.filterNotNull(): ImmutableLongArray {
  */
 @JvmName("immutableArrayFilterNotNull_Float")
 public fun ImmutableArray<Float?>.filterNotNull(): ImmutableFloatArray {
-    return buildImmutableFloatArray {
-        forEach { value ->
-            if (value != null) {
-                add(value)
-            }
+    val result = ImmutableFloatArray.Builder()
+    forEach { value ->
+        if (value != null) {
+            result.add(value)
         }
     }
+    return result.build()
 }
 
 /**
@@ -588,13 +591,13 @@ public fun ImmutableArray<Float?>.filterNotNull(): ImmutableFloatArray {
  */
 @JvmName("immutableArrayFilterNotNull_Double")
 public fun ImmutableArray<Double?>.filterNotNull(): ImmutableDoubleArray {
-    return buildImmutableDoubleArray {
-        forEach { value ->
-            if (value != null) {
-                add(value)
-            }
+    val result = ImmutableDoubleArray.Builder()
+    forEach { value ->
+        if (value != null) {
+            result.add(value)
         }
     }
+    return result.build()
 }
 
 /**

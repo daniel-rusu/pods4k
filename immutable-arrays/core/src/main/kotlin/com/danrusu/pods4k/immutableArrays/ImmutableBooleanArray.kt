@@ -305,6 +305,8 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
 
             result.add(value)
         }
+        if (result.size == size) return this
+
         return result.build()
     }
 
@@ -318,6 +320,8 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
                 result.add(element)
             }
         }
+        if (result.size == size) return this
+
         return result.build()
     }
 
@@ -331,6 +335,8 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
                 result.add(element)
             }
         }
+        if (result.size == size) return this
+
         return result.build()
     }
 
@@ -344,6 +350,8 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
                 result.add(element)
             }
         }
+        if (result.size == size) return this
+
         return result.build()
     }
 
@@ -364,6 +372,9 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
                 secondIndex--
             }
         }
+        if (firstIndex == 0) return Pair(emptyImmutableBooleanArray(), this)
+        if (firstIndex == size) return Pair(this, emptyImmutableBooleanArray())
+
         val first = ImmutableBooleanArray(firstIndex) { buffer[it] }
         val second = ImmutableBooleanArray(size - first.size) { buffer[size - it - 1] }
         return Pair(first, second)

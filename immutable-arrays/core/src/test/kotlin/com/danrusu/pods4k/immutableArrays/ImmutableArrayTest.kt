@@ -575,6 +575,9 @@ class ImmutableArrayTest {
         with(immutableArrayOf("a", "bb", "ccc", "dddd")) {
             expectThat(filter { it.length % 2 == 0 })
                 .isEqualTo(immutableArrayOf("bb", "dddd"))
+
+            expectThat(filter { it.isNotEmpty() })
+                .isEqualTo(this)
         }
     }
 
@@ -588,6 +591,9 @@ class ImmutableArrayTest {
         with(immutableArrayOf("a", "b", "c", "ddd")) {
             expectThat(filterIndexed { index, element -> element.length == index })
                 .isEqualTo(immutableArrayOf("b", "ddd"))
+
+            expectThat(filterIndexed { index, element -> index >= 0 || element.isNotEmpty() })
+                .isEqualTo(this)
         }
     }
 
@@ -601,6 +607,9 @@ class ImmutableArrayTest {
         with(immutableArrayOf("a", "bb", "ccc", "dddd")) {
             expectThat(filterNot { it.length % 2 == 0 })
                 .isEqualTo(immutableArrayOf("a", "ccc"))
+
+            expectThat(filterNot { it.isEmpty() })
+                .isEqualTo(this)
         }
     }
 
@@ -614,6 +623,12 @@ class ImmutableArrayTest {
         with(immutableArrayOf("a", "bb", "ccc", "dddd")) {
             expectThat(partition { it.length % 2 == 0 })
                 .isEqualTo(Pair(immutableArrayOf("bb", "dddd"), immutableArrayOf("a", "ccc")))
+
+            expectThat(partition { it.isEmpty() })
+                .isEqualTo(Pair(emptyImmutableArray(), this))
+
+            expectThat(partition { it.isNotEmpty() })
+                .isEqualTo(Pair(this, emptyImmutableArray()))
         }
     }
 
