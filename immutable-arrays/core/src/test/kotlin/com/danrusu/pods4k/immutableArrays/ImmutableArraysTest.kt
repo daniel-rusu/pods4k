@@ -171,6 +171,30 @@ class ImmutableArraysTest {
     }
 
     @Test
+    fun `filterNotNull validation`() {
+        with(emptyImmutableArray<String?>()) {
+            expectThat(filterNotNull())
+                .isEqualTo(emptyImmutableArray<String>())
+        }
+
+        with(immutableArrayOf("one", null, "two")) {
+            expectThat(filterNotNull())
+                .isEqualTo(immutableArrayOf("one", "two"))
+        }
+
+        with(emptyImmutableArray<Int?>()) {
+            expectThat(filterNotNull())
+                .isEqualTo(emptyImmutableIntArray())
+        }
+
+        with(immutableArrayOf(1, null, 2)) {
+            expectThat(filterNotNull())
+                .isA<ImmutableIntArray>()
+                .isEqualTo(immutableArrayOf(1, 2))
+        }
+    }
+
+    @Test
     fun `sorted validation`() {
         with(immutableArrayOf("dogs", "apples", "pineapples")) {
             expectThat(sorted())

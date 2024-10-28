@@ -7,6 +7,7 @@ _Date TBD_
 
 **New Features:**
 
+* Add `filterNotNull` extension functions
 * Add `filterIndexed` method
 * Add `filterNot` method
 * Add `flatten` extension functions for immutable arrays, sequences, or iterables that contain nested immutable arrays

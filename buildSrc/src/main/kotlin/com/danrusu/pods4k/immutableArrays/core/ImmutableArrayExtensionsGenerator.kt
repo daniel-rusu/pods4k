@@ -27,6 +27,7 @@ internal object ImmutableArrayExtensionsGenerator {
             addIndexOf()
             addLastIndexOf()
             addGetOrElse()
+            addFilterNotNull()
             addSorted()
             addSortedDescending()
             addPlusImmutableArray()
@@ -166,6 +167,41 @@ private fun FileSpec.Builder.addGetOrElse() {
     }
 }
 
+private fun FileSpec.Builder.addFilterNotNull() {
+    for (baseType in BaseType.entries) {
+        val nonNullType = when (baseType) {
+            GENERIC -> TypeVariableName("T", Any::class.asTypeName())
+            else -> baseType.type
+        }
+        val returnType = when (baseType) {
+            GENERIC -> baseType.getGeneratedClass().parameterizedBy(nonNullType)
+            else -> baseType.getGeneratedTypeName()
+        }
+
+        function(
+            kdoc = "Returns an immutable array containing only the non-null elements",
+            receiver = GENERIC.getGeneratedClass().parameterizedBy(nonNullType.copy(nullable = true)),
+            name = "filterNotNull",
+            returns = returnType,
+            forceFunctionBody = true,
+        ) {
+            if (baseType == GENERIC) {
+                addTypeVariable(nonNullType as TypeVariableName)
+                jvmName("immutableArrayFilterNotNull")
+            } else {
+                jvmName("immutableArrayFilterNotNull_${baseType.typeClass.simpleName}")
+            }
+            controlFlow("return build${baseType.generatedClassName}") {
+                controlFlow("forEach { value ->") {
+                    controlFlow("if (value != null)") {
+                        statement("add(value)")
+                    }
+                }
+            }
+        }
+    }
+}
+
 private fun FileSpec.Builder.addSorted() {
     val genericVariableName = "T"
     val genericType = TypeVariableName(genericVariableName)
@@ -195,7 +231,7 @@ private fun FileSpec.Builder.addSorted() {
         ) {
             comment(
                 "Immutable arrays can't be mutated, so it's safe to return the same array when the ordering " +
-                        "won't change"
+                    "won't change",
             )
             statement("if (size <= 1) return this")
             emptyLine()
@@ -234,7 +270,8 @@ private fun FileSpec.Builder.addSortedDescending() {
                 The sort is _stable_ so equal elements preserve their order relative to each other after sorting.
             """.trimIndent()
 
-            else -> "Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with all " +
+            else ->
+                "Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with all " +
                     "elements sorted according to their reverse natural sort order."
         }
         val receiver = when (baseType) {
@@ -270,7 +307,7 @@ private fun FileSpec.Builder.addPlusImmutableArray() {
     for (baseType in BaseType.entries) {
         function(
             kdoc = "Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with the " +
-                    "elements of [this] followed by the elements of [other]",
+                "elements of [this] followed by the elements of [other]",
             modifiers = listOf(KModifier.OPERATOR),
             receiver = baseType.getGeneratedTypeName(),
             name = "plus",

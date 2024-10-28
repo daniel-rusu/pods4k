@@ -4,6 +4,7 @@ package com.danrusu.pods4k.immutableArrays
 import java.lang.IllegalArgumentException
 import java.util.Arrays
 import java.util.RandomAccess
+import kotlin.Any
 import kotlin.Boolean
 import kotlin.Byte
 import kotlin.Char
@@ -468,6 +469,132 @@ public inline fun ImmutableFloatArray.getOrElse(index: Int, defaultValue: (index
  */
 public inline fun ImmutableDoubleArray.getOrElse(index: Int, defaultValue: (index: Int) -> Double): Double {
     return values.getOrElse(index, defaultValue)
+}
+
+/**
+ * Returns an immutable array containing only the non-null elements
+ */
+@JvmName("immutableArrayFilterNotNull")
+public fun <T : Any> ImmutableArray<T?>.filterNotNull(): ImmutableArray<T> {
+    return buildImmutableArray {
+        forEach { value ->
+            if (value != null) {
+                add(value)
+            }
+        }
+    }
+}
+
+/**
+ * Returns an immutable array containing only the non-null elements
+ */
+@JvmName("immutableArrayFilterNotNull_Boolean")
+public fun ImmutableArray<Boolean?>.filterNotNull(): ImmutableBooleanArray {
+    return buildImmutableBooleanArray {
+        forEach { value ->
+            if (value != null) {
+                add(value)
+            }
+        }
+    }
+}
+
+/**
+ * Returns an immutable array containing only the non-null elements
+ */
+@JvmName("immutableArrayFilterNotNull_Byte")
+public fun ImmutableArray<Byte?>.filterNotNull(): ImmutableByteArray {
+    return buildImmutableByteArray {
+        forEach { value ->
+            if (value != null) {
+                add(value)
+            }
+        }
+    }
+}
+
+/**
+ * Returns an immutable array containing only the non-null elements
+ */
+@JvmName("immutableArrayFilterNotNull_Char")
+public fun ImmutableArray<Char?>.filterNotNull(): ImmutableCharArray {
+    return buildImmutableCharArray {
+        forEach { value ->
+            if (value != null) {
+                add(value)
+            }
+        }
+    }
+}
+
+/**
+ * Returns an immutable array containing only the non-null elements
+ */
+@JvmName("immutableArrayFilterNotNull_Short")
+public fun ImmutableArray<Short?>.filterNotNull(): ImmutableShortArray {
+    return buildImmutableShortArray {
+        forEach { value ->
+            if (value != null) {
+                add(value)
+            }
+        }
+    }
+}
+
+/**
+ * Returns an immutable array containing only the non-null elements
+ */
+@JvmName("immutableArrayFilterNotNull_Int")
+public fun ImmutableArray<Int?>.filterNotNull(): ImmutableIntArray {
+    return buildImmutableIntArray {
+        forEach { value ->
+            if (value != null) {
+                add(value)
+            }
+        }
+    }
+}
+
+/**
+ * Returns an immutable array containing only the non-null elements
+ */
+@JvmName("immutableArrayFilterNotNull_Long")
+public fun ImmutableArray<Long?>.filterNotNull(): ImmutableLongArray {
+    return buildImmutableLongArray {
+        forEach { value ->
+            if (value != null) {
+                add(value)
+            }
+        }
+    }
+}
+
+/**
+ * Returns an immutable array containing only the non-null elements
+ */
+@JvmName("immutableArrayFilterNotNull_Float")
+public fun ImmutableArray<Float?>.filterNotNull(): ImmutableFloatArray {
+    return buildImmutableFloatArray {
+        forEach { value ->
+            if (value != null) {
+                add(value)
+            }
+        }
+    }
+}
+
+/**
+ * Returns an immutable array containing only the non-null elements
+ */
+@JvmName("immutableArrayFilterNotNull_Double")
+public fun ImmutableArray<Double?>.filterNotNull(): ImmutableDoubleArray {
+    return buildImmutableDoubleArray {
+        forEach { value ->
+            if (value != null) {
+                add(value)
+            }
+        }
+    }
 }
 
 /**
