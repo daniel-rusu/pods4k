@@ -297,6 +297,19 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     }
 
     /**
+     * Returns an immutable array containing the first elements that satisfy the [predicate].
+     */
+    public inline fun takeWhile(predicate: (element: Double) -> Boolean): ImmutableDoubleArray {
+        val result = Builder()
+        for (value in values) {
+            if (!predicate(value)) break
+
+            result.add(value)
+        }
+        return result.build()
+    }
+
+    /**
      * Returns an immutable array containing only the elements matching the given [predicate].
      */
     public inline fun filter(predicate: (element: Double) -> Boolean): ImmutableDoubleArray {

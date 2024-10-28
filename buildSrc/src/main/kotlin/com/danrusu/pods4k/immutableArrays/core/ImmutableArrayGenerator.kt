@@ -286,6 +286,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 forceFunctionBody = true,
             )
             addTake(baseType)
+            addTakeWhile(baseType)
             addFilter(baseType)
             addFilterIndexed(baseType)
             addFilterNot(baseType)
@@ -514,6 +515,28 @@ private fun TypeSpec.Builder.addTake(baseType: BaseType) {
         }
         statement("System.arraycopy(values, 0, backingArray, 0, n)")
         statement("return ${baseType.generatedClassName}(backingArray)")
+    }
+}
+
+private fun TypeSpec.Builder.addTakeWhile(baseType: BaseType) {
+    function(
+        kdoc = "Returns an immutable array containing the first elements that satisfy the [predicate].",
+        modifiers = listOf(KModifier.INLINE),
+        name = "takeWhile",
+        parameters = { "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) }) },
+        returns = baseType.getGeneratedTypeName(),
+    ) {
+        if (baseType == GENERIC) {
+            statement("val result = Builder<%T>()", baseType.type)
+        } else {
+            statement("val result = Builder()")
+        }
+        controlFlow("for (value in values)") {
+            statement("if (!predicate(value)) break")
+            emptyLine()
+            statement("result.add(value)")
+        }
+        statement("return result.build()")
     }
 }
 

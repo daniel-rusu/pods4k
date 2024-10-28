@@ -552,6 +552,20 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `takeWhile validation`() {
+        with(immutableArrayOf("a", "bb", "ccc", "d")) {
+            expectThat(takeWhile { it.isEmpty() })
+                .isEqualTo(emptyImmutableArray())
+
+            expectThat(takeWhile { it.length <= 2 })
+                .isEqualTo(immutableArrayOf("a", "bb"))
+
+            expectThat(takeWhile { it.length <= 3 })
+                .isEqualTo(immutableArrayOf("a", "bb", "ccc", "d"))
+        }
+    }
+
+    @Test
     fun `filter validation`() {
         with(emptyImmutableArray<String>()) {
             expectThat(filter { it.length % 2 == 0 })
