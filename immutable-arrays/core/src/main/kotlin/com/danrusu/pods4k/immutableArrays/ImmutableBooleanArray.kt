@@ -294,6 +294,19 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     }
 
     /**
+     * Returns an immutable array containing only the elements matching the given [predicate].
+     */
+    public inline fun filterIndexed(predicate: (index: Int, element: Boolean) -> Boolean): ImmutableBooleanArray {
+        val result = Builder()
+        forEachIndexed { index, element ->
+            if (predicate(index, element)) {
+                result.add(element)
+            }
+        }
+        return result.build()
+    }
+
+    /**
      * Returns an immutable array containing only the elements that don't match the [predicate].
      */
     public inline fun filterNot(predicate: (element: Boolean) -> Boolean): ImmutableBooleanArray {

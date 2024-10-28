@@ -286,6 +286,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 forceFunctionBody = true,
             )
             addFilter(baseType)
+            addFilterIndexed(baseType)
             addFilterNot(baseType)
             addPartition(baseType)
             addSortedBy(baseType)
@@ -503,6 +504,37 @@ private fun TypeSpec.Builder.addFilter(baseType: BaseType) {
         }
         controlFlow("for (element in values)") {
             controlFlow("if (predicate(element))") {
+                statement("result.add(element)")
+            }
+        }
+        statement("return result.build()")
+    }
+}
+
+private fun TypeSpec.Builder.addFilterIndexed(baseType: BaseType) {
+    function(
+        kdoc = """
+            Returns an immutable array containing only the elements matching the given [predicate].
+        """.trimIndent(),
+        modifiers = listOf(KModifier.INLINE),
+        name = "filterIndexed",
+        parameters = {
+            "predicate"(
+                type = lambda<Boolean> {
+                    "index"<Int>()
+                    "element"(type = baseType.type)
+                },
+            )
+        },
+        returns = baseType.getGeneratedTypeName(),
+    ) {
+        if (baseType == GENERIC) {
+            statement("val result = Builder<%T>()", baseType.type)
+        } else {
+            statement("val result = Builder()")
+        }
+        controlFlow("forEachIndexed { index, element ->") {
+            controlFlow("if (predicate(index, element))") {
                 statement("result.add(element)")
             }
         }

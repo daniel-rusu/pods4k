@@ -295,6 +295,19 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     }
 
     /**
+     * Returns an immutable array containing only the elements matching the given [predicate].
+     */
+    public inline fun filterIndexed(predicate: (index: Int, element: Char) -> Boolean): ImmutableCharArray {
+        val result = Builder()
+        forEachIndexed { index, element ->
+            if (predicate(index, element)) {
+                result.add(element)
+            }
+        }
+        return result.build()
+    }
+
+    /**
      * Returns an immutable array containing only the elements that don't match the [predicate].
      */
     public inline fun filterNot(predicate: (element: Char) -> Boolean): ImmutableCharArray {

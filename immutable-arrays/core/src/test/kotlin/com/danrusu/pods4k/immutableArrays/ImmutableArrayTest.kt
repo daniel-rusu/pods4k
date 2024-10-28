@@ -541,6 +541,19 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `filterIndexed validation`() {
+        with(emptyImmutableArray<String>()) {
+            expectThat(filterIndexed { index, element -> element.length == index })
+                .isEqualTo(emptyImmutableArray())
+        }
+
+        with(immutableArrayOf("a", "b", "c", "ddd")) {
+            expectThat(filterIndexed { index, element -> element.length == index })
+                .isEqualTo(immutableArrayOf("b", "ddd"))
+        }
+    }
+
+    @Test
     fun `filterNot validation`() {
         with(emptyImmutableArray<String>()) {
             expectThat(filterNot { it.length % 2 == 0 })
