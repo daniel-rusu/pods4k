@@ -528,6 +528,30 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `take validation`() {
+        with(immutableArrayOf("one", "two", "three")) {
+            expectThrows<IllegalArgumentException> {
+                take(-1)
+            }.message.isEqualTo("Requested element count -1 is less than zero.")
+
+            expectThat(take(0))
+                .isEqualTo(emptyImmutableArray())
+
+            expectThat(take(1))
+                .isEqualTo(immutableArrayOf("one"))
+
+            expectThat(take(2))
+                .isEqualTo(immutableArrayOf("one", "two"))
+
+            expectThat(take(3))
+                .isEqualTo(immutableArrayOf("one", "two", "three"))
+
+            expectThat(take(10))
+                .isEqualTo(immutableArrayOf("one", "two", "three"))
+        }
+    }
+
+    @Test
     fun `filter validation`() {
         with(emptyImmutableArray<String>()) {
             expectThat(filter { it.length % 2 == 0 })

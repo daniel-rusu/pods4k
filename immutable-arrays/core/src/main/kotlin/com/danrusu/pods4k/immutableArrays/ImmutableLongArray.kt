@@ -282,6 +282,21 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     }
 
     /**
+     * Returns an immutable array containing the first [n] elements.
+     *
+     * @throws IllegalArgumentException if [n] is negative.
+     */
+    public fun take(n: Int): ImmutableLongArray {
+        require(n >= 0) { "Requested element count $n is less than zero." }
+        if (n == 0) return EMPTY
+        if (n >= size) return this
+
+        val backingArray = LongArray(n)
+        System.arraycopy(values, 0, backingArray, 0, n)
+        return ImmutableLongArray(backingArray)
+    }
+
+    /**
      * Returns an immutable array containing only the elements matching the given [predicate].
      */
     public inline fun filter(predicate: (element: Long) -> Boolean): ImmutableLongArray {

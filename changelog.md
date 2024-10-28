@@ -7,6 +7,7 @@ _Date TBD_
 
 **New Features:**
 
+* Add `take` method
 * Add `filterNotNull` extension functions
 * Add `filterIndexed` method
 * Add `filterNot` method

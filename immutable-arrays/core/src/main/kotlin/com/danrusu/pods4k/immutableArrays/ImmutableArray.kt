@@ -282,6 +282,22 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     }
 
     /**
+     * Returns an immutable array containing the first [n] elements.
+     *
+     * @throws IllegalArgumentException if [n] is negative.
+     */
+    @Suppress("UNCHECKED_CAST")
+    public fun take(n: Int): ImmutableArray<T> {
+        require(n >= 0) { "Requested element count $n is less than zero." }
+        if (n == 0) return EMPTY
+        if (n >= size) return this
+
+        val backingArray = arrayOfNulls<Any>(n) as Array<out T>
+        System.arraycopy(values, 0, backingArray, 0, n)
+        return ImmutableArray(backingArray)
+    }
+
+    /**
      * Returns an immutable array containing only the elements matching the given [predicate].
      */
     public inline fun filter(predicate: (element: T) -> Boolean): ImmutableArray<T> {

@@ -285,6 +285,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 returns = Int::class.asTypeName(),
                 forceFunctionBody = true,
             )
+            addTake(baseType)
             addFilter(baseType)
             addFilterIndexed(baseType)
             addFilterNot(baseType)
@@ -483,6 +484,36 @@ private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
         ) {
             statement("return get(${n - 1})")
         }
+    }
+}
+
+private fun TypeSpec.Builder.addTake(baseType: BaseType) {
+    function(
+        kdoc = """
+            Returns an immutable array containing the first [n] elements.
+
+            @throws IllegalArgumentException if [n] is negative.
+        """.trimIndent(),
+        name = "take",
+        parameters = { "n"<Int>() },
+        returns = baseType.getGeneratedTypeName(),
+    ) {
+        statement(
+            """
+            require(n >= 0) { "Requested element count ${'$'}n is less than zero." }
+            """.trimIndent(),
+        )
+        statement("if (n == 0) return EMPTY")
+        statement("if (n >= size) return this")
+        emptyLine()
+        if (baseType == GENERIC) {
+            suppress("UNCHECKED_CAST")
+            statement("val backingArray = arrayOfNulls<Any>(n) as %T", baseType.backingArrayType)
+        } else {
+            statement("val backingArray = ${baseType.backingArrayConstructor}(n)")
+        }
+        statement("System.arraycopy(values, 0, backingArray, 0, n)")
+        statement("return ${baseType.generatedClassName}(backingArray)")
     }
 }
 
