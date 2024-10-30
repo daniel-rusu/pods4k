@@ -559,7 +559,7 @@ class ImmutableArrayTest {
         }
 
         with(immutableArrayOf("a", "bb", "ccc", "d")) {
-            expectThat(takeWhile { it.isEmpty() })
+            expectThat(takeWhile { it.length >= 2 })
                 .isEqualTo(emptyImmutableArray())
 
             expectThat(takeWhile { it.length <= 2 })
@@ -591,6 +591,25 @@ class ImmutableArrayTest {
 
             expectThat(takeLast(10))
                 .isEqualTo(immutableArrayOf("one", "two", "three"))
+        }
+    }
+
+    @Test
+    fun `takeLastWhile validation`() {
+        with(emptyImmutableArray<String>()) {
+            expectThat(takeLastWhile { true })
+                .isEqualTo(emptyImmutableArray())
+        }
+
+        with(immutableArrayOf("aaaa", "bbb", "cc", "d")) {
+            expectThat(takeLastWhile { it.isEmpty() })
+                .isEqualTo(emptyImmutableArray())
+
+            expectThat(takeLastWhile { it.length <= 2 })
+                .isEqualTo(immutableArrayOf("cc", "d"))
+
+            expectThat(takeLastWhile { it.length <= 4 })
+                .isEqualTo(immutableArrayOf("aaaa", "bbb", "cc", "d"))
         }
     }
 

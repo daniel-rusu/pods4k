@@ -7,6 +7,7 @@ _Date TBD_
 
 **New Features:**
 
+* Add `takeLastWhile` method
 * Add `takeLast` method
 * Add `takeWhile` method
 * Add `take` method

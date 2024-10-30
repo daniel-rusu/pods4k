@@ -323,6 +323,17 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     }
 
     /**
+     * Returns an immutable array containing the last elements that satisfy the [predicate].
+     */
+    public inline fun takeLastWhile(predicate: (element: Float) -> Boolean): ImmutableFloatArray {
+        var untilIndex = lastIndex
+        while (untilIndex >= 0 && predicate(values[untilIndex])) {
+            untilIndex--
+        }
+        return takeLast(lastIndex - untilIndex)
+    }
+
+    /**
      * Returns an immutable array containing only the elements matching the given [predicate].
      */
     public inline fun filter(predicate: (element: Float) -> Boolean): ImmutableFloatArray {

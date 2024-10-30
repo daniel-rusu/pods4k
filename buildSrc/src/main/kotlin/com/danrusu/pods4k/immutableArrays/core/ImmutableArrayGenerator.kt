@@ -288,6 +288,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addTake(baseType)
             addTakeWhile(baseType)
             addTakeLast(baseType)
+            addTakeLastWhile(baseType)
             addFilter(baseType)
             addFilterIndexed(baseType)
             addFilterNot(baseType)
@@ -562,6 +563,22 @@ private fun TypeSpec.Builder.addTakeLast(baseType: BaseType) {
         }
         statement("System.arraycopy(values, size - n, backingArray, 0, n)")
         statement("return ${baseType.generatedClassName}(backingArray)")
+    }
+}
+
+private fun TypeSpec.Builder.addTakeLastWhile(baseType: BaseType) {
+    function(
+        kdoc = "Returns an immutable array containing the last elements that satisfy the [predicate].",
+        modifiers = listOf(KModifier.INLINE),
+        name = "takeLastWhile",
+        parameters = { "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) }) },
+        returns = baseType.getGeneratedTypeName(),
+    ) {
+        statement("var untilIndex = lastIndex")
+        controlFlow("while (untilIndex >= 0 && predicate(values[untilIndex]))") {
+            statement("untilIndex--")
+        }
+        statement("return takeLast(lastIndex - untilIndex)")
     }
 }
 
