@@ -300,15 +300,11 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
      * Returns an immutable array containing the first elements that satisfy the [predicate].
      */
     public inline fun takeWhile(predicate: (element: Char) -> Boolean): ImmutableCharArray {
-        val result = Builder()
-        for (value in values) {
-            if (!predicate(value)) break
-
-            result.add(value)
+        var untilIndex = 0
+        while (untilIndex < size && predicate(values[untilIndex])) {
+            untilIndex++
         }
-        if (result.size == size) return this
-
-        return result.build()
+        return take(untilIndex)
     }
 
     /**

@@ -578,6 +578,11 @@ class ImmutableIntArrayTest {
 
     @Test
     fun `takeWhile validation`() {
+        with(emptyImmutableIntArray()) {
+            expectThat(takeWhile { true })
+                .isEqualTo(emptyImmutableIntArray())
+        }
+
         with(immutableArrayOf(1, 2, 5, 3)) {
             expectThat(takeWhile { it < 1 })
                 .isEqualTo(emptyImmutableIntArray())

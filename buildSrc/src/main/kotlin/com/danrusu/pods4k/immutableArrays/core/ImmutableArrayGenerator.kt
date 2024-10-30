@@ -527,19 +527,11 @@ private fun TypeSpec.Builder.addTakeWhile(baseType: BaseType) {
         parameters = { "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) }) },
         returns = baseType.getGeneratedTypeName(),
     ) {
-        if (baseType == GENERIC) {
-            statement("val result = Builder<%T>()", baseType.type)
-        } else {
-            statement("val result = Builder()")
+        statement("var untilIndex = 0")
+        controlFlow("while (untilIndex < size && predicate(values[untilIndex]))") {
+            statement("untilIndex++")
         }
-        controlFlow("for (value in values)") {
-            statement("if (!predicate(value)) break")
-            emptyLine()
-            statement("result.add(value)")
-        }
-        statement("if (result.size == size) return this")
-        emptyLine()
-        statement("return result.build()")
+        statement("return take(untilIndex)")
     }
 }
 
