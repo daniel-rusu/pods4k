@@ -312,6 +312,21 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     }
 
     /**
+     * Returns an immutable array containing the last [n] elements.
+     *
+     * @throws IllegalArgumentException if [n] is negative.
+     */
+    public fun takeLast(n: Int): ImmutableShortArray {
+        require(n >= 0) { "Requested element count $n is less than zero." }
+        if (n == 0) return EMPTY
+        if (n >= size) return this
+
+        val backingArray = ShortArray(n)
+        System.arraycopy(values, size - n, backingArray, 0, n)
+        return ImmutableShortArray(backingArray)
+    }
+
+    /**
      * Returns an immutable array containing only the elements matching the given [predicate].
      */
     public inline fun filter(predicate: (element: Short) -> Boolean): ImmutableShortArray {

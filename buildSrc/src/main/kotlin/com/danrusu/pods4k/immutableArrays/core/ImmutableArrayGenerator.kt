@@ -287,6 +287,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             )
             addTake(baseType)
             addTakeWhile(baseType)
+            addTakeLast(baseType)
             addFilter(baseType)
             addFilterIndexed(baseType)
             addFilterNot(baseType)
@@ -539,6 +540,36 @@ private fun TypeSpec.Builder.addTakeWhile(baseType: BaseType) {
         statement("if (result.size == size) return this")
         emptyLine()
         statement("return result.build()")
+    }
+}
+
+private fun TypeSpec.Builder.addTakeLast(baseType: BaseType) {
+    function(
+        kdoc = """
+            Returns an immutable array containing the last [n] elements.
+
+            @throws IllegalArgumentException if [n] is negative.
+        """.trimIndent(),
+        name = "takeLast",
+        parameters = { "n"<Int>() },
+        returns = baseType.getGeneratedTypeName(),
+    ) {
+        statement(
+            """
+            require(n >= 0) { "Requested element count ${'$'}n is less than zero." }
+            """.trimIndent(),
+        )
+        statement("if (n == 0) return EMPTY")
+        statement("if (n >= size) return this")
+        emptyLine()
+        if (baseType == GENERIC) {
+            suppress("UNCHECKED_CAST")
+            statement("val backingArray = arrayOfNulls<Any>(n) as %T", baseType.backingArrayType)
+        } else {
+            statement("val backingArray = ${baseType.backingArrayConstructor}(n)")
+        }
+        statement("System.arraycopy(values, size - n, backingArray, 0, n)")
+        statement("return ${baseType.generatedClassName}(backingArray)")
     }
 }
 

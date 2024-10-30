@@ -7,6 +7,7 @@ _Date TBD_
 
 **New Features:**
 
+* Add `takeLast` method
 * Add `takeWhile` method
 * Add `take` method
 * Add `filterNotNull` extension functions
