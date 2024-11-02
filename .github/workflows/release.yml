@@ -27,6 +27,30 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-home-cache-cleanup: true
+      - name: Generate code
+        run: ./gradlew generateCode --no-daemon
+
+      - name: Check for changes in generated code
+        id: diff
+        run: |
+          git diff --exit-code >/dev/null 2>&1
+
+      - name: Fail if submission doesn't include the latest generated code
+        if: ${{ always() && steps.diff.outcome != 'success' }}
+        run: |
+          echo "Generated files changed. Run './gradlew generateCode' after changing the code generators and include the updated files with your submission."
+          exit 1
+      - name: Build & run tests
+        run: ./gradlew build --no-daemon
+
+      - name: Upload test report if failed
+        if: failure() # Only upload the build report if the previous step failed
+        uses: actions/upload-artifact@v4
+        with:
+          name: Test report
+          path: |
+            **/build/reports/tests/test/*
+            build/reports/tests/test/*
       - name: Publish the artifacts
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
