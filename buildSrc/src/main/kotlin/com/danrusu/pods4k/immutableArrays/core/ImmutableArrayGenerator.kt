@@ -289,6 +289,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addTakeWhile(baseType)
             addTakeLast(baseType)
             addTakeLastWhile(baseType)
+            addDrop(baseType)
             addFilter(baseType)
             addFilterIndexed(baseType)
             addFilterNot(baseType)
@@ -579,6 +580,27 @@ private fun TypeSpec.Builder.addTakeLastWhile(baseType: BaseType) {
             statement("untilIndex--")
         }
         statement("return takeLast(lastIndex - untilIndex)")
+    }
+}
+
+private fun TypeSpec.Builder.addDrop(baseType: BaseType) {
+    function(
+        kdoc = """
+            Returns an immutable array containing all the elements expect the first n elements.
+
+            @throws IllegalArgumentException if [n] is negative.
+        """.trimIndent(),
+        name = "drop",
+        parameters = { "n"<Int>() },
+        returns = baseType.getGeneratedTypeName(),
+    ) {
+        statement(
+            """
+            require(n >= 0) { "Requested element count ${'$'}n is less than zero." }
+            """.trimIndent(),
+        )
+        emptyLine()
+        statement("return takeLast((size - n).coerceAtLeast(0))")
     }
 }
 
