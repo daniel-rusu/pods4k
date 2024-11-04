@@ -290,6 +290,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addTakeLast(baseType)
             addTakeLastWhile(baseType)
             addDrop(baseType)
+            addDropWhile(baseType)
             addFilter(baseType)
             addFilterIndexed(baseType)
             addFilterNot(baseType)
@@ -601,6 +602,22 @@ private fun TypeSpec.Builder.addDrop(baseType: BaseType) {
         )
         emptyLine()
         statement("return takeLast((size - n).coerceAtLeast(0))")
+    }
+}
+
+private fun TypeSpec.Builder.addDropWhile(baseType: BaseType) {
+    function(
+        kdoc = "Returns an immutable array containing all the elements expect the first elements that satisfy the [predicate].",
+        modifiers = listOf(KModifier.INLINE),
+        name = "dropWhile",
+        parameters = { "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) }) },
+        returns = baseType.getGeneratedTypeName(),
+    ) {
+        statement("var untilIndex = 0")
+        controlFlow("while (untilIndex < size && predicate(values[untilIndex]))") {
+            statement("untilIndex++")
+        }
+        statement("return takeLast(size - untilIndex)")
     }
 }
 

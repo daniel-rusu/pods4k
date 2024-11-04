@@ -345,6 +345,18 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     }
 
     /**
+     * Returns an immutable array containing all the elements expect the first elements that satisfy
+     * the [predicate].
+     */
+    public inline fun dropWhile(predicate: (element: Long) -> Boolean): ImmutableLongArray {
+        var untilIndex = 0
+        while (untilIndex < size && predicate(values[untilIndex])) {
+            untilIndex++
+        }
+        return takeLast(size - untilIndex)
+    }
+
+    /**
      * Returns an immutable array containing only the elements matching the given [predicate].
      */
     public inline fun filter(predicate: (element: Long) -> Boolean): ImmutableLongArray {

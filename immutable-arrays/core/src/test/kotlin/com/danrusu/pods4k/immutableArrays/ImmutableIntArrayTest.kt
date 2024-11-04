@@ -581,6 +581,9 @@ class ImmutableIntArrayTest {
         with(emptyImmutableIntArray()) {
             expectThat(takeWhile { true })
                 .isEqualTo(emptyImmutableIntArray())
+
+            expectThat(takeWhile { false })
+                .isEqualTo(emptyImmutableIntArray())
         }
 
         with(immutableArrayOf(1, 2, 5, 3)) {
@@ -624,6 +627,9 @@ class ImmutableIntArrayTest {
         with(emptyImmutableIntArray()) {
             expectThat(takeLastWhile { true })
                 .isEqualTo(emptyImmutableIntArray())
+
+            expectThat(takeLastWhile { false })
+                .isEqualTo(emptyImmutableIntArray())
         }
 
         with(immutableArrayOf(1, 5, 2, 3)) {
@@ -659,6 +665,28 @@ class ImmutableIntArrayTest {
 
             expectThat(drop(10))
                 .isEqualTo(emptyImmutableIntArray())
+        }
+    }
+
+    @Test
+    fun `dropWhile validation`() {
+        with(emptyImmutableIntArray()) {
+            expectThat(dropWhile { true })
+                .isEqualTo(emptyImmutableIntArray())
+
+            expectThat(dropWhile { false })
+                .isEqualTo(emptyImmutableIntArray())
+        }
+
+        with(immutableArrayOf(1, 2, 5, 3)) {
+            expectThat(dropWhile { it <= 5 })
+                .isEqualTo(emptyImmutableIntArray())
+
+            expectThat(dropWhile { it <= 4 })
+                .isEqualTo(immutableArrayOf(5, 3))
+
+            expectThat(dropWhile { it <= 0 })
+                .isEqualTo(immutableArrayOf(1, 2, 5, 3))
         }
     }
 

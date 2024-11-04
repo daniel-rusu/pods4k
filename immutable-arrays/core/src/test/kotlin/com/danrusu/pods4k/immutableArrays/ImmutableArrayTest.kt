@@ -556,6 +556,9 @@ class ImmutableArrayTest {
         with(emptyImmutableArray<String>()) {
             expectThat(takeWhile { true })
                 .isEqualTo(emptyImmutableArray())
+
+            expectThat(takeWhile { false })
+                .isEqualTo(emptyImmutableArray())
         }
 
         with(immutableArrayOf("a", "bb", "ccc", "d")) {
@@ -599,6 +602,9 @@ class ImmutableArrayTest {
         with(emptyImmutableArray<String>()) {
             expectThat(takeLastWhile { true })
                 .isEqualTo(emptyImmutableArray())
+
+            expectThat(takeLastWhile { false })
+                .isEqualTo(emptyImmutableArray())
         }
 
         with(immutableArrayOf("aaaa", "bbb", "cc", "d")) {
@@ -634,6 +640,28 @@ class ImmutableArrayTest {
 
             expectThat(drop(10))
                 .isEqualTo(emptyImmutableArray())
+        }
+    }
+
+    @Test
+    fun `dropWhile validation`() {
+        with(emptyImmutableArray<String>()) {
+            expectThat(dropWhile { true })
+                .isEqualTo(emptyImmutableArray())
+
+            expectThat(dropWhile { false })
+                .isEqualTo(emptyImmutableArray())
+        }
+
+        with(immutableArrayOf("a", "bb", "ccc", "d")) {
+            expectThat(dropWhile { it.length <= 3 })
+                .isEqualTo(emptyImmutableArray())
+
+            expectThat(dropWhile { it.length <= 2 })
+                .isEqualTo(immutableArrayOf("ccc", "d"))
+
+            expectThat(dropWhile { it.isEmpty() })
+                .isEqualTo(immutableArrayOf("a", "bb", "ccc", "d"))
         }
     }
 
