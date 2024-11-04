@@ -554,6 +554,14 @@ class ImmutableIntArrayTest {
 
     @Test
     fun `take validation`() {
+        with(emptyImmutableIntArray()) {
+            expectThat(take(0))
+                .isEqualTo(emptyImmutableIntArray())
+
+            expectThat(take(10))
+                .isEqualTo(emptyImmutableIntArray())
+        }
+
         with(immutableArrayOf(1, 2, 3)) {
             expectThrows<IllegalArgumentException> {
                 take(-1)
@@ -600,6 +608,14 @@ class ImmutableIntArrayTest {
 
     @Test
     fun `takeLast validation`() {
+        with(emptyImmutableIntArray()) {
+            expectThat(takeLast(0))
+                .isEqualTo(emptyImmutableIntArray())
+
+            expectThat(takeLast(10))
+                .isEqualTo(emptyImmutableIntArray())
+        }
+
         with(immutableArrayOf(1, 2, 3)) {
             expectThrows<IllegalArgumentException> {
                 takeLast(-1)
@@ -646,6 +662,14 @@ class ImmutableIntArrayTest {
 
     @Test
     fun `drop validation`() {
+        with(emptyImmutableIntArray()) {
+            expectThat(drop(0))
+                .isEqualTo(emptyImmutableIntArray())
+
+            expectThat(dropLast(10))
+                .isEqualTo(emptyImmutableIntArray())
+        }
+
         with(immutableArrayOf(1, 2, 3)) {
             expectThrows<IllegalArgumentException> {
                 drop(-1)
@@ -687,6 +711,38 @@ class ImmutableIntArrayTest {
 
             expectThat(dropWhile { it <= 0 })
                 .isEqualTo(immutableArrayOf(1, 2, 5, 3))
+        }
+    }
+
+    @Test
+    fun `dropLast validation`() {
+        with(emptyImmutableIntArray()) {
+            expectThat(dropLast(0))
+                .isEqualTo(emptyImmutableIntArray())
+
+            expectThat(dropLast(10))
+                .isEqualTo(emptyImmutableIntArray())
+        }
+
+        with(immutableArrayOf(1, 2, 3)) {
+            expectThrows<IllegalArgumentException> {
+                dropLast(-1)
+            }.message.isEqualTo("Requested element count -1 is less than zero.")
+
+            expectThat(dropLast(0))
+                .isEqualTo(immutableArrayOf(1, 2, 3))
+
+            expectThat(dropLast(1))
+                .isEqualTo(immutableArrayOf(1, 2))
+
+            expectThat(dropLast(2))
+                .isEqualTo(immutableArrayOf(1))
+
+            expectThat(dropLast(3))
+                .isEqualTo(emptyImmutableIntArray())
+
+            expectThat(dropLast(10))
+                .isEqualTo(emptyImmutableIntArray())
         }
     }
 

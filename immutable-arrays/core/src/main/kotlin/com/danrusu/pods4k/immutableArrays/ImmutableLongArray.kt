@@ -357,6 +357,17 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     }
 
     /**
+     * Returns an immutable array containing all the elements expect the last n elements.
+     *
+     * @throws IllegalArgumentException if [n] is negative.
+     */
+    public fun dropLast(n: Int): ImmutableLongArray {
+        require(n >= 0) { "Requested element count $n is less than zero." }
+
+        return take((size - n).coerceAtLeast(0))
+    }
+
+    /**
      * Returns an immutable array containing only the elements matching the given [predicate].
      */
     public inline fun filter(predicate: (element: Long) -> Boolean): ImmutableLongArray {
