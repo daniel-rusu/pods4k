@@ -747,6 +747,28 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `dropLastWhile validation`() {
+        with(emptyImmutableIntArray()) {
+            expectThat(dropLastWhile { true })
+                .isEqualTo(emptyImmutableIntArray())
+
+            expectThat(dropLastWhile { false })
+                .isEqualTo(emptyImmutableIntArray())
+        }
+
+        with(immutableArrayOf(1, 2, 5, 3)) {
+            expectThat(dropLastWhile { it <= 5 })
+                .isEqualTo(emptyImmutableIntArray())
+
+            expectThat(dropLastWhile { it <= 4 })
+                .isEqualTo(immutableArrayOf(1, 2, 5))
+
+            expectThat(dropLastWhile { it <= 0 })
+                .isEqualTo(immutableArrayOf(1, 2, 5, 3))
+        }
+    }
+
+    @Test
     fun `filter validation`() {
         with(emptyImmutableIntArray()) {
             expectThat(filter { it % 2 == 0 })

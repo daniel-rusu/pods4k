@@ -292,6 +292,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addDrop(baseType)
             addDropWhile(baseType)
             addDropLast(baseType)
+            addDropLastWhile(baseType)
             addFilter(baseType)
             addFilterIndexed(baseType)
             addFilterNot(baseType)
@@ -531,11 +532,12 @@ private fun TypeSpec.Builder.addTakeWhile(baseType: BaseType) {
         parameters = { "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) }) },
         returns = baseType.getGeneratedTypeName(),
     ) {
-        statement("var untilIndex = 0")
-        controlFlow("while (untilIndex < size && predicate(values[untilIndex]))") {
-            statement("untilIndex++")
+        controlFlow("for (index in 0..lastIndex)") {
+            controlFlow("if (!predicate(values[index]))") {
+                statement("return take(index)")
+            }
         }
-        statement("return take(untilIndex)")
+        statement("return this")
     }
 }
 
@@ -577,18 +579,19 @@ private fun TypeSpec.Builder.addTakeLastWhile(baseType: BaseType) {
         parameters = { "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) }) },
         returns = baseType.getGeneratedTypeName(),
     ) {
-        statement("var untilIndex = lastIndex")
-        controlFlow("while (untilIndex >= 0 && predicate(values[untilIndex]))") {
-            statement("untilIndex--")
+        controlFlow("for (index in lastIndex downTo 0)") {
+            controlFlow("if (!predicate(values[index]))") {
+                statement("return takeLast(size - index - 1)")
+            }
         }
-        statement("return takeLast(lastIndex - untilIndex)")
+        statement("return this")
     }
 }
 
 private fun TypeSpec.Builder.addDrop(baseType: BaseType) {
     function(
         kdoc = """
-            Returns an immutable array containing all the elements expect the first n elements.
+            Returns an immutable array containing all the elements except the first n elements.
 
             @throws IllegalArgumentException if [n] is negative.
         """.trimIndent(),
@@ -608,24 +611,25 @@ private fun TypeSpec.Builder.addDrop(baseType: BaseType) {
 
 private fun TypeSpec.Builder.addDropWhile(baseType: BaseType) {
     function(
-        kdoc = "Returns an immutable array containing all the elements expect the first elements that satisfy the [predicate].",
+        kdoc = "Returns an immutable array containing all the elements except the first elements that satisfy the [predicate].",
         modifiers = listOf(KModifier.INLINE),
         name = "dropWhile",
         parameters = { "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) }) },
         returns = baseType.getGeneratedTypeName(),
     ) {
-        statement("var untilIndex = 0")
-        controlFlow("while (untilIndex < size && predicate(values[untilIndex]))") {
-            statement("untilIndex++")
+        controlFlow("for (index in 0..lastIndex)") {
+            controlFlow("if (!predicate(values[index]))") {
+                statement("return takeLast(size - index)")
+            }
         }
-        statement("return takeLast(size - untilIndex)")
+        statement("return EMPTY")
     }
 }
 
 private fun TypeSpec.Builder.addDropLast(baseType: BaseType) {
     function(
         kdoc = """
-            Returns an immutable array containing all the elements expect the last n elements.
+            Returns an immutable array containing all the elements except the last n elements.
 
             @throws IllegalArgumentException if [n] is negative.
         """.trimIndent(),
@@ -640,6 +644,23 @@ private fun TypeSpec.Builder.addDropLast(baseType: BaseType) {
         )
         emptyLine()
         statement("return take((size - n).coerceAtLeast(0))")
+    }
+}
+
+private fun TypeSpec.Builder.addDropLastWhile(baseType: BaseType) {
+    function(
+        kdoc = "Returns an immutable array containing all the elements except the last elements that satisfy the [predicate].",
+        modifiers = listOf(KModifier.INLINE),
+        name = "dropLastWhile",
+        parameters = { "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) }) },
+        returns = baseType.getGeneratedTypeName(),
+    ) {
+        controlFlow("for (index in lastIndex downTo 0)") {
+            controlFlow("if (!predicate(values[index]))") {
+                statement("return take(index + 1)")
+            }
+        }
+        statement("return EMPTY")
     }
 }
 

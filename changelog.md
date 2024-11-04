@@ -7,6 +7,7 @@ _Date TBD_
 
 **New Features:**
 
+* Add `dropLastWhile` method
 * Add `dropLast` method
 * Add `dropWhile` method
 * Add `drop` method

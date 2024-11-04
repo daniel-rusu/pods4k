@@ -299,11 +299,12 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
      * Returns an immutable array containing the first elements that satisfy the [predicate].
      */
     public inline fun takeWhile(predicate: (element: Boolean) -> Boolean): ImmutableBooleanArray {
-        var untilIndex = 0
-        while (untilIndex < size && predicate(values[untilIndex])) {
-            untilIndex++
+        for (index in 0..lastIndex) {
+            if (!predicate(values[index])) {
+                return take(index)
+            }
         }
-        return take(untilIndex)
+        return this
     }
 
     /**
@@ -325,15 +326,16 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
      * Returns an immutable array containing the last elements that satisfy the [predicate].
      */
     public inline fun takeLastWhile(predicate: (element: Boolean) -> Boolean): ImmutableBooleanArray {
-        var untilIndex = lastIndex
-        while (untilIndex >= 0 && predicate(values[untilIndex])) {
-            untilIndex--
+        for (index in lastIndex downTo 0) {
+            if (!predicate(values[index])) {
+                return takeLast(size - index - 1)
+            }
         }
-        return takeLast(lastIndex - untilIndex)
+        return this
     }
 
     /**
-     * Returns an immutable array containing all the elements expect the first n elements.
+     * Returns an immutable array containing all the elements except the first n elements.
      *
      * @throws IllegalArgumentException if [n] is negative.
      */
@@ -344,19 +346,20 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     }
 
     /**
-     * Returns an immutable array containing all the elements expect the first elements that satisfy
+     * Returns an immutable array containing all the elements except the first elements that satisfy
      * the [predicate].
      */
     public inline fun dropWhile(predicate: (element: Boolean) -> Boolean): ImmutableBooleanArray {
-        var untilIndex = 0
-        while (untilIndex < size && predicate(values[untilIndex])) {
-            untilIndex++
+        for (index in 0..lastIndex) {
+            if (!predicate(values[index])) {
+                return takeLast(size - index)
+            }
         }
-        return takeLast(size - untilIndex)
+        return EMPTY
     }
 
     /**
-     * Returns an immutable array containing all the elements expect the last n elements.
+     * Returns an immutable array containing all the elements except the last n elements.
      *
      * @throws IllegalArgumentException if [n] is negative.
      */
@@ -364,6 +367,19 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
         require(n >= 0) { "Requested element count $n is less than zero." }
 
         return take((size - n).coerceAtLeast(0))
+    }
+
+    /**
+     * Returns an immutable array containing all the elements except the last elements that satisfy
+     * the [predicate].
+     */
+    public inline fun dropLastWhile(predicate: (element: Boolean) -> Boolean): ImmutableBooleanArray {
+        for (index in lastIndex downTo 0) {
+            if (!predicate(values[index])) {
+                return take(index + 1)
+            }
+        }
+        return EMPTY
     }
 
     /**
