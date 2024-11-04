@@ -146,13 +146,13 @@ names.last() // & lastOrNull()
 ### By Condition
 
 ```kotlin
-val numbers = immutableArrayOf(1, 2, 3, 4, 5)
+val numbers = immutableArrayOf(4, 5, 6)
 
-names.first { it % 2 == 0 } // 2
-names.last { it % 2 == 0 } // 4
+names.first { it % 2 == 0 } // 4
+names.last { it % 2 == 0 } // 6
 // similarly with firstOrNull & lastOrNull
 
-names.single { it % 3 == 0 } // 3
+names.single { it % 3 == 0 } // 6
 // similarly with singleOrNull
 ```
 
@@ -180,6 +180,29 @@ names.asSequence()
     .filter { it.isInteresting() }
     .map { /* ... */ }
     .forEach { /* ... */ }
+```
+
+</details>
+
+<details>
+<summary>Transformations</summary>
+
+```kotlin
+val names = immutableArrayOf("Dan", "Bobby", "Jill")
+
+names.map { it.length } // [3, 5, 4]
+
+names.filter { it.length <= 4 } // ["Dan", "Jill"]
+
+names.take(2) // ["Dan", "Bobby"]
+
+names.sorted() // ["Bobby", "Dan", "Jill"]
+
+names.partition { it.length % 2 == 0 } // Pair(["Jill"], ["Dan", "Bobby"])
+
+names + "Jane" // ["Dan", "Bobby", "Jill", "Jane"]
+
+// etc.
 ```
 
 </details>
