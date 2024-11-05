@@ -185,6 +185,27 @@ names.asSequence()
 </details>
 
 <details>
+<summary>Conditions</summary>
+
+```kotlin
+val names = immutableArrayOf("Dan", "Bobby", "Jill")
+
+"Jill" in names // true
+
+names.isEmpty() // false
+
+names.any { it.startsWith("B") } // true
+
+names.none { it.length > 10 } // true
+
+names.contains("Joe") // false
+
+// etc.
+```
+
+</details>
+
+<details>
 <summary>Transformations</summary>
 
 ```kotlin
