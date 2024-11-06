@@ -248,24 +248,20 @@ collector periodically moves surviving objects around, so we can end up with the
 <details>
 <summary>Memory Impacts</summary>
 
-1. Notice that the list contains 7 values but the backing array has a size of 10 with 3 null elements.  `ArrayList`
-   starts with a default capacity of 10. As elements pass the filter criteria and get added to the array, if the backing
-   array becomes full, a new array that's 1.5 times larger is created and the elements are copied over. On average,
-   array lists end up with about 17% of unused capacity when the exact size isn't known ahead of time.
+1. Notice that the list contains 7 values but the backing array has a capacity of 10. When an `ArrayList` runs out of
+   capacity, the backing array is replaced with a new array that's 1.5-times larger and the elements get copied over. On
+   average, array lists end up with about 17% of unused capacity when the exact capacity isn't specified ahead of time.
 
-2. Although a 32-bit integer needs just 4 bytes to represent the value, in a typical 64-bit JVM environment,
-   an `Integer` wrapper object requires 16 bytes for the object header, 4 bytes for the actual integer value, plus
-   another 4 bytes of padding totalling 24 bytes. If we enable pointer compression, we can reduce this down to 16 bytes
-   per wrapper.
+2. A primitive 32-bit integer uses just 4 bytes. However, an `Integer` wrapper object requires 16 bytes for the object
+   header, 4 bytes for the value, plus another 4 bytes of padding totalling 24 bytes. Enabling JVM pointer compression
+   reduces this to 16 bytes per wrapper.
 
-3. In addition to the size of the `Integer` wrapper objects, the backing array stores pointers to the memory address of
-   each of these wrappers. So ignoring the memory overhead of the list object and ignoring the unused over-provisioned
-   spots, we need 32 bytes to store each 4-byte integer value!  With pointer compression, we can reduce this down to 20
-   bytes for each 4-byte integer but that's still a 5X memory overhead!
+3. Additionally, lists need to store pointers to each of these wrappers. So ignoring the memory overhead of the list
+   class and ignoring the unused over-provisioned spots, lists use 32 bytes to store each 4-byte integer value!
+   Enabling JVM pointer compression reduces this to 20 bytes for each 4-byte integer but that's still a 5X higher!
 
-The following table shows the per-element memory consumption on a 64-bit JVM accounting for the size of the reference
-that points to the wrapper object, wrapper object header, value, and padding in the wrapper object to account for memory
-alignment:
+The following shows the per-element memory usage on a 64-bit JVM accounting for the size of the pointer to the wrapper
+object, wrapper object header, value, and padding in the wrapper object to account for memory alignment:
 
 | Type    | Immutable Array<br/>(bytes per element) | ArrayList<br/>(bytes per element) | ArrayList on JVM with compressed oops<br/>(bytes per element) |
 |---------|-----------------------------------------|-----------------------------------|---------------------------------------------------------------|
@@ -284,32 +280,11 @@ alignment:
 <details>
 <summary>Performance Impacts</summary>
 
-When performing a trivial operation like `readOnlyList.get(index) + 1`, the following steps are performed behind the
-scenes (note that this is a simplified explanation of the main steps):
-
-1. Fetch the memory at the address specified by the `readOnlyList` variable to load the ArrayList object.
-2. Ensure that `index` is smaller than the list size (enforced by the ArrayList class).
-3. Fetch the memory at the address specified by the `elementData` variable from the `ArrayList` class to load the
-   backing array object.
-4. Ensure that `index` is smaller than the array size. This second check is enforced by the JVM for array accesses.
-5. Compute the array address of that element into the array (i.e. `offset + elementSize * index`)
-6. Fetch the memory at that computed location into the array, interpreting it as a pointer, and return that pointer
-   back up the chain to the caller of `readOnlyList.get(index)`.
-7. Fetch the memory specified by that pointer to get the `Integer` wrapper object.
-8. Cast the object to an `Integer` by validating the object header (since generics are erased at compile time).
-9. Unbox the `Integer` object into a primitive `int` and finally add 1.
-
-Notice how many steps and memory hops are performed to fetch a single value! Iterating through read-only lists in tight
-loops and performing operations on primitive values performs very poorly on modern CPU architectures. That's because
-these values are scattered throughout memory resulting in very poor cache locality.
-
 Fetching data from main memory can take several hundred cycles on modern CPU architectures. The CPU tries to minimize
-this latency by fetching in bulk and predicting addresses that will be requested to pre-fetches data before it's
-actually requested. Iterating through a primitive array is predictable as they are stored in a contiguous block of
-memory. With primitive arrays, the CPU will fetch the initial element along with neighboring elements, so subsequent
-elements are already loaded in the much quicker CPU caches by the time they're requested. However, the CPU pre-fetcher
-has a tough time predicting the address of scattered memory requiring several hundred extra cycles to access each new
-element if that hasn't already been fetched.
+this latency by fetching in bulk and also by predicting and pre-fetching data before it's requested. Primitive arrays
+store the values in a contiguous block of memory, so the CPU will prefetch neighboring elements making subsequent
+accesses essentially free. However, the CPU pre-fetcher has a tough time predicting the address of scattered memory when
+dealing with lists of wrapper objects which can result in much higher memory latency to access each value.
 
 To get an idea of the potential performance impact of wrapper objects, Java Language Architect, Brian Goetz, ran some
 benchmarks replacing reference carriers with values as part of project Valhalla exploration. Brian found performance
