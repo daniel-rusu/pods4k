@@ -35,6 +35,36 @@ integrity of true immutability, Immutable Arrays are a great addition to any And
 
 See [dependency instructions](../README.md#dependency) for adding this library to your gradle or maven build.
 
+Usages look the same as regular lists after construction:
+
+```kotlin
+val people = immutableArrayOf(dan, jill, bobby) // ImmutableArray<Person>
+
+people[0] // dan
+
+// Normal iteration with loops, forEach, asSequence, etc.
+for (person in people) {
+    sendMarketingEmail(person)
+}
+
+// All the typical transformations and conditions
+val adults = people.filter { it.age >= 18 } // ImmutableArray<Person>
+val adultAges = adults.map { it.age } // ImmutableIntArray
+
+val containsRetirees = adults.any { it.isRetired() }
+val adultsSortedByName = people.sortedBy { it.name } // ImmutableArray<Person>
+
+// Working toString()
+println(adults)
+
+// Working equals & hashCode
+if (adults == immutableArrayOf(dan, jill)) {
+    //...
+}
+
+// etc.
+```
+
 <details>
 <summary>Creating Immutable Arrays</summary>
 
