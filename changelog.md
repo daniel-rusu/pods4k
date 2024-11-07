@@ -1,9 +1,11 @@
 Change Log
 ==========
 
-## Unreleased
+## 0.5.0
 
-_Date TBD_
+_2024-11-06_
+
+### Immutable Arrays
 
 **New Features:**
 
@@ -28,10 +30,10 @@ _Date TBD_
 
 * Update `equals` to first check the referential equality of the backing array and immediately return without checking
   the contents when they are the same backing array.
-* Make `toList` return empty singleton when the size is 0, singleton-list when 1, and share backing array when working
-  with generic types.
-* Pre-allocate a perfectly-sized buffer for `partition` by populating the buffer array from both ends.
-* Pre-allocate a perfectly-sized backing array for `flatMap` & `flatMapIndexed` when operating on nested immutable
+* Make `toList` return the empty singleton when the size is 0, singleton-list when 1, and share the backing array when
+  working with generic types.
+* Pre-allocate a perfectly sized buffer for `partition` by populating the buffer array from both ends.
+* Pre-allocate a perfectly sized backing array for `flatMap` & `flatMapIndexed` when operating on nested immutable
   arrays.
 
 ## 0.4.0

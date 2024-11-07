@@ -15,7 +15,7 @@ and share it with others.
 
 ```kotlin
 dependencies {
-    implementation("com.danrusu.pods4k:pods4k:0.4.0")
+    implementation("com.danrusu.pods4k:pods4k:0.5.0")
 }
 ```
 
@@ -26,7 +26,7 @@ dependencies {
 <dependency>
     <groupId>com.danrusu.pods4k</groupId>
     <artifactId>pods4k</artifactId>
-    <version>0.4.0</version>
+    <version>0.5.0</version>
 </dependency>
 ```
 
