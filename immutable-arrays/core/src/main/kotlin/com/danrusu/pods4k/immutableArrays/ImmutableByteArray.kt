@@ -9,7 +9,10 @@ import kotlin.Byte
 import kotlin.ByteArray
 import kotlin.CharSequence
 import kotlin.Comparable
+import kotlin.Double
 import kotlin.Int
+import kotlin.Long
+import kotlin.OverloadResolutionByLambdaReturnType
 import kotlin.Pair
 import kotlin.PublishedApi
 import kotlin.String
@@ -280,6 +283,24 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     public inline fun indexOfLast(predicate: (element: Byte) -> Boolean): Int {
         return values.indexOfLast(predicate)
     }
+
+    /**
+     * See [ByteArray.sumOf]
+     */
+    @OverloadResolutionByLambdaReturnType
+    public inline fun sumOf(selector: (element: Byte) -> Int): Int = values.sumOf(selector)
+
+    /**
+     * See [ByteArray.sumOf]
+     */
+    @OverloadResolutionByLambdaReturnType
+    public inline fun sumOf(selector: (element: Byte) -> Long): Long = values.sumOf(selector)
+
+    /**
+     * See [ByteArray.sumOf]
+     */
+    @OverloadResolutionByLambdaReturnType
+    public inline fun sumOf(selector: (element: Byte) -> Double): Double = values.sumOf(selector)
 
     /**
      * Returns an immutable array containing the first [n] elements.

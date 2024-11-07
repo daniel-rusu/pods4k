@@ -1,6 +1,16 @@
 Change Log
 ==========
 
+## Unreleased
+
+_Date TBD_
+
+### Immutable Arrays
+
+**New Features:**
+
+* Add `sumOf` methods
+
 ## 0.5.0
 
 _2024-11-06_

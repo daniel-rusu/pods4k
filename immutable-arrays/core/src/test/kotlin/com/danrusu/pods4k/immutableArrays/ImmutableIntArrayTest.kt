@@ -541,6 +541,23 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `sumOf validation`() {
+        with(immutableArrayOf(1, 2, 3)) {
+            expectThat(sumOf { it * 2 })
+                .isA<Int>()
+                .isEqualTo(12)
+
+            expectThat(sumOf { it.toLong() * 2 })
+                .isA<Long>()
+                .isEqualTo(12L)
+
+            expectThat(sumOf { it * 2.0 })
+                .isA<Double>()
+                .isEqualTo(12.0)
+        }
+    }
+
+    @Test
     fun `sortedBy validation`() {
         with(immutableArrayOf(3, 17, 11)) {
             expectThat(sortedBy { it.toString() })

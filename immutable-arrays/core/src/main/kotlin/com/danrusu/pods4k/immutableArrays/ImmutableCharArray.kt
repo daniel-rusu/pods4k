@@ -9,7 +9,10 @@ import kotlin.Char
 import kotlin.CharArray
 import kotlin.CharSequence
 import kotlin.Comparable
+import kotlin.Double
 import kotlin.Int
+import kotlin.Long
+import kotlin.OverloadResolutionByLambdaReturnType
 import kotlin.Pair
 import kotlin.PublishedApi
 import kotlin.String
@@ -280,6 +283,24 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     public inline fun indexOfLast(predicate: (element: Char) -> Boolean): Int {
         return values.indexOfLast(predicate)
     }
+
+    /**
+     * See [CharArray.sumOf]
+     */
+    @OverloadResolutionByLambdaReturnType
+    public inline fun sumOf(selector: (element: Char) -> Int): Int = values.sumOf(selector)
+
+    /**
+     * See [CharArray.sumOf]
+     */
+    @OverloadResolutionByLambdaReturnType
+    public inline fun sumOf(selector: (element: Char) -> Long): Long = values.sumOf(selector)
+
+    /**
+     * See [CharArray.sumOf]
+     */
+    @OverloadResolutionByLambdaReturnType
+    public inline fun sumOf(selector: (element: Char) -> Double): Double = values.sumOf(selector)
 
     /**
      * Returns an immutable array containing the first [n] elements.

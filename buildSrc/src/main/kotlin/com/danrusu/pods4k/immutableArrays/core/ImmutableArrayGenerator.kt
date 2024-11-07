@@ -15,6 +15,7 @@ import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.property
 import com.danrusu.pods4k.utils.statement
 import com.danrusu.pods4k.utils.suppress
+import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.KModifier
@@ -285,6 +286,24 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 returns = Int::class.asTypeName(),
                 forceFunctionBody = true,
             )
+            for (resultType in listOf(Int::class, Long::class, Double::class)) {
+                "sumOf"(
+                    typeSpecBuilder = this,
+                    baseType = baseType,
+                    annotations = listOf(
+                        AnnotationSpec.builder(OverloadResolutionByLambdaReturnType::class).build(),
+                    ),
+                    parameters = {
+                        "selector"(
+                            type = lambda(
+                                parameters = { "element"(type = baseType.type) },
+                                returnType = resultType.asTypeName(),
+                            ),
+                        )
+                    },
+                    returns = resultType.asTypeName(),
+                )
+            }
             addTake(baseType)
             addTakeWhile(baseType)
             addTakeLast(baseType)
@@ -356,12 +375,19 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
     }
 }
 
-/** Delegates to the same function on the backing array */
+/**
+ * Delegates to the same function on the backing array.
+ *
+ * @param makeInline Controls whether it should be an inline function.  IMPORTANT: Default to true so that all delegated
+ * functions perform exactly the same as if working with an array directly instead of waiting for the JIT warmup to
+ * inline tiny functions.
+ */
 private operator fun String.invoke(
     typeSpecBuilder: TypeSpec.Builder,
     baseType: BaseType,
     kdoc: String = "See [${if (baseType == GENERIC) "Array" else baseType.backingArrayConstructor}.$this]",
     makeInline: Boolean = true,
+    annotations: List<AnnotationSpec> = emptyList(),
     modifiers: List<KModifier> = emptyList(),
     parameters: ParameterDSL.() -> Unit = {},
     returns: TypeName = Unit::class.asTypeName(),
@@ -370,13 +396,13 @@ private operator fun String.invoke(
     val params = ParameterDSL().apply(parameters).build().joinToString { it.name }
     typeSpecBuilder.function(
         kdoc = kdoc,
-        // Inline all delegated functions so that we get the same performance as if working with a regular array
         modifiers = if (makeInline) modifiers + KModifier.INLINE else modifiers,
         name = this,
         parameters = parameters,
         returns = returns,
         forceFunctionBody = forceFunctionBody,
     ) {
+        addAnnotations(annotations)
         if (returns == Unit::class.asTypeName()) {
             statement("values.${this@invoke}($params)")
         } else {

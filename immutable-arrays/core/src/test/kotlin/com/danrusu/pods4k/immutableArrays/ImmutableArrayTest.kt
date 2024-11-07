@@ -528,6 +528,23 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `sumOf validation`() {
+        with(immutableArrayOf("1", "2", "3")) {
+            expectThat(sumOf { it.toInt() })
+                .isA<Int>()
+                .isEqualTo(6)
+
+            expectThat(sumOf { it.toLong() })
+                .isA<Long>()
+                .isEqualTo(6L)
+
+            expectThat(sumOf { it.toDouble() })
+                .isA<Double>()
+                .isEqualTo(6.0)
+        }
+    }
+
+    @Test
     fun `take validation`() {
         with(emptyImmutableArray<String>()) {
             expectThat(take(0))

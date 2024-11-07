@@ -7,8 +7,11 @@ import kotlin.Array
 import kotlin.Boolean
 import kotlin.CharSequence
 import kotlin.Comparable
+import kotlin.Double
 import kotlin.Int
 import kotlin.IntArray
+import kotlin.Long
+import kotlin.OverloadResolutionByLambdaReturnType
 import kotlin.Pair
 import kotlin.PublishedApi
 import kotlin.String
@@ -279,6 +282,24 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     public inline fun indexOfLast(predicate: (element: Int) -> Boolean): Int {
         return values.indexOfLast(predicate)
     }
+
+    /**
+     * See [IntArray.sumOf]
+     */
+    @OverloadResolutionByLambdaReturnType
+    public inline fun sumOf(selector: (element: Int) -> Int): Int = values.sumOf(selector)
+
+    /**
+     * See [IntArray.sumOf]
+     */
+    @OverloadResolutionByLambdaReturnType
+    public inline fun sumOf(selector: (element: Int) -> Long): Long = values.sumOf(selector)
+
+    /**
+     * See [IntArray.sumOf]
+     */
+    @OverloadResolutionByLambdaReturnType
+    public inline fun sumOf(selector: (element: Int) -> Double): Double = values.sumOf(selector)
 
     /**
      * Returns an immutable array containing the first [n] elements.
