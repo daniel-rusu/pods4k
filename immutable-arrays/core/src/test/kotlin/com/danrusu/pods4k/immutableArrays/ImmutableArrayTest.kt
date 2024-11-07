@@ -12,8 +12,6 @@ import strikt.assertions.isTrue
 import strikt.assertions.message
 import kotlin.collections.set
 
-private data class Person(val id: Int)
-
 /**
  * IMPORTANT:
  * Read TESTING-STRATEGY.md before modifying this file.
@@ -48,7 +46,7 @@ class ImmutableArrayTest {
 
     @Test
     fun `size validation`() {
-        with(ImmutableArray(0) { "element $it" }) {
+        with(emptyImmutableArray<String>()) {
             expectThat(this).hasSize(0)
         }
         with(ImmutableArray(10) { "element $it" }) {
@@ -58,10 +56,10 @@ class ImmutableArrayTest {
 
     @Test
     fun `lastIndex validation`() {
-        with(ImmutableArray(0) { "element $it" }) {
+        with(emptyImmutableArray<String>()) {
             expectThat(this.lastIndex).isEqualTo(-1)
         }
-        with(ImmutableArray(1) { "element $it" }) {
+        with(immutableArrayOf("one")) {
             expectThat(this.lastIndex).isEqualTo(0)
         }
         with(ImmutableArray(10) { "element $it" }) {
@@ -71,21 +69,18 @@ class ImmutableArrayTest {
 
     @Test
     fun `indices validation`() {
-        with(ImmutableArray(3) { "element $it" }) {
+        with(immutableArrayOf("one", "two", "three")) {
             expectThat(this.indices).isEqualTo(IntRange(start = 0, endInclusive = 2))
         }
     }
 
     @Test
     fun `toString validation`() {
-        with(ImmutableArray(0) { "element $it" }) {
+        with(emptyImmutableArray<String>()) {
             expectThat(this.toString()).isEqualTo("[]")
         }
-        with(ImmutableArray(1) { "element $it" }) {
-            expectThat(this.toString()).isEqualTo("[element 0]")
-        }
-        with(ImmutableArray(4) { Person(id = it) }) {
-            expectThat(this.toString()).isEqualTo("[Person(id=0), Person(id=1), Person(id=2), Person(id=3)]")
+        with(immutableArrayOf("one", "two", "three")) {
+            expectThat(this.toString()).isEqualTo("[one, two, three]")
         }
     }
 
@@ -185,20 +180,20 @@ class ImmutableArrayTest {
 
     @Test
     fun `isEmpty and isNotEmpty validation`() {
-        with(ImmutableArray(0) { "element $it" }) {
+        with(emptyImmutableArray<String>()) {
             expectThat(this).isEmpty()
         }
-        with(ImmutableArray(3) { "element $it" }) {
+        with(immutableArrayOf("one", "two", "three")) {
             expectThat(this).isNotEmpty()
         }
     }
 
     @Test
     fun `get validation`() {
-        with(ImmutableArray(3) { "element $it" }) {
-            expectThat(get(0)).isEqualTo("element 0")
-            expectThat(get(1)).isEqualTo("element 1")
-            expectThat(get(2)).isEqualTo("element 2")
+        with(immutableArrayOf("one", "two", "three")) {
+            expectThat(get(0)).isEqualTo("one")
+            expectThat(get(1)).isEqualTo("two")
+            expectThat(get(2)).isEqualTo("three")
 
             expectThrows<ArrayIndexOutOfBoundsException> {
                 get(3)
@@ -208,15 +203,15 @@ class ImmutableArrayTest {
 
     @Test
     fun `getOrNull validation`() {
-        with(ImmutableArray(3) { "element $it" }) {
-            expectThat(this.getOrNull(2)).isEqualTo("element 2")
+        with(immutableArrayOf("one", "two", "three")) {
+            expectThat(this.getOrNull(2)).isEqualTo("three")
             expectThat(this.getOrNull(3)).isNull()
         }
     }
 
     @Test
     fun `index operator validation`() {
-        with(ImmutableArray(3) { "element $it" }) {
+        with(immutableArrayOf("one", "two", "three")) {
             expectThat(this[0]).isEqualTo(get(0))
             expectThat(this[1]).isEqualTo(get(1))
             expectThat(this[2]).isEqualTo(get(2))
@@ -229,236 +224,236 @@ class ImmutableArrayTest {
 
     @Test
     fun `componentN function validation`() {
-        val values = ImmutableArray(5) { "element $it" }
+        val values = immutableArrayOf("one", "two", "three", "four", "five")
         with(values) {
             val (first) = this
-            expectThat(first).isEqualTo("element 0")
+            expectThat(first).isEqualTo("one")
         }
         with(values) {
             val (first, second) = this
-            expectThat(first).isEqualTo("element 0")
-            expectThat(second).isEqualTo("element 1")
+            expectThat(first).isEqualTo("one")
+            expectThat(second).isEqualTo("two")
         }
         with(values) {
             val (first, second, third) = this
-            expectThat(first).isEqualTo("element 0")
-            expectThat(second).isEqualTo("element 1")
-            expectThat(third).isEqualTo("element 2")
+            expectThat(first).isEqualTo("one")
+            expectThat(second).isEqualTo("two")
+            expectThat(third).isEqualTo("three")
         }
         with(values) {
             val (first, second, third, fourth) = this
-            expectThat(first).isEqualTo("element 0")
-            expectThat(second).isEqualTo("element 1")
-            expectThat(third).isEqualTo("element 2")
-            expectThat(fourth).isEqualTo("element 3")
+            expectThat(first).isEqualTo("one")
+            expectThat(second).isEqualTo("two")
+            expectThat(third).isEqualTo("three")
+            expectThat(fourth).isEqualTo("four")
         }
         with(values) {
             val (first, second, third, fourth, fifth) = this
-            expectThat(first).isEqualTo("element 0")
-            expectThat(second).isEqualTo("element 1")
-            expectThat(third).isEqualTo("element 2")
-            expectThat(fourth).isEqualTo("element 3")
-            expectThat(fifth).isEqualTo("element 4")
+            expectThat(first).isEqualTo("one")
+            expectThat(second).isEqualTo("two")
+            expectThat(third).isEqualTo("three")
+            expectThat(fourth).isEqualTo("four")
+            expectThat(fifth).isEqualTo("five")
         }
     }
 
     @Test
     fun `single validation`() {
-        with(ImmutableArray(3) { "element $it" }) {
+        with(immutableArrayOf("one", "two", "three")) {
             expectThrows<IllegalArgumentException> {
                 this.single()
             }.message.isEqualTo("Array has more than one element.")
         }
-        with(ImmutableArray(1) { "element $it" }) {
-            expectThat(this.single()).isEqualTo("element 0")
+        with(immutableArrayOf("one")) {
+            expectThat(this.single()).isEqualTo("one")
         }
     }
 
     @Test
     fun `single with predicate validation`() {
-        with(ImmutableArray(3) { "element $it" }) {
+        with(immutableArrayOf("one", "two", "three")) {
             expectThrows<IllegalArgumentException> {
-                this.single { it.contains("element") }
+                this.single { it.contains("o") }
             }.message.isEqualTo("Array contains more than one matching element.")
         }
-        with(ImmutableArray(3) { "element $it" }) {
-            expectThat(this.single { it.contains("2") }).isEqualTo("element 2")
+        with(immutableArrayOf("one", "two", "three")) {
+            expectThat(this.single { it.contains("wo") }).isEqualTo("two")
         }
     }
 
     @Test
     fun `singleOrNull validation`() {
-        with(ImmutableArray(3) { "element $it" }) {
+        with(immutableArrayOf("one", "two", "three")) {
             expectThat(this.singleOrNull()).isNull()
         }
-        with(ImmutableArray(1) { "element $it" }) {
-            expectThat(this.singleOrNull()).isEqualTo("element 0")
+        with(immutableArrayOf("one")) {
+            expectThat(this.singleOrNull()).isEqualTo("one")
         }
     }
 
     @Test
     fun `singleOrNull with predicate validation`() {
-        with(ImmutableArray(3) { "element $it" }) {
+        with(immutableArrayOf("one", "two", "three")) {
             expectThat(
-                this.singleOrNull { it.contains("element") },
+                this.singleOrNull { it.contains("o") },
             ).isNull()
         }
-        with(ImmutableArray(3) { "element $it" }) {
-            expectThat(this.singleOrNull { it.contains("2") }).isEqualTo("element 2")
+        with(immutableArrayOf("one", "two", "three")) {
+            expectThat(this.singleOrNull { it.contains("wo") }).isEqualTo("two")
         }
     }
 
     @Test
     fun `first validation`() {
-        with(ImmutableArray(3) { "element $it" }) {
-            expectThat(this.first()).isEqualTo("element 0")
+        with(immutableArrayOf("one", "two", "three")) {
+            expectThat(this.first()).isEqualTo("one")
         }
     }
 
     @Test
     fun `first with predicate validation`() {
-        with(ImmutableArray(7) { "${2 * it}" }) {
+        with(immutableArrayOf("one", "two", "three")) {
             expectThat(
-                this.first { it.contains("2") },
-            ).isEqualTo("2")
+                this.first { it.contains("t") },
+            ).isEqualTo("two")
         }
     }
 
     @Test
     fun `firstOrNull validation`() {
-        with(ImmutableArray(0) { "element $it" }) {
+        with(emptyImmutableArray<String>()) {
             expectThat(this.firstOrNull()).isNull()
         }
-        with(ImmutableArray(3) { "element $it" }) {
-            expectThat(this.firstOrNull()).isEqualTo("element 0")
+        with(immutableArrayOf("one", "two", "three")) {
+            expectThat(this.firstOrNull()).isEqualTo("one")
         }
     }
 
     @Test
     fun `firstOrNull with predicate validation`() {
-        with(ImmutableArray(7) { "${2 * it}" }) {
+        with(immutableArrayOf("one", "two", "three")) {
             expectThat(
-                this.firstOrNull { it.contains("2") },
-            ).isEqualTo("2")
+                this.firstOrNull { it.contains("t") },
+            ).isEqualTo("two")
 
             expectThat(
-                this.firstOrNull { it.contains("3") },
+                this.firstOrNull { it.contains("z") },
             ).isNull()
         }
     }
 
     @Test
     fun `last validation`() {
-        with(ImmutableArray(3) { "element $it" }) {
-            expectThat(this.last()).isEqualTo("element 2")
+        with(immutableArrayOf("one", "two", "three")) {
+            expectThat(this.last()).isEqualTo("three")
         }
     }
 
     @Test
     fun `last with predicate validation`() {
-        with(ImmutableArray(7) { "${2 * it}" }) {
+        with(immutableArrayOf("one", "two", "three")) {
             expectThat(
-                this.last { it.contains("2") },
-            ).isEqualTo("12")
+                this.last { it.contains("t") },
+            ).isEqualTo("three")
         }
     }
 
     @Test
     fun `lastOrNull with predicate validation`() {
-        with(ImmutableArray(7) { "${2 * it}" }) {
+        with(immutableArrayOf("one", "two", "three")) {
             expectThat(
-                this.lastOrNull { it.contains("2") },
-            ).isEqualTo("12")
+                this.lastOrNull { it.contains("t") },
+            ).isEqualTo("three")
 
             expectThat(
-                this.lastOrNull { it.contains("3") },
+                this.lastOrNull { it.contains("z") },
             ).isNull()
         }
     }
 
     @Test
     fun `lastOrNull validation`() {
-        with(ImmutableArray(0) { "element $it" }) {
+        with(emptyImmutableArray<String>()) {
             expectThat(this.lastOrNull()).isNull()
         }
-        with(ImmutableArray(3) { "element $it" }) {
-            expectThat(this.lastOrNull()).isEqualTo("element 2")
+        with(immutableArrayOf("one", "two", "three")) {
+            expectThat(this.lastOrNull()).isEqualTo("three")
         }
     }
 
     @Test
     fun `iterator validation`() {
-        with(ImmutableArray(2) { Person(id = it) }) {
+        with(immutableArrayOf("one", "two")) {
             val iterator = this.iterator()
             expectThat(iterator.hasNext()).isTrue()
-            expectThat(iterator.next()).isEqualTo(Person(id = 0))
+            expectThat(iterator.next()).isEqualTo("one")
 
             expectThat(iterator.hasNext()).isTrue()
-            expectThat(iterator.next()).isEqualTo(Person(id = 1))
+            expectThat(iterator.next()).isEqualTo("two")
 
             expectThat(iterator.hasNext()).isFalse()
         }
 
         // can iterate with a regular for-loop
-        with(ImmutableArray(3) { "element $it" }) {
+        with(immutableArrayOf("one", "two", "three")) {
             val elements = mutableListOf<String>()
             for (element in this) {
                 elements += element
             }
-            expectThat(elements).isEqualTo(mutableListOf("element 0", "element 1", "element 2"))
+            expectThat(elements).isEqualTo(mutableListOf("one", "two", "three"))
         }
     }
 
     @Test
     fun `asIterable validation`() {
-        with(ImmutableArray(3) { "element $it" }) {
+        with(immutableArrayOf("one", "two", "three")) {
             val iterable = this.asIterable()
             expectThat(iterable).isA<Iterable<String>>()
 
-            expectThat(iterable.toList()).isEqualTo(listOf("element 0", "element 1", "element 2"))
+            expectThat(iterable.toList()).isEqualTo(listOf("one", "two", "three"))
         }
     }
 
     @Test
     fun `withIndex validation`() {
-        with(ImmutableArray(2) { "element $it" }) {
+        with(immutableArrayOf("one", "two")) {
             expectThat(this.withIndex().toList()).isEqualTo(
-                listOf(IndexedValue(0, "element 0"), IndexedValue(1, "element 1")),
+                listOf(IndexedValue(0, "one"), IndexedValue(1, "two")),
             )
         }
     }
 
     @Test
     fun `asSequence validation`() {
-        with(ImmutableArray(3) { "element $it" }) {
+        with(immutableArrayOf("one", "two", "three")) {
             val elementsFromSequence = this.asSequence().toList()
-            expectThat(elementsFromSequence).isEqualTo(listOf("element 0", "element 1", "element 2"))
+            expectThat(elementsFromSequence).isEqualTo(listOf("one", "two", "three"))
         }
     }
 
     @Test
     fun `forEach validation`() {
-        with(ImmutableArray(3) { "element $it" }) {
+        with(immutableArrayOf("one", "two", "three")) {
             val elements = mutableListOf<String>()
             this.forEach { element ->
                 elements += element
             }
-            expectThat(elements).isEqualTo(mutableListOf("element 0", "element 1", "element 2"))
+            expectThat(elements).isEqualTo(mutableListOf("one", "two", "three"))
         }
     }
 
     @Test
     fun `forEachIndexed validation`() {
-        with(ImmutableArray(3) { "element $it" }) {
+        with(immutableArrayOf("one", "two", "three")) {
             val elements = mutableMapOf<Int, String>()
             this.forEachIndexed { index, element ->
                 elements[index] = element
             }
             expectThat(elements).isEqualTo(
                 mutableMapOf(
-                    0 to "element 0",
-                    1 to "element 1",
-                    2 to "element 2",
+                    0 to "one",
+                    1 to "two",
+                    2 to "three",
                 ),
             )
         }

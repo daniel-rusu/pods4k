@@ -37,7 +37,7 @@ class ImmutableIntArrayTest {
 
     @Test
     fun `size validation`() {
-        with(ImmutableIntArray(0) { it }) {
+        with(emptyImmutableIntArray()) {
             expectThat(this).hasSize(0)
         }
         with(ImmutableIntArray(10) { it }) {
@@ -47,10 +47,10 @@ class ImmutableIntArrayTest {
 
     @Test
     fun `lastIndex validation`() {
-        with(ImmutableIntArray(0) { it }) {
+        with(emptyImmutableIntArray()) {
             expectThat(this.lastIndex).isEqualTo(-1)
         }
-        with(ImmutableIntArray(1) { it }) {
+        with(immutableArrayOf(1)) {
             expectThat(this.lastIndex).isEqualTo(0)
         }
         with(ImmutableIntArray(10) { it }) {
@@ -60,21 +60,21 @@ class ImmutableIntArrayTest {
 
     @Test
     fun `indices validation`() {
-        with(ImmutableIntArray(3) { it }) {
+        with(immutableArrayOf(1, 2, 3)) {
             expectThat(this.indices).isEqualTo(IntRange(start = 0, endInclusive = 2))
         }
     }
 
     @Test
     fun `toString validation`() {
-        with(ImmutableIntArray(0) { it }) {
+        with(emptyImmutableIntArray()) {
             expectThat(this.toString()).isEqualTo("[]")
         }
-        with(ImmutableIntArray(1) { it }) {
-            expectThat(this.toString()).isEqualTo("[0]")
+        with(immutableArrayOf(1)) {
+            expectThat(this.toString()).isEqualTo("[1]")
         }
-        with(ImmutableIntArray(4) { 2 * it }) {
-            expectThat(this.toString()).isEqualTo("[0, 2, 4, 6]")
+        with(immutableArrayOf(1, 2, 3)) {
+            expectThat(this.toString()).isEqualTo("[1, 2, 3]")
         }
     }
 
@@ -176,22 +176,22 @@ class ImmutableIntArrayTest {
 
     @Test
     fun `isEmpty and isNotEmpty validation`() {
-        with(ImmutableIntArray(0) { it }) {
+        with(emptyImmutableIntArray()) {
             expectThat(this).isEmpty()
         }
-        with(ImmutableIntArray(3) { it }) {
+        with(immutableArrayOf(1, 2, 3)) {
             expectThat(this).isNotEmpty()
         }
     }
 
     @Test
     fun `get validation`() {
-        with(ImmutableIntArray(3) { it }) {
+        with(immutableArrayOf(1, 2, 3)) {
             expectThat(get(0)::class.java).isEqualTo(primitiveIntClass)
 
-            expectThat(get(0)).isEqualTo(0)
-            expectThat(get(1)).isEqualTo(1)
-            expectThat(get(2)).isEqualTo(2)
+            expectThat(get(0)).isEqualTo(1)
+            expectThat(get(1)).isEqualTo(2)
+            expectThat(get(2)).isEqualTo(3)
 
             expectThrows<ArrayIndexOutOfBoundsException> {
                 get(3)
@@ -201,15 +201,15 @@ class ImmutableIntArrayTest {
 
     @Test
     fun `getOrNull validation`() {
-        with(ImmutableIntArray(3) { it }) {
-            expectThat(this.getOrNull(2)).isEqualTo(2)
+        with(immutableArrayOf(1, 2, 3)) {
+            expectThat(this.getOrNull(2)).isEqualTo(3)
             expectThat(this.getOrNull(3)).isNull()
         }
     }
 
     @Test
     fun `index operator validation`() {
-        with(ImmutableIntArray(3) { it }) {
+        with(immutableArrayOf(1, 2, 3)) {
             expectThat(this[0]).isEqualTo(get(0))
             expectThat(this[1]).isEqualTo(get(1))
             expectThat(this[2]).isEqualTo(get(2))
@@ -222,246 +222,245 @@ class ImmutableIntArrayTest {
 
     @Test
     fun `componentN function validation`() {
-        val values = ImmutableIntArray(5) { it }
+        val values = immutableArrayOf(1, 2, 3, 4, 5)
         with(values) {
             val (first) = this
             expectThat(first::class.java == primitiveIntClass)
-            expectThat(first).isEqualTo(0)
+            expectThat(first).isEqualTo(1)
         }
         with(values) {
             val (first, second) = this
-            expectThat(first).isEqualTo(0)
-            expectThat(second).isEqualTo(1)
+            expectThat(first).isEqualTo(1)
+            expectThat(second).isEqualTo(2)
         }
         with(values) {
             val (first, second, third) = this
-            expectThat(first).isEqualTo(0)
-            expectThat(second).isEqualTo(1)
-            expectThat(third).isEqualTo(2)
+            expectThat(first).isEqualTo(1)
+            expectThat(second).isEqualTo(2)
+            expectThat(third).isEqualTo(3)
         }
         with(values) {
             val (first, second, third, fourth) = this
-            expectThat(first).isEqualTo(0)
-            expectThat(second).isEqualTo(1)
-            expectThat(third).isEqualTo(2)
-            expectThat(fourth).isEqualTo(3)
+            expectThat(first).isEqualTo(1)
+            expectThat(second).isEqualTo(2)
+            expectThat(third).isEqualTo(3)
+            expectThat(fourth).isEqualTo(4)
         }
         with(values) {
             val (first, second, third, fourth, fifth) = this
-            expectThat(first).isEqualTo(0)
-            expectThat(second).isEqualTo(1)
-            expectThat(third).isEqualTo(2)
-            expectThat(fourth).isEqualTo(3)
-            expectThat(fifth).isEqualTo(4)
+            expectThat(first).isEqualTo(1)
+            expectThat(second).isEqualTo(2)
+            expectThat(third).isEqualTo(3)
+            expectThat(fourth).isEqualTo(4)
+            expectThat(fifth).isEqualTo(5)
         }
     }
 
     @Test
     fun `single validation`() {
-        with(ImmutableIntArray(3) { it }) {
+        with(immutableArrayOf(1, 2, 3)) {
             expectThrows<IllegalArgumentException> {
                 this.single()
             }.message.isEqualTo("Array has more than one element.")
         }
-        with(ImmutableIntArray(1) { it }) {
+        with(immutableArrayOf(1)) {
             val singleValue = this.single()
-            expectThat(singleValue).isEqualTo(0)
+            expectThat(singleValue).isEqualTo(1)
             expectThat(singleValue::class.java).isEqualTo(primitiveIntClass)
         }
     }
 
     @Test
     fun `single with predicate validation`() {
-        with(ImmutableIntArray(3) { it }) {
+        with(immutableArrayOf(1, 2, 3)) {
             expectThrows<IllegalArgumentException> {
                 this.single { it > 0 }
             }.message.isEqualTo("Array contains more than one matching element.")
         }
-        with(ImmutableIntArray(3) { it }) {
-            expectThat(this.single { it % 2 == 1 }).isEqualTo(1)
+        with(immutableArrayOf(2, 3, 4)) {
+            expectThat(this.single { it % 2 == 1 }).isEqualTo(3)
         }
     }
 
     @Test
     fun `singleOrNull validation`() {
-        with(ImmutableIntArray(3) { it }) {
+        with(immutableArrayOf(1, 2, 3)) {
             expectThat(this.singleOrNull()).isNull()
         }
-        with(ImmutableIntArray(1) { it }) {
-            expectThat(this.singleOrNull()).isEqualTo(0)
+        with(immutableArrayOf(1)) {
+            expectThat(this.singleOrNull()).isEqualTo(1)
         }
     }
 
     @Test
     fun `singleOrNull with predicate validation`() {
-        with(ImmutableIntArray(3) { it }) {
+        with(immutableArrayOf(1, 2, 3)) {
             expectThat(
                 this.singleOrNull { it > 0 },
             ).isNull()
         }
-        with(ImmutableIntArray(3) { it }) {
-            expectThat(this.singleOrNull { it % 2 == 1 }).isEqualTo(1)
+        with(immutableArrayOf(2, 3, 4)) {
+            expectThat(this.singleOrNull { it % 2 == 1 }).isEqualTo(3)
         }
     }
 
     @Test
     fun `first validation`() {
-        with(ImmutableIntArray(3) { it }) {
+        with(immutableArrayOf(1, 2, 3)) {
             val first = this.first()
-            expectThat(first).isEqualTo(0)
+            expectThat(first).isEqualTo(1)
             expectThat(first::class.java).isEqualTo(primitiveIntClass)
         }
     }
 
     @Test
     fun `first with predicate validation`() {
-        with(ImmutableIntArray(5) { 2 * it }) {
+        with(immutableArrayOf(1, 2, 3, 4)) {
             val first = this.first { element ->
                 expectThat(element::class.java).isEqualTo(primitiveIntClass)
 
-                element % 4 == 0
+                element % 2 == 0
             }
-            expectThat(first).isEqualTo(0)
+            expectThat(first).isEqualTo(2)
         }
     }
 
     @Test
     fun `firstOrNull validation`() {
-        with(ImmutableIntArray(0) { it }) {
+        with(emptyImmutableIntArray()) {
             expectThat(this.firstOrNull()).isNull()
         }
-        with(ImmutableArray(3) { it }) {
-            expectThat(this.firstOrNull()).isEqualTo(0)
+        with(immutableArrayOf(1, 2, 3)) {
+            expectThat(this.firstOrNull()).isEqualTo(1)
         }
     }
 
     @Test
     fun `firstOrNull with predicate validation`() {
-        with(ImmutableIntArray(5) { 2 * it }) {
+        with(immutableArrayOf(1, 2, 3, 4)) {
             val first = this.firstOrNull { element ->
                 expectThat(element::class.java).isEqualTo(primitiveIntClass)
 
-                element % 4 == 0
+                element % 2 == 0
             }
-            expectThat(first).isEqualTo(0)
+            expectThat(first).isEqualTo(2)
 
-            expectThat(this.firstOrNull { it > 0 && it % 7 == 0 }).isNull()
+            expectThat(this.firstOrNull { it % 7 == 0 }).isNull()
         }
     }
 
     @Test
     fun `last validation`() {
-        with(ImmutableIntArray(3) { it }) {
+        with(immutableArrayOf(1, 2, 3)) {
             val last = this.last()
-            expectThat(last).isEqualTo(2)
+            expectThat(last).isEqualTo(3)
             expectThat(last::class.java).isEqualTo(primitiveIntClass)
         }
     }
 
     @Test
     fun `last with predicate validation`() {
-        with(ImmutableIntArray(6) { 2 * it }) {
+        with(immutableArrayOf(1, 2, 3, 4)) {
             val last = this.last { element ->
                 expectThat(element::class.java).isEqualTo(primitiveIntClass)
 
-                element % 4 == 0
+                element % 2 == 0
             }
-            expectThat(last).isEqualTo(8)
+            expectThat(last).isEqualTo(4)
         }
     }
 
     @Test
     fun `lastOrNull validation`() {
-        with(ImmutableIntArray(0) { it }) {
+        with(emptyImmutableIntArray()) {
             expectThat(this.lastOrNull()).isNull()
         }
-        with(ImmutableArray(3) { "element $it" }) {
-            expectThat(this.lastOrNull()).isEqualTo("element 2")
+        with(immutableArrayOf(1, 2, 3)) {
+            expectThat(this.lastOrNull()).isEqualTo(3)
         }
     }
 
     @Test
     fun `lastOrNull with predicate validation`() {
-        with(ImmutableIntArray(6) { 2 * it }) {
+        with(immutableArrayOf(1, 2, 3, 4)) {
             val last = this.lastOrNull { element ->
                 expectThat(element::class.java).isEqualTo(primitiveIntClass)
 
-                element % 4 == 0
+                element % 2 == 0
             }
-            expectThat(last).isEqualTo(8)
+            expectThat(last).isEqualTo(4)
 
-            expectThat(
-                this.lastOrNull { it > 0 && it % 7 == 0 },
-            ).isNull()
+            expectThat(this.lastOrNull { it % 7 == 0 })
+                .isNull()
         }
     }
 
     @Test
     fun `iterator validation`() {
-        with(ImmutableIntArray(2) { it }) {
+        with(immutableArrayOf(1, 2)) {
             val iterator = this.iterator()
             expectThat(iterator.hasNext()).isTrue()
-            expectThat(iterator.next()).isEqualTo(0)
+            expectThat(iterator.next()).isEqualTo(1)
 
             expectThat(iterator.hasNext()).isTrue()
-            expectThat(iterator.next()).isEqualTo(1)
+            expectThat(iterator.next()).isEqualTo(2)
 
             expectThat(iterator.hasNext()).isFalse()
         }
 
         // can iterate with a regular for-loop
-        with(ImmutableIntArray(3) { it }) {
+        with(immutableArrayOf(1, 2, 3)) {
             val elements = mutableListOf<Int>()
             for (element in this) {
                 expectThat(element::class.java).isEqualTo(primitiveIntClass)
                 elements += element
             }
-            expectThat(elements).isEqualTo(mutableListOf(0, 1, 2))
+            expectThat(elements).isEqualTo(mutableListOf(1, 2, 3))
         }
     }
 
     @Test
     fun `asIterable validation`() {
-        with(ImmutableIntArray(3) { it }) {
+        with(immutableArrayOf(1, 2, 3)) {
             val iterable = this.asIterable()
             expectThat(iterable).isA<Iterable<Int>>()
 
-            expectThat(iterable.toList()).isEqualTo(listOf(0, 1, 2))
+            expectThat(iterable.toList()).isEqualTo(listOf(1, 2, 3))
         }
     }
 
     @Test
     fun `withIndex validation`() {
-        with(ImmutableIntArray(2) { 10 * it }) {
+        with(immutableArrayOf(1, 2)) {
             expectThat(this.withIndex().toList()).isEqualTo(
-                listOf(IndexedValue(index = 0, value = 0), IndexedValue(index = 1, value = 10)),
+                listOf(IndexedValue(index = 0, value = 1), IndexedValue(index = 1, value = 2)),
             )
         }
     }
 
     @Test
     fun `asSequence validation`() {
-        with(ImmutableIntArray(3) { it }) {
+        with(immutableArrayOf(1, 2, 3)) {
             val elementsFromSequence = this.asSequence().toList()
-            expectThat(elementsFromSequence).isEqualTo(listOf(0, 1, 2))
+            expectThat(elementsFromSequence).isEqualTo(listOf(1, 2, 3))
         }
     }
 
     @Test
     fun `forEach validation`() {
-        with(ImmutableIntArray(3) { it }) {
+        with(immutableArrayOf(1, 2, 3)) {
             val elements = mutableListOf<Int>()
             this.forEach { element ->
                 expectThat(element::class.java).isEqualTo(primitiveIntClass)
                 elements += element
             }
-            expectThat(elements).isEqualTo(mutableListOf(0, 1, 2))
+            expectThat(elements).isEqualTo(mutableListOf(1, 2, 3))
         }
     }
 
     @Test
     fun `forEachIndexed validation`() {
-        with(ImmutableIntArray(3) { 10 * it }) {
+        with(immutableArrayOf(1, 2, 3)) {
             val elements = mutableMapOf<Int, Int>()
             this.forEachIndexed { index, element ->
                 expectThat(element::class.java).isEqualTo(primitiveIntClass)
@@ -469,9 +468,9 @@ class ImmutableIntArrayTest {
             }
             expectThat(elements).isEqualTo(
                 mutableMapOf(
-                    0 to 0,
-                    1 to 10,
-                    2 to 20,
+                    0 to 1,
+                    1 to 2,
+                    2 to 3,
                 ),
             )
         }
