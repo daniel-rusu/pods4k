@@ -35,7 +35,7 @@ Alternatively, you can [pick & choose](publishing/bom/README.md) individual comp
 ## Immutable Arrays
 
 [Immutable Arrays](immutable-arrays/README.md) are a safer and more efficient alternative to read-only lists while
-maintaining familiar operations.
+maintaining familiar operations. Immutable arrays are up to 12X faster than lists and use up to 32X less memory!
 
 Unlike regular arrays, the elements cannot be re-assigned, so immutable arrays can be safely shared without needing
 immutable collections:
@@ -47,30 +47,24 @@ println(names[0]) // "Dan"
 names[1] = "Jane" // Compile error: No set method providing array access
 ```
 
-On top of the core efficiency improvements, immutable arrays are even more efficient when dealing with the 8 base
-types as they use between 3 to 24 times less memory than lists and performance can improve by over 10 times!
-
-Surprisingly, immutable arrays are even more efficient than regular arrays as they have hundreds of optimized
-specializations for common operations when working with or transforming into one of the 8 base types:
+Immutable arrays are also more efficient than regular arrays as most transformation operations on arrays generate lists:
 
 ```kotlin
-val people = immutableArrayOf(
-    Person(name = "Dan", age = 3),
-    Person(name = "Bob", age = 4),
-) // ImmutableArray<Person>
-
-// Since age is a non-nullable Int, this creates an efficient
-// ImmutableIntArray storing primitive int values
+// This generates a List<Int> when the `people` variable is an Array<Person>
+// but generates an ImmutableIntArray when `people` variable is an ImmutableArray<Person>
 val ages = people.map { it.age }
-performStatisticalAnalysis(ages)
 ```
 
 See [Immutable Arrays](immutable-arrays/README.md) for more specifics along with a
 detailed comparison against regular arrays, read-only lists, and immutable lists.
 
-## Java Compatibility
+## Minimum Requirements
 
-Requires JDK 11 or later. Automated tests are run on JDK LTS releases 11, 17, & 21.
+* Kotlin 1.9.25
+* JDK 11
+    * Automated tests are run on JDK LTS releases 11, 17, & 21
+
+## Java Compatibility
 
 Some data structures use techniques which are only supported by the Kotlin compiler. While they can be used in a mixed
 Java & Kotlin codebase to store one of these data structures in a Java-defined collection, referencing these data
