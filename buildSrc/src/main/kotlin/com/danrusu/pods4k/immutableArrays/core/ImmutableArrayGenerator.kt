@@ -304,6 +304,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                     returns = resultType.asTypeName(),
                 )
             }
+            addSumOfFloat(baseType)
             addTake(baseType)
             addTakeWhile(baseType)
             addTakeLast(baseType)
@@ -517,6 +518,37 @@ private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
         ) {
             statement("return get(${n - 1})")
         }
+    }
+}
+
+/**
+ * For some reason, the Kotlin team decided to have sumOf Int, Long, and Double but not Float:
+ * https://youtrack.jetbrains.com/issue/KT-43310/Add-sumOf-with-Float-return-type
+ *
+ * So we need to code this manually instead of delegating to the same method on the backing array (since that doesn't
+ * exist for floats).
+ */
+private fun TypeSpec.Builder.addSumOfFloat(baseType: BaseType) {
+    function(
+        kdoc = "Returns the sum of all values produced by the [selector] function applied to each element.",
+        modifiers = listOf(KModifier.INLINE),
+        name = "sumOf",
+        parameters = {
+            "selector"(
+                type = lambda(
+                    parameters = { "element"(type = baseType.type) },
+                    returnType = Float::class.asTypeName(),
+                ),
+            )
+        },
+        returns = Float::class.asTypeName(),
+    ) {
+        addAnnotation(AnnotationSpec.builder(OverloadResolutionByLambdaReturnType::class).build())
+        statement("var sum = 0.0f")
+        controlFlow("for (element in values)") {
+            statement("sum += selector(element)")
+        }
+        statement("return sum")
     }
 }
 

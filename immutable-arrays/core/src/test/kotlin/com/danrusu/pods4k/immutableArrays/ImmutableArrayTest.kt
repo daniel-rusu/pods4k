@@ -533,6 +533,10 @@ class ImmutableArrayTest {
                 .isA<Long>()
                 .isEqualTo(6L)
 
+            expectThat(sumOf { it.toFloat() })
+                .isA<Float>()
+                .isEqualTo(6.0f)
+
             expectThat(sumOf { it.toDouble() })
                 .isA<Double>()
                 .isEqualTo(6.0)

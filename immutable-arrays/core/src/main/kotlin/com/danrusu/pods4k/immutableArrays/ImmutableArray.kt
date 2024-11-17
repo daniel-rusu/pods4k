@@ -9,6 +9,7 @@ import kotlin.Boolean
 import kotlin.CharSequence
 import kotlin.Comparable
 import kotlin.Double
+import kotlin.Float
 import kotlin.Int
 import kotlin.Long
 import kotlin.Nothing
@@ -301,6 +302,18 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
      */
     @OverloadResolutionByLambdaReturnType
     public inline fun sumOf(selector: (element: T) -> Double): Double = values.sumOf(selector)
+
+    /**
+     * Returns the sum of all values produced by the [selector] function applied to each element.
+     */
+    @OverloadResolutionByLambdaReturnType
+    public inline fun sumOf(selector: (element: T) -> Float): Float {
+        var sum = 0.0f
+        for (element in values) {
+            sum += selector(element)
+        }
+        return sum
+    }
 
     /**
      * Returns an immutable array containing the first [n] elements.

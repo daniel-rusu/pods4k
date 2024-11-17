@@ -52,7 +52,7 @@ val adults = people.filter { it.age >= 18 } // ImmutableArray<Person>
 val adultAges = adults.map { it.age } // ImmutableIntArray
 
 val containsRetirees = adults.any { it.isRetired() }
-val adultsSortedByName = people.sortedBy { it.name } // ImmutableArray<Person>
+val adultsSortedByName = adults.sortedBy { it.name } // ImmutableArray<Person>
 
 // Working toString()
 println(adults)

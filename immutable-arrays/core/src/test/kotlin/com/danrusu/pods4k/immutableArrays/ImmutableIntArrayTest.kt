@@ -550,6 +550,10 @@ class ImmutableIntArrayTest {
                 .isA<Long>()
                 .isEqualTo(12L)
 
+            expectThat(sumOf { it * 2.0f })
+                .isA<Float>()
+                .isEqualTo(12.0f)
+
             expectThat(sumOf { it * 2.0 })
                 .isA<Double>()
                 .isEqualTo(12.0)

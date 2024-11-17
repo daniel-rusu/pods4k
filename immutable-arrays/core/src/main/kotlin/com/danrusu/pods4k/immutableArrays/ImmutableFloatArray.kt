@@ -303,6 +303,18 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     public inline fun sumOf(selector: (element: Float) -> Double): Double = values.sumOf(selector)
 
     /**
+     * Returns the sum of all values produced by the [selector] function applied to each element.
+     */
+    @OverloadResolutionByLambdaReturnType
+    public inline fun sumOf(selector: (element: Float) -> Float): Float {
+        var sum = 0.0f
+        for (element in values) {
+            sum += selector(element)
+        }
+        return sum
+    }
+
+    /**
      * Returns an immutable array containing the first [n] elements.
      *
      * @throws IllegalArgumentException if [n] is negative.
