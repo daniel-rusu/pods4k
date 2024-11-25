@@ -11,8 +11,8 @@ on [GitHub](https://github.com/daniel-rusu/pods4k) and sharing it with others.
 
 * [Key Benefits](#key-benefits)
 * [Usage](#usage)
-* [Memory Layout](#memory-layout)
 * [Benefits vs Alternatives](#benefits-vs-alternatives)
+* [Memory Layout](#memory-layout)
 * [Caveats](#caveats)
 
 ## Key Benefits
@@ -256,73 +256,6 @@ names + "Jane" // ["Dan", "Bobby", "Jill", "Jane"]
 
 </details>
 
-## Memory Layout
-
-Performing some operation that results in an `ImmutableIntArray` ends up with the following memory layout:
-
-![Memory Layout of immutable arrays](./resources/immutable-array-memory-layout.drawio.png)
-
-Note that the `values` variable of type `ImmutableIntArray` actually references a regular primitive int array in the
-bytecode.
-
-Here is the same example but operating on a regular primitive array and ending up with a read-only list:
-
-![Memory Layout of Read-only Lists](./resources/list-memory-layout.drawio.png)
-
-Classes that operate on generics, such as lists, can't store primitive types directly. Each primitive int gets
-auto-boxed into an `Integer` wrapper object and a pointer to that wrapper is passed to the resulting list. These wrapper
-objects are allocated in different regions of memory depending on availability and the garbage collector also
-periodically moves surviving objects around, so we can end up with the objects scattered throughout the heap.
-
-<details>
-<summary>Memory Impacts</summary>
-
-1. Notice that the list contains 7 values but the backing array has a capacity of 10. When an `ArrayList` runs out of
-   capacity, the backing array is replaced with a new array that's 1.5-times larger and the elements get copied over. On
-   average, array lists end up with about 17% of unused capacity when the exact capacity isn't specified ahead of time.
-
-2. A primitive int uses just 4 bytes. However, an `Integer` wrapper object requires 16 bytes for the object header, plus
-   4 bytes for the int value, plus another 4 bytes of padding totaling 24 bytes. Enabling JVM pointer compression
-   reduces this to 16 bytes per wrapper.
-
-3. Lists don't store the wrappers directly but instead store pointers to each of these wrappers. A list of integers uses
-   8 + 24 = 32 bytes to store each 4-byte int value!  Enabling JVM pointer compression reduces this to 20 bytes per
-   integer element but that's still 5X the memory of primitive int arrays!
-
-4. The ratio becomes worse when storing smaller data types. E.g. A list of booleans uses 32X more memory than primitive
-   boolean arrays when JVM pointer compression isn't enabled and 20X more memory with pointer compression.
-
-The following table shows the per-element memory usage on a 64-bit JVM accounting for the size of the element pointer,
-wrapper object header, value, and padding in the wrapper object to account for memory alignment:
-
-| Type    | Immutable Array<br/>(bytes per element) | ArrayList<br/>(bytes per element) | ArrayList on JVM with compressed oops<br/>(bytes per element) |
-|---------|-----------------------------------------|-----------------------------------|---------------------------------------------------------------|
-| Boolean | **1**                                   | 8 + (16 + 1 + 7) = **32**         | 4 + (12 + 1 + 3) = **20**                                     |
-| Byte    | **1**                                   | 8 + (16 + 1 + 7) = **32**         | 4 + (12 + 1 + 3) = **20**                                     |
-| Char    | **2**                                   | 8 + (16 + 2 + 6) = **32**         | 4 + (12 + 2 + 2) = **20**                                     |
-| Short   | **2**                                   | 8 + (16 + 2 + 6) = **32**         | 4 + (12 + 2 + 2) = **20**                                     |
-| Int     | **4**                                   | 8 + (16 + 4 + 4) = **32**         | 4 + (12 + 4 + 0) = **20**                                     |
-| Float   | **4**                                   | 8 + (16 + 4 + 4) = **32**         | 4 + (12 + 4 + 0) = **20**                                     |
-| Long    | **8**                                   | 8 + (16 + 8 + 0) = **32**         | 4 + (12 + 8 + 4) = **28**                                     |
-| Double  | **8**                                   | 8 + (16 + 8 + 0) = **32**         | 4 + (12 + 8 + 4) = **28**                                     |
-
-</details>
-
-<details>
-<summary>Performance Impacts</summary>
-
-Fetching from main memory can take hundreds of cycles on modern CPU architectures. The CPU tries to minimize latency by
-fetching in bulk and also by predicting and pre-fetching data before it's requested. Primitive arrays store values in a
-contiguous block of memory, so the CPU will prefetch neighboring elements making subsequent accesses essentially free
-when iterating. However, the CPU pre-fetcher has a tough time predicting the location of scattered memory when dealing
-with lists of wrapper objects, resulting in much higher memory latency on average.
-
-To get an idea of the potential performance impact of wrapper objects, Java Language Architect, Brian Goetz, ran some
-benchmarks replacing reference carriers with values as part of project Valhalla exploration. Brian found performance
-improvements ranging from 3.5x to 12x faster: [YouTube presentation](https://youtu.be/1H4vmT-Va4o?t=899)
-
-</details>
-
 ## Benefits vs Alternatives
 
 Here's a quick overview of how immutable arrays compare to alternatives:
@@ -335,8 +268,6 @@ Here's a quick overview of how immutable arrays compare to alternatives:
 | Compile-time Safety      | ✅                | ❌ <br/> Can be mutated | ✅ / ❌ <br/> Casting enables mutation | ❌ <br/> Throws exceptions   | ❌ <br/> Throws exceptions |
 | Proper equals & hashCode | ✅                | ❌                      | ✅                                    | ✅                           | ✅                         |
 | Meaningful toString()    | ✅                | ❌                      | ✅                                    | ✅                           | ✅                         |
-
-<br>
 
 ### Benefits over regular arrays
 
@@ -585,7 +516,72 @@ Immutable lists have the same performance drawbacks as read-only lists
 
 </details>
 
-<br>
+## Memory Layout
+
+Performing some operation that results in an `ImmutableIntArray` ends up with the following memory layout:
+
+![Memory Layout of immutable arrays](./resources/immutable-array-memory-layout.drawio.png)
+
+Note that the `values` variable of type `ImmutableIntArray` actually references a regular primitive int array in the
+bytecode.
+
+Here is the same example but operating on a regular primitive array and ending up with a read-only list:
+
+![Memory Layout of Read-only Lists](./resources/list-memory-layout.drawio.png)
+
+Classes that operate on generics, such as lists, can't store primitive types directly. Each primitive int gets
+auto-boxed into an `Integer` wrapper object and a pointer to that wrapper is passed to the resulting list. These wrapper
+objects are allocated in different regions of memory depending on availability and the garbage collector also
+periodically moves surviving objects around, so we can end up with the objects scattered throughout the heap.
+
+<details>
+<summary>Memory Impacts</summary>
+
+1. Notice that the list contains 7 values but the backing array has a capacity of 10. When an `ArrayList` runs out of
+   capacity, the backing array is replaced with a new array that's 1.5-times larger and the elements get copied over. On
+   average, array lists end up with about 17% of unused capacity when the exact capacity isn't specified ahead of time.
+
+2. A primitive int uses just 4 bytes. However, an `Integer` wrapper object requires 16 bytes for the object header, plus
+   4 bytes for the int value, plus another 4 bytes of padding totaling 24 bytes. Enabling JVM pointer compression
+   reduces this to 16 bytes per wrapper.
+
+3. Lists don't store the wrappers directly but instead store pointers to each of these wrappers. A list of integers uses
+   8 + 24 = 32 bytes to store each 4-byte int value!  Enabling JVM pointer compression reduces this to 20 bytes per
+   integer element but that's still 5X the memory of primitive int arrays!
+
+4. The ratio becomes worse when storing smaller data types. E.g. A list of booleans uses 32X more memory than primitive
+   boolean arrays when JVM pointer compression isn't enabled and 20X more memory with pointer compression.
+
+The following table shows the per-element memory usage on a 64-bit JVM accounting for the size of the element pointer,
+wrapper object header, value, and padding in the wrapper object to account for memory alignment:
+
+| Type    | Immutable Array<br/>(bytes per element) | ArrayList<br/>(bytes per element) | ArrayList on JVM with compressed oops<br/>(bytes per element) |
+|---------|-----------------------------------------|-----------------------------------|---------------------------------------------------------------|
+| Boolean | **1**                                   | 8 + (16 + 1 + 7) = **32**         | 4 + (12 + 1 + 3) = **20**                                     |
+| Byte    | **1**                                   | 8 + (16 + 1 + 7) = **32**         | 4 + (12 + 1 + 3) = **20**                                     |
+| Char    | **2**                                   | 8 + (16 + 2 + 6) = **32**         | 4 + (12 + 2 + 2) = **20**                                     |
+| Short   | **2**                                   | 8 + (16 + 2 + 6) = **32**         | 4 + (12 + 2 + 2) = **20**                                     |
+| Int     | **4**                                   | 8 + (16 + 4 + 4) = **32**         | 4 + (12 + 4 + 0) = **20**                                     |
+| Float   | **4**                                   | 8 + (16 + 4 + 4) = **32**         | 4 + (12 + 4 + 0) = **20**                                     |
+| Long    | **8**                                   | 8 + (16 + 8 + 0) = **32**         | 4 + (12 + 8 + 4) = **28**                                     |
+| Double  | **8**                                   | 8 + (16 + 8 + 0) = **32**         | 4 + (12 + 8 + 4) = **28**                                     |
+
+</details>
+
+<details>
+<summary>Performance Impacts</summary>
+
+Fetching from main memory can take hundreds of cycles on modern CPU architectures. The CPU tries to minimize latency by
+fetching in bulk and also by predicting and pre-fetching data before it's requested. Primitive arrays store values in a
+contiguous block of memory, so the CPU will prefetch neighboring elements making subsequent accesses essentially free
+when iterating. However, the CPU pre-fetcher has a tough time predicting the location of scattered memory when dealing
+with lists of wrapper objects, resulting in much higher memory latency on average.
+
+To get an idea of the potential performance impact of wrapper objects, Java Language Architect, Brian Goetz, ran some
+benchmarks replacing reference carriers with values as part of project Valhalla exploration. Brian found performance
+improvements ranging from 3.5x to 12x faster: [YouTube presentation](https://youtu.be/1H4vmT-Va4o?t=899)
+
+</details>
 
 ## Caveats
 
