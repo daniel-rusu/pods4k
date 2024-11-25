@@ -11,6 +11,7 @@ on [GitHub](https://github.com/daniel-rusu/pods4k) and sharing it with others.
 
 * [Key Benefits](#key-benefits)
 * [Usage](#usage)
+* [Benchmarks](#benchmarks)
 * [Benefits vs Alternatives](#benefits-vs-alternatives)
 * [Memory Layout](#memory-layout)
 * [Caveats](#caveats)
@@ -24,7 +25,7 @@ on [GitHub](https://github.com/daniel-rusu/pods4k) and sharing it with others.
 * **Memory Efficiency**
     * Up to 32 times less memory than lists!
 * **Performance**
-    * Up to 12 times faster than lists!
+    * Between 2 to 8 times faster than lists for many common operations and some operations are even faster!
 * **Type Safety**
     * Prevents mutation attempts at compile time.
 
@@ -255,6 +256,86 @@ names + "Jane" // ["Dan", "Bobby", "Jill", "Jane"]
 ```
 
 </details>
+
+## Benchmarks
+
+<details>
+<summary>Benchmark Setup</summary>
+
+All benchmarks were run with the [Java Microbenchmark Harness](https://github.com/openjdk/jmh), JMH, in order to help
+avoid JMV benchmarking pitfalls and produce more realistic results. The benchmarks are defined in
+the [pods4k-benchmarks](https://github.com/daniel-rusu/pods4k-benchmarks) repository.
+
+Benchmarks create 1,000 randomly-sized collections with sizes that attempt to resemble the real world:
+
+- 35% between 0 and 10 elements
+- 30% between 11 and 50 elements
+- 20% between 51 and 200 elements
+- 10% between 201 and 1,000 elements
+- 5% between 1,001 and 10,000 elements
+
+The operation being measured is then performed on each of these 1,000 collections repeatedly for a certain duration of
+time to measure the average throughput (how many collections can be processed per second). This is repeated multiple
+times and on multiple JVM processes to measure variability and ensure low margins of error.
+
+This entire process is repeated 27 times, once for each combination of:
+
+- The 3 types of "collections" being measured (lists, arrays, & immutable arrays)
+- The 9 types of data (Boolean, Byte, Char, Short, Int, Long, Float, Double, & String as the most common reference type)
+
+The collections are populated with random data produced with a random generator that's initialized with a constant seed
+so that comparisons against the different "collection" types are valid since they'll operate on identical data.
+</details>
+
+<details>
+<summary>Interpreting Results</summary>
+The throughput of each scenario is measured to determine how many collections can be processed per second.
+
+Since the exact throughput will vary depending on the speed of your computer, the results are normalized and reported
+as a relative throughput against the performance of lists. For example, if you can perform some operation 1,000 times
+per second on lists and 1,500 times per second on arrays, then arrays will be reported as having a relative throughput
+of 1.5 compared to lists.
+</details>
+
+Arrays are faster than lists when dealing with one of the 8 base types because lists need to store wrapper objects
+whereas arrays store the values in a contiguous chunk of memory . Arrays are also faster when dealing with reference
+types, like strings, because they avoid an extra layer of indirection and an extra set of index-out-of-bounds checks:
+
+![Memory Layout of immutable arrays](./resources/benchmarks/map.png)
+
+Immutable arrays are even faster than regular arrays because most transformation operations on regular arrays generate
+lists whereas the same operation on immutable arrays generate immutable arrays.
+
+![Memory Layout of immutable arrays](./resources/benchmarks/partition.png)
+
+Arrays and immutable arrays have similar performance (within margin of error) for most operations that inspect the data
+without transforming it. Both are much faster than lists when dealing with one of the 8 base types:
+
+![Memory Layout of immutable arrays](./resources/benchmarks/any.png)
+
+Operations that make use of arraycopy have significantly higher performance than lists and even regular arrays:
+
+![Memory Layout of immutable arrays](./resources/benchmarks/take.png)
+
+Note that I had to split the smaller data types into a separate chart to avoid skewing the chart axis since their
+performance was too high!
+
+![Memory Layout of immutable arrays](./resources/benchmarks/takeLast.png)
+
+The `takeWhile` & `takeLastWhile` operations perform similarly so we'll just show one for brevity.
+
+![Memory Layout of immutable arrays](./resources/benchmarks/takeWhile.png)
+
+The drop variants (`drop`, `dropLast`, `dropWhile`, & `dropLastWhile`) perform even better than the `take` variants
+above. We're omitting those for brevity.
+
+![Memory Layout of immutable arrays](./resources/benchmarks/sorted.png)
+
+Sorting becomes extremely fast for smaller data types!
+
+![Memory Layout of immutable arrays](./resources/benchmarks/plusCollection.png)
+
+Note that appending another collection creates a new one without modifying the original collection.
 
 ## Benefits vs Alternatives
 
@@ -579,7 +660,8 @@ with lists of wrapper objects, resulting in much higher memory latency on averag
 
 To get an idea of the potential performance impact of wrapper objects, Java Language Architect, Brian Goetz, ran some
 benchmarks replacing reference carriers with values as part of project Valhalla exploration. Brian found performance
-improvements ranging from 3.5x to 12x faster: [YouTube presentation](https://youtu.be/1H4vmT-Va4o?t=899)
+improvements ranging from 3.5x to 12x faster: [YouTube presentation](https://youtu.be/1H4vmT-Va4o?t=899). This aligns
+with the results of the benchmarks above.
 
 </details>
 
