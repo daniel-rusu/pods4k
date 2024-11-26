@@ -73,4 +73,27 @@ class TransformationsToMapTest {
             ),
         )
     }
+
+    @Test
+    fun `associateWith validation`() {
+        expectThat(
+            immutableArrayOf("a", "bb", "ccc").associateWith { it.length },
+        ).isEqualTo(
+            mapOf(
+                "a" to 1,
+                "bb" to 2,
+                "ccc" to 3,
+            ),
+        )
+
+        expectThat(
+            immutableArrayOf(1, 2, 3).associateWith { it.toString() },
+        ).isEqualTo(
+            mapOf(
+                1 to "1",
+                2 to "2",
+                3 to "3",
+            ),
+        )
+    }
 }

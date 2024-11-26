@@ -142,3 +142,66 @@ public inline fun <K> ImmutableFloatArray.associateBy(keySelector: (element: Flo
 public inline fun <K> ImmutableDoubleArray.associateBy(keySelector: (element: Double) -> K): Map<K, Double> {
     return asList().associateBy(keySelector)
 }
+
+/**
+ * See [Array.associateWith]
+ */
+public inline fun <T, V> ImmutableArray<T>.associateWith(valueSelector: (element: T) -> V): Map<T, V> {
+    return asList().associateWith(valueSelector)
+}
+
+/**
+ * See [Array.associateWith]
+ */
+public inline fun <V> ImmutableBooleanArray.associateWith(valueSelector: (element: Boolean) -> V): Map<Boolean, V> {
+    return asList().associateWith(valueSelector)
+}
+
+/**
+ * See [Array.associateWith]
+ */
+public inline fun <V> ImmutableByteArray.associateWith(valueSelector: (element: Byte) -> V): Map<Byte, V> {
+    return asList().associateWith(valueSelector)
+}
+
+/**
+ * See [Array.associateWith]
+ */
+public inline fun <V> ImmutableCharArray.associateWith(valueSelector: (element: Char) -> V): Map<Char, V> {
+    return asList().associateWith(valueSelector)
+}
+
+/**
+ * See [Array.associateWith]
+ */
+public inline fun <V> ImmutableShortArray.associateWith(valueSelector: (element: Short) -> V): Map<Short, V> {
+    return asList().associateWith(valueSelector)
+}
+
+/**
+ * See [Array.associateWith]
+ */
+public inline fun <V> ImmutableIntArray.associateWith(valueSelector: (element: Int) -> V): Map<Int, V> {
+    return asList().associateWith(valueSelector)
+}
+
+/**
+ * See [Array.associateWith]
+ */
+public inline fun <V> ImmutableLongArray.associateWith(valueSelector: (element: Long) -> V): Map<Long, V> {
+    return asList().associateWith(valueSelector)
+}
+
+/**
+ * See [Array.associateWith]
+ */
+public inline fun <V> ImmutableFloatArray.associateWith(valueSelector: (element: Float) -> V): Map<Float, V> {
+    return asList().associateWith(valueSelector)
+}
+
+/**
+ * See [Array.associateWith]
+ */
+public inline fun <V> ImmutableDoubleArray.associateWith(valueSelector: (element: Double) -> V): Map<Double, V> {
+    return asList().associateWith(valueSelector)
+}

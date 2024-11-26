@@ -19,6 +19,7 @@ internal object TransformationsToMapFileGenerator {
             addToMap()
             addAssociate()
             addAssociateBy()
+            addAssociateWith()
         }
         fileSpec.writeTo(File(destinationPath, ""))
     }
@@ -95,6 +96,33 @@ private fun FileSpec.Builder.addAssociateBy() {
             // Important: This needs to meet the same contract as what's promised by the standard library to maintain
             // iteration order since this library is documented as a replacement for read-only lists.
             statement("return asList().associateBy(keySelector)")
+        }
+    }
+}
+
+private fun FileSpec.Builder.addAssociateWith() {
+    val value = TypeVariableName("V")
+    for (baseType in BaseType.entries) {
+        function(
+            kdoc = "See [Array.associateWith]",
+            modifiers = listOf(KModifier.INLINE),
+            receiver = baseType.getGeneratedTypeName(),
+            name = "associateWith",
+            parameters = {
+                "valueSelector"(
+                    type = lambda(parameters = { "element"(type = baseType.type) }, returnType = value),
+                )
+            },
+            returns = ClassName("kotlin.collections", "Map").parameterizedBy(baseType.type, value),
+            forceFunctionBody = true,
+        ) {
+            if (baseType == BaseType.GENERIC) {
+                addTypeVariable(baseType.type as TypeVariableName)
+            }
+            addTypeVariable(value)
+            // Important: This needs to meet the same contract as what's promised by the standard library to maintain
+            // iteration order since this library is documented as a replacement for read-only lists.
+            statement("return asList().associateWith(valueSelector)")
         }
     }
 }
