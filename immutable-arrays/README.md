@@ -12,8 +12,8 @@ a [![GitHub stars](https://img.shields.io/github/stars/daniel-rusu/pods4k?label=
 on [GitHub](https://github.com/daniel-rusu/pods4k) and sharing it with others.
 
 * [Key Benefits](#key-benefits)
-* [Usage](#usage)
 * [Benchmarks](#benchmarks)
+* [Usage](#usage)
 * [Benefits vs Alternatives](#benefits-vs-alternatives)
 * [Memory Layout](#memory-layout)
 * [Caveats](#caveats)
@@ -33,6 +33,83 @@ on [GitHub](https://github.com/daniel-rusu/pods4k) and sharing it with others.
 
 Ideal for memory-constrained environments, performance-critical workloads, or simply for ensuring data integrity.
 Immutable Arrays enhance Android and JVM backend applications.
+
+## Benchmarks
+
+<details>
+<summary>Benchmark Setup</summary>
+
+Benchmarks use the [Java Microbenchmark Harness](https://github.com/openjdk/jmh) to ensure accurate results.
+
+Benchmarks generate 1,000 randomly-sized collections with sizes that resemble the real world:
+
+- 35% between 0 and 10 elements
+- 30% between 11 and 50 elements
+- 20% between 51 and 200 elements
+- 10% between 201 and 1,000 elements
+- 5% between 1,001 and 10,000 elements
+
+An operation is performed on each collection and the throughput of how many collections can be processed per second is
+measured. This is repeated across 27 configurations: 3 collection types (lists, arrays, & immutable arrays) and 9 data
+types (Boolean, Int, String, etc.). Each test uses identical, randomly-generated data. See benchmark
+sources in [pods4k-benchmarks](https://github.com/daniel-rusu/pods4k-benchmarks) for full details.
+
+Results are normalized to list performance
+
+- 1,000 ops/sec for lists vs. 1,500 for arrays = relative throughput of 1.5.
+
+</details>
+
+### Benchmark Results
+
+Arrays are faster than lists when dealing with one of the 8 base types because lists store wrapper objects scattered
+throughout memory whereas arrays store the values in a contiguous chunk of memory . Arrays are also usually faster when
+dealing with reference types, like strings, because they avoid an extra layer of indirection and an extra set of
+index-out-of-bounds checks:
+
+![Memory Layout of immutable arrays](./resources/benchmarks/map.png)
+
+Immutable arrays are even faster than regular arrays because most transformation operations on regular arrays generate
+lists whereas the same operation on immutable arrays generate immutable arrays.
+
+![Memory Layout of immutable arrays](./resources/benchmarks/partition.png)
+
+Arrays and immutable arrays have similar performance (within margin of error) for most operations that inspect the data
+without transforming it. Both are much faster than lists when dealing with one of the 8 base types:
+
+![Memory Layout of immutable arrays](./resources/benchmarks/any.png)
+
+Immutable Array operations that use arraycopy have significantly higher performance than lists and even regular arrays:
+
+![Memory Layout of immutable arrays](./resources/benchmarks/take.png)
+
+Note that I had to split the smaller data types into a separate chart to avoid skewing the chart axis since their
+performance was too high!
+
+![Memory Layout of immutable arrays](./resources/benchmarks/takeLast.png)
+
+The `takeWhile` & `takeLastWhile` operations perform similarly so we'll just show one for brevity.
+
+![Memory Layout of immutable arrays](./resources/benchmarks/takeWhile.png)
+
+The relative performance of the drop operations (`drop`, `dropLast`, `dropWhile`, & `dropLastWhile`) are similar or
+higher than the `take` variants above. We're omitting those for brevity.
+
+![Memory Layout of immutable arrays](./resources/benchmarks/sorted.png)
+
+Sorting becomes extremely fast for smaller data types!
+
+![Memory Layout of immutable arrays](./resources/benchmarks/plusCollection.png)
+
+### Benchmark Summary
+
+Although there are many more operations, the above results should provide a pretty good representation of the
+performance improvement of common non-trivial operations.
+
+Immutable arrays are between 2 to 8 times faster than lists for many common operations with some scenarios over 30 times
+faster! Immutable arrays are also significantly faster than regular arrays which was surprising at first until I
+realized that most transformation operations on regular arrays produce lists whereas immutable array operations produce
+immutable arrays.
 
 ## Usage
 
@@ -230,83 +307,6 @@ names.partition { it.length % 2 == 0 } // Pair(["Jill"], ["Dan", "Bobby"])
 ```
 
 </details>
-
-## Benchmarks
-
-<details>
-<summary>Benchmark Setup</summary>
-
-Benchmarks use the [Java Microbenchmark Harness](https://github.com/openjdk/jmh) to ensure accurate results.
-
-Benchmarks generate 1,000 randomly-sized collections with sizes that resemble the real world:
-
-- 35% between 0 and 10 elements
-- 30% between 11 and 50 elements
-- 20% between 51 and 200 elements
-- 10% between 201 and 1,000 elements
-- 5% between 1,001 and 10,000 elements
-
-An operation is performed on each collection and the throughput of how many collections can be processed per second is
-measured. This is repeated across 27 configurations: 3 collection types (lists, arrays, & immutable arrays) and 9 data
-types (Boolean, Int, String, etc.). Each test uses identical, randomly-generated data. See benchmark
-sources in [pods4k-benchmarks](https://github.com/daniel-rusu/pods4k-benchmarks) for full details.
-
-Results are normalized to list performance
-
-- 1,000 ops/sec for lists vs. 1,500 for arrays = relative throughput of 1.5.
-
-</details>
-
-### Benchmark Results
-
-Arrays are faster than lists when dealing with one of the 8 base types because lists store wrapper objects scattered
-throughout memory whereas arrays store the values in a contiguous chunk of memory . Arrays are also usually faster when
-dealing with reference types, like strings, because they avoid an extra layer of indirection and an extra set of
-index-out-of-bounds checks:
-
-![Memory Layout of immutable arrays](./resources/benchmarks/map.png)
-
-Immutable arrays are even faster than regular arrays because most transformation operations on regular arrays generate
-lists whereas the same operation on immutable arrays generate immutable arrays.
-
-![Memory Layout of immutable arrays](./resources/benchmarks/partition.png)
-
-Arrays and immutable arrays have similar performance (within margin of error) for most operations that inspect the data
-without transforming it. Both are much faster than lists when dealing with one of the 8 base types:
-
-![Memory Layout of immutable arrays](./resources/benchmarks/any.png)
-
-Immutable Array operations that use arraycopy have significantly higher performance than lists and even regular arrays:
-
-![Memory Layout of immutable arrays](./resources/benchmarks/take.png)
-
-Note that I had to split the smaller data types into a separate chart to avoid skewing the chart axis since their
-performance was too high!
-
-![Memory Layout of immutable arrays](./resources/benchmarks/takeLast.png)
-
-The `takeWhile` & `takeLastWhile` operations perform similarly so we'll just show one for brevity.
-
-![Memory Layout of immutable arrays](./resources/benchmarks/takeWhile.png)
-
-The relative performance of the drop operations (`drop`, `dropLast`, `dropWhile`, & `dropLastWhile`) are similar or
-higher than the `take` variants above. We're omitting those for brevity.
-
-![Memory Layout of immutable arrays](./resources/benchmarks/sorted.png)
-
-Sorting becomes extremely fast for smaller data types!
-
-![Memory Layout of immutable arrays](./resources/benchmarks/plusCollection.png)
-
-### Benchmark Summary
-
-Although there are many more operations, the above results should provide a pretty good representation of the
-performance improvement of common non-trivial operations.
-
-Immutable arrays are between 2 to 8 times faster than lists for many common operations with some scenarios over 30 times
-faster! Immutable arrays are also significantly faster than regular arrays which was surprising at first until I
-realized that most transformation operations on regular arrays produce lists whereas immutable array operations produce
-immutable arrays.
 
 ## Benefits vs Alternatives
 
