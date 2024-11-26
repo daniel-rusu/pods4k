@@ -9,6 +9,7 @@ _Date TBD_
 
 **New Features:**
 
+* Add `associate` extension functions
 * Add `sumOf` methods
 
 ## 0.5.0

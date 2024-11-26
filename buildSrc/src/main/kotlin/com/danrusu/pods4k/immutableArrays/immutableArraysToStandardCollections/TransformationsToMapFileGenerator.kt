@@ -7,6 +7,7 @@ import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.statement
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
+import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeVariableName
 import com.squareup.kotlinpoet.asTypeName
@@ -15,13 +16,14 @@ import java.io.File
 internal object TransformationsToMapFileGenerator {
     fun generate(destinationPath: String) {
         val fileSpec = createFile(ImmutableArrayConfig.packageName, "TransformationsToMap") {
-            addToSet()
+            addToMap()
+            addAssociate()
         }
         fileSpec.writeTo(File(destinationPath, ""))
     }
 }
 
-private fun FileSpec.Builder.addToSet() {
+private fun FileSpec.Builder.addToMap() {
     val key = TypeVariableName("K")
     val value = TypeVariableName("V")
     val pair = Pair::class.asTypeName().parameterizedBy(key, value)
@@ -36,5 +38,35 @@ private fun FileSpec.Builder.addToSet() {
         // Important: This needs to meet the same contract as what's promised by the standard library to maintain
         // iteration order since this library is documented as a replacement for read-only lists.
         statement("return asList().toMap()")
+    }
+}
+
+private fun FileSpec.Builder.addAssociate() {
+    val key = TypeVariableName("K")
+    val value = TypeVariableName("V")
+    val pair = Pair::class.asTypeName().parameterizedBy(key, value)
+    for (baseType in BaseType.entries) {
+        function(
+            kdoc = "See [Array.associate]",
+            modifiers = listOf(KModifier.INLINE),
+            receiver = baseType.getGeneratedTypeName(),
+            name = "associate",
+            parameters = {
+                "transform"(
+                    type = lambda(parameters = { "element"(type = baseType.type) }, returnType = pair),
+                )
+            },
+            returns = ClassName("kotlin.collections", "Map").parameterizedBy(key, value),
+            forceFunctionBody = true,
+        ) {
+            if (baseType == BaseType.GENERIC) {
+                addTypeVariable(baseType.type as TypeVariableName)
+            }
+            addTypeVariable(key)
+            addTypeVariable(value)
+            // Important: This needs to meet the same contract as what's promised by the standard library to maintain
+            // iteration order since this library is documented as a replacement for read-only lists.
+            statement("return asList().associate(transform)")
+        }
     }
 }
