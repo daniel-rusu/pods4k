@@ -18,6 +18,7 @@ internal object TransformationsToMapFileGenerator {
         val fileSpec = createFile(ImmutableArrayConfig.packageName, "TransformationsToMap") {
             addToMap()
             addAssociate()
+            addAssociateBy()
         }
         fileSpec.writeTo(File(destinationPath, ""))
     }
@@ -67,6 +68,33 @@ private fun FileSpec.Builder.addAssociate() {
             // Important: This needs to meet the same contract as what's promised by the standard library to maintain
             // iteration order since this library is documented as a replacement for read-only lists.
             statement("return asList().associate(transform)")
+        }
+    }
+}
+
+private fun FileSpec.Builder.addAssociateBy() {
+    val key = TypeVariableName("K")
+    for (baseType in BaseType.entries) {
+        function(
+            kdoc = "See [Array.associateBy]",
+            modifiers = listOf(KModifier.INLINE),
+            receiver = baseType.getGeneratedTypeName(),
+            name = "associateBy",
+            parameters = {
+                "keySelector"(
+                    type = lambda(parameters = { "element"(type = baseType.type) }, returnType = key),
+                )
+            },
+            returns = ClassName("kotlin.collections", "Map").parameterizedBy(key, baseType.type),
+            forceFunctionBody = true,
+        ) {
+            if (baseType == BaseType.GENERIC) {
+                addTypeVariable(baseType.type as TypeVariableName)
+            }
+            addTypeVariable(key)
+            // Important: This needs to meet the same contract as what's promised by the standard library to maintain
+            // iteration order since this library is documented as a replacement for read-only lists.
+            statement("return asList().associateBy(keySelector)")
         }
     }
 }

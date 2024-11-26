@@ -79,3 +79,66 @@ public inline fun <K, V> ImmutableFloatArray.associate(transform: (element: Floa
 public inline fun <K, V> ImmutableDoubleArray.associate(transform: (element: Double) -> Pair<K, V>): Map<K, V> {
     return asList().associate(transform)
 }
+
+/**
+ * See [Array.associateBy]
+ */
+public inline fun <T, K> ImmutableArray<T>.associateBy(keySelector: (element: T) -> K): Map<K, T> {
+    return asList().associateBy(keySelector)
+}
+
+/**
+ * See [Array.associateBy]
+ */
+public inline fun <K> ImmutableBooleanArray.associateBy(keySelector: (element: Boolean) -> K): Map<K, Boolean> {
+    return asList().associateBy(keySelector)
+}
+
+/**
+ * See [Array.associateBy]
+ */
+public inline fun <K> ImmutableByteArray.associateBy(keySelector: (element: Byte) -> K): Map<K, Byte> {
+    return asList().associateBy(keySelector)
+}
+
+/**
+ * See [Array.associateBy]
+ */
+public inline fun <K> ImmutableCharArray.associateBy(keySelector: (element: Char) -> K): Map<K, Char> {
+    return asList().associateBy(keySelector)
+}
+
+/**
+ * See [Array.associateBy]
+ */
+public inline fun <K> ImmutableShortArray.associateBy(keySelector: (element: Short) -> K): Map<K, Short> {
+    return asList().associateBy(keySelector)
+}
+
+/**
+ * See [Array.associateBy]
+ */
+public inline fun <K> ImmutableIntArray.associateBy(keySelector: (element: Int) -> K): Map<K, Int> {
+    return asList().associateBy(keySelector)
+}
+
+/**
+ * See [Array.associateBy]
+ */
+public inline fun <K> ImmutableLongArray.associateBy(keySelector: (element: Long) -> K): Map<K, Long> {
+    return asList().associateBy(keySelector)
+}
+
+/**
+ * See [Array.associateBy]
+ */
+public inline fun <K> ImmutableFloatArray.associateBy(keySelector: (element: Float) -> K): Map<K, Float> {
+    return asList().associateBy(keySelector)
+}
+
+/**
+ * See [Array.associateBy]
+ */
+public inline fun <K> ImmutableDoubleArray.associateBy(keySelector: (element: Double) -> K): Map<K, Double> {
+    return asList().associateBy(keySelector)
+}
