@@ -9,6 +9,7 @@ _Date TBD_
 
 **New Features:**
 
+* Add `groupBy` extension functions
 * Add `associateWith` extension functions
 * Add `associateBy` extension functions
 * Add `associate` extension functions

@@ -1,6 +1,7 @@
 // Auto-generated file. DO NOT EDIT!
 package com.danrusu.pods4k.immutableArrays
 
+import java.util.LinkedHashMap
 import kotlin.Boolean
 import kotlin.Byte
 import kotlin.Char
@@ -10,6 +11,7 @@ import kotlin.Int
 import kotlin.Long
 import kotlin.Pair
 import kotlin.Short
+import kotlin.Suppress
 import kotlin.collections.Map
 
 /**
@@ -204,4 +206,148 @@ public inline fun <V> ImmutableFloatArray.associateWith(valueSelector: (element:
  */
 public inline fun <V> ImmutableDoubleArray.associateWith(valueSelector: (element: Double) -> V): Map<Double, V> {
     return asList().associateWith(valueSelector)
+}
+
+/**
+ * See [Array.groupBy]
+ */
+@Suppress("UNCHECKED_CAST")
+public fun <T, K> ImmutableArray<T>.groupBy(keySelector: (element: T) -> K): Map<K, ImmutableArray<T>> {
+    val result = LinkedHashMap<K, Any>()
+    for (element in this) {
+        val key = keySelector(element)
+        val builder = result.getOrPut(key) { ImmutableArray.Builder<T>() } as
+            ImmutableArray.Builder<T>
+        builder.add(element)
+    }
+    result.replaceAll { _, builder -> (builder as ImmutableArray.Builder<T>).build() }
+    return result as Map<K, ImmutableArray<T>>
+}
+
+/**
+ * See [Array.groupBy]
+ */
+@Suppress("UNCHECKED_CAST")
+public fun <K> ImmutableBooleanArray.groupBy(keySelector: (element: Boolean) -> K): Map<K, ImmutableBooleanArray> {
+    val result = LinkedHashMap<K, Any>()
+    for (element in this) {
+        val key = keySelector(element)
+        val builder = result.getOrPut(key) { ImmutableBooleanArray.Builder() } as
+            ImmutableBooleanArray.Builder
+        builder.add(element)
+    }
+    result.replaceAll { _, builder -> (builder as ImmutableBooleanArray.Builder).build() }
+    return result as Map<K, ImmutableBooleanArray>
+}
+
+/**
+ * See [Array.groupBy]
+ */
+@Suppress("UNCHECKED_CAST")
+public fun <K> ImmutableByteArray.groupBy(keySelector: (element: Byte) -> K): Map<K, ImmutableByteArray> {
+    val result = LinkedHashMap<K, Any>()
+    for (element in this) {
+        val key = keySelector(element)
+        val builder = result.getOrPut(key) { ImmutableByteArray.Builder() } as
+            ImmutableByteArray.Builder
+        builder.add(element)
+    }
+    result.replaceAll { _, builder -> (builder as ImmutableByteArray.Builder).build() }
+    return result as Map<K, ImmutableByteArray>
+}
+
+/**
+ * See [Array.groupBy]
+ */
+@Suppress("UNCHECKED_CAST")
+public fun <K> ImmutableCharArray.groupBy(keySelector: (element: Char) -> K): Map<K, ImmutableCharArray> {
+    val result = LinkedHashMap<K, Any>()
+    for (element in this) {
+        val key = keySelector(element)
+        val builder = result.getOrPut(key) { ImmutableCharArray.Builder() } as
+            ImmutableCharArray.Builder
+        builder.add(element)
+    }
+    result.replaceAll { _, builder -> (builder as ImmutableCharArray.Builder).build() }
+    return result as Map<K, ImmutableCharArray>
+}
+
+/**
+ * See [Array.groupBy]
+ */
+@Suppress("UNCHECKED_CAST")
+public fun <K> ImmutableShortArray.groupBy(keySelector: (element: Short) -> K): Map<K, ImmutableShortArray> {
+    val result = LinkedHashMap<K, Any>()
+    for (element in this) {
+        val key = keySelector(element)
+        val builder = result.getOrPut(key) { ImmutableShortArray.Builder() } as
+            ImmutableShortArray.Builder
+        builder.add(element)
+    }
+    result.replaceAll { _, builder -> (builder as ImmutableShortArray.Builder).build() }
+    return result as Map<K, ImmutableShortArray>
+}
+
+/**
+ * See [Array.groupBy]
+ */
+@Suppress("UNCHECKED_CAST")
+public fun <K> ImmutableIntArray.groupBy(keySelector: (element: Int) -> K): Map<K, ImmutableIntArray> {
+    val result = LinkedHashMap<K, Any>()
+    for (element in this) {
+        val key = keySelector(element)
+        val builder = result.getOrPut(key) { ImmutableIntArray.Builder() } as
+            ImmutableIntArray.Builder
+        builder.add(element)
+    }
+    result.replaceAll { _, builder -> (builder as ImmutableIntArray.Builder).build() }
+    return result as Map<K, ImmutableIntArray>
+}
+
+/**
+ * See [Array.groupBy]
+ */
+@Suppress("UNCHECKED_CAST")
+public fun <K> ImmutableLongArray.groupBy(keySelector: (element: Long) -> K): Map<K, ImmutableLongArray> {
+    val result = LinkedHashMap<K, Any>()
+    for (element in this) {
+        val key = keySelector(element)
+        val builder = result.getOrPut(key) { ImmutableLongArray.Builder() } as
+            ImmutableLongArray.Builder
+        builder.add(element)
+    }
+    result.replaceAll { _, builder -> (builder as ImmutableLongArray.Builder).build() }
+    return result as Map<K, ImmutableLongArray>
+}
+
+/**
+ * See [Array.groupBy]
+ */
+@Suppress("UNCHECKED_CAST")
+public fun <K> ImmutableFloatArray.groupBy(keySelector: (element: Float) -> K): Map<K, ImmutableFloatArray> {
+    val result = LinkedHashMap<K, Any>()
+    for (element in this) {
+        val key = keySelector(element)
+        val builder = result.getOrPut(key) { ImmutableFloatArray.Builder() } as
+            ImmutableFloatArray.Builder
+        builder.add(element)
+    }
+    result.replaceAll { _, builder -> (builder as ImmutableFloatArray.Builder).build() }
+    return result as Map<K, ImmutableFloatArray>
+}
+
+/**
+ * See [Array.groupBy]
+ */
+@Suppress("UNCHECKED_CAST")
+public fun <K> ImmutableDoubleArray.groupBy(keySelector: (element: Double) -> K): Map<K, ImmutableDoubleArray> {
+    val result = LinkedHashMap<K, Any>()
+    for (element in this) {
+        val key = keySelector(element)
+        val builder = result.getOrPut(key) { ImmutableDoubleArray.Builder() } as
+            ImmutableDoubleArray.Builder
+        builder.add(element)
+    }
+    result.replaceAll { _, builder -> (builder as ImmutableDoubleArray.Builder).build() }
+    return result as Map<K, ImmutableDoubleArray>
 }

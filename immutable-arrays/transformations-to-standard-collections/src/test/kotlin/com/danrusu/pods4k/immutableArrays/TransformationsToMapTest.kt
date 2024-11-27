@@ -96,4 +96,31 @@ class TransformationsToMapTest {
             ),
         )
     }
+
+    @Test
+    fun `groupBy validation`() {
+        expectThat(emptyImmutableArray<String>().groupBy { it.length })
+            .isEqualTo(emptyMap())
+
+        expectThat(immutableArrayOf("a", "bb", "ccc", "dddd", "eeeee").groupBy { it.length % 3 })
+            .isEqualTo(
+                mapOf(
+                    1 to immutableArrayOf("a", "dddd"),
+                    2 to immutableArrayOf("bb", "eeeee"),
+                    0 to immutableArrayOf("ccc"),
+                ),
+            )
+
+        expectThat(emptyImmutableIntArray().groupBy { it % 3 })
+            .isEqualTo(emptyMap())
+
+        expectThat(immutableArrayOf(1, 2, 3, 4, 5).groupBy { it % 3 })
+            .isEqualTo(
+                mapOf(
+                    1 to immutableArrayOf(1, 4),
+                    2 to immutableArrayOf(2, 5),
+                    0 to immutableArrayOf(3),
+                ),
+            )
+    }
 }
