@@ -12,6 +12,7 @@ import com.danrusu.pods4k.immutableArrays.core.multiplicativeSpecializations.Map
 import com.danrusu.pods4k.immutableArrays.core.multiplicativeSpecializations.MapIndexedSpecializationGenerator
 import com.danrusu.pods4k.immutableArrays.core.multiplicativeSpecializations.MapNotNullSpecializationGenerator
 import com.danrusu.pods4k.immutableArrays.core.multiplicativeSpecializations.MapSpecializationGenerator
+import com.danrusu.pods4k.immutableArrays.core.multiplicativeSpecializations.ZipSpecializationGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysToStandardCollections.TransformationsToListFileGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysToStandardCollections.TransformationsToMapFileGenerator
 import com.danrusu.pods4k.immutableArrays.immutableArraysToStandardCollections.TransformationsToSetFileGenerator
@@ -53,6 +54,7 @@ private fun generateImmutableArrayMultiplicativeSpecializations(moduleSourcePath
     MapIndexedNotNullSpecializationGenerator.generate(moduleSourcePath)
     FlatMapSpecializationGenerator.generate(moduleSourcePath)
     FlatMapIndexedSpecializationGenerator.generate(moduleSourcePath)
+    ZipSpecializationGenerator.generate(moduleSourcePath)
 }
 
 private fun generateImmutableArraysToStandardCollectionsModule(target: Project) {
