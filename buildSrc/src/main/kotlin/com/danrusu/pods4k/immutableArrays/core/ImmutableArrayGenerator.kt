@@ -321,6 +321,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addSortedByDescending(baseType)
             addSortedWith(baseType)
             addDistinct(baseType)
+            addDistinctBy(baseType)
 
             companionObject {
                 if (baseType == GENERIC) {
@@ -960,6 +961,29 @@ private fun TypeSpec.Builder.addDistinct(baseType: BaseType) {
         statement("if (size <= 1) return this")
         emptyLine()
         statement("return values.toSet().toImmutableArray()")
+    }
+}
+
+private fun TypeSpec.Builder.addDistinctBy(baseType: BaseType) {
+    val key = TypeVariableName("K")
+    function(
+        kdoc = "Returns an immutable array containing only the elements having distinct keys returned by the [selector]",
+        modifiers = listOf(KModifier.INLINE),
+        name = "distinctBy",
+        parameters = {
+            "selector"(
+                type = lambda(
+                    parameters = { "element"(type = baseType.type) },
+                    returnType = key,
+                ),
+            )
+        },
+        returns = baseType.getGeneratedTypeName(),
+        forceFunctionBody = true,
+    ) {
+        addTypeVariable(key)
+        statement("val keys = HashSet<%T>()", key)
+        statement("return filter { keys.add(selector(it)) }")
     }
 }
 

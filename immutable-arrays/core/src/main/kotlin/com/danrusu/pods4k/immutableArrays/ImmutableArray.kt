@@ -537,6 +537,15 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
         return values.toSet().toImmutableArray()
     }
 
+    /**
+     * Returns an immutable array containing only the elements having distinct keys returned by the
+     * [selector]
+     */
+    public inline fun <K> distinctBy(selector: (element: T) -> K): ImmutableArray<T> {
+        val keys = HashSet<K>()
+        return filter { keys.add(selector(it)) }
+    }
+
     @Suppress("UNCHECKED_CAST")
     public companion object {
         @PublishedApi

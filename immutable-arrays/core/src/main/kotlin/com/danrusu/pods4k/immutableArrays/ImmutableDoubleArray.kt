@@ -532,6 +532,15 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
         return values.toSet().toImmutableArray()
     }
 
+    /**
+     * Returns an immutable array containing only the elements having distinct keys returned by the
+     * [selector]
+     */
+    public inline fun <K> distinctBy(selector: (element: Double) -> K): ImmutableDoubleArray {
+        val keys = HashSet<K>()
+        return filter { keys.add(selector(it)) }
+    }
+
     public companion object {
         @PublishedApi
         internal val EMPTY: ImmutableDoubleArray = ImmutableDoubleArray(DoubleArray(0))

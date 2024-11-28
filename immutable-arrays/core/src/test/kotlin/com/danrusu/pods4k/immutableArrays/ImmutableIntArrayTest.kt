@@ -895,6 +895,15 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `distinctBy validation`() {
+        expectThat(emptyImmutableIntArray().distinctBy { it.toString().length })
+            .isEqualTo(emptyImmutableIntArray())
+
+        expectThat(immutableArrayOf(1, 2, 10, 20, 100).distinctBy { it.toString().length })
+            .isEqualTo(immutableArrayOf(1, 10, 100))
+    }
+
+    @Test
     fun `builder add validation`() {
         val builder = ImmutableIntArray.Builder()
 

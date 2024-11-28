@@ -63,7 +63,8 @@ private fun FileSpec.Builder.addAsList() {
             if (baseType == GENERIC) {
                 addTypeVariable(baseType.type as TypeVariableName)
             }
-            // IMPORTANT: Don't attempt to delegate to the backing array (eg. "return values.asList()") because that can allow an outsider to mutate the backing array via the list wrapper
+            // IMPORTANT: Don't attempt to delegate to the backing array (eg. "return values.asList()") because that
+            // can allow an outsider to mutate the backing array via the list wrapper
             // See https://youtrack.jetbrains.com/issue/KT-70779/Array.asList-exposes-mutation-back-door
             addCode(
                 """

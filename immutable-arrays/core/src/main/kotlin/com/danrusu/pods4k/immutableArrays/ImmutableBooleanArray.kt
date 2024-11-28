@@ -532,6 +532,15 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
         return values.toSet().toImmutableArray()
     }
 
+    /**
+     * Returns an immutable array containing only the elements having distinct keys returned by the
+     * [selector]
+     */
+    public inline fun <K> distinctBy(selector: (element: Boolean) -> K): ImmutableBooleanArray {
+        val keys = HashSet<K>()
+        return filter { keys.add(selector(it)) }
+    }
+
     public companion object {
         @PublishedApi
         internal val EMPTY: ImmutableBooleanArray = ImmutableBooleanArray(BooleanArray(0))

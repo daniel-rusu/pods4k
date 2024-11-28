@@ -9,6 +9,7 @@ _Date TBD_
 
 **New Features:**
 
+* Add `distinctBy` method
 * Add `distinct` method
 * Add `groupBy` extension functions
 * Add `associateWith` extension functions
