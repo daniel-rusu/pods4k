@@ -521,6 +521,17 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
         return temp.toImmutableArray()
     }
 
+    /**
+     * Returns an immutable array containing only the distinct elements from this immutable array.
+     *
+     * Iteration order is preserved and subsequent duplicate elements are ignored.
+     */
+    public fun distinct(): ImmutableBooleanArray {
+        if (size <= 1) return this
+
+        return values.toSet().toImmutableArray()
+    }
+
     public companion object {
         @PublishedApi
         internal val EMPTY: ImmutableBooleanArray = ImmutableBooleanArray(BooleanArray(0))

@@ -521,6 +521,17 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
         return temp.toImmutableArray()
     }
 
+    /**
+     * Returns an immutable array containing only the distinct elements from this immutable array.
+     *
+     * Iteration order is preserved and subsequent duplicate elements are ignored.
+     */
+    public fun distinct(): ImmutableLongArray {
+        if (size <= 1) return this
+
+        return values.toSet().toImmutableArray()
+    }
+
     public companion object {
         @PublishedApi
         internal val EMPTY: ImmutableLongArray = ImmutableLongArray(LongArray(0))

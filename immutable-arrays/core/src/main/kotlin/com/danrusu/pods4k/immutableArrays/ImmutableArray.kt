@@ -526,6 +526,17 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
         return ImmutableArray(backingArray)
     }
 
+    /**
+     * Returns an immutable array containing only the distinct elements from this immutable array.
+     *
+     * Iteration order is preserved and subsequent duplicate elements are ignored.
+     */
+    public fun distinct(): ImmutableArray<T> {
+        if (size <= 1) return this
+
+        return values.toSet().toImmutableArray()
+    }
+
     @Suppress("UNCHECKED_CAST")
     public companion object {
         @PublishedApi

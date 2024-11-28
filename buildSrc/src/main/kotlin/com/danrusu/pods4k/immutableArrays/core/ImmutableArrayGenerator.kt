@@ -320,6 +320,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addSortedBy(baseType)
             addSortedByDescending(baseType)
             addSortedWith(baseType)
+            addDistinct(baseType)
 
             companionObject {
                 if (baseType == GENERIC) {
@@ -942,6 +943,23 @@ private fun TypeSpec.Builder.addSortedWith(baseType: BaseType) {
             statement("%T.sort(temp, comparator)", java.util.Arrays::class)
             statement("return temp.toImmutableArray()")
         }
+    }
+}
+
+private fun TypeSpec.Builder.addDistinct(baseType: BaseType) {
+    function(
+        kdoc = """
+            Returns an immutable array containing only the distinct elements from this immutable array.
+
+            Iteration order is preserved and subsequent duplicate elements are ignored.
+        """.trimIndent(),
+        name = "distinct",
+        returns = baseType.getGeneratedTypeName(),
+        forceFunctionBody = true,
+    ) {
+        statement("if (size <= 1) return this")
+        emptyLine()
+        statement("return values.toSet().toImmutableArray()")
     }
 }
 
