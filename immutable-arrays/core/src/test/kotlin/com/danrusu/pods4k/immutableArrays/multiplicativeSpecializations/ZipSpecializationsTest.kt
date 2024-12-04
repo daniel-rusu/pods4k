@@ -1,6 +1,7 @@
 package com.danrusu.pods4k.immutableArrays.multiplicativeSpecializations
 
 import com.danrusu.pods4k.immutableArrays.emptyImmutableArray
+import com.danrusu.pods4k.immutableArrays.emptyImmutableCharArray
 import com.danrusu.pods4k.immutableArrays.emptyImmutableDoubleArray
 import com.danrusu.pods4k.immutableArrays.emptyImmutableIntArray
 import com.danrusu.pods4k.immutableArrays.immutableArrayOf
@@ -10,7 +11,131 @@ import strikt.assertions.isEqualTo
 
 class ZipSpecializationsTest {
     @Test
-    fun `generic to generic validation`() {
+    fun `zip generic with generic validation`() {
+        with(emptyImmutableArray<String>()) {
+            expectThat(
+                zip(emptyImmutableArray<String>()),
+            ).isEqualTo(emptyImmutableArray<Pair<String, String>>())
+
+            expectThat(
+                zip(immutableArrayOf("one", "two")),
+            ).isEqualTo(emptyImmutableArray<Pair<String, String>>())
+        }
+        with(immutableArrayOf("one", "two")) {
+            expectThat(
+                zip(emptyImmutableArray<String>()),
+            ).isEqualTo(emptyImmutableArray<Pair<String, String>>())
+
+            expectThat(
+                zip(immutableArrayOf("1")),
+            ).isEqualTo(immutableArrayOf(Pair("one", "1")))
+
+            expectThat(
+                zip(immutableArrayOf("1", "2", "3")),
+            ).isEqualTo(
+                immutableArrayOf(
+                    Pair("one", "1"),
+                    Pair("two", "2"),
+                ),
+            )
+        }
+    }
+
+    @Test
+    fun `zip generic with primitive validation`() {
+        with(emptyImmutableArray<String>()) {
+            expectThat(
+                zip(emptyImmutableIntArray()),
+            ).isEqualTo(emptyImmutableArray<Pair<String, Int>>())
+
+            expectThat(
+                zip(immutableArrayOf(1, 2)),
+            ).isEqualTo(emptyImmutableArray<Pair<String, Int>>())
+        }
+        with(immutableArrayOf("one", "two")) {
+            expectThat(
+                zip(emptyImmutableIntArray()),
+            ).isEqualTo(emptyImmutableArray<Pair<String, Int>>())
+
+            expectThat(
+                zip(immutableArrayOf(1)),
+            ).isEqualTo(immutableArrayOf(Pair("one", 1)))
+
+            expectThat(
+                zip(immutableArrayOf(1, 2, 3)),
+            ).isEqualTo(
+                immutableArrayOf(
+                    Pair("one", 1),
+                    Pair("two", 2),
+                ),
+            )
+        }
+    }
+
+    @Test
+    fun `zip primitive with generic validation`() {
+        with(emptyImmutableIntArray()) {
+            expectThat(
+                zip(emptyImmutableArray<String>()),
+            ).isEqualTo(emptyImmutableArray<Pair<Int, String>>())
+
+            expectThat(
+                zip(immutableArrayOf("one", "two")),
+            ).isEqualTo(emptyImmutableArray<Pair<Int, String>>())
+        }
+        with(immutableArrayOf(1, 2)) {
+            expectThat(
+                zip(emptyImmutableArray<String>()),
+            ).isEqualTo(emptyImmutableArray<Pair<Int, String>>())
+
+            expectThat(
+                zip(immutableArrayOf("1")),
+            ).isEqualTo(immutableArrayOf(Pair(1, "1")))
+
+            expectThat(
+                zip(immutableArrayOf("1", "2", "3")),
+            ).isEqualTo(
+                immutableArrayOf(
+                    Pair(1, "1"),
+                    Pair(2, "2"),
+                ),
+            )
+        }
+    }
+
+    @Test
+    fun `zip primitive with primitive validation`() {
+        with(emptyImmutableIntArray()) {
+            expectThat(
+                zip(emptyImmutableCharArray()),
+            ).isEqualTo(emptyImmutableArray<Pair<Int, Char>>())
+
+            expectThat(
+                zip(immutableArrayOf('a', 'b')),
+            ).isEqualTo(emptyImmutableArray<Pair<Int, Char>>())
+        }
+        with(immutableArrayOf(1, 2)) {
+            expectThat(
+                zip(emptyImmutableCharArray()),
+            ).isEqualTo(emptyImmutableArray<Pair<Int, Char>>())
+
+            expectThat(
+                zip(immutableArrayOf('a')),
+            ).isEqualTo(immutableArrayOf(Pair(1, 'a')))
+
+            expectThat(
+                zip(immutableArrayOf('a', 'b', 'c')),
+            ).isEqualTo(
+                immutableArrayOf(
+                    Pair(1, 'a'),
+                    Pair(2, 'b'),
+                ),
+            )
+        }
+    }
+
+    @Test
+    fun `zip transforming generic to generic validation`() {
         with(emptyImmutableArray<String>()) {
             expectThat(
                 zip(emptyImmutableArray()) { a, b -> "$a:$b" },
@@ -36,7 +161,7 @@ class ZipSpecializationsTest {
     }
 
     @Test
-    fun `generic to primitive validation`() {
+    fun `zip transforming generic to primitive validation`() {
         with(emptyImmutableArray<String>()) {
             expectThat(
                 zip(emptyImmutableArray()) { a, b -> a.length + b.length },
@@ -62,7 +187,7 @@ class ZipSpecializationsTest {
     }
 
     @Test
-    fun `primitive to generic validation`() {
+    fun `zip transforming primitive to generic validation`() {
         with(emptyImmutableIntArray()) {
             expectThat(
                 zip(emptyImmutableIntArray()) { a, b -> "$a:$b" },
@@ -88,7 +213,7 @@ class ZipSpecializationsTest {
     }
 
     @Test
-    fun `primitive to primitive validation`() {
+    fun `zip transforming primitive to primitive validation`() {
         with(emptyImmutableIntArray()) {
             expectThat(
                 zip(emptyImmutableIntArray()) { a, b -> (a + b).toDouble() },
