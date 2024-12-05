@@ -60,31 +60,17 @@ Results are normalized to list performance
 
 </details>
 
-### Benchmark Results
+### Copy Operations
 
-Arrays are faster than lists when dealing with one of the 8 base types because lists store wrapper objects scattered
-throughout memory whereas arrays store the values in a contiguous chunk of memory . Arrays are also usually faster when
-dealing with reference types, like strings, because they avoid an extra layer of indirection and an extra set of
-index-out-of-bounds checks:
-
-![Memory Layout of immutable arrays](./resources/benchmarks/map.png)
-
-Immutable arrays are even faster than regular arrays because most transformation operations on regular arrays generate
-lists whereas the same operation on immutable arrays generate immutable arrays.
-
-![Memory Layout of immutable arrays](./resources/benchmarks/partition.png)
-
-Arrays and immutable arrays have similar performance (within margin of error) for most operations that inspect the data
-without transforming it. Both are much faster than lists when dealing with one of the 8 base types:
-
-![Memory Layout of immutable arrays](./resources/benchmarks/any.png)
-
-Immutable Array operations that use arraycopy have significantly higher performance than lists and even regular arrays:
+Operations that copy ranges of values have significantly higher performance than lists and even regular arrays. Note
+that the smaller data types are split into a separate chart to avoid skewing the chart axis since their performance is
+too high!
 
 ![Memory Layout of immutable arrays](./resources/benchmarks/take.png)
 
-Note that I had to split the smaller data types into a separate chart to avoid skewing the chart axis since their
-performance was too high!
+Copy operations on lists or regular arrays accumulate values into an ArrayList one element at a time. Since copy
+operations on immutable arrays generate immutable arrays, we can copy an entire range of values with the low-level
+arraycopy function which uses bulk memory operations to copy multiple elements at a time.
 
 ![Memory Layout of immutable arrays](./resources/benchmarks/takeLast.png)
 
@@ -95,21 +81,39 @@ The `takeWhile` & `takeLastWhile` operations perform similarly so we'll just sho
 The relative performance of the drop operations (`drop`, `dropLast`, `dropWhile`, & `dropLastWhile`) are similar or
 higher than the `take` variants above. We're omitting those for brevity.
 
-![Memory Layout of immutable arrays](./resources/benchmarks/sorted.png)
+### Transformation Operations
+
+Transformation are significantly faster than lists and even regular arrays:
+
+![Memory Layout of immutable arrays](./resources/benchmarks/map.png)
+
+Lists and arrays incur additional overhead as they accumulate values in an ArrayList which checks the capacity of the
+list for each element. Transformations on immutable arrays generate immutable arrays avoiding the ArrayList overhead.
+Additionally, immutable arrays operate on the 8 primitive types directly without incurring the memory overhead of
+auto-boxing or the performance overhead of the indirection that unboxing introduces.
+
+![Memory Layout of immutable arrays](./resources/benchmarks/partition.png)
 
 Sorting becomes extremely fast for smaller data types!
 
+![Memory Layout of immutable arrays](./resources/benchmarks/sorted.png)
+
+Combining two immutable arrays into a larger one is much faster than lists for most data types:
+
 ![Memory Layout of immutable arrays](./resources/benchmarks/plusCollection.png)
+
+### Condition Operations
+
+Immutable arrays are much faster than lists for operations that inspect the data when dealing with one of the 8 base
+types:
+
+![Memory Layout of immutable arrays](./resources/benchmarks/any.png)
 
 ### Benchmark Summary
 
 Although there are many more operations, the above results should provide a pretty good representation of the
-performance improvement of common non-trivial operations.
-
-Immutable arrays are between 2 to 8 times faster than lists for many common operations with some scenarios over 30 times
-faster! Immutable arrays are also significantly faster than regular arrays which was surprising at first until I
-realized that most transformation operations on regular arrays produce lists whereas immutable array operations produce
-immutable arrays.
+performance improvement of common non-trivial operations. Immutable arrays are between 2 to 8 times faster than lists
+for many common operations with some scenarios over 30 times faster!
 
 ## Usage
 
