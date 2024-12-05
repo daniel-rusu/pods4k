@@ -92,6 +92,12 @@ list for each element. Transformations on immutable arrays generate immutable ar
 Additionally, immutable arrays operate on the 8 primitive types directly without incurring the memory overhead of
 auto-boxing or the performance overhead of the indirection that unboxing introduces.
 
+![Memory Layout of immutable arrays](./resources/benchmarks/flatmap.png)
+
+Note that regular arrays are slightly slower than lists here because the Kotlin standard library doesn't have a
+`flatMap` function that operates on nested arrays. We used `elements.flatMap { it.nestedRegularArray.asList() }` as the
+most efficient alternative for regular arrays since `asList()` returns a wrapper without copying the backing array.
+
 ![Memory Layout of immutable arrays](./resources/benchmarks/partition.png)
 
 Sorting becomes extremely fast for smaller data types!
@@ -111,9 +117,9 @@ types:
 
 ### Benchmark Summary
 
-Although there are many more operations, the above results should provide a pretty good representation of the
-performance improvement of common non-trivial operations. Immutable arrays are between 2 to 8 times faster than lists
-for many common operations with some scenarios over 30 times faster!
+Immutable arrays are between 2 to 8 times faster than lists for many common operations with some scenarios over 30 times
+faster!  Although there are many more operations, the above results should provide a pretty good representation of the
+performance improvement of common non-trivial operations.
 
 ## Usage
 
