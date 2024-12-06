@@ -9,6 +9,7 @@ _Date TBD_
 
 **New Features:**
 
+* Add `unzip` specialization
 * Add `zip` extension functions
 * Add `zip` with transform specializations
 * Add `distinctBy` method
