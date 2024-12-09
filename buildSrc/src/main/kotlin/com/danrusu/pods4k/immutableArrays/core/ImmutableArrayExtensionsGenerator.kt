@@ -4,6 +4,7 @@ import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.BaseType.BOOLEAN
 import com.danrusu.pods4k.immutableArrays.BaseType.GENERIC
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
+import com.danrusu.pods4k.utils.addGenericTypes
 import com.danrusu.pods4k.utils.comment
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.createFile
@@ -60,9 +61,8 @@ private fun FileSpec.Builder.addAsList() {
             name = "asList",
             returns = List::class.asTypeName().parameterizedBy(baseType.type),
         ) {
-            if (baseType == GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
+            addGenericTypes(baseType.type)
+
             // IMPORTANT: Don't attempt to delegate to the backing array (eg. "return values.asList()") because that
             // can allow an outsider to mutate the backing array via the list wrapper
             // See https://youtrack.jetbrains.com/issue/KT-70779/Array.asList-exposes-mutation-back-door
@@ -100,9 +100,8 @@ private fun FileSpec.Builder.addContains() {
             returns = Boolean::class.asTypeName(),
             forceFunctionBody = true,
         ) {
-            if (baseType == GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
+            addGenericTypes(baseType.type)
+
             statement("return any { it == element }")
         }
     }
@@ -117,9 +116,8 @@ private fun FileSpec.Builder.addIndexOf() {
             parameters = { "element"(type = baseType.type) },
             returns = Int::class.asTypeName(),
         ) {
-            if (baseType == GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
+            addGenericTypes(baseType.type)
+
             statement("forEachIndexed { index, value -> if (value == element) return index }")
             statement("return -1")
         }
@@ -135,9 +133,8 @@ private fun FileSpec.Builder.addLastIndexOf() {
             parameters = { "element"(type = baseType.type) },
             returns = Int::class.asTypeName(),
         ) {
-            if (baseType == GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
+            addGenericTypes(baseType.type)
+
             controlFlow("for (index in lastIndex downTo 0)") {
                 statement("if (get(index) == element) return index")
             }
@@ -160,9 +157,8 @@ private fun FileSpec.Builder.addGetOrElse() {
             returns = baseType.type,
             forceFunctionBody = true,
         ) {
-            if (baseType == GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
+            addGenericTypes(baseType.type)
+
             statement("return values.getOrElse(index, defaultValue)")
         }
     }
@@ -186,8 +182,9 @@ private fun FileSpec.Builder.addFilterNotNull() {
             returns = returnType,
             forceFunctionBody = true,
         ) {
+            addGenericTypes(nonNullType)
+
             if (baseType == GENERIC) {
-                addTypeVariable(nonNullType as TypeVariableName)
                 jvmName("immutableArrayFilterNotNull")
                 statement("val result = ${baseType.generatedClassName}.Builder<%T>()", nonNullType)
             } else {
@@ -325,9 +322,8 @@ private fun FileSpec.Builder.addPlusImmutableArray() {
             },
             returns = baseType.getGeneratedTypeName(),
         ) {
-            if (baseType == GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
+            addGenericTypes(baseType.type)
+
             controlFlow("when") {
                 statement("isEmpty() -> return other")
                 statement("other.isEmpty() -> return this")
@@ -355,9 +351,8 @@ private fun FileSpec.Builder.addPlusValue() {
             parameters = { "element"(type = baseType.type) },
             returns = baseType.getGeneratedTypeName(),
         ) {
-            if (baseType == GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
+            addGenericTypes(baseType.type)
+
             controlFlow("return build${baseType.generatedClassName}(initialCapacity = size + 1)") {
                 statement("addAll(this@plus)")
                 statement("add(element)")
@@ -419,7 +414,8 @@ private fun FileSpec.Builder.addRequireNoNulls() {
         name = "requireNoNulls",
         returns = GENERIC.getGeneratedClass().parameterizedBy(typeVariable),
     ) {
-        addTypeVariable(GENERIC.type as TypeVariableName)
+        addGenericTypes(GENERIC.type)
+
         statement("if (contains(null)) throw %T(\"null element found in \$this\")", IllegalArgumentException::class)
         emptyLine()
         suppress("UNCHECKED_CAST")
@@ -437,7 +433,8 @@ private fun FileSpec.Builder.addFlatten() {
         forceFunctionBody = true,
     ) {
         jvmName("flattenIterable")
-        addTypeVariable(GENERIC.type as TypeVariableName)
+        addGenericTypes(GENERIC.type)
+
         controlFlow("return build${GENERIC.generatedClassName}()") {
             controlFlow("for (nestedCollection in this@flatten)") {
                 statement("this@build${GENERIC.generatedClassName}.addAll(nestedCollection)")
@@ -454,9 +451,8 @@ private fun FileSpec.Builder.addFlatten() {
             forceFunctionBody = true,
         ) {
             jvmName("flatten${baseType.generatedClassName}")
-            if (baseType == GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
+            addGenericTypes(baseType.type)
+
             controlFlow("return build${baseType.generatedClassName}()") {
                 controlFlow("for (nestedArray in this@flatten)") {
                     statement("this@build${baseType.generatedClassName}.addAll(nestedArray)")

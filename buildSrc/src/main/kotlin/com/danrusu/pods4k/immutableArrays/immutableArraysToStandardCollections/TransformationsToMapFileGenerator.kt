@@ -2,6 +2,7 @@ package com.danrusu.pods4k.immutableArrays.immutableArraysToStandardCollections
 
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
+import com.danrusu.pods4k.utils.addGenericTypes
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.createFile
 import com.danrusu.pods4k.utils.function
@@ -64,11 +65,8 @@ private fun FileSpec.Builder.addAssociate() {
             returns = ClassName("kotlin.collections", "Map").parameterizedBy(key, value),
             forceFunctionBody = true,
         ) {
-            if (baseType == BaseType.GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
-            addTypeVariable(key)
-            addTypeVariable(value)
+            addGenericTypes(baseType.type, key, value)
+
             // Important: This needs to meet the same contract as what's promised by the standard library to maintain
             // iteration order since this library is documented as a replacement for read-only lists.
             statement("return asList().associate(transform)")
@@ -92,10 +90,8 @@ private fun FileSpec.Builder.addAssociateBy() {
             returns = ClassName("kotlin.collections", "Map").parameterizedBy(key, baseType.type),
             forceFunctionBody = true,
         ) {
-            if (baseType == BaseType.GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
-            addTypeVariable(key)
+            addGenericTypes(baseType.type, key)
+
             // Important: This needs to meet the same contract as what's promised by the standard library to maintain
             // iteration order since this library is documented as a replacement for read-only lists.
             statement("return asList().associateBy(keySelector)")
@@ -119,10 +115,7 @@ private fun FileSpec.Builder.addAssociateWith() {
             returns = ClassName("kotlin.collections", "Map").parameterizedBy(baseType.type, value),
             forceFunctionBody = true,
         ) {
-            if (baseType == BaseType.GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
-            addTypeVariable(value)
+            addGenericTypes(baseType.type, value)
             // Important: This needs to meet the same contract as what's promised by the standard library to maintain
             // iteration order since this library is documented as a replacement for read-only lists.
             statement("return asList().associateWith(valueSelector)")
@@ -147,10 +140,7 @@ private fun FileSpec.Builder.addGroupBy() {
         ) {
             // Important: This needs to meet the same contract as what's promised by the standard library to maintain
             // iteration order since this library is documented as a replacement for read-only lists.
-            if (baseType == BaseType.GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
-            addTypeVariable(key)
+            addGenericTypes(baseType.type, key)
             /*
             Reusing the same map to store the builders and the final immutable arrays in order to avoid duplicating the
             memory footprint.

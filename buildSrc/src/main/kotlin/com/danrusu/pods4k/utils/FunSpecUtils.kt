@@ -2,6 +2,8 @@ package com.danrusu.pods4k.utils
 
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.FunSpec
+import com.squareup.kotlinpoet.TypeName
+import com.squareup.kotlinpoet.TypeVariableName
 
 internal fun FunSpec.Builder.suppress(warning: String): FunSpec.Builder {
     return addAnnotation(
@@ -37,4 +39,12 @@ internal fun FunSpec.Builder.controlFlow(
     body: FunSpec.Builder.() -> Unit,
 ) {
     beginControlFlow(controlFlow, *args).apply(body).endControlFlow()
+}
+
+internal fun FunSpec.Builder.addGenericTypes(vararg types: TypeName) {
+    for (type in types) {
+        if (type is TypeVariableName) {
+            addTypeVariable(type)
+        }
+    }
 }

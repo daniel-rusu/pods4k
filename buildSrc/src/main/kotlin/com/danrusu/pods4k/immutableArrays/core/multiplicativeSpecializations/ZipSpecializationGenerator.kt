@@ -1,6 +1,7 @@
 package com.danrusu.pods4k.immutableArrays.core.multiplicativeSpecializations
 
 import com.danrusu.pods4k.immutableArrays.BaseType
+import com.danrusu.pods4k.utils.addGenericTypes
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.statement
@@ -39,12 +40,8 @@ private fun FileSpec.Builder.addZipFunction(type1: BaseType, type2: BaseType) {
             .parameterizedBy(Pair::class.asTypeName().parameterizedBy(type1.type, type2ValueName)),
         forceFunctionBody = true,
     ) {
-        if (type1 == BaseType.GENERIC) {
-            addTypeVariable(type1.type as TypeVariableName)
-        }
-        if (type2 == BaseType.GENERIC) {
-            addTypeVariable(type2ValueName as TypeVariableName)
-        }
+        addGenericTypes(type1.type, type2ValueName)
+
         controlFlow("return ${BaseType.GENERIC.generatedClassName}(minOf(size, other.size)) { index ->") {
             statement("Pair(this[index], other[index])")
         }
@@ -84,12 +81,8 @@ private fun FileSpec.Builder.addZipWithTransformFunction(fromType: BaseType, toT
         forceFunctionBody = true,
     ) {
         addAnnotation(OverloadResolutionByLambdaReturnType::class)
-        if (fromType == BaseType.GENERIC) {
-            addTypeVariable(fromType.type as TypeVariableName)
-        }
-        if (toType == BaseType.GENERIC) {
-            addTypeVariable(valueType as TypeVariableName)
-        }
+        addGenericTypes(fromType.type, valueType)
+
         controlFlow("return ${toType.generatedClassName}(minOf(size, other.size)) { index ->") {
             statement("transform(this[index], other[index])")
         }

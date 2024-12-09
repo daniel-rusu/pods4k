@@ -3,6 +3,7 @@ package com.danrusu.pods4k.immutableArrays.core
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.BaseType.GENERIC
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
+import com.danrusu.pods4k.utils.addGenericTypes
 import com.danrusu.pods4k.utils.comment
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.createFile
@@ -50,9 +51,8 @@ private fun FileSpec.Builder.addEmptyFunctions() {
             name = "empty${baseType.generatedClassName}",
             returns = baseType.getGeneratedTypeName(),
         ) {
-            if (baseType == GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
+            addGenericTypes(baseType.type)
+
             statement("return ${baseType.generatedClassName}.EMPTY")
         }
     }
@@ -65,7 +65,8 @@ private fun FileSpec.Builder.addImmutableArrayOf() {
         name = "immutableArrayOf",
         returns = GENERIC.getGeneratedTypeName(),
     ) {
-        addTypeVariable(GENERIC.type as TypeVariableName)
+        addGenericTypes(GENERIC.type)
+
         statement("return empty${GENERIC.generatedClassName}()")
     }
 
@@ -77,9 +78,8 @@ private fun FileSpec.Builder.addImmutableArrayOf() {
             returns = baseType.getGeneratedTypeName(),
             forceFunctionBody = true,
         ) {
-            if (baseType == GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
+            addGenericTypes(baseType.type)
+
             statement("return build${baseType.generatedClassName}(initialCapacity = values.size) { addAll(values) }")
         }
     }
@@ -102,8 +102,8 @@ private fun FileSpec.Builder.addImmutableArrayOfNotNull() {
             returns = returnType,
             forceFunctionBody = true,
         ) {
+            addGenericTypes(nonNullType)
             if (baseType == GENERIC) {
-                addTypeVariable(nonNullType as TypeVariableName)
                 jvmName("immutableArrayOfNotNull")
             } else {
                 jvmName("immutableArrayOfNotNull_${baseType.typeClass.simpleName}")
@@ -137,8 +137,8 @@ private fun FileSpec.Builder.addBuilderFunctions() {
             returns = baseType.getGeneratedTypeName(),
             forceFunctionBody = true,
         ) {
+            addGenericTypes(baseType.type)
             if (baseType == GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
                 statement(
                     "return ${baseType.generatedClassName}.Builder<%T>(initialCapacity).apply(body).build()",
                     baseType.type,

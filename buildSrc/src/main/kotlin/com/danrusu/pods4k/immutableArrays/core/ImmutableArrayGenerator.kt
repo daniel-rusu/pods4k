@@ -4,6 +4,7 @@ import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.BaseType.GENERIC
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
 import com.danrusu.pods4k.utils.ParameterDSL
+import com.danrusu.pods4k.utils.addGenericTypes
 import com.danrusu.pods4k.utils.addPrimaryConstructor
 import com.danrusu.pods4k.utils.comment
 import com.danrusu.pods4k.utils.companionObject
@@ -981,7 +982,8 @@ private fun TypeSpec.Builder.addDistinctBy(baseType: BaseType) {
         returns = baseType.getGeneratedTypeName(),
         forceFunctionBody = true,
     ) {
-        addTypeVariable(key)
+        addGenericTypes(key)
+
         statement("val keys = HashSet<%T>()", key)
         statement("return filter { keys.add(selector(it)) }")
     }
@@ -1024,9 +1026,8 @@ private fun TypeSpec.Builder.addCompanionObjectInvokeOperator(baseType: BaseType
         },
         returns = returnType,
     ) {
-        if (baseType == GENERIC) {
-            addTypeVariable(baseType.type as TypeVariableName)
-        }
+        addGenericTypes(baseType.type)
+
         statement("if (size == 0) return EMPTY")
         emptyLine()
         statement("val backingArray = ${baseType.backingArrayConstructor}(size) { index -> init(index) }")

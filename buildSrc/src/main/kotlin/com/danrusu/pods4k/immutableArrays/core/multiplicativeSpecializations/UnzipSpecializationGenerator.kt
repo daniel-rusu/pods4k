@@ -1,6 +1,7 @@
 package com.danrusu.pods4k.immutableArrays.core.multiplicativeSpecializations
 
 import com.danrusu.pods4k.immutableArrays.BaseType
+import com.danrusu.pods4k.utils.addGenericTypes
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.statement
@@ -37,23 +38,20 @@ private fun FileSpec.Builder.addUnzipFunction(type1: BaseType, type2: BaseType) 
         returns = Pair::class.asTypeName().parameterizedBy(type1.getGeneratedTypeName(), type2Name),
     ) {
         jvmName("unzip_${type1.name}_${type2.name}")
-        if (type1 == BaseType.GENERIC) {
-            addTypeVariable(type1.type as TypeVariableName)
-        }
-        if (type2 == BaseType.GENERIC) {
-            addTypeVariable(type2ValueName as TypeVariableName)
-        }
+        addGenericTypes(type1.type, type2ValueName)
 
         if (type1 == BaseType.GENERIC) {
             statement("val first = ${type1.generatedClassName}.Builder<%T>(initialCapacity = size)", type1.type)
         } else {
             statement("val first = ${type1.generatedClassName}.Builder(initialCapacity = size)")
         }
+
         if (type2 == BaseType.GENERIC) {
             statement("val second = ${type2.generatedClassName}.Builder<%T>(initialCapacity = size)", type2ValueName)
         } else {
             statement("val second = ${type2.generatedClassName}.Builder(initialCapacity = size)")
         }
+
         controlFlow("for (pair in this)") {
             statement("first.add(pair.first)")
             statement("second.add(pair.second)")

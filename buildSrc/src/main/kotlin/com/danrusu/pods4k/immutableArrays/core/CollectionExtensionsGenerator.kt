@@ -3,6 +3,7 @@ package com.danrusu.pods4k.immutableArrays.core
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.BaseType.GENERIC
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
+import com.danrusu.pods4k.utils.addGenericTypes
 import com.danrusu.pods4k.utils.comment
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.createFile
@@ -12,7 +13,6 @@ import com.danrusu.pods4k.utils.statement
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
-import com.squareup.kotlinpoet.TypeVariableName
 import com.squareup.kotlinpoet.WildcardTypeName
 import com.squareup.kotlinpoet.asTypeName
 import java.io.File
@@ -39,9 +39,8 @@ private fun FileSpec.Builder.addIterableToImmutableArray() {
             name = "toImmutableArray",
             returns = baseType.getGeneratedTypeName(),
         ) {
-            if (baseType == GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
+            addGenericTypes(baseType.type)
+
             controlFlow("val initialCapacity = when (this)") {
                 statement("is Collection<%T> -> size", baseType.type)
                 statement("else -> 10")
@@ -71,9 +70,8 @@ private fun FileSpec.Builder.addCollectionContainsAll() {
             returns = Boolean::class.asTypeName(),
             forceFunctionBody = true,
         ) {
-            if (baseType == GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
+            addGenericTypes(baseType.type)
+
             statement("return containsAll(elements.asList())")
         }
     }
@@ -93,9 +91,8 @@ private fun FileSpec.Builder.addMutableCollectionAddAll() {
             parameters = { "elements"(type = baseType.getGeneratedTypeName()) },
             returns = Boolean::class.asTypeName(),
         ) {
-            if (baseType == GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
+            addGenericTypes(baseType.type)
+
             comment(
                 "Wrap the backing array without copying the contents so we can delegate to the existing addAll " +
                     "method which ensures sufficient capacity in a single step",
@@ -122,9 +119,8 @@ private fun FileSpec.Builder.addMutableCollectionRemoveAll() {
             returns = Boolean::class.asTypeName(),
             forceFunctionBody = true,
         ) {
-            if (baseType == GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
+            addGenericTypes(baseType.type)
+
             statement("return removeAll(elements.asList())")
         }
     }
@@ -145,9 +141,8 @@ private fun FileSpec.Builder.addMutableCollectionRetainAll() {
             returns = Boolean::class.asTypeName(),
             forceFunctionBody = true,
         ) {
-            if (baseType == GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
+            addGenericTypes(baseType.type)
+
             statement("return retainAll(elements.asList())")
         }
     }
@@ -163,9 +158,8 @@ private fun FileSpec.Builder.addIterableFlatten() {
             forceFunctionBody = true,
         ) {
             jvmName("flattenIterableOf${baseType.generatedClassName}")
-            if (baseType == GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
+            addGenericTypes(baseType.type)
+
             controlFlow("return build${baseType.generatedClassName}()") {
                 controlFlow("for (nestedArray in this@flatten)") {
                     statement("this@build${baseType.generatedClassName}.addAll(nestedArray)")

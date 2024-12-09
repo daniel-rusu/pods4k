@@ -1,6 +1,7 @@
 package com.danrusu.pods4k.immutableArrays.core.multiplicativeSpecializations
 
 import com.danrusu.pods4k.immutableArrays.BaseType
+import com.danrusu.pods4k.utils.addGenericTypes
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.statement
@@ -48,11 +49,9 @@ private fun FileSpec.Builder.addFlatMapFunction(fromType: BaseType, toType: Base
     ) {
         jvmName("flatMap${toType.typeClass.simpleName}Iterable")
         addAnnotation(OverloadResolutionByLambdaReturnType::class)
-        if (fromType == BaseType.GENERIC) {
-            addTypeVariable(fromType.type as TypeVariableName)
-        }
+        addGenericTypes(fromType.type, mappedType)
+
         if (toType == BaseType.GENERIC) {
-            addTypeVariable(mappedType as TypeVariableName)
             statement("val builder = ${toType.generatedClassName}.Builder<%T>()", mappedType)
         } else {
             statement("val builder = ${toType.generatedClassName}.Builder()")
@@ -79,12 +78,7 @@ private fun FileSpec.Builder.addFlatMapFunction(fromType: BaseType, toType: Base
     ) {
         jvmName("flatMap${toType.generatedClassName}")
         addAnnotation(OverloadResolutionByLambdaReturnType::class)
-        if (fromType == BaseType.GENERIC) {
-            addTypeVariable(fromType.type as TypeVariableName)
-        }
-        if (toType == BaseType.GENERIC) {
-            addTypeVariable(mappedType as TypeVariableName)
-        }
+        addGenericTypes(fromType.type, mappedType)
 
         /*
         Mapping the elements into an array of sub-arrays is more memory efficient and also improves performance based

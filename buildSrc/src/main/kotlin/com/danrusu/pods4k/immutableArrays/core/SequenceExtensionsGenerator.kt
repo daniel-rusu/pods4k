@@ -1,8 +1,8 @@
 package com.danrusu.pods4k.immutableArrays.core
 
 import com.danrusu.pods4k.immutableArrays.BaseType
-import com.danrusu.pods4k.immutableArrays.BaseType.GENERIC
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
+import com.danrusu.pods4k.utils.addGenericTypes
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.createFile
 import com.danrusu.pods4k.utils.function
@@ -10,7 +10,6 @@ import com.danrusu.pods4k.utils.jvmName
 import com.danrusu.pods4k.utils.statement
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
-import com.squareup.kotlinpoet.TypeVariableName
 import com.squareup.kotlinpoet.asTypeName
 import java.io.File
 
@@ -33,9 +32,8 @@ private fun FileSpec.Builder.addToImmutableArray() {
             returns = baseType.getGeneratedTypeName(),
             forceFunctionBody = true,
         ) {
-            if (baseType == GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
+            addGenericTypes(baseType.type)
+
             controlFlow("return build${baseType.generatedClassName}") {
                 statement("addAll(this@toImmutableArray)")
             }
@@ -57,9 +55,8 @@ private fun FileSpec.Builder.addFlatten() {
             forceFunctionBody = true,
         ) {
             jvmName("flattenSequenceOf${baseType.generatedClassName}")
-            if (baseType == GENERIC) {
-                addTypeVariable(baseType.type as TypeVariableName)
-            }
+            addGenericTypes(baseType.type)
+
             statement("return map { it.asIterable() }.flatten()")
         }
     }
