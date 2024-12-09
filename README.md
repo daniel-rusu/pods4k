@@ -34,29 +34,42 @@ Alternatively, you can [pick & choose](publishing/bom/README.md) individual comp
 
 ## Immutable Arrays
 
-[Immutable Arrays](immutable-arrays/README.md) are a safer and more efficient alternative to read-only lists while
-maintaining familiar operations. Immutable arrays are up to 12X faster than lists and use up to 32X less memory!
+[Immutable Arrays](immutable-arrays/README.md) offer a safer and more efficient alternative to lists while maintaining
+the same look and
+feel.
 
-Unlike regular arrays, the elements cannot be re-assigned, so immutable arrays can be safely shared without needing
-immutable collections:
+### Key Benefits
+
+* **Clean & Familiar**
+    * Uses a list-like syntax ensuring easy adoption with clean code.
+* **True Immutability**
+    * Unlike read-only lists, Immutable Arrays cannot be mutated through casting.
+* **Memory Efficient**
+    * Up to 32 times less memory than lists for many common operations!
+* **Fast**
+    * 2 to 8 times faster than lists for many common operations, with some even faster!
+* **Type Safety**
+    * Accidental mutation attempts are prevented at compile time.
+
+### Usage
 
 ```kotlin
-val names = immutableArrayOf("Dan", "Bob")
-println(names[0]) // "Dan"
+val people = immutableArrayOf(dan, jill, bobby)
+people[0] // dan
 
-names[1] = "Jane" // Compile error: No set method providing array access
+// Normal iteration with loops, forEach, asSequence, etc.
+for (person in people) {
+    sendMarketingEmail(person)
+}
+
+// All the typical transformations and conditions
+val adults = people.filter { it.age >= 18 }
+val adultAges = adults.map { it.age }
+val containsRetirees = adults.any { it.isRetired() }
 ```
 
-Immutable arrays are also more efficient than regular arrays as most transformation operations on arrays generate lists:
-
-```kotlin
-// This generates a List<Int> when the `people` variable is an Array<Person>
-// but generates an ImmutableIntArray when `people` variable is an ImmutableArray<Person>
-val ages = people.map { it.age }
-```
-
-See [Immutable Arrays](immutable-arrays/README.md) for more specifics along with a
-detailed comparison against regular arrays, read-only lists, and immutable lists.
+See [Immutable Arrays](immutable-arrays/README.md) for more specifics along with benchmarks and detailed comparisons
+against regular arrays, read-only lists, and immutable lists.
 
 ## Minimum Requirements
 
