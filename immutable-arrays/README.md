@@ -62,6 +62,10 @@ Results are normalized to list performance
 
 </details>
 
+Note that comparisons against regular arrays are like-for-like (eg. `ImmutableIntArray` vs `IntArray`) to give regular
+arrays the best possible result. To interpret the charts, when the `elements` type is `Array` and the data type
+is `Boolean` then a primitive `BooleanArray` is used etc.
+
 ### Copy Operations
 
 Operations that copy ranges of values have significantly higher performance than lists and even regular arrays. The
