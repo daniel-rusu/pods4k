@@ -316,7 +316,7 @@ names.partition { it.length % 2 == 0 } // Pair(["Jill"], ["Dan", "Bobby"])
 
 ## Benefits vs Alternatives
 
-| Feature                  | Immutable Arrays | Regular Arrays         | Read-only Lists                      | Unmodifiable Lists          | Immutable Lists           |
+| Feature                  | Immutable Arrays | Regular Arrays         | Read-only Lists                      | Unmodifiable Lists          | Java Immutable Lists      |
 |--------------------------|------------------|------------------------|--------------------------------------|-----------------------------|---------------------------|
 | True Immutability        | ✅                | ❌                      | ❌ <br/>Casting enables mutation      | ❌ <br/>Mutable backing list | ✅                         |
 | Memory Efficiency        | ✅✅               | ✅                      | ❌                                    | ❌                           | ❌                         |
@@ -534,13 +534,13 @@ indirection caused by the view wrapper.
 
 <br>
 
-### Benefits over immutable lists
+### Benefits over immutable lists from Java (such as Guava)
 
 <details>
 <summary>No mutation exceptions at runtime</summary>
 
-Immutable lists implement the Java `List` interface and override mutating methods to throw exceptions. Although this
-prevents mutation, bad usages result in runtime exceptions affecting the user experience.
+Immutable lists defined in Java implement the mutable Java `List` interface and override mutating methods to throw
+exceptions. Although this prevents mutation, bad usages result in runtime exceptions affecting the user experience.
 
 Attempting to mutate an immutable array won't even compile preventing this category of defects altogether.
 
