@@ -186,10 +186,10 @@ private fun FileSpec.Builder.addFilterNotNull() {
 
             if (baseType == GENERIC) {
                 jvmName("immutableArrayFilterNotNull")
-                statement("val result = ${baseType.generatedClassName}.Builder<%T>()", nonNullType)
+                statement("val result = ${baseType.generatedClassName}.Builder<%T>(size)", nonNullType)
             } else {
                 jvmName("immutableArrayFilterNotNull_${baseType.typeClass.simpleName}")
-                statement("val result = ${baseType.generatedClassName}.Builder()")
+                statement("val result = ${baseType.generatedClassName}.Builder(size)")
             }
             controlFlow("forEach { value ->") {
                 controlFlow("if (value != null)") {

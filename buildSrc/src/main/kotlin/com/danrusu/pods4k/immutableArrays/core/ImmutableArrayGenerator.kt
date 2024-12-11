@@ -734,9 +734,9 @@ private fun TypeSpec.Builder.addFilter(baseType: BaseType) {
         returns = baseType.getGeneratedTypeName(),
     ) {
         if (baseType == GENERIC) {
-            statement("val result = Builder<%T>()", baseType.type)
+            statement("val result = Builder<%T>(size)", baseType.type)
         } else {
-            statement("val result = Builder()")
+            statement("val result = Builder(size)")
         }
         controlFlow("for (element in values)") {
             controlFlow("if (predicate(element))") {
@@ -765,9 +765,9 @@ private fun TypeSpec.Builder.addFilterIndexed(baseType: BaseType) {
         returns = baseType.getGeneratedTypeName(),
     ) {
         if (baseType == GENERIC) {
-            statement("val result = Builder<%T>()", baseType.type)
+            statement("val result = Builder<%T>(size)", baseType.type)
         } else {
-            statement("val result = Builder()")
+            statement("val result = Builder(size)")
         }
         controlFlow("forEachIndexed { index, element ->") {
             controlFlow("if (predicate(index, element))") {
@@ -789,9 +789,9 @@ private fun TypeSpec.Builder.addFilterNot(baseType: BaseType) {
         returns = baseType.getGeneratedTypeName(),
     ) {
         if (baseType == GENERIC) {
-            statement("val result = Builder<%T>()", baseType.type)
+            statement("val result = Builder<%T>(size)", baseType.type)
         } else {
-            statement("val result = Builder()")
+            statement("val result = Builder(size)")
         }
         controlFlow("for (element in values)") {
             controlFlow("if (!predicate(element))") {

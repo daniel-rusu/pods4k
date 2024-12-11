@@ -25,7 +25,7 @@ import kotlin.Short
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T, R> ImmutableArray<T>.mapNotNull(transform: (element: T) -> R?): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
+    val builder = ImmutableArray.Builder<R>(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -37,7 +37,7 @@ public inline fun <T, R> ImmutableArray<T>.mapNotNull(transform: (element: T) ->
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Boolean?): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
+    val builder = ImmutableBooleanArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -49,7 +49,7 @@ public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Bo
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Byte?): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
+    val builder = ImmutableByteArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -61,7 +61,7 @@ public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> By
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Char?): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
+    val builder = ImmutableCharArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -73,7 +73,7 @@ public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Ch
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Short?): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
+    val builder = ImmutableShortArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -85,7 +85,7 @@ public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Sh
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Int?): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
+    val builder = ImmutableIntArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -97,7 +97,7 @@ public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> In
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Long?): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
+    val builder = ImmutableLongArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -109,7 +109,7 @@ public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Lo
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Float?): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
+    val builder = ImmutableFloatArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -121,7 +121,7 @@ public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Fl
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Double?): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
+    val builder = ImmutableDoubleArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -133,7 +133,7 @@ public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Do
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableBooleanArray.mapNotNull(transform: (element: Boolean) -> R?): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
+    val builder = ImmutableArray.Builder<R>(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -145,7 +145,7 @@ public inline fun <R> ImmutableBooleanArray.mapNotNull(transform: (element: Bool
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean) -> Boolean?): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
+    val builder = ImmutableBooleanArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -157,7 +157,7 @@ public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean)
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean) -> Byte?): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
+    val builder = ImmutableByteArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -169,7 +169,7 @@ public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean)
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean) -> Char?): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
+    val builder = ImmutableCharArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -181,7 +181,7 @@ public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean)
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean) -> Short?): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
+    val builder = ImmutableShortArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -193,7 +193,7 @@ public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean)
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean) -> Int?): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
+    val builder = ImmutableIntArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -205,7 +205,7 @@ public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean)
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean) -> Long?): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
+    val builder = ImmutableLongArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -217,7 +217,7 @@ public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean)
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean) -> Float?): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
+    val builder = ImmutableFloatArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -229,7 +229,7 @@ public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean)
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean) -> Double?): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
+    val builder = ImmutableDoubleArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -241,7 +241,7 @@ public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean)
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableByteArray.mapNotNull(transform: (element: Byte) -> R?): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
+    val builder = ImmutableArray.Builder<R>(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -253,7 +253,7 @@ public inline fun <R> ImmutableByteArray.mapNotNull(transform: (element: Byte) -
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Boolean?): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
+    val builder = ImmutableBooleanArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -265,7 +265,7 @@ public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Bo
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Byte?): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
+    val builder = ImmutableByteArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -277,7 +277,7 @@ public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> By
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Char?): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
+    val builder = ImmutableCharArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -289,7 +289,7 @@ public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Ch
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Short?): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
+    val builder = ImmutableShortArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -301,7 +301,7 @@ public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Sh
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Int?): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
+    val builder = ImmutableIntArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -313,7 +313,7 @@ public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> In
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Long?): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
+    val builder = ImmutableLongArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -325,7 +325,7 @@ public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Lo
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Float?): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
+    val builder = ImmutableFloatArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -337,7 +337,7 @@ public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Fl
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Double?): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
+    val builder = ImmutableDoubleArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -349,7 +349,7 @@ public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Do
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableCharArray.mapNotNull(transform: (element: Char) -> R?): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
+    val builder = ImmutableArray.Builder<R>(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -361,7 +361,7 @@ public inline fun <R> ImmutableCharArray.mapNotNull(transform: (element: Char) -
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Boolean?): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
+    val builder = ImmutableBooleanArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -373,7 +373,7 @@ public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Bo
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Byte?): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
+    val builder = ImmutableByteArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -385,7 +385,7 @@ public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> By
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Char?): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
+    val builder = ImmutableCharArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -397,7 +397,7 @@ public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Ch
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Short?): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
+    val builder = ImmutableShortArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -409,7 +409,7 @@ public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Sh
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Int?): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
+    val builder = ImmutableIntArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -421,7 +421,7 @@ public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> In
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Long?): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
+    val builder = ImmutableLongArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -433,7 +433,7 @@ public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Lo
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Float?): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
+    val builder = ImmutableFloatArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -445,7 +445,7 @@ public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Fl
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Double?): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
+    val builder = ImmutableDoubleArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -457,7 +457,7 @@ public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Do
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableShortArray.mapNotNull(transform: (element: Short) -> R?): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
+    val builder = ImmutableArray.Builder<R>(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -469,7 +469,7 @@ public inline fun <R> ImmutableShortArray.mapNotNull(transform: (element: Short)
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> Boolean?): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
+    val builder = ImmutableBooleanArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -481,7 +481,7 @@ public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> 
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> Byte?): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
+    val builder = ImmutableByteArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -493,7 +493,7 @@ public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> 
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> Char?): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
+    val builder = ImmutableCharArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -505,7 +505,7 @@ public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> 
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> Short?): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
+    val builder = ImmutableShortArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -517,7 +517,7 @@ public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> 
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> Int?): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
+    val builder = ImmutableIntArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -529,7 +529,7 @@ public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> 
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> Long?): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
+    val builder = ImmutableLongArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -541,7 +541,7 @@ public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> 
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> Float?): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
+    val builder = ImmutableFloatArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -553,7 +553,7 @@ public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> 
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> Double?): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
+    val builder = ImmutableDoubleArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -565,7 +565,7 @@ public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> 
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableIntArray.mapNotNull(transform: (element: Int) -> R?): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
+    val builder = ImmutableArray.Builder<R>(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -577,7 +577,7 @@ public inline fun <R> ImmutableIntArray.mapNotNull(transform: (element: Int) -> 
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Boolean?): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
+    val builder = ImmutableBooleanArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -589,7 +589,7 @@ public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Bool
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Byte?): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
+    val builder = ImmutableByteArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -601,7 +601,7 @@ public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Byte
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Char?): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
+    val builder = ImmutableCharArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -613,7 +613,7 @@ public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Char
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Short?): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
+    val builder = ImmutableShortArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -625,7 +625,7 @@ public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Shor
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Int?): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
+    val builder = ImmutableIntArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -637,7 +637,7 @@ public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Int?
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Long?): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
+    val builder = ImmutableLongArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -649,7 +649,7 @@ public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Long
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Float?): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
+    val builder = ImmutableFloatArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -661,7 +661,7 @@ public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Floa
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Double?): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
+    val builder = ImmutableDoubleArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -673,7 +673,7 @@ public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Doub
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableLongArray.mapNotNull(transform: (element: Long) -> R?): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
+    val builder = ImmutableArray.Builder<R>(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -685,7 +685,7 @@ public inline fun <R> ImmutableLongArray.mapNotNull(transform: (element: Long) -
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Boolean?): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
+    val builder = ImmutableBooleanArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -697,7 +697,7 @@ public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Bo
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Byte?): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
+    val builder = ImmutableByteArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -709,7 +709,7 @@ public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> By
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Char?): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
+    val builder = ImmutableCharArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -721,7 +721,7 @@ public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Ch
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Short?): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
+    val builder = ImmutableShortArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -733,7 +733,7 @@ public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Sh
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Int?): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
+    val builder = ImmutableIntArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -745,7 +745,7 @@ public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> In
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Long?): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
+    val builder = ImmutableLongArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -757,7 +757,7 @@ public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Lo
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Float?): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
+    val builder = ImmutableFloatArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -769,7 +769,7 @@ public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Fl
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Double?): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
+    val builder = ImmutableDoubleArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -781,7 +781,7 @@ public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Do
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableFloatArray.mapNotNull(transform: (element: Float) -> R?): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
+    val builder = ImmutableArray.Builder<R>(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -793,7 +793,7 @@ public inline fun <R> ImmutableFloatArray.mapNotNull(transform: (element: Float)
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> Boolean?): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
+    val builder = ImmutableBooleanArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -805,7 +805,7 @@ public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> 
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> Byte?): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
+    val builder = ImmutableByteArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -817,7 +817,7 @@ public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> 
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> Char?): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
+    val builder = ImmutableCharArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -829,7 +829,7 @@ public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> 
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> Short?): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
+    val builder = ImmutableShortArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -841,7 +841,7 @@ public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> 
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> Int?): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
+    val builder = ImmutableIntArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -853,7 +853,7 @@ public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> 
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> Long?): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
+    val builder = ImmutableLongArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -865,7 +865,7 @@ public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> 
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> Float?): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
+    val builder = ImmutableFloatArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -877,7 +877,7 @@ public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> 
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> Double?): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
+    val builder = ImmutableDoubleArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -889,7 +889,7 @@ public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> 
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableDoubleArray.mapNotNull(transform: (element: Double) -> R?): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
+    val builder = ImmutableArray.Builder<R>(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -901,7 +901,7 @@ public inline fun <R> ImmutableDoubleArray.mapNotNull(transform: (element: Doubl
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -> Boolean?): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
+    val builder = ImmutableBooleanArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -913,7 +913,7 @@ public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -> Byte?): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
+    val builder = ImmutableByteArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -925,7 +925,7 @@ public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -> Char?): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
+    val builder = ImmutableCharArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -937,7 +937,7 @@ public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -> Short?): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
+    val builder = ImmutableShortArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -949,7 +949,7 @@ public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -> Int?): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
+    val builder = ImmutableIntArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -961,7 +961,7 @@ public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -> Long?): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
+    val builder = ImmutableLongArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -973,7 +973,7 @@ public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -> Float?): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
+    val builder = ImmutableFloatArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
@@ -985,7 +985,7 @@ public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -> Double?): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
+    val builder = ImmutableDoubleArray.Builder(size)
     forEach { element ->
         transform(element)?.let { builder.add(it) }
     }
