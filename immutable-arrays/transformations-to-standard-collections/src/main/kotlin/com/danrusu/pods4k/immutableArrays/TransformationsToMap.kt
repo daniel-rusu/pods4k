@@ -216,7 +216,7 @@ public fun <T, K> ImmutableArray<T>.groupBy(keySelector: (element: T) -> K): Map
     val result = LinkedHashMap<K, Any>()
     for (element in this) {
         val key = keySelector(element)
-        val builder = result.getOrPut(key) { ImmutableArray.Builder<T>() } as
+        val builder = result.getOrPut(key) { ImmutableArray.Builder<T>(size) } as
             ImmutableArray.Builder<T>
         builder.add(element)
     }
@@ -232,7 +232,7 @@ public fun <K> ImmutableBooleanArray.groupBy(keySelector: (element: Boolean) -> 
     val result = LinkedHashMap<K, Any>()
     for (element in this) {
         val key = keySelector(element)
-        val builder = result.getOrPut(key) { ImmutableBooleanArray.Builder() } as
+        val builder = result.getOrPut(key) { ImmutableBooleanArray.Builder(size) } as
             ImmutableBooleanArray.Builder
         builder.add(element)
     }
@@ -248,7 +248,7 @@ public fun <K> ImmutableByteArray.groupBy(keySelector: (element: Byte) -> K): Ma
     val result = LinkedHashMap<K, Any>()
     for (element in this) {
         val key = keySelector(element)
-        val builder = result.getOrPut(key) { ImmutableByteArray.Builder() } as
+        val builder = result.getOrPut(key) { ImmutableByteArray.Builder(size) } as
             ImmutableByteArray.Builder
         builder.add(element)
     }
@@ -264,7 +264,7 @@ public fun <K> ImmutableCharArray.groupBy(keySelector: (element: Char) -> K): Ma
     val result = LinkedHashMap<K, Any>()
     for (element in this) {
         val key = keySelector(element)
-        val builder = result.getOrPut(key) { ImmutableCharArray.Builder() } as
+        val builder = result.getOrPut(key) { ImmutableCharArray.Builder(size) } as
             ImmutableCharArray.Builder
         builder.add(element)
     }
@@ -280,7 +280,7 @@ public fun <K> ImmutableShortArray.groupBy(keySelector: (element: Short) -> K): 
     val result = LinkedHashMap<K, Any>()
     for (element in this) {
         val key = keySelector(element)
-        val builder = result.getOrPut(key) { ImmutableShortArray.Builder() } as
+        val builder = result.getOrPut(key) { ImmutableShortArray.Builder(size) } as
             ImmutableShortArray.Builder
         builder.add(element)
     }
@@ -296,7 +296,7 @@ public fun <K> ImmutableIntArray.groupBy(keySelector: (element: Int) -> K): Map<
     val result = LinkedHashMap<K, Any>()
     for (element in this) {
         val key = keySelector(element)
-        val builder = result.getOrPut(key) { ImmutableIntArray.Builder() } as
+        val builder = result.getOrPut(key) { ImmutableIntArray.Builder(size) } as
             ImmutableIntArray.Builder
         builder.add(element)
     }
@@ -312,7 +312,7 @@ public fun <K> ImmutableLongArray.groupBy(keySelector: (element: Long) -> K): Ma
     val result = LinkedHashMap<K, Any>()
     for (element in this) {
         val key = keySelector(element)
-        val builder = result.getOrPut(key) { ImmutableLongArray.Builder() } as
+        val builder = result.getOrPut(key) { ImmutableLongArray.Builder(size) } as
             ImmutableLongArray.Builder
         builder.add(element)
     }
@@ -328,7 +328,7 @@ public fun <K> ImmutableFloatArray.groupBy(keySelector: (element: Float) -> K): 
     val result = LinkedHashMap<K, Any>()
     for (element in this) {
         val key = keySelector(element)
-        val builder = result.getOrPut(key) { ImmutableFloatArray.Builder() } as
+        val builder = result.getOrPut(key) { ImmutableFloatArray.Builder(size) } as
             ImmutableFloatArray.Builder
         builder.add(element)
     }
@@ -344,7 +344,7 @@ public fun <K> ImmutableDoubleArray.groupBy(keySelector: (element: Double) -> K)
     val result = LinkedHashMap<K, Any>()
     for (element in this) {
         val key = keySelector(element)
-        val builder = result.getOrPut(key) { ImmutableDoubleArray.Builder() } as
+        val builder = result.getOrPut(key) { ImmutableDoubleArray.Builder(size) } as
             ImmutableDoubleArray.Builder
         builder.add(element)
     }

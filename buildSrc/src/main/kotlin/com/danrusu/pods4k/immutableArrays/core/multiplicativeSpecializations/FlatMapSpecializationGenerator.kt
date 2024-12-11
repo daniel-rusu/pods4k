@@ -52,9 +52,9 @@ private fun FileSpec.Builder.addFlatMapFunction(fromType: BaseType, toType: Base
         addGenericTypes(fromType.type, mappedType)
 
         if (toType == BaseType.GENERIC) {
-            statement("val builder = ${toType.generatedClassName}.Builder<%T>()", mappedType)
+            statement("val builder = ${toType.generatedClassName}.Builder<%T>(size)", mappedType)
         } else {
-            statement("val builder = ${toType.generatedClassName}.Builder()")
+            statement("val builder = ${toType.generatedClassName}.Builder(size)")
         }
         statement("forEach { builder.addAll(transform(it)) }")
         statement("return builder.build()")

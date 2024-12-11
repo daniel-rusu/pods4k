@@ -43,7 +43,7 @@ public inline fun <T, R> ImmutableArray<T>.flatMapIndexed(
         element: T,
     ) -> Iterable<R>,
 ): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
+    val builder = ImmutableArray.Builder<R>(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -81,7 +81,7 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
         element: T,
     ) -> Iterable<Boolean>,
 ): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
+    val builder = ImmutableBooleanArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -119,7 +119,7 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
         element: T,
     ) -> Iterable<Byte>,
 ): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
+    val builder = ImmutableByteArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -157,7 +157,7 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
         element: T,
     ) -> Iterable<Char>,
 ): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
+    val builder = ImmutableCharArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -195,7 +195,7 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
         element: T,
     ) -> Iterable<Short>,
 ): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
+    val builder = ImmutableShortArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -233,7 +233,7 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
         element: T,
     ) -> Iterable<Int>,
 ): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
+    val builder = ImmutableIntArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -271,7 +271,7 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
         element: T,
     ) -> Iterable<Long>,
 ): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
+    val builder = ImmutableLongArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -309,7 +309,7 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
         element: T,
     ) -> Iterable<Float>,
 ): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
+    val builder = ImmutableFloatArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -347,7 +347,7 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
         element: T,
     ) -> Iterable<Double>,
 ): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
+    val builder = ImmutableDoubleArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -385,7 +385,7 @@ public inline fun <R> ImmutableBooleanArray.flatMapIndexed(
         element: Boolean,
     ) -> Iterable<R>,
 ): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
+    val builder = ImmutableArray.Builder<R>(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -423,7 +423,7 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
         element: Boolean,
     ) -> Iterable<Boolean>,
 ): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
+    val builder = ImmutableBooleanArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -461,7 +461,7 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
         element: Boolean,
     ) -> Iterable<Byte>,
 ): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
+    val builder = ImmutableByteArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -499,7 +499,7 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
         element: Boolean,
     ) -> Iterable<Char>,
 ): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
+    val builder = ImmutableCharArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -537,7 +537,7 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
         element: Boolean,
     ) -> Iterable<Short>,
 ): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
+    val builder = ImmutableShortArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -575,7 +575,7 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
         element: Boolean,
     ) -> Iterable<Int>,
 ): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
+    val builder = ImmutableIntArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -613,7 +613,7 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
         element: Boolean,
     ) -> Iterable<Long>,
 ): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
+    val builder = ImmutableLongArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -651,7 +651,7 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
         element: Boolean,
     ) -> Iterable<Float>,
 ): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
+    val builder = ImmutableFloatArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -689,7 +689,7 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
         element: Boolean,
     ) -> Iterable<Double>,
 ): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
+    val builder = ImmutableDoubleArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -727,7 +727,7 @@ public inline fun <R> ImmutableByteArray.flatMapIndexed(
         element: Byte,
     ) -> Iterable<R>,
 ): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
+    val builder = ImmutableArray.Builder<R>(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -765,7 +765,7 @@ public inline fun ImmutableByteArray.flatMapIndexed(
         element: Byte,
     ) -> Iterable<Boolean>,
 ): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
+    val builder = ImmutableBooleanArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -803,7 +803,7 @@ public inline fun ImmutableByteArray.flatMapIndexed(
         element: Byte,
     ) -> Iterable<Byte>,
 ): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
+    val builder = ImmutableByteArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -841,7 +841,7 @@ public inline fun ImmutableByteArray.flatMapIndexed(
         element: Byte,
     ) -> Iterable<Char>,
 ): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
+    val builder = ImmutableCharArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -879,7 +879,7 @@ public inline fun ImmutableByteArray.flatMapIndexed(
         element: Byte,
     ) -> Iterable<Short>,
 ): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
+    val builder = ImmutableShortArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -917,7 +917,7 @@ public inline fun ImmutableByteArray.flatMapIndexed(
         element: Byte,
     ) -> Iterable<Int>,
 ): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
+    val builder = ImmutableIntArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -955,7 +955,7 @@ public inline fun ImmutableByteArray.flatMapIndexed(
         element: Byte,
     ) -> Iterable<Long>,
 ): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
+    val builder = ImmutableLongArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -993,7 +993,7 @@ public inline fun ImmutableByteArray.flatMapIndexed(
         element: Byte,
     ) -> Iterable<Float>,
 ): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
+    val builder = ImmutableFloatArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1031,7 +1031,7 @@ public inline fun ImmutableByteArray.flatMapIndexed(
         element: Byte,
     ) -> Iterable<Double>,
 ): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
+    val builder = ImmutableDoubleArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1069,7 +1069,7 @@ public inline fun <R> ImmutableCharArray.flatMapIndexed(
         element: Char,
     ) -> Iterable<R>,
 ): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
+    val builder = ImmutableArray.Builder<R>(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1107,7 +1107,7 @@ public inline fun ImmutableCharArray.flatMapIndexed(
         element: Char,
     ) -> Iterable<Boolean>,
 ): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
+    val builder = ImmutableBooleanArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1145,7 +1145,7 @@ public inline fun ImmutableCharArray.flatMapIndexed(
         element: Char,
     ) -> Iterable<Byte>,
 ): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
+    val builder = ImmutableByteArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1183,7 +1183,7 @@ public inline fun ImmutableCharArray.flatMapIndexed(
         element: Char,
     ) -> Iterable<Char>,
 ): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
+    val builder = ImmutableCharArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1221,7 +1221,7 @@ public inline fun ImmutableCharArray.flatMapIndexed(
         element: Char,
     ) -> Iterable<Short>,
 ): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
+    val builder = ImmutableShortArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1259,7 +1259,7 @@ public inline fun ImmutableCharArray.flatMapIndexed(
         element: Char,
     ) -> Iterable<Int>,
 ): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
+    val builder = ImmutableIntArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1297,7 +1297,7 @@ public inline fun ImmutableCharArray.flatMapIndexed(
         element: Char,
     ) -> Iterable<Long>,
 ): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
+    val builder = ImmutableLongArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1335,7 +1335,7 @@ public inline fun ImmutableCharArray.flatMapIndexed(
         element: Char,
     ) -> Iterable<Float>,
 ): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
+    val builder = ImmutableFloatArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1373,7 +1373,7 @@ public inline fun ImmutableCharArray.flatMapIndexed(
         element: Char,
     ) -> Iterable<Double>,
 ): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
+    val builder = ImmutableDoubleArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1411,7 +1411,7 @@ public inline fun <R> ImmutableShortArray.flatMapIndexed(
         element: Short,
     ) -> Iterable<R>,
 ): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
+    val builder = ImmutableArray.Builder<R>(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1449,7 +1449,7 @@ public inline fun ImmutableShortArray.flatMapIndexed(
         element: Short,
     ) -> Iterable<Boolean>,
 ): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
+    val builder = ImmutableBooleanArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1487,7 +1487,7 @@ public inline fun ImmutableShortArray.flatMapIndexed(
         element: Short,
     ) -> Iterable<Byte>,
 ): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
+    val builder = ImmutableByteArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1525,7 +1525,7 @@ public inline fun ImmutableShortArray.flatMapIndexed(
         element: Short,
     ) -> Iterable<Char>,
 ): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
+    val builder = ImmutableCharArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1563,7 +1563,7 @@ public inline fun ImmutableShortArray.flatMapIndexed(
         element: Short,
     ) -> Iterable<Short>,
 ): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
+    val builder = ImmutableShortArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1601,7 +1601,7 @@ public inline fun ImmutableShortArray.flatMapIndexed(
         element: Short,
     ) -> Iterable<Int>,
 ): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
+    val builder = ImmutableIntArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1639,7 +1639,7 @@ public inline fun ImmutableShortArray.flatMapIndexed(
         element: Short,
     ) -> Iterable<Long>,
 ): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
+    val builder = ImmutableLongArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1677,7 +1677,7 @@ public inline fun ImmutableShortArray.flatMapIndexed(
         element: Short,
     ) -> Iterable<Float>,
 ): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
+    val builder = ImmutableFloatArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1715,7 +1715,7 @@ public inline fun ImmutableShortArray.flatMapIndexed(
         element: Short,
     ) -> Iterable<Double>,
 ): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
+    val builder = ImmutableDoubleArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1753,7 +1753,7 @@ public inline fun <R> ImmutableIntArray.flatMapIndexed(
         element: Int,
     ) -> Iterable<R>,
 ): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
+    val builder = ImmutableArray.Builder<R>(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1791,7 +1791,7 @@ public inline fun ImmutableIntArray.flatMapIndexed(
         element: Int,
     ) -> Iterable<Boolean>,
 ): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
+    val builder = ImmutableBooleanArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1829,7 +1829,7 @@ public inline fun ImmutableIntArray.flatMapIndexed(
         element: Int,
     ) -> Iterable<Byte>,
 ): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
+    val builder = ImmutableByteArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1867,7 +1867,7 @@ public inline fun ImmutableIntArray.flatMapIndexed(
         element: Int,
     ) -> Iterable<Char>,
 ): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
+    val builder = ImmutableCharArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1905,7 +1905,7 @@ public inline fun ImmutableIntArray.flatMapIndexed(
         element: Int,
     ) -> Iterable<Short>,
 ): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
+    val builder = ImmutableShortArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1943,7 +1943,7 @@ public inline fun ImmutableIntArray.flatMapIndexed(
         element: Int,
     ) -> Iterable<Int>,
 ): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
+    val builder = ImmutableIntArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -1981,7 +1981,7 @@ public inline fun ImmutableIntArray.flatMapIndexed(
         element: Int,
     ) -> Iterable<Long>,
 ): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
+    val builder = ImmutableLongArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2019,7 +2019,7 @@ public inline fun ImmutableIntArray.flatMapIndexed(
         element: Int,
     ) -> Iterable<Float>,
 ): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
+    val builder = ImmutableFloatArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2057,7 +2057,7 @@ public inline fun ImmutableIntArray.flatMapIndexed(
         element: Int,
     ) -> Iterable<Double>,
 ): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
+    val builder = ImmutableDoubleArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2095,7 +2095,7 @@ public inline fun <R> ImmutableLongArray.flatMapIndexed(
         element: Long,
     ) -> Iterable<R>,
 ): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
+    val builder = ImmutableArray.Builder<R>(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2133,7 +2133,7 @@ public inline fun ImmutableLongArray.flatMapIndexed(
         element: Long,
     ) -> Iterable<Boolean>,
 ): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
+    val builder = ImmutableBooleanArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2171,7 +2171,7 @@ public inline fun ImmutableLongArray.flatMapIndexed(
         element: Long,
     ) -> Iterable<Byte>,
 ): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
+    val builder = ImmutableByteArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2209,7 +2209,7 @@ public inline fun ImmutableLongArray.flatMapIndexed(
         element: Long,
     ) -> Iterable<Char>,
 ): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
+    val builder = ImmutableCharArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2247,7 +2247,7 @@ public inline fun ImmutableLongArray.flatMapIndexed(
         element: Long,
     ) -> Iterable<Short>,
 ): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
+    val builder = ImmutableShortArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2285,7 +2285,7 @@ public inline fun ImmutableLongArray.flatMapIndexed(
         element: Long,
     ) -> Iterable<Int>,
 ): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
+    val builder = ImmutableIntArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2323,7 +2323,7 @@ public inline fun ImmutableLongArray.flatMapIndexed(
         element: Long,
     ) -> Iterable<Long>,
 ): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
+    val builder = ImmutableLongArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2361,7 +2361,7 @@ public inline fun ImmutableLongArray.flatMapIndexed(
         element: Long,
     ) -> Iterable<Float>,
 ): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
+    val builder = ImmutableFloatArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2399,7 +2399,7 @@ public inline fun ImmutableLongArray.flatMapIndexed(
         element: Long,
     ) -> Iterable<Double>,
 ): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
+    val builder = ImmutableDoubleArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2437,7 +2437,7 @@ public inline fun <R> ImmutableFloatArray.flatMapIndexed(
         element: Float,
     ) -> Iterable<R>,
 ): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
+    val builder = ImmutableArray.Builder<R>(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2475,7 +2475,7 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
         element: Float,
     ) -> Iterable<Boolean>,
 ): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
+    val builder = ImmutableBooleanArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2513,7 +2513,7 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
         element: Float,
     ) -> Iterable<Byte>,
 ): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
+    val builder = ImmutableByteArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2551,7 +2551,7 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
         element: Float,
     ) -> Iterable<Char>,
 ): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
+    val builder = ImmutableCharArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2589,7 +2589,7 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
         element: Float,
     ) -> Iterable<Short>,
 ): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
+    val builder = ImmutableShortArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2627,7 +2627,7 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
         element: Float,
     ) -> Iterable<Int>,
 ): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
+    val builder = ImmutableIntArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2665,7 +2665,7 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
         element: Float,
     ) -> Iterable<Long>,
 ): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
+    val builder = ImmutableLongArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2703,7 +2703,7 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
         element: Float,
     ) -> Iterable<Float>,
 ): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
+    val builder = ImmutableFloatArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2741,7 +2741,7 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
         element: Float,
     ) -> Iterable<Double>,
 ): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
+    val builder = ImmutableDoubleArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2779,7 +2779,7 @@ public inline fun <R> ImmutableDoubleArray.flatMapIndexed(
         element: Double,
     ) -> Iterable<R>,
 ): ImmutableArray<R> {
-    val builder = ImmutableArray.Builder<R>()
+    val builder = ImmutableArray.Builder<R>(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2817,7 +2817,7 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
         element: Double,
     ) -> Iterable<Boolean>,
 ): ImmutableBooleanArray {
-    val builder = ImmutableBooleanArray.Builder()
+    val builder = ImmutableBooleanArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2855,7 +2855,7 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
         element: Double,
     ) -> Iterable<Byte>,
 ): ImmutableByteArray {
-    val builder = ImmutableByteArray.Builder()
+    val builder = ImmutableByteArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2893,7 +2893,7 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
         element: Double,
     ) -> Iterable<Char>,
 ): ImmutableCharArray {
-    val builder = ImmutableCharArray.Builder()
+    val builder = ImmutableCharArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2931,7 +2931,7 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
         element: Double,
     ) -> Iterable<Short>,
 ): ImmutableShortArray {
-    val builder = ImmutableShortArray.Builder()
+    val builder = ImmutableShortArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -2969,7 +2969,7 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
         element: Double,
     ) -> Iterable<Int>,
 ): ImmutableIntArray {
-    val builder = ImmutableIntArray.Builder()
+    val builder = ImmutableIntArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -3007,7 +3007,7 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
         element: Double,
     ) -> Iterable<Long>,
 ): ImmutableLongArray {
-    val builder = ImmutableLongArray.Builder()
+    val builder = ImmutableLongArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -3045,7 +3045,7 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
         element: Double,
     ) -> Iterable<Float>,
 ): ImmutableFloatArray {
-    val builder = ImmutableFloatArray.Builder()
+    val builder = ImmutableFloatArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
@@ -3083,7 +3083,7 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
         element: Double,
     ) -> Iterable<Double>,
 ): ImmutableDoubleArray {
-    val builder = ImmutableDoubleArray.Builder()
+    val builder = ImmutableDoubleArray.Builder(size)
     forEachIndexed { index, element -> builder.addAll(transform(index, element)) }
     return builder.build()
 }
