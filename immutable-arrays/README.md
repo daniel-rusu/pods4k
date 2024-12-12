@@ -131,7 +131,14 @@ performance improvement of common non-trivial operations.
 
 ## Usage
 
-See [dependency instructions](../README.md#dependency) for adding this library to your gradle or maven build.
+See [dependency instructions](../README.md#dependency) for more details about adding this library to your Gradle or
+Maven build.
+
+```kotlin
+dependencies {
+    implementation("com.danrusu.pods4k:pods4k:<version>")
+}
+```
 
 Usages look the same as regular lists after construction:
 
