@@ -92,7 +92,7 @@ higher than the `take` variants above. We're omitting those for brevity.
 
 ### Transformation Operations
 
-Transformation are significantly faster than lists and even regular arrays:
+Transformations are significantly faster than lists and even regular arrays:
 
 ![Memory Layout of immutable arrays](./resources/benchmarks/map.png)
 
@@ -127,7 +127,7 @@ types:
 Lists store generic types forcing primitive values to be auto-boxed. This makes inspecting their values slower as the
 wrapper object introduces an extra layer of indirection.
 
-### Benchmark Summary
+## Benchmark Summary
 
 Immutable arrays are between 2 to 8 times faster than lists for many common operations with some scenarios over 30 times
 faster!  Although there are many more operations, the above results should provide a pretty good representation of the
