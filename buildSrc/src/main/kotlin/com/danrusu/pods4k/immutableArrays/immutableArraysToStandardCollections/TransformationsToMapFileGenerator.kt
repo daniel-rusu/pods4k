@@ -156,14 +156,14 @@ private fun FileSpec.Builder.addGroupBy() {
                 statement("val key = keySelector(element)")
                 if (baseType == BaseType.GENERIC) {
                     statement(
-                        "val builder = result.getOrPut(key) { ${baseType.generatedClassName}.Builder<%T>() } " +
+                        "val builder = result.getOrPut(key) { ${baseType.generatedClassName}.Builder<%T>(size) } " +
                             "as ${baseType.generatedClassName}.Builder<%T>",
                         baseType.type,
                         baseType.type,
                     )
                 } else {
                     statement(
-                        "val builder = result.getOrPut(key) { ${baseType.generatedClassName}.Builder() } " +
+                        "val builder = result.getOrPut(key) { ${baseType.generatedClassName}.Builder(size) } " +
                             "as ${baseType.generatedClassName}.Builder",
                     )
                 }

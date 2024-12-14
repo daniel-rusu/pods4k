@@ -421,7 +421,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
      * Returns an immutable array containing only the elements matching the given [predicate].
      */
     public inline fun filter(predicate: (element: Byte) -> Boolean): ImmutableByteArray {
-        val result = Builder()
+        val result = Builder(size)
         for (element in values) {
             if (predicate(element)) {
                 result.add(element)
@@ -436,7 +436,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
      * Returns an immutable array containing only the elements matching the given [predicate].
      */
     public inline fun filterIndexed(predicate: (index: Int, element: Byte) -> Boolean): ImmutableByteArray {
-        val result = Builder()
+        val result = Builder(size)
         forEachIndexed { index, element ->
             if (predicate(index, element)) {
                 result.add(element)
@@ -451,7 +451,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
      * Returns an immutable array containing only the elements that don't match the [predicate].
      */
     public inline fun filterNot(predicate: (element: Byte) -> Boolean): ImmutableByteArray {
-        val result = Builder()
+        val result = Builder(size)
         for (element in values) {
             if (!predicate(element)) {
                 result.add(element)

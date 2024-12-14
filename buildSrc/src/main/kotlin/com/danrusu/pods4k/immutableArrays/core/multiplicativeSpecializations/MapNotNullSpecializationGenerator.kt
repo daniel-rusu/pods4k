@@ -46,9 +46,9 @@ private fun FileSpec.Builder.addMapNotNullFunction(fromType: BaseType, toType: B
         addGenericTypes(fromType.type, mappedType)
 
         if (toType == BaseType.GENERIC) {
-            statement("val builder = ${toType.generatedClassName}.Builder<%T>()", mappedType)
+            statement("val builder = ${toType.generatedClassName}.Builder<%T>(size)", mappedType)
         } else {
-            statement("val builder = ${toType.generatedClassName}.Builder()")
+            statement("val builder = ${toType.generatedClassName}.Builder(size)")
         }
         controlFlow("forEach { element ->") {
             statement("transform(element)?.let { builder.add(it) }")
