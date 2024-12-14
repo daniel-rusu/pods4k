@@ -29,9 +29,9 @@ on [GitHub](https://github.com/daniel-rusu/pods4k) and sharing it with others.
     * 2 to 8 times faster than lists for many common operations, with some even faster!
 * **Memory Efficient**
     * Over 5X memory reduction versus lists for many common scenarios!
-        * `people.map { it.weightKg }` creates a primitive `ImmutableFloatArray`
+        * `people.map { it.weightKg }` creates a primitive `ImmutableFloatArray`.
     * Many operations retain zero extra memory when results are empty or the same elements.
-        * `people.filter { it.isEmployed() }` returns the same instance when everyone is employed.
+        * `people.filter { it.isEmployed() }` returns same instance when everyone is employed.
     * etc.
 * **Type Safety**
     * Accidental mutation attempts are prevented at compile time.
@@ -296,27 +296,27 @@ Arrays directly for optimal efficiency.
 <details>
 <summary>Choosing between toList(), asList(), and asIterable()</summary>
 
-When working with reference types, such as `ImmutableArray<Person>`, prefer `asList()` as that's extremely efficient
-since the generated wrapper is backed by the same backing array without copying the elements.
+When working with reference types, such as `ImmutableArray<Person>`, prefer `asList()` as that allows the flexibility of
+random access and is extremely efficient since the generated wrapper is backed by the same backing array without copying
+the elements.
 
 When working with primitive variants, such as `ImmutableFloatArray`, exposing these to list APIs will result in
 auto-boxing since lists operate on generic types:
 
-* If random access isn't needed then use `asIterable()` as that avoids copying the backing array and auto-boxes the
-  values lazily when they are iterated over.
-* If random access is needed and the number of accesses won't exceed the list size, then use `asList()` as this
-  results in less auto-boxing.
+* If random access isn't needed, use `asIterable()` as that avoids copying the backing array and nudges usages towards
+  one-time access patterns with the iterator. This only auto-boxes the elements that are accessed when stopping early.
+* If random access is needed and the number of accesses won't exceed the list size, use `asList()` as this results in
+  less auto-boxing.
 * For everything else, use `toList()` as this auto-boxes all the values upfront and avoids additional auto-boxing when
   accessing the elements multiple times.
 
-The `asList()` and `asIterable()` approaches have a secondary benefit since they auto-box values lazily only when
-accessed. This reduces the pressure on the garbage collector for use cases that aggregate values without holding onto
-each element, such as when computing the average value as we only need to keep track of the sum. This usage pattern of
-creating temporary objects that are immediately discarded is very efficient with modern garbage collectors as the
-collection process only copies objects that are still referenced. So short-lived objects that are immediately discarded
-don't add any overhead to garbage collectors. However, if all the elements were auto-boxed up-front to pass to some
-utility that computes their average, any garbage collections that occur before that utility completes would be forced to
-copy all these element wrappers since they are still referenced.
+Using `asList()` or `asIterable()` has a secondary benefit since they auto-box values lazily when accessed. This reduces
+the pressure on the garbage collector for use cases that aggregate values without holding onto the elements, such as
+when only keeping track of the sum to compute the average. This usage pattern of creating temporary objects that are
+immediately discarded is very efficient with modern garbage collectors as the collection process only copies objects
+that are still accessible. So having 1 or 1,000 discarded objects has no performance impact on the collection process.
+However, if we auto-box all elements up-front to pass to some utility, any collections that occur before that utility
+completes would be forced to copy all these element wrappers around since they're all still accessible.
 
 </details>
 
@@ -327,19 +327,18 @@ There are several reasons why Immutable Arrays shouldn't implement the `List` in
 
 1. If the 8 primitive variants implemented the List interface, (eg.`ImmutableFloatArray` implemented `List<Float>`), we
    can't override the generic `List` methods and use primitive return types as that changes the method signature.
-   Although Kotlin hides the distinction between a `Float` wrapper and a `float` primitive (using Java terms), this
-   distinction is enforced at the bytecode level. This results in auto-boxing elements every time they are accessed and
-   dramatically affects the memory and performance of the library. To get an idea of the memory impacts of auto-boxing,
-   replacing an `ImmutableFloatArray` with a `List<Float>` increases the memory consumption by 5 to 8 times depending on
-   the JVM configuration.
-2. If Immutable Arrays implemented the `List` interface, the `List` extension functions from the Kotlin standard library
-   would overshadow the optimized versions from this library. This affects the memory and performance of this library
-   significantly and also break the immutability guarantees since the Kotlin standard library functions generate
-   read-only lists that can be mutated through casting.
-3. The `List` interface contains methods with `List` return types that we would never want to be used with Immutable
-   Arrays. Throwing an `OperationNotSupportedException` would break the `List` contract breaking downstream usages in
-   unpredictable ways. Using these methods would affect the memory and performance profile but most importantly, this
-   would make usages accidentally cross over into the list world where the immutability guarantees no longer exist.
+   Although Kotlin hides the distinction between a `Float` wrapper and a `float` primitive (using Java terms), this is
+   enforced at the bytecode level. This would auto-box the elements every time they're accessed and dramatically affect
+   the memory and performance of the library. To get an idea of the memory impacts, replacing an `ImmutableFloatArray`
+   with a `List<Float>` increases the memory consumption by 5 to 8 times depending on the JVM configuration.
+2. As a quick test, we made `ImmutableArray<T>` implement the `List<T>` interface and found that the `List` extension
+   functions from the Kotlin standard library overshadowed the optimized versions from this library. This affects the
+   memory and performance of this library significantly and also break the immutability guarantees since the Kotlin
+   standard library functions generate read-only lists that can be mutated through casting.
+3. The `List` interface contains methods with `List` return types that we wouldn't want users to use. Using these would
+   affect the memory and performance profile but most importantly, this would make usages accidentally cross over into
+   the list world where the immutability guarantees no longer exist.Throwing an `OperationNotSupportedException` would
+   break the `List` contract breaking downstream usages in unpredictable ways.
 
 Immutable Arrays maximize the use of primitive types in order to reduce memory consumption and improve performance so
 that clean code is efficient by default. For example, `immutableArrayOf(1, 2, 3)` automatically bind to the most
