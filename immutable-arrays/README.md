@@ -668,11 +668,6 @@ wrapper object header, value, and padding in the wrapper object to account for m
 
 The following experimental features are used which could change in future Kotlin releases:
 
-* [Inline value classes](https://kotlinlang.org/docs/inline-classes.html)
-    * These enable zero cost abstractions that are eliminated at compile time. The immutable array classes are inline
-      value classes.
-    * This feature was introduced in Kotlin 1.3 and is used by some standard library features
-      like [unsigned integer types](https://kotlinlang.org/docs/unsigned-integer-types.html).
 * [Overload resolution by lambda return type](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-overload-resolution-by-lambda-return-type/)
     * This enables the hundreds of optimized specializations that make use of overloaded functions containing parameters
       with different lambda return types. Without this feature, these overloaded functions would result in a runtime
