@@ -1,6 +1,5 @@
 # Benchmarks
 
-* [Primitive vs Boxed types](#primitive-vs-boxed-types)
 * [Results](#results)
     * [Copy Operations](#copy-operations)
     * [Transformation Operations](#transformation-operations)
@@ -31,42 +30,38 @@ Results are normalized to list performance
 
 - 1,000 ops/sec for lists vs. 1,500 for arrays = relative throughput of 1.5.
 
-### Data types
-
-When a chart has the `elements type = Array` and the `value type = Boolean` then a primitive `BooleanArray` is used etc.
-
-* List
-    * `ArrayList<T>` is used
-    * The Kotlin standard library uses `ArrayList` and exposes it through the `List` or `MutableList` interfaces.
-* Array
-    * `Array<T>` is used when the value type is `Reference`
-    * Primitive arrays are used for the 8 base types (eg. `BooleanArray` when the value type is `Boolean` etc.)
-* ImmutableArray
-    * `ImmutableArray<T>` is used when the data type is `Reference`
-    * Primitive immutable arrays are used for the 8 base types (eg. `ImmutableBooleanArray` when the value type is
-      `Boolean`)
-
 </details>
 
-## Primitive vs Boxed types
+<details>
+<summary>Value types</summary>
 
-Immutable Arrays are intended as an alternative to read-only lists. Lists operate on generic types forcing primitives to
-be auto-boxed. Note that comparisons against regular arrays are like-for-like (eg. `ImmutableFloatArray` vs
-`FloatArray`) in order to
-get the best possible results with regular arrays.
+There are 9 Immutable Array types in this library. A generic `ImmutableArray<T>` and a primitive type for each of the 8
+base types, such as `ImmutableIntArray`. Since regular arrays also have primitive variants, like-for-like comparisons
+are made with regular arrays (eg.`ImmutableFloatArray` vs.`FloatArray`).
 
-A guiding principle of this library is for clean code to automatically use the most efficient option by default.
-something like `immutableArrayOf(1, 2, 3)` creates a primitive `ImmutableIntArray`. When storing reference types, we
-often perform operations on its constituent properties resulting in primitives:
+The Immutable Arrays library makes every effort to minimize auto-boxing without sacrificing readability so that clean
+code is efficient by default. Developers write natural-looking code without thinking about primitives or auto-boxing and
+the library automatically binds to the most efficient specialization:
 
 ```kotlin
-// people is an ImmutableArray<Person>
-val weights = people.map { it.weightKg } // ImmutableFloatArray
+val names = immutableArrayOf("Dan", "Jill") // ImmutableArray<String>
+val luckyNumbers = immutableArrayOf(1, 2, 3) // ImmutableIntArray!!!
+```
 
+Even when starting with a generic type, we often perform operations on its constituent primitive properties. Immutable
+Arrays automatically binds transformation operations, such as the `map` operation, to the most efficient specialization:
+
+```kotlin
+val people = immutableArrayOf(dan, bob, jill) // ImmutableArray<Person>
+
+val weights = people.map { it.weightKg } // ImmutableFloatArray!!!
 // Operate on weights with improved performance and efficiency
 ```
 
-Including primitive data types in the benchmarks aligns with the most natural usage of this library.
+Benchmarking 9 value types (generic + 8 primitive types) aligns with the most natural usage of this library as
+primitives are automatically used whenever possible.
+
+</details>
 
 ## Results
 
