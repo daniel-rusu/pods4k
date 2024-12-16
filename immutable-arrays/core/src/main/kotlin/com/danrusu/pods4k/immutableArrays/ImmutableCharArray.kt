@@ -479,10 +479,13 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
                 secondIndex--
             }
         }
-        if (firstIndex == 0) return Pair(emptyImmutableCharArray(), this)
-        if (firstIndex == size) return Pair(this, emptyImmutableCharArray())
+        if (firstIndex == 0) return Pair(EMPTY, this)
+        if (firstIndex == size) return Pair(this, EMPTY)
 
-        val first = ImmutableCharArray(firstIndex) { buffer[it] }
+        val firstBackingArray = CharArray(firstIndex)
+        System.arraycopy(buffer, 0, firstBackingArray, 0, firstIndex)
+
+        val first = ImmutableCharArray(firstBackingArray)
         val second = ImmutableCharArray(size - first.size) { buffer[size - it - 1] }
         return Pair(first, second)
     }

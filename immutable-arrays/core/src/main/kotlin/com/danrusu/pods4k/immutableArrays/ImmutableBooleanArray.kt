@@ -478,10 +478,13 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
                 secondIndex--
             }
         }
-        if (firstIndex == 0) return Pair(emptyImmutableBooleanArray(), this)
-        if (firstIndex == size) return Pair(this, emptyImmutableBooleanArray())
+        if (firstIndex == 0) return Pair(EMPTY, this)
+        if (firstIndex == size) return Pair(this, EMPTY)
 
-        val first = ImmutableBooleanArray(firstIndex) { buffer[it] }
+        val firstBackingArray = BooleanArray(firstIndex)
+        System.arraycopy(buffer, 0, firstBackingArray, 0, firstIndex)
+
+        val first = ImmutableBooleanArray(firstBackingArray)
         val second = ImmutableBooleanArray(size - first.size) { buffer[size - it - 1] }
         return Pair(first, second)
     }

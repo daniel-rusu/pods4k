@@ -844,10 +844,18 @@ private fun TypeSpec.Builder.addPartition(baseType: BaseType) {
                 """.trimIndent(),
             )
         }
-        statement("if (firstIndex == 0) return Pair(empty${baseType.generatedClassName}(), this)")
-        statement("if (firstIndex == size) return Pair(this, empty${baseType.generatedClassName}())")
+        statement("if (firstIndex == 0) return Pair(EMPTY, this)")
+        statement("if (firstIndex == size) return Pair(this, EMPTY)")
         emptyLine()
-        statement("val first = ${baseType.generatedClassName}(firstIndex) { buffer[it] }")
+
+        if (baseType == GENERIC) {
+            statement("val firstBackingArray = arrayOfNulls<Any?>(firstIndex) as Array<T>")
+        } else {
+            statement("val firstBackingArray = ${baseType.backingArrayConstructor}(firstIndex)")
+        }
+        statement("System.arraycopy(buffer, 0, firstBackingArray, 0, firstIndex)")
+        emptyLine()
+        statement("val first = ${baseType.generatedClassName}(firstBackingArray)")
         statement("val second = ${baseType.generatedClassName}(size - first.size) { buffer[size - it - 1] }")
         statement("return Pair(first, second)")
     }

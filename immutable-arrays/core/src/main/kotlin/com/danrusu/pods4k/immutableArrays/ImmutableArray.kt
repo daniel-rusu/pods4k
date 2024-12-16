@@ -482,10 +482,13 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
                 secondIndex--
             }
         }
-        if (firstIndex == 0) return Pair(emptyImmutableArray(), this)
-        if (firstIndex == size) return Pair(this, emptyImmutableArray())
+        if (firstIndex == 0) return Pair(EMPTY, this)
+        if (firstIndex == size) return Pair(this, EMPTY)
 
-        val first = ImmutableArray(firstIndex) { buffer[it] }
+        val firstBackingArray = arrayOfNulls<Any?>(firstIndex) as Array<T>
+        System.arraycopy(buffer, 0, firstBackingArray, 0, firstIndex)
+
+        val first = ImmutableArray(firstBackingArray)
         val second = ImmutableArray(size - first.size) { buffer[size - it - 1] }
         return Pair(first, second)
     }

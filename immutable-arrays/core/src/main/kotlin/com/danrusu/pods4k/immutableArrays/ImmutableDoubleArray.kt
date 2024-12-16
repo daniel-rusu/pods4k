@@ -478,10 +478,13 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
                 secondIndex--
             }
         }
-        if (firstIndex == 0) return Pair(emptyImmutableDoubleArray(), this)
-        if (firstIndex == size) return Pair(this, emptyImmutableDoubleArray())
+        if (firstIndex == 0) return Pair(EMPTY, this)
+        if (firstIndex == size) return Pair(this, EMPTY)
 
-        val first = ImmutableDoubleArray(firstIndex) { buffer[it] }
+        val firstBackingArray = DoubleArray(firstIndex)
+        System.arraycopy(buffer, 0, firstBackingArray, 0, firstIndex)
+
+        val first = ImmutableDoubleArray(firstBackingArray)
         val second = ImmutableDoubleArray(size - first.size) { buffer[size - it - 1] }
         return Pair(first, second)
     }

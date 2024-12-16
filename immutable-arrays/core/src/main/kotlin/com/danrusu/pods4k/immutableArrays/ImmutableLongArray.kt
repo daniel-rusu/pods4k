@@ -478,10 +478,13 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
                 secondIndex--
             }
         }
-        if (firstIndex == 0) return Pair(emptyImmutableLongArray(), this)
-        if (firstIndex == size) return Pair(this, emptyImmutableLongArray())
+        if (firstIndex == 0) return Pair(EMPTY, this)
+        if (firstIndex == size) return Pair(this, EMPTY)
 
-        val first = ImmutableLongArray(firstIndex) { buffer[it] }
+        val firstBackingArray = LongArray(firstIndex)
+        System.arraycopy(buffer, 0, firstBackingArray, 0, firstIndex)
+
+        val first = ImmutableLongArray(firstBackingArray)
         val second = ImmutableLongArray(size - first.size) { buffer[size - it - 1] }
         return Pair(first, second)
     }

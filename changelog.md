@@ -1,6 +1,16 @@
 Change Log
 ==========
 
+## Unreleased
+
+_Date TBD_
+
+### Immutable Arrays
+
+**Performance Improvements:**
+
+* Update `partition` to use `arraycopy` to copy from the left side of the buffer.
+
 ## 0.6.0
 
 _2024-12-09_
