@@ -940,10 +940,9 @@ private fun TypeSpec.Builder.addSortedWith(baseType: BaseType) {
         emptyLine()
         if (baseType == GENERIC) {
             suppress("UNCHECKED_CAST")
-            statement(
-                "val backingArray = ${baseType.backingArrayConstructor}(size) { get(it) } as Array<%T>",
-                baseType.type,
-            )
+            statement("val backingArray = arrayOfNulls<Any?>(size) as Array<%T>", baseType.type)
+            statement("System.arraycopy(values, 0, backingArray, 0, size)")
+            emptyLine()
             statement("%T.sort(backingArray, comparator)", java.util.Arrays::class)
             statement("return ${baseType.generatedClassName}(backingArray)")
         } else {

@@ -9,6 +9,7 @@ _Date TBD_
 
 **Performance Improvements:**
 
+* Update `sortedWith` on `ImmutableArray<T>` to copy the elements with `arraycopy`.
 * Update `partition` to use `arraycopy` to copy from the left side of the buffer.
 
 ## 0.6.0

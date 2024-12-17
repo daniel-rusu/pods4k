@@ -524,7 +524,9 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
         // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
         if (size <= 1) return this
 
-        val backingArray = Array<Any?>(size) { get(it) } as Array<T>
+        val backingArray = arrayOfNulls<Any?>(size) as Array<T>
+        System.arraycopy(values, 0, backingArray, 0, size)
+
         Arrays.sort(backingArray, comparator)
         return ImmutableArray(backingArray)
     }
