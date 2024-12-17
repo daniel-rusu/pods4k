@@ -4,6 +4,7 @@ import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.BaseType.BOOLEAN
 import com.danrusu.pods4k.immutableArrays.BaseType.GENERIC
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
+import com.danrusu.pods4k.immutableArrays.createImmutableArrayBuilder
 import com.danrusu.pods4k.utils.addGenericTypes
 import com.danrusu.pods4k.utils.comment
 import com.danrusu.pods4k.utils.controlFlow
@@ -186,11 +187,10 @@ private fun FileSpec.Builder.addFilterNotNull() {
 
             if (baseType == GENERIC) {
                 jvmName("immutableArrayFilterNotNull")
-                statement("val result = ${baseType.generatedClassName}.Builder<%T>()", nonNullType)
             } else {
                 jvmName("immutableArrayFilterNotNull_${baseType.typeClass.simpleName}")
-                statement("val result = ${baseType.generatedClassName}.Builder()")
             }
+            createImmutableArrayBuilder(name = "result", forType = baseType, genericTypeOverride = nonNullType)
             controlFlow("forEach { value ->") {
                 controlFlow("if (value != null)") {
                     statement("result.add(value)")

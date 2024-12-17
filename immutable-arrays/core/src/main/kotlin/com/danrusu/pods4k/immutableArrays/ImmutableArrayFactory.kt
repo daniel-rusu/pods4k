@@ -260,7 +260,8 @@ public fun <T> buildImmutableArray(
     initialCapacity: Int = 10,
     body: ImmutableArray.Builder<T>.() -> Unit,
 ): ImmutableArray<T> {
-    return ImmutableArray.Builder<T>(initialCapacity).apply(body).build()
+    val builder = ImmutableArray.Builder<T>(initialCapacity = initialCapacity)
+    return builder.apply(body).build()
 }
 
 /**
@@ -270,7 +271,8 @@ public fun buildImmutableBooleanArray(
     initialCapacity: Int = 10,
     body: ImmutableBooleanArray.Builder.() -> Unit,
 ): ImmutableBooleanArray {
-    return ImmutableBooleanArray.Builder(initialCapacity).apply(body).build()
+    val builder = ImmutableBooleanArray.Builder(initialCapacity = initialCapacity)
+    return builder.apply(body).build()
 }
 
 /**
@@ -280,7 +282,8 @@ public fun buildImmutableByteArray(
     initialCapacity: Int = 10,
     body: ImmutableByteArray.Builder.() -> Unit,
 ): ImmutableByteArray {
-    return ImmutableByteArray.Builder(initialCapacity).apply(body).build()
+    val builder = ImmutableByteArray.Builder(initialCapacity = initialCapacity)
+    return builder.apply(body).build()
 }
 
 /**
@@ -290,7 +293,8 @@ public fun buildImmutableCharArray(
     initialCapacity: Int = 10,
     body: ImmutableCharArray.Builder.() -> Unit,
 ): ImmutableCharArray {
-    return ImmutableCharArray.Builder(initialCapacity).apply(body).build()
+    val builder = ImmutableCharArray.Builder(initialCapacity = initialCapacity)
+    return builder.apply(body).build()
 }
 
 /**
@@ -300,7 +304,8 @@ public fun buildImmutableShortArray(
     initialCapacity: Int = 10,
     body: ImmutableShortArray.Builder.() -> Unit,
 ): ImmutableShortArray {
-    return ImmutableShortArray.Builder(initialCapacity).apply(body).build()
+    val builder = ImmutableShortArray.Builder(initialCapacity = initialCapacity)
+    return builder.apply(body).build()
 }
 
 /**
@@ -310,7 +315,8 @@ public fun buildImmutableIntArray(
     initialCapacity: Int = 10,
     body: ImmutableIntArray.Builder.() -> Unit,
 ): ImmutableIntArray {
-    return ImmutableIntArray.Builder(initialCapacity).apply(body).build()
+    val builder = ImmutableIntArray.Builder(initialCapacity = initialCapacity)
+    return builder.apply(body).build()
 }
 
 /**
@@ -320,7 +326,8 @@ public fun buildImmutableLongArray(
     initialCapacity: Int = 10,
     body: ImmutableLongArray.Builder.() -> Unit,
 ): ImmutableLongArray {
-    return ImmutableLongArray.Builder(initialCapacity).apply(body).build()
+    val builder = ImmutableLongArray.Builder(initialCapacity = initialCapacity)
+    return builder.apply(body).build()
 }
 
 /**
@@ -330,7 +337,8 @@ public fun buildImmutableFloatArray(
     initialCapacity: Int = 10,
     body: ImmutableFloatArray.Builder.() -> Unit,
 ): ImmutableFloatArray {
-    return ImmutableFloatArray.Builder(initialCapacity).apply(body).build()
+    val builder = ImmutableFloatArray.Builder(initialCapacity = initialCapacity)
+    return builder.apply(body).build()
 }
 
 /**
@@ -340,7 +348,8 @@ public fun buildImmutableDoubleArray(
     initialCapacity: Int = 10,
     body: ImmutableDoubleArray.Builder.() -> Unit,
 ): ImmutableDoubleArray {
-    return ImmutableDoubleArray.Builder(initialCapacity).apply(body).build()
+    val builder = ImmutableDoubleArray.Builder(initialCapacity = initialCapacity)
+    return builder.apply(body).build()
 }
 
 internal object BuilderUtils {

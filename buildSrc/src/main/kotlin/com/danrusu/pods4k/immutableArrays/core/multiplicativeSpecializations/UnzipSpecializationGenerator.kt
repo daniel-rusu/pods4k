@@ -1,6 +1,7 @@
 package com.danrusu.pods4k.immutableArrays.core.multiplicativeSpecializations
 
 import com.danrusu.pods4k.immutableArrays.BaseType
+import com.danrusu.pods4k.immutableArrays.createImmutableArrayBuilder
 import com.danrusu.pods4k.utils.addGenericTypes
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.function
@@ -40,17 +41,13 @@ private fun FileSpec.Builder.addUnzipFunction(type1: BaseType, type2: BaseType) 
         jvmName("unzip_${type1.name}_${type2.name}")
         addGenericTypes(type1.type, type2ValueName)
 
-        if (type1 == BaseType.GENERIC) {
-            statement("val first = ${type1.generatedClassName}.Builder<%T>(initialCapacity = size)", type1.type)
-        } else {
-            statement("val first = ${type1.generatedClassName}.Builder(initialCapacity = size)")
-        }
-
-        if (type2 == BaseType.GENERIC) {
-            statement("val second = ${type2.generatedClassName}.Builder<%T>(initialCapacity = size)", type2ValueName)
-        } else {
-            statement("val second = ${type2.generatedClassName}.Builder(initialCapacity = size)")
-        }
+        createImmutableArrayBuilder(name = "first", forType = type1, initialCapacity = "size")
+        createImmutableArrayBuilder(
+            name = "second",
+            forType = type2,
+            initialCapacity = "size",
+            genericTypeOverride = type2ValueName,
+        )
 
         controlFlow("for (pair in this)") {
             statement("first.add(pair.first)")

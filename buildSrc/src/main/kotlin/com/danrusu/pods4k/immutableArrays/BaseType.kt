@@ -1,6 +1,9 @@
 package com.danrusu.pods4k.immutableArrays
 
+import com.danrusu.pods4k.immutableArrays.BaseType.GENERIC
+import com.danrusu.pods4k.utils.statement
 import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeVariableName
@@ -50,5 +53,22 @@ internal enum class BaseType(
     fun getGeneratedTypeName(): TypeName = when (this) {
         GENERIC -> getGeneratedClass().parameterizedBy(type)
         else -> getGeneratedClass()
+    }
+}
+
+internal fun FunSpec.Builder.createImmutableArrayBuilder(
+    name: String,
+    forType: BaseType,
+    initialCapacity: String? = null,
+    genericTypeOverride: TypeName? = null,
+) {
+    val capacityOverride = initialCapacity?.let { "initialCapacity = $it" } ?: ""
+
+    val builderType = ClassName(ImmutableArrayConfig.packageName, forType.generatedClassName, "Builder")
+    if (forType == GENERIC) {
+        val genericType = genericTypeOverride ?: forType.type
+        statement("val $name = %T<%T>($capacityOverride)", builderType, genericType)
+    } else {
+        statement("val $name = %T($capacityOverride)", builderType)
     }
 }

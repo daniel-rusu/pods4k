@@ -3,6 +3,7 @@ package com.danrusu.pods4k.immutableArrays.core
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.BaseType.GENERIC
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
+import com.danrusu.pods4k.immutableArrays.createImmutableArrayBuilder
 import com.danrusu.pods4k.utils.ParameterDSL
 import com.danrusu.pods4k.utils.addGenericTypes
 import com.danrusu.pods4k.utils.addPrimaryConstructor
@@ -733,11 +734,7 @@ private fun TypeSpec.Builder.addFilter(baseType: BaseType) {
         parameters = { "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) }) },
         returns = baseType.getGeneratedTypeName(),
     ) {
-        if (baseType == GENERIC) {
-            statement("val result = Builder<%T>()", baseType.type)
-        } else {
-            statement("val result = Builder()")
-        }
+        createImmutableArrayBuilder(name = "result", forType = baseType)
         controlFlow("for (element in values)") {
             controlFlow("if (predicate(element))") {
                 statement("result.add(element)")
@@ -764,11 +761,7 @@ private fun TypeSpec.Builder.addFilterIndexed(baseType: BaseType) {
         },
         returns = baseType.getGeneratedTypeName(),
     ) {
-        if (baseType == GENERIC) {
-            statement("val result = Builder<%T>()", baseType.type)
-        } else {
-            statement("val result = Builder()")
-        }
+        createImmutableArrayBuilder(name = "result", forType = baseType)
         controlFlow("forEachIndexed { index, element ->") {
             controlFlow("if (predicate(index, element))") {
                 statement("result.add(element)")
@@ -788,11 +781,7 @@ private fun TypeSpec.Builder.addFilterNot(baseType: BaseType) {
         parameters = { "predicate"(type = lambda<Boolean> { "element"(type = baseType.type) }) },
         returns = baseType.getGeneratedTypeName(),
     ) {
-        if (baseType == GENERIC) {
-            statement("val result = Builder<%T>()", baseType.type)
-        } else {
-            statement("val result = Builder()")
-        }
+        createImmutableArrayBuilder(name = "result", forType = baseType)
         controlFlow("for (element in values)") {
             controlFlow("if (!predicate(element))") {
                 statement("result.add(element)")

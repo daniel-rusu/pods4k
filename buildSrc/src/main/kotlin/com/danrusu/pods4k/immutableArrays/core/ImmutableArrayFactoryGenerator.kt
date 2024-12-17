@@ -3,6 +3,7 @@ package com.danrusu.pods4k.immutableArrays.core
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.BaseType.GENERIC
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
+import com.danrusu.pods4k.immutableArrays.createImmutableArrayBuilder
 import com.danrusu.pods4k.utils.addGenericTypes
 import com.danrusu.pods4k.utils.comment
 import com.danrusu.pods4k.utils.controlFlow
@@ -138,14 +139,8 @@ private fun FileSpec.Builder.addBuilderFunctions() {
             forceFunctionBody = true,
         ) {
             addGenericTypes(baseType.type)
-            if (baseType == GENERIC) {
-                statement(
-                    "return ${baseType.generatedClassName}.Builder<%T>(initialCapacity).apply(body).build()",
-                    baseType.type,
-                )
-            } else {
-                statement("return ${baseType.generatedClassName}.Builder(initialCapacity).apply(body).build()")
-            }
+            createImmutableArrayBuilder(name = "builder", forType = baseType, initialCapacity = "initialCapacity")
+            statement("return builder.apply(body).build()")
         }
     }
 }
