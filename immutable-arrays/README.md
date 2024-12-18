@@ -674,10 +674,10 @@ The following experimental features are used which could change in future Kotlin
       signature clash on the JVM.
     * This feature was introduced in Kotlin 1.4 and is used extensively throughout the Kotlin standard library.
 * [Custom equals in value classes](https://youtrack.jetbrains.com/issue/KT-24874/Support-custom-equals-and-hashCode-for-value-classes)
-    * This enables overriding the equals & hashcode methods for inline value classes.
+    * This enables overriding the `equals` & `hashCode` methods for inline value classes.
     * This feature was added for the JVM IR backend (which handles both Android & regular backend JVM development) in
-      Kotlin 1.9 but hasn't been announced yet because the other backends were not ready. Since this isn't a Kotlin
-      multiplatform library, the lack of support in the other backends won't affect us.
+      Kotlin 1.9 but hasn't been announced yet because the other multiplatform backends were not ready. Since this isn't
+      a Kotlin multiplatform library, the lack of support in the other backends won't affect us.
     * Vote and comment on this [YouTrack ticket](https://youtrack.jetbrains.com/issue/KT-24874) to raise the importance
       of this feature so that we can use it without the extra experimental opt-in.
 

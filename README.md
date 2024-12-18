@@ -35,8 +35,7 @@ Alternatively, you can [pick & choose](publishing/bom/README.md) individual comp
 ## Immutable Arrays
 
 [Immutable Arrays](immutable-arrays/README.md) offer a safer and more efficient alternative to lists while maintaining
-the same look and
-feel.
+the same look and feel.
 
 ### Key Benefits
 
@@ -44,10 +43,14 @@ feel.
     * Uses a list-like syntax ensuring easy adoption with clean code.
 * **True Immutability**
     * Unlike read-only lists, Immutable Arrays cannot be mutated through casting.
-* **Memory Efficient**
-    * Up to 32 times less memory than lists for many common operations!
 * **Fast**
     * 2 to 8 times faster than lists for many common operations, with some even faster!
+* **Memory Efficient**
+    * Over 5X memory reduction versus lists for many common scenarios!
+        * `people.map { it.weightKg }` creates a primitive `ImmutableFloatArray`.
+    * Many operations retain zero extra memory when results are empty or the same elements.
+        * `people.filter { it.isEmployed() }` returns same instance when everyone is employed.
+    * etc.
 * **Type Safety**
     * Accidental mutation attempts are prevented at compile time.
 
@@ -74,6 +77,7 @@ against regular arrays, read-only lists, and immutable lists.
 ## Minimum Requirements
 
 * Kotlin 1.9.25
+    * This library is K2 compatible as it's used in other projects that use Kotlin 2.1 etc.
 * JDK 11
     * Automated tests are run on JDK LTS releases 11, 17, & 21
 
