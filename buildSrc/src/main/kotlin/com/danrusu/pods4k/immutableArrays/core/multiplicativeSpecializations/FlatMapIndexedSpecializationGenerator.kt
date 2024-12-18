@@ -1,6 +1,7 @@
 package com.danrusu.pods4k.immutableArrays.core.multiplicativeSpecializations
 
 import com.danrusu.pods4k.immutableArrays.BaseType
+import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
 import com.danrusu.pods4k.immutableArrays.createImmutableArrayBuilder
 import com.danrusu.pods4k.utils.addGenericTypes
 import com.danrusu.pods4k.utils.controlFlow
@@ -93,7 +94,7 @@ private fun FileSpec.Builder.addFlatMapIndexedFunction(fromType: BaseType, toTyp
         }
         controlFlow(
             "return %M(initialCapacity = numElements)",
-            MemberName("com.danrusu.pods4k.immutableArrays", "build${toType.generatedClassName}"),
+            MemberName(ImmutableArrayConfig.packageName, "build${toType.generatedClassName}"),
         ) {
             statement("arrays.forEach { addAll(it) }")
         }
