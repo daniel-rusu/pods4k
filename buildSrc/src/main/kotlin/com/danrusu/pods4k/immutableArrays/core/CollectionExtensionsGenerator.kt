@@ -157,7 +157,7 @@ private fun FileSpec.Builder.addIterableFlatten() {
             returns = baseType.getGeneratedTypeName(),
             forceFunctionBody = true,
         ) {
-            jvmName("flattenIterableOf${baseType.generatedClassName}")
+            jvmName("flatten", baseType.generatedClassName)
             addGenericTypes(baseType.type)
 
             controlFlow("return build${baseType.generatedClassName}()") {

@@ -54,7 +54,7 @@ private fun FileSpec.Builder.addFlatten() {
             returns = Sequence::class.asTypeName().parameterizedBy(baseType.type),
             forceFunctionBody = true,
         ) {
-            jvmName("flattenSequenceOf${baseType.generatedClassName}")
+            jvmName("flatten", baseType.generatedClassName)
             addGenericTypes(baseType.type)
 
             statement("return map { it.asIterable() }.flatten()")

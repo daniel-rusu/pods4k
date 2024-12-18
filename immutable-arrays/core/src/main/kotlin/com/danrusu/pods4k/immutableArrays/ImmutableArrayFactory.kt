@@ -130,7 +130,7 @@ public fun immutableArrayOf(vararg values: Double): ImmutableDoubleArray {
 /**
  * Returns an [ImmutableArray] containing only the non-null values.
  */
-@JvmName("immutableArrayOfNotNull")
+@JvmName("immutableArrayOfNotNull_GENERIC")
 public fun <T : Any> immutableArrayOfNotNull(vararg values: T?): ImmutableArray<T> {
     return buildImmutableArray {
         for (value in values) {
@@ -144,7 +144,7 @@ public fun <T : Any> immutableArrayOfNotNull(vararg values: T?): ImmutableArray<
 /**
  * Returns an [ImmutableBooleanArray] containing only the non-null values.
  */
-@JvmName("immutableArrayOfNotNull_Boolean")
+@JvmName("immutableArrayOfNotNull_BOOLEAN")
 public fun immutableArrayOfNotNull(vararg values: Boolean?): ImmutableBooleanArray {
     return buildImmutableBooleanArray {
         for (value in values) {
@@ -158,7 +158,7 @@ public fun immutableArrayOfNotNull(vararg values: Boolean?): ImmutableBooleanArr
 /**
  * Returns an [ImmutableByteArray] containing only the non-null values.
  */
-@JvmName("immutableArrayOfNotNull_Byte")
+@JvmName("immutableArrayOfNotNull_BYTE")
 public fun immutableArrayOfNotNull(vararg values: Byte?): ImmutableByteArray {
     return buildImmutableByteArray {
         for (value in values) {
@@ -172,7 +172,7 @@ public fun immutableArrayOfNotNull(vararg values: Byte?): ImmutableByteArray {
 /**
  * Returns an [ImmutableCharArray] containing only the non-null values.
  */
-@JvmName("immutableArrayOfNotNull_Char")
+@JvmName("immutableArrayOfNotNull_CHAR")
 public fun immutableArrayOfNotNull(vararg values: Char?): ImmutableCharArray {
     return buildImmutableCharArray {
         for (value in values) {
@@ -186,7 +186,7 @@ public fun immutableArrayOfNotNull(vararg values: Char?): ImmutableCharArray {
 /**
  * Returns an [ImmutableShortArray] containing only the non-null values.
  */
-@JvmName("immutableArrayOfNotNull_Short")
+@JvmName("immutableArrayOfNotNull_SHORT")
 public fun immutableArrayOfNotNull(vararg values: Short?): ImmutableShortArray {
     return buildImmutableShortArray {
         for (value in values) {
@@ -200,7 +200,7 @@ public fun immutableArrayOfNotNull(vararg values: Short?): ImmutableShortArray {
 /**
  * Returns an [ImmutableIntArray] containing only the non-null values.
  */
-@JvmName("immutableArrayOfNotNull_Int")
+@JvmName("immutableArrayOfNotNull_INT")
 public fun immutableArrayOfNotNull(vararg values: Int?): ImmutableIntArray {
     return buildImmutableIntArray {
         for (value in values) {
@@ -214,7 +214,7 @@ public fun immutableArrayOfNotNull(vararg values: Int?): ImmutableIntArray {
 /**
  * Returns an [ImmutableLongArray] containing only the non-null values.
  */
-@JvmName("immutableArrayOfNotNull_Long")
+@JvmName("immutableArrayOfNotNull_LONG")
 public fun immutableArrayOfNotNull(vararg values: Long?): ImmutableLongArray {
     return buildImmutableLongArray {
         for (value in values) {
@@ -228,7 +228,7 @@ public fun immutableArrayOfNotNull(vararg values: Long?): ImmutableLongArray {
 /**
  * Returns an [ImmutableFloatArray] containing only the non-null values.
  */
-@JvmName("immutableArrayOfNotNull_Float")
+@JvmName("immutableArrayOfNotNull_FLOAT")
 public fun immutableArrayOfNotNull(vararg values: Float?): ImmutableFloatArray {
     return buildImmutableFloatArray {
         for (value in values) {
@@ -242,7 +242,7 @@ public fun immutableArrayOfNotNull(vararg values: Float?): ImmutableFloatArray {
 /**
  * Returns an [ImmutableDoubleArray] containing only the non-null values.
  */
-@JvmName("immutableArrayOfNotNull_Double")
+@JvmName("immutableArrayOfNotNull_DOUBLE")
 public fun immutableArrayOfNotNull(vararg values: Double?): ImmutableDoubleArray {
     return buildImmutableDoubleArray {
         for (value in values) {

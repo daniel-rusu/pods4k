@@ -184,12 +184,7 @@ private fun FileSpec.Builder.addFilterNotNull() {
             forceFunctionBody = true,
         ) {
             addGenericTypes(nonNullType)
-
-            if (baseType == GENERIC) {
-                jvmName("immutableArrayFilterNotNull")
-            } else {
-                jvmName("immutableArrayFilterNotNull_${baseType.typeClass.simpleName}")
-            }
+            jvmName("filterNotNull", baseType.name)
             createImmutableArrayBuilder(name = "result", forType = baseType, genericTypeOverride = nonNullType)
             controlFlow("forEach { value ->") {
                 controlFlow("if (value != null)") {
@@ -432,7 +427,7 @@ private fun FileSpec.Builder.addFlatten() {
         returns = GENERIC.getGeneratedTypeName(),
         forceFunctionBody = true,
     ) {
-        jvmName("flattenIterable")
+        jvmName("flatten", "Iterable", GENERIC.name)
         addGenericTypes(GENERIC.type)
 
         controlFlow("return build${GENERIC.generatedClassName}()") {
@@ -450,7 +445,7 @@ private fun FileSpec.Builder.addFlatten() {
             returns = baseType.getGeneratedTypeName(),
             forceFunctionBody = true,
         ) {
-            jvmName("flatten${baseType.generatedClassName}")
+            jvmName("flatten", baseType.generatedClassName)
             addGenericTypes(baseType.type)
 
             controlFlow("return build${baseType.generatedClassName}()") {

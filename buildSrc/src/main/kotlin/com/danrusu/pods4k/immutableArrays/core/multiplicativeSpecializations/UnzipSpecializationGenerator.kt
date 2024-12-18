@@ -5,13 +5,13 @@ import com.danrusu.pods4k.immutableArrays.createImmutableArrayBuilder
 import com.danrusu.pods4k.utils.addGenericTypes
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.function
+import com.danrusu.pods4k.utils.jvmName
 import com.danrusu.pods4k.utils.statement
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeVariableName
 import com.squareup.kotlinpoet.asTypeName
-import com.squareup.kotlinpoet.jvm.jvmName
 
 internal object UnzipSpecializationGenerator : SpecializationGenerator("UnzipSpecializations") {
     override fun generateSpecialization(fileSpec: FileSpec.Builder, fromType: BaseType, toType: BaseType) {
@@ -38,7 +38,7 @@ private fun FileSpec.Builder.addUnzipFunction(type1: BaseType, type2: BaseType) 
         name = "unzip",
         returns = Pair::class.asTypeName().parameterizedBy(type1.getGeneratedTypeName(), type2Name),
     ) {
-        jvmName("unzip_${type1.name}_${type2.name}")
+        jvmName("unzip", "Pair", type1.name, type2.name)
         addGenericTypes(type1.type, type2ValueName)
 
         createImmutableArrayBuilder(name = "first", forType = type1, initialCapacity = "size")

@@ -98,7 +98,7 @@ public fun Sequence<Double>.toImmutableArray(): ImmutableDoubleArray {
  *
  * The operation is _intermediate_ and _stateless_.
  */
-@JvmName("flattenSequenceOfImmutableArray")
+@JvmName("flatten_ImmutableArray")
 public fun <T> Sequence<ImmutableArray<T>>.flatten(): Sequence<T> {
     return map { it.asIterable() }.flatten()
 }
@@ -108,7 +108,7 @@ public fun <T> Sequence<ImmutableArray<T>>.flatten(): Sequence<T> {
  *
  * The operation is _intermediate_ and _stateless_.
  */
-@JvmName("flattenSequenceOfImmutableBooleanArray")
+@JvmName("flatten_ImmutableBooleanArray")
 public fun Sequence<ImmutableBooleanArray>.flatten(): Sequence<Boolean> {
     return map { it.asIterable() }.flatten()
 }
@@ -118,7 +118,7 @@ public fun Sequence<ImmutableBooleanArray>.flatten(): Sequence<Boolean> {
  *
  * The operation is _intermediate_ and _stateless_.
  */
-@JvmName("flattenSequenceOfImmutableByteArray")
+@JvmName("flatten_ImmutableByteArray")
 public fun Sequence<ImmutableByteArray>.flatten(): Sequence<Byte> {
     return map { it.asIterable() }.flatten()
 }
@@ -128,7 +128,7 @@ public fun Sequence<ImmutableByteArray>.flatten(): Sequence<Byte> {
  *
  * The operation is _intermediate_ and _stateless_.
  */
-@JvmName("flattenSequenceOfImmutableCharArray")
+@JvmName("flatten_ImmutableCharArray")
 public fun Sequence<ImmutableCharArray>.flatten(): Sequence<Char> {
     return map { it.asIterable() }.flatten()
 }
@@ -138,7 +138,7 @@ public fun Sequence<ImmutableCharArray>.flatten(): Sequence<Char> {
  *
  * The operation is _intermediate_ and _stateless_.
  */
-@JvmName("flattenSequenceOfImmutableShortArray")
+@JvmName("flatten_ImmutableShortArray")
 public fun Sequence<ImmutableShortArray>.flatten(): Sequence<Short> {
     return map { it.asIterable() }.flatten()
 }
@@ -148,7 +148,7 @@ public fun Sequence<ImmutableShortArray>.flatten(): Sequence<Short> {
  *
  * The operation is _intermediate_ and _stateless_.
  */
-@JvmName("flattenSequenceOfImmutableIntArray")
+@JvmName("flatten_ImmutableIntArray")
 public fun Sequence<ImmutableIntArray>.flatten(): Sequence<Int> {
     return map { it.asIterable() }.flatten()
 }
@@ -158,7 +158,7 @@ public fun Sequence<ImmutableIntArray>.flatten(): Sequence<Int> {
  *
  * The operation is _intermediate_ and _stateless_.
  */
-@JvmName("flattenSequenceOfImmutableLongArray")
+@JvmName("flatten_ImmutableLongArray")
 public fun Sequence<ImmutableLongArray>.flatten(): Sequence<Long> {
     return map { it.asIterable() }.flatten()
 }
@@ -168,7 +168,7 @@ public fun Sequence<ImmutableLongArray>.flatten(): Sequence<Long> {
  *
  * The operation is _intermediate_ and _stateless_.
  */
-@JvmName("flattenSequenceOfImmutableFloatArray")
+@JvmName("flatten_ImmutableFloatArray")
 public fun Sequence<ImmutableFloatArray>.flatten(): Sequence<Float> {
     return map { it.asIterable() }.flatten()
 }
@@ -178,7 +178,7 @@ public fun Sequence<ImmutableFloatArray>.flatten(): Sequence<Float> {
  *
  * The operation is _intermediate_ and _stateless_.
  */
-@JvmName("flattenSequenceOfImmutableDoubleArray")
+@JvmName("flatten_ImmutableDoubleArray")
 public fun Sequence<ImmutableDoubleArray>.flatten(): Sequence<Double> {
     return map { it.asIterable() }.flatten()
 }

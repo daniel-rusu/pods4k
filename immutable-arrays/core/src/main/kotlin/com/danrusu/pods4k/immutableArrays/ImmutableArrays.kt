@@ -474,7 +474,7 @@ public inline fun ImmutableDoubleArray.getOrElse(index: Int, defaultValue: (inde
 /**
  * Returns an immutable array containing only the non-null elements
  */
-@JvmName("immutableArrayFilterNotNull")
+@JvmName("filterNotNull_GENERIC")
 @Suppress("UNCHECKED_CAST")
 public fun <T : Any> ImmutableArray<T?>.filterNotNull(): ImmutableArray<T> {
     val result = ImmutableArray.Builder<T>()
@@ -491,7 +491,7 @@ public fun <T : Any> ImmutableArray<T?>.filterNotNull(): ImmutableArray<T> {
 /**
  * Returns an immutable array containing only the non-null elements
  */
-@JvmName("immutableArrayFilterNotNull_Boolean")
+@JvmName("filterNotNull_BOOLEAN")
 public fun ImmutableArray<Boolean?>.filterNotNull(): ImmutableBooleanArray {
     val result = ImmutableBooleanArray.Builder()
     forEach { value ->
@@ -505,7 +505,7 @@ public fun ImmutableArray<Boolean?>.filterNotNull(): ImmutableBooleanArray {
 /**
  * Returns an immutable array containing only the non-null elements
  */
-@JvmName("immutableArrayFilterNotNull_Byte")
+@JvmName("filterNotNull_BYTE")
 public fun ImmutableArray<Byte?>.filterNotNull(): ImmutableByteArray {
     val result = ImmutableByteArray.Builder()
     forEach { value ->
@@ -519,7 +519,7 @@ public fun ImmutableArray<Byte?>.filterNotNull(): ImmutableByteArray {
 /**
  * Returns an immutable array containing only the non-null elements
  */
-@JvmName("immutableArrayFilterNotNull_Char")
+@JvmName("filterNotNull_CHAR")
 public fun ImmutableArray<Char?>.filterNotNull(): ImmutableCharArray {
     val result = ImmutableCharArray.Builder()
     forEach { value ->
@@ -533,7 +533,7 @@ public fun ImmutableArray<Char?>.filterNotNull(): ImmutableCharArray {
 /**
  * Returns an immutable array containing only the non-null elements
  */
-@JvmName("immutableArrayFilterNotNull_Short")
+@JvmName("filterNotNull_SHORT")
 public fun ImmutableArray<Short?>.filterNotNull(): ImmutableShortArray {
     val result = ImmutableShortArray.Builder()
     forEach { value ->
@@ -547,7 +547,7 @@ public fun ImmutableArray<Short?>.filterNotNull(): ImmutableShortArray {
 /**
  * Returns an immutable array containing only the non-null elements
  */
-@JvmName("immutableArrayFilterNotNull_Int")
+@JvmName("filterNotNull_INT")
 public fun ImmutableArray<Int?>.filterNotNull(): ImmutableIntArray {
     val result = ImmutableIntArray.Builder()
     forEach { value ->
@@ -561,7 +561,7 @@ public fun ImmutableArray<Int?>.filterNotNull(): ImmutableIntArray {
 /**
  * Returns an immutable array containing only the non-null elements
  */
-@JvmName("immutableArrayFilterNotNull_Long")
+@JvmName("filterNotNull_LONG")
 public fun ImmutableArray<Long?>.filterNotNull(): ImmutableLongArray {
     val result = ImmutableLongArray.Builder()
     forEach { value ->
@@ -575,7 +575,7 @@ public fun ImmutableArray<Long?>.filterNotNull(): ImmutableLongArray {
 /**
  * Returns an immutable array containing only the non-null elements
  */
-@JvmName("immutableArrayFilterNotNull_Float")
+@JvmName("filterNotNull_FLOAT")
 public fun ImmutableArray<Float?>.filterNotNull(): ImmutableFloatArray {
     val result = ImmutableFloatArray.Builder()
     forEach { value ->
@@ -589,7 +589,7 @@ public fun ImmutableArray<Float?>.filterNotNull(): ImmutableFloatArray {
 /**
  * Returns an immutable array containing only the non-null elements
  */
-@JvmName("immutableArrayFilterNotNull_Double")
+@JvmName("filterNotNull_DOUBLE")
 public fun ImmutableArray<Double?>.filterNotNull(): ImmutableDoubleArray {
     val result = ImmutableDoubleArray.Builder()
     forEach { value ->
@@ -1258,7 +1258,7 @@ public fun <T> ImmutableArray<T?>.requireNoNulls(): ImmutableArray<T> {
 /**
  * Returns a single immutable array with all the elements from all nested collections.
  */
-@JvmName("flattenIterable")
+@JvmName("flatten_Iterable_GENERIC")
 public fun <T> ImmutableArray<Iterable<T>>.flatten(): ImmutableArray<T> {
     return buildImmutableArray {
         for (nestedCollection in this@flatten) {
@@ -1270,7 +1270,7 @@ public fun <T> ImmutableArray<Iterable<T>>.flatten(): ImmutableArray<T> {
 /**
  * Returns a single immutable array with all the elements from all nested arrays.
  */
-@JvmName("flattenImmutableArray")
+@JvmName("flatten_ImmutableArray")
 public fun <T> ImmutableArray<ImmutableArray<T>>.flatten(): ImmutableArray<T> {
     return buildImmutableArray {
         for (nestedArray in this@flatten) {
@@ -1282,7 +1282,7 @@ public fun <T> ImmutableArray<ImmutableArray<T>>.flatten(): ImmutableArray<T> {
 /**
  * Returns a single immutable array with all the elements from all nested arrays.
  */
-@JvmName("flattenImmutableBooleanArray")
+@JvmName("flatten_ImmutableBooleanArray")
 public fun ImmutableArray<ImmutableBooleanArray>.flatten(): ImmutableBooleanArray {
     return buildImmutableBooleanArray {
         for (nestedArray in this@flatten) {
@@ -1294,7 +1294,7 @@ public fun ImmutableArray<ImmutableBooleanArray>.flatten(): ImmutableBooleanArra
 /**
  * Returns a single immutable array with all the elements from all nested arrays.
  */
-@JvmName("flattenImmutableByteArray")
+@JvmName("flatten_ImmutableByteArray")
 public fun ImmutableArray<ImmutableByteArray>.flatten(): ImmutableByteArray {
     return buildImmutableByteArray {
         for (nestedArray in this@flatten) {
@@ -1306,7 +1306,7 @@ public fun ImmutableArray<ImmutableByteArray>.flatten(): ImmutableByteArray {
 /**
  * Returns a single immutable array with all the elements from all nested arrays.
  */
-@JvmName("flattenImmutableCharArray")
+@JvmName("flatten_ImmutableCharArray")
 public fun ImmutableArray<ImmutableCharArray>.flatten(): ImmutableCharArray {
     return buildImmutableCharArray {
         for (nestedArray in this@flatten) {
@@ -1318,7 +1318,7 @@ public fun ImmutableArray<ImmutableCharArray>.flatten(): ImmutableCharArray {
 /**
  * Returns a single immutable array with all the elements from all nested arrays.
  */
-@JvmName("flattenImmutableShortArray")
+@JvmName("flatten_ImmutableShortArray")
 public fun ImmutableArray<ImmutableShortArray>.flatten(): ImmutableShortArray {
     return buildImmutableShortArray {
         for (nestedArray in this@flatten) {
@@ -1330,7 +1330,7 @@ public fun ImmutableArray<ImmutableShortArray>.flatten(): ImmutableShortArray {
 /**
  * Returns a single immutable array with all the elements from all nested arrays.
  */
-@JvmName("flattenImmutableIntArray")
+@JvmName("flatten_ImmutableIntArray")
 public fun ImmutableArray<ImmutableIntArray>.flatten(): ImmutableIntArray {
     return buildImmutableIntArray {
         for (nestedArray in this@flatten) {
@@ -1342,7 +1342,7 @@ public fun ImmutableArray<ImmutableIntArray>.flatten(): ImmutableIntArray {
 /**
  * Returns a single immutable array with all the elements from all nested arrays.
  */
-@JvmName("flattenImmutableLongArray")
+@JvmName("flatten_ImmutableLongArray")
 public fun ImmutableArray<ImmutableLongArray>.flatten(): ImmutableLongArray {
     return buildImmutableLongArray {
         for (nestedArray in this@flatten) {
@@ -1354,7 +1354,7 @@ public fun ImmutableArray<ImmutableLongArray>.flatten(): ImmutableLongArray {
 /**
  * Returns a single immutable array with all the elements from all nested arrays.
  */
-@JvmName("flattenImmutableFloatArray")
+@JvmName("flatten_ImmutableFloatArray")
 public fun ImmutableArray<ImmutableFloatArray>.flatten(): ImmutableFloatArray {
     return buildImmutableFloatArray {
         for (nestedArray in this@flatten) {
@@ -1366,7 +1366,7 @@ public fun ImmutableArray<ImmutableFloatArray>.flatten(): ImmutableFloatArray {
 /**
  * Returns a single immutable array with all the elements from all nested arrays.
  */
-@JvmName("flattenImmutableDoubleArray")
+@JvmName("flatten_ImmutableDoubleArray")
 public fun ImmutableArray<ImmutableDoubleArray>.flatten(): ImmutableDoubleArray {
     return buildImmutableDoubleArray {
         for (nestedArray in this@flatten) {

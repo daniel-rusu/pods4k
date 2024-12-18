@@ -10,6 +10,7 @@ import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.createFile
 import com.danrusu.pods4k.utils.declareObject
 import com.danrusu.pods4k.utils.function
+import com.danrusu.pods4k.utils.jvmName
 import com.danrusu.pods4k.utils.property
 import com.danrusu.pods4k.utils.statement
 import com.squareup.kotlinpoet.FileSpec
@@ -18,7 +19,6 @@ import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.TypeVariableName
 import com.squareup.kotlinpoet.asTypeName
-import com.squareup.kotlinpoet.jvm.jvmName
 import java.io.File
 
 internal object ImmutableArrayFactoryGenerator {
@@ -104,11 +104,7 @@ private fun FileSpec.Builder.addImmutableArrayOfNotNull() {
             forceFunctionBody = true,
         ) {
             addGenericTypes(nonNullType)
-            if (baseType == GENERIC) {
-                jvmName("immutableArrayOfNotNull")
-            } else {
-                jvmName("immutableArrayOfNotNull_${baseType.typeClass.simpleName}")
-            }
+            jvmName("immutableArrayOfNotNull", baseType.name)
             controlFlow("return build${baseType.generatedClassName}") {
                 controlFlow("for (value in values)") {
                     controlFlow("if (value != null)") {

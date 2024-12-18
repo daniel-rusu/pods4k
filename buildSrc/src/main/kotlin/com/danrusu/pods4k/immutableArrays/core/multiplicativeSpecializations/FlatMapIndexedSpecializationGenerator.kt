@@ -5,6 +5,7 @@ import com.danrusu.pods4k.immutableArrays.createImmutableArrayBuilder
 import com.danrusu.pods4k.utils.addGenericTypes
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.function
+import com.danrusu.pods4k.utils.jvmName
 import com.danrusu.pods4k.utils.statement
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.KModifier
@@ -13,7 +14,6 @@ import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeVariableName
 import com.squareup.kotlinpoet.asTypeName
-import com.squareup.kotlinpoet.jvm.jvmName
 
 internal object FlatMapIndexedSpecializationGenerator : SpecializationGenerator("FlatMapIndexedSpecializations") {
     override fun generateSpecialization(fileSpec: FileSpec.Builder, fromType: BaseType, toType: BaseType) {
@@ -51,7 +51,7 @@ private fun FileSpec.Builder.addFlatMapIndexedFunction(fromType: BaseType, toTyp
         },
         returns = resultType,
     ) {
-        jvmName("flatMapIndexed${toType.typeClass.simpleName}Iterable")
+        jvmName("flatMapIndexed", "Iterable", toType.name)
         addAnnotation(OverloadResolutionByLambdaReturnType::class)
         addGenericTypes(fromType.type, mappedType)
 
@@ -79,7 +79,7 @@ private fun FileSpec.Builder.addFlatMapIndexedFunction(fromType: BaseType, toTyp
         },
         returns = resultType,
     ) {
-        jvmName("flatMapIndexed${toType.generatedClassName}")
+        jvmName("flatMapIndexed", toType.generatedClassName)
         addAnnotation(OverloadResolutionByLambdaReturnType::class)
         addGenericTypes(fromType.type, mappedType)
         /**
