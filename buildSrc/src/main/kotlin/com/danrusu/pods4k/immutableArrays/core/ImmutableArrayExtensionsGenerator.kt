@@ -319,13 +319,18 @@ private fun FileSpec.Builder.addPlusImmutableArray() {
         ) {
             addGenericTypes(baseType.type)
 
-            controlFlow("when") {
-                statement("isEmpty() -> return other")
-                statement("other.isEmpty() -> return this")
-            }
-            controlFlow("return build${baseType.generatedClassName}(initialCapacity = size + other.size)") {
-                statement("addAll(this@plus)")
-                statement("addAll(other)")
+            controlFlow("return when") {
+                statement("isEmpty() -> other")
+                statement("other.isEmpty() -> this")
+                if (baseType == GENERIC) {
+                    suppress("UNCHECKED_CAST")
+                    statement(
+                        "else -> ${baseType.generatedClassName}((this.values as Array<%T>) + other.values)",
+                        baseType.type,
+                    )
+                } else {
+                    statement("else -> ${baseType.generatedClassName}(this.values + other.values)")
+                }
             }
         }
     }
