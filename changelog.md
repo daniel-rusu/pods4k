@@ -9,7 +9,8 @@ _Date TBD_
 
 **Performance Improvements:**
 
-* Update `plus` to concatenate Immutable Arrays without using builders.
+* Update `plus` to concatenate an element with an Immutable Array without using builders.
+* Update `plus` to concatenate 2 Immutable Arrays without using builders.
 * Update `sortedWith` on `ImmutableArray<T>` to copy the elements with `arraycopy`.
 * Update `partition` to use `arraycopy` to copy from the left side of the buffer.
 

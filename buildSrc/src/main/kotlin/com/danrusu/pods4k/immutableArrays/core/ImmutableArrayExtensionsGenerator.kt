@@ -350,12 +350,15 @@ private fun FileSpec.Builder.addPlusValue() {
             name = "plus",
             parameters = { "element"(type = baseType.type) },
             returns = baseType.getGeneratedTypeName(),
+            forceFunctionBody = true,
         ) {
             addGenericTypes(baseType.type)
 
-            controlFlow("return build${baseType.generatedClassName}(initialCapacity = size + 1)") {
-                statement("addAll(this@plus)")
-                statement("add(element)")
+            if (baseType == GENERIC) {
+                suppress("UNCHECKED_CAST")
+                statement("return ${baseType.generatedClassName}((values as Array<%T>) + element)", baseType.type)
+            } else {
+                statement("return ${baseType.generatedClassName}(values + element)")
             }
         }
     }
