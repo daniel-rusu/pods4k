@@ -406,6 +406,14 @@ class ImmutableArrayTest {
 
         expectThat(immutableArrayOf("one").randomOrNull())
             .isEqualTo("one")
+
+        with(immutableArrayOf("one", "two", "three")) {
+            expectThat(randomOrNull(Random(seed = 0)))
+                .isEqualTo("one")
+
+            expectThat(randomOrNull(Random(seed = 2)))
+                .isEqualTo("two")
+        }
     }
 
     @Test

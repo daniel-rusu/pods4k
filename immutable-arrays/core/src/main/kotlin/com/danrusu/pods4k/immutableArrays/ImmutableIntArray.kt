@@ -225,6 +225,11 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     public inline fun randomOrNull(): Int? = values.randomOrNull()
 
     /**
+     * See [IntArray.randomOrNull]
+     */
+    public inline fun randomOrNull(random: Random): Int? = values.randomOrNull(random)
+
+    /**
      * See [IntArray.iterator]
      */
     public inline operator fun iterator(): Iterator<Int> = values.iterator()

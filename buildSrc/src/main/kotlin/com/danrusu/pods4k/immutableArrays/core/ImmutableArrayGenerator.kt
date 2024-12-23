@@ -217,6 +217,12 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 baseType = baseType,
                 returns = baseType.type.copy(nullable = true),
             )
+            "randomOrNull"(
+                typeSpecBuilder = this,
+                baseType = baseType,
+                parameters = { "random"<Random>() },
+                returns = baseType.type.copy(nullable = true),
+            )
             "iterator"(
                 typeSpecBuilder = this,
                 baseType = baseType,

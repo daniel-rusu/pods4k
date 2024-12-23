@@ -9,6 +9,7 @@ _Date TBD_
 
 **New Features:**
 
+* Add `randomOrNull(Random)` method
 * Add `randomOrNull()` method
 * Add `random(Random)` method
 * Add `random()` method

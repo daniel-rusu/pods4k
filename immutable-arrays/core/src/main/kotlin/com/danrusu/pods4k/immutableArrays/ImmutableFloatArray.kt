@@ -225,6 +225,11 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     public inline fun randomOrNull(): Float? = values.randomOrNull()
 
     /**
+     * See [FloatArray.randomOrNull]
+     */
+    public inline fun randomOrNull(random: Random): Float? = values.randomOrNull(random)
+
+    /**
      * See [FloatArray.iterator]
      */
     public inline operator fun iterator(): Iterator<Float> = values.iterator()

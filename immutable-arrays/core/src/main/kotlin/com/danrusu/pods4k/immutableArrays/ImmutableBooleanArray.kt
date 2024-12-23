@@ -225,6 +225,11 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     public inline fun randomOrNull(): Boolean? = values.randomOrNull()
 
     /**
+     * See [BooleanArray.randomOrNull]
+     */
+    public inline fun randomOrNull(random: Random): Boolean? = values.randomOrNull(random)
+
+    /**
      * See [BooleanArray.iterator]
      */
     public inline operator fun iterator(): Iterator<Boolean> = values.iterator()

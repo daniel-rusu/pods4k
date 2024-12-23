@@ -225,6 +225,11 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     public inline fun randomOrNull(): Long? = values.randomOrNull()
 
     /**
+     * See [LongArray.randomOrNull]
+     */
+    public inline fun randomOrNull(random: Random): Long? = values.randomOrNull(random)
+
+    /**
      * See [LongArray.iterator]
      */
     public inline operator fun iterator(): Iterator<Long> = values.iterator()

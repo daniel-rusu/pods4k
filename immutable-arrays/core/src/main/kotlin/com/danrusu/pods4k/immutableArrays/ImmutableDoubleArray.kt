@@ -225,6 +225,11 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     public inline fun randomOrNull(): Double? = values.randomOrNull()
 
     /**
+     * See [DoubleArray.randomOrNull]
+     */
+    public inline fun randomOrNull(random: Random): Double? = values.randomOrNull(random)
+
+    /**
      * See [DoubleArray.iterator]
      */
     public inline operator fun iterator(): Iterator<Double> = values.iterator()

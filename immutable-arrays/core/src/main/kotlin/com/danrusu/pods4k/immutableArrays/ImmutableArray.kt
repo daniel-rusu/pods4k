@@ -226,6 +226,11 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     public inline fun randomOrNull(): T? = values.randomOrNull()
 
     /**
+     * See [Array.randomOrNull]
+     */
+    public inline fun randomOrNull(random: Random): T? = values.randomOrNull(random)
+
+    /**
      * See [Array.iterator]
      */
     public inline operator fun iterator(): Iterator<T> = values.iterator()

@@ -420,6 +420,14 @@ class ImmutableIntArrayTest {
 
         expectThat(immutableArrayOf(3).randomOrNull())
             .isEqualTo(3)
+
+        with(immutableArrayOf(1, 5, 3)) {
+            expectThat(randomOrNull(Random(seed = 0)))
+                .isEqualTo(1)
+
+            expectThat(randomOrNull(Random(seed = 2)))
+                .isEqualTo(5)
+        }
     }
 
     @Test
