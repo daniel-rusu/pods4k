@@ -5,9 +5,9 @@
 A collection of performance-oriented data structures providing performance and efficiency that might appear to be
 impossible at first glance.
 
-If you're enjoying this library, please give it
+If you find this library useful, please consider giving it
 a [![GitHub stars](https://img.shields.io/github/stars/daniel-rusu/pods4k?label=Star)](https://github.com/daniel-rusu/pods4k)
-and share it with others.
+on [GitHub](https://github.com/daniel-rusu/pods4k) and sharing it with others.
 
 ## Dependency
 
