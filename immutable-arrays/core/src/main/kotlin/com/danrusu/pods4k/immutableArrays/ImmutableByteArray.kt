@@ -221,6 +221,11 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     public inline fun random(random: Random): Byte = values.random(random)
 
     /**
+     * See [ByteArray.randomOrNull]
+     */
+    public inline fun randomOrNull(): Byte? = values.randomOrNull()
+
+    /**
      * See [ByteArray.iterator]
      */
     public inline operator fun iterator(): Iterator<Byte> = values.iterator()

@@ -221,6 +221,11 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     public inline fun random(random: Random): Char = values.random(random)
 
     /**
+     * See [CharArray.randomOrNull]
+     */
+    public inline fun randomOrNull(): Char? = values.randomOrNull()
+
+    /**
      * See [CharArray.iterator]
      */
     public inline operator fun iterator(): Iterator<Char> = values.iterator()

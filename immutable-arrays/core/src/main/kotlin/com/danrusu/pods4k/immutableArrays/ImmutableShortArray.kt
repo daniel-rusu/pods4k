@@ -221,6 +221,11 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     public inline fun random(random: Random): Short = values.random(random)
 
     /**
+     * See [ShortArray.randomOrNull]
+     */
+    public inline fun randomOrNull(): Short? = values.randomOrNull()
+
+    /**
      * See [ShortArray.iterator]
      */
     public inline operator fun iterator(): Iterator<Short> = values.iterator()

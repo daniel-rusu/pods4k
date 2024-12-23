@@ -400,6 +400,15 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `randomOrNull validation`() {
+        expectThat(emptyImmutableArray<String>().randomOrNull())
+            .isEqualTo(null)
+
+        expectThat(immutableArrayOf("one").randomOrNull())
+            .isEqualTo("one")
+    }
+
+    @Test
     fun `iterator validation`() {
         with(immutableArrayOf("one", "two")) {
             val iterator = this.iterator()
