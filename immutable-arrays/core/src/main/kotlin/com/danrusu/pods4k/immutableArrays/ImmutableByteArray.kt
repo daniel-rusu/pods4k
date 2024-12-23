@@ -210,6 +210,11 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     }
 
     /**
+     * See [ByteArray.random]
+     */
+    public inline fun random(): Byte = values.random()
+
+    /**
      * See [ByteArray.iterator]
      */
     public inline operator fun iterator(): Iterator<Byte> = values.iterator()

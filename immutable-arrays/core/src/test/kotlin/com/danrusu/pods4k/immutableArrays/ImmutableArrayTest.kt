@@ -10,7 +10,6 @@ import strikt.assertions.isNotEqualTo
 import strikt.assertions.isNull
 import strikt.assertions.isTrue
 import strikt.assertions.message
-import kotlin.collections.set
 
 /**
  * IMPORTANT:
@@ -379,6 +378,16 @@ class ImmutableArrayTest {
         with(immutableArrayOf("one", "two", "three")) {
             expectThat(this.lastOrNull()).isEqualTo("three")
         }
+    }
+
+    @Test
+    fun `random validation`() {
+        expectThrows<NoSuchElementException> {
+            emptyImmutableArray<String>().random()
+        }.message.isEqualTo("Array is empty.")
+
+        expectThat(immutableArrayOf("one").random())
+            .isEqualTo("one")
     }
 
     @Test

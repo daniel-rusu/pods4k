@@ -210,6 +210,11 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     }
 
     /**
+     * See [Array.random]
+     */
+    public inline fun random(): T = values.random()
+
+    /**
      * See [Array.iterator]
      */
     public inline operator fun iterator(): Iterator<T> = values.iterator()

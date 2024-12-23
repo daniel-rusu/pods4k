@@ -210,6 +210,11 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     }
 
     /**
+     * See [CharArray.random]
+     */
+    public inline fun random(): Char = values.random()
+
+    /**
      * See [CharArray.iterator]
      */
     public inline operator fun iterator(): Iterator<Char> = values.iterator()

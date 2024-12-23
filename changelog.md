@@ -7,6 +7,10 @@ _Date TBD_
 
 ### Immutable Arrays
 
+**New Features:**
+
+* Add `random()` method
+
 **Performance Improvements:**
 
 * Update `plus` to concatenate an element with an Immutable Array without using builders.

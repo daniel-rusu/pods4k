@@ -10,7 +10,6 @@ import strikt.assertions.isNotEqualTo
 import strikt.assertions.isNull
 import strikt.assertions.isTrue
 import strikt.assertions.message
-import kotlin.collections.set
 
 private val primitiveIntClass = 3::class.java
 
@@ -393,6 +392,16 @@ class ImmutableIntArrayTest {
             expectThat(this.lastOrNull { it % 7 == 0 })
                 .isNull()
         }
+    }
+
+    @Test
+    fun `random validation`() {
+        expectThrows<NoSuchElementException> {
+            emptyImmutableIntArray().random()
+        }.message.isEqualTo("Array is empty.")
+
+        expectThat(immutableArrayOf(3).random())
+            .isEqualTo(3)
     }
 
     @Test

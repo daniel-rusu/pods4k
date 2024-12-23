@@ -209,6 +209,11 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     }
 
     /**
+     * See [IntArray.random]
+     */
+    public inline fun random(): Int = values.random()
+
+    /**
      * See [IntArray.iterator]
      */
     public inline operator fun iterator(): Iterator<Int> = values.iterator()
