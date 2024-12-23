@@ -22,6 +22,7 @@ import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
 import kotlin.collections.Iterator
 import kotlin.jvm.JvmInline
+import kotlin.random.Random
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
 
@@ -212,6 +213,11 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
      * See [LongArray.random]
      */
     public inline fun random(): Long = values.random()
+
+    /**
+     * See [LongArray.random]
+     */
+    public inline fun random(random: Random): Long = values.random(random)
 
     /**
      * See [LongArray.iterator]

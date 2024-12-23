@@ -23,6 +23,7 @@ import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
 import kotlin.collections.Iterator
 import kotlin.jvm.JvmInline
+import kotlin.random.Random
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
 
@@ -213,6 +214,11 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
      * See [CharArray.random]
      */
     public inline fun random(): Char = values.random()
+
+    /**
+     * See [CharArray.random]
+     */
+    public inline fun random(random: Random): Char = values.random(random)
 
     /**
      * See [CharArray.iterator]

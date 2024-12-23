@@ -22,6 +22,7 @@ import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
 import kotlin.collections.Iterator
 import kotlin.jvm.JvmInline
+import kotlin.random.Random
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
 
@@ -212,6 +213,11 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
      * See [DoubleArray.random]
      */
     public inline fun random(): Double = values.random()
+
+    /**
+     * See [DoubleArray.random]
+     */
+    public inline fun random(random: Random): Double = values.random(random)
 
     /**
      * See [DoubleArray.iterator]

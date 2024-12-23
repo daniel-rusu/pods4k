@@ -9,6 +9,7 @@ _Date TBD_
 
 **New Features:**
 
+* Add `random(Random)` method
 * Add `random()` method
 
 **Performance Improvements:**

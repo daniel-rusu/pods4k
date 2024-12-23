@@ -23,6 +23,7 @@ import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
 import kotlin.collections.Iterator
 import kotlin.jvm.JvmInline
+import kotlin.random.Random
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
 
@@ -213,6 +214,11 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
      * See [Array.random]
      */
     public inline fun random(): T = values.random()
+
+    /**
+     * See [Array.random]
+     */
+    public inline fun random(random: Random): T = values.random(random)
 
     /**
      * See [Array.iterator]

@@ -22,6 +22,7 @@ import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
 import kotlin.collections.Iterator
 import kotlin.jvm.JvmInline
+import kotlin.random.Random
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
 
@@ -212,6 +213,11 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
      * See [BooleanArray.random]
      */
     public inline fun random(): Boolean = values.random()
+
+    /**
+     * See [BooleanArray.random]
+     */
+    public inline fun random(random: Random): Boolean = values.random(random)
 
     /**
      * See [BooleanArray.iterator]

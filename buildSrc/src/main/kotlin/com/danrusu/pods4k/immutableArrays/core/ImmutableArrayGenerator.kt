@@ -30,6 +30,7 @@ import com.squareup.kotlinpoet.TypeVariableName
 import com.squareup.kotlinpoet.WildcardTypeName
 import com.squareup.kotlinpoet.asTypeName
 import java.io.File
+import kotlin.random.Random
 
 internal object ImmutableArrayGenerator {
     fun generate(destinationPath: String) {
@@ -203,6 +204,12 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             "random"(
                 typeSpecBuilder = this,
                 baseType = baseType,
+                returns = baseType.type,
+            )
+            "random"(
+                typeSpecBuilder = this,
+                baseType = baseType,
+                parameters = { "random"<Random>() },
                 returns = baseType.type,
             )
             "iterator"(

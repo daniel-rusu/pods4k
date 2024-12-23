@@ -10,6 +10,7 @@ import strikt.assertions.isNotEqualTo
 import strikt.assertions.isNull
 import strikt.assertions.isTrue
 import strikt.assertions.message
+import kotlin.random.Random
 
 /**
  * IMPORTANT:
@@ -388,6 +389,14 @@ class ImmutableArrayTest {
 
         expectThat(immutableArrayOf("one").random())
             .isEqualTo("one")
+
+        with(immutableArrayOf("one", "two", "three")) {
+            expectThat(random(Random(seed = 0)))
+                .isEqualTo("one")
+
+            expectThat(random(Random(seed = 2)))
+                .isEqualTo("two")
+        }
     }
 
     @Test

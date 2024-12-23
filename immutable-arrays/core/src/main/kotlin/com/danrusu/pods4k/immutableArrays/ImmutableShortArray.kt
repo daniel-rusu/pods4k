@@ -23,6 +23,7 @@ import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
 import kotlin.collections.Iterator
 import kotlin.jvm.JvmInline
+import kotlin.random.Random
 import kotlin.ranges.IntRange
 import kotlin.sequences.Sequence
 
@@ -213,6 +214,11 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
      * See [ShortArray.random]
      */
     public inline fun random(): Short = values.random()
+
+    /**
+     * See [ShortArray.random]
+     */
+    public inline fun random(random: Random): Short = values.random(random)
 
     /**
      * See [ShortArray.iterator]

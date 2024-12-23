@@ -10,6 +10,7 @@ import strikt.assertions.isNotEqualTo
 import strikt.assertions.isNull
 import strikt.assertions.isTrue
 import strikt.assertions.message
+import kotlin.random.Random
 
 private val primitiveIntClass = 3::class.java
 
@@ -402,6 +403,14 @@ class ImmutableIntArrayTest {
 
         expectThat(immutableArrayOf(3).random())
             .isEqualTo(3)
+
+        with(immutableArrayOf(1, 5, 3)) {
+            expectThat(random(Random(seed = 0)))
+                .isEqualTo(1)
+
+            expectThat(random(Random(seed = 2)))
+                .isEqualTo(5)
+        }
     }
 
     @Test
