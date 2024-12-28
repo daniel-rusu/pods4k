@@ -341,15 +341,12 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
      *
      * @throws IllegalArgumentException if [n] is negative.
      */
-    @Suppress("UNCHECKED_CAST")
     public fun take(n: Int): ImmutableArray<T> {
         require(n >= 0) { "Requested element count $n is less than zero." }
         if (n == 0) return EMPTY
         if (n >= size) return this
 
-        val backingArray = arrayOfNulls<Any>(n) as Array<out T>
-        System.arraycopy(values, 0, backingArray, 0, n)
-        return ImmutableArray(backingArray)
+        return ImmutableArray.copyOf(copy = values, startIndex = 0, size = n)
     }
 
     /**
@@ -369,15 +366,12 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
      *
      * @throws IllegalArgumentException if [n] is negative.
      */
-    @Suppress("UNCHECKED_CAST")
     public fun takeLast(n: Int): ImmutableArray<T> {
         require(n >= 0) { "Requested element count $n is less than zero." }
         if (n == 0) return EMPTY
         if (n >= size) return this
 
-        val backingArray = arrayOfNulls<Any>(n) as Array<out T>
-        System.arraycopy(values, size - n, backingArray, 0, n)
-        return ImmutableArray(backingArray)
+        return ImmutableArray.copyOf(copy = values, startIndex = size - n, size = n)
     }
 
     /**
@@ -506,10 +500,7 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
         if (firstIndex == 0) return Pair(EMPTY, this)
         if (firstIndex == size) return Pair(this, EMPTY)
 
-        val firstBackingArray = arrayOfNulls<Any?>(firstIndex) as Array<T>
-        System.arraycopy(buffer, 0, firstBackingArray, 0, firstIndex)
-
-        val first = ImmutableArray(firstBackingArray)
+        val first = ImmutableArray.copyOf(copy = buffer, startIndex = 0, size = firstIndex)
         val second = ImmutableArray(size - first.size) { buffer[size - it - 1] }
         return Pair(first, second)
     }
@@ -682,9 +673,7 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
                 0 -> return EMPTY
                 values.size -> return ImmutableArray(values as Array<T>)
             }
-            val backingArray = arrayOfNulls<Any?>(size) as Array<T>
-            System.arraycopy(values, 0, backingArray, 0, size)
-            return ImmutableArray(backingArray)
+            return copyOf(copy = values as Array<T>, startIndex = 0, size = size)
         }
 
         private fun ensureCapacity(minCapacity: Int) {

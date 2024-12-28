@@ -599,14 +599,7 @@ private fun TypeSpec.Builder.addTake(baseType: BaseType) {
         statement("if (n == 0) return EMPTY")
         statement("if (n >= size) return this")
         emptyLine()
-        if (baseType == GENERIC) {
-            suppress("UNCHECKED_CAST")
-            statement("val backingArray = arrayOfNulls<Any>(n) as %T", baseType.backingArrayType)
-        } else {
-            statement("val backingArray = ${baseType.backingArrayConstructor}(n)")
-        }
-        statement("System.arraycopy(values, 0, backingArray, 0, n)")
-        statement("return ${baseType.generatedClassName}(backingArray)")
+        statement("return ${baseType.generatedClassName}.copyOf(copy = values, startIndex = 0, size = n)")
     }
 }
 
@@ -646,14 +639,7 @@ private fun TypeSpec.Builder.addTakeLast(baseType: BaseType) {
         statement("if (n == 0) return EMPTY")
         statement("if (n >= size) return this")
         emptyLine()
-        if (baseType == GENERIC) {
-            suppress("UNCHECKED_CAST")
-            statement("val backingArray = arrayOfNulls<Any>(n) as %T", baseType.backingArrayType)
-        } else {
-            statement("val backingArray = ${baseType.backingArrayConstructor}(n)")
-        }
-        statement("System.arraycopy(values, size - n, backingArray, 0, n)")
-        statement("return ${baseType.generatedClassName}(backingArray)")
+        statement("return ${baseType.generatedClassName}.copyOf(copy = values, startIndex = size - n, size = n)")
     }
 }
 
@@ -860,15 +846,7 @@ private fun TypeSpec.Builder.addPartition(baseType: BaseType) {
         statement("if (firstIndex == 0) return Pair(EMPTY, this)")
         statement("if (firstIndex == size) return Pair(this, EMPTY)")
         emptyLine()
-
-        if (baseType == GENERIC) {
-            statement("val firstBackingArray = arrayOfNulls<Any?>(firstIndex) as Array<T>")
-        } else {
-            statement("val firstBackingArray = ${baseType.backingArrayConstructor}(firstIndex)")
-        }
-        statement("System.arraycopy(buffer, 0, firstBackingArray, 0, firstIndex)")
-        emptyLine()
-        statement("val first = ${baseType.generatedClassName}(firstBackingArray)")
+        statement("val first = ${baseType.generatedClassName}.copyOf(copy = buffer, startIndex = 0, size = firstIndex)")
         statement("val second = ${baseType.generatedClassName}(size - first.size) { buffer[size - it - 1] }")
         statement("return Pair(first, second)")
     }
@@ -1231,20 +1209,17 @@ private fun TypeSpec.Builder.addBuilderBuildFunction(baseType: BaseType) {
              this optimization only applies when calling build() with the array exactly full.
              */
             if (baseType == GENERIC) {
+                suppress("UNCHECKED_CAST")
                 statement("values.size -> return ${baseType.generatedClassName}(values as Array<%T>)", baseType.type)
             } else {
                 statement("values.size -> return ${baseType.generatedClassName}(values)")
             }
         }
         if (baseType == GENERIC) {
-            suppress("UNCHECKED_CAST")
-            statement("val backingArray = arrayOfNulls<Any?>(size) as Array<%T>", baseType.type)
+            statement("return copyOf(copy = values as Array<%T>, startIndex = 0, size = size)", baseType.type)
         } else {
-            statement("val backingArray = ${baseType.backingArrayConstructor}(size)")
+            statement("return copyOf(copy = values, startIndex = 0, size = size)")
         }
-        statement("System.arraycopy(values, 0, backingArray, 0, size)")
-
-        statement("return ${baseType.generatedClassName}(backingArray)")
     }
 }
 

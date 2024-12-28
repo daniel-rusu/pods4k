@@ -346,9 +346,7 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
         if (n == 0) return EMPTY
         if (n >= size) return this
 
-        val backingArray = CharArray(n)
-        System.arraycopy(values, 0, backingArray, 0, n)
-        return ImmutableCharArray(backingArray)
+        return ImmutableCharArray.copyOf(copy = values, startIndex = 0, size = n)
     }
 
     /**
@@ -373,9 +371,7 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
         if (n == 0) return EMPTY
         if (n >= size) return this
 
-        val backingArray = CharArray(n)
-        System.arraycopy(values, size - n, backingArray, 0, n)
-        return ImmutableCharArray(backingArray)
+        return ImmutableCharArray.copyOf(copy = values, startIndex = size - n, size = n)
     }
 
     /**
@@ -503,10 +499,7 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
         if (firstIndex == 0) return Pair(EMPTY, this)
         if (firstIndex == size) return Pair(this, EMPTY)
 
-        val firstBackingArray = CharArray(firstIndex)
-        System.arraycopy(buffer, 0, firstBackingArray, 0, firstIndex)
-
-        val first = ImmutableCharArray(firstBackingArray)
+        val first = ImmutableCharArray.copyOf(copy = buffer, startIndex = 0, size = firstIndex)
         val second = ImmutableCharArray(size - first.size) { buffer[size - it - 1] }
         return Pair(first, second)
     }
@@ -689,9 +682,7 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
                 0 -> return EMPTY
                 values.size -> return ImmutableCharArray(values)
             }
-            val backingArray = CharArray(size)
-            System.arraycopy(values, 0, backingArray, 0, size)
-            return ImmutableCharArray(backingArray)
+            return copyOf(copy = values, startIndex = 0, size = size)
         }
 
         private fun ensureCapacity(minCapacity: Int) {

@@ -345,9 +345,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
         if (n == 0) return EMPTY
         if (n >= size) return this
 
-        val backingArray = BooleanArray(n)
-        System.arraycopy(values, 0, backingArray, 0, n)
-        return ImmutableBooleanArray(backingArray)
+        return ImmutableBooleanArray.copyOf(copy = values, startIndex = 0, size = n)
     }
 
     /**
@@ -372,9 +370,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
         if (n == 0) return EMPTY
         if (n >= size) return this
 
-        val backingArray = BooleanArray(n)
-        System.arraycopy(values, size - n, backingArray, 0, n)
-        return ImmutableBooleanArray(backingArray)
+        return ImmutableBooleanArray.copyOf(copy = values, startIndex = size - n, size = n)
     }
 
     /**
@@ -502,10 +498,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
         if (firstIndex == 0) return Pair(EMPTY, this)
         if (firstIndex == size) return Pair(this, EMPTY)
 
-        val firstBackingArray = BooleanArray(firstIndex)
-        System.arraycopy(buffer, 0, firstBackingArray, 0, firstIndex)
-
-        val first = ImmutableBooleanArray(firstBackingArray)
+        val first = ImmutableBooleanArray.copyOf(copy = buffer, startIndex = 0, size = firstIndex)
         val second = ImmutableBooleanArray(size - first.size) { buffer[size - it - 1] }
         return Pair(first, second)
     }
@@ -688,9 +681,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
                 0 -> return EMPTY
                 values.size -> return ImmutableBooleanArray(values)
             }
-            val backingArray = BooleanArray(size)
-            System.arraycopy(values, 0, backingArray, 0, size)
-            return ImmutableBooleanArray(backingArray)
+            return copyOf(copy = values, startIndex = 0, size = size)
         }
 
         private fun ensureCapacity(minCapacity: Int) {
