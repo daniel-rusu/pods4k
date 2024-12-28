@@ -45,6 +45,39 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `copyOf validation`() {
+        with(arrayOf("one", "two", "three")) {
+            expectThrows<ArrayIndexOutOfBoundsException> {
+                ImmutableArray.copyOf(copy = this, startIndex = -1, size = 1)
+            }
+
+            expectThrows<ArrayIndexOutOfBoundsException> {
+                ImmutableArray.copyOf(copy = this, startIndex = 3, size = 1)
+            }
+
+            expectThrows<ArrayIndexOutOfBoundsException> {
+                ImmutableArray.copyOf(copy = this, startIndex = 1, size = 3)
+            }
+
+            expectThrows<ArrayIndexOutOfBoundsException> {
+                ImmutableArray.copyOf(copy = this, startIndex = 0, size = 4)
+            }
+
+            expectThat(ImmutableArray.copyOf(copy = this, startIndex = 0, size = 0))
+                .hasSize(0)
+
+            expectThat(ImmutableArray.copyOf(copy = this, startIndex = 0, size = 1))
+                .isEqualTo(immutableArrayOf("one"))
+
+            expectThat(ImmutableArray.copyOf(copy = this, startIndex = 1, size = 2))
+                .isEqualTo(immutableArrayOf("two", "three"))
+
+            expectThat(ImmutableArray.copyOf(copy = this, startIndex = 0, size = 3))
+                .isEqualTo(immutableArrayOf("one", "two", "three"))
+        }
+    }
+
+    @Test
     fun `size validation`() {
         with(emptyImmutableArray<String>()) {
             expectThat(this).hasSize(0)

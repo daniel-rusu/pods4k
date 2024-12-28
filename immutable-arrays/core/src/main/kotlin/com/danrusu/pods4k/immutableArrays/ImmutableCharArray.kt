@@ -587,6 +587,22 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
             val backingArray = CharArray(size) { index -> init(index) }
             return ImmutableCharArray(backingArray)
         }
+
+        /**
+         * Returns an ImmutableCharArray with the first [size] elements copied from [copy] starting
+         * from [startIndex].
+         */
+        public fun copyOf(
+            copy: CharArray,
+            startIndex: Int,
+            size: Int,
+        ): ImmutableCharArray {
+            if (size == 0) return EMPTY
+
+            val backingArray = CharArray(size)
+            System.arraycopy(copy, startIndex, backingArray, 0, size)
+            return ImmutableCharArray(backingArray)
+        }
     }
 
     /**

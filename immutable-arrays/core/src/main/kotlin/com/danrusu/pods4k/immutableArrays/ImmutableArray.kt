@@ -595,6 +595,22 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
             val backingArray = Array<Any?>(size) { index -> init(index) }
             return ImmutableArray(backingArray as Array<out T>)
         }
+
+        /**
+         * Returns an ImmutableArray with the first [size] elements copied from [copy] starting from
+         * [startIndex].
+         */
+        public fun <T> copyOf(
+            copy: Array<T>,
+            startIndex: Int,
+            size: Int,
+        ): ImmutableArray<T> {
+            if (size == 0) return EMPTY
+
+            val backingArray = arrayOfNulls<Any?>(size) as Array<T>
+            System.arraycopy(copy, startIndex, backingArray, 0, size)
+            return ImmutableArray(backingArray)
+        }
     }
 
     /**

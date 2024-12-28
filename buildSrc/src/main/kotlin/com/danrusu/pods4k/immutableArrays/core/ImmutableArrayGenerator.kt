@@ -354,6 +354,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 }
                 addCompanionObjectEmptyProperty(baseType)
                 addCompanionObjectInvokeOperator(baseType)
+                addCompanionObjectCopyOf(baseType)
             }
 
             declareClass(name = "Builder") {
@@ -1027,7 +1028,6 @@ private fun TypeSpec.Builder.addCompanionObjectEmptyProperty(baseType: BaseType)
 }
 
 private fun TypeSpec.Builder.addCompanionObjectInvokeOperator(baseType: BaseType) {
-    val returnType = baseType.getGeneratedTypeName()
     function(
         kdoc = """
             Returns an ${baseType.generatedClassName} instance of the specified [size], where each element is calculated by calling the [init] function.
@@ -1043,7 +1043,7 @@ private fun TypeSpec.Builder.addCompanionObjectInvokeOperator(baseType: BaseType
             "size"<Int>()
             "init"(type = lambda(parameters = { "index"<Int>() }, returnType = baseType.type))
         },
-        returns = returnType,
+        returns = baseType.getGeneratedTypeName(),
     ) {
         addGenericTypes(baseType.type)
 
@@ -1055,6 +1055,36 @@ private fun TypeSpec.Builder.addCompanionObjectInvokeOperator(baseType: BaseType
         } else {
             statement("return ${baseType.generatedClassName}(backingArray)")
         }
+    }
+}
+
+private fun TypeSpec.Builder.addCompanionObjectCopyOf(baseType: BaseType) {
+    val returnType = baseType.getGeneratedTypeName()
+    val backingArrayType = when (baseType) {
+        GENERIC -> Array::class.asTypeName().parameterizedBy(baseType.type)
+        else -> baseType.backingArrayType
+    }
+    function(
+        kdoc = "Returns an ${baseType.generatedClassName} with the first [size] elements copied from [copy] " +
+            "starting from [startIndex].",
+        name = "copyOf",
+        parameters = {
+            "copy"(type = backingArrayType)
+            "startIndex"<Int>()
+            "size"<Int>()
+        },
+        returns = returnType,
+    ) {
+        addGenericTypes(baseType.type)
+        statement("if (size == 0) return EMPTY")
+        emptyLine()
+        if (baseType == GENERIC) {
+            statement("val backingArray = arrayOfNulls<Any?>(size) as %T", backingArrayType)
+        } else {
+            statement("val backingArray = ${baseType.backingArrayConstructor}(size)")
+        }
+        statement("System.arraycopy(copy, startIndex, backingArray, 0, size)")
+        statement("return ${baseType.generatedClassName}(backingArray)")
     }
 }
 

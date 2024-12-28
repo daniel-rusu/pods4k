@@ -586,6 +586,22 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
             val backingArray = DoubleArray(size) { index -> init(index) }
             return ImmutableDoubleArray(backingArray)
         }
+
+        /**
+         * Returns an ImmutableDoubleArray with the first [size] elements copied from [copy]
+         * starting from [startIndex].
+         */
+        public fun copyOf(
+            copy: DoubleArray,
+            startIndex: Int,
+            size: Int,
+        ): ImmutableDoubleArray {
+            if (size == 0) return EMPTY
+
+            val backingArray = DoubleArray(size)
+            System.arraycopy(copy, startIndex, backingArray, 0, size)
+            return ImmutableDoubleArray(backingArray)
+        }
     }
 
     /**

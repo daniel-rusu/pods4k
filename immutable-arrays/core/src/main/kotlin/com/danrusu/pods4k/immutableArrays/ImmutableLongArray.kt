@@ -586,6 +586,22 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
             val backingArray = LongArray(size) { index -> init(index) }
             return ImmutableLongArray(backingArray)
         }
+
+        /**
+         * Returns an ImmutableLongArray with the first [size] elements copied from [copy] starting
+         * from [startIndex].
+         */
+        public fun copyOf(
+            copy: LongArray,
+            startIndex: Int,
+            size: Int,
+        ): ImmutableLongArray {
+            if (size == 0) return EMPTY
+
+            val backingArray = LongArray(size)
+            System.arraycopy(copy, startIndex, backingArray, 0, size)
+            return ImmutableLongArray(backingArray)
+        }
     }
 
     /**

@@ -586,6 +586,22 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
             val backingArray = BooleanArray(size) { index -> init(index) }
             return ImmutableBooleanArray(backingArray)
         }
+
+        /**
+         * Returns an ImmutableBooleanArray with the first [size] elements copied from [copy]
+         * starting from [startIndex].
+         */
+        public fun copyOf(
+            copy: BooleanArray,
+            startIndex: Int,
+            size: Int,
+        ): ImmutableBooleanArray {
+            if (size == 0) return EMPTY
+
+            val backingArray = BooleanArray(size)
+            System.arraycopy(copy, startIndex, backingArray, 0, size)
+            return ImmutableBooleanArray(backingArray)
+        }
     }
 
     /**
