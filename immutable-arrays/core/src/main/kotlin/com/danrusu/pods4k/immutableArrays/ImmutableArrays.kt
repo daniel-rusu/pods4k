@@ -624,8 +624,7 @@ public fun ImmutableByteArray.sorted(): ImmutableByteArray {
     // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
     if (size <= 1) return this
 
-    val backingArray = ByteArray(size)
-    System.arraycopy(values, 0, backingArray, 0, size)
+    val backingArray = values.copyOf()
     Arrays.sort(backingArray)
     return ImmutableByteArray(backingArray)
 }
@@ -638,8 +637,7 @@ public fun ImmutableCharArray.sorted(): ImmutableCharArray {
     // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
     if (size <= 1) return this
 
-    val backingArray = CharArray(size)
-    System.arraycopy(values, 0, backingArray, 0, size)
+    val backingArray = values.copyOf()
     Arrays.sort(backingArray)
     return ImmutableCharArray(backingArray)
 }
@@ -652,8 +650,7 @@ public fun ImmutableShortArray.sorted(): ImmutableShortArray {
     // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
     if (size <= 1) return this
 
-    val backingArray = ShortArray(size)
-    System.arraycopy(values, 0, backingArray, 0, size)
+    val backingArray = values.copyOf()
     Arrays.sort(backingArray)
     return ImmutableShortArray(backingArray)
 }
@@ -666,8 +663,7 @@ public fun ImmutableIntArray.sorted(): ImmutableIntArray {
     // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
     if (size <= 1) return this
 
-    val backingArray = IntArray(size)
-    System.arraycopy(values, 0, backingArray, 0, size)
+    val backingArray = values.copyOf()
     Arrays.sort(backingArray)
     return ImmutableIntArray(backingArray)
 }
@@ -680,8 +676,7 @@ public fun ImmutableLongArray.sorted(): ImmutableLongArray {
     // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
     if (size <= 1) return this
 
-    val backingArray = LongArray(size)
-    System.arraycopy(values, 0, backingArray, 0, size)
+    val backingArray = values.copyOf()
     Arrays.sort(backingArray)
     return ImmutableLongArray(backingArray)
 }
@@ -694,8 +689,7 @@ public fun ImmutableFloatArray.sorted(): ImmutableFloatArray {
     // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
     if (size <= 1) return this
 
-    val backingArray = FloatArray(size)
-    System.arraycopy(values, 0, backingArray, 0, size)
+    val backingArray = values.copyOf()
     Arrays.sort(backingArray)
     return ImmutableFloatArray(backingArray)
 }
@@ -708,8 +702,7 @@ public fun ImmutableDoubleArray.sorted(): ImmutableDoubleArray {
     // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
     if (size <= 1) return this
 
-    val backingArray = DoubleArray(size)
-    System.arraycopy(values, 0, backingArray, 0, size)
+    val backingArray = values.copyOf()
     Arrays.sort(backingArray)
     return ImmutableDoubleArray(backingArray)
 }

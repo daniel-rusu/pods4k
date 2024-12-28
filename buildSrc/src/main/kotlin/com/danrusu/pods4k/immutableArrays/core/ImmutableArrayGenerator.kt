@@ -398,7 +398,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 addBuilderPlusAssignOperator(baseType)
                 addBuilderAddAllFunctions(baseType)
                 addBuilderBuildFunction(baseType)
-                addBuilderEnsureCapacityFunction(baseType)
+                addBuilderEnsureCapacityFunction()
             }
         }
     }
@@ -1056,6 +1056,17 @@ private fun TypeSpec.Builder.addCompanionObjectCopyOf(baseType: BaseType) {
         addGenericTypes(baseType.type)
         statement("if (size == 0) return EMPTY")
         emptyLine()
+        /*
+        IMPORTANT:
+        The implementation must not insert any values that aren't in the original copy.  Eg, regularArray.copyOf(n) pads
+        the result with null / 0 when n exceeds the size of the copy so we don't want that behavior.
+
+        We're not validating the bounds because System.arraycopy will validate those to ensure that startIndex is in
+        range and that there are at least size elements after the startIndex.
+
+        We're not delegating to copyOfRange(startIndex, startIndex + size) because that duplicates the bounds checks
+        and then delegates to arraycopy which will validate the bounds again.
+         */
         if (baseType == GENERIC) {
             statement("val backingArray = arrayOfNulls<Any?>(size) as %T", backingArrayType)
         } else {
@@ -1231,7 +1242,7 @@ private fun TypeSpec.Builder.addBuilderBuildFunction(baseType: BaseType) {
  * array which ends up sharing the same backing array with the generated immutable array.  See the warning in
  * [addBuilderBuildFunction] for more specifics.
  */
-private fun TypeSpec.Builder.addBuilderEnsureCapacityFunction(baseType: BaseType) {
+private fun TypeSpec.Builder.addBuilderEnsureCapacityFunction() {
     function(
         modifiers = listOf(KModifier.PRIVATE),
         name = "ensureCapacity",
@@ -1240,11 +1251,6 @@ private fun TypeSpec.Builder.addBuilderEnsureCapacityFunction(baseType: BaseType
         statement("val newCapacity = BuilderUtils.computeNewCapacity(values.size, minCapacity)")
         statement("if (newCapacity == values.size) return")
         emptyLine()
-        when (baseType) {
-            GENERIC -> statement("val replacement = arrayOfNulls<Any?>(newCapacity)")
-            else -> statement("val replacement = ${baseType.backingArrayConstructor}(newCapacity)")
-        }
-        statement("System.arraycopy(values, 0, replacement, 0, size)")
-        statement("values = replacement")
+        statement("values = values.copyOf(newCapacity)")
     }
 }

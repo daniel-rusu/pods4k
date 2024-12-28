@@ -29,7 +29,7 @@ on [GitHub](https://github.com/daniel-rusu/pods4k) and sharing it with others.
     * 2 to 8 times faster than lists for many common operations, with some even faster!
 * **Memory Efficient**
     * Over 5X memory reduction versus lists for many common scenarios!
-        * `people.map { it.weightKg }` creates a primitive `ImmutableFloatArray`.
+        * `people.map { it.weightKg }` returns a primitive `ImmutableFloatArray` instead of `ImmutableArray<Float>`.
     * Many operations retain zero extra memory when results are empty or the same elements.
         * `people.filter { it.isEmployed() }` returns same instance when everyone is employed.
     * etc.

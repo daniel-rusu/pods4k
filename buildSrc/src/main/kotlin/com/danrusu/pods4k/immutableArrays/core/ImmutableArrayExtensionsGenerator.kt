@@ -243,8 +243,7 @@ private fun FileSpec.Builder.addSorted() {
                 suppress("UNCHECKED_CAST")
                 statement("val backingArray = ${baseType.backingArrayConstructor}(size) { get(it) }")
             } else {
-                statement("val backingArray = ${baseType.backingArrayConstructor}(size)")
-                statement("System.arraycopy(values, 0, backingArray, 0, size)")
+                statement("val backingArray = values.copyOf()")
             }
             statement("%T.sort(backingArray)", java.util.Arrays::class)
             if (baseType == GENERIC) {

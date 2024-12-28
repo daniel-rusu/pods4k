@@ -688,9 +688,7 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
             val newCapacity = BuilderUtils.computeNewCapacity(values.size, minCapacity)
             if (newCapacity == values.size) return
 
-            val replacement = IntArray(newCapacity)
-            System.arraycopy(values, 0, replacement, 0, size)
-            values = replacement
+            values = values.copyOf(newCapacity)
         }
     }
 }
