@@ -3,7 +3,6 @@ package com.danrusu.pods4k.immutableArrays.core
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
 import com.danrusu.pods4k.utils.addGenericTypes
-import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.createFile
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.statement
@@ -33,10 +32,7 @@ private fun FileSpec.Builder.addGenericArrayToImmutableArray() {
         ) {
             addGenericTypes(baseType.type)
             if (baseType == BaseType.GENERIC) {
-                // delegate to the builder to keep the code clean and take advantage of System.arraycopy
-                controlFlow("return build${baseType.generatedClassName}(size)") {
-                    statement("addAll(this@toImmutableArray)")
-                }
+                statement("return ${baseType.generatedClassName}.copyOf(copy = this, startIndex = 0, size = size)")
             } else {
                 // Each element needs to be unboxed so use the factory function to avoid creating the temporary builder
                 statement("return ${baseType.generatedClassName}(size)·{·this[it]·}")
@@ -56,9 +52,7 @@ private fun FileSpec.Builder.addPrimitiveArrayToImmutableArray() {
             returns = baseType.getGeneratedTypeName(),
             forceFunctionBody = true,
         ) {
-            controlFlow("return build${baseType.generatedClassName}(size)") {
-                statement("addAll(this@toImmutableArray)")
-            }
+            statement("return ${baseType.generatedClassName}.copyOf(copy = this, startIndex = 0, size = size)")
         }
     }
 }

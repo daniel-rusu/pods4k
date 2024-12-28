@@ -23,81 +23,63 @@ import kotlin.ShortArray
  * Returns an [ImmutableBooleanArray] with the contents of this array.
  */
 public fun BooleanArray.toImmutableArray(): ImmutableBooleanArray {
-    return buildImmutableBooleanArray(size) {
-        addAll(this@toImmutableArray)
-    }
+    return ImmutableBooleanArray.copyOf(copy = this, startIndex = 0, size = size)
 }
 
 /**
  * Returns an [ImmutableByteArray] with the contents of this array.
  */
 public fun ByteArray.toImmutableArray(): ImmutableByteArray {
-    return buildImmutableByteArray(size) {
-        addAll(this@toImmutableArray)
-    }
+    return ImmutableByteArray.copyOf(copy = this, startIndex = 0, size = size)
 }
 
 /**
  * Returns an [ImmutableCharArray] with the contents of this array.
  */
 public fun CharArray.toImmutableArray(): ImmutableCharArray {
-    return buildImmutableCharArray(size) {
-        addAll(this@toImmutableArray)
-    }
+    return ImmutableCharArray.copyOf(copy = this, startIndex = 0, size = size)
 }
 
 /**
  * Returns an [ImmutableShortArray] with the contents of this array.
  */
 public fun ShortArray.toImmutableArray(): ImmutableShortArray {
-    return buildImmutableShortArray(size) {
-        addAll(this@toImmutableArray)
-    }
+    return ImmutableShortArray.copyOf(copy = this, startIndex = 0, size = size)
 }
 
 /**
  * Returns an [ImmutableIntArray] with the contents of this array.
  */
 public fun IntArray.toImmutableArray(): ImmutableIntArray {
-    return buildImmutableIntArray(size) {
-        addAll(this@toImmutableArray)
-    }
+    return ImmutableIntArray.copyOf(copy = this, startIndex = 0, size = size)
 }
 
 /**
  * Returns an [ImmutableLongArray] with the contents of this array.
  */
 public fun LongArray.toImmutableArray(): ImmutableLongArray {
-    return buildImmutableLongArray(size) {
-        addAll(this@toImmutableArray)
-    }
+    return ImmutableLongArray.copyOf(copy = this, startIndex = 0, size = size)
 }
 
 /**
  * Returns an [ImmutableFloatArray] with the contents of this array.
  */
 public fun FloatArray.toImmutableArray(): ImmutableFloatArray {
-    return buildImmutableFloatArray(size) {
-        addAll(this@toImmutableArray)
-    }
+    return ImmutableFloatArray.copyOf(copy = this, startIndex = 0, size = size)
 }
 
 /**
  * Returns an [ImmutableDoubleArray] with the contents of this array.
  */
 public fun DoubleArray.toImmutableArray(): ImmutableDoubleArray {
-    return buildImmutableDoubleArray(size) {
-        addAll(this@toImmutableArray)
-    }
+    return ImmutableDoubleArray.copyOf(copy = this, startIndex = 0, size = size)
 }
 
 /**
  * Returns an [ImmutableArray] with the contents of this array.
  */
 public fun <T> Array<T>.toImmutableArray(): ImmutableArray<T> {
-    return buildImmutableArray(size) {
-        addAll(this@toImmutableArray)
-    }
+    return ImmutableArray.copyOf(copy = this, startIndex = 0, size = size)
 }
 
 /**

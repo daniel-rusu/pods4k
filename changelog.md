@@ -17,6 +17,8 @@ _Date TBD_
 
 **Performance Improvements:**
 
+* Use `copyOf` companion factory function in `immutableArrayOf(...)` and `regularArray.toImmutableArray()` to avoid
+  creating a temporary builder.
 * Update `plus` to concatenate an element with an Immutable Array without using builders.
 * Update `plus` to concatenate 2 Immutable Arrays without using builders.
 * Update `sortedWith` on `ImmutableArray<T>` to copy the elements with `arraycopy`.

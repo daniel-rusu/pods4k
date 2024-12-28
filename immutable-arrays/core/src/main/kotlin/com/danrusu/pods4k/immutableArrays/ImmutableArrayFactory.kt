@@ -68,63 +68,63 @@ public fun <T> immutableArrayOf(): ImmutableArray<T> = emptyImmutableArray()
  * Returns an [ImmutableArray] containing the specified [values].
  */
 public fun <T> immutableArrayOf(vararg values: T): ImmutableArray<T> {
-    return buildImmutableArray(initialCapacity = values.size) { addAll(values) }
+    return ImmutableArray.copyOf(copy = values, startIndex = 0, size = values.size)
 }
 
 /**
  * Returns an [ImmutableBooleanArray] containing the specified [values].
  */
 public fun immutableArrayOf(vararg values: Boolean): ImmutableBooleanArray {
-    return buildImmutableBooleanArray(initialCapacity = values.size) { addAll(values) }
+    return ImmutableBooleanArray.copyOf(copy = values, startIndex = 0, size = values.size)
 }
 
 /**
  * Returns an [ImmutableByteArray] containing the specified [values].
  */
 public fun immutableArrayOf(vararg values: Byte): ImmutableByteArray {
-    return buildImmutableByteArray(initialCapacity = values.size) { addAll(values) }
+    return ImmutableByteArray.copyOf(copy = values, startIndex = 0, size = values.size)
 }
 
 /**
  * Returns an [ImmutableCharArray] containing the specified [values].
  */
 public fun immutableArrayOf(vararg values: Char): ImmutableCharArray {
-    return buildImmutableCharArray(initialCapacity = values.size) { addAll(values) }
+    return ImmutableCharArray.copyOf(copy = values, startIndex = 0, size = values.size)
 }
 
 /**
  * Returns an [ImmutableShortArray] containing the specified [values].
  */
 public fun immutableArrayOf(vararg values: Short): ImmutableShortArray {
-    return buildImmutableShortArray(initialCapacity = values.size) { addAll(values) }
+    return ImmutableShortArray.copyOf(copy = values, startIndex = 0, size = values.size)
 }
 
 /**
  * Returns an [ImmutableIntArray] containing the specified [values].
  */
 public fun immutableArrayOf(vararg values: Int): ImmutableIntArray {
-    return buildImmutableIntArray(initialCapacity = values.size) { addAll(values) }
+    return ImmutableIntArray.copyOf(copy = values, startIndex = 0, size = values.size)
 }
 
 /**
  * Returns an [ImmutableLongArray] containing the specified [values].
  */
 public fun immutableArrayOf(vararg values: Long): ImmutableLongArray {
-    return buildImmutableLongArray(initialCapacity = values.size) { addAll(values) }
+    return ImmutableLongArray.copyOf(copy = values, startIndex = 0, size = values.size)
 }
 
 /**
  * Returns an [ImmutableFloatArray] containing the specified [values].
  */
 public fun immutableArrayOf(vararg values: Float): ImmutableFloatArray {
-    return buildImmutableFloatArray(initialCapacity = values.size) { addAll(values) }
+    return ImmutableFloatArray.copyOf(copy = values, startIndex = 0, size = values.size)
 }
 
 /**
  * Returns an [ImmutableDoubleArray] containing the specified [values].
  */
 public fun immutableArrayOf(vararg values: Double): ImmutableDoubleArray {
-    return buildImmutableDoubleArray(initialCapacity = values.size) { addAll(values) }
+    return ImmutableDoubleArray.copyOf(copy = values, startIndex = 0, size = values.size)
 }
 
 /**
