@@ -345,7 +345,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
         if (n == 0) return EMPTY
         if (n >= size) return this
 
-        return ImmutableFloatArray.copyOf(copy = values, startIndex = 0, size = n)
+        return ImmutableFloatArray.copyFrom(source = values, startIndex = 0, size = n)
     }
 
     /**
@@ -370,7 +370,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
         if (n == 0) return EMPTY
         if (n >= size) return this
 
-        return ImmutableFloatArray.copyOf(copy = values, startIndex = size - n, size = n)
+        return ImmutableFloatArray.copyFrom(source = values, startIndex = size - n, size = n)
     }
 
     /**
@@ -498,7 +498,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
         if (firstIndex == 0) return Pair(EMPTY, this)
         if (firstIndex == size) return Pair(this, EMPTY)
 
-        val first = ImmutableFloatArray.copyOf(copy = buffer, startIndex = 0, size = firstIndex)
+        val first = ImmutableFloatArray.copyFrom(source = buffer, startIndex = 0, size = firstIndex)
         val second = ImmutableFloatArray(size - first.size) { buffer[size - it - 1] }
         return Pair(first, second)
     }
@@ -584,15 +584,15 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
          * Returns an ImmutableFloatArray with the first [size] elements copied from [copy] starting
          * from [startIndex].
          */
-        public fun copyOf(
-            copy: FloatArray,
+        public fun copyFrom(
+            source: FloatArray,
             startIndex: Int,
             size: Int,
         ): ImmutableFloatArray {
             if (size == 0) return EMPTY
 
             val backingArray = FloatArray(size)
-            System.arraycopy(copy, startIndex, backingArray, 0, size)
+            System.arraycopy(source, startIndex, backingArray, 0, size)
             return ImmutableFloatArray(backingArray)
         }
     }
@@ -681,7 +681,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
                 0 -> return EMPTY
                 values.size -> return ImmutableFloatArray(values)
             }
-            return copyOf(copy = values, startIndex = 0, size = size)
+            return copyFrom(source = values, startIndex = 0, size = size)
         }
 
         private fun ensureCapacity(minCapacity: Int) {

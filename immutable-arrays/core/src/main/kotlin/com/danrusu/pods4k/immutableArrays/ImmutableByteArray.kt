@@ -346,7 +346,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
         if (n == 0) return EMPTY
         if (n >= size) return this
 
-        return ImmutableByteArray.copyOf(copy = values, startIndex = 0, size = n)
+        return ImmutableByteArray.copyFrom(source = values, startIndex = 0, size = n)
     }
 
     /**
@@ -371,7 +371,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
         if (n == 0) return EMPTY
         if (n >= size) return this
 
-        return ImmutableByteArray.copyOf(copy = values, startIndex = size - n, size = n)
+        return ImmutableByteArray.copyFrom(source = values, startIndex = size - n, size = n)
     }
 
     /**
@@ -499,7 +499,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
         if (firstIndex == 0) return Pair(EMPTY, this)
         if (firstIndex == size) return Pair(this, EMPTY)
 
-        val first = ImmutableByteArray.copyOf(copy = buffer, startIndex = 0, size = firstIndex)
+        val first = ImmutableByteArray.copyFrom(source = buffer, startIndex = 0, size = firstIndex)
         val second = ImmutableByteArray(size - first.size) { buffer[size - it - 1] }
         return Pair(first, second)
     }
@@ -585,15 +585,15 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
          * Returns an ImmutableByteArray with the first [size] elements copied from [copy] starting
          * from [startIndex].
          */
-        public fun copyOf(
-            copy: ByteArray,
+        public fun copyFrom(
+            source: ByteArray,
             startIndex: Int,
             size: Int,
         ): ImmutableByteArray {
             if (size == 0) return EMPTY
 
             val backingArray = ByteArray(size)
-            System.arraycopy(copy, startIndex, backingArray, 0, size)
+            System.arraycopy(source, startIndex, backingArray, 0, size)
             return ImmutableByteArray(backingArray)
         }
     }
@@ -682,7 +682,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
                 0 -> return EMPTY
                 values.size -> return ImmutableByteArray(values)
             }
-            return copyOf(copy = values, startIndex = 0, size = size)
+            return copyFrom(source = values, startIndex = 0, size = size)
         }
 
         private fun ensureCapacity(minCapacity: Int) {

@@ -599,7 +599,7 @@ private fun TypeSpec.Builder.addTake(baseType: BaseType) {
         statement("if (n == 0) return EMPTY")
         statement("if (n >= size) return this")
         emptyLine()
-        statement("return ${baseType.generatedClassName}.copyOf(copy = values, startIndex = 0, size = n)")
+        statement("return ${baseType.generatedClassName}.copyFrom(source = values, startIndex = 0, size = n)")
     }
 }
 
@@ -639,7 +639,7 @@ private fun TypeSpec.Builder.addTakeLast(baseType: BaseType) {
         statement("if (n == 0) return EMPTY")
         statement("if (n >= size) return this")
         emptyLine()
-        statement("return ${baseType.generatedClassName}.copyOf(copy = values, startIndex = size - n, size = n)")
+        statement("return ${baseType.generatedClassName}.copyFrom(source = values, startIndex = size - n, size = n)")
     }
 }
 
@@ -846,7 +846,7 @@ private fun TypeSpec.Builder.addPartition(baseType: BaseType) {
         statement("if (firstIndex == 0) return Pair(EMPTY, this)")
         statement("if (firstIndex == size) return Pair(this, EMPTY)")
         emptyLine()
-        statement("val first = ${baseType.generatedClassName}.copyOf(copy = buffer, startIndex = 0, size = firstIndex)")
+        statement("val first = ${baseType.generatedClassName}.copyFrom(source = buffer, startIndex = 0, size = firstIndex)")
         statement("val second = ${baseType.generatedClassName}(size - first.size) { buffer[size - it - 1] }")
         statement("return Pair(first, second)")
     }
@@ -1045,9 +1045,9 @@ private fun TypeSpec.Builder.addCompanionObjectCopyOf(baseType: BaseType) {
     function(
         kdoc = "Returns an ${baseType.generatedClassName} with the first [size] elements copied from [copy] " +
             "starting from [startIndex].",
-        name = "copyOf",
+        name = "copyFrom",
         parameters = {
-            "copy"(type = backingArrayType)
+            "source"(type = backingArrayType)
             "startIndex"<Int>()
             "size"<Int>()
         },
@@ -1058,7 +1058,7 @@ private fun TypeSpec.Builder.addCompanionObjectCopyOf(baseType: BaseType) {
         emptyLine()
         /*
         IMPORTANT:
-        The implementation must not insert any values that aren't in the original copy.  Eg, regularArray.copyOf(n) pads
+        The implementation must not insert any values that aren't in the source array.  Eg, regularArray.copyOf(n) pads
         the result with null / 0 when n exceeds the size of the copy so we don't want that behavior.
 
         We're not validating the bounds because System.arraycopy will validate those to ensure that startIndex is in
@@ -1072,7 +1072,7 @@ private fun TypeSpec.Builder.addCompanionObjectCopyOf(baseType: BaseType) {
         } else {
             statement("val backingArray = ${baseType.backingArrayConstructor}(size)")
         }
-        statement("System.arraycopy(copy, startIndex, backingArray, 0, size)")
+        statement("System.arraycopy(source, startIndex, backingArray, 0, size)")
         statement("return ${baseType.generatedClassName}(backingArray)")
     }
 }
@@ -1227,9 +1227,9 @@ private fun TypeSpec.Builder.addBuilderBuildFunction(baseType: BaseType) {
             }
         }
         if (baseType == GENERIC) {
-            statement("return copyOf(copy = values as Array<%T>, startIndex = 0, size = size)", baseType.type)
+            statement("return copyFrom(source = values as Array<%T>, startIndex = 0, size = size)", baseType.type)
         } else {
-            statement("return copyOf(copy = values, startIndex = 0, size = size)")
+            statement("return copyFrom(source = values, startIndex = 0, size = size)")
         }
     }
 }

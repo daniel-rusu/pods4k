@@ -346,7 +346,7 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
         if (n == 0) return EMPTY
         if (n >= size) return this
 
-        return ImmutableShortArray.copyOf(copy = values, startIndex = 0, size = n)
+        return ImmutableShortArray.copyFrom(source = values, startIndex = 0, size = n)
     }
 
     /**
@@ -371,7 +371,7 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
         if (n == 0) return EMPTY
         if (n >= size) return this
 
-        return ImmutableShortArray.copyOf(copy = values, startIndex = size - n, size = n)
+        return ImmutableShortArray.copyFrom(source = values, startIndex = size - n, size = n)
     }
 
     /**
@@ -499,7 +499,7 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
         if (firstIndex == 0) return Pair(EMPTY, this)
         if (firstIndex == size) return Pair(this, EMPTY)
 
-        val first = ImmutableShortArray.copyOf(copy = buffer, startIndex = 0, size = firstIndex)
+        val first = ImmutableShortArray.copyFrom(source = buffer, startIndex = 0, size = firstIndex)
         val second = ImmutableShortArray(size - first.size) { buffer[size - it - 1] }
         return Pair(first, second)
     }
@@ -585,15 +585,15 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
          * Returns an ImmutableShortArray with the first [size] elements copied from [copy] starting
          * from [startIndex].
          */
-        public fun copyOf(
-            copy: ShortArray,
+        public fun copyFrom(
+            source: ShortArray,
             startIndex: Int,
             size: Int,
         ): ImmutableShortArray {
             if (size == 0) return EMPTY
 
             val backingArray = ShortArray(size)
-            System.arraycopy(copy, startIndex, backingArray, 0, size)
+            System.arraycopy(source, startIndex, backingArray, 0, size)
             return ImmutableShortArray(backingArray)
         }
     }
@@ -682,7 +682,7 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
                 0 -> return EMPTY
                 values.size -> return ImmutableShortArray(values)
             }
-            return copyOf(copy = values, startIndex = 0, size = size)
+            return copyFrom(source = values, startIndex = 0, size = size)
         }
 
         private fun ensureCapacity(minCapacity: Int) {

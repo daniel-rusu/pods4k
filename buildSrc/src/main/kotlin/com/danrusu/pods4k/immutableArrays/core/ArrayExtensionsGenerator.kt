@@ -32,7 +32,7 @@ private fun FileSpec.Builder.addGenericArrayToImmutableArray() {
         ) {
             addGenericTypes(baseType.type)
             if (baseType == BaseType.GENERIC) {
-                statement("return ${baseType.generatedClassName}.copyOf(copy = this, startIndex = 0, size = size)")
+                statement("return ${baseType.generatedClassName}.copyFrom(source = this, startIndex = 0, size = size)")
             } else {
                 // Each element needs to be unboxed so use the factory function to avoid creating the temporary builder
                 statement("return ${baseType.generatedClassName}(size)·{·this[it]·}")
@@ -52,7 +52,7 @@ private fun FileSpec.Builder.addPrimitiveArrayToImmutableArray() {
             returns = baseType.getGeneratedTypeName(),
             forceFunctionBody = true,
         ) {
-            statement("return ${baseType.generatedClassName}.copyOf(copy = this, startIndex = 0, size = size)")
+            statement("return ${baseType.generatedClassName}.copyFrom(source = this, startIndex = 0, size = size)")
         }
     }
 }

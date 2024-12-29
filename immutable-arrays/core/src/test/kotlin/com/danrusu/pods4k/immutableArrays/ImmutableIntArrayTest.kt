@@ -39,31 +39,31 @@ class ImmutableIntArrayTest {
     fun `copyOf validation`() {
         with(intArrayOf(1, 2, 3)) {
             expectThrows<ArrayIndexOutOfBoundsException> {
-                ImmutableIntArray.copyOf(copy = this, startIndex = -1, size = 1)
+                ImmutableIntArray.copyFrom(source = this, startIndex = -1, size = 1)
             }
 
             expectThrows<ArrayIndexOutOfBoundsException> {
-                ImmutableIntArray.copyOf(copy = this, startIndex = 3, size = 1)
+                ImmutableIntArray.copyFrom(source = this, startIndex = 3, size = 1)
             }
 
             expectThrows<ArrayIndexOutOfBoundsException> {
-                ImmutableIntArray.copyOf(copy = this, startIndex = 1, size = 3)
+                ImmutableIntArray.copyFrom(source = this, startIndex = 1, size = 3)
             }
 
             expectThrows<ArrayIndexOutOfBoundsException> {
-                ImmutableIntArray.copyOf(copy = this, startIndex = 0, size = 4)
+                ImmutableIntArray.copyFrom(source = this, startIndex = 0, size = 4)
             }
 
-            expectThat(ImmutableIntArray.copyOf(copy = this, startIndex = 0, size = 0))
+            expectThat(ImmutableIntArray.copyFrom(source = this, startIndex = 0, size = 0))
                 .hasSize(0)
 
-            expectThat(ImmutableIntArray.copyOf(copy = this, startIndex = 0, size = 1))
+            expectThat(ImmutableIntArray.copyFrom(source = this, startIndex = 0, size = 1))
                 .isEqualTo(immutableArrayOf(1))
 
-            expectThat(ImmutableIntArray.copyOf(copy = this, startIndex = 1, size = 2))
+            expectThat(ImmutableIntArray.copyFrom(source = this, startIndex = 1, size = 2))
                 .isEqualTo(immutableArrayOf(2, 3))
 
-            expectThat(ImmutableIntArray.copyOf(copy = this, startIndex = 0, size = 3))
+            expectThat(ImmutableIntArray.copyFrom(source = this, startIndex = 0, size = 3))
                 .isEqualTo(immutableArrayOf(1, 2, 3))
         }
     }

@@ -346,7 +346,7 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
         if (n == 0) return EMPTY
         if (n >= size) return this
 
-        return ImmutableCharArray.copyOf(copy = values, startIndex = 0, size = n)
+        return ImmutableCharArray.copyFrom(source = values, startIndex = 0, size = n)
     }
 
     /**
@@ -371,7 +371,7 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
         if (n == 0) return EMPTY
         if (n >= size) return this
 
-        return ImmutableCharArray.copyOf(copy = values, startIndex = size - n, size = n)
+        return ImmutableCharArray.copyFrom(source = values, startIndex = size - n, size = n)
     }
 
     /**
@@ -499,7 +499,7 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
         if (firstIndex == 0) return Pair(EMPTY, this)
         if (firstIndex == size) return Pair(this, EMPTY)
 
-        val first = ImmutableCharArray.copyOf(copy = buffer, startIndex = 0, size = firstIndex)
+        val first = ImmutableCharArray.copyFrom(source = buffer, startIndex = 0, size = firstIndex)
         val second = ImmutableCharArray(size - first.size) { buffer[size - it - 1] }
         return Pair(first, second)
     }
@@ -585,15 +585,15 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
          * Returns an ImmutableCharArray with the first [size] elements copied from [copy] starting
          * from [startIndex].
          */
-        public fun copyOf(
-            copy: CharArray,
+        public fun copyFrom(
+            source: CharArray,
             startIndex: Int,
             size: Int,
         ): ImmutableCharArray {
             if (size == 0) return EMPTY
 
             val backingArray = CharArray(size)
-            System.arraycopy(copy, startIndex, backingArray, 0, size)
+            System.arraycopy(source, startIndex, backingArray, 0, size)
             return ImmutableCharArray(backingArray)
         }
     }
@@ -682,7 +682,7 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
                 0 -> return EMPTY
                 values.size -> return ImmutableCharArray(values)
             }
-            return copyOf(copy = values, startIndex = 0, size = size)
+            return copyFrom(source = values, startIndex = 0, size = size)
         }
 
         private fun ensureCapacity(minCapacity: Int) {

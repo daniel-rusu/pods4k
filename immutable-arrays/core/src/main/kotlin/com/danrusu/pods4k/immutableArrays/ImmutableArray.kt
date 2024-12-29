@@ -346,7 +346,7 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
         if (n == 0) return EMPTY
         if (n >= size) return this
 
-        return ImmutableArray.copyOf(copy = values, startIndex = 0, size = n)
+        return ImmutableArray.copyFrom(source = values, startIndex = 0, size = n)
     }
 
     /**
@@ -371,7 +371,7 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
         if (n == 0) return EMPTY
         if (n >= size) return this
 
-        return ImmutableArray.copyOf(copy = values, startIndex = size - n, size = n)
+        return ImmutableArray.copyFrom(source = values, startIndex = size - n, size = n)
     }
 
     /**
@@ -500,7 +500,7 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
         if (firstIndex == 0) return Pair(EMPTY, this)
         if (firstIndex == size) return Pair(this, EMPTY)
 
-        val first = ImmutableArray.copyOf(copy = buffer, startIndex = 0, size = firstIndex)
+        val first = ImmutableArray.copyFrom(source = buffer, startIndex = 0, size = firstIndex)
         val second = ImmutableArray(size - first.size) { buffer[size - it - 1] }
         return Pair(first, second)
     }
@@ -591,15 +591,15 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
          * Returns an ImmutableArray with the first [size] elements copied from [copy] starting from
          * [startIndex].
          */
-        public fun <T> copyOf(
-            copy: Array<T>,
+        public fun <T> copyFrom(
+            source: Array<T>,
             startIndex: Int,
             size: Int,
         ): ImmutableArray<T> {
             if (size == 0) return EMPTY
 
             val backingArray = arrayOfNulls<Any?>(size) as Array<T>
-            System.arraycopy(copy, startIndex, backingArray, 0, size)
+            System.arraycopy(source, startIndex, backingArray, 0, size)
             return ImmutableArray(backingArray)
         }
     }
@@ -673,7 +673,7 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
                 0 -> return EMPTY
                 values.size -> return ImmutableArray(values as Array<T>)
             }
-            return copyOf(copy = values as Array<T>, startIndex = 0, size = size)
+            return copyFrom(source = values as Array<T>, startIndex = 0, size = size)
         }
 
         private fun ensureCapacity(minCapacity: Int) {
