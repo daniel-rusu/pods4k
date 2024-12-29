@@ -189,6 +189,21 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `isSameInstanceAs validation`() {
+        val arrayWithValues = immutableArrayOf("one", "two")
+        val secondArrayWithSameValues = immutableArrayOf("one", "two")
+
+        expectThat(arrayWithValues.referencesSameArrayAs(arrayWithValues))
+            .isTrue()
+
+        expectThat(arrayWithValues)
+            .isEqualTo(secondArrayWithSameValues)
+
+        expectThat(arrayWithValues.referencesSameArrayAs(secondArrayWithSameValues))
+            .isFalse()
+    }
+
+    @Test
     fun `hashCode validation`() {
         with(emptyImmutableArray<String>()) {
             expectThat(this.hashCode()).isEqualTo(emptyImmutableArray<String>().hashCode())
