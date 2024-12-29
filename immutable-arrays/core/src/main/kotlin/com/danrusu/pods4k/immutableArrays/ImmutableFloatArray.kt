@@ -342,10 +342,9 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
      */
     public fun take(n: Int): ImmutableFloatArray {
         require(n >= 0) { "Requested element count $n is less than zero." }
-        if (n == 0) return EMPTY
         if (n >= size) return this
 
-        return ImmutableFloatArray.copyFrom(source = values, startIndex = 0, size = n)
+        return copyFrom(source = values, startIndex = 0, size = n)
     }
 
     /**
@@ -367,10 +366,9 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
      */
     public fun takeLast(n: Int): ImmutableFloatArray {
         require(n >= 0) { "Requested element count $n is less than zero." }
-        if (n == 0) return EMPTY
         if (n >= size) return this
 
-        return ImmutableFloatArray.copyFrom(source = values, startIndex = size - n, size = n)
+        return copyFrom(source = values, startIndex = size - n, size = n)
     }
 
     /**
@@ -498,7 +496,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
         if (firstIndex == 0) return Pair(EMPTY, this)
         if (firstIndex == size) return Pair(this, EMPTY)
 
-        val first = ImmutableFloatArray.copyFrom(source = buffer, startIndex = 0, size = firstIndex)
+        val first = copyFrom(source = buffer, startIndex = 0, size = firstIndex)
         val second = ImmutableFloatArray(size - first.size) { buffer[size - it - 1] }
         return Pair(first, second)
     }
@@ -677,10 +675,8 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
          * Returns an immutable array containing the elements that were added.
          */
         public fun build(): ImmutableFloatArray {
-            when (size) {
-                0 -> return EMPTY
-                values.size -> return ImmutableFloatArray(values)
-            }
+            if (size == values.size) return ImmutableFloatArray(values)
+
             return copyFrom(source = values, startIndex = 0, size = size)
         }
 

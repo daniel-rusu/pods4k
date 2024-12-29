@@ -596,10 +596,9 @@ private fun TypeSpec.Builder.addTake(baseType: BaseType) {
             require(n >= 0) { "Requested element count ${'$'}n is less than zero." }
             """.trimIndent(),
         )
-        statement("if (n == 0) return EMPTY")
         statement("if (n >= size) return this")
         emptyLine()
-        statement("return ${baseType.generatedClassName}.copyFrom(source = values, startIndex = 0, size = n)")
+        statement("return copyFrom(source = values, startIndex = 0, size = n)")
     }
 }
 
@@ -636,10 +635,9 @@ private fun TypeSpec.Builder.addTakeLast(baseType: BaseType) {
             require(n >= 0) { "Requested element count ${'$'}n is less than zero." }
             """.trimIndent(),
         )
-        statement("if (n == 0) return EMPTY")
         statement("if (n >= size) return this")
         emptyLine()
-        statement("return ${baseType.generatedClassName}.copyFrom(source = values, startIndex = size - n, size = n)")
+        statement("return copyFrom(source = values, startIndex = size - n, size = n)")
     }
 }
 
@@ -843,10 +841,12 @@ private fun TypeSpec.Builder.addPartition(baseType: BaseType) {
                 """.trimIndent(),
             )
         }
+        // IMPORTANT: Don't try to remove this empty check because although copyFrom has an empty check, we want to use
+        // this as the right side without copying it
         statement("if (firstIndex == 0) return Pair(EMPTY, this)")
         statement("if (firstIndex == size) return Pair(this, EMPTY)")
         emptyLine()
-        statement("val first = ${baseType.generatedClassName}.copyFrom(source = buffer, startIndex = 0, size = firstIndex)")
+        statement("val first = copyFrom(source = buffer, startIndex = 0, size = firstIndex)")
         statement("val second = ${baseType.generatedClassName}(size - first.size) { buffer[size - it - 1] }")
         statement("return Pair(first, second)")
     }
@@ -1199,33 +1199,33 @@ private fun TypeSpec.Builder.addBuilderBuildFunction(baseType: BaseType) {
         name = "build",
         returns = baseType.getGeneratedTypeName(),
     ) {
-        controlFlow("when (size)") {
-            statement("0 -> return EMPTY")
+        /*
 
-            /*
-            Avoiding copying the array again when the size matches the capacity is important for when the initial
-            capacity was set appropriately.  Other capabilities of this library depend on this optimization for optimal
-            efficiency.
+        Avoiding copying the array again when the size matches the capacity is important for when the initial capacity
+        was set appropriately.  Other capabilities of this library depend on this optimization for optimal efficiency.
 
-             *** IMPORTANT ***
-            This optimization is only safe as long as the builder can only append elements without the ability to
-            remove or re-assign previously-added elements.  Allowing the ability to modify previously-assigned array
-            positions would introduce a mutation backdoor:
-             1. Call build() when the array is exactly full so that the immutable array uses the same backing array
-             2. Continue using the builder to remove or re-assign previous elements modifying the immutable array
+         *** IMPORTANT ***
+        This optimization is only safe as long as the builder can only append elements without the ability to remove or
+        re-assign previously-added elements.  Allowing the ability to modify previously-assigned array positions would
+        introduce a mutation backdoor:
+         1. Call build() when the array is exactly full so that the immutable array uses the same backing array
+         2. Continue using the builder to remove or re-assign previous elements modifying the immutable array
 
-            This optimization is safe when only reading & appending is allowed because:
-             1. Reading doesn't modify the immutable array anyway
-             2. Continuing to use the builder to append more elements would end up creating a new backing array because
-             this optimization only applies when calling build() with the array exactly full.
-             */
-            if (baseType == GENERIC) {
-                suppress("UNCHECKED_CAST")
-                statement("values.size -> return ${baseType.generatedClassName}(values as Array<%T>)", baseType.type)
-            } else {
-                statement("values.size -> return ${baseType.generatedClassName}(values)")
-            }
+        This optimization is safe if you can only read and append to the builder because:
+         1. Reading doesn't modify the immutable array anyway
+         2. Continuing to use the builder to append more elements would end up creating a new backing array because
+         this optimization only applies when calling build() with the array exactly full.
+         */
+        if (baseType == GENERIC) {
+            suppress("UNCHECKED_CAST")
+            statement(
+                "if (size == values.size) return ${baseType.generatedClassName}(values as Array<%T>)",
+                baseType.type,
+            )
+        } else {
+            statement("if (size == values.size) return ${baseType.generatedClassName}(values)")
         }
+        emptyLine()
         if (baseType == GENERIC) {
             statement("return copyFrom(source = values as Array<%T>, startIndex = 0, size = size)", baseType.type)
         } else {

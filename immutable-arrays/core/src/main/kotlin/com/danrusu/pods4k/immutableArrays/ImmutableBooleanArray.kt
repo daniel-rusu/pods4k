@@ -342,10 +342,9 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
      */
     public fun take(n: Int): ImmutableBooleanArray {
         require(n >= 0) { "Requested element count $n is less than zero." }
-        if (n == 0) return EMPTY
         if (n >= size) return this
 
-        return ImmutableBooleanArray.copyFrom(source = values, startIndex = 0, size = n)
+        return copyFrom(source = values, startIndex = 0, size = n)
     }
 
     /**
@@ -367,10 +366,9 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
      */
     public fun takeLast(n: Int): ImmutableBooleanArray {
         require(n >= 0) { "Requested element count $n is less than zero." }
-        if (n == 0) return EMPTY
         if (n >= size) return this
 
-        return ImmutableBooleanArray.copyFrom(source = values, startIndex = size - n, size = n)
+        return copyFrom(source = values, startIndex = size - n, size = n)
     }
 
     /**
@@ -498,12 +496,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
         if (firstIndex == 0) return Pair(EMPTY, this)
         if (firstIndex == size) return Pair(this, EMPTY)
 
-        val first = ImmutableBooleanArray.copyFrom(
-            source = buffer,
-            startIndex = 0,
-            size =
-            firstIndex,
-        )
+        val first = copyFrom(source = buffer, startIndex = 0, size = firstIndex)
         val second = ImmutableBooleanArray(size - first.size) { buffer[size - it - 1] }
         return Pair(first, second)
     }
@@ -682,10 +675,8 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
          * Returns an immutable array containing the elements that were added.
          */
         public fun build(): ImmutableBooleanArray {
-            when (size) {
-                0 -> return EMPTY
-                values.size -> return ImmutableBooleanArray(values)
-            }
+            if (size == values.size) return ImmutableBooleanArray(values)
+
             return copyFrom(source = values, startIndex = 0, size = size)
         }
 
