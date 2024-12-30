@@ -11,32 +11,28 @@ import strikt.assertions.isGreaterThanOrEqualTo
 class ImmutableArrayFactoryTest {
     @Test
     fun `emptyImmutableArray validation`() {
-        with(emptyImmutableArray<String>()) {
-            expectThat(this).isA<ImmutableArray<String>>()
-            expectThat(this).isEmpty()
-        }
-        with(emptyImmutableIntArray()) {
-            expectThat(this).isA<ImmutableIntArray>()
-            expectThat(this).isEmpty()
-        }
+        expectThat(emptyImmutableArray<String>())
+            .isA<ImmutableArray<String>>()
+            .isEmpty()
+
+        expectThat(emptyImmutableIntArray())
+            .isA<ImmutableIntArray>()
+            .isEmpty()
     }
 
     @Test
     fun `immutableArrayOf validation`() {
-        with(immutableArrayOf<String>()) {
-            expectThat(this).isA<ImmutableArray<String>>()
-            expectThat(this).isEmpty()
-        }
+        expectThat(immutableArrayOf<String>())
+            .isA<ImmutableArray<String>>()
+            .isEmpty()
 
-        with(immutableArrayOf("one", "two")) {
-            expectThat(this).isA<ImmutableArray<String>>()
-            expectThat(this).containsExactly("one", "two")
-        }
+        expectThat(immutableArrayOf("one", "two"))
+            .isA<ImmutableArray<String>>()
+            .containsExactly("one", "two")
 
-        with(immutableArrayOf(10, 20, 30)) {
-            expectThat(this).isA<ImmutableIntArray>()
-            expectThat(this).containsExactly(10, 20, 30)
-        }
+        expectThat(immutableArrayOf(10, 20, 30))
+            .isA<ImmutableIntArray>()
+            .containsExactly(10, 20, 30)
     }
 
     @Test
@@ -47,13 +43,16 @@ class ImmutableArrayFactoryTest {
         val nullInt: Int? = null
 
         expectThat(immutableArrayOfNotNull<String>())
-            .isEqualTo(emptyImmutableArray())
+            .isA<ImmutableArray<String>>()
+            .isEmpty()
 
         expectThat(immutableArrayOfNotNull(nullString, nullString))
-            .isEqualTo(emptyImmutableArray())
+            .isA<ImmutableArray<String>>()
+            .isEmpty()
 
         expectThat(immutableArrayOfNotNull(nullInt))
-            .isEqualTo(emptyImmutableIntArray())
+            .isA<ImmutableIntArray>()
+            .isEmpty()
 
         expectThat(immutableArrayOfNotNull(nullString, "one", nullString, "two", nullString, nullString))
             .isEqualTo(immutableArrayOf("one", "two"))
@@ -64,6 +63,10 @@ class ImmutableArrayFactoryTest {
 
     @Test
     fun `buildImmutableArray validation`() {
+        expectThat(buildImmutableArray<String> { })
+            .isA<ImmutableArray<String>>()
+            .isEmpty()
+
         val names = buildImmutableArray {
             add("Bob")
             add("Jill")

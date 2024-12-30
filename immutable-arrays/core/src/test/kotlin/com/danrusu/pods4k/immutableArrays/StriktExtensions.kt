@@ -148,13 +148,20 @@ fun Assertion.Builder<ImmutableShortArray>.containsExactly(
 @JvmName("immutableArray_isEmpty")
 fun <T> Assertion.Builder<ImmutableArray<T>>.isEmpty(): Assertion.Builder<ImmutableArray<T>> {
     return assert(description = "is empty") {
-        if (subject.size == 0 != subject.isEmpty()) {
-            return@assert fail("Inconsistent size:${subject.size} with isEmpty():${subject.isEmpty()}")
+        val isEmpty = subject.isEmpty()
+        val isEmptyInstance = subject.referencesSameArrayAs(ImmutableArray.EMPTY)
+
+        if (subject.size == 0 != isEmpty) {
+            return@assert fail("Inconsistent size:${subject.size} with isEmpty():$isEmpty")
         }
-        if (subject.isEmpty() == subject.isNotEmpty()) {
-            return@assert fail("Inconsistent isEmpty():${subject.isEmpty()} with isNotEmpty():${subject.isNotEmpty()}")
+        if (isEmpty == subject.isNotEmpty()) {
+            return@assert fail("Inconsistent isEmpty():$isEmpty with isNotEmpty():${subject.isNotEmpty()}")
         }
-        when (subject.isEmpty()) {
+        // Ensure that all places that can return an empty result always return the EMPTY instance
+        if (isEmpty != isEmptyInstance) {
+            return@assert fail("Inconsistent isEmpty():$isEmpty with isSameInstanceAs(EMPTY):$isEmptyInstance")
+        }
+        when (isEmpty) {
             true -> pass()
             else -> fail(actual = subject, description = "Array is not empty")
         }
@@ -164,13 +171,20 @@ fun <T> Assertion.Builder<ImmutableArray<T>>.isEmpty(): Assertion.Builder<Immuta
 @JvmName("immutableBooleanArray_isEmpty")
 fun Assertion.Builder<ImmutableBooleanArray>.isEmpty(): Assertion.Builder<ImmutableBooleanArray> {
     return assert(description = "is empty") {
-        if (subject.size == 0 != subject.isEmpty()) {
-            return@assert fail("Inconsistent size:${subject.size} with isEmpty():${subject.isEmpty()}")
+        val isEmpty = subject.isEmpty()
+        val isEmptyInstance = subject.referencesSameArrayAs(ImmutableBooleanArray.EMPTY)
+
+        if (subject.size == 0 != isEmpty) {
+            return@assert fail("Inconsistent size:${subject.size} with isEmpty():$isEmpty")
         }
-        if (subject.isEmpty() == subject.isNotEmpty()) {
-            return@assert fail("Inconsistent isEmpty():${subject.isEmpty()} with isNotEmpty():${subject.isNotEmpty()}")
+        if (isEmpty == subject.isNotEmpty()) {
+            return@assert fail("Inconsistent isEmpty():$isEmpty with isNotEmpty():${subject.isNotEmpty()}")
         }
-        when (subject.isEmpty()) {
+        // Ensure that all places that can return an empty result always return the EMPTY instance
+        if (isEmpty != isEmptyInstance) {
+            return@assert fail("Inconsistent isEmpty():$isEmpty with isSameInstanceAs(EMPTY):$isEmptyInstance")
+        }
+        when (isEmpty) {
             true -> pass()
             else -> fail(actual = subject, description = "Array is not empty")
         }
@@ -180,13 +194,20 @@ fun Assertion.Builder<ImmutableBooleanArray>.isEmpty(): Assertion.Builder<Immuta
 @JvmName("immutableByteArray_isEmpty")
 fun Assertion.Builder<ImmutableByteArray>.isEmpty(): Assertion.Builder<ImmutableByteArray> {
     return assert(description = "is empty") {
-        if (subject.size == 0 != subject.isEmpty()) {
-            return@assert fail("Inconsistent size:${subject.size} with isEmpty():${subject.isEmpty()}")
+        val isEmpty = subject.isEmpty()
+        val isEmptyInstance = subject.referencesSameArrayAs(ImmutableByteArray.EMPTY)
+
+        if (subject.size == 0 != isEmpty) {
+            return@assert fail("Inconsistent size:${subject.size} with isEmpty():$isEmpty")
         }
-        if (subject.isEmpty() == subject.isNotEmpty()) {
-            return@assert fail("Inconsistent isEmpty():${subject.isEmpty()} with isNotEmpty():${subject.isNotEmpty()}")
+        if (isEmpty == subject.isNotEmpty()) {
+            return@assert fail("Inconsistent isEmpty():$isEmpty with isNotEmpty():${subject.isNotEmpty()}")
         }
-        when (subject.isEmpty()) {
+        // Ensure that all places that can return an empty result always return the EMPTY instance
+        if (isEmpty != isEmptyInstance) {
+            return@assert fail("Inconsistent isEmpty():$isEmpty with isSameInstanceAs(EMPTY):$isEmptyInstance")
+        }
+        when (isEmpty) {
             true -> pass()
             else -> fail(actual = subject, description = "Array is not empty")
         }
@@ -196,13 +217,20 @@ fun Assertion.Builder<ImmutableByteArray>.isEmpty(): Assertion.Builder<Immutable
 @JvmName("immutableCharArray_isEmpty")
 fun Assertion.Builder<ImmutableCharArray>.isEmpty(): Assertion.Builder<ImmutableCharArray> {
     return assert(description = "is empty") {
-        if (subject.size == 0 != subject.isEmpty()) {
-            return@assert fail("Inconsistent size:${subject.size} with isEmpty():${subject.isEmpty()}")
+        val isEmpty = subject.isEmpty()
+        val isEmptyInstance = subject.referencesSameArrayAs(ImmutableCharArray.EMPTY)
+
+        if (subject.size == 0 != isEmpty) {
+            return@assert fail("Inconsistent size:${subject.size} with isEmpty():$isEmpty")
         }
-        if (subject.isEmpty() == subject.isNotEmpty()) {
-            return@assert fail("Inconsistent isEmpty():${subject.isEmpty()} with isNotEmpty():${subject.isNotEmpty()}")
+        if (isEmpty == subject.isNotEmpty()) {
+            return@assert fail("Inconsistent isEmpty():$isEmpty with isNotEmpty():${subject.isNotEmpty()}")
         }
-        when (subject.isEmpty()) {
+        // Ensure that all places that can return an empty result always return the EMPTY instance
+        if (isEmpty != isEmptyInstance) {
+            return@assert fail("Inconsistent isEmpty():$isEmpty with isSameInstanceAs(EMPTY):$isEmptyInstance")
+        }
+        when (isEmpty) {
             true -> pass()
             else -> fail(actual = subject, description = "Array is not empty")
         }
@@ -212,13 +240,20 @@ fun Assertion.Builder<ImmutableCharArray>.isEmpty(): Assertion.Builder<Immutable
 @JvmName("immutableDoubleArray_isEmpty")
 fun Assertion.Builder<ImmutableDoubleArray>.isEmpty(): Assertion.Builder<ImmutableDoubleArray> {
     return assert(description = "is empty") {
-        if (subject.size == 0 != subject.isEmpty()) {
-            return@assert fail("Inconsistent size:${subject.size} with isEmpty():${subject.isEmpty()}")
+        val isEmpty = subject.isEmpty()
+        val isEmptyInstance = subject.referencesSameArrayAs(ImmutableDoubleArray.EMPTY)
+
+        if (subject.size == 0 != isEmpty) {
+            return@assert fail("Inconsistent size:${subject.size} with isEmpty():$isEmpty")
         }
-        if (subject.isEmpty() == subject.isNotEmpty()) {
-            return@assert fail("Inconsistent isEmpty():${subject.isEmpty()} with isNotEmpty():${subject.isNotEmpty()}")
+        if (isEmpty == subject.isNotEmpty()) {
+            return@assert fail("Inconsistent isEmpty():$isEmpty with isNotEmpty():${subject.isNotEmpty()}")
         }
-        when (subject.isEmpty()) {
+        // Ensure that all places that can return an empty result always return the EMPTY instance
+        if (isEmpty != isEmptyInstance) {
+            return@assert fail("Inconsistent isEmpty():$isEmpty with isSameInstanceAs(EMPTY):$isEmptyInstance")
+        }
+        when (isEmpty) {
             true -> pass()
             else -> fail(actual = subject, description = "Array is not empty")
         }
@@ -228,13 +263,20 @@ fun Assertion.Builder<ImmutableDoubleArray>.isEmpty(): Assertion.Builder<Immutab
 @JvmName("immutableFloatArray_isEmpty")
 fun Assertion.Builder<ImmutableFloatArray>.isEmpty(): Assertion.Builder<ImmutableFloatArray> {
     return assert(description = "is empty") {
-        if (subject.size == 0 != subject.isEmpty()) {
-            return@assert fail("Inconsistent size:${subject.size} with isEmpty():${subject.isEmpty()}")
+        val isEmpty = subject.isEmpty()
+        val isEmptyInstance = subject.referencesSameArrayAs(ImmutableFloatArray.EMPTY)
+
+        if (subject.size == 0 != isEmpty) {
+            return@assert fail("Inconsistent size:${subject.size} with isEmpty():$isEmpty")
         }
-        if (subject.isEmpty() == subject.isNotEmpty()) {
-            return@assert fail("Inconsistent isEmpty():${subject.isEmpty()} with isNotEmpty():${subject.isNotEmpty()}")
+        if (isEmpty == subject.isNotEmpty()) {
+            return@assert fail("Inconsistent isEmpty():$isEmpty with isNotEmpty():${subject.isNotEmpty()}")
         }
-        when (subject.isEmpty()) {
+        // Ensure that all places that can return an empty result always return the EMPTY instance
+        if (isEmpty != isEmptyInstance) {
+            return@assert fail("Inconsistent isEmpty():$isEmpty with isSameInstanceAs(EMPTY):$isEmptyInstance")
+        }
+        when (isEmpty) {
             true -> pass()
             else -> fail(actual = subject, description = "Array is not empty")
         }
@@ -244,13 +286,20 @@ fun Assertion.Builder<ImmutableFloatArray>.isEmpty(): Assertion.Builder<Immutabl
 @JvmName("immutableIntArray_isEmpty")
 fun Assertion.Builder<ImmutableIntArray>.isEmpty(): Assertion.Builder<ImmutableIntArray> {
     return assert(description = "is empty") {
-        if (subject.size == 0 != subject.isEmpty()) {
-            return@assert fail("Inconsistent size:${subject.size} with isEmpty():${subject.isEmpty()}")
+        val isEmpty = subject.isEmpty()
+        val isEmptyInstance = subject.referencesSameArrayAs(ImmutableIntArray.EMPTY)
+
+        if (subject.size == 0 != isEmpty) {
+            return@assert fail("Inconsistent size:${subject.size} with isEmpty():$isEmpty")
         }
-        if (subject.isEmpty() == subject.isNotEmpty()) {
-            return@assert fail("Inconsistent isEmpty():${subject.isEmpty()} with isNotEmpty():${subject.isNotEmpty()}")
+        if (isEmpty == subject.isNotEmpty()) {
+            return@assert fail("Inconsistent isEmpty():$isEmpty with isNotEmpty():${subject.isNotEmpty()}")
         }
-        when (subject.isEmpty()) {
+        // Ensure that all places that can return an empty result always return the EMPTY instance
+        if (isEmpty != isEmptyInstance) {
+            return@assert fail("Inconsistent isEmpty():$isEmpty with isSameInstanceAs(EMPTY):$isEmptyInstance")
+        }
+        when (isEmpty) {
             true -> pass()
             else -> fail(actual = subject, description = "Array is not empty")
         }
@@ -260,13 +309,20 @@ fun Assertion.Builder<ImmutableIntArray>.isEmpty(): Assertion.Builder<ImmutableI
 @JvmName("immutableLongArray_isEmpty")
 fun Assertion.Builder<ImmutableLongArray>.isEmpty(): Assertion.Builder<ImmutableLongArray> {
     return assert(description = "is empty") {
-        if (subject.size == 0 != subject.isEmpty()) {
-            return@assert fail("Inconsistent size:${subject.size} with isEmpty():${subject.isEmpty()}")
+        val isEmpty = subject.isEmpty()
+        val isEmptyInstance = subject.referencesSameArrayAs(ImmutableLongArray.EMPTY)
+
+        if (subject.size == 0 != isEmpty) {
+            return@assert fail("Inconsistent size:${subject.size} with isEmpty():$isEmpty")
         }
-        if (subject.isEmpty() == subject.isNotEmpty()) {
-            return@assert fail("Inconsistent isEmpty():${subject.isEmpty()} with isNotEmpty():${subject.isNotEmpty()}")
+        if (isEmpty == subject.isNotEmpty()) {
+            return@assert fail("Inconsistent isEmpty():$isEmpty with isNotEmpty():${subject.isNotEmpty()}")
         }
-        when (subject.isEmpty()) {
+        // Ensure that all places that can return an empty result always return the EMPTY instance
+        if (isEmpty != isEmptyInstance) {
+            return@assert fail("Inconsistent isEmpty():$isEmpty with isSameInstanceAs(EMPTY):$isEmptyInstance")
+        }
+        when (isEmpty) {
             true -> pass()
             else -> fail(actual = subject, description = "Array is not empty")
         }
@@ -276,13 +332,20 @@ fun Assertion.Builder<ImmutableLongArray>.isEmpty(): Assertion.Builder<Immutable
 @JvmName("immutableShortArray_isEmpty")
 fun Assertion.Builder<ImmutableShortArray>.isEmpty(): Assertion.Builder<ImmutableShortArray> {
     return assert(description = "is empty") {
-        if (subject.size == 0 != subject.isEmpty()) {
-            return@assert fail("Inconsistent size:${subject.size} with isEmpty():${subject.isEmpty()}")
+        val isEmpty = subject.isEmpty()
+        val isEmptyInstance = subject.referencesSameArrayAs(ImmutableShortArray.EMPTY)
+
+        if (subject.size == 0 != isEmpty) {
+            return@assert fail("Inconsistent size:${subject.size} with isEmpty():$isEmpty")
         }
-        if (subject.isEmpty() == subject.isNotEmpty()) {
-            return@assert fail("Inconsistent isEmpty():${subject.isEmpty()} with isNotEmpty():${subject.isNotEmpty()}")
+        if (isEmpty == subject.isNotEmpty()) {
+            return@assert fail("Inconsistent isEmpty():$isEmpty with isNotEmpty():${subject.isNotEmpty()}")
         }
-        when (subject.isEmpty()) {
+        // Ensure that all places that can return an empty result always return the EMPTY instance
+        if (isEmpty != isEmptyInstance) {
+            return@assert fail("Inconsistent isEmpty():$isEmpty with isSameInstanceAs(EMPTY):$isEmptyInstance")
+        }
+        when (isEmpty) {
             true -> pass()
             else -> fail(actual = subject, description = "Array is not empty")
         }

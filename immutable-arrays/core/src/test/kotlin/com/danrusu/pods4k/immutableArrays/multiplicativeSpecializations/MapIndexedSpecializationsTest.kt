@@ -1,10 +1,14 @@
 package com.danrusu.pods4k.immutableArrays.multiplicativeSpecializations
 
+import com.danrusu.pods4k.immutableArrays.ImmutableArray
+import com.danrusu.pods4k.immutableArrays.ImmutableIntArray
 import com.danrusu.pods4k.immutableArrays.emptyImmutableArray
 import com.danrusu.pods4k.immutableArrays.emptyImmutableIntArray
 import com.danrusu.pods4k.immutableArrays.immutableArrayOf
+import com.danrusu.pods4k.immutableArrays.isEmpty
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
+import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 
 class MapIndexedSpecializationsTest {
@@ -12,7 +16,8 @@ class MapIndexedSpecializationsTest {
     fun `generic to generic validation`() {
         with(emptyImmutableArray<String>()) {
             expectThat(mapIndexed { index, element -> "$index: $element" })
-                .isEqualTo(emptyImmutableArray())
+                .isA<ImmutableArray<String>>()
+                .isEmpty()
         }
 
         with(immutableArrayOf("Dan", "Jill")) {
@@ -25,7 +30,8 @@ class MapIndexedSpecializationsTest {
     fun `generic to primitive validation`() {
         with(emptyImmutableArray<String>()) {
             expectThat(mapIndexed { index, element -> index + element.length })
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
         }
 
         with(immutableArrayOf("a", "bb", "ccc")) {
@@ -38,7 +44,8 @@ class MapIndexedSpecializationsTest {
     fun `primitive to generic validation`() {
         with(emptyImmutableIntArray()) {
             expectThat(mapIndexed { index, element -> "$index: $element" })
-                .isEqualTo(emptyImmutableArray())
+                .isA<ImmutableArray<String>>()
+                .isEmpty()
         }
 
         with(immutableArrayOf(1, 2, 3)) {
@@ -51,7 +58,8 @@ class MapIndexedSpecializationsTest {
     fun `primitive to primitive validation`() {
         with(emptyImmutableIntArray()) {
             expectThat(mapIndexed { index, element -> index + element })
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
         }
 
         with(immutableArrayOf(1, 2, 3)) {

@@ -13,12 +13,17 @@ private val primitiveIntClass = 3::class.java
 
 class ImmutableArraysTest {
 
+    /**
+     * Suppressing the constant-condition inspection as it's a false positive thinking that a List is always a
+     * MutableList.  Submitted:
+     *
+     * https://youtrack.jetbrains.com/issue/IDEA-357859/False-positive-for-KotlinConstantConditions-inspection-for-primitiveArray.asList-is-MutableList
+     *
+     * This seems to be fixed in K2 mode but leaving it in here while the library targets Kotlin 1.9.x
+     */
     @Suppress("KotlinConstantConditions")
     @Test
     fun `asList validation`() {
-        // Suppressing the constant-condition inspection as it's a false positive thinking that a List is always a MutableList
-        // Submitted: https://youtrack.jetbrains.com/issue/IDEA-357859/False-positive-for-KotlinConstantConditions-inspection-for-primitiveArray.asList-is-MutableList
-
         // generic array
         with(immutableArrayOf("one", "two", "three", "two")) {
             val list = asList()
@@ -189,7 +194,8 @@ class ImmutableArraysTest {
 
         with(emptyImmutableArray<Int?>()) {
             expectThat(filterNotNull())
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
         }
 
         with(immutableArrayOf(1, null, 2)) {
@@ -244,7 +250,8 @@ class ImmutableArraysTest {
     @Test
     fun `plus immutableArray validation`() {
         expectThat(emptyImmutableArray<String>() + emptyImmutableArray())
-            .isEqualTo(emptyImmutableArray())
+            .isA<ImmutableArray<String>>()
+            .isEmpty()
 
         expectThat(emptyImmutableArray<String>() + immutableArrayOf("one", "two"))
             .isEqualTo(immutableArrayOf("one", "two"))
@@ -253,7 +260,8 @@ class ImmutableArraysTest {
             .isEqualTo(immutableArrayOf("a", "b", "c", "d", "e"))
 
         expectThat(emptyImmutableIntArray() + emptyImmutableIntArray())
-            .isEqualTo(emptyImmutableIntArray())
+            .isA<ImmutableIntArray>()
+            .isEmpty()
 
         expectThat(emptyImmutableIntArray() + immutableArrayOf(1, 2))
             .isEqualTo(immutableArrayOf(1, 2))
@@ -282,9 +290,9 @@ class ImmutableArraysTest {
         with(immutableArrayOf<Int>(1, 3, 5)) {
             expectThat(this).isA<ImmutableArray<Int>>()
 
-            val primitiveVersion = this.toImmutableIntArray()
-            expectThat(primitiveVersion).isA<ImmutableIntArray>()
-            expectThat(primitiveVersion).containsExactly(1, 3, 5)
+            expectThat(this.toImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .containsExactly(1, 3, 5)
         }
     }
 
@@ -293,9 +301,9 @@ class ImmutableArraysTest {
         with(immutableArrayOf(1, 3, 5)) {
             expectThat(this).isA<ImmutableIntArray>()
 
-            val genericVersion = this.toTypedImmutableArray()
-            expectThat(genericVersion).isA<ImmutableArray<Int>>()
-            expectThat(genericVersion).containsExactly(1, 3, 5)
+            expectThat(this.toTypedImmutableArray())
+                .isA<ImmutableArray<Int>>()
+                .containsExactly(1, 3, 5)
         }
     }
 

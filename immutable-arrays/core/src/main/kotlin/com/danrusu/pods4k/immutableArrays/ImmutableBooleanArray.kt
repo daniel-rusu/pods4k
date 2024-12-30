@@ -689,6 +689,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
          * Returns an immutable array containing the elements that were added.
          */
         public fun build(): ImmutableBooleanArray {
+            if (size == 0) return EMPTY
             if (size == values.size) return ImmutableBooleanArray(values)
 
             return copyFrom(source = values, startIndex = 0, size = size)

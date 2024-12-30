@@ -8,37 +8,31 @@ import strikt.assertions.isEqualTo
 class ArraysTest {
     @Test
     fun `primitive array toImmutableArray validation`() {
-        with(BooleanArray(0)) {
-            val immutable = this.toImmutableArray()
-            expectThat(immutable).isA<ImmutableBooleanArray>()
+        expectThat(BooleanArray(0).toImmutableArray())
+            .isA<ImmutableBooleanArray>()
+            .isEmpty()
 
-            expectThat(immutable).isEmpty()
-        }
-        with(intArrayOf(1, 3, 5)) {
-            val immutable = this.toImmutableArray()
-            expectThat(immutable).isA<ImmutableIntArray>()
-            expectThat(immutable).containsExactly(1, 3, 5)
-        }
+        expectThat(intArrayOf(1, 3, 5).toImmutableArray())
+            .isEqualTo(immutableArrayOf(1, 3, 5))
     }
 
     @Test
     fun `generic array toImmutableArray validation`() {
-        with(emptyArray<String>()) {
-            expectThat(this.toImmutableArray())
-                .isEqualTo(emptyImmutableArray())
-        }
-        with(arrayOf("one", "two")) {
-            expectThat(this.toImmutableArray())
-                .isEqualTo(immutableArrayOf("one", "two"))
-        }
+        expectThat(emptyArray<String>().toImmutableArray())
+            .isA<ImmutableArray<String>>()
+            .isEmpty()
+
+        expectThat(arrayOf("one", "two").toImmutableArray())
+            .isEqualTo(immutableArrayOf("one", "two"))
+
         with(emptyArray<Int>()) {
             expectThat(this.toImmutableArray())
                 .isA<ImmutableIntArray>()
-                .isEqualTo(emptyImmutableIntArray())
+                .isEmpty()
 
             expectThat(this.toImmutableArray<Int>())
                 .isA<ImmutableArray<Int>>()
-                .isEqualTo(emptyImmutableArray())
+                .isEmpty()
         }
         with(arrayOf(1, 3, 5)) {
             expectThat(this.toImmutableArray())

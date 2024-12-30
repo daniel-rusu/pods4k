@@ -681,6 +681,7 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
          */
         @Suppress("UNCHECKED_CAST")
         public fun build(): ImmutableArray<T> {
+            if (size == 0) return EMPTY
             if (size == values.size) return ImmutableArray(values as Array<T>)
 
             return copyFrom(source = values as Array<T>, startIndex = 0, size = size)

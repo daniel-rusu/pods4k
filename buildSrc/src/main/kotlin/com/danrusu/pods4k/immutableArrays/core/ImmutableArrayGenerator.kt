@@ -1220,6 +1220,9 @@ private fun TypeSpec.Builder.addBuilderBuildFunction(baseType: BaseType) {
         name = "build",
         returns = baseType.getGeneratedTypeName(),
     ) {
+        // This check is needed for the scenario where the initial capacity is set to 0 and no elements are added
+        // so that we always use the EMPTY singleton for empty immutable arrays
+        statement("if (size == 0) return EMPTY")
         /*
 
         Avoiding copying the array again when the size matches the capacity is important for when the initial capacity

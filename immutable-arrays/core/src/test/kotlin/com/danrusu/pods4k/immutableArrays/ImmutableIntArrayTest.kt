@@ -28,6 +28,7 @@ class ImmutableIntArrayTest {
     fun `creation validation`() {
         expectThat(ImmutableIntArray(1) { it })
             .isA<ImmutableIntArray>()
+            .containsExactly(0)
 
         // Cannot create with negative size
         expectThrows<NegativeArraySizeException> {
@@ -36,7 +37,7 @@ class ImmutableIntArrayTest {
     }
 
     @Test
-    fun `copyOf validation`() {
+    fun `copyFrom validation`() {
         with(intArrayOf(1, 2, 3)) {
             expectThrows<ArrayIndexOutOfBoundsException> {
                 ImmutableIntArray.copyFrom(source = this, startIndex = -1, size = 1)
@@ -55,7 +56,8 @@ class ImmutableIntArrayTest {
             }
 
             expectThat(ImmutableIntArray.copyFrom(source = this, startIndex = 0, size = 0))
-                .hasSize(0)
+                .isA<ImmutableIntArray>()
+                .isEmpty()
 
             expectThat(ImmutableIntArray.copyFrom(source = this, startIndex = 0, size = 1))
                 .isEqualTo(immutableArrayOf(1))
@@ -185,7 +187,7 @@ class ImmutableIntArrayTest {
     }
 
     @Test
-    fun `isSameInstanceAs validation`() {
+    fun `referencesSameArrayAs validation`() {
         val arrayWithValues = immutableArrayOf(1, 2)
         val secondArrayWithSameValues = immutableArrayOf(1, 2)
 
@@ -224,12 +226,13 @@ class ImmutableIntArrayTest {
 
     @Test
     fun `isEmpty and isNotEmpty validation`() {
-        with(emptyImmutableIntArray()) {
-            expectThat(this).isEmpty()
-        }
-        with(immutableArrayOf(1, 2, 3)) {
-            expectThat(this).isNotEmpty()
-        }
+        expectThat(emptyImmutableIntArray())
+            .isA<ImmutableIntArray>()
+            .isEmpty()
+
+        expectThat(immutableArrayOf(1, 2, 3))
+            .isA<ImmutableIntArray>()
+            .isNotEmpty()
     }
 
     @Test
@@ -659,10 +662,12 @@ class ImmutableIntArrayTest {
     fun `take validation`() {
         with(emptyImmutableIntArray()) {
             expectThat(take(0))
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
 
             expectThat(take(10))
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
         }
 
         with(immutableArrayOf(1, 2, 3)) {
@@ -671,7 +676,8 @@ class ImmutableIntArrayTest {
             }.message.isEqualTo("Requested element count -1 is less than zero.")
 
             expectThat(take(0))
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
 
             expectThat(take(1))
                 .isEqualTo(immutableArrayOf(1))
@@ -691,15 +697,18 @@ class ImmutableIntArrayTest {
     fun `takeWhile validation`() {
         with(emptyImmutableIntArray()) {
             expectThat(takeWhile { true })
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
 
             expectThat(takeWhile { false })
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
         }
 
         with(immutableArrayOf(1, 2, 5, 3)) {
             expectThat(takeWhile { it >= 2 })
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
 
             expectThat(takeWhile { it <= 4 })
                 .isEqualTo(immutableArrayOf(1, 2))
@@ -713,10 +722,12 @@ class ImmutableIntArrayTest {
     fun `takeLast validation`() {
         with(emptyImmutableIntArray()) {
             expectThat(takeLast(0))
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
 
             expectThat(takeLast(10))
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
         }
 
         with(immutableArrayOf(1, 2, 3)) {
@@ -725,7 +736,8 @@ class ImmutableIntArrayTest {
             }.message.isEqualTo("Requested element count -1 is less than zero.")
 
             expectThat(takeLast(0))
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
 
             expectThat(takeLast(1))
                 .isEqualTo(immutableArrayOf(3))
@@ -745,15 +757,18 @@ class ImmutableIntArrayTest {
     fun `takeLastWhile validation`() {
         with(emptyImmutableIntArray()) {
             expectThat(takeLastWhile { true })
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
 
             expectThat(takeLastWhile { false })
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
         }
 
         with(immutableArrayOf(1, 5, 2, 3)) {
             expectThat(takeLastWhile { it <= 2 })
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
 
             expectThat(takeLastWhile { it <= 4 })
                 .isEqualTo(immutableArrayOf(2, 3))
@@ -767,10 +782,12 @@ class ImmutableIntArrayTest {
     fun `drop validation`() {
         with(emptyImmutableIntArray()) {
             expectThat(drop(0))
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
 
             expectThat(dropLast(10))
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
         }
 
         with(immutableArrayOf(1, 2, 3)) {
@@ -788,10 +805,12 @@ class ImmutableIntArrayTest {
                 .isEqualTo(immutableArrayOf(3))
 
             expectThat(drop(3))
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
 
             expectThat(drop(10))
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
         }
     }
 
@@ -799,15 +818,18 @@ class ImmutableIntArrayTest {
     fun `dropWhile validation`() {
         with(emptyImmutableIntArray()) {
             expectThat(dropWhile { true })
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
 
             expectThat(dropWhile { false })
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
         }
 
         with(immutableArrayOf(1, 2, 5, 3)) {
             expectThat(dropWhile { it <= 5 })
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
 
             expectThat(dropWhile { it <= 4 })
                 .isEqualTo(immutableArrayOf(5, 3))
@@ -821,10 +843,12 @@ class ImmutableIntArrayTest {
     fun `dropLast validation`() {
         with(emptyImmutableIntArray()) {
             expectThat(dropLast(0))
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
 
             expectThat(dropLast(10))
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
         }
 
         with(immutableArrayOf(1, 2, 3)) {
@@ -842,10 +866,12 @@ class ImmutableIntArrayTest {
                 .isEqualTo(immutableArrayOf(1))
 
             expectThat(dropLast(3))
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
 
             expectThat(dropLast(10))
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
         }
     }
 
@@ -853,15 +879,18 @@ class ImmutableIntArrayTest {
     fun `dropLastWhile validation`() {
         with(emptyImmutableIntArray()) {
             expectThat(dropLastWhile { true })
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
 
             expectThat(dropLastWhile { false })
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
         }
 
         with(immutableArrayOf(1, 2, 5, 3)) {
             expectThat(dropLastWhile { it <= 5 })
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
 
             expectThat(dropLastWhile { it <= 4 })
                 .isEqualTo(immutableArrayOf(1, 2, 5))
@@ -875,7 +904,8 @@ class ImmutableIntArrayTest {
     fun `filter validation`() {
         with(emptyImmutableIntArray()) {
             expectThat(filter { it % 2 == 0 })
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
         }
 
         with(immutableArrayOf(1, 2, 3, 4)) {
@@ -891,7 +921,8 @@ class ImmutableIntArrayTest {
     fun `filterIndexed validation`() {
         with(emptyImmutableIntArray()) {
             expectThat(filterIndexed { index, element -> element == index })
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
         }
 
         with(immutableArrayOf(0, 3, 2, 4)) {
@@ -907,7 +938,8 @@ class ImmutableIntArrayTest {
     fun `filterNot validation`() {
         with(emptyImmutableIntArray()) {
             expectThat(filterNot { it % 2 == 0 })
-                .isEqualTo(emptyImmutableIntArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
         }
 
         with(immutableArrayOf(1, 2, 3, 4)) {
@@ -922,19 +954,35 @@ class ImmutableIntArrayTest {
     @Test
     fun `partition validation`() {
         with(emptyImmutableIntArray()) {
-            expectThat(partition { it % 2 == 0 })
-                .isEqualTo(Pair(emptyImmutableIntArray(), emptyImmutableIntArray()))
+            val pair = partition { it % 2 == 0 }
+            expectThat(pair.first)
+                .isA<ImmutableIntArray>()
+                .isEmpty()
+
+            expectThat(pair.second)
+                .isA<ImmutableIntArray>()
+                .isEmpty()
         }
 
         with(immutableArrayOf(1, 2, 3, 4)) {
             expectThat(partition { it % 2 == 0 })
                 .isEqualTo(Pair(immutableArrayOf(2, 4), immutableArrayOf(1, 3)))
 
-            expectThat(partition { it < 0 })
-                .isEqualTo(Pair(emptyImmutableIntArray(), this))
+            var pair = partition { it < 0 }
+            expectThat(pair.first)
+                .isA<ImmutableIntArray>()
+                .isEmpty()
 
-            expectThat(partition { it > 0 })
-                .isEqualTo(Pair(this, emptyImmutableIntArray()))
+            expectThat(pair.second)
+                .isEqualTo(this)
+
+            pair = partition { it > 0 }
+            expectThat(pair.first)
+                .isEqualTo(this)
+
+            expectThat(pair.second)
+                .isA<ImmutableIntArray>()
+                .isEmpty()
         }
     }
 
@@ -970,7 +1018,8 @@ class ImmutableIntArrayTest {
     @Test
     fun `distinct validation`() {
         expectThat(emptyImmutableIntArray().distinct())
-            .isEqualTo(emptyImmutableIntArray())
+            .isA<ImmutableIntArray>()
+            .isEmpty()
 
         expectThat(immutableArrayOf(1, 1, 2, 3, 3).distinct())
             .isA<ImmutableIntArray>()
@@ -980,7 +1029,8 @@ class ImmutableIntArrayTest {
     @Test
     fun `distinctBy validation`() {
         expectThat(emptyImmutableIntArray().distinctBy { it.toString().length })
-            .isEqualTo(emptyImmutableIntArray())
+            .isA<ImmutableIntArray>()
+            .isEmpty()
 
         expectThat(immutableArrayOf(1, 2, 10, 20, 100).distinctBy { it.toString().length })
             .isEqualTo(immutableArrayOf(1, 10, 100))
@@ -993,7 +1043,8 @@ class ImmutableIntArrayTest {
         expectThat(builder.size)
             .isEqualTo(0)
         expectThat(builder.build())
-            .isEqualTo(emptyImmutableIntArray())
+            .isA<ImmutableIntArray>()
+            .isEmpty()
 
         builder.add(1)
 
@@ -1018,7 +1069,8 @@ class ImmutableIntArrayTest {
         expectThat(builder.size)
             .isEqualTo(0)
         expectThat(builder.build())
-            .isEqualTo(emptyImmutableIntArray())
+            .isA<ImmutableIntArray>()
+            .isEmpty()
 
         builder += 1
 

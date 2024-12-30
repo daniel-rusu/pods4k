@@ -689,6 +689,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
          * Returns an immutable array containing the elements that were added.
          */
         public fun build(): ImmutableFloatArray {
+            if (size == 0) return EMPTY
             if (size == values.size) return ImmutableFloatArray(values)
 
             return copyFrom(source = values, startIndex = 0, size = size)

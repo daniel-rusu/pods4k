@@ -13,7 +13,8 @@ class CollectionsTest {
     fun `toImmutableArray validation`() {
         with(listOf<String>()) {
             expectThat(this.toImmutableArray())
-                .isEqualTo(emptyImmutableArray())
+                .isA<ImmutableArray<String>>()
+                .isEmpty()
         }
         with(listOf(1, 3)) {
             expectThat(this.toImmutableArray())
@@ -161,6 +162,17 @@ class CollectionsTest {
         // iterable of generic arrays
         with(
             listOf(
+                emptyImmutableArray<String>(),
+                emptyImmutableArray<String>(),
+            ),
+        ) {
+            expectThat(flatten())
+                .isA<ImmutableArray<String>>()
+                .isEmpty()
+        }
+
+        with(
+            listOf(
                 immutableArrayOf("a", "b"),
                 immutableArrayOf("c", "d", "e"),
                 emptyImmutableArray<String>(),
@@ -171,6 +183,17 @@ class CollectionsTest {
         }
 
         // iterable of primitive arrays
+        with(
+            listOf(
+                emptyImmutableIntArray(),
+                emptyImmutableIntArray(),
+            ),
+        ) {
+            expectThat(flatten())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
+        }
+
         with(
             listOf(
                 immutableArrayOf(1, 2),

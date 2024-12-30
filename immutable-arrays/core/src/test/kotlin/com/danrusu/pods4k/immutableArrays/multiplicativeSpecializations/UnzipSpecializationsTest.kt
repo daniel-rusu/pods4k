@@ -1,24 +1,31 @@
 package com.danrusu.pods4k.immutableArrays.multiplicativeSpecializations
 
+import com.danrusu.pods4k.immutableArrays.ImmutableArray
+import com.danrusu.pods4k.immutableArrays.ImmutableCharArray
+import com.danrusu.pods4k.immutableArrays.ImmutableIntArray
 import com.danrusu.pods4k.immutableArrays.emptyImmutableArray
-import com.danrusu.pods4k.immutableArrays.emptyImmutableCharArray
-import com.danrusu.pods4k.immutableArrays.emptyImmutableIntArray
 import com.danrusu.pods4k.immutableArrays.immutableArrayOf
+import com.danrusu.pods4k.immutableArrays.isEmpty
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
+import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 
 class UnzipSpecializationsTest {
     @Test
     fun `generic with generic validation`() {
-        expectThat(
-            emptyImmutableArray<Pair<String, String>>().unzip(),
-        ).isEqualTo(
-            Pair(
-                emptyImmutableArray<String>(),
-                emptyImmutableArray<String>(),
-            ),
-        )
+        with(emptyImmutableArray<Pair<String, String>>().unzip()) {
+            expectThat(this)
+                .isA<Pair<String, String>>()
+
+            expectThat(first)
+                .isA<ImmutableArray<String>>()
+                .isEmpty()
+
+            expectThat(second)
+                .isA<ImmutableArray<String>>()
+                .isEmpty()
+        }
 
         expectThat(
             immutableArrayOf(Pair("one", "1")).unzip(),
@@ -44,14 +51,18 @@ class UnzipSpecializationsTest {
 
     @Test
     fun `generic with primitive validation`() {
-        expectThat(
-            emptyImmutableArray<Pair<String, Int>>().unzip(),
-        ).isEqualTo(
-            Pair(
-                emptyImmutableArray<String>(),
-                emptyImmutableIntArray(),
-            ),
-        )
+        with(emptyImmutableArray<Pair<String, Int>>().unzip()) {
+            expectThat(this)
+                .isA<Pair<ImmutableArray<String>, ImmutableIntArray>>()
+
+            expectThat(first)
+                .isA<ImmutableArray<String>>()
+                .isEmpty()
+
+            expectThat(second)
+                .isA<ImmutableIntArray>()
+                .isEmpty()
+        }
 
         expectThat(
             immutableArrayOf(Pair("one", 1)).unzip(),
@@ -77,14 +88,18 @@ class UnzipSpecializationsTest {
 
     @Test
     fun `primitive with generic validation`() {
-        expectThat(
-            emptyImmutableArray<Pair<Int, String>>().unzip(),
-        ).isEqualTo(
-            Pair(
-                emptyImmutableIntArray(),
-                emptyImmutableArray<String>(),
-            ),
-        )
+        with(emptyImmutableArray<Pair<Int, String>>().unzip()) {
+            expectThat(this)
+                .isA<Pair<ImmutableIntArray, ImmutableArray<String>>>()
+
+            expectThat(first)
+                .isA<ImmutableIntArray>()
+                .isEmpty()
+
+            expectThat(second)
+                .isA<ImmutableArray<String>>()
+                .isEmpty()
+        }
 
         expectThat(
             immutableArrayOf(Pair(1, "a")).unzip(),
@@ -110,14 +125,18 @@ class UnzipSpecializationsTest {
 
     @Test
     fun `primitive with primitive validation`() {
-        expectThat(
-            emptyImmutableArray<Pair<Int, Char>>().unzip(),
-        ).isEqualTo(
-            Pair(
-                emptyImmutableIntArray(),
-                emptyImmutableCharArray(),
-            ),
-        )
+        with(emptyImmutableArray<Pair<Int, Char>>().unzip()) {
+            expectThat(this)
+                .isA<Pair<ImmutableIntArray, ImmutableCharArray>>()
+
+            expectThat(first)
+                .isA<ImmutableIntArray>()
+                .isEmpty()
+
+            expectThat(second)
+                .isA<ImmutableCharArray>()
+                .isEmpty()
+        }
 
         expectThat(
             immutableArrayOf(Pair(1, 'a')).unzip(),

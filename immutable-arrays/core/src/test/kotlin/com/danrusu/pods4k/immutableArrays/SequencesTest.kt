@@ -8,6 +8,22 @@ import strikt.assertions.isEqualTo
 class SequencesTest {
     @Test
     fun `toImmutableArray validation`() {
+        with(sequenceOf<String>()) {
+            expectThat(this.toImmutableArray())
+                .isA<ImmutableArray<String>>()
+                .isEmpty()
+        }
+
+        with(sequenceOf<Int>()) {
+            expectThat(this.toImmutableArray())
+                .isA<ImmutableIntArray>()
+                .isEmpty()
+
+            expectThat(this.toImmutableArray<Int>())
+                .isA<ImmutableArray<Int>>()
+                .isEmpty()
+        }
+
         with(sequenceOf(1, 3, 5)) {
             expectThat(this.toImmutableArray())
                 .isA<ImmutableIntArray>()

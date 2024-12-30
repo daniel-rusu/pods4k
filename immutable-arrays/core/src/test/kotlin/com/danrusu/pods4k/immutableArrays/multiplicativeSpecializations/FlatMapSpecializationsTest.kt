@@ -1,12 +1,16 @@
 package com.danrusu.pods4k.immutableArrays.multiplicativeSpecializations
 
+import com.danrusu.pods4k.immutableArrays.ImmutableArray
+import com.danrusu.pods4k.immutableArrays.ImmutableDoubleArray
+import com.danrusu.pods4k.immutableArrays.ImmutableIntArray
 import com.danrusu.pods4k.immutableArrays.emptyImmutableArray
-import com.danrusu.pods4k.immutableArrays.emptyImmutableDoubleArray
 import com.danrusu.pods4k.immutableArrays.emptyImmutableIntArray
 import com.danrusu.pods4k.immutableArrays.immutableArrayOf
+import com.danrusu.pods4k.immutableArrays.isEmpty
 import com.danrusu.pods4k.immutableArrays.toImmutableArray
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
+import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 
 class FlatMapSpecializationsTest {
@@ -16,11 +20,13 @@ class FlatMapSpecializationsTest {
         with(emptyImmutableArray<String>()) {
             // iterable
             expectThat(flatMap<String, Char> { it.toList() })
-                .isEqualTo(emptyImmutableArray<Char>())
+                .isA<ImmutableArray<Char>>()
+                .isEmpty()
 
             // immutable array
             expectThat(flatMap { it.toList().toImmutableArray<Char>() })
-                .isEqualTo(emptyImmutableArray<Char>())
+                .isA<ImmutableArray<Char>>()
+                .isEmpty()
         }
 
         with(immutableArrayOf("Dan", "Jill")) {
@@ -42,14 +48,18 @@ class FlatMapSpecializationsTest {
                 flatMap { element ->
                     element.toCharArray().map { it.digitToInt() }
                 },
-            ).isEqualTo(emptyImmutableIntArray())
+            )
+                .isA<ImmutableIntArray>()
+                .isEmpty()
 
             // immutable array
             expectThat(
                 flatMap { element ->
                     element.toCharArray().map { it.digitToInt() }.toImmutableArray()
                 },
-            ).isEqualTo(emptyImmutableIntArray())
+            )
+                .isA<ImmutableIntArray>()
+                .isEmpty()
         }
 
         with(immutableArrayOf("1", "22", "333")) {
@@ -74,11 +84,13 @@ class FlatMapSpecializationsTest {
         with(emptyImmutableIntArray()) {
             // iterable
             expectThat(flatMap<Char> { it.toString().toList() })
-                .isEqualTo(emptyImmutableArray<Char>())
+                .isA<ImmutableArray<Char>>()
+                .isEmpty()
 
             // immutable array
             expectThat(flatMap { it.toString().toList().toImmutableArray<Char>() })
-                .isEqualTo(emptyImmutableArray<Char>())
+                .isA<ImmutableArray<Char>>()
+                .isEmpty()
         }
 
         with(immutableArrayOf(10, 2, 37)) {
@@ -100,14 +112,18 @@ class FlatMapSpecializationsTest {
                 flatMap { element ->
                     DoubleArray(element) { it.toDouble() / element }.toList()
                 },
-            ).isEqualTo(emptyImmutableDoubleArray())
+            )
+                .isA<ImmutableDoubleArray>()
+                .isEmpty()
 
             // immutable array
             expectThat(
                 flatMap { element ->
                     DoubleArray(element) { it.toDouble() / element }.toList().toImmutableArray()
                 },
-            ).isEqualTo(emptyImmutableDoubleArray())
+            )
+                .isA<ImmutableDoubleArray>()
+                .isEmpty()
         }
 
         with(immutableArrayOf(1, 2, 3)) {

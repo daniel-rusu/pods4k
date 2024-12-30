@@ -1,10 +1,12 @@
 package com.danrusu.pods4k.immutableArrays.multiplicativeSpecializations
 
-import com.danrusu.pods4k.immutableArrays.emptyImmutableArray
-import com.danrusu.pods4k.immutableArrays.emptyImmutableIntArray
+import com.danrusu.pods4k.immutableArrays.ImmutableArray
+import com.danrusu.pods4k.immutableArrays.ImmutableIntArray
 import com.danrusu.pods4k.immutableArrays.immutableArrayOf
+import com.danrusu.pods4k.immutableArrays.isEmpty
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
+import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 
 class MapNotNullSpecializationsTest {
@@ -18,7 +20,8 @@ class MapNotNullSpecializationsTest {
 
         // all null
         expectThat(input.mapNotNull { if (it.second > 10) it.first else null })
-            .isEqualTo(emptyImmutableArray())
+            .isA<ImmutableArray<String>>()
+            .isEmpty()
 
         // some null
         expectThat(input.mapNotNull { if (it.second % 2 != 0) it.first else null })
@@ -35,7 +38,8 @@ class MapNotNullSpecializationsTest {
 
         // all null
         expectThat(input.mapNotNull { if (it.length > 10) it.length else null })
-            .isEqualTo(emptyImmutableIntArray())
+            .isA<ImmutableIntArray>()
+            .isEmpty()
 
         // some null
         expectThat(input.mapNotNull { if (it.length > 1) it.length else null })
@@ -52,7 +56,8 @@ class MapNotNullSpecializationsTest {
 
         // all null
         expectThat(input.mapNotNull { if (it > 10) it.toString() else null })
-            .isEqualTo(emptyImmutableArray())
+            .isA<ImmutableArray<String>>()
+            .isEmpty()
 
         // some null
         expectThat(input.mapNotNull { if (it % 2 == 1) it.toString() else null })
@@ -69,7 +74,8 @@ class MapNotNullSpecializationsTest {
 
         // all null
         expectThat(input.mapNotNull { if (it > 10) 2 * it else null })
-            .isEqualTo(emptyImmutableIntArray())
+            .isA<ImmutableIntArray>()
+            .isEmpty()
 
         // some null
         expectThat(input.mapNotNull { if (it % 2 == 1) 5 * it else null })
