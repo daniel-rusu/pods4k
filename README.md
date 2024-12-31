@@ -9,11 +9,18 @@ If you find this library useful, please consider giving it
 a [![GitHub stars](https://img.shields.io/github/stars/daniel-rusu/pods4k?label=Star)](https://github.com/daniel-rusu/pods4k)
 on [GitHub](https://github.com/daniel-rusu/pods4k) and sharing it with others.
 
-## Dependency
+## Installation
+
+<a href="https://github.com/daniel-rusu/pods4k/releases/latest" alt="Activity"><img src="https://img.shields.io/github/v/release/daniel-rusu/pods4k?label=pods4k" /></a>
+is available from Maven Central:
 
 **Gradle:**
 
 ```kotlin
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     implementation("com.danrusu.pods4k:pods4k:0.6.0")
 }

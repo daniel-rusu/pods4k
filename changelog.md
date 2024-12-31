@@ -18,9 +18,9 @@ _Date TBD_
 
 **Performance Improvements:**
 
-* Update `distinct()` to use `filter` along with a `HashSet` instead of calling `toSet().toImmutableArray()` as this
-  avoids using a more expensive `LinkedHashSet` while still maintaining ordering guarantees. Using `filter` also returns
-  the same instance when appropriate so no extra memory is retained when all elements are already distinct.
+* Update `distinct()` to use `filter` with a `HashSet` instead of calling `toSet().toImmutableArray()` to avoid using
+  the more expensive `LinkedHashSet` while still maintaining original ordering. This also returns the same instance when
+  all elements are already distinct.
 * Update `immutableArrayOf(...)` to avoid creating a temporary builder by using the `copyFrom` factory function
 * Update `regularArray.toImmutableArray()` to avoid creating a temporary builder by using the `copyFrom` factory
   function

@@ -1,8 +1,8 @@
 # Bill of Materials
 
-This library is composed of multiple modules where each module is published as a separate artifact. We also publish a
-single top-level artifact that automatically brings in all the artifacts of this library, so the simplest way to depend
-on the entire library is to add a single dependency to the top-level artifact as described in
+This library is composed of multiple modules where each module is published as a separate artifact on Maven Central. We
+also publish a single top-level artifact that automatically brings in all the artifacts of this library, so the simplest
+way to depend on the entire library is to add a single dependency to the top-level artifact as described in
 [dependency details](../../README.md#dependency).
 
 In addition to the above, we also publish a bill of materials, BOM, which references all the artifact versions in that
@@ -10,12 +10,18 @@ release. The main use-case for the BOM is if you prefer to pick and choose indiv
 depending on the entire library. In that case, you can reference the BOM at a particular version and add dependencies
 for the components that you want without specifying their individual versions.
 
+<a href="https://github.com/daniel-rusu/pods4k/releases/latest" alt="Activity"><img src="https://img.shields.io/github/v/release/daniel-rusu/pods4k?label=Latest Release" /></a>
+
 ## Gradle
 
 ```kotlin
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     // Import the BOM at a particular version
-    implementation(platform("com.danrusu.pods4k:bom:[version]"))
+    implementation(platform("com.danrusu.pods4k:bom:[version_number]"))
 
     // Pick the artifacts that you want but don't specify their versions as that's controlled by the BOM
     implementation("com.danrusu.pods4k.immutable-arrays:core")
@@ -34,7 +40,7 @@ dependencies {
             <dependency>
                 <groupId>com.danrusu.pods4k</groupId>
                 <artifactId>bom</artifactId>
-                <version>[version]</version>
+                <version>[version_number]</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
