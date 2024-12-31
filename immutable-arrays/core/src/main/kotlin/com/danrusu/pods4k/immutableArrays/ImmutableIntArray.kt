@@ -558,7 +558,8 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     public fun distinct(): ImmutableIntArray {
         if (size <= 1) return this
 
-        return values.toSet().toImmutableArray()
+        val distinctValues = HashSet<Int>()
+        return filter { distinctValues.add(it) }
     }
 
     /**
@@ -566,6 +567,8 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
      * [selector]
      */
     public inline fun <K> distinctBy(selector: (element: Int) -> K): ImmutableIntArray {
+        if (size <= 1) return this
+
         val keys = HashSet<K>()
         return filter { keys.add(selector(it)) }
     }

@@ -558,7 +558,8 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     public fun distinct(): ImmutableFloatArray {
         if (size <= 1) return this
 
-        return values.toSet().toImmutableArray()
+        val distinctValues = HashSet<Float>()
+        return filter { distinctValues.add(it) }
     }
 
     /**
@@ -566,6 +567,8 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
      * [selector]
      */
     public inline fun <K> distinctBy(selector: (element: Float) -> K): ImmutableFloatArray {
+        if (size <= 1) return this
+
         val keys = HashSet<K>()
         return filter { keys.add(selector(it)) }
     }

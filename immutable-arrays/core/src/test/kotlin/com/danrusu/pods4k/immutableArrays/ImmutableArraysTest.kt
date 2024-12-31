@@ -207,6 +207,12 @@ class ImmutableArraysTest {
 
     @Test
     fun `sorted validation`() {
+        // references
+        with(immutableArrayOf("one")) {
+            expectThat(sorted().referencesSameArrayAs(this))
+                .isTrue()
+        }
+
         with(immutableArrayOf("dogs", "apples", "pineapples")) {
             expectThat(sorted())
                 .isEqualTo(immutableArrayOf("apples", "dogs", "pineapples"))
@@ -214,6 +220,12 @@ class ImmutableArraysTest {
             // original is left unchanged
             expectThat(this)
                 .isEqualTo(immutableArrayOf("dogs", "apples", "pineapples"))
+        }
+
+        // primitives
+        with(immutableArrayOf(1)) {
+            expectThat(sorted().referencesSameArrayAs(this))
+                .isTrue()
         }
 
         with(immutableArrayOf(1, 2, 5, 4, 3)) {
@@ -228,6 +240,12 @@ class ImmutableArraysTest {
 
     @Test
     fun `sortedDescending validation`() {
+        // references
+        with(immutableArrayOf("one")) {
+            expectThat(sortedDescending().referencesSameArrayAs(this))
+                .isTrue()
+        }
+
         with(immutableArrayOf("dogs", "apples", "pineapples")) {
             expectThat(sortedDescending())
                 .isEqualTo(immutableArrayOf("pineapples", "dogs", "apples"))
@@ -235,6 +253,12 @@ class ImmutableArraysTest {
             // original is left unchanged
             expectThat(this)
                 .isEqualTo(immutableArrayOf("dogs", "apples", "pineapples"))
+        }
+
+        // primitives
+        with(immutableArrayOf(1)) {
+            expectThat(sortedDescending().referencesSameArrayAs(this))
+                .isTrue()
         }
 
         with(immutableArrayOf(1, 2, 5, 4, 3)) {
@@ -253,8 +277,13 @@ class ImmutableArraysTest {
             .isA<ImmutableArray<String>>()
             .isEmpty()
 
-        expectThat(emptyImmutableArray<String>() + immutableArrayOf("one", "two"))
-            .isEqualTo(immutableArrayOf("one", "two"))
+        with(immutableArrayOf("one", "two")) {
+            expectThat((emptyImmutableArray<String>() + this).referencesSameArrayAs(this))
+                .isTrue()
+
+            expectThat((this + emptyImmutableArray<String>()).referencesSameArrayAs(this))
+                .isTrue()
+        }
 
         expectThat(immutableArrayOf("a", "b", "c") + immutableArrayOf("d", "e"))
             .isEqualTo(immutableArrayOf("a", "b", "c", "d", "e"))
@@ -263,8 +292,13 @@ class ImmutableArraysTest {
             .isA<ImmutableIntArray>()
             .isEmpty()
 
-        expectThat(emptyImmutableIntArray() + immutableArrayOf(1, 2))
-            .isEqualTo(immutableArrayOf(1, 2))
+        with(immutableArrayOf(1, 2)) {
+            expectThat((emptyImmutableIntArray() + this).referencesSameArrayAs(this))
+                .isTrue()
+
+            expectThat((this + emptyImmutableIntArray()).referencesSameArrayAs(this))
+                .isTrue()
+        }
 
         expectThat(immutableArrayOf(1, 2, 3) + immutableArrayOf(4, 5))
             .isEqualTo(immutableArrayOf(1, 2, 3, 4, 5))
@@ -311,7 +345,10 @@ class ImmutableArraysTest {
     fun `requireNoNulls validation`() {
         with(immutableArrayOf<String?>("one", "two")) {
             expectThat(requireNoNulls())
-                .isEqualTo(immutableArrayOf("one", "two"))
+                .isA<ImmutableArray<String>>()
+
+            expectThat(requireNoNulls().referencesSameArrayAs(this))
+                .isTrue()
         }
 
         expectThrows<IllegalArgumentException> {

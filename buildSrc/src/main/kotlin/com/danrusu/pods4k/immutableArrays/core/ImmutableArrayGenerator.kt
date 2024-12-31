@@ -980,7 +980,11 @@ private fun TypeSpec.Builder.addDistinct(baseType: BaseType) {
     ) {
         statement("if (size <= 1) return this")
         emptyLine()
-        statement("return values.toSet().toImmutableArray()")
+
+        // This is more efficient than values.toSet().toImmutableArray() because it doesn't need to use a
+        // LinkedHashSet to maintain ordering so it uses less memory
+        statement("val distinctValues = HashSet<%T>()", baseType.type)
+        statement("return filter { distinctValues.add(it) }")
     }
 }
 
@@ -1003,6 +1007,8 @@ private fun TypeSpec.Builder.addDistinctBy(baseType: BaseType) {
     ) {
         addGenericTypes(key)
 
+        statement("if (size <= 1) return this")
+        emptyLine()
         statement("val keys = HashSet<%T>()", key)
         statement("return filter { keys.add(selector(it)) }")
     }

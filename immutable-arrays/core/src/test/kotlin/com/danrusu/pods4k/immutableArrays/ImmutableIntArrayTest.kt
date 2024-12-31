@@ -685,11 +685,11 @@ class ImmutableIntArrayTest {
             expectThat(take(2))
                 .isEqualTo(immutableArrayOf(1, 2))
 
-            expectThat(take(3))
-                .isEqualTo(immutableArrayOf(1, 2, 3))
+            expectThat(take(3).referencesSameArrayAs(this))
+                .isTrue()
 
-            expectThat(take(10))
-                .isEqualTo(immutableArrayOf(1, 2, 3))
+            expectThat(take(10).referencesSameArrayAs(this))
+                .isTrue()
         }
     }
 
@@ -713,8 +713,8 @@ class ImmutableIntArrayTest {
             expectThat(takeWhile { it <= 4 })
                 .isEqualTo(immutableArrayOf(1, 2))
 
-            expectThat(takeWhile { it <= 5 })
-                .isEqualTo(immutableArrayOf(1, 2, 5, 3))
+            expectThat(takeWhile { it <= 5 }.referencesSameArrayAs(this))
+                .isTrue()
         }
     }
 
@@ -745,11 +745,11 @@ class ImmutableIntArrayTest {
             expectThat(takeLast(2))
                 .isEqualTo(immutableArrayOf(2, 3))
 
-            expectThat(takeLast(3))
-                .isEqualTo(immutableArrayOf(1, 2, 3))
+            expectThat(takeLast(3).referencesSameArrayAs(this))
+                .isTrue()
 
-            expectThat(takeLast(10))
-                .isEqualTo(immutableArrayOf(1, 2, 3))
+            expectThat(takeLast(10).referencesSameArrayAs(this))
+                .isTrue()
         }
     }
 
@@ -773,8 +773,8 @@ class ImmutableIntArrayTest {
             expectThat(takeLastWhile { it <= 4 })
                 .isEqualTo(immutableArrayOf(2, 3))
 
-            expectThat(takeLastWhile { it <= 5 })
-                .isEqualTo(immutableArrayOf(1, 5, 2, 3))
+            expectThat(takeLastWhile { it <= 5 }.referencesSameArrayAs(this))
+                .isTrue()
         }
     }
 
@@ -795,8 +795,8 @@ class ImmutableIntArrayTest {
                 drop(-1)
             }.message.isEqualTo("Requested element count -1 is less than zero.")
 
-            expectThat(drop(0))
-                .isEqualTo(immutableArrayOf(1, 2, 3))
+            expectThat(drop(0).referencesSameArrayAs(this))
+                .isTrue()
 
             expectThat(drop(1))
                 .isEqualTo(immutableArrayOf(2, 3))
@@ -834,8 +834,8 @@ class ImmutableIntArrayTest {
             expectThat(dropWhile { it <= 4 })
                 .isEqualTo(immutableArrayOf(5, 3))
 
-            expectThat(dropWhile { it <= 0 })
-                .isEqualTo(immutableArrayOf(1, 2, 5, 3))
+            expectThat(dropWhile { it <= 0 }.referencesSameArrayAs(this))
+                .isTrue()
         }
     }
 
@@ -856,8 +856,8 @@ class ImmutableIntArrayTest {
                 dropLast(-1)
             }.message.isEqualTo("Requested element count -1 is less than zero.")
 
-            expectThat(dropLast(0))
-                .isEqualTo(immutableArrayOf(1, 2, 3))
+            expectThat(dropLast(0).referencesSameArrayAs(this))
+                .isTrue()
 
             expectThat(dropLast(1))
                 .isEqualTo(immutableArrayOf(1, 2))
@@ -895,8 +895,8 @@ class ImmutableIntArrayTest {
             expectThat(dropLastWhile { it <= 4 })
                 .isEqualTo(immutableArrayOf(1, 2, 5))
 
-            expectThat(dropLastWhile { it <= 0 })
-                .isEqualTo(immutableArrayOf(1, 2, 5, 3))
+            expectThat(dropLastWhile { it <= 0 }.referencesSameArrayAs(this))
+                .isTrue()
         }
     }
 
@@ -912,8 +912,8 @@ class ImmutableIntArrayTest {
             expectThat(filter { it % 2 == 0 })
                 .isEqualTo(immutableArrayOf(2, 4))
 
-            expectThat(filter { it >= 0 })
-                .isEqualTo(this)
+            expectThat(filter { it >= 0 }.referencesSameArrayAs(this))
+                .isTrue()
         }
     }
 
@@ -929,8 +929,10 @@ class ImmutableIntArrayTest {
             expectThat(filterIndexed { index, element -> element == index })
                 .isEqualTo(immutableArrayOf(0, 2))
 
-            expectThat(filterIndexed { index, element -> index + element >= 0 })
-                .isEqualTo(this)
+            expectThat(
+                filterIndexed { index, element -> index + element >= 0 }
+                    .referencesSameArrayAs(this),
+            ).isTrue()
         }
     }
 
@@ -946,8 +948,8 @@ class ImmutableIntArrayTest {
             expectThat(filterNot { it % 2 == 0 })
                 .isEqualTo(immutableArrayOf(1, 3))
 
-            expectThat(filterNot { it < 0 })
-                .isEqualTo(this)
+            expectThat(filterNot { it < 0 }.referencesSameArrayAs(this))
+                .isTrue()
         }
     }
 
@@ -973,12 +975,12 @@ class ImmutableIntArrayTest {
                 .isA<ImmutableIntArray>()
                 .isEmpty()
 
-            expectThat(pair.second)
-                .isEqualTo(this)
+            expectThat(pair.second.referencesSameArrayAs(this))
+                .isTrue()
 
             pair = partition { it > 0 }
-            expectThat(pair.first)
-                .isEqualTo(this)
+            expectThat(pair.first.referencesSameArrayAs(this))
+                .isTrue()
 
             expectThat(pair.second)
                 .isA<ImmutableIntArray>()
@@ -988,6 +990,11 @@ class ImmutableIntArrayTest {
 
     @Test
     fun `sortedByDescending validation`() {
+        with(immutableArrayOf(1)) {
+            expectThat(sortedBy { it.toString() }.referencesSameArrayAs(this))
+                .isTrue()
+        }
+
         with(immutableArrayOf(3, 17, 11)) {
             expectThat(sortedByDescending { it.toString() })
                 .isEqualTo(immutableArrayOf(3, 17, 11))
@@ -1000,6 +1007,13 @@ class ImmutableIntArrayTest {
 
     @Test
     fun `sortedWith validation`() {
+        with(immutableArrayOf(1)) {
+            val comparator = Comparator<Int> { o1, o2 -> o1.compareTo(o2) }
+
+            expectThat(sortedWith(comparator).referencesSameArrayAs(this))
+                .isTrue()
+        }
+
         with(immutableArrayOf(1, 5, 3, 4)) {
             val comparator = Comparator<Int> { o1, o2 -> o1.compareTo(o2) }
 
@@ -1021,6 +1035,11 @@ class ImmutableIntArrayTest {
             .isA<ImmutableIntArray>()
             .isEmpty()
 
+        with(immutableArrayOf(1, 2, 3)) {
+            expectThat(distinct().referencesSameArrayAs(this))
+                .isTrue()
+        }
+
         expectThat(immutableArrayOf(1, 1, 2, 3, 3).distinct())
             .isA<ImmutableIntArray>()
             .isEqualTo(immutableArrayOf(1, 2, 3))
@@ -1031,6 +1050,11 @@ class ImmutableIntArrayTest {
         expectThat(emptyImmutableIntArray().distinctBy { it.toString().length })
             .isA<ImmutableIntArray>()
             .isEmpty()
+
+        with(immutableArrayOf(1, 20, 300)) {
+            expectThat(distinctBy { it.toString().length }.referencesSameArrayAs(this))
+                .isTrue()
+        }
 
         expectThat(immutableArrayOf(1, 2, 10, 20, 100).distinctBy { it.toString().length })
             .isEqualTo(immutableArrayOf(1, 10, 100))

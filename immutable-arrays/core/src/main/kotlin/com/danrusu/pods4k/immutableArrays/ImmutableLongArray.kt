@@ -558,7 +558,8 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     public fun distinct(): ImmutableLongArray {
         if (size <= 1) return this
 
-        return values.toSet().toImmutableArray()
+        val distinctValues = HashSet<Long>()
+        return filter { distinctValues.add(it) }
     }
 
     /**
@@ -566,6 +567,8 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
      * [selector]
      */
     public inline fun <K> distinctBy(selector: (element: Long) -> K): ImmutableLongArray {
+        if (size <= 1) return this
+
         val keys = HashSet<K>()
         return filter { keys.add(selector(it)) }
     }
