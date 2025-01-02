@@ -48,14 +48,16 @@ val names = immutableArrayOf("Dan", "Jill") // ImmutableArray<String>
 val luckyNumbers = immutableArrayOf(1, 2, 3) // ImmutableIntArray!!!
 ```
 
-Even when starting with a generic type, we often perform operations on its constituent primitive properties. Immutable
-Arrays automatically binds transformation operations, such as the `map` operation, to the most efficient specialization:
+Unlike lists or regular arrays, working with Immutable Arrays makes it natural to end up operating on primitives even
+when starting with generic types:
 
 ```kotlin
-val people = immutableArrayOf(dan, bob, jill) // ImmutableArray<Person>
+// people is an ImmutableArray<Person>
+val weightsInKilograms = people.map { it.weightKg } // ImmutableFloatArray since weightKg is a Float
+// ...
 
-val weights = people.map { it.weightKg } // ImmutableFloatArray!!!
-// Operate on weights with improved performance and efficiency
+// Extra-fast without any extra developer effort!
+val babyIsPresent = weightsInKilograms.any { it < 5.0f }
 ```
 
 Benchmarking 9 value types (generic + 8 primitive types) aligns with the most natural usage of this library as
@@ -72,9 +74,9 @@ smaller data types are split into a separate chart to avoid skewing the chart ax
 
 ![Memory Layout of immutable arrays](./resources/benchmarks/take.png)
 
-Copy operations on lists or regular arrays accumulate values into an ArrayList one element at a time. However, the same
-operations on immutable arrays generate immutable arrays, so we can copy entire ranges of values with the low-level
-arraycopy function which uses bulk memory operations to copy multiple elements at a time.
+Copy operations on lists or regular arrays produce lists accumulating values one element at a time. However, Immutable
+Array operations generate immutable arrays to maintain immutability, so we can use arraycopy to copy memory in bulk and
+avoid per-element bound checks.
 
 ![Memory Layout of immutable arrays](./resources/benchmarks/takeLast.png)
 
@@ -91,16 +93,15 @@ Transformations are significantly faster than lists and even regular arrays:
 
 ![Memory Layout of immutable arrays](./resources/benchmarks/map.png)
 
-Lists and regular arrays incur additional overhead as they accumulate values in an ArrayList. This repeatedly checks
-for sufficient list capacity as each element is added. Transformations on immutable arrays generate immutable arrays
-avoiding the ArrayList overhead. Additionally, immutable arrays operate on the 8 primitive types directly without
-incurring the memory and performance overhead of auto-boxing and unboxing that lists introduce.
+Immutable Arrays are faster than lists or regular arrays because they produce Immutable Arrays in order to maintain
+immutability. This skips the list capacity check for each element and also avoids auto-boxing when transforming elements
+into one of the 8 primitive types.
 
 ![Memory Layout of immutable arrays](./resources/benchmarks/flatmap.png)
 
-Note that regular arrays are slightly slower than lists here because the Kotlin standard library doesn't have a
-`flatMap` function that operates on nested arrays. We used `elements.flatMap { it.nestedRegularArray.asList() }` as the
-most efficient alternative for regular arrays since `asList()` returns a wrapper without copying the backing array.
+Note that `flatMap` on regular nested arrays is slightly slower than lists because the Kotlin standard library doesn't
+have an overload for that. We used `elements.flatMap { it.nestedRegularArray.asList() }`as the most efficient
+alternative since `asList()` returns a wrapper without copying the backing array.
 
 ![Memory Layout of immutable arrays](./resources/benchmarks/partition.png)
 
@@ -127,3 +128,14 @@ wrapper object introduces an extra layer of indirection.
 Immutable arrays are between 2 to 8 times faster than lists for many common operations with some scenarios over 30 times
 faster!  Although there are many more operations, the above results should provide a pretty good representation of the
 performance improvement of common non-trivial operations.
+
+We don't usually think about primitives in Kotlin and the same is true with Immutable Arrays.  However, although we just
+focus on writing clean list-like code, Immutable Arrays automatically use primitives when possible:
+
+```kotlin
+// primitive ImmutableFloatArray since weightKg is a Float
+val weightsInKilograms = people.map { it.weightKg }
+
+// Extra-fast while looking the same as regular list code
+val babyIsPresent = weightsInKilograms.any { it < 5.0f }
+```

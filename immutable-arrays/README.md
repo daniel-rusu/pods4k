@@ -81,18 +81,18 @@ Operations that inspect the data are much faster than lists when dealing with on
 
 It seems impossible that Immutable Arrays outperform regular arrays for dozens of operations since these are
 like-for-like comparisons (eg. `ImmutableFloatArray` vs.`FloatArray`). That's because Immutable Arrays replace array
-operations with highly optimized versions. See the [Benchmarks page](BENCHMARKS.md) for detailed explanations and more
-benchmarks with even higher performance!
+operations with highly optimized versions that maintain immutability. See the [Benchmarks page](BENCHMARKS.md) for
+detailed explanations and more benchmarks with even higher performance!
 
-Unlike lists or regular arrays, working with Immutable Arrays makes it natural to end up operating on primitives without
-needing to think about it. The following automatically switches from an `ImmutableArray<T>` to an `ImmutableFloatArray`:
+Unlike lists or regular arrays, working with Immutable Arrays makes it common to operate on primitives without needing
+to think about it. The following automatically switches from an `ImmutableArray<T>` to an `ImmutableFloatArray`:
 
 ```kotlin
 // This operation uses 5X less memory versus lists or regular arrays!
 val weightsInKilograms = people.map { it.weightKg } // ImmutableFloatArray since weightKg is a Float
 // ...
 
-// Extra-fast without any extra developer effort!
+// Extra-fast while looking the same as regular list code
 val babyIsPresent = weightsInKilograms.any { it < 5.0f }
 ```
 
