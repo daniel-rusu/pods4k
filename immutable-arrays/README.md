@@ -42,7 +42,7 @@ dependencies {
     * Unlike read-only lists, Immutable Arrays cannot be mutated through casting.
 * **Fast**
     * 2 to 8 times faster than lists for many common operations, with some even faster!
-    * Immutability allows skipping some work and many operations are bypassed entirely when we infer identical results.
+    * Immutability allows skipping work and many operations are bypassed entirely when inferring identical results.
 * **Memory Efficient**
     * Over 5X memory reduction versus lists for many operations across hundreds of scenarios!
         * `people.map { it.weightKg }` returns a primitive array when `weightKg` is a primitive type.

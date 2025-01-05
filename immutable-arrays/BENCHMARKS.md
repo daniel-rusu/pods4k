@@ -2,6 +2,7 @@
 
 * [Results](#results)
     * [Copy Operations](#copy-operations)
+    * [Conditional Copy Operations](#conditional-copy-operations)
     * [Transformation Operations](#transformation-operations)
     * [Condition Operations](#condition-operations)
 * [Summary](#benchmark-summary)
@@ -98,12 +99,19 @@ avoid per-element bound checks.
 
 ![Memory Layout of immutable arrays](./resources/benchmarks/takeLast.png)
 
-The `takeWhile` & `takeLastWhile` operations perform similarly so we'll just show `takeWhile` for brevity.
+The `drop` and `dropLast` operations have similar relative performance. Omitting those for brevity.
+
+### Conditional Copy Operations
+
+Operations that conditionally copy elements can be significantly faster than lists and regular arrays
 
 ![Memory Layout of immutable arrays](./resources/benchmarks/takeWhile.png)
 
-The relative performance of the drop operations (`drop`, `dropLast`, `dropWhile`, & `dropLastWhile`) are similar or
-higher than the `take` variants above. We're omitting those for brevity.
+These are much faster because producing an Immutable Array allows us to find the cutoff point and copy memory in bulk.
+
+![Memory Layout of immutable arrays](./resources/benchmarks/takeLastWhile.png)
+
+The `dropWhile` and `dropLastWhile` operations have even higher relative performance. Omitting those for brevity.
 
 ### Transformation Operations
 
