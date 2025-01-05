@@ -9,6 +9,8 @@
 <details>
 <summary>Benchmark Setup</summary>
 
+### Measurement Process
+
 Benchmarks use the [Java Microbenchmark Harness](https://github.com/openjdk/jmh) to ensure accurate results.
 
 1,000 collections are randomly generated with sizes chosen from the following probability distribution in order to
@@ -26,9 +28,25 @@ Int, String, etc.). When measuring the performance of a data type across the 3 c
 operates on identical, randomly-generated data. See benchmark sources
 in [pods4k-benchmarks](https://github.com/daniel-rusu/pods4k-benchmarks) for full details.
 
-Results are normalized to list performance
+### Result Normalization
 
-- 1,000 ops/sec for lists vs. 1,500 for arrays = relative throughput of 1.5.
+The relative throughput allows us say that an operation is `X` times faster when switching from one data structure to
+another without talking about the exact throughput since that's dependent on the machine. So results are normalized
+relative to the median list performance in each chart. Normalizing all results against the same value is important as
+that allows us to gauge the impact of switching data structures, and also the impact of different data types.
+
+**Example calculation:**
+
+| Operation Performed On | Operation Throughput | Relative Throughput |
+|------------------------|----------------------|---------------------|
+| `List<Boolean>`        | `1,200` ops/sec      | `1.2`               |
+| `List<Int>`*           | `1,000` ops/sec      | `1.0`               |
+| `List<Float>`          | `900` ops/sec        | `0.9`               |
+| `BooleanArray`         | `2,400` ops/sec      | `2.4`               |
+| `IntArray`             | `2,000` ops/sec      | `2.0`               |
+| `FloatArray`           | `1,800` ops/sec      | `1.8`               |
+
+* Everything is normalized relative to `List<Int>` in this hypothetical example as that's the median list performance.
 
 </details>
 
@@ -129,7 +147,7 @@ Immutable arrays are between 2 to 8 times faster than lists for many common oper
 faster!  Although there are many more operations, the above results should provide a pretty good representation of the
 performance improvement of common non-trivial operations.
 
-We don't usually think about primitives in Kotlin and the same is true with Immutable Arrays.  However, although we just
+We don't usually think about primitives in Kotlin and the same is true with Immutable Arrays. However, although we just
 focus on writing clean list-like code, Immutable Arrays automatically use primitives when possible:
 
 ```kotlin
