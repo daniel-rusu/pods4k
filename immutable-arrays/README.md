@@ -45,7 +45,7 @@ dependencies {
     * Immutability allows skipping work and many operations are bypassed entirely when inferring identical results.
 * **Memory Efficient**
     * Over 5X memory reduction versus lists for many operations across hundreds of scenarios!
-        * `people.map { it.weightKg }` returns a primitive array when `weightKg` is a primitive type.
+        * `people.map { it.weightKg }` returns a primitive Immutable Array when `weightKg` is a primitive type.
     * Immutability allows operations to retain zero extra memory in hundreds of scenarios!
         * `people.filter { it.isEmployed() }` returns same instance when everyone is employed.
 * **Type Safety**
@@ -63,19 +63,19 @@ Here is a sneak peek of a few types of operations from the [Benchmarks page](BEN
 Operations that copy ranges of values have significantly higher performance than lists and even regular arrays. The
 smaller data types are split into a separate chart to avoid skewing the axis since their performance is too high:
 
-![Memory Layout of immutable arrays](./resources/benchmarks/take.png)
+![take benchmarks](./resources/benchmarks/take.png)
 
 ### Transformation Operations
 
 Transformations are much faster than lists and even regular arrays:
 
-![Memory Layout of immutable arrays](./resources/benchmarks/map.png)
+![map benchmarks](./resources/benchmarks/map.png)
 
 ### Condition Operations
 
 Operations that inspect the data are much faster than lists when dealing with one of the 8 base types:
 
-![Memory Layout of immutable arrays](./resources/benchmarks/any.png)
+![any benchmarks](./resources/benchmarks/any.png)
 
 ### Benchmark Summary
 
@@ -663,9 +663,9 @@ wrapper objects face higher memory latency due to the extra indirection.
 <details>
 <summary>Memory Impacts</summary>
 
-1. Notice that the list contains 7 values but the backing array has a capacity of 10. When an `ArrayList` runs out of
+1. Notice that the list contains 6 values but the backing array has a capacity of 10. When an `ArrayList` runs out of
    capacity, the backing array is replaced with a new array that's 1.5-times larger and the elements get copied over. On
-   average, array lists end up with about 17% of unused capacity when the exact capacity isn't known ahead of time.
+   average, array lists end up with about 17% of unused capacity when the exact capacity isn't known in advance.
 
 2. A primitive int uses just 4 bytes. However, an `Integer` wrapper object requires 16 bytes for the object header, plus
    4 bytes for the int value, plus another 4 bytes of padding totaling 24 bytes. Enabling JVM pointer compression
