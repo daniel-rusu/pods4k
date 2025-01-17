@@ -1,10 +1,12 @@
 # Benchmarks
 
-* [Results](#results)
-    * [Copy Operations](#copy-operations)
-    * [Conditional Copy Operations](#conditional-copy-operations)
-    * [Transformation Operations](#transformation-operations)
-    * [Condition Operations](#condition-operations)
+* [Operation Categories](#operation-categories)
+    * [Copy](#copy)
+    * [Conditional Copy](#conditional-copy)
+    * [Transformation](#transformation)
+    * [Categorization](#categorization)
+    * [Conditions](#conditions)
+    * [Miscellaneous](#miscellaneous)
 * [Summary](#benchmark-summary)
 
 <details>
@@ -84,24 +86,24 @@ primitives are automatically used whenever possible.
 
 </details>
 
-## Results
+## Operation Categories
 
-### Copy Operations
+### Copy
 
 Operations that copy ranges of values have significantly higher performance than lists and even regular arrays. The
 smaller data types are split into a separate chart to avoid skewing the chart axis since their performance is too high!
 
 ![take benchmarks](./resources/benchmarks/take.png)
 
-Copy operations on lists or regular arrays produce lists accumulating values one element at a time. However, Immutable
-Array operations generate immutable arrays to maintain immutability, so we can use arraycopy to copy memory in bulk and
-avoid per-element bound checks.
+Operations on lists or regular arrays produce lists accumulating values one element at a time. Immutable Array
+operations generate immutable arrays in order to maintain immutability guarantees. This allows us to use bulk memory
+operations to copy multiple elements at a time and also avoid per-element bound checks.
 
 ![takeLast benchmarks](./resources/benchmarks/takeLast.png)
 
 The `drop` and `dropLast` operations have similar relative performance. Omitting those for brevity.
 
-### Conditional Copy Operations
+### Conditional Copy
 
 Operations that conditionally copy elements can be significantly faster than lists and regular arrays
 
@@ -113,7 +115,7 @@ These are much faster because producing an Immutable Array allows us to find the
 
 The `dropWhile` and `dropLastWhile` operations have even higher relative performance. Omitting those for brevity.
 
-### Transformation Operations
+### Transformation
 
 Transformations are significantly faster than lists and even regular arrays:
 
@@ -129,7 +131,7 @@ Note that `flatMap` on regular nested arrays is slightly slower than lists becau
 have an overload for that. We used `elements.flatMap { it.nestedRegularArray.asList() }`as the most efficient
 alternative since `asList()` returns a wrapper without copying the backing array.
 
-### Categorization Operations
+### Categorization
 
 Categorizing is much faster than lists and even regular arrays:
 
@@ -140,17 +142,16 @@ either side.
 
 ![groupBy benchmarks](./resources/benchmarks/groupBy.png)
 
-### Condition Operations
+### Conditions
 
-Immutable arrays are much faster than lists for operations that inspect the data when dealing with one of the 8 base
-types:
+Immutable Arrays are much faster than lists when inspecting one of the 8 base data types:
 
 ![any benchmarks](./resources/benchmarks/any.png)
 
 Lists store generic types forcing primitive values to be auto-boxed. This makes inspecting their values slower as the
 wrapper object introduces an extra layer of indirection.
 
-### Miscellaneous Operations
+### Miscellaneous
 
 Sorting becomes extremely fast for smaller data types!
 
@@ -166,8 +167,9 @@ Immutable arrays are between 2 to 8 times faster than lists for many common oper
 faster!  Although there are many more operations, the above results should provide a pretty good representation of the
 performance improvement of common non-trivial operations.
 
-We don't usually think about primitives in Kotlin and the same is true with Immutable Arrays. However, although we just
-focus on writing clean list-like code, Immutable Arrays automatically use primitives when possible:
+We don't usually think about primitives in Kotlin and the same is true with Immutable Arrays. Immutable Arrays allows us
+to write clean list-like code, and the library automatically uses primitives when possible. This reduces memory
+consumption and improves performance without having to think about primitives:
 
 ```kotlin
 // primitive ImmutableFloatArray since weightKg is a Float
