@@ -13,7 +13,7 @@ on [GitHub](https://github.com/daniel-rusu/pods4k) and sharing it with others.
 
 * [Installation](#installation)
 * [Key Benefits](#key-benefits)
-* [Benchmarks](#benchmarks)
+* [Performance](#performance)
 * [Usage](#usage)
 * [Benefits vs Alternatives](#benefits-vs-alternatives)
 * [Memory Layout](#memory-layout)
@@ -41,12 +41,11 @@ dependencies {
 * **True Immutability**
     * Unlike read-only lists, Immutable Arrays cannot be mutated through casting.
 * **Fast**
-    * 2 to 8 times faster than lists for many common operations, with some even faster!
-    * Immutability allows skipping work and many operations are bypassed entirely when inferring identical results.
+    * 2 to 8X faster than lists in [benchmarks](BENCHMARKS.md) for most operations, with some much faster!
 * **Memory Efficient**
-    * Over 5X memory reduction versus lists for many operations across hundreds of scenarios!
+    * Over 5X memory reduction versus lists across hundreds of scenarios!
         * `people.map { it.weightKg }` returns a primitive Immutable Array when `weightKg` is a primitive type.
-    * Immutability allows operations to retain zero extra memory in hundreds of scenarios!
+    * Immutability enables operations to retain 0 extra memory in hundreds of scenarios!
         * `people.filter { it.isEmployed() }` returns same instance when everyone is employed.
 * **Type Safety**
     * Accidental mutation attempts are prevented at compile time.
@@ -54,47 +53,25 @@ dependencies {
 Ideal for memory-constrained environments, performance-critical workloads, or simply for ensuring data integrity.
 Immutable Arrays are great for Android and backend JVM applications.
 
-## Benchmarks
+## Performance
 
-Here is a sneak peek of a few types of operations from the [Benchmarks page](BENCHMARKS.md):
+Immutable Arrays are 2 to 8X faster than lists for most operations. They often outperform regular arrays as the array
+operations have been replaced with highly-optimized versions which preserve immutability guarantees. Immutability also
+enables skipping many operations when inferring identical results.
 
-### Copy operations
-
-Operations that copy ranges of values have significantly higher performance than lists and even regular arrays. The
-smaller data types are split into a separate chart to avoid skewing the axis since their performance is too high:
+Here's a sneak peek from the [Benchmarks page](BENCHMARKS.md):
 
 ![take benchmarks](./resources/benchmarks/take.png)
 
-### Transformation Operations
-
-Transformations are much faster than lists and even regular arrays:
+Using a separate chart for the smaller data types to avoid skewing the axis as their performance is too high.
 
 ![map benchmarks](./resources/benchmarks/map.png)
 
-### Condition Operations
-
-Operations that inspect the data are much faster than lists when dealing with one of the 8 base types:
+Elements can be inspected much faster than lists when dealing with the 8 base types:
 
 ![any benchmarks](./resources/benchmarks/any.png)
 
-### Benchmark Summary
-
-It seems impossible that Immutable Arrays outperform regular arrays for dozens of operations since these are
-like-for-like comparisons (eg. `ImmutableFloatArray` vs.`FloatArray`). That's because Immutable Arrays replace array
-operations with highly optimized versions that maintain immutability. See the [Benchmarks page](BENCHMARKS.md) for
-detailed explanations and more benchmarks with even higher performance!
-
-Unlike lists or regular arrays, working with Immutable Arrays makes it common to operate on primitives without needing
-to think about it. The following automatically switches from an `ImmutableArray<T>` to an `ImmutableFloatArray`:
-
-```kotlin
-// This operation uses 5X less memory versus lists or regular arrays!
-val weightsInKilograms = people.map { it.weightKg } // ImmutableFloatArray since weightKg is a Float
-// ...
-
-// Extra-fast while looking the same as regular list code
-val babyIsPresent = weightsInKilograms.any { it < 5.0f }
-```
+See the [Benchmarks page](BENCHMARKS.md) for more surprising results along with performance explanations.
 
 ## Usage
 
@@ -102,7 +79,6 @@ Usages look the same as regular lists after construction:
 
 ```kotlin
 val people = immutableArrayOf(dan, jill, bobby)
-
 people[0] // dan
 
 // Normal iteration with loops, forEach, asSequence, etc.
@@ -115,7 +91,6 @@ val adults = people.filter { it.age >= 18 }
 val adultAges = adults.map { it.age }
 val adultsSortedByName = adults.sortedBy { it.name }
 val containsRetirees = adults.any { it.isRetired() }
-// etc.
 ```
 
 <details>
@@ -311,7 +286,7 @@ names.partition { it.length % 2 == 0 } // Pair(["Jill"], ["Dan", "Bobby"])
 
 ### Interop with List APIs
 
-You can pass an Immutable Array to methods that expect lists, collections, or iterables in several ways:
+There are several ways to pass Immutable Arrays to functions that accept lists or iterables:
 
 ```kotlin
 val people = immutableArrayOf(dan, bob, jill)
@@ -319,7 +294,7 @@ val people = immutableArrayOf(dan, bob, jill)
 // copy to standalone read-only List
 notifyPeople(people.toList())
 
-// create an immutable List wrapper backed by the same array without copying the elements
+// create an immutable List wrapper backed by the same array without copying elements
 notifyPeople(people.asList())
 
 // create an Iterable wrapper without copying the elements
@@ -643,18 +618,18 @@ Immutable lists have the same performance drawbacks as read-only lists
 
 Performing some operation that results in an `ImmutableIntArray` ends up with the following memory layout:
 
-![Memory Layout of immutable arrays](./resources/immutable-array-memory-layout.drawio.png)
+![Memory Layout of immutable arrays](./resources/memory/immutable-array-memory-layout.drawio.png)
 
 Note that the `values` variable of type `ImmutableIntArray` actually references a regular primitive int array in the
 bytecode.
 
 Here is the same example but operating on a regular primitive array and ending up with a read-only list:
 
-![Memory Layout of Read-only Lists](./resources/list-memory-layout.drawio.png)
+![Memory Layout of Read-only Lists](./resources/memory/list-memory-layout.drawio.png)
 
 Classes that operate on generics, such as lists, can't store primitive types directly. Each primitive int gets
 auto-boxed into an `Integer` wrapper object and a pointer to that wrapper is passed to the resulting list. These wrapper
-objects are allocated in different regions of memory depending on availability and the garbage collector also
+objects are allocated in different regions of memory depending on availability, and the garbage collector also
 periodically moves surviving objects around, so we can end up with the objects scattered throughout the heap.
 
 Primitive arrays benefit from faster CPU memory access due to their contiguous memory layout, while lists with scattered
