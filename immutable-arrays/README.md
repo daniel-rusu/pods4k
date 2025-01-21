@@ -14,6 +14,7 @@ on [GitHub](https://github.com/daniel-rusu/pods4k) and sharing it with others.
 * [Installation](#installation)
 * [Key Benefits](#key-benefits)
 * [Performance](#performance)
+* [Memory Consumption](#memory-consumption)
 * [Usage](#usage)
 * [Benefits vs Alternatives](#benefits-vs-alternatives)
 * [Memory Layout](#memory-layout)
@@ -41,12 +42,9 @@ dependencies {
 * **True Immutability**
     * Unlike read-only lists, Immutable Arrays cannot be mutated through casting.
 * **Fast**
-    * 2 to 8X faster than lists in [benchmarks](BENCHMARKS.md) for most operations, with some much faster!
+    * 2 to 8X faster [benchmark results](BENCHMARKS.md) than lists for most operations, with some much faster!
 * **Memory Efficient**
-    * Over 5X memory reduction versus lists across hundreds of scenarios!
-        * `people.map { it.weightKg }` returns a primitive Immutable Array when `weightKg` is a primitive type.
-    * Immutability enables operations to retain 0 extra memory in hundreds of scenarios!
-        * `people.filter { it.isEmployed() }` returns same instance when everyone is employed.
+    * Over 4X [memory reduction](#memory-consumption) in most scenarios!
 * **Type Safety**
     * Accidental mutation attempts are prevented at compile time.
 
@@ -72,6 +70,154 @@ Elements can be inspected much faster than lists when dealing with the 8 base ty
 ![any benchmarks](./resources/benchmarks/any.png)
 
 See the [Benchmarks page](BENCHMARKS.md) for more surprising results along with performance explanations.
+
+## Memory Consumption
+
+### Zero memory scenarios
+
+Unlike lists and regular arrays, immutability enables many scenarios to re-use existing instances instead of copying
+elements into a separate collection.
+
+<details>
+<summary>Scenarios that return same instance</summary>
+
+The following scenarios return `this` without allocating any memory:
+
+| Operation                         | Returns `this` when                 |
+|-----------------------------------|-------------------------------------|
+| `take(n)`                         | `n >= size`                         |
+| `takeWhile { condition }`         | all elements meet the condition     |
+| `takeLast(n)`                     | `n >= size`                         |
+| `takeLastWhile { condition }`     | all elements meet the condition     |
+| `drop(n)`                         | `n == 0`                            |
+| `dropWhile { condition }`         | first element fails condition       |
+| `dropLast(n)`                     | `n == 0`                            |
+| `dropLastWhile { condition }`     | last element fails condition        |
+| `sorted()`                        | `size <= 1`                         |
+| `sortedDescending()`              | `size <= 1`                         |
+| `sortedBy { selector }`           | `size <= 1`                         |
+| `sortedByDescending { selector }` | `size <= 1`                         |
+| `sortedWith(comparator)`          | `size <= 1`                         |
+| `distinct()`                      | `size <= 1`                         |
+| `distinctBy { selector }`         | `size <= 1`                         |
+| `plus(otherArray)`                | `otherArray.isEmpty()` & vice versa |
+
+These scenarios allocate a temporary builder to keep track of the elements and discard that returning the same instance
+when discovering that all elements were added:
+
+| Operation                     | Returns `this` when               |
+|-------------------------------|-----------------------------------|
+| `filter { condition }`        | all elements meet the condition   |
+| `filterIndexed { condition }` | all elements meet the condition   |
+| `filterNot { condition }`     | all elements fail the condition   |
+| `distinct()`                  | all elements are distinct         |
+| `distinctBy { selector }`     | selector produces distinct values |
+
+</details>
+
+<details>
+<summary>Scenarios that return `EMPTY` singleton</summary>
+
+Unlike lists and regular arrays, all scenarios that end up with an empty Immutable Array reference the `EMPTY`
+singleton.
+
+These scenarios return the `EMPTY` singleton without allocating any memory:
+
+| Operation                                           | Returns `EMPTY` singleton when      |
+|-----------------------------------------------------|-------------------------------------|
+| `emptyImmutableArray()` & 8 primitive variants      | always                              |
+| `immutableArrayOf()`                                | no arguments provided               |
+| `ImmutableArray(n) { init }` & 8 primitive variants | `n == 0`                            |
+| `regularArray.toImmutableArray()`                   | `isEmpty()`                         |
+| `copyFrom(array, startIndex, size)`                 | `size == 0`                         |
+| `take(n)`                                           | `n == 0`                            |
+| `takeWhile { condition }`                           | first element fails condition       |
+| `takeLast(n)`                                       | `n == 0`                            |
+| `takeLastWhile { condition }`                       | last element fails condition        |
+| `drop(n)`                                           | `n >= size`                         |
+| `dropWhile { condition }`                           | all elements fail condition         |
+| `dropLast(n)`                                       | `n >= size`                         |
+| `dropLastWhile { condition }`                       | all elements fail condition         |
+| `map { selector }`                                  | `isEmpty()`                         |
+| `mapIndexed { selector }`                           | `isEmpty()`                         |
+| `sorted()`                                          | `isEmpty()`                         |
+| `sortedDescending()`                                | `isEmpty()`                         |
+| `sortedBy { selector }`                             | `isEmpty()`                         |
+| `sortedByDescending { selector }`                   | `isEmpty()`                         |
+| `sortedWith(comparator)`                            | `isEmpty()`                         |
+| `distinct()`                                        | `isEmpty()`                         |
+| `distinctBy { selector }`                           | `isEmpty()`                         |
+| `plus(otherArray)`                                  | `isEmpty() && otherArray.isEmpty()` |
+| `toTypedImmutableArray()`                           | `isEmpty()`                         |
+| `zip(other)`                                        | `isEmpty()` or `other.isEmpty()`    |
+
+These scenarios allocate temporary memory to keep track of elements and return the `EMPTY` singleton after no elements
+were added:
+
+| Operation                                               | Returns `EMPTY` singleton when    |
+|---------------------------------------------------------|-----------------------------------|
+| `ImmutableArray.Builder.build()` & 8 primitive variants | `isEmpty()`                       |
+| `immutableArrayOfNotNull(...)`                          | all arguments are null            |
+| `buildImmutableArray { ... }` & 8 primitive variants    | no elements added                 |
+| `iterable.toImmutableArray()`                           | the iterable is empty             |
+| `sequence.toImmutableArray()`                           | the sequence is empty             |
+| `filter { condition }`                                  | all elements meet the condition   |
+| `filterIndexed { condition }`                           | all elements meet the condition   |
+| `filterNot { condition }`                               | all elements fail the condition   |
+| `filterNotNull()`                                       | all elements are null             |
+| `mapNotNull { selector }`                               | all elements are null             |
+| `mapIndexedNotNull { selector }`                        | all elements are null             |
+| `distinct()`                                            | all elements are distinct         |
+| `distinctBy { selector }`                               | selector produces distinct values |
+| `flatMap { selector }`                                  | all nested collections are empty  |
+| `flatten()`                                             | all nested arrays are empty       |
+
+</details>
+
+There are also operations that re-use memory for a portion of the results. For example, `partition` returns
+`Pair(this, EMPTY)` or `Pair(EMPTY, this)` when all elements end up on same side.
+
+### Memory of uncached values
+
+The following shows the memory consumption of storing uncached values:
+
+![uncached values](./resources/memory/UncachedValues.png)
+
+We avoided adding regular arrays to the memory-consumption charts as most operations on regular arrays produce
+lists. So most array operations will experience the above memory consumption.
+
+All Immutable Array operations automatically take advantage of primitives without affecting readability and without
+having to think about it. For example, `people.map { it.weightKg }` returns a primitive Immutable Array when `weightKg`
+is a primitive type.
+
+### Memory of cached values
+
+The JVM has a cache of common primitive wrappers. The cache is used during auto-boxing or when using the `valueOf`
+factory functions but is bypassed in some scenarios such as when calling the constructors directly, like
+`java.lang.Boolean(true)`, etc.
+
+The following values are cached:
+
+* All `Boolean` and `Byte` values
+* `Char` ASCII values between `0` and `127`
+* `Short`, `Int`, and `Long` values between `-128` and `127`.
+
+Although we can re-use cached values, we still need to store references to those instances. The following shows the
+memory of storing references to cached values compared to storing the values directly in Immutable Arrays:
+
+![uncached values](./resources/memory/CachedValues.png)
+
+`Float` and `Double` are omitted as those are never cached. For reference, lists use 3.5 to 8 times more memory than
+Immutable Arrays when storing `Float` & `Double` values.
+
+The memory of storing references to cached values is often much higher than the values themselves. The cache provides
+the highest hit rate when working with smaller `Boolean`, `Byte`, and `Char` data types. However, storing references to
+these cached values takes between 2 to 8 times more memory than Immutable Arrays!
+
+Using cached `Long` values is the only scenario that might use less memory than Immutable Arrays assuming JVM pointer
+compression is enabled. However, the benefit becomes questionable as the majority of `Long` values are outside the tiny
+`-128` to `127` range since `Long` is usually chosen when anticipating larger values. For example, when using `Long` to
+store the price in cents, only prices up to $1.27 can be cached making the cache unsuitable for most prices.
 
 ## Usage
 
