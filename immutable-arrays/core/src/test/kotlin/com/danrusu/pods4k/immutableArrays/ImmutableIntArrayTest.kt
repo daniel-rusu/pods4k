@@ -533,6 +533,42 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `toTypedMutableArray validation`() {
+        with(emptyImmutableIntArray()) {
+            val result = toTypedMutableArray()
+
+            expectThat(result)
+                .isA<Array<Int>>()
+
+            expectThat(result.size)
+                .isEqualTo(0)
+        }
+
+        with(immutableArrayOf(1, 2, 3)) {
+            expectThat(toTypedMutableArray())
+                .isEqualTo(arrayOf(1, 2, 3))
+        }
+    }
+
+    @Test
+    fun `can use spread operator with toTypedMutableArray`() {
+        // Note that numbers is Int? instead of Int otherwise a primitive non-typed array would be required
+        fun inspectNumbers(vararg numbers: Int?) {
+            expectThat(numbers.size)
+                .isEqualTo(2)
+
+            expectThat(numbers[0])
+                .isEqualTo(100)
+
+            expectThat(numbers[1])
+                .isEqualTo(200)
+        }
+
+        val numbers = immutableArrayOf(100, 200)
+        inspectNumbers(*numbers.toTypedMutableArray())
+    }
+
+    @Test
     fun `forEach validation`() {
         with(immutableArrayOf(1, 2, 3)) {
             val elements = mutableListOf<Int>()

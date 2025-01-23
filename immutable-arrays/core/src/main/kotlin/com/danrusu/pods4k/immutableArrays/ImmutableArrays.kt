@@ -5,6 +5,7 @@ import java.lang.IllegalArgumentException
 import java.util.Arrays
 import java.util.RandomAccess
 import kotlin.Any
+import kotlin.Array
 import kotlin.Boolean
 import kotlin.Byte
 import kotlin.Char
@@ -1177,6 +1178,53 @@ public fun ImmutableFloatArray.toTypedImmutableArray(): ImmutableArray<Float> {
 public fun ImmutableDoubleArray.toTypedImmutableArray(): ImmutableArray<Double> {
     return ImmutableArray(size) { this[it] }
 }
+
+/**
+ * Returns a regular (mutable) typed array with a copy of the elements.
+ */
+public inline fun <reified T> ImmutableArray<T>.toTypedMutableArray(): Array<out T> = Array(size) {
+    values[it]
+}
+
+/**
+ * Returns a regular (mutable) typed array with a copy of the elements.
+ */
+public fun ImmutableBooleanArray.toTypedMutableArray(): Array<Boolean> = Array(size) { values[it] }
+
+/**
+ * Returns a regular (mutable) typed array with a copy of the elements.
+ */
+public fun ImmutableByteArray.toTypedMutableArray(): Array<Byte> = Array(size) { values[it] }
+
+/**
+ * Returns a regular (mutable) typed array with a copy of the elements.
+ */
+public fun ImmutableCharArray.toTypedMutableArray(): Array<Char> = Array(size) { values[it] }
+
+/**
+ * Returns a regular (mutable) typed array with a copy of the elements.
+ */
+public fun ImmutableShortArray.toTypedMutableArray(): Array<Short> = Array(size) { values[it] }
+
+/**
+ * Returns a regular (mutable) typed array with a copy of the elements.
+ */
+public fun ImmutableIntArray.toTypedMutableArray(): Array<Int> = Array(size) { values[it] }
+
+/**
+ * Returns a regular (mutable) typed array with a copy of the elements.
+ */
+public fun ImmutableLongArray.toTypedMutableArray(): Array<Long> = Array(size) { values[it] }
+
+/**
+ * Returns a regular (mutable) typed array with a copy of the elements.
+ */
+public fun ImmutableFloatArray.toTypedMutableArray(): Array<Float> = Array(size) { values[it] }
+
+/**
+ * Returns a regular (mutable) typed array with a copy of the elements.
+ */
+public fun ImmutableDoubleArray.toTypedMutableArray(): Array<Double> = Array(size) { values[it] }
 
 /**
  * Ensures that none of the elements are null otherwise an [IllegalArgumentException] is thrown.
