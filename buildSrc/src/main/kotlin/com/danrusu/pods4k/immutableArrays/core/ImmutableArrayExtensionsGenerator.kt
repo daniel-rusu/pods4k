@@ -37,6 +37,7 @@ internal object ImmutableArrayExtensionsGenerator {
             addPlusValue()
             addToPrimitiveImmutableArray()
             addToTypedImmutableArray()
+            addToMutableArray()
             addToTypedMutableArray()
             addRequireNoNulls()
             addFlatten()
@@ -401,6 +402,30 @@ private fun FileSpec.Builder.addToTypedImmutableArray() {
             forceFunctionBody = true,
         ) {
             statement("return ${GENERIC.generatedClassName}(size)·{·this[it]·}")
+        }
+    }
+}
+
+private fun FileSpec.Builder.addToMutableArray() {
+    for (baseType in BaseType.entries) {
+        function(
+            kdoc = "Returns a regular (mutable) array with a copy of the elements.",
+            modifiers = if (baseType == GENERIC) listOf(KModifier.INLINE) else emptyList(),
+            receiver = baseType.getGeneratedTypeName(),
+            name = "toMutableArray",
+            returns = baseType.backingArrayType,
+        ) {
+            if (baseType == GENERIC) {
+                // We need to use reified generics so that the array is of the appropriate type since generic arrays
+                // store the generic type at runtime.  This is especially important when wanting to use the spread
+                // operator to call a vararg function otherwise we'll get a cast exception at runtime
+                addGenericTypes((baseType.type as TypeVariableName).copy(reified = true))
+
+                // Can't use copyOf as the resulting array would store `Object` as the generic type
+                statement("return Array(size) { values[it] }")
+            } else {
+                statement("return values.copyOf()")
+            }
         }
     }
 }

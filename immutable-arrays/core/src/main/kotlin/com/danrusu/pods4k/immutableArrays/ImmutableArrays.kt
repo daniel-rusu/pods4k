@@ -7,14 +7,22 @@ import java.util.RandomAccess
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
+import kotlin.BooleanArray
 import kotlin.Byte
+import kotlin.ByteArray
 import kotlin.Char
+import kotlin.CharArray
 import kotlin.Comparable
 import kotlin.Double
+import kotlin.DoubleArray
 import kotlin.Float
+import kotlin.FloatArray
 import kotlin.Int
+import kotlin.IntArray
 import kotlin.Long
+import kotlin.LongArray
 import kotlin.Short
+import kotlin.ShortArray
 import kotlin.Suppress
 import kotlin.collections.AbstractList
 import kotlin.collections.Iterable
@@ -1178,6 +1186,53 @@ public fun ImmutableFloatArray.toTypedImmutableArray(): ImmutableArray<Float> {
 public fun ImmutableDoubleArray.toTypedImmutableArray(): ImmutableArray<Double> {
     return ImmutableArray(size) { this[it] }
 }
+
+/**
+ * Returns a regular (mutable) array with a copy of the elements.
+ */
+public inline fun <reified T> ImmutableArray<T>.toMutableArray(): Array<out T> = Array(size) {
+    values[it]
+}
+
+/**
+ * Returns a regular (mutable) array with a copy of the elements.
+ */
+public fun ImmutableBooleanArray.toMutableArray(): BooleanArray = values.copyOf()
+
+/**
+ * Returns a regular (mutable) array with a copy of the elements.
+ */
+public fun ImmutableByteArray.toMutableArray(): ByteArray = values.copyOf()
+
+/**
+ * Returns a regular (mutable) array with a copy of the elements.
+ */
+public fun ImmutableCharArray.toMutableArray(): CharArray = values.copyOf()
+
+/**
+ * Returns a regular (mutable) array with a copy of the elements.
+ */
+public fun ImmutableShortArray.toMutableArray(): ShortArray = values.copyOf()
+
+/**
+ * Returns a regular (mutable) array with a copy of the elements.
+ */
+public fun ImmutableIntArray.toMutableArray(): IntArray = values.copyOf()
+
+/**
+ * Returns a regular (mutable) array with a copy of the elements.
+ */
+public fun ImmutableLongArray.toMutableArray(): LongArray = values.copyOf()
+
+/**
+ * Returns a regular (mutable) array with a copy of the elements.
+ */
+public fun ImmutableFloatArray.toMutableArray(): FloatArray = values.copyOf()
+
+/**
+ * Returns a regular (mutable) array with a copy of the elements.
+ */
+public fun ImmutableDoubleArray.toMutableArray(): DoubleArray = values.copyOf()
 
 /**
  * Returns a regular (mutable) typed array with a copy of the elements.
