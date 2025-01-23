@@ -18,6 +18,7 @@ import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeVariableName
+import com.squareup.kotlinpoet.WildcardTypeName
 import com.squareup.kotlinpoet.asTypeName
 import java.io.File
 
@@ -36,6 +37,7 @@ internal object ImmutableArrayExtensionsGenerator {
             addPlusValue()
             addToPrimitiveImmutableArray()
             addToTypedImmutableArray()
+            addToTypedMutableArray()
             addRequireNoNulls()
             addFlatten()
         }
@@ -399,6 +401,30 @@ private fun FileSpec.Builder.addToTypedImmutableArray() {
             forceFunctionBody = true,
         ) {
             statement("return ${GENERIC.generatedClassName}(size)·{·this[it]·}")
+        }
+    }
+}
+
+private fun FileSpec.Builder.addToTypedMutableArray() {
+    for (baseType in BaseType.entries) {
+        val returnType = when (baseType) {
+            GENERIC -> Array::class.asTypeName().parameterizedBy(WildcardTypeName.producerOf(baseType.type))
+            else -> Array::class.asTypeName().parameterizedBy(baseType.type)
+        }
+        function(
+            kdoc = "Returns a regular (mutable) typed array with a copy of the elements.",
+            modifiers = if (baseType == GENERIC) listOf(KModifier.INLINE) else emptyList(),
+            receiver = baseType.getGeneratedTypeName(),
+            name = "toTypedMutableArray",
+            returns = returnType,
+        ) {
+            if (baseType == GENERIC) {
+                // We need to use reified generics so that the array is of the appropriate type since generic arrays
+                // store the generic type at runtime.  This is especially important when wanting to use the spread
+                // operator to call a vararg function otherwise we'll get a cast exception at runtime
+                addGenericTypes((baseType.type as TypeVariableName).copy(reified = true))
+            }
+            statement("return Array(size) { values[it] }")
         }
     }
 }
