@@ -543,12 +543,23 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
      * sorted according to the specified [comparator].
      */
     public fun sortedWith(comparator: Comparator<in Short>): ImmutableShortArray {
-        // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
         if (size <= 1) return this
 
         val temp = values.toTypedArray()
         Arrays.sort(temp, comparator)
         return temp.toImmutableArray()
+    }
+
+    /**
+     * Leaves this immutable array as is and returns an [ImmutableShortArray] with all elements
+     * shuffled.
+     */
+    public fun shuffled(): ImmutableShortArray {
+        if (size <= 1) return this
+
+        val backingArray = values.copyOf()
+        backingArray.shuffle()
+        return ImmutableShortArray(backingArray)
     }
 
     /**

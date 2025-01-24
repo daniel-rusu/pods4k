@@ -9,14 +9,13 @@ _Date TBD_
 
 **New Features:**
 
+* Add `shuffled()` method
 * Add `toMutableArray()` extension functions
 * Add `toTypedMutableArray()` extension functions
 * Add `referencesSameArrayAs(immutableArray)` method since referential equality isn't allowed for inline classes
 * Add `copyFrom(regularArray, startIndex, size)` companion factory function
-* Add `randomOrNull(Random)` method
-* Add `randomOrNull()` method
-* Add `random(Random)` method
-* Add `random()` method
+* Add `randomOrNull()` & `randomOrNull(Random)` methods
+* Add `random()` & `random(Random)` methods
 
 **Performance Improvements:**
 

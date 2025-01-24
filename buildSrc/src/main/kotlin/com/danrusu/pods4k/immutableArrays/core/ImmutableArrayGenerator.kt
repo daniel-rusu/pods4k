@@ -346,6 +346,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addSortedBy(baseType)
             addSortedByDescending(baseType)
             addSortedWith(baseType)
+            addShuffled(baseType)
             addDistinct(baseType)
             addDistinctBy(baseType)
 
@@ -945,9 +946,6 @@ private fun TypeSpec.Builder.addSortedWith(baseType: BaseType) {
         },
         returns = baseType.getGeneratedTypeName(),
     ) {
-        comment(
-            "Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change",
-        )
         statement("if (size <= 1) return this")
         emptyLine()
         if (baseType == GENERIC) {
@@ -964,6 +962,27 @@ private fun TypeSpec.Builder.addSortedWith(baseType: BaseType) {
             statement("%T.sort(temp, comparator)", java.util.Arrays::class)
             statement("return temp.toImmutableArray()")
         }
+    }
+}
+
+private fun TypeSpec.Builder.addShuffled(baseType: BaseType) {
+    function(
+        kdoc = "Leaves this immutable array as is and returns an [${baseType.generatedClassName}] with all elements " +
+            "shuffled.",
+        name = "shuffled",
+        returns = baseType.getGeneratedTypeName(),
+    ) {
+        statement("if (size <= 1) return this")
+        emptyLine()
+        if (baseType == GENERIC) {
+            suppress("UNCHECKED_CAST")
+            statement("val backingArray = arrayOfNulls<Any?>(size) as Array<%T>", baseType.type)
+            statement("System.arraycopy(values, 0, backingArray, 0, size)")
+        } else {
+            statement("val backingArray = values.copyOf()")
+        }
+        statement("backingArray.shuffle()")
+        statement("return ${baseType.generatedClassName}(backingArray)")
     }
 }
 

@@ -545,13 +545,25 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
      */
     @Suppress("UNCHECKED_CAST")
     public fun sortedWith(comparator: Comparator<in T>): ImmutableArray<T> {
-        // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
         if (size <= 1) return this
 
         val backingArray = arrayOfNulls<Any?>(size) as Array<T>
         System.arraycopy(values, 0, backingArray, 0, size)
 
         Arrays.sort(backingArray, comparator)
+        return ImmutableArray(backingArray)
+    }
+
+    /**
+     * Leaves this immutable array as is and returns an [ImmutableArray] with all elements shuffled.
+     */
+    @Suppress("UNCHECKED_CAST")
+    public fun shuffled(): ImmutableArray<T> {
+        if (size <= 1) return this
+
+        val backingArray = arrayOfNulls<Any?>(size) as Array<T>
+        System.arraycopy(values, 0, backingArray, 0, size)
+        backingArray.shuffle()
         return ImmutableArray(backingArray)
     }
 

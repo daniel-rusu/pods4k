@@ -1101,6 +1101,19 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `shuffled validation`() {
+        with(emptyImmutableIntArray()) {
+            expectThat(shuffled().referencesSameArrayAs(ImmutableIntArray.EMPTY))
+                .isTrue()
+        }
+
+        with(immutableArrayOf(1)) {
+            expectThat(shuffled().referencesSameArrayAs(this))
+                .isTrue()
+        }
+    }
+
+    @Test
     fun `distinct validation`() {
         expectThat(emptyImmutableIntArray().distinct())
             .isA<ImmutableIntArray>()

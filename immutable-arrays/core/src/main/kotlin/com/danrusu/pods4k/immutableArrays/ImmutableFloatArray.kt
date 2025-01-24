@@ -542,12 +542,23 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
      * sorted according to the specified [comparator].
      */
     public fun sortedWith(comparator: Comparator<in Float>): ImmutableFloatArray {
-        // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
         if (size <= 1) return this
 
         val temp = values.toTypedArray()
         Arrays.sort(temp, comparator)
         return temp.toImmutableArray()
+    }
+
+    /**
+     * Leaves this immutable array as is and returns an [ImmutableFloatArray] with all elements
+     * shuffled.
+     */
+    public fun shuffled(): ImmutableFloatArray {
+        if (size <= 1) return this
+
+        val backingArray = values.copyOf()
+        backingArray.shuffle()
+        return ImmutableFloatArray(backingArray)
     }
 
     /**
