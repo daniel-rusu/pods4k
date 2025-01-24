@@ -75,8 +75,8 @@ See the [Benchmarks page](BENCHMARKS.md) for more surprising results along with 
 
 ### Zero memory scenarios
 
-Unlike lists and regular arrays, immutability enables many scenarios to re-use existing instances instead of copying
-elements into a separate collection.
+Unlike lists and regular arrays, immutability enables skipping creating new collections and re-uses existing instances
+in many scenarios:
 
 <details>
 <summary>Scenarios that return same instance</summary>
@@ -116,7 +116,7 @@ when discovering that all elements were added:
 </details>
 
 <details>
-<summary>Scenarios that return `EMPTY` singleton</summary>
+<summary>Scenarios that return EMPTY singleton</summary>
 
 Unlike lists and regular arrays, all scenarios that end up with an empty Immutable Array reference the `EMPTY`
 singleton.
@@ -174,50 +174,56 @@ were added:
 
 </details>
 
-There are also operations that re-use memory for a portion of the results. For example, `partition` returns
-`Pair(this, EMPTY)` or `Pair(EMPTY, this)` when all elements end up on same side.
+Some operations re-use instances for a portion of the results. For example, `partition` returns `Pair(this, EMPTY)` or
+`Pair(EMPTY, this)` when all elements end up on same side.
 
 ### Memory of uncached values
 
-The following shows the memory consumption of storing uncached values:
+The following shows the memory consumption of storing uncached values (wrapper header + value + padding + reference):
 
 ![uncached values](./resources/memory/UncachedValues.png)
 
-We avoided adding regular arrays to the memory-consumption charts as most operations on regular arrays produce
-lists. So most array operations will experience the above memory consumption.
+Regular arrays aren't included in the memory consumption charts as most operations on regular arrays produce lists
+resulting in the above memory consumption.
 
-All Immutable Array operations automatically take advantage of primitives without affecting readability and without
-having to think about it. For example, `people.map { it.weightKg }` returns a primitive Immutable Array when `weightKg`
-is a primitive type.
+These charts represent the memory consumption of using Immutable Arrays in the most natural manner without sacrificing
+code quality or readability. All Immutable Array operations automatically take advantage of primitives without having to
+think about it. For example, `people.map { it.weightKg }` returns a primitive Immutable Array when `weightKg` is a
+primitive type.
 
 ### Memory of cached values
 
-The JVM has a cache of common primitive wrappers. The cache is used during auto-boxing or when using the `valueOf`
-factory functions but is bypassed in some scenarios such as when calling the constructors directly, like
-`java.lang.Boolean(true)`, etc.
+The JVM has a cache of common primitive wrappers that's mostly used during auto-boxing. The cache is bypassed when
+values are out of range, when manually calling the constructors (eg. `java.lang.Boolean(true)`), or via reflection
+utilities that call the constructor, etc.
 
-The following values are cached:
+The JVM caches the following values:
 
 * All `Boolean` and `Byte` values
 * `Char` ASCII values between `0` and `127`
-* `Short`, `Int`, and `Long` values between `-128` and `127`.
+* `Short`, `Int`, & `Long` values between `-128` and `127`.
+* `Float` & `Double` values are never cached.
 
-Although we can re-use cached values, we still need to store references to those instances. The following shows the
-memory of storing references to cached values compared to storing the values directly in Immutable Arrays:
+The memory of storing references to cached wrappers is often much higher than storing the values themselves:
 
 ![uncached values](./resources/memory/CachedValues.png)
 
-`Float` and `Double` are omitted as those are never cached. For reference, lists use 3.5 to 8 times more memory than
-Immutable Arrays when storing `Float` & `Double` values.
+The cache provides the highest hit rate when working with smaller `Boolean`, `Byte`, and `Char` data types. However,
+storing references to these cached wrappers takes 2 - 8X more memory than Immutable Arrays!
 
-The memory of storing references to cached values is often much higher than the values themselves. The cache provides
-the highest hit rate when working with smaller `Boolean`, `Byte`, and `Char` data types. However, storing references to
-these cached values takes between 2 to 8 times more memory than Immutable Arrays!
+Storing cached `Long` values is the only scenario that uses less memory than Immutable Arrays assuming JVM pointer
+compression is enabled. However, the majority of `Long` values are outside the tiny `-128` to `127` range and `Long` is
+usually chosen when anticipating larger values. For example, when using `Long` to represent salaries in cents, the cache
+would support salaries up to $1.27 making it useless.
 
-Using cached `Long` values is the only scenario that might use less memory than Immutable Arrays assuming JVM pointer
-compression is enabled. However, the benefit becomes questionable as the majority of `Long` values are outside the tiny
-`-128` to `127` range since `Long` is usually chosen when anticipating larger values. For example, when using `Long` to
-store the price in cents, only prices up to $1.27 can be cached making the cache unsuitable for most prices.
+### Memory Conclusion
+
+Immutability enables many operations to use zero memory whereas the same operations on lists or regular arrays create
+new collections. Additionally, Immutable Arrays are perfectly sized whereas lists end up with about 17% unused capacity
+on average when the final size isn't known in advance.
+
+Taking into account the average memory reduction for each data type and the smarter use of memory, Immutable Arrays are
+expected to reduce memory consumption by over 4X in most scenarios.
 
 ## Usage
 
@@ -780,40 +786,6 @@ periodically moves surviving objects around, so we can end up with the objects s
 
 Primitive arrays benefit from faster CPU memory access due to their contiguous memory layout, while lists with scattered
 wrapper objects face higher memory latency due to the extra indirection.
-
-<details>
-<summary>Memory Impacts</summary>
-
-1. Notice that the list contains 6 values but the backing array has a capacity of 10. When an `ArrayList` runs out of
-   capacity, the backing array is replaced with a new array that's 1.5-times larger and the elements get copied over. On
-   average, array lists end up with about 17% of unused capacity when the exact capacity isn't known in advance.
-
-2. A primitive int uses just 4 bytes. However, an `Integer` wrapper object requires 16 bytes for the object header, plus
-   4 bytes for the int value, plus another 4 bytes of padding totaling 24 bytes. Enabling JVM pointer compression
-   reduces this to 16 bytes per wrapper.
-
-3. Lists don't store the wrappers directly but instead store pointers to each of these wrappers. So a list of integers
-   uses 8 + 24 = 32 bytes to store each 4-byte int value!  Enabling JVM pointer compression reduces this to 20 bytes per
-   integer element but that's still 5X the memory of primitive int arrays!
-
-4. The ratio becomes worse when storing smaller data types. E.g. A list of booleans uses 32X more memory than primitive
-   boolean arrays without JVM pointer compression and still 20X more memory with JVM pointer compression enabled!
-
-The following table shows the per-element memory usage on a 64-bit JVM accounting for the size of the element pointer,
-wrapper object header, value, and padding in the wrapper object to account for memory alignment:
-
-| Type    | Immutable Array<br/>(bytes per element) | ArrayList<br/>JVM compressed oops disabled<br/>(bytes per element) | ArrayList<br/>JVM compressed oops enabled<br/>(bytes per element) |
-|---------|-----------------------------------------|--------------------------------------------------------------------|-------------------------------------------------------------------|
-| Boolean | **1**                                   | 8 + (16 + 1 + 7) = **32**                                          | 4 + (12 + 1 + 3) = **20**                                         |
-| Byte    | **1**                                   | 8 + (16 + 1 + 7) = **32**                                          | 4 + (12 + 1 + 3) = **20**                                         |
-| Char    | **2**                                   | 8 + (16 + 2 + 6) = **32**                                          | 4 + (12 + 2 + 2) = **20**                                         |
-| Short   | **2**                                   | 8 + (16 + 2 + 6) = **32**                                          | 4 + (12 + 2 + 2) = **20**                                         |
-| Int     | **4**                                   | 8 + (16 + 4 + 4) = **32**                                          | 4 + (12 + 4 + 0) = **20**                                         |
-| Float   | **4**                                   | 8 + (16 + 4 + 4) = **32**                                          | 4 + (12 + 4 + 0) = **20**                                         |
-| Long    | **8**                                   | 8 + (16 + 8 + 0) = **32**                                          | 4 + (12 + 8 + 4) = **28**                                         |
-| Double  | **8**                                   | 8 + (16 + 8 + 0) = **32**                                          | 4 + (12 + 8 + 4) = **28**                                         |
-
-</details>
 
 ## Caveats
 
