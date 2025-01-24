@@ -156,9 +156,9 @@ private fun TypeSpec.Builder.addBuilderUtilsEnsureCapacity() {
         returns = Int::class.asTypeName(),
     ) {
         controlFlow("when") {
-            statement("minCapacity < 0 -> throw %T() // overflow", OutOfMemoryError::class)
+            statement("minCapacity < 0 -> error(%S)", "minCapacity encountered overflow")
             statement("currentCapacity >= minCapacity -> return currentCapacity")
-            statement("minCapacity > MAX_ARRAY_SIZE -> throw %T()", OutOfMemoryError::class)
+            statement("minCapacity > MAX_ARRAY_SIZE -> error(%S)", "minCapacity exceeds max array size")
         }
         comment("increase the size by at least 50 percent")
         statement("val newCapacity = currentCapacity + (currentCapacity shr 1) + 1")

@@ -469,7 +469,7 @@ private fun FileSpec.Builder.addRequireNoNulls() {
     ) {
         addGenericTypes(GENERIC.type)
 
-        statement("if (contains(null)) throw %T(\"null element found in \$this\")", IllegalArgumentException::class)
+        statement("require (null !in this) { \"null element found in \$this\" }")
         emptyLine()
         suppress("UNCHECKED_CAST")
         statement("return this as ${GENERIC.generatedClassName}<%T>", GENERIC.type)
