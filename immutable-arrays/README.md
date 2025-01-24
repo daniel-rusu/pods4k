@@ -98,6 +98,7 @@ The following scenarios return `this` without allocating any memory:
 | `sortedBy { selector }`           | `size <= 1`                         |
 | `sortedByDescending { selector }` | `size <= 1`                         |
 | `sortedWith(comparator)`          | `size <= 1`                         |
+| `shuffled()` & `shuffled(random)` | `size <= 1`                         |
 | `distinct()`                      | `size <= 1`                         |
 | `distinctBy { selector }`         | `size <= 1`                         |
 | `plus(otherArray)`                | `otherArray.isEmpty()` & vice versa |
@@ -145,6 +146,7 @@ These scenarios return the `EMPTY` singleton without allocating any memory:
 | `sortedBy { selector }`                             | `isEmpty()`                         |
 | `sortedByDescending { selector }`                   | `isEmpty()`                         |
 | `sortedWith(comparator)`                            | `isEmpty()`                         |
+| `shuffled()` & `shuffled(random)`                   | `isEmpty()`                         |
 | `distinct()`                                        | `isEmpty()`                         |
 | `distinctBy { selector }`                           | `isEmpty()`                         |
 | `plus(otherArray)`                                  | `isEmpty() && otherArray.isEmpty()` |
@@ -199,8 +201,8 @@ utilities that call the constructor, etc.
 
 The JVM caches the following values:
 
-* All `Boolean` and `Byte` values
-* `Char` ASCII values between `0` and `127`
+* All `Boolean` and `Byte` values.
+* `Char` ASCII values between `0` and `127`.
 * `Short`, `Int`, & `Long` values between `-128` and `127`.
 * `Float` & `Double` values are never cached.
 

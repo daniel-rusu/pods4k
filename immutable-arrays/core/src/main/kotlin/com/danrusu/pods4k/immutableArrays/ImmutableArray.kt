@@ -568,6 +568,19 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     }
 
     /**
+     * Leaves this immutable array as is and returns an [ImmutableArray] with all elements shuffled.
+     */
+    @Suppress("UNCHECKED_CAST")
+    public fun shuffled(random: Random): ImmutableArray<T> {
+        if (size <= 1) return this
+
+        val backingArray = arrayOfNulls<Any?>(size) as Array<T>
+        System.arraycopy(values, 0, backingArray, 0, size)
+        backingArray.shuffle(random)
+        return ImmutableArray(backingArray)
+    }
+
+    /**
      * Returns an immutable array containing only the distinct elements from this immutable array.
      *
      * Iteration order is preserved and subsequent duplicate elements are ignored.

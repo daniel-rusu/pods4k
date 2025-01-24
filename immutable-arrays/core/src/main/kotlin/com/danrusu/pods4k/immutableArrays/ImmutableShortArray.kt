@@ -557,8 +557,18 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     public fun shuffled(): ImmutableShortArray {
         if (size <= 1) return this
 
-        val backingArray = values.copyOf()
-        backingArray.shuffle()
+        val backingArray = values.copyOf().apply { shuffle() }
+        return ImmutableShortArray(backingArray)
+    }
+
+    /**
+     * Leaves this immutable array as is and returns an [ImmutableShortArray] with all elements
+     * shuffled.
+     */
+    public fun shuffled(random: Random): ImmutableShortArray {
+        if (size <= 1) return this
+
+        val backingArray = values.copyOf().apply { shuffle(random) }
         return ImmutableShortArray(backingArray)
     }
 

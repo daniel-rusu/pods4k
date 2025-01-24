@@ -556,8 +556,18 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     public fun shuffled(): ImmutableBooleanArray {
         if (size <= 1) return this
 
-        val backingArray = values.copyOf()
-        backingArray.shuffle()
+        val backingArray = values.copyOf().apply { shuffle() }
+        return ImmutableBooleanArray(backingArray)
+    }
+
+    /**
+     * Leaves this immutable array as is and returns an [ImmutableBooleanArray] with all elements
+     * shuffled.
+     */
+    public fun shuffled(random: Random): ImmutableBooleanArray {
+        if (size <= 1) return this
+
+        val backingArray = values.copyOf().apply { shuffle(random) }
         return ImmutableBooleanArray(backingArray)
     }
 

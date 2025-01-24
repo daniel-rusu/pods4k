@@ -1093,11 +1093,25 @@ class ImmutableArrayTest {
         with(emptyImmutableArray<String>()) {
             expectThat(shuffled().referencesSameArrayAs(ImmutableArray.EMPTY))
                 .isTrue()
+
+            expectThat(shuffled(Random).referencesSameArrayAs(ImmutableArray.EMPTY))
+                .isTrue()
         }
 
         with(immutableArrayOf("one")) {
             expectThat(shuffled().referencesSameArrayAs(this))
                 .isTrue()
+
+            expectThat(shuffled(Random).referencesSameArrayAs(this))
+                .isTrue()
+        }
+
+        with(immutableArrayOf("a", "b", "c")) {
+            expectThat(shuffled(Random(seed = 0L)))
+                .isEqualTo(immutableArrayOf("b", "c", "a"))
+
+            expectThat(this)
+                .isEqualTo(immutableArrayOf("a", "b", "c"))
         }
     }
 

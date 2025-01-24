@@ -9,7 +9,7 @@ _Date TBD_
 
 **New Features:**
 
-* Add `shuffled()` method
+* Add `shuffled()` & `shuffled(random)` methods
 * Add `toMutableArray()` extension functions
 * Add `toTypedMutableArray()` extension functions
 * Add `referencesSameArrayAs(immutableArray)` method since referential equality isn't allowed for inline classes

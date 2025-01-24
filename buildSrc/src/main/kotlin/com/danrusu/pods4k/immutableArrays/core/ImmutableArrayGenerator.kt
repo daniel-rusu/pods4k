@@ -966,11 +966,15 @@ private fun TypeSpec.Builder.addSortedWith(baseType: BaseType) {
 }
 
 private fun TypeSpec.Builder.addShuffled(baseType: BaseType) {
+    val kdoc = "Leaves this immutable array as is and returns an [${baseType.generatedClassName}] with all elements " +
+        "shuffled."
+    val functionName = "shuffled"
+    val returnType = baseType.getGeneratedTypeName()
+
     function(
-        kdoc = "Leaves this immutable array as is and returns an [${baseType.generatedClassName}] with all elements " +
-            "shuffled.",
-        name = "shuffled",
-        returns = baseType.getGeneratedTypeName(),
+        kdoc = kdoc,
+        name = functionName,
+        returns = returnType,
     ) {
         statement("if (size <= 1) return this")
         emptyLine()
@@ -978,10 +982,29 @@ private fun TypeSpec.Builder.addShuffled(baseType: BaseType) {
             suppress("UNCHECKED_CAST")
             statement("val backingArray = arrayOfNulls<Any?>(size) as Array<%T>", baseType.type)
             statement("System.arraycopy(values, 0, backingArray, 0, size)")
+            statement("backingArray.shuffle()")
         } else {
-            statement("val backingArray = values.copyOf()")
+            statement("val backingArray = values.copyOf().apply { shuffle() }")
         }
-        statement("backingArray.shuffle()")
+        statement("return ${baseType.generatedClassName}(backingArray)")
+    }
+
+    function(
+        kdoc = kdoc,
+        name = functionName,
+        parameters = { "random"<Random>() },
+        returns = returnType,
+    ) {
+        statement("if (size <= 1) return this")
+        emptyLine()
+        if (baseType == GENERIC) {
+            suppress("UNCHECKED_CAST")
+            statement("val backingArray = arrayOfNulls<Any?>(size) as Array<%T>", baseType.type)
+            statement("System.arraycopy(values, 0, backingArray, 0, size)")
+            statement("backingArray.shuffle(random)")
+        } else {
+            statement("val backingArray = values.copyOf().apply { shuffle(random) }")
+        }
         statement("return ${baseType.generatedClassName}(backingArray)")
     }
 }

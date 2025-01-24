@@ -556,8 +556,18 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     public fun shuffled(): ImmutableLongArray {
         if (size <= 1) return this
 
-        val backingArray = values.copyOf()
-        backingArray.shuffle()
+        val backingArray = values.copyOf().apply { shuffle() }
+        return ImmutableLongArray(backingArray)
+    }
+
+    /**
+     * Leaves this immutable array as is and returns an [ImmutableLongArray] with all elements
+     * shuffled.
+     */
+    public fun shuffled(random: Random): ImmutableLongArray {
+        if (size <= 1) return this
+
+        val backingArray = values.copyOf().apply { shuffle(random) }
         return ImmutableLongArray(backingArray)
     }
 
