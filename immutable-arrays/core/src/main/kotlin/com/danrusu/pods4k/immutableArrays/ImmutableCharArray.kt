@@ -1,14 +1,13 @@
 // Auto-generated file. DO NOT EDIT!
 package com.danrusu.pods4k.immutableArrays
 
-import java.util.Arrays
-import java.util.Comparator
 import kotlin.Array
 import kotlin.Boolean
 import kotlin.Char
 import kotlin.CharArray
 import kotlin.CharSequence
 import kotlin.Comparable
+import kotlin.Comparator
 import kotlin.Double
 import kotlin.Float
 import kotlin.Int
@@ -546,7 +545,7 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
         if (size <= 1) return this
 
         val temp = values.toTypedArray()
-        Arrays.sort(temp, comparator)
+        temp.sortWith(comparator)
         return temp.toImmutableArray()
     }
 

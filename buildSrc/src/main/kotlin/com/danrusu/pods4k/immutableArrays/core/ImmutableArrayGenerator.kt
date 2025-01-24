@@ -941,7 +941,7 @@ private fun TypeSpec.Builder.addSortedWith(baseType: BaseType) {
         name = "sortedWith",
         parameters = {
             "comparator"(
-                type = Comparator::class.asTypeName().parameterizedBy(WildcardTypeName.consumerOf(baseType.type)),
+                type = ClassName("kotlin", "Comparator").parameterizedBy(WildcardTypeName.consumerOf(baseType.type)),
             )
         },
         returns = baseType.getGeneratedTypeName(),
@@ -953,13 +953,13 @@ private fun TypeSpec.Builder.addSortedWith(baseType: BaseType) {
             statement("val backingArray = arrayOfNulls<Any?>(size) as Array<%T>", baseType.type)
             statement("System.arraycopy(values, 0, backingArray, 0, size)")
             emptyLine()
-            statement("%T.sort(backingArray, comparator)", java.util.Arrays::class)
+            statement("backingArray.sortWith(comparator)")
             statement("return ${baseType.generatedClassName}(backingArray)")
         } else {
             // The standard library comparator-based sort utilities only operate on generic arrays.
             // This is probably to avoid auto-boxing each value everytime it's compared
             statement("val temp = values.toTypedArray()")
-            statement("%T.sort(temp, comparator)", java.util.Arrays::class)
+            statement("temp.sortWith(comparator)")
             statement("return temp.toImmutableArray()")
         }
     }
