@@ -248,7 +248,7 @@ private fun FileSpec.Builder.addSorted() {
             } else {
                 statement("val backingArray = values.copyOf()")
             }
-            statement("%T.sort(backingArray)", java.util.Arrays::class)
+            statement("backingArray.sort()")
             if (baseType == GENERIC) {
                 statement("return ${baseType.generatedClassName}(backingArray) as %T", receiver)
             } else {
@@ -298,7 +298,7 @@ private fun FileSpec.Builder.addSortedDescending() {
                 statement("if (size <= 1) return this")
                 emptyLine()
                 statement("val backingArray = ${baseType.backingArrayConstructor}(size) { get(it) }")
-                statement("%T.sort(backingArray)", java.util.Arrays::class)
+                statement("backingArray.sort()")
                 statement("backingArray.reverse()")
                 statement("return ${baseType.generatedClassName}(backingArray)")
             }
