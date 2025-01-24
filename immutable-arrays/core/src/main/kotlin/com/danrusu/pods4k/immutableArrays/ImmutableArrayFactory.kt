@@ -1,7 +1,6 @@
 // Auto-generated file. DO NOT EDIT!
 package com.danrusu.pods4k.immutableArrays
 
-import java.lang.OutOfMemoryError
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Byte
@@ -368,9 +367,9 @@ internal object BuilderUtils {
      */
     public fun computeNewCapacity(currentCapacity: Int, minCapacity: Int): Int {
         when {
-            minCapacity < 0 -> throw OutOfMemoryError() // overflow
+            minCapacity < 0 -> error("minCapacity encountered overflow")
             currentCapacity >= minCapacity -> return currentCapacity
-            minCapacity > MAX_ARRAY_SIZE -> throw OutOfMemoryError()
+            minCapacity > MAX_ARRAY_SIZE -> error("minCapacity exceeds max array size")
         }
         // increase the size by at least 50 percent
         val newCapacity = currentCapacity + (currentCapacity shr 1) + 1

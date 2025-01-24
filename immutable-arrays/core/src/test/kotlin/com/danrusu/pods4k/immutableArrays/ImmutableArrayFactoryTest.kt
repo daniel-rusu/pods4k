@@ -7,6 +7,7 @@ import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 import strikt.assertions.isGreaterThan
 import strikt.assertions.isGreaterThanOrEqualTo
+import strikt.assertions.message
 
 class ImmutableArrayFactoryTest {
     @Test
@@ -114,18 +115,18 @@ class ImmutableArrayFactoryTest {
                 .isEqualTo(MAX_ARRAY_SIZE)
 
             // Specifying a minCapacity that has overflowed
-            expectThrows<OutOfMemoryError> {
+            expectThrows<IllegalStateException> {
                 computeNewCapacity(currentCapacity = currentCapacity, minCapacity = currentCapacity + 21)
-            }
+            }.message.isEqualTo("minCapacity encountered overflow")
 
             // Requesting a capacity equal to the max array size is allowed
             expectThat(computeNewCapacity(currentCapacity = currentCapacity, minCapacity = MAX_ARRAY_SIZE))
                 .isEqualTo(MAX_ARRAY_SIZE)
 
             // Specifying a minCapacity that exceeds the max array size
-            expectThrows<OutOfMemoryError> {
+            expectThrows<IllegalStateException> {
                 computeNewCapacity(currentCapacity = currentCapacity, minCapacity = MAX_ARRAY_SIZE + 1)
-            }
+            }.message.isEqualTo("minCapacity exceeds max array size")
         }
     }
 }
