@@ -1,13 +1,12 @@
 // Auto-generated file. DO NOT EDIT!
 package com.danrusu.pods4k.immutableArrays
 
-import java.util.Arrays
-import java.util.Comparator
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
 import kotlin.CharSequence
 import kotlin.Comparable
+import kotlin.Comparator
 import kotlin.Double
 import kotlin.Float
 import kotlin.Int
@@ -550,7 +549,7 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
         val backingArray = arrayOfNulls<Any?>(size) as Array<T>
         System.arraycopy(values, 0, backingArray, 0, size)
 
-        Arrays.sort(backingArray, comparator)
+        backingArray.sortWith(comparator)
         return ImmutableArray(backingArray)
     }
 
