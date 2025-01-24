@@ -2,7 +2,6 @@
 package com.danrusu.pods4k.immutableArrays
 
 import java.lang.IllegalArgumentException
-import java.util.Arrays
 import java.util.RandomAccess
 import kotlin.Any
 import kotlin.Array
@@ -621,7 +620,7 @@ public fun <T : Comparable<T>> ImmutableArray<T>.sorted(): ImmutableArray<T> {
     if (size <= 1) return this
 
     val backingArray = Array<Any?>(size) { get(it) }
-    Arrays.sort(backingArray)
+    backingArray.sort()
     return ImmutableArray(backingArray) as ImmutableArray<T>
 }
 
@@ -634,7 +633,7 @@ public fun ImmutableByteArray.sorted(): ImmutableByteArray {
     if (size <= 1) return this
 
     val backingArray = values.copyOf()
-    Arrays.sort(backingArray)
+    backingArray.sort()
     return ImmutableByteArray(backingArray)
 }
 
@@ -647,7 +646,7 @@ public fun ImmutableCharArray.sorted(): ImmutableCharArray {
     if (size <= 1) return this
 
     val backingArray = values.copyOf()
-    Arrays.sort(backingArray)
+    backingArray.sort()
     return ImmutableCharArray(backingArray)
 }
 
@@ -660,7 +659,7 @@ public fun ImmutableShortArray.sorted(): ImmutableShortArray {
     if (size <= 1) return this
 
     val backingArray = values.copyOf()
-    Arrays.sort(backingArray)
+    backingArray.sort()
     return ImmutableShortArray(backingArray)
 }
 
@@ -673,7 +672,7 @@ public fun ImmutableIntArray.sorted(): ImmutableIntArray {
     if (size <= 1) return this
 
     val backingArray = values.copyOf()
-    Arrays.sort(backingArray)
+    backingArray.sort()
     return ImmutableIntArray(backingArray)
 }
 
@@ -686,7 +685,7 @@ public fun ImmutableLongArray.sorted(): ImmutableLongArray {
     if (size <= 1) return this
 
     val backingArray = values.copyOf()
-    Arrays.sort(backingArray)
+    backingArray.sort()
     return ImmutableLongArray(backingArray)
 }
 
@@ -699,7 +698,7 @@ public fun ImmutableFloatArray.sorted(): ImmutableFloatArray {
     if (size <= 1) return this
 
     val backingArray = values.copyOf()
-    Arrays.sort(backingArray)
+    backingArray.sort()
     return ImmutableFloatArray(backingArray)
 }
 
@@ -712,7 +711,7 @@ public fun ImmutableDoubleArray.sorted(): ImmutableDoubleArray {
     if (size <= 1) return this
 
     val backingArray = values.copyOf()
-    Arrays.sort(backingArray)
+    backingArray.sort()
     return ImmutableDoubleArray(backingArray)
 }
 
@@ -735,7 +734,7 @@ public fun ImmutableByteArray.sortedDescending(): ImmutableByteArray {
     if (size <= 1) return this
 
     val backingArray = ByteArray(size) { get(it) }
-    Arrays.sort(backingArray)
+    backingArray.sort()
     backingArray.reverse()
     return ImmutableByteArray(backingArray)
 }
@@ -749,7 +748,7 @@ public fun ImmutableCharArray.sortedDescending(): ImmutableCharArray {
     if (size <= 1) return this
 
     val backingArray = CharArray(size) { get(it) }
-    Arrays.sort(backingArray)
+    backingArray.sort()
     backingArray.reverse()
     return ImmutableCharArray(backingArray)
 }
@@ -763,7 +762,7 @@ public fun ImmutableShortArray.sortedDescending(): ImmutableShortArray {
     if (size <= 1) return this
 
     val backingArray = ShortArray(size) { get(it) }
-    Arrays.sort(backingArray)
+    backingArray.sort()
     backingArray.reverse()
     return ImmutableShortArray(backingArray)
 }
@@ -777,7 +776,7 @@ public fun ImmutableIntArray.sortedDescending(): ImmutableIntArray {
     if (size <= 1) return this
 
     val backingArray = IntArray(size) { get(it) }
-    Arrays.sort(backingArray)
+    backingArray.sort()
     backingArray.reverse()
     return ImmutableIntArray(backingArray)
 }
@@ -791,7 +790,7 @@ public fun ImmutableLongArray.sortedDescending(): ImmutableLongArray {
     if (size <= 1) return this
 
     val backingArray = LongArray(size) { get(it) }
-    Arrays.sort(backingArray)
+    backingArray.sort()
     backingArray.reverse()
     return ImmutableLongArray(backingArray)
 }
@@ -805,7 +804,7 @@ public fun ImmutableFloatArray.sortedDescending(): ImmutableFloatArray {
     if (size <= 1) return this
 
     val backingArray = FloatArray(size) { get(it) }
-    Arrays.sort(backingArray)
+    backingArray.sort()
     backingArray.reverse()
     return ImmutableFloatArray(backingArray)
 }
@@ -819,7 +818,7 @@ public fun ImmutableDoubleArray.sortedDescending(): ImmutableDoubleArray {
     if (size <= 1) return this
 
     val backingArray = DoubleArray(size) { get(it) }
-    Arrays.sort(backingArray)
+    backingArray.sort()
     backingArray.reverse()
     return ImmutableDoubleArray(backingArray)
 }
