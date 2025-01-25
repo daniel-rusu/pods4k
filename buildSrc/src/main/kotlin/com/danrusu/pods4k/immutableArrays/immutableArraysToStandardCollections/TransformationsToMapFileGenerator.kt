@@ -150,7 +150,7 @@ private fun FileSpec.Builder.addGroupBy() {
             collection.  This approach is also more compute efficient as it avoids re-hashing each key to determine its
             location in the map since it just iterates through the links replacing each map entry value in place.
              */
-            statement("val result = %T<K, Any>()", LinkedHashMap::class)
+            statement("val result = mutableMapOf<K, Any>()")
             controlFlow("for (element in this)") {
                 statement("val key = keySelector(element)")
                 if (baseType == BaseType.GENERIC) {
