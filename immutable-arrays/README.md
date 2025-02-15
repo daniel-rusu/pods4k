@@ -66,7 +66,7 @@ The [Benchmarks page](BENCHMARKS.md) has more surprising results along with perf
 
 ### Zero-memory scenarios
 
-Unlike lists, immutability enables skipping creating new collections by re-uses existing instances in many scenarios:
+Unlike lists, immutability enables re-using instances in many scenarios instead of creating new collections:
 
 <details>
 <summary>Scenarios that return same instance</summary>
@@ -108,9 +108,6 @@ when discovering that all elements were added:
 
 <details>
 <summary>Scenarios that return EMPTY singleton</summary>
-
-Unlike lists and regular arrays, all scenarios that end up with an empty Immutable Array reference the `EMPTY`
-singleton.
 
 These scenarios return the `EMPTY` singleton without allocating any memory:
 
@@ -166,8 +163,8 @@ were added:
 
 </details>
 
-Some operations re-use instances for a portion of the results. For example, `partition` returns `Pair(this, EMPTY)` or
-`Pair(EMPTY, this)` when all elements end up on same side.
+Additionally, some operations re-use instances for a portion of the results. For example, `partition` returns
+`Pair(this, EMPTY)` or `Pair(EMPTY, this)` when all elements end up on same side.
 
 ### Memory of uncached values
 
@@ -175,7 +172,7 @@ The following shows the memory consumption of storing uncached values (wrapper h
 
 ![uncached values](./resources/memory/UncachedValues.png)
 
-Regular arrays aren't included as most regular array operations produce lists resulting in the above memory consumption.
+Regular arrays aren't included as most regular-array operations produce lists resulting in the above memory consumption.
 
 ### Memory of cached values
 
@@ -193,15 +190,14 @@ Regular arrays aren't included as most regular array operations produce lists re
 
 * `Float` & `Double` values are never cached
 * Values that are out of range, such as `128`, aren't cached
-* Manually calling the constructor, like `java.lang.Boolean(true)`, bypasses the cache
+* Manually calling the constructor bypasses the cache
+    * E.g. `java.lang.Boolean(true)`, `java.lang.Integer(0)`, etc.
 * Generic utilities that use reflection to call constructors bypass the cache
 * etc.
 
 </details>
 
 The memory of storing references to cached wrappers is often much higher than storing the values themselves:
-
-Storing references to cached wrappers usually uses much more memory than storing the values themselves:
 
 ![cached values](./resources/memory/CachedValues.png)
 
@@ -214,14 +210,14 @@ these cached wrappers takes 2 - 8X more memory than storing the values themselve
 `Int` values are cached between 0% to 100% of the time depending on your use-case. Some use-cases, such as storing a
 person's age, have most values within the `-128 to 127` caching range. Other use-cases are almost always out of caching
 range, such as when storing IDs, counters, prices in cents, etc. Even use-cases with tiny values might bypass the cache
-if they're created by calling the constructor, such as via generic reflection utils etc.
+if they're created by calling the constructor, such as via generic reflection utilities etc.
 
-Using `R` as the percentage of `Int` values that are cached, the Immutable Array weighted average memory reduction is
-`cachedMemoryReduction*R + uncachedMemoryReduction*(1 - R)`. From the memory charts, the memory reduction is 1 or 5X
+Using `P` as the percentage of `Int` values that are cached, the Immutable Array weighted average memory reduction is
+`cachedMemoryReduction*P + uncachedMemoryReduction*(1 - P)`. From the memory charts, the memory reduction is 1 or 5X
 with JVM pointer compression enabled and 2 or 8X without, so the weighted average is:
 
-* Compressed oops enabled: `1*R + 5*(1 - R)` = `5 - 4R`
-* Compressed oops disabled: `2*R + 8*(1 - R)` = `8 - 6R`
+* Compressed oops enabled: `1*P + 5*(1 - P)` = `5 - 4P`
+* Compressed oops disabled: `2*P + 8*(1 - P)` = `8 - 6P`
 
 Using these formulas for several percentages, we see that Immutable Arrays reduce memory consumption by at least 3X most
 of the time:
@@ -236,10 +232,9 @@ of the time:
 
 </details>
 
-Cached `Long` is the only scenario that uses less memory than Immutable Arrays assuming JVM pointer compression is
-enabled. However, the majority of `Long` values are outside the tiny cache range and `Long` is chosen when anticipating
-larger values. For example, using `Long` to represent salaries in cents, only salaries up to $1.27 can be cached making
-it useless.
+Cached `Long` is the only scenario with lower memory than Immutable Arrays assuming JVM pointer compression is enabled.
+However, the majority of `Long` values are outside the tiny cache range and `Long` is chosen when anticipating larger
+values. When using `Long` to store salaries in cents, only salaries up to $1.27 can be cached making the cache useless.
 
 ### Memory Layout
 
@@ -250,18 +245,17 @@ Here's an example where we code naturally and automatically benefit from primiti
 
 ![Memory Layout of immutable arrays](./resources/memory/immutable-array-memory-layout.drawio.png)
 
-The `values` variable references a primitive int array in the generated bytecode but in Kotlin code it's an Immutable
-Array.
+Note that the `values` Immutable Array variable directly references a primitive int array in the generated bytecode.
 
-Immutable Array operations produce Immutable Arrays in order to preserve immutability guarantees. However, most regular
-array operations produce lists. Here's the resulting list memory layout of performing the same operation with a regular
-primitive array:
+Immutable Array operations produce Immutable Arrays in order to preserve immutability guarantees. However, most
+regular-array operations produce lists. Here's the resulting list memory layout of performing the same operation with a
+regular primitive array:
 
 ![Memory Layout of Read-only Lists](./resources/memory/list-memory-layout.drawio.png)
 
-The `values` variable references an `ArrayList`, which references an over-sized array, which itself references wrapper
-objects which finally store the primitive values. Lists use generics so primitives are auto-boxed into wrapper objects
-and references to those wrappers are stored.
+Lists use generics so primitives are auto-boxed into wrapper objects and references to those wrappers are stored. The
+`values` variable references an `ArrayList`, which references an over-sized array, which itself references wrapper
+objects which finally store the primitive values.
 
 Unlike lists or regular arrays, Immutable Arrays automatically switch to the most optimal type improving memory and
 performance:
@@ -519,12 +513,13 @@ notifyPeople(people.asIterable())
 <summary>Adding Immutable Arrays to existing projects</summary>
 
 Updating projects to use Immutable Arrays can be done in chunks rather than replacing all lists at once. This can be
-tackled at the class, package, or module level. The boundaries that interact with other parts of the application would
-expose Immutable Arrays using `toList`, `asList`, or `asIterable`. As other parts of the application get updated to work
-with Immutable Arrays, the boundary layers can be updated to operate on Immutable Arrays directly for optimal
-efficiency.
+tackled at the class, package, or module level. The boundaries that interact with other parts of the application can
+expose Immutable Arrays as regular collections using `toList`, `asList`, or `asIterable`. As other parts of the
+application get updated to work with Immutable Arrays, the boundary layers can be updated to operate on Immutable Arrays
+directly for optimal efficiency.
 
-Usages that use mutable lists to accumulate elements can replace those with Immutable Array builders.
+Mutable lists that are used just to accumulate elements can be replaced with Immutable Array builders as those are much
+more efficient.
 
 </details>
 
@@ -535,25 +530,25 @@ When working with reference types, such as `ImmutableArray<Person>`, prefer `asL
 random access and is extremely efficient since the generated wrapper is backed by the same backing array without copying
 the elements.
 
-When working with primitive variants, such as `ImmutableFloatArray`, exposing these to list APIs will auto-box the
-elements since lists operate on generic types:
+When working with primitive variants, such as `ImmutableFloatArray`, exposing these to list APIs will auto-box elements
+since lists use generics:
 
 * If random access isn't needed, use `asIterable()` to avoid copying the backing array and nudge usages towards one-time
   access patterns with the iterator.
 * Otherwise, if random access is needed and the number of accesses won't exceed the list size, use `asList()`.
-* For everything else, use `toList()` as this auto-boxes all the values upfront and avoids additional auto-boxing when
-  the same elements are accessed multiple times.
+* For everything else, use `toList()` to auto-box all values upfront and avoid additional auto-boxing when the same
+  elements are accessed multiple times.
 
 Using `asList()` or `asIterable()` only auto-boxes the elements that are accessed. For example, wrapping a 1,000-element
 array by calling `asList()` and then performing 3 element accesses will only perform 3 auto-boxing operations.
 
-Using `asList()` or `asIterable()` has a secondary benefit since they only auto-box values lazily when accessed. This
-reduces the pressure on the garbage collector for use cases that aggregate values without retaining the elements, such
-as when keeping track of the sum to compute the average. This usage pattern of creating temporary objects that are
-immediately discarded is very efficient with modern garbage collectors. The collection process only copies objects that
-are still accessible. Having 1 or 1,000 discarded objects has no performance impact on the collection step. However, if
-we auto-box all elements up-front to pass to some utility, any collections that occur before that utility completes
-would be forced to copy all these objects around since they're all still accessible.
+Using `asList()` or `asIterable()` auto-boxes values lazily when accessed. This reduces the pressure on the garbage
+collector for use cases that operate on the values without retaining the elements, such as when iterating the elements
+to sum their values. Creating temporary wrapper objects that are immediately discarded is very efficient with modern
+garbage collectors as the collection process only copies objects that are still accessible. Having 1 or 1,000 discarded
+objects has no performance impact on the collection step. However, if we auto-box all elements up-front to pass to some
+utility, any collections that occur before that utility completes would be forced to copy all these objects since
+they're all still accessible.
 
 </details>
 
@@ -566,7 +561,7 @@ There are several reasons why Immutable Arrays shouldn't implement the `List` in
    elements would be auto-boxed on every access significantly affecting the memory and performance of the library.
 2. As a quick test, we made `ImmutableArray<T>` implement the `List<T>` interface and found that the `List` extension
    functions from the Kotlin standard library overshadowed the optimized versions from this library. This significantly
-   affects the memory and performance of this library and also break the immutability guarantees since the Kotlin
+   affects the memory and performance of this library and also breaks the immutability guarantees since the Kotlin
    standard library functions generate read-only lists that can be mutated through casting.
 3. The `List` interface contains methods with `List` return types that we wouldn't want users to use. Using these would
    affect the memory and performance, but most importantly, this would make usages accidentally cross over into the list
@@ -790,7 +785,7 @@ indirection caused by the view wrapper.
 
 <br>
 
-### Benefits over immutable lists from Java (such as Guava)
+### Benefits over Java immutable lists (such as Guava)
 
 <details>
 <summary>No mutation exceptions at runtime</summary>
