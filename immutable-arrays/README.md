@@ -6,7 +6,7 @@ replacing common operations with highly-optimized versions. Ideal for Android, b
 performance-critical or memory-constrained application.
 
 * **Fast**: [2 - 8X faster than lists](BENCHMARKS.md) for most operations!
-* **Memory Efficient**: [4X memory reduction](#memory-consumption) in most scenarios!
+* **Memory Efficient**: [4X memory reduction](#memory-efficiency) in most scenarios!
 * **True Immutability**: Cannot be mutated through casting.
 * **Type Safety**: Prevents accidental mutation attempts at compile time.
 * **Clean & Familiar**: Familiar list-like syntax ensures clean code and easy adoption.
@@ -15,15 +15,14 @@ If you find this library useful, please consider giving it
 a [![GitHub stars](https://img.shields.io/github/stars/daniel-rusu/pods4k?label=Star)](https://github.com/daniel-rusu/pods4k)
 on [GitHub](https://github.com/daniel-rusu/pods4k) and sharing it with others.
 
-* [Installation](#installation)
-
+* [Quick Start](#quick-start)
 * [Performance](#performance)
-* [Memory Consumption](#memory-consumption)
-* [Usage](#usage)
+* [Memory Efficiency](#memory-efficiency)
+* [Advanced Usage](#advanced-usage)
 * [Benefits vs Alternatives](#benefits-vs-alternatives)
 * [Caveats](#caveats)
 
-## Installation
+## Quick Start
 
 <a href="https://github.com/daniel-rusu/pods4k/releases/latest" alt="Activity"><img src="https://img.shields.io/github/v/release/daniel-rusu/pods4k?label=Latest Release" /></a>
 is available from Maven Central. See [dependency instructions](../README.md#installation) for more details.
@@ -35,6 +34,18 @@ repositories {
 dependencies {
     implementation("com.danrusu.pods4k:pods4k:<version_number>")
 }
+```
+
+Usages look the same as lists after construction:
+
+```kotlin
+val people = immutableArrayOf(dan, jill, bobby) // ImmutableArray<Person>
+
+for (person in people) {
+    sendMarketingEmailTo(person)
+}
+val employedPeople = people.filter { it.isEmployed() }
+val salaries = employedPeople.map { it.salary }
 ```
 
 ## Performance
@@ -57,7 +68,7 @@ Elements can be inspected much faster than lists when dealing with the 8 base ty
 
 The [Benchmarks page](BENCHMARKS.md) has more surprising results along with performance explanations.
 
-## Memory Consumption
+## Memory Efficiency
 
 ### Zero-memory scenarios
 
@@ -278,25 +289,7 @@ operations.
 Taking into account the average memory reduction for each data type and the smarter use of memory, Immutable Arrays are
 expected to reduce memory consumption by over 4X in most scenarios.
 
-## Usage
-
-Usages look the same as regular lists after construction:
-
-```kotlin
-val people = immutableArrayOf(dan, jill, bobby)
-people[0] // dan
-
-// Normal iteration with loops, forEach, asSequence, etc.
-for (person in people) {
-    sendMarketingEmail(person)
-}
-
-// All the typical transformations and conditions
-val adults = people.filter { it.age >= 18 }
-val adultAges = adults.map { it.age }
-val adultsSortedByName = adults.sortedBy { it.name }
-val containsRetirees = adults.any { it.isRetired() }
-```
+## Advanced Usage
 
 <details>
 <summary>Creating Immutable Arrays</summary>
