@@ -1,17 +1,18 @@
 # Immutable Arrays
 
-**Immutable Arrays** for Kotlin offers a safer and more efficient alternative to read-only lists while maintaining
-familiar syntax. They are inline classes that compile to regular arrays while eliminating mutating abilities and
-replacing common operations with highly-optimized versions. Ideal for Android, backend services, and any
-performance-critical or memory-constrained application.
+**Immutable Arrays** are a safer and more efficient alternative to lists in Kotlin while maintaining familiar syntax.
+They are inline classes that compile to regular arrays while eliminating mutating abilities and replacing common
+operations with highly-optimized versions.
 
+* **Clean & Familiar**: List-like syntax ensures clean code and easy adoption.
 * **Fast**: [2 - 8X faster than lists](BENCHMARKS.md) for most operations!
 * **Memory Efficient**: [4X memory reduction](#memory-efficiency) in most scenarios!
 * **True Immutability**: Cannot be mutated through casting.
 * **Type Safety**: Prevents accidental mutation attempts at compile time.
-* **Clean & Familiar**: Familiar list-like syntax ensures clean code and easy adoption.
+* **Efficient Builders**: Accumulate elements more efficiently than mutable lists.
 
-If you find this library useful, please consider giving it
+Ideal for Android, backend services, and any performance-critical or memory-constrained application. If you find this
+library useful, please consider giving it
 a [![GitHub stars](https://img.shields.io/github/stars/daniel-rusu/pods4k?label=Star)](https://github.com/daniel-rusu/pods4k)
 on [GitHub](https://github.com/daniel-rusu/pods4k) and sharing it with others.
 
@@ -19,7 +20,7 @@ on [GitHub](https://github.com/daniel-rusu/pods4k) and sharing it with others.
 * [Performance](#performance)
 * [Memory Efficiency](#memory-efficiency)
 * [Advanced Usage](#advanced-usage)
-* [Benefits vs Alternatives](#benefits-vs-alternatives)
+* [Comparison with Alternatives](#comparison-with-alternatives)
 * [Caveats](#caveats)
 
 ## Quick Start
@@ -36,7 +37,7 @@ dependencies {
 }
 ```
 
-Usages look the same as lists after construction:
+Usage looks the same as lists after construction:
 
 ```kotlin
 val people = immutableArrayOf(dan, jill, bobby) // ImmutableArray<Person>
@@ -52,7 +53,7 @@ val salaries = employedPeople.map { it.salary }
 
 Immutable Arrays are 2 to 8X faster than lists for most operations with some much faster. They often outperform regular
 arrays as operations were replaced with highly-optimized versions that preserve immutability. Immutability also enables
-skipping many operations when inferring identical results.
+skipping operations when inferring identical results.
 
 Here's a sneak peek from the [Benchmarks page](BENCHMARKS.md):
 
@@ -283,8 +284,7 @@ pressure on the garbage collector.
 
 Immutability enables many operations to use zero memory whereas the same operations on lists or regular arrays create
 new collections. Immutable Arrays automatically use primitives reducing memory consumption, and they're always perfectly
-sized whereas lists end up with 17% unused capacity on average as the final size isn't known in advance for most
-operations.
+sized whereas lists end up with unused wasted capacity for most operations.
 
 Taking into account the average memory reduction for each data type and the smarter use of memory, Immutable Arrays are
 expected to reduce memory consumption by over 4X in most scenarios.
@@ -558,16 +558,22 @@ There are several reasons why Immutable Arrays shouldn't implement the `List` in
 
 </details>
 
-## Benefits vs Alternatives
+## Comparison with Alternatives
 
-| Feature                  | Immutable Arrays | Regular Arrays         | Read-only Lists                      | Unmodifiable Lists          | Java Immutable Lists      |
-|--------------------------|------------------|------------------------|--------------------------------------|-----------------------------|---------------------------|
-| True Immutability        | ✅                | ❌                      | ❌ <br/>Casting enables mutation      | ❌ <br/>Mutable backing list | ✅                         |
-| Memory Efficiency        | ✅✅               | ✅                      | ❌                                    | ❌                           | ❌                         |
-| Performance              | ✅✅               | ✅                      | ❌                                    | ❌                           | ❌                         |
-| Compile-time Safety      | ✅                | ❌ <br/> Can be mutated | ✅ / ❌ <br/> Casting enables mutation | ❌ <br/> Throws exceptions   | ❌ <br/> Throws exceptions |
-| Proper equals & hashCode | ✅                | ❌                      | ✅                                    | ✅                           | ✅                         |
-| Meaningful toString()    | ✅                | ❌                      | ✅                                    | ✅                           | ✅                         |
+| Feature                  | Immutable Arrays | Regular Arrays | Read-only Lists    | Unmodifiable Lists | Java Immutable Lists |
+|--------------------------|------------------|----------------|--------------------|--------------------|----------------------|
+| True Immutability        | ✅                | ❌              | ❌ <sup>1</sup>     | ❌ <sup>2</sup>     | ✅                    |
+| Memory Efficiency        | ⭐⭐               | ⭐              | ❌                  | ❌                  | ❌                    |
+| Performance              | ⭐⭐               | ⭐              | ❌                  | ❌                  | ❌                    |
+| Compile-time Safety      | ✅                | ❌              | ✅ / ❌ <sup>1</sup> | ❌ <sup>3</sup>     | ❌ <sup>3</sup>       |
+| Proper equals & hashCode | ✅                | ❌              | ✅                  | ✅                  | ✅                    |
+| Meaningful toString()    | ✅                | ❌              | ✅                  | ✅                  | ✅                    |
+
+<sup>1</sup> Casting enables mutation
+
+<sup>2</sup> Mutable backing list
+
+<sup>3</sup> Throws exceptions at runtime
 
 ### Benefits over regular arrays
 
