@@ -578,6 +578,54 @@ There are several reasons why Immutable Arrays shouldn't implement the `List` in
 ### Benefits over regular arrays
 
 <details>
+<summary>Avoids equality & hashCode defects</summary>
+
+Unlike regular arrays, Immutable arrays have proper equals & hashCode implementations allowing us to check structural
+equality:
+
+```kotlin
+immutableArrayOf("Dan", "Bob") == immutableArrayOf("Dan", "Bob") // true
+
+arrayOf("Dan", "Bob") == arrayOf("Dan", "Bob") // false despite identical contents
+```
+
+Since we can compare lists directly, developers occasionally attempt to do the same with regular arrays. Even worse,
+defects can sneak in without obvious usages of these broken behaviors:
+
+```kotlin
+data class Order(val id: Long, private val products: Array<Product>)
+
+val rejectedOrders = mutableSetOf<Order>()
+// Oops, attempting to add Orders to a hashSet will make use of the auto-generated 
+// equals & hashCode methods from the Order data class which will in turn rely on 
+// the defective equals & hashCode implementation of regular arrays
+```
+
+Swapping `Array<Product>` with `ImmutableArray<Product>` will fix this defect scenario.
+
+</details>
+
+<details>
+<summary>Safe asList() implementation</summary>
+
+The `asList()` function is typically used to efficiently share regular arrays with APIs that operate on lists since this
+creates a view wrapper that shares the same backing array without copying the elements. However, casting the wrapper
+exposes a backdoor for mutating the original array:
+
+```kotlin
+val array = arrayOf("Dan", "Jill")
+val list = namesArray.asList()
+
+(list as MutableList<String>)[0] = "Bob"
+array[0] // "Bob"!!!
+```
+
+Unlike regular arrays, calling `asList()` on an Immutable Array is safe as that returns a truly-immutable view backed by
+the same array.
+
+</details>
+
+<details>
 <summary>Meaningful toString()</summary>
 
 Unlike regular arrays, calling `toString()` on immutable arrays produces a pretty representation of the data:
@@ -591,22 +639,10 @@ println(arrayOf("Dan", "Bob")) // [Ljava.lang.String;@7d4991ad  Yuck!
 </details>
 
 <details>
-<summary>Efficient sharing of encapsulated data</summary>
+<summary>Faster & more efficient operations</summary>
 
-Regular arrays can have their elements reassigned making them a poor choice for encapsulated data that needs to be
-shared. this forces us to duplicate the contents before sharing so that callers can't mutate the encapsulated array.
-Note that calling `asList()` to wrap generic arrays is not safe as casting that to an `ArrayList` exposes a backdoor to
-mutating the shared underlying array.
-
-Duplicating the array negatively affects performance and adds extra pressure on the garbage collector. Immutable arrays
-can be safely shared resulting in cleaner and more efficient code.
-</details>
-
-<details>
-<summary>Efficient operations</summary>
-
-Regular arrays are chosen for memory or performance reasons, however these benefits are negated as most operations on
-regular arrays produce lists losing any array benefits and potentially being even slower due to extra auto-boxing:
+Regular arrays are chosen for memory or performance reasons, however most operations on regular arrays produce lists
+so they lose these benefits while also incurring extra overhead from auto-boxing the values:
 
 ```kotlin
 val weights = doubleArrayOf(1.5, 3.0, 10.2, 15.7, 2.0)
@@ -661,34 +697,16 @@ performance improvements over regular arrays:
 </details>
 
 <details>
-<summary>Avoids equality & hashCode defects</summary>
+<summary>Efficient sharing of encapsulated data</summary>
 
-Unlike regular arrays, Immutable arrays have proper equals & hashCode implementations allowing us to check equality:
+Regular arrays can have their elements reassigned making them a poor choice for encapsulated data that needs to be
+shared. The only safe solution is to duplicate the contents before sharing so that callers can't mutate the encapsulated
+array. Note that calling `asList()` on a generic array is not safe as the generated view can be cast into a
+`MutableList` exposing a backdoor for mutating the original array. Additionally, calling `asList()` on a primitive
+array, like `IntArray`, negatively affects memory and performance by auto-boxing elements every time they're accessed.
 
-```kotlin
-arrayOf("Dan", "Bob") == arrayOf("Dan", "Bob") // false!
-
-// Yes, this condition will be true when immutable arrays have equal contents
-immutableArrayOf("Dan", "Bob") == immutableArrayOf("Dan", "Bob") // true
-```
-
-Since we can compare lists directly, developers occasionally attempt to do the same with regular arrays. Even worse,
-defects can sneak in without obvious usages of these broken behaviors:
-
-```kotlin
-data class Order(val id: Long, private val products: Array<Product>)
-
-val rejectedOrders = mutableSetOf<Order>()
-// Oops, attempting to add Orders to a hashSet will make use of the auto-generated 
-// equals & hashCode methods from the Order data class which will in turn rely on 
-// the defective equals & hashCode implementation of regular arrays
-```
-
-Swapping `Array<Product>` with `ImmutableArray<Product>` will fix this defect scenario.
-
+Immutable arrays can be safely shared resulting in cleaner and more efficient code.
 </details>
-
-<br>
 
 ### Benefits over read-only lists
 
@@ -720,7 +738,7 @@ values[0] = 100 // Compiler error: No set method providing array access
 <summary>More memory efficient</summary>
 
 Immutable Arrays reduce memory consumption by over 4X compared to lists in most scenarios. See
-the [Memory Consumption](#memory-consumption) comparison for details.
+the [Memory Efficiency](#memory-efficiency) comparison for details.
 
 </details>
 
@@ -732,12 +750,10 @@ details.
 
 </details>
 
-<br>
-
 ### Benefits over unmodifiable lists
 
 <details>
-<summary>Safer and more robust</summary>
+<summary>Avoids delayed-processing defects</summary>
 
 Calling `Collections.unmodifiableList(myMutableList)` doesn't copy the elements into a new immutable list but rather
 creates a view that wraps the original collection. Although the view won't allow mutation, the underlying collection
@@ -776,8 +792,6 @@ see [Benefits over read-only lists](#benefits-over-read-only-lists)) but slightl
 indirection caused by the view wrapper.
 
 </details>
-
-<br>
 
 ### Benefits over Java immutable lists (such as Guava)
 
