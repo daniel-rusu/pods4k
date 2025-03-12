@@ -1,20 +1,19 @@
 # Immutable Arrays
 
-**Immutable Arrays** offer a safer, more efficient alternative to Kotlin lists while preserving familiar syntax. They
-are inline classes that compile to regular arrays while enforcing immutability at the type level and with
-highly-optimized operations.
+**Immutable Arrays** offer a safer, more efficient alternative to Kotlin lists with familiar syntax. They are inline
+classes that compile to regular arrays but with highly-optimized operations and immutability enforced at the type level.
 
 * **Clean & Familiar**: Maintains list-like syntax for easy adoption.
 * **Blazing Fast**: [2 to 8 times faster than lists](BENCHMARKS.md) for most operations.
-* **Memory Efficient**: [Reduces memory consumption by 4 times](#memory-efficiency) in most use cases.
+* **Memory Efficient**: [Over 4X memory reduction](#memory-efficiency) in many common scenarios.
 * **True Immutability**: Cannot be modified, even with casting.
 * **Type Safety**: Prevents accidental mutation attempts at compile time.
 * **Efficient Builders**: Gather elements more efficiently than mutable lists.
 
-Ideal for Android, backend services, and any applications demanding enhanced efficiency or performance. If you find this
+Ideal for Android, backend services, and any application seeking enhanced efficiency or performance. If you find this
 library useful, please consider giving it
 a [![GitHub stars](https://img.shields.io/github/stars/daniel-rusu/pods4k?label=Star)](https://github.com/daniel-rusu/pods4k)
-on [GitHub](https://github.com/daniel-rusu/pods4k) and sharing it with your network.
+on [GitHub](https://github.com/daniel-rusu/pods4k) and sharing it with others.
 
 * [Quick Start](#quick-start)
 * [Performance](#performance)
@@ -40,29 +39,27 @@ dependencies {
 Intuitive list-like syntax:
 
 ```kotlin
-val people = immutableArrayOf(dan, jill, bobby) // ImmutableArray<Person>
+val people = immutableArrayOf(dan, jill, bobby)
 
 // Iterate naturally
 for (person in people) {
     sendMarketingEmailTo(person)
 }
-
-// All the usual functional operations
+// All the usual operations
 val employedPeople = people.filter { it.isEmployed() }
 val salaries = employedPeople.map { it.salary }
 ```
 
 ## Performance
 
-Immutable Arrays typically outperform lists by 2 to 8 times, with some operations showing even greater performance. They
-often outperform regular arrays, thanks to specialized optimizations that preserve immutability. Immutability also
-enables skipping operations when inferring identical results.
+Immutable Arrays typically outperform lists by 2 to 8 times, with some operations even faster. They even outperform
+regular arrays in many scenarios, thanks to optimized operations which preserve immutability.
 
-Here's a sneak peek from the [Benchmarks page](BENCHMARKS.md):
+Preview from the [Benchmarks page](BENCHMARKS.md), which includes more benchmarks and explanations:
 
 ![take benchmarks](./resources/benchmarks/take.png)
 
-Smaller data types are shown separately to avoid skewing the axis as their performance is too high.
+Smaller data types are split on the right to avoid skewing the axis due to extreme performance.
 
 ![map benchmarks](./resources/benchmarks/map.png)
 
@@ -70,18 +67,22 @@ Elements can be inspected much faster than lists when dealing with the 8 base ty
 
 ![any benchmarks](./resources/benchmarks/any.png)
 
-See the [Benchmarks page](BENCHMARKS.md) for a detailed analysis and even more surprising results.
-
 ## Memory Efficiency
+
+Immutability enables re-using instances in many scenarios whereas the same operations on lists create new collections.
+Additionally, Immutable Arrays automatically use primitives which further reduces memory consumption, and they're always
+perfectly sized, unlike lists that usually have unused capacity.
+
+On average, these optimizations cut memory consumption by over 4 times compared to lists in many common scenarios.
 
 ### Zero-memory scenarios
 
-Unlike lists, Immutable Arrays intelligently reuse instances, minimizing memory allocations.
+Immutable Arrays intelligently reuse instances to minimize memory:
 
 <details>
 <summary>Scenarios that return same instance</summary>
 
-The following scenarios return `this` without allocating any memory:
+These scenarios return `this` without allocating any memory:
 
 | Operation                         | Returns `this` when                 |
 |-----------------------------------|-------------------------------------|
@@ -103,8 +104,8 @@ The following scenarios return `this` without allocating any memory:
 | `distinctBy { selector }`         | `size <= 1`                         |
 | `plus(otherArray)`                | `otherArray.isEmpty()` & vice versa |
 
-In these cases, a temporary builder tracks elements, but when all elements match, it discards the builder and returns
-the original instance:
+These scenarios allocate memory to track elements, but discard it returning the original instance when all elements are
+included:
 
 | Operation                     | Returns `this` when               |
 |-------------------------------|-----------------------------------|
@@ -150,7 +151,7 @@ These scenarios return the `EMPTY` singleton without allocating any memory:
 | `toTypedImmutableArray()`                           | `isEmpty()`                         |
 | `zip(other)`                                        | `isEmpty()` or `other.isEmpty()`    |
 
-These scenarios allocate temporary memory to keep track of elements and return the `EMPTY` singleton if none were added:
+These scenarios allocate memory to track elements, but return `EMPTY` singleton when no elements are included:
 
 | Operation                                               | Returns `EMPTY` singleton when    |
 |---------------------------------------------------------|-----------------------------------|
@@ -172,124 +173,97 @@ These scenarios allocate temporary memory to keep track of elements and return t
 
 </details>
 
-Additionally, some operations re-use instances for a portion of the results. For example, `partition` returns
-`Pair(this, EMPTY)` or `Pair(EMPTY, this)` when all elements end up on same side.
+### Element Memory Consumption
 
-### Memory of uncached values
+Immutable Arrays use significantly less memory to store values:
 
-The following shows the memory consumption of storing uncached values (wrapper header + value + padding + reference):
+![average_memory_consumption](./resources/memory/AverageMemory.png)
 
-![uncached values](./resources/memory/UncachedValues.png)
-
-Regular arrays are excluded since their operations typically yield lists, leading to the above memory usage.
-
-### Memory of cached values
+Regular arrays are excluded since their operations typically yield lists, leading to the above memory usage. However,
+Immutable Arrays automatically use optimal memory layouts.
 
 <details>
-<summary>The JVM caches small boxed primitive values</summary>
-
-* All `Boolean` and `Byte` values.
-* `Char` ASCII values between `0` and `127`.
-* `Short`, `Int`, & `Long` values between `-128` and `127`.
-
-</details>
-
-<details>
-<summary>The cache is bypassed in many scenarios</summary>
-
-* `Float` & `Double` values are never cached
-* Values that are out of range, such as `128`, aren't cached
-* Manually calling the constructor bypasses the cache
-    * E.g. `java.lang.Boolean(true)`, `java.lang.Integer(0)`, etc.
-* Generic utilities that use reflection to call constructors bypass the cache
-* etc.
-
-</details>
-
-Storing references to cached wrappers often uses much more memory than storing the values themselves:
-
-![cached values](./resources/memory/CachedValues.png)
-
-The cache hit rate is highest when working with `Boolean`, `Byte`, and `Char` data types. However, referencing these
-cached wrappers consumes 2 to 8 times more memory than storing the values directly!
-
-<details>
-<summary>Int memory consumption is reduced by over 3X in most scenarios</summary>
-
-`Int` values are cached between 0% to 100% of the time depending on your use-case. Some use-cases, such as storing a
-person's age, have most values within the `-128 to 127` caching range. Other use-cases are almost always out of caching
-range, such as when storing IDs, counters, prices in cents, etc. Even use-cases with tiny values might bypass the cache
-if they're created by calling the constructor, such as via generic reflection utilities etc.
-
-The effective memory reduction can be quantified as `cachedMemoryReduction x P + uncachedMemoryReduction x (1 - P)`,
-where P is the percentage of cached `Int` values. From the memory charts, the memory reduction is 1 or 5X with JVM
-pointer compression enabled and 2 or 8X without, so the weighted average is:
-
-* Compressed oops enabled: `1*P + 5*(1 - P)` = `5 - 4P`
-* Compressed oops disabled: `2*P + 8*(1 - P)` = `8 - 6P`
-
-Using these formulas for several percentages, we see that Immutable Arrays reduce memory consumption by at least 3X most
-of the time:
-
-| Cached Percentage | Int memory reduction | Int memory reduction <br>Compressed oops |
-|-------------------|----------------------|------------------------------------------|
-| 0%                | 8X                   | 5X                                       |
-| 25%               | 6.5X                 | 4X                                       |
-| 50%               | 5X                   | 3X                                       |
-| 75%               | 3.5X                 | 2X                                       |
-| 100%              | 2X                   | 1X                                       |
-
-</details>
-
-Storing cached `Long` values is the only scenario that uses less memory than Immutable arrays assuming JVM pointer
-compression is enabled. However, most `Long` values are outside the tiny cache range since `Long` is chosen when
-anticipating larger values. For example, using `Long` to store salaries in cents, only salaries up to $1.27 are cached
-making the cache useless.
-
-### Memory Layout
-
-<details>
-<summary>Immutable Arrays automatically use primitives</summary>
+<summary>Memory layout</summary>
 
 Here's an example where we code naturally and automatically benefit from primitives:
 
 ![Memory Layout of Immutable Arrays](./resources/memory/immutable-array-memory-layout.drawio.png)
 
-Note that the `values` Immutable Array variable directly references a primitive int array in the generated bytecode.
+Note that the `values` Immutable Array variable directly references a primitive `IntArray` in the generated bytecode.
 
 Immutable Array operations produce Immutable Arrays in order to preserve immutability guarantees. However, most
-regular-array operations produce lists. Here's the resulting list memory layout of performing the same operation with a
-regular primitive array:
+regular-array operations produce lists resulting in the following memory layout:
 
 ![Memory Layout of Read-only Lists](./resources/memory/list-memory-layout.drawio.png)
 
-Lists use generics so primitives are auto-boxed into wrapper objects and references to those wrappers are stored. The
-`values` variable references an `ArrayList`, which references an over-sized array, which itself references wrapper
-objects which finally store the primitive values.
+Unlike lists or regular arrays, Immutable Arrays also dynamically switch to the most optimal data type:
+
+```kotlin
+// ImmmutableArray<Person>
+val people = immutableArrayOf(dan, bob, jill)
+
+// ImmutableFloatArray storing primitive floats!
+val peopleWeights = people.map { it.weightKg }
+```
 
 </details>
 
-Unlike lists or regular arrays, Immutable Arrays automatically use the most optimal type to avoid auto-boxing:
+The `Average Memory Consumption` chart uses the cache rate of each data type to compute the weighted-average element
+size given the cached and uncached sizes:
 
-```kotlin
-class Person(val name: String, val weightKg: Float)
+<details>
+<summary>Uncached element size</summary>
 
-val people = immutableArrayOf(dan, bob, jill) // ImmutableArray<Person>
+Immutable Arrays store primitives whereas lists store references to wrapper objects. Each wrapper incurs extra overhead
+from the object header and padding. Combined with the reference to each wrapper, this results in much higher memory
+consumption:
 
-// automatically switch from generics to primitive variants
-val weights = people.map { it.weightKg } // ImmutableFloatArray storing primitive floats!
-```
+![uncached values](./resources/memory/UncachedValues.png)
 
-Auto-boxing leads to higher memory usage, extra indirection, poor cache locality, and increased garbage collection
-overhead.
+</details>
 
-### Memory Conclusion
+<details>
+<summary>Cached element size</summary>
 
-Immutability enables many operations to use zero memory whereas the same operations on lists or regular arrays create
-new collections. Immutable Arrays automatically use primitives reducing memory consumption, and they're always perfectly
-sized, unlike lists that often waste capacity.
+The JVM maintains a small cache of boxed primitive values:
 
-Thanks to these optimizations, Immutable Arrays typically cut memory consumption by over 4 times compared to lists.
+* All `Boolean` and `Byte` values.
+* `Char` ASCII values between `0` and `127`.
+* `Short`, `Int`, & `Long` values between `-128` and `127`.
+* `Float` and `Double` values are never cached.
+
+Storing references to cached wrappers often takes more memory than storing the values directly with Immutable Arrays:
+
+![cached values](./resources/memory/CachedValues.png)
+
+Note that the cache is bypassed when calling the constructor directly (E.g.`java.lang.Boolean(true)`,
+`java.lang.Integer(0)`, etc.). This can happen in generic utilities that use reflection to fetch the class by name and
+call the constructor making it easy to miss these types of inefficiencies.
+
+</details>
+
+<details>
+<summary>Estimated cache rates</summary>
+
+These estimates represent the average percentage of values that use the JVM cache for use-cases that store values in
+lists. Lists typically store user data as opposed to all values that we encounter in code. For example, loops are common
+and loop counters are usually small, but storing loop counters in lists isn't common.
+
+| Data Type         | Caching Range    | Estimated Cache Rate |
+|-------------------|------------------|----------------------|
+| Boolean           | `true & false`   | 100%                 |
+| Byte              | `-128 to 127`    | 100%                 |
+| Char              | ASCII `0 to 127` | 90%                  |
+| Short             | `-128 to 127`    | 70%                  |
+| Int               | `-128 to 127`    | 50%                  |
+| Float             | N/A              | 0%                   |
+| Long <sup>1</sup> | `-128 to 127`    | 5%                   |
+| Double            | N/A              | 0%                   |
+
+<sup>1</sup> `Long` is chosen when anticipating larger values, such as when storing salaries in cents, but all salaries
+are greater than $1.27 making the cache useless in this scenario.
+
+</details>
 
 ## Advanced Usage
 
