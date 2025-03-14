@@ -1,31 +1,43 @@
 # Immutable Arrays
 
-**Immutable Arrays** offer a safer, more efficient alternative to Kotlin lists with familiar syntax. They are inline
-classes that compile to regular arrays but with highly-optimized operations and immutability enforced at the type level.
+**Immutable Arrays** offer a safer, faster, and more efficient alternative to lists while maintaining familiar syntax.
+They are inline classes that compile to regular arrays but with highly-optimized operations and immutability enforced at
+the type level.
 
-* **Clean & Familiar**: Maintains list-like syntax for easy adoption.
-* **Blazing Fast**: [2 to 8 times faster than lists](BENCHMARKS.md) for most operations.
-* **Memory Efficient**: [Over 4X memory reduction](#memory-efficiency) in many common scenarios.
-* **True Immutability**: Cannot be modified, even with casting.
-* **Type Safety**: Prevents accidental mutation attempts at compile time.
-* **Efficient Builders**: Gather elements more efficiently than mutable lists.
+Ideal for Android, backend services, and any application seeking enhanced safety, efficiency, or performance.
 
-Ideal for Android, backend services, and any application seeking enhanced efficiency or performance. If you find this
-library useful, please consider giving it
-a [![GitHub stars](https://img.shields.io/github/stars/daniel-rusu/pods4k?label=Star)](https://github.com/daniel-rusu/pods4k)
-on [GitHub](https://github.com/daniel-rusu/pods4k) and sharing it with others.
+[![Maven Central][maven-central-badge]][maven-central-url]
+[![Licence][license-badge]][license-url]
+![Top language][top-language-badge]
+![Build Status][build-status-badge]
+[![Stargazers][stars-badge]][stars-url]
 
-* [Quick Start](#quick-start)
-* [Performance](#performance)
-* [Memory Efficiency](#memory-efficiency)
-* [Advanced Usage](#advanced-usage)
-* [Comparison with Alternatives](#comparison-with-alternatives)
-* [Caveats](#caveats)
+[Key Benefits](#key-benefits) |
+[Quick Start](#quick-start) |
+[Performance](#performance) |
+[Efficiency](#efficiency) |
+[Usage](#usage) |
+[Comparison with Alternatives](#comparison-with-alternatives) |
+[Caveats](#caveats)
+
+## Key Benefits
+
+* ![Familiar][familiar-shield] Maintains list-like syntax for easy adoption.
+* ![Fast][fast-shield] [2 to 8 times faster than lists](BENCHMARKS.md) for most operations.
+* ![Efficient][efficient-shield] [Over 4X memory reduction](#memory-efficiency) in many common scenarios.
+* ![Immutable][immutable-shield] Cannot be modified, even with casting.
+* ![Type Safe][type-safe-shield] Prevents accidental mutation attempts at compile time.
+* ![Efficient Builders][efficient-builders-shield] Gather elements more efficiently than
+  mutable lists.
+
+If you find this
+library useful, please consider giving it a [![GitHub stars][github-stars-shield]][github-url] on [GitHub][github-url]
+and sharing it with others.
 
 ## Quick Start
 
-<a href="https://github.com/daniel-rusu/pods4k/releases/latest" alt="Activity"><img src="https://img.shields.io/github/v/release/daniel-rusu/pods4k?label=Latest Release" /></a>
-available on Maven Central. See [dependency instructions](../README.md#installation) for more details.
+![Latest Version][maven-central-shield] available on Maven Central.
+See [dependency instructions](../README.md#installation) for more details.
 
 ```kotlin
 repositories {
@@ -67,7 +79,7 @@ Elements can be inspected much faster than lists when dealing with the 8 base ty
 
 ![any benchmarks](./resources/benchmarks/any.png)
 
-## Memory Efficiency
+## Efficiency
 
 Immutability enables re-using instances in many scenarios whereas the same operations on lists create new collections.
 Additionally, Immutable Arrays automatically use primitives which further reduces memory consumption, and they're always
@@ -265,7 +277,7 @@ are greater than $1.27 making the cache useless in this scenario.
 
 </details>
 
-## Advanced Usage
+## Usage
 
 <details>
 <summary>Creating Immutable Arrays</summary>
@@ -938,3 +950,40 @@ This library leverages the following experimental Kotlin features that may evolv
       of this feature so that Immutable Arrays can eventually support Kotlin multiplatform.
 
 </details>
+
+[maven-central-badge]: https://img.shields.io/maven-central/v/com.danrusu.pods4k/pods4k?style=for-the-badge
+
+[license-badge]: https://img.shields.io/github/license/daniel-rusu/pods4k?style=for-the-badge
+
+[top-language-badge]: https://img.shields.io/github/languages/top/daniel-rusu/pods4k?style=for-the-badge
+
+[build-status-badge]: https://img.shields.io/github/actions/workflow/status/daniel-rusu/pods4k/ci.yml?style=for-the-badge&label=CI
+
+
+[stars-badge]: https://img.shields.io/github/stars/daniel-rusu/pods4k?style=for-the-badge
+
+
+[familiar-shield]: https://img.shields.io/badge/Clean_%26_Familiar-blue
+
+[fast-shield]: https://img.shields.io/badge/Blazing_Fast-blue
+
+[efficient-shield]: https://img.shields.io/badge/Memory_Efficient-blue
+
+[immutable-shield]: https://img.shields.io/badge/True_Immutability-blue
+
+[type-safe-shield]: https://img.shields.io/badge/Type_Safety-blue
+
+[efficient-builders-shield]: https://img.shields.io/badge/Efficient_Builders-blue
+
+[github-stars-shield]: https://img.shields.io/github/stars/daniel-rusu/pods4k?label=Star
+
+[maven-central-shield]: https://img.shields.io/maven-central/v/com.danrusu.pods4k/pods4k?label=Latest%20Version
+
+
+[github-url]: https://github.com/daniel-rusu/pods4k
+
+[stars-url]: https://github.com/daniel-rusu/pods4k/stargazers
+
+[maven-central-url]: https://central.sonatype.com/artifact/com.danrusu.pods4k/pods4k
+
+[license-url]: https://github.com/daniel-rusu/pods4k/blob/main/LICENSE
