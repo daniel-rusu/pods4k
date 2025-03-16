@@ -12,29 +12,27 @@ Ideal for Android, backend services, and any application seeking enhanced safety
 ![Build Status][build-status-badge]
 [![Stargazers][stars-badge]][stars-url]
 
-[Key Benefits](#key-benefits) |
-[Quick Start](#quick-start) |
-[Performance](#performance) |
-[Efficiency](#efficiency) |
-[Usage](#usage) |
-[Comparison with Alternatives](#comparison-with-alternatives) |
-[Caveats](#caveats)
+[Key Benefits](#-key-benefits) |
+[Quick Start](#-quick-start) |
+[Performance](#-performance) |
+[Efficiency](#-efficiency) |
+[Usage](#-usage) |
+[Comparison with Alternatives](#-comparison-with-alternatives) |
+[Caveats](#-caveats)
 
-## Key Benefits
+## ✨ Key Benefits
 
 * ![Familiar][familiar-shield] Maintains list-like syntax for easy adoption.
 * ![Fast][fast-shield] [2 to 8 times faster than lists](BENCHMARKS.md) for most operations.
-* ![Efficient][efficient-shield] [Over 4X memory reduction](#memory-efficiency) in many common scenarios.
+* ![Efficient][efficient-shield] [Over 4X memory reduction](#-efficiency) in many common scenarios.
 * ![Immutable][immutable-shield] Cannot be modified, even with casting.
 * ![Type Safe][type-safe-shield] Prevents accidental mutation attempts at compile time.
-* ![Efficient Builders][efficient-builders-shield] Gather elements more efficiently than
-  mutable lists.
+* ![Efficient Builders][efficient-builders-shield] Gather elements more efficiently than mutable lists.
 
-If you find this
-library useful, please consider giving it a [![GitHub stars][github-stars-shield]][github-url] on [GitHub][github-url]
-and sharing it with others.
+If you find this library useful, please consider giving it a [![GitHub stars][github-stars-shield]][github-url]
+on [GitHub][github-url] and sharing it with others.
 
-## Quick Start
+## 🚀 Quick Start
 
 ![Latest Version][maven-central-shield] available on Maven Central.
 See [dependency instructions](../README.md#installation) for more details.
@@ -62,7 +60,7 @@ val employedPeople = people.filter { it.isEmployed() }
 val salaries = employedPeople.map { it.salary }
 ```
 
-## Performance
+## 🔥 Performance
 
 Immutable Arrays typically outperform lists by 2 to 8 times, with some operations even faster. They even outperform
 regular arrays in many scenarios, thanks to optimized operations which preserve immutability.
@@ -79,7 +77,7 @@ Elements can be inspected much faster than lists when dealing with the 8 base ty
 
 ![any benchmarks](./resources/benchmarks/any.png)
 
-## Efficiency
+## 🎯 Efficiency
 
 Immutability enables re-using instances in many scenarios whereas the same operations on lists create new collections.
 Additionally, Immutable Arrays automatically use primitives which further reduces memory consumption, and they're always
@@ -277,7 +275,7 @@ are greater than $1.27 making the cache useless in this scenario.
 
 </details>
 
-## Usage
+## 📖 Usage
 
 <details>
 <summary>Creating Immutable Arrays</summary>
@@ -542,7 +540,7 @@ There are several reasons why Immutable Arrays shouldn't implement the `List` in
 
 </details>
 
-## Comparison with Alternatives
+## 🏆 Comparison with Alternatives
 
 | Feature                  | Immutable Arrays | Regular Arrays | Read-only Lists    | Unmodifiable Lists | Java Immutable Lists |
 |--------------------------|------------------|----------------|--------------------|--------------------|----------------------|
@@ -722,7 +720,7 @@ values[0] = 100 // Compiler error: No set method providing array access
 <summary>✅ More memory efficient</summary>
 
 Immutable Arrays reduce memory consumption by over 4X compared to lists in most scenarios. See
-the [Memory Efficiency](#memory-efficiency) comparison for details.
+the [Efficiency](#-efficiency) comparison for details.
 
 </details>
 
@@ -805,7 +803,7 @@ Immutable lists have the same performance drawbacks as read-only lists
 
 </details>
 
-## Caveats
+## 📌 Caveats
 
 <details>
 <summary>Shallow immutability</summary>
@@ -958,7 +956,6 @@ This library leverages the following experimental Kotlin features that may evolv
 [top-language-badge]: https://img.shields.io/github/languages/top/daniel-rusu/pods4k?style=for-the-badge
 
 [build-status-badge]: https://img.shields.io/github/actions/workflow/status/daniel-rusu/pods4k/ci.yml?style=for-the-badge&label=CI
-
 
 [stars-badge]: https://img.shields.io/github/stars/daniel-rusu/pods4k?style=for-the-badge
 
