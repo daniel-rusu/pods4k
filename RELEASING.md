@@ -23,5 +23,5 @@ Releasing
       a long time for the artifact status to go from `PUBLISHING` to `PUBLISHED` so I recommend checking back every 30
       minutes or so.
 5. Create a `Finalize release X.Y.Z` commit with the following changes:
-    * Update [README.md](README.md#dependency) to reference the newly-released version in the gradle & maven dependency
+    * Update [latest_version.json](latest_version.json) with the new version as the documentation uses this version
     * Document the new release version & date in the [changelog.md](changelog.md)

@@ -34,7 +34,7 @@ on [GitHub][github-url] and sharing it with others.
 
 ## 🚀 Quick Start
 
-![Latest Version][maven-central-shield] available on Maven Central.
+[![Latest Version][latest-version-shield]][maven-central-url] available on Maven Central.
 See [dependency instructions](../README.md#installation) for more details.
 
 ```kotlin
@@ -949,7 +949,7 @@ This library leverages the following experimental Kotlin features that may evolv
 
 </details>
 
-[maven-central-badge]: https://img.shields.io/maven-central/v/com.danrusu.pods4k/pods4k?style=for-the-badge
+[maven-central-badge]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdaniel-rusu%2Fpods4k%2Frefs%2Fheads%2Fmain%2Flatest_version.json&query=version&style=for-the-badge&label=maven-central&color=orange
 
 [license-badge]: https://img.shields.io/github/license/daniel-rusu/pods4k?style=for-the-badge
 
@@ -974,7 +974,7 @@ This library leverages the following experimental Kotlin features that may evolv
 
 [github-stars-shield]: https://img.shields.io/github/stars/daniel-rusu/pods4k?label=Star
 
-[maven-central-shield]: https://img.shields.io/maven-central/v/com.danrusu.pods4k/pods4k?label=Latest%20Version
+[latest-version-shield]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdaniel-rusu%2Fpods4k%2Frefs%2Fheads%2Fmain%2Flatest_version.json&query=version&label=Latest%20Version&color=orange
 
 
 [github-url]: https://github.com/daniel-rusu/pods4k

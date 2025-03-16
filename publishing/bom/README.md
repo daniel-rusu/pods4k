@@ -10,7 +10,7 @@ release. The main use-case for the BOM is if you prefer to pick and choose indiv
 depending on the entire library. In that case, you can reference the BOM at a particular version and add dependencies
 for the components that you want without specifying their individual versions.
 
-<a href="https://github.com/daniel-rusu/pods4k/releases/latest" alt="Activity"><img src="https://img.shields.io/github/v/release/daniel-rusu/pods4k?label=Latest Release" /></a>
+[![Latest Release][latest-version-shield]][maven-central-url]
 
 ## Gradle
 
@@ -21,7 +21,7 @@ repositories {
 
 dependencies {
     // Import the BOM at a particular version
-    implementation(platform("com.danrusu.pods4k:bom:[version_number]"))
+    implementation(platform("com.danrusu.pods4k:bom:<latest_version>"))
 
     // Pick the artifacts that you want but don't specify their versions as that's controlled by the BOM
     implementation("com.danrusu.pods4k.immutable-arrays:core")
@@ -40,7 +40,7 @@ dependencies {
             <dependency>
                 <groupId>com.danrusu.pods4k</groupId>
                 <artifactId>bom</artifactId>
-                <version>[version_number]</version>
+                <version>latest_version</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -69,3 +69,7 @@ The `bom` references the following artifacts:
 |:--------------------------------------|:------------------------------------------|:---------------------------------------------------------------------------|
 | `com.danrusu.pods4k.immutable-arrays` | `core`                                    | The core Immutable Arrays library                                          |
 | `com.danrusu.pods4k.immutable-arrays` | `transformations-to-standard-collections` | Extensions that transform immutable arrays to standard-library collections |
+
+[latest-version-shield]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdaniel-rusu%2Fpods4k%2Frefs%2Fheads%2Fmain%2Flatest_version.json&query=version&label=Latest%20Version&color=orange
+
+[maven-central-url]: https://central.sonatype.com/artifact/com.danrusu.pods4k/bom
