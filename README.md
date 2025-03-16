@@ -1,4 +1,10 @@
-# pods4k [![Build Status](https://img.shields.io/github/actions/workflow/status/daniel-rusu/pods4k/ci.yml?branch=main&label=CI&logo=github)](https://github.com/daniel-rusu/pods4k/actions/workflows/ci.yml?query=branch%3Amain++)
+# pods4k
+
+[![Maven Central][maven-central-badge]][maven-central-url]
+[![Licence][license-badge]][license-url]
+![Top language][top-language-badge]
+![Build Status][build-status-badge]
+[![Stargazers][stars-badge]][stars-url]
 
 ## Performance-oriented data structures for Kotlin
 
@@ -11,8 +17,7 @@ on [GitHub](https://github.com/daniel-rusu/pods4k) and sharing it with others.
 
 ## Installation
 
-<a href="https://github.com/daniel-rusu/pods4k/releases/latest" alt="Activity"><img src="https://img.shields.io/github/v/release/daniel-rusu/pods4k?label=pods4k" /></a>
-is available from Maven Central:
+[![Latest Version][maven-central-shield]][maven-central-url] available on Maven Central:
 
 **Gradle:**
 
@@ -40,32 +45,30 @@ Alternatively, you can [pick & choose](publishing/bom/README.md) individual comp
 
 ## Immutable Arrays
 
-[Immutable Arrays](immutable-arrays/README.md) are a safer and more efficient alternative to read-only lists while
-maintaining the same look and feel.
+[Immutable Arrays](immutable-arrays/README.md) offer a safer, faster, and more efficient alternative to lists while
+maintaining familiar syntax.
 
 #### Key Benefits
 
-* **Clean & Familiar**: List-like syntax ensures easy adoption with clean code.
-* **True Immutability**: Cannot be mutated through casting.
-* **Fast**: 2 to 8X faster [benchmark results](immutable-arrays/BENCHMARKS.md) than lists for most operations!
-* **Memory Efficient**: Over 4X [memory reduction](immutable-arrays/README.md#memory-consumption) in most scenarios!
-* **Type Safety**: Prevents accidental mutation attempts at compile time.
+* ![Fast][fast-shield] [2 to 8 times faster than lists](immutable-arrays/BENCHMARKS.md) for most operations.
+* ![Efficient][efficient-shield] [Over 4X memory reduction](immutable-arrays/README.md#-efficiency) in many common
+  scenarios.
+* ![Immutable][immutable-shield] Cannot be modified, even with casting.
+* ![Type Safe][type-safe-shield] Prevents accidental mutation attempts at compile time.
+* ![Efficient Builders][efficient-builders-shield] Gather elements more efficiently than mutable lists.
 
-#### Usage
+#### Intuitive list-like syntax
 
 ```kotlin
 val people = immutableArrayOf(dan, jill, bobby)
-people[0] // dan
 
-// Normal iteration with loops, forEach, asSequence, etc.
+// Iterate naturally
 for (person in people) {
-    sendMarketingEmail(person)
+    sendMarketingEmailTo(person)
 }
-
-// All the typical transformations and conditions
-val adults = people.filter { it.age >= 18 }
-val adultAges = adults.map { it.age }
-val containsRetirees = adults.any { it.isRetired() }
+// All the usual operations
+val employedPeople = people.filter { it.isEmployed() }
+val salaries = employedPeople.map { it.salary }
 ```
 
 See [Immutable Arrays](immutable-arrays/README.md) for more specifics along with detailed comparisons against regular
@@ -83,3 +86,36 @@ arrays, read-only lists, and immutable lists.
 Some data structures use techniques which are only supported by the Kotlin compiler. While they can be used in a mixed
 Java & Kotlin codebase to store one of these data structures in a Java-defined collection, referencing these data
 structures by their class name is only supported within Kotlin files.
+
+
+[maven-central-badge]: https://img.shields.io/maven-central/v/com.danrusu.pods4k/pods4k?style=for-the-badge
+
+[license-badge]: https://img.shields.io/github/license/daniel-rusu/pods4k?style=for-the-badge
+
+[top-language-badge]: https://img.shields.io/github/languages/top/daniel-rusu/pods4k?style=for-the-badge
+
+[build-status-badge]: https://img.shields.io/github/actions/workflow/status/daniel-rusu/pods4k/ci.yml?style=for-the-badge&label=CI
+
+[stars-badge]: https://img.shields.io/github/stars/daniel-rusu/pods4k?style=for-the-badge
+
+
+[fast-shield]: https://img.shields.io/badge/Blazing_Fast-blue
+
+[efficient-shield]: https://img.shields.io/badge/Memory_Efficient-blue
+
+[immutable-shield]: https://img.shields.io/badge/True_Immutability-blue
+
+[type-safe-shield]: https://img.shields.io/badge/Type_Safety-blue
+
+[efficient-builders-shield]: https://img.shields.io/badge/Efficient_Builders-blue
+
+[github-stars-shield]: https://img.shields.io/github/stars/daniel-rusu/pods4k?label=Star
+
+[maven-central-shield]: https://img.shields.io/maven-central/v/com.danrusu.pods4k/pods4k?label=Latest%20Version
+
+
+[stars-url]: https://github.com/daniel-rusu/pods4k/stargazers
+
+[maven-central-url]: https://central.sonatype.com/artifact/com.danrusu.pods4k/pods4k
+
+[license-url]: https://github.com/daniel-rusu/pods4k/blob/main/LICENSE
