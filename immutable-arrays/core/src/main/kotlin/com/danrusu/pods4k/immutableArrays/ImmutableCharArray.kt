@@ -448,46 +448,81 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * Returns an immutable array containing only the elements matching the given [predicate].
      */
-    public inline fun filter(predicate: (element: Char) -> Boolean): ImmutableCharArray {
-        val result = Builder()
-        for (element in values) {
-            if (predicate(element)) {
-                result.add(element)
-            }
-        }
-        if (result.size == size) return this
-
-        return result.build()
+    public inline fun filter(crossinline predicate: (element: Char) -> Boolean): ImmutableCharArray {
+        // delegate to filterIndexed as that's extremely optimized
+        return filterIndexed { _, element -> predicate(element) }
     }
 
     /**
      * Returns an immutable array containing only the elements matching the given [predicate].
+     *
+     * Warning: This code is quite dense because it's highly optimized to reduce the temporary
+     * memory overhead and also dramatically improves performance due to branch elimination and
+     * a perfectly-sized result.
      */
-    public inline fun filterIndexed(predicate: (index: Int, element: Char) -> Boolean): ImmutableCharArray {
-        val result = Builder()
-        forEachIndexed { index, element ->
-            if (predicate(index, element)) {
-                result.add(element)
-            }
-        }
-        if (result.size == size) return this
+    public fun filterIndexed(predicate: (index: Int, element: Char) -> Boolean): ImmutableCharArray {
+        if (isEmpty()) return this
 
-        return result.build()
+        // divide by 32 rounding up
+        val bitArraySize = (size + 31) ushr 5
+        // store an array of int values whose 1-bits capture which elements pass the predicate
+        val bitArray = IntArray(bitArraySize)
+
+        var resultSize = 0
+        // the bit index into the current 32-bit int
+        var bitIndex = -1 // start at -1 as it gets incremented right away in the loop
+        var bitArrayIndex = 0
+        var currentBits = 0 // the current 32-bits with no elements yet
+        forEachIndexed { index, element ->
+            if (++bitIndex == 32) {
+                // reached the end of the current bits so store them and reset
+                bitArray[bitArrayIndex++] = currentBits
+                currentBits = 0
+                bitIndex = 0
+            }
+            // jit turns this into a branchless operation
+            val currentElement = if (predicate(index, element)) 1 else 0
+
+            // conditionally increase the size without branching
+            resultSize += currentElement
+
+            // conditionally include the current element without branching
+            currentBits = currentBits or (currentElement shl bitIndex)
+        }
+        if (resultSize == 0) return EMPTY
+        if (resultSize == size) return this
+
+        // store the last set of partially-filled bits
+        bitArray[bitArrayIndex] = currentBits
+
+        val result = CharArray(resultSize)
+        var resultIndex = 0
+        bitArrayIndex = 0
+        bitIndex = -1
+        currentBits = bitArray[0]
+        var originalIndex = 0
+        // check the resultIndex instead of the originalIndex so that we can stop early
+        while (resultIndex < result.size) {
+            if (++bitIndex == 32) {
+                // reached the end of the current bits so get the next 32 bits and reset
+                currentBits = bitArray[++bitArrayIndex]
+                bitIndex = 0
+            }
+            // always copy to avoid branching as resultIndex won't increment if current element isn't included
+            result[resultIndex] = this[originalIndex++]
+            // increment the resultIndex if the current element should be included
+            val currentElement = (currentBits ushr bitIndex) and 1
+            resultIndex += currentElement
+        }
+        return ImmutableCharArray(result)
     }
 
     /**
      * Returns an immutable array containing only the elements that don't match the [predicate].
      */
-    public inline fun filterNot(predicate: (element: Char) -> Boolean): ImmutableCharArray {
-        val result = Builder()
-        for (element in values) {
-            if (!predicate(element)) {
-                result.add(element)
-            }
-        }
-        if (result.size == size) return this
-
-        return result.build()
+    public inline fun filterNot(crossinline predicate: (element: Char) -> Boolean): ImmutableCharArray {
+        // delegate to filterIndexed as that's extremely optimized
+        return filterIndexed { _, element -> !predicate(element) }
     }
 
     /**
@@ -587,7 +622,7 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
      * Returns an immutable array containing only the elements having distinct keys returned by the
      * [selector]
      */
-    public inline fun <K> distinctBy(selector: (element: Char) -> K): ImmutableCharArray {
+    public inline fun <K> distinctBy(crossinline selector: (element: Char) -> K): ImmutableCharArray {
         if (size <= 1) return this
 
         val keys = HashSet<K>()
