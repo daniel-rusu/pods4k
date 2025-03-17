@@ -986,6 +986,15 @@ class ImmutableIntArrayTest {
             expectThat(filter { it >= 0 }.referencesSameArrayAs(this))
                 .isTrue()
         }
+
+        // fuzz testing ensuring that the behavior matches regular arrays since the implementation is complex
+        repeat(100) {
+            val size = Random.nextInt(from = 0, until = 200)
+            val randomValues = IntArray(size) { Random.nextInt() }
+
+            expectThat(randomValues.toImmutableArray().filter { it % 2 == 0 }.asList())
+                .isEqualTo(randomValues.filter { it % 2 == 0 })
+        }
     }
 
     @Test
@@ -1005,6 +1014,16 @@ class ImmutableIntArrayTest {
                     .referencesSameArrayAs(this),
             ).isTrue()
         }
+
+        // fuzz testing ensuring that the behavior matches regular arrays since the implementation is complex
+        repeat(100) {
+            val size = Random.nextInt(from = 0, until = 200)
+            val randomValues = IntArray(size) { Random.nextInt() }
+
+            expectThat(
+                randomValues.toImmutableArray().filterIndexed { index, value -> (index + value) % 2 == 0 }.asList(),
+            ).isEqualTo(randomValues.filterIndexed { index, value -> (index + value) % 2 == 0 })
+        }
     }
 
     @Test
@@ -1021,6 +1040,15 @@ class ImmutableIntArrayTest {
 
             expectThat(filterNot { it < 0 }.referencesSameArrayAs(this))
                 .isTrue()
+        }
+
+        // fuzz testing ensuring that the behavior matches regular arrays since the implementation is complex
+        repeat(100) {
+            val size = Random.nextInt(from = 0, until = 200)
+            val randomValues = IntArray(size) { Random.nextInt() }
+
+            expectThat(randomValues.toImmutableArray().filterNot { it % 2 == 0 }.asList())
+                .isEqualTo(randomValues.filterNot { it % 2 == 0 })
         }
     }
 

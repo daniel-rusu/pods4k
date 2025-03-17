@@ -19,6 +19,9 @@ _Date TBD_
 
 **Performance Improvements:**
 
+* Update `filter`, `filterIndexed`, & `filterNot` to switch from accumulating elements in a builder to capturing
+  accepted elements as single bits in an `IntArray` and use bitwise operations to avoid branching. This cuts temporary
+  memory by over 10X and dramatically improves performance.
 * Update `distinct()` to use `filter` with a `HashSet` instead of calling `toSet().toImmutableArray()` to avoid using
   the more expensive `LinkedHashSet` while still maintaining original ordering. This also returns the same instance when
   all elements are already distinct.
