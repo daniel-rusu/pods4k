@@ -107,6 +107,12 @@ The `drop` and `dropLast` operations have similar relative performance. Omitting
 
 Operations that conditionally copy elements can be significantly faster than lists and regular arrays
 
+![filter benchmarks](./resources/benchmarks/filter.png)
+
+Although filtering can't take advantage of bulk copy operations since the accepted values are scattered, representing
+accepted elements as individual binary bits unlocked low-level bitwise operations resulting in seemingly impossible
+performance.
+
 ![takeWhile benchmarks](./resources/benchmarks/takeWhile.png)
 
 These are much faster because producing an Immutable Array allows us to find the cutoff point and copy memory in bulk.

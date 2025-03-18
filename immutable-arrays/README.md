@@ -73,9 +73,9 @@ Smaller data types are split on the right to avoid skewing the axis due to extre
 
 ![map benchmarks](./resources/benchmarks/map.png)
 
-Elements can be inspected much faster than lists when dealing with the 8 base types:
+Filtering elements seems impossibly fast:
 
-![any benchmarks](./resources/benchmarks/any.png)
+![filter benchmarks](./resources/benchmarks/filter.png)
 
 ## 🎯 Efficiency
 
