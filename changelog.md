@@ -1,9 +1,9 @@
 Change Log
 ==========
 
-## Unreleased
+## 0.7.0
 
-_Date TBD_
+_2025-3-18_
 
 ### Immutable Arrays
 
