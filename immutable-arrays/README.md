@@ -80,8 +80,9 @@ Filtering elements seems impossibly fast:
 ## 🎯 Efficiency
 
 Immutability enables re-using instances in many scenarios whereas the same operations on lists create new collections.
-Additionally, Immutable Arrays automatically use primitives which further reduces memory consumption, and they're always
-perfectly sized, unlike lists that usually have unused capacity.
+Many operations have also been optimized to use significantly less temporary memory. Additionally, Immutable Arrays
+automatically use primitives which further reduces memory consumption, and they're always perfectly sized, unlike lists
+that usually have unused capacity.
 
 On average, these optimizations cut memory consumption by over 4 times compared to lists in many common scenarios.
 
