@@ -13,6 +13,7 @@ Releasing
     * **Release Title**: `X.Y.Z`
     * **Description**: Copy the changes from [changelog.md](changelog.md) for this release
         * Copy the raw contents to avoid formatting issues due to escaped characters etc.
+    * Uncheck the `Set as latest release` checkbox as it's not quite ready yet
 4. Release artifacts in Maven Central:
     * The previous step should have automatically triggered the release workflow
     * Make sure the [`Trigger Release` action](https://github.com/daniel-rusu/pods4k/actions/workflows/release.yml)
@@ -25,3 +26,8 @@ Releasing
 5. Create a `Finalize release X.Y.Z` commit with the following changes:
     * Update [latest_version.json](latest_version.json) with the new version as the documentation uses this version
     * Document the new release version & date in the [changelog.md](changelog.md)
+6. Mark the new release as the latest release
+    * Edit the new [GitHub release](https://github.com/daniel-rusu/pods4k/releases) and select the
+      `Set as the latest release` checkbox at the bottom
+    * Make sure that the new release displays as the latest release in the `Releases` section of
+      the [repo front page](https://github.com/daniel-rusu/pods4k)
