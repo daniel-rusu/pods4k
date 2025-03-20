@@ -1,0 +1,9 @@
+blank_issues_enabled: false
+contact_links:
+  - name: ❓ Questions
+    url: https://github.com/daniel-rusu/pods4k/discussions
+    about: Ask questions, clarify behavior of features, anything that is unclear
+
+  - name: ⭐ Star this project to show your support
+    url: https://github.com/daniel-rusu/pods4k/
+    about: Please consider clicking the star button in the top right corner

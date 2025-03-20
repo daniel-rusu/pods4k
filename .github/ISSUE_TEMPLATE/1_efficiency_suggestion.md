@@ -1,5 +1,5 @@
 ---
-name: Performance or efficiency idea
+name: 💡 Performance or efficiency idea
 about: Suggest a performance or efficiency improvement
 title: ''
 labels: performance / efficiency
