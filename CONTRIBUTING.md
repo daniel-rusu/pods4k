@@ -1,11 +1,25 @@
 # Contributing to pods4k
-We love your input! We are currently looking for the following types of contributions:
 
-* [Submitting bug reports](https://github.com/daniel-rusu/pods4k/issues/new?labels=bug&template=bug_report.md)
-* [Submitting feature requests](https://github.com/daniel-rusu/pods4k/issues/new?labels=enhancement&template=feature_request.md) to enhance the existing data structures of this library
-* [Discussions](https://github.com/daniel-rusu/pods4k/discussions) about improving documentation
-* [Discussions](https://github.com/daniel-rusu/pods4k/discussions) about improving the quality and maintainability of the code
-* [Discussions](https://github.com/daniel-rusu/pods4k/discussions) about improving the infrastructure (CI, release process, linting, etc.)
+We love your input! We're currently looking for the following types of contributions:
+
+* [Bug reports][bug-report-url] for behavior or documentation errors
+* [Feature requests][feature-request-url] to enhance the existing data structures of this library
+* [Performance or efficiency suggestions][efficiency-suggestion-url] to share high-level ideas
+* [Documentation discussions][discussions-url] to improve clarity and adoption
+* [Quality discussions][discussions-url] to improve code organization
+* [Infrastructure discussions][discussions-url] to improve CI, release process, linting, etc.
 
 ## License
-By contributing, you agree that your contributions will be licensed under the [Apache-2.0 License](http://www.apache.org/licenses/LICENSE-2.0) of this library.
+
+By contributing, you agree that your contributions will be licensed under the [Apache-2.0 License][apache-license] of
+this library.
+
+[bug-report-url]: https://github.com/daniel-rusu/pods4k/issues/new?labels=bug&template=bug_report.md
+
+[feature-request-url]: https://github.com/daniel-rusu/pods4k/issues/new?labels=enhancement&template=feature_request.md
+
+[efficiency-suggestion-url]: https://github.com/daniel-rusu/pods4k/issues/new?template=efficiency_suggestion.md
+
+[discussions-url]: https://github.com/daniel-rusu/pods4k/discussions
+
+[apache-license]: http://www.apache.org/licenses/LICENSE-2.0
