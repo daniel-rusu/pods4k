@@ -14,7 +14,7 @@ We love your input! We're currently looking for the following types of contribut
 By contributing, you agree that your contributions will be licensed under the [Apache-2.0 License][apache-license] of
 this library.
 
-[bug-report-url]: https://github.com/daniel-rusu/pods4k/issues/new?template=3_bug_report.md
+[bug-report-url]: https://github.com/daniel-rusu/pods4k/issues/new?template=3_bug_report.yml
 
 [feature-request-url]: https://github.com/daniel-rusu/pods4k/issues/new?template=2_feature_request.md
 

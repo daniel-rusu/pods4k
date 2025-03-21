@@ -1,0 +1,45 @@
+name: "🐞 Bug report"
+description: Report a bug to help us improve
+labels: [
+  "bug"
+]
+body:
+  - type: markdown
+    attributes:
+      value: "**Thanks for taking the time to report a bug!**"
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: Please enter a clear and concise description of the defect
+      placeholder: Empty immutable arrays don't return 0 for the size
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce-steps
+    attributes:
+      label: "Steps to reproduce"
+      description: Please provide steps to reproduce the defect. A short code snippet would be ideal.
+      value: |
+        ```kotlin
+        val names = emptyImmutableArray<String>()
+        println(names.size) // 42 but should be 0
+        ```
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: "pods4k version"
+      description: Please enter the version of this library that you're currently using.
+      placeholder: E.g. 0.7.0
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: "Context"
+      description: Any additional context that might be relevant
+      placeholder: Using Kotlin 1.9.25 with OpenJDK 21
+    validations:
+      required: false
