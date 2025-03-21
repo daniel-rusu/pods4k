@@ -1,0 +1,43 @@
+name: "🚀 Feature request"
+description: Suggest a new capability to improve a data structure
+labels: [
+  "enhancement"
+]
+body:
+  - type: markdown
+    attributes:
+      value: "**Thanks for taking the time to suggest an improvement!**"
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: Briefly describe the feature that you are proposing
+      placeholder: Please add a `forEach` method on Immutable Arrays to perform an action for each element
+    validations:
+      required: true
+  - type: textarea
+    id: scenario
+    attributes:
+      label: "Scenario"
+      description: Briefly describe a scenario or use-case that would benefit from this feature
+      placeholder: |
+        Given a `people` Immutable Array, performing an action on each element currently looks like this:
+        ```kotlin
+          for (person in people) {
+            sendMarketingEmailTo(person)
+          }
+        ```
+        
+        A `forEach` method would make this cleaner:
+        ```kotlin
+          people.forEach { sendMarketingEmailTo(it) }
+        ```
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "Alternatives"
+      description: Briefly describe any alternative solutions that you considered (if any)
+    validations:
+      required: false

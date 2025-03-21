@@ -16,7 +16,7 @@ this library.
 
 [bug-report-url]: https://github.com/daniel-rusu/pods4k/issues/new?template=3_bug_report.yml
 
-[feature-request-url]: https://github.com/daniel-rusu/pods4k/issues/new?template=2_feature_request.md
+[feature-request-url]: https://github.com/daniel-rusu/pods4k/issues/new?template=2_feature_request.yml
 
 [efficiency-suggestion-url]: https://github.com/daniel-rusu/pods4k/issues/new?template=1_efficiency_suggestion.md
 
