@@ -18,7 +18,7 @@ this library.
 
 [feature-request-url]: https://github.com/daniel-rusu/pods4k/issues/new?template=2_feature_request.yml
 
-[efficiency-suggestion-url]: https://github.com/daniel-rusu/pods4k/issues/new?template=1_efficiency_suggestion.md
+[efficiency-suggestion-url]: https://github.com/daniel-rusu/pods4k/issues/new?template=1_efficiency_suggestion.yml
 
 [discussions-url]: https://github.com/daniel-rusu/pods4k/discussions
 

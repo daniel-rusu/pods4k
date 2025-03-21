@@ -1,0 +1,32 @@
+name: "💡 Performance or efficiency idea"
+description: Suggest a performance or efficiency improvement
+labels: [
+  "performance / efficiency"
+]
+body:
+  - type: markdown
+    attributes:
+      value: "**Thanks for taking the time to suggest an improvement!**"
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: Briefly describe the performance or efficiency improvement that you're suggesting
+      placeholder: The `partition` operation should use a perfectly-sized double-sided buffer instead of appending results to 2 separate dynamically-growing builders. Elements that pass the predicate should be added to the front of the buffer and the others to the end so that both sides grow inwards towards the center.
+    validations:
+      required: true
+  - type: textarea
+    id: impacts
+    attributes:
+      label: "Memory and Performance impacts"
+      description: Briefly describe how this might affect performance and memory consumption
+      placeholder: This reduces memory overhead as the double-sided buffer would be perfectly sized whereas appending to 2 builders ends up with extra unused capacity in each builder.  This also avoids the temporary memory of previously-discarded buffers as resizing no longer occurs which should also improve performance.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "Alternative solutions"
+      description: Briefly describe alternative solutions that you considered (if any) in case we can combine ideas
+    validations:
+      required: false

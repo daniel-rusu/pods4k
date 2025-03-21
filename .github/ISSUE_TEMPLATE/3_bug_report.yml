@@ -19,7 +19,7 @@ body:
     id: reproduce-steps
     attributes:
       label: "Steps to reproduce"
-      description: Please provide steps to reproduce the defect. A short code snippet would be ideal.
+      description: Please provide steps to reproduce the defect. A short code snippet would be ideal
       value: |
         ```kotlin
         val names = emptyImmutableArray<String>()
@@ -31,7 +31,7 @@ body:
     id: version
     attributes:
       label: "pods4k version"
-      description: Please enter the version of this library that you're currently using.
+      description: Please enter the version of this library that you're currently using
       placeholder: E.g. 0.7.0
     validations:
       required: true
