@@ -867,12 +867,11 @@ public operator fun ImmutableCharArray.plus(other: ImmutableCharArray): Immutabl
  * Leaves [this] immutable array as is and returns an [ImmutableShortArray] with the elements of
  * [this] followed by the elements of [other]
  */
-public operator fun ImmutableShortArray.plus(other: ImmutableShortArray): ImmutableShortArray =
-    when {
-        isEmpty() -> other
-        other.isEmpty() -> this
-        else -> ImmutableShortArray(this.values + other.values)
-    }
+public operator fun ImmutableShortArray.plus(other: ImmutableShortArray): ImmutableShortArray = when {
+    isEmpty() -> other
+    other.isEmpty() -> this
+    else -> ImmutableShortArray(this.values + other.values)
+}
 
 /**
  * Leaves [this] immutable array as is and returns an [ImmutableIntArray] with the elements of
@@ -898,23 +897,21 @@ public operator fun ImmutableLongArray.plus(other: ImmutableLongArray): Immutabl
  * Leaves [this] immutable array as is and returns an [ImmutableFloatArray] with the elements of
  * [this] followed by the elements of [other]
  */
-public operator fun ImmutableFloatArray.plus(other: ImmutableFloatArray): ImmutableFloatArray =
-    when {
-        isEmpty() -> other
-        other.isEmpty() -> this
-        else -> ImmutableFloatArray(this.values + other.values)
-    }
+public operator fun ImmutableFloatArray.plus(other: ImmutableFloatArray): ImmutableFloatArray = when {
+    isEmpty() -> other
+    other.isEmpty() -> this
+    else -> ImmutableFloatArray(this.values + other.values)
+}
 
 /**
  * Leaves [this] immutable array as is and returns an [ImmutableDoubleArray] with the elements of
  * [this] followed by the elements of [other]
  */
-public operator fun ImmutableDoubleArray.plus(other: ImmutableDoubleArray): ImmutableDoubleArray =
-    when {
-        isEmpty() -> other
-        other.isEmpty() -> this
-        else -> ImmutableDoubleArray(this.values + other.values)
-    }
+public operator fun ImmutableDoubleArray.plus(other: ImmutableDoubleArray): ImmutableDoubleArray = when {
+    isEmpty() -> other
+    other.isEmpty() -> this
+    else -> ImmutableDoubleArray(this.values + other.values)
+}
 
 /**
  * Leaves [this] immutable array as is and returns an [ImmutableArray] with the elements of [this]
