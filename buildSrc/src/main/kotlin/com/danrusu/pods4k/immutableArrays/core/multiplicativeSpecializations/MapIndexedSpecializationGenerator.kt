@@ -11,7 +11,11 @@ import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeVariableName
 
 internal object MapIndexedSpecializationGenerator : SpecializationGenerator("MapIndexedSpecializations") {
-    override fun generateSpecialization(fileSpec: FileSpec.Builder, fromType: BaseType, toType: BaseType) {
+    override fun generateSpecialization(
+        fileSpec: FileSpec.Builder,
+        fromType: BaseType,
+        toType: BaseType,
+    ) {
         fileSpec.addMapIndexedFunction(fromType, toType)
     }
 }

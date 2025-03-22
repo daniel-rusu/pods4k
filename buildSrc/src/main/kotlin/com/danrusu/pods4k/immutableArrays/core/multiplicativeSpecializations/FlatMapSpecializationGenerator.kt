@@ -17,7 +17,11 @@ import com.squareup.kotlinpoet.TypeVariableName
 import com.squareup.kotlinpoet.asTypeName
 
 internal object FlatMapSpecializationGenerator : SpecializationGenerator("FlatMapSpecializations") {
-    override fun generateSpecialization(fileSpec: FileSpec.Builder, fromType: BaseType, toType: BaseType) {
+    override fun generateSpecialization(
+        fileSpec: FileSpec.Builder,
+        fromType: BaseType,
+        toType: BaseType,
+    ) {
         fileSpec.addFlatMapFunction(fromType, toType)
     }
 }

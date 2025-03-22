@@ -15,7 +15,11 @@ import com.squareup.kotlinpoet.TypeVariableName
 internal object MapIndexedNotNullSpecializationGenerator :
     SpecializationGenerator("MapIndexedNotNullSpecializations") {
 
-    override fun generateSpecialization(fileSpec: FileSpec.Builder, fromType: BaseType, toType: BaseType) {
+    override fun generateSpecialization(
+        fileSpec: FileSpec.Builder,
+        fromType: BaseType,
+        toType: BaseType,
+    ) {
         fileSpec.addMapIndexedNotNullFunction(fromType, toType)
     }
 }

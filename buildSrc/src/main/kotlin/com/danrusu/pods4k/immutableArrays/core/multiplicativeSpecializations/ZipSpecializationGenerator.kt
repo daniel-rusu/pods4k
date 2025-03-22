@@ -13,7 +13,11 @@ import com.squareup.kotlinpoet.TypeVariableName
 import com.squareup.kotlinpoet.asTypeName
 
 internal object ZipSpecializationGenerator : SpecializationGenerator("ZipSpecializations") {
-    override fun generateSpecialization(fileSpec: FileSpec.Builder, fromType: BaseType, toType: BaseType) {
+    override fun generateSpecialization(
+        fileSpec: FileSpec.Builder,
+        fromType: BaseType,
+        toType: BaseType,
+    ) {
         fileSpec.addZipWithTransformFunction(fromType, toType)
         fileSpec.addZipFunction(fromType, toType)
     }

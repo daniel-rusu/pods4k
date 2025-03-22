@@ -656,7 +656,11 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
          * Returns an ImmutableIntArray with the first [size] elements copied from [copy] starting
          * from [startIndex].
          */
-        public fun copyFrom(source: IntArray, startIndex: Int, size: Int): ImmutableIntArray {
+        public fun copyFrom(
+            source: IntArray,
+            startIndex: Int,
+            size: Int,
+        ): ImmutableIntArray {
             if (size == 0) return EMPTY
 
             val backingArray = IntArray(size)

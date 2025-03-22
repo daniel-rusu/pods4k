@@ -8,7 +8,11 @@ import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.asTypeName
 
-internal inline fun createFile(packageName: String, fileName: String, body: FileSpec.Builder.() -> Unit): FileSpec {
+internal inline fun createFile(
+    packageName: String,
+    fileName: String,
+    body: FileSpec.Builder.() -> Unit,
+): FileSpec {
     return FileSpec.builder(packageName, fileName).apply {
         indent("    ") // 4 spaces for indentation
         addFileComment("Auto-generated file. DO NOT EDIT!")

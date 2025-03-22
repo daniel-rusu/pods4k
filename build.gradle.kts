@@ -55,10 +55,11 @@ allprojects {
 }
 
 val ktlintEditorConfigOverride = mapOf(
+    "max_line_length" to "120",
+    "ktlint_function_signature_rule_force_multiline_when_parameter_count_greater_or_equal_than" to 3,
     "ktlint_standard_discouraged-comment-location" to "disabled",
     "ktlint_standard_value-argument-comment" to "disabled",
     "ktlint_standard_function-expression-body" to "disabled",
-    "max_line_length" to "120",
 )
 
 spotless {

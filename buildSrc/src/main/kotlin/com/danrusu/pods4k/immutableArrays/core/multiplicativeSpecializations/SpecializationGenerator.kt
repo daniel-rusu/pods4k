@@ -18,5 +18,9 @@ internal abstract class SpecializationGenerator(private val fileName: String) {
         fileSpec.writeTo(File(destinationPath, ""))
     }
 
-    protected abstract fun generateSpecialization(fileSpec: FileSpec.Builder, fromType: BaseType, toType: BaseType)
+    protected abstract fun generateSpecialization(
+        fileSpec: FileSpec.Builder,
+        fromType: BaseType,
+        toType: BaseType,
+    )
 }
