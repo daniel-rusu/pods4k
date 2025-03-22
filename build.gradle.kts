@@ -58,6 +58,7 @@ val ktlintEditorConfigOverride = mapOf(
     "ktlint_standard_discouraged-comment-location" to "disabled",
     "ktlint_standard_value-argument-comment" to "disabled",
     "ktlint_standard_function-expression-body" to "disabled",
+    "max_line_length" to "120",
 )
 
 spotless {

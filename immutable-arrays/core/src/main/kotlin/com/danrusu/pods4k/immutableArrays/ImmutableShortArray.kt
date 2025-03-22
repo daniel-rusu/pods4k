@@ -568,7 +568,9 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedByDescending(crossinline selector: (element: Short) -> R?): ImmutableShortArray {
+    public inline fun <R : Comparable<R>> sortedByDescending(
+        crossinline selector: (element: Short) -> R?,
+    ): ImmutableShortArray {
         return sortedWith(compareByDescending(selector))
     }
 
@@ -655,11 +657,7 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
          * Returns an ImmutableShortArray with the first [size] elements copied from [copy] starting
          * from [startIndex].
          */
-        public fun copyFrom(
-            source: ShortArray,
-            startIndex: Int,
-            size: Int,
-        ): ImmutableShortArray {
+        public fun copyFrom(source: ShortArray, startIndex: Int, size: Int): ImmutableShortArray {
             if (size == 0) return EMPTY
 
             val backingArray = ShortArray(size)
@@ -674,9 +672,7 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
      * @param initialCapacity The initial capacity of the temporary array where the values are
      * accumulated.  A larger value reduces the number of times it's resized as elements get added.
      */
-    public class Builder(
-        initialCapacity: Int = 10,
-    ) {
+    public class Builder(initialCapacity: Int = 10) {
         public var size: Int = 0
             private set
 

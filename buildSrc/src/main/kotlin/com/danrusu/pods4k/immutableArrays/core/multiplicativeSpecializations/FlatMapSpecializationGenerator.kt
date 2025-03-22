@@ -35,7 +35,8 @@ private fun FileSpec.Builder.addFlatMapFunction(fromType: BaseType, toType: Base
 
     // flatMap joining iterables
     function(
-        kdoc = "Transforms each element into a collection and appends those collections in a single ${toType.generatedClassName}.",
+        kdoc = "Transforms each element into a collection and appends those collections in a single " +
+            "${toType.generatedClassName}.",
         modifiers = listOf(KModifier.INLINE),
         receiver = fromType.getGeneratedTypeName(),
         name = "flatMap",
@@ -60,7 +61,8 @@ private fun FileSpec.Builder.addFlatMapFunction(fromType: BaseType, toType: Base
 
     // flatMap joining immutable arrays
     function(
-        kdoc = "Transforms each element into an immutable array and appends those arrays in a single ${toType.generatedClassName}.",
+        kdoc = "Transforms each element into an immutable array and appends those arrays in a single " +
+            "${toType.generatedClassName}.",
         modifiers = listOf(KModifier.INLINE),
         receiver = fromType.getGeneratedTypeName(),
         name = "flatMap",

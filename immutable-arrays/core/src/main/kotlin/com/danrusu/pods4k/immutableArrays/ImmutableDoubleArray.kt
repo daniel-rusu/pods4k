@@ -556,7 +556,9 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedBy(crossinline selector: (element: Double) -> R?): ImmutableDoubleArray {
+    public inline fun <R : Comparable<R>> sortedBy(
+        crossinline selector: (element: Double) -> R?,
+    ): ImmutableDoubleArray {
         return sortedWith(compareBy(selector))
     }
 
@@ -567,7 +569,9 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
      * The sort is _stable_ so equal elements preserve their order relative to each other after
      * sorting.
      */
-    public inline fun <R : Comparable<R>> sortedByDescending(crossinline selector: (element: Double) -> R?): ImmutableDoubleArray {
+    public inline fun <R : Comparable<R>> sortedByDescending(
+        crossinline selector: (element: Double) -> R?,
+    ): ImmutableDoubleArray {
         return sortedWith(compareByDescending(selector))
     }
 
@@ -654,11 +658,7 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
          * Returns an ImmutableDoubleArray with the first [size] elements copied from [copy]
          * starting from [startIndex].
          */
-        public fun copyFrom(
-            source: DoubleArray,
-            startIndex: Int,
-            size: Int,
-        ): ImmutableDoubleArray {
+        public fun copyFrom(source: DoubleArray, startIndex: Int, size: Int): ImmutableDoubleArray {
             if (size == 0) return EMPTY
 
             val backingArray = DoubleArray(size)
@@ -673,9 +673,7 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
      * @param initialCapacity The initial capacity of the temporary array where the values are
      * accumulated.  A larger value reduces the number of times it's resized as elements get added.
      */
-    public class Builder(
-        initialCapacity: Int = 10,
-    ) {
+    public class Builder(initialCapacity: Int = 10) {
         public var size: Int = 0
             private set
 

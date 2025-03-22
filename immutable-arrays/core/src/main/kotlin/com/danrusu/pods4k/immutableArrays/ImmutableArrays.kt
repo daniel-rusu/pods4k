@@ -422,10 +422,7 @@ public inline fun <T> ImmutableArray<T>.getOrElse(index: Int, defaultValue: (ind
 /**
  * See [Array.getOrElse]
  */
-public inline fun ImmutableBooleanArray.getOrElse(
-    index: Int,
-    defaultValue: (index: Int) -> Boolean,
-): Boolean {
+public inline fun ImmutableBooleanArray.getOrElse(index: Int, defaultValue: (index: Int) -> Boolean): Boolean {
     return values.getOrElse(index, defaultValue)
 }
 

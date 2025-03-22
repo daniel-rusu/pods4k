@@ -77,7 +77,9 @@ public inline fun <T> ImmutableArray<T>.flatMap(transform: (element: T) -> Itera
  */
 @JvmName("flatMap_ImmutableBooleanArray")
 @OverloadResolutionByLambdaReturnType
-public inline fun <T> ImmutableArray<T>.flatMap(transform: (element: T) -> ImmutableBooleanArray): ImmutableBooleanArray {
+public inline fun <T> ImmutableArray<T>.flatMap(
+    transform: (element: T) -> ImmutableBooleanArray,
+): ImmutableBooleanArray {
     var numElements = 0
     val arrays = map { element ->
         transform(element).values.also { numElements += it.size }
@@ -301,7 +303,9 @@ public inline fun <R> ImmutableBooleanArray.flatMap(transform: (element: Boolean
  */
 @JvmName("flatMap_ImmutableArray")
 @OverloadResolutionByLambdaReturnType
-public inline fun <R> ImmutableBooleanArray.flatMap(transform: (element: Boolean) -> ImmutableArray<R>): ImmutableArray<R> {
+public inline fun <R> ImmutableBooleanArray.flatMap(
+    transform: (element: Boolean) -> ImmutableArray<R>,
+): ImmutableArray<R> {
     var numElements = 0
     val arrays = map { element ->
         transform(element).values.also { numElements += it.size }
@@ -317,7 +321,9 @@ public inline fun <R> ImmutableBooleanArray.flatMap(transform: (element: Boolean
  */
 @JvmName("flatMap_Iterable_BOOLEAN")
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableBooleanArray.flatMap(transform: (element: Boolean) -> Iterable<Boolean>): ImmutableBooleanArray {
+public inline fun ImmutableBooleanArray.flatMap(
+    transform: (element: Boolean) -> Iterable<Boolean>,
+): ImmutableBooleanArray {
     val builder = ImmutableBooleanArray.Builder()
     forEach { builder.addAll(transform(it)) }
     return builder.build()
@@ -329,7 +335,9 @@ public inline fun ImmutableBooleanArray.flatMap(transform: (element: Boolean) ->
  */
 @JvmName("flatMap_ImmutableBooleanArray")
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableBooleanArray.flatMap(transform: (element: Boolean) -> ImmutableBooleanArray): ImmutableBooleanArray {
+public inline fun ImmutableBooleanArray.flatMap(
+    transform: (element: Boolean) -> ImmutableBooleanArray,
+): ImmutableBooleanArray {
     var numElements = 0
     val arrays = map { element ->
         transform(element).values.also { numElements += it.size }
@@ -357,7 +365,9 @@ public inline fun ImmutableBooleanArray.flatMap(transform: (element: Boolean) ->
  */
 @JvmName("flatMap_ImmutableByteArray")
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableBooleanArray.flatMap(transform: (element: Boolean) -> ImmutableByteArray): ImmutableByteArray {
+public inline fun ImmutableBooleanArray.flatMap(
+    transform: (element: Boolean) -> ImmutableByteArray,
+): ImmutableByteArray {
     var numElements = 0
     val arrays = map { element ->
         transform(element).values.also { numElements += it.size }
@@ -385,7 +395,9 @@ public inline fun ImmutableBooleanArray.flatMap(transform: (element: Boolean) ->
  */
 @JvmName("flatMap_ImmutableCharArray")
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableBooleanArray.flatMap(transform: (element: Boolean) -> ImmutableCharArray): ImmutableCharArray {
+public inline fun ImmutableBooleanArray.flatMap(
+    transform: (element: Boolean) -> ImmutableCharArray,
+): ImmutableCharArray {
     var numElements = 0
     val arrays = map { element ->
         transform(element).values.also { numElements += it.size }
@@ -413,7 +425,9 @@ public inline fun ImmutableBooleanArray.flatMap(transform: (element: Boolean) ->
  */
 @JvmName("flatMap_ImmutableShortArray")
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableBooleanArray.flatMap(transform: (element: Boolean) -> ImmutableShortArray): ImmutableShortArray {
+public inline fun ImmutableBooleanArray.flatMap(
+    transform: (element: Boolean) -> ImmutableShortArray,
+): ImmutableShortArray {
     var numElements = 0
     val arrays = map { element ->
         transform(element).values.also { numElements += it.size }
@@ -469,7 +483,9 @@ public inline fun ImmutableBooleanArray.flatMap(transform: (element: Boolean) ->
  */
 @JvmName("flatMap_ImmutableLongArray")
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableBooleanArray.flatMap(transform: (element: Boolean) -> ImmutableLongArray): ImmutableLongArray {
+public inline fun ImmutableBooleanArray.flatMap(
+    transform: (element: Boolean) -> ImmutableLongArray,
+): ImmutableLongArray {
     var numElements = 0
     val arrays = map { element ->
         transform(element).values.also { numElements += it.size }
@@ -497,7 +513,9 @@ public inline fun ImmutableBooleanArray.flatMap(transform: (element: Boolean) ->
  */
 @JvmName("flatMap_ImmutableFloatArray")
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableBooleanArray.flatMap(transform: (element: Boolean) -> ImmutableFloatArray): ImmutableFloatArray {
+public inline fun ImmutableBooleanArray.flatMap(
+    transform: (element: Boolean) -> ImmutableFloatArray,
+): ImmutableFloatArray {
     var numElements = 0
     val arrays = map { element ->
         transform(element).values.also { numElements += it.size }
@@ -513,7 +531,9 @@ public inline fun ImmutableBooleanArray.flatMap(transform: (element: Boolean) ->
  */
 @JvmName("flatMap_Iterable_DOUBLE")
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableBooleanArray.flatMap(transform: (element: Boolean) -> Iterable<Double>): ImmutableDoubleArray {
+public inline fun ImmutableBooleanArray.flatMap(
+    transform: (element: Boolean) -> Iterable<Double>,
+): ImmutableDoubleArray {
     val builder = ImmutableDoubleArray.Builder()
     forEach { builder.addAll(transform(it)) }
     return builder.build()
@@ -525,7 +545,9 @@ public inline fun ImmutableBooleanArray.flatMap(transform: (element: Boolean) ->
  */
 @JvmName("flatMap_ImmutableDoubleArray")
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableBooleanArray.flatMap(transform: (element: Boolean) -> ImmutableDoubleArray): ImmutableDoubleArray {
+public inline fun ImmutableBooleanArray.flatMap(
+    transform: (element: Boolean) -> ImmutableDoubleArray,
+): ImmutableDoubleArray {
     var numElements = 0
     val arrays = map { element ->
         transform(element).values.also { numElements += it.size }
@@ -581,7 +603,9 @@ public inline fun ImmutableByteArray.flatMap(transform: (element: Byte) -> Itera
  */
 @JvmName("flatMap_ImmutableBooleanArray")
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableByteArray.flatMap(transform: (element: Byte) -> ImmutableBooleanArray): ImmutableBooleanArray {
+public inline fun ImmutableByteArray.flatMap(
+    transform: (element: Byte) -> ImmutableBooleanArray,
+): ImmutableBooleanArray {
     var numElements = 0
     val arrays = map { element ->
         transform(element).values.also { numElements += it.size }
@@ -833,7 +857,9 @@ public inline fun ImmutableCharArray.flatMap(transform: (element: Char) -> Itera
  */
 @JvmName("flatMap_ImmutableBooleanArray")
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableCharArray.flatMap(transform: (element: Char) -> ImmutableBooleanArray): ImmutableBooleanArray {
+public inline fun ImmutableCharArray.flatMap(
+    transform: (element: Char) -> ImmutableBooleanArray,
+): ImmutableBooleanArray {
     var numElements = 0
     val arrays = map { element ->
         transform(element).values.also { numElements += it.size }
@@ -1085,7 +1111,9 @@ public inline fun ImmutableShortArray.flatMap(transform: (element: Short) -> Ite
  */
 @JvmName("flatMap_ImmutableBooleanArray")
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableShortArray.flatMap(transform: (element: Short) -> ImmutableBooleanArray): ImmutableBooleanArray {
+public inline fun ImmutableShortArray.flatMap(
+    transform: (element: Short) -> ImmutableBooleanArray,
+): ImmutableBooleanArray {
     var numElements = 0
     val arrays = map { element ->
         transform(element).values.also { numElements += it.size }
@@ -1281,7 +1309,9 @@ public inline fun ImmutableShortArray.flatMap(transform: (element: Short) -> Ite
  */
 @JvmName("flatMap_ImmutableDoubleArray")
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableShortArray.flatMap(transform: (element: Short) -> ImmutableDoubleArray): ImmutableDoubleArray {
+public inline fun ImmutableShortArray.flatMap(
+    transform: (element: Short) -> ImmutableDoubleArray,
+): ImmutableDoubleArray {
     var numElements = 0
     val arrays = map { element ->
         transform(element).values.also { numElements += it.size }
@@ -1589,7 +1619,9 @@ public inline fun ImmutableLongArray.flatMap(transform: (element: Long) -> Itera
  */
 @JvmName("flatMap_ImmutableBooleanArray")
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableLongArray.flatMap(transform: (element: Long) -> ImmutableBooleanArray): ImmutableBooleanArray {
+public inline fun ImmutableLongArray.flatMap(
+    transform: (element: Long) -> ImmutableBooleanArray,
+): ImmutableBooleanArray {
     var numElements = 0
     val arrays = map { element ->
         transform(element).values.also { numElements += it.size }
@@ -1841,7 +1873,9 @@ public inline fun ImmutableFloatArray.flatMap(transform: (element: Float) -> Ite
  */
 @JvmName("flatMap_ImmutableBooleanArray")
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableFloatArray.flatMap(transform: (element: Float) -> ImmutableBooleanArray): ImmutableBooleanArray {
+public inline fun ImmutableFloatArray.flatMap(
+    transform: (element: Float) -> ImmutableBooleanArray,
+): ImmutableBooleanArray {
     var numElements = 0
     val arrays = map { element ->
         transform(element).values.also { numElements += it.size }
@@ -2037,7 +2071,9 @@ public inline fun ImmutableFloatArray.flatMap(transform: (element: Float) -> Ite
  */
 @JvmName("flatMap_ImmutableDoubleArray")
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableFloatArray.flatMap(transform: (element: Float) -> ImmutableDoubleArray): ImmutableDoubleArray {
+public inline fun ImmutableFloatArray.flatMap(
+    transform: (element: Float) -> ImmutableDoubleArray,
+): ImmutableDoubleArray {
     var numElements = 0
     val arrays = map { element ->
         transform(element).values.also { numElements += it.size }
@@ -2065,7 +2101,9 @@ public inline fun <R> ImmutableDoubleArray.flatMap(transform: (element: Double) 
  */
 @JvmName("flatMap_ImmutableArray")
 @OverloadResolutionByLambdaReturnType
-public inline fun <R> ImmutableDoubleArray.flatMap(transform: (element: Double) -> ImmutableArray<R>): ImmutableArray<R> {
+public inline fun <R> ImmutableDoubleArray.flatMap(
+    transform: (element: Double) -> ImmutableArray<R>,
+): ImmutableArray<R> {
     var numElements = 0
     val arrays = map { element ->
         transform(element).values.also { numElements += it.size }
@@ -2081,7 +2119,9 @@ public inline fun <R> ImmutableDoubleArray.flatMap(transform: (element: Double) 
  */
 @JvmName("flatMap_Iterable_BOOLEAN")
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableDoubleArray.flatMap(transform: (element: Double) -> Iterable<Boolean>): ImmutableBooleanArray {
+public inline fun ImmutableDoubleArray.flatMap(
+    transform: (element: Double) -> Iterable<Boolean>,
+): ImmutableBooleanArray {
     val builder = ImmutableBooleanArray.Builder()
     forEach { builder.addAll(transform(it)) }
     return builder.build()
@@ -2093,7 +2133,9 @@ public inline fun ImmutableDoubleArray.flatMap(transform: (element: Double) -> I
  */
 @JvmName("flatMap_ImmutableBooleanArray")
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableDoubleArray.flatMap(transform: (element: Double) -> ImmutableBooleanArray): ImmutableBooleanArray {
+public inline fun ImmutableDoubleArray.flatMap(
+    transform: (element: Double) -> ImmutableBooleanArray,
+): ImmutableBooleanArray {
     var numElements = 0
     val arrays = map { element ->
         transform(element).values.also { numElements += it.size }
@@ -2177,7 +2219,9 @@ public inline fun ImmutableDoubleArray.flatMap(transform: (element: Double) -> I
  */
 @JvmName("flatMap_ImmutableShortArray")
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableDoubleArray.flatMap(transform: (element: Double) -> ImmutableShortArray): ImmutableShortArray {
+public inline fun ImmutableDoubleArray.flatMap(
+    transform: (element: Double) -> ImmutableShortArray,
+): ImmutableShortArray {
     var numElements = 0
     val arrays = map { element ->
         transform(element).values.also { numElements += it.size }
@@ -2261,7 +2305,9 @@ public inline fun ImmutableDoubleArray.flatMap(transform: (element: Double) -> I
  */
 @JvmName("flatMap_ImmutableFloatArray")
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableDoubleArray.flatMap(transform: (element: Double) -> ImmutableFloatArray): ImmutableFloatArray {
+public inline fun ImmutableDoubleArray.flatMap(
+    transform: (element: Double) -> ImmutableFloatArray,
+): ImmutableFloatArray {
     var numElements = 0
     val arrays = map { element ->
         transform(element).values.also { numElements += it.size }
@@ -2289,7 +2335,9 @@ public inline fun ImmutableDoubleArray.flatMap(transform: (element: Double) -> I
  */
 @JvmName("flatMap_ImmutableDoubleArray")
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableDoubleArray.flatMap(transform: (element: Double) -> ImmutableDoubleArray): ImmutableDoubleArray {
+public inline fun ImmutableDoubleArray.flatMap(
+    transform: (element: Double) -> ImmutableDoubleArray,
+): ImmutableDoubleArray {
     var numElements = 0
     val arrays = map { element ->
         transform(element).values.also { numElements += it.size }

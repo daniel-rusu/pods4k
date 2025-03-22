@@ -34,7 +34,9 @@ public inline fun <T, R> ImmutableArray<T>.mapIndexed(transform: (index: Int, el
  * index.
  */
 @OverloadResolutionByLambdaReturnType
-public inline fun <T> ImmutableArray<T>.mapIndexed(transform: (index: Int, element: T) -> Boolean): ImmutableBooleanArray {
+public inline fun <T> ImmutableArray<T>.mapIndexed(
+    transform: (index: Int, element: T) -> Boolean,
+): ImmutableBooleanArray {
     return ImmutableBooleanArray(size) { transform(it, get(it)) }
 }
 
@@ -97,7 +99,9 @@ public inline fun <T> ImmutableArray<T>.mapIndexed(transform: (index: Int, eleme
  * index.
  */
 @OverloadResolutionByLambdaReturnType
-public inline fun <T> ImmutableArray<T>.mapIndexed(transform: (index: Int, element: T) -> Double): ImmutableDoubleArray {
+public inline fun <T> ImmutableArray<T>.mapIndexed(
+    transform: (index: Int, element: T) -> Double,
+): ImmutableDoubleArray {
     return ImmutableDoubleArray(size) { transform(it, get(it)) }
 }
 
@@ -241,7 +245,9 @@ public inline fun <R> ImmutableByteArray.mapIndexed(transform: (index: Int, elem
  * index.
  */
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableByteArray.mapIndexed(transform: (index: Int, element: Byte) -> Boolean): ImmutableBooleanArray {
+public inline fun ImmutableByteArray.mapIndexed(
+    transform: (index: Int, element: Byte) -> Boolean,
+): ImmutableBooleanArray {
     return ImmutableBooleanArray(size) { transform(it, get(it)) }
 }
 
@@ -304,7 +310,9 @@ public inline fun ImmutableByteArray.mapIndexed(transform: (index: Int, element:
  * index.
  */
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableByteArray.mapIndexed(transform: (index: Int, element: Byte) -> Double): ImmutableDoubleArray {
+public inline fun ImmutableByteArray.mapIndexed(
+    transform: (index: Int, element: Byte) -> Double,
+): ImmutableDoubleArray {
     return ImmutableDoubleArray(size) { transform(it, get(it)) }
 }
 
@@ -322,7 +330,9 @@ public inline fun <R> ImmutableCharArray.mapIndexed(transform: (index: Int, elem
  * index.
  */
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableCharArray.mapIndexed(transform: (index: Int, element: Char) -> Boolean): ImmutableBooleanArray {
+public inline fun ImmutableCharArray.mapIndexed(
+    transform: (index: Int, element: Char) -> Boolean,
+): ImmutableBooleanArray {
     return ImmutableBooleanArray(size) { transform(it, get(it)) }
 }
 
@@ -385,7 +395,9 @@ public inline fun ImmutableCharArray.mapIndexed(transform: (index: Int, element:
  * index.
  */
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableCharArray.mapIndexed(transform: (index: Int, element: Char) -> Double): ImmutableDoubleArray {
+public inline fun ImmutableCharArray.mapIndexed(
+    transform: (index: Int, element: Char) -> Double,
+): ImmutableDoubleArray {
     return ImmutableDoubleArray(size) { transform(it, get(it)) }
 }
 
@@ -435,7 +447,9 @@ public inline fun ImmutableShortArray.mapIndexed(transform: (index: Int, element
  * index.
  */
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableShortArray.mapIndexed(transform: (index: Int, element: Short) -> Short): ImmutableShortArray {
+public inline fun ImmutableShortArray.mapIndexed(
+    transform: (index: Int, element: Short) -> Short,
+): ImmutableShortArray {
     return ImmutableShortArray(size) { transform(it, get(it)) }
 }
 
@@ -462,7 +476,9 @@ public inline fun ImmutableShortArray.mapIndexed(transform: (index: Int, element
  * index.
  */
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableShortArray.mapIndexed(transform: (index: Int, element: Short) -> Float): ImmutableFloatArray {
+public inline fun ImmutableShortArray.mapIndexed(
+    transform: (index: Int, element: Short) -> Float,
+): ImmutableFloatArray {
     return ImmutableFloatArray(size) { transform(it, get(it)) }
 }
 
@@ -471,7 +487,9 @@ public inline fun ImmutableShortArray.mapIndexed(transform: (index: Int, element
  * index.
  */
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableShortArray.mapIndexed(transform: (index: Int, element: Short) -> Double): ImmutableDoubleArray {
+public inline fun ImmutableShortArray.mapIndexed(
+    transform: (index: Int, element: Short) -> Double,
+): ImmutableDoubleArray {
     return ImmutableDoubleArray(size) { transform(it, get(it)) }
 }
 
@@ -489,7 +507,9 @@ public inline fun <R> ImmutableIntArray.mapIndexed(transform: (index: Int, eleme
  * index.
  */
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableIntArray.mapIndexed(transform: (index: Int, element: Int) -> Boolean): ImmutableBooleanArray {
+public inline fun ImmutableIntArray.mapIndexed(
+    transform: (index: Int, element: Int) -> Boolean,
+): ImmutableBooleanArray {
     return ImmutableBooleanArray(size) { transform(it, get(it)) }
 }
 
@@ -570,7 +590,9 @@ public inline fun <R> ImmutableLongArray.mapIndexed(transform: (index: Int, elem
  * index.
  */
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableLongArray.mapIndexed(transform: (index: Int, element: Long) -> Boolean): ImmutableBooleanArray {
+public inline fun ImmutableLongArray.mapIndexed(
+    transform: (index: Int, element: Long) -> Boolean,
+): ImmutableBooleanArray {
     return ImmutableBooleanArray(size) { transform(it, get(it)) }
 }
 
@@ -633,7 +655,9 @@ public inline fun ImmutableLongArray.mapIndexed(transform: (index: Int, element:
  * index.
  */
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableLongArray.mapIndexed(transform: (index: Int, element: Long) -> Double): ImmutableDoubleArray {
+public inline fun ImmutableLongArray.mapIndexed(
+    transform: (index: Int, element: Long) -> Double,
+): ImmutableDoubleArray {
     return ImmutableDoubleArray(size) { transform(it, get(it)) }
 }
 
@@ -683,7 +707,9 @@ public inline fun ImmutableFloatArray.mapIndexed(transform: (index: Int, element
  * index.
  */
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableFloatArray.mapIndexed(transform: (index: Int, element: Float) -> Short): ImmutableShortArray {
+public inline fun ImmutableFloatArray.mapIndexed(
+    transform: (index: Int, element: Float) -> Short,
+): ImmutableShortArray {
     return ImmutableShortArray(size) { transform(it, get(it)) }
 }
 
@@ -710,7 +736,9 @@ public inline fun ImmutableFloatArray.mapIndexed(transform: (index: Int, element
  * index.
  */
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableFloatArray.mapIndexed(transform: (index: Int, element: Float) -> Float): ImmutableFloatArray {
+public inline fun ImmutableFloatArray.mapIndexed(
+    transform: (index: Int, element: Float) -> Float,
+): ImmutableFloatArray {
     return ImmutableFloatArray(size) { transform(it, get(it)) }
 }
 
@@ -719,7 +747,9 @@ public inline fun ImmutableFloatArray.mapIndexed(transform: (index: Int, element
  * index.
  */
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableFloatArray.mapIndexed(transform: (index: Int, element: Float) -> Double): ImmutableDoubleArray {
+public inline fun ImmutableFloatArray.mapIndexed(
+    transform: (index: Int, element: Float) -> Double,
+): ImmutableDoubleArray {
     return ImmutableDoubleArray(size) { transform(it, get(it)) }
 }
 
@@ -756,7 +786,9 @@ public inline fun ImmutableDoubleArray.mapIndexed(
  * index.
  */
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableDoubleArray.mapIndexed(transform: (index: Int, element: Double) -> Byte): ImmutableByteArray {
+public inline fun ImmutableDoubleArray.mapIndexed(
+    transform: (index: Int, element: Double) -> Byte,
+): ImmutableByteArray {
     return ImmutableByteArray(size) { transform(it, get(it)) }
 }
 
@@ -765,7 +797,9 @@ public inline fun ImmutableDoubleArray.mapIndexed(transform: (index: Int, elemen
  * index.
  */
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableDoubleArray.mapIndexed(transform: (index: Int, element: Double) -> Char): ImmutableCharArray {
+public inline fun ImmutableDoubleArray.mapIndexed(
+    transform: (index: Int, element: Double) -> Char,
+): ImmutableCharArray {
     return ImmutableCharArray(size) { transform(it, get(it)) }
 }
 
@@ -797,7 +831,9 @@ public inline fun ImmutableDoubleArray.mapIndexed(transform: (index: Int, elemen
  * index.
  */
 @OverloadResolutionByLambdaReturnType
-public inline fun ImmutableDoubleArray.mapIndexed(transform: (index: Int, element: Double) -> Long): ImmutableLongArray {
+public inline fun ImmutableDoubleArray.mapIndexed(
+    transform: (index: Int, element: Double) -> Long,
+): ImmutableLongArray {
     return ImmutableLongArray(size) { transform(it, get(it)) }
 }
 

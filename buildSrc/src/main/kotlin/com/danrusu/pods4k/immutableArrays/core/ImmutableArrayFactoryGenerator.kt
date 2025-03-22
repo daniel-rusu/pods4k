@@ -81,7 +81,9 @@ private fun FileSpec.Builder.addImmutableArrayOf() {
         ) {
             addGenericTypes(baseType.type)
 
-            statement("return ${baseType.generatedClassName}.copyFrom(source = values, startIndex = 0, size = values.size)")
+            statement(
+                "return ${baseType.generatedClassName}.copyFrom(source = values, startIndex = 0, size = values.size)",
+            )
         }
     }
 }

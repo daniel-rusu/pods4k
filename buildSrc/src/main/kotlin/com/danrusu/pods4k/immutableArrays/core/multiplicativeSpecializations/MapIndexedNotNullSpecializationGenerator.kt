@@ -31,7 +31,8 @@ private fun FileSpec.Builder.addMapIndexedNotNullFunction(fromType: BaseType, to
         resultTypeName = toType.getGeneratedTypeName()
     }
     function(
-        kdoc = "Returns an immutable array containing the non-null results of applying [transform] to each element and its index.",
+        kdoc = "Returns an immutable array containing the non-null results of applying [transform] to each element " +
+            "and its index.",
         modifiers = listOf(KModifier.INLINE),
         receiver = fromType.getGeneratedTypeName(),
         name = "mapIndexedNotNull",

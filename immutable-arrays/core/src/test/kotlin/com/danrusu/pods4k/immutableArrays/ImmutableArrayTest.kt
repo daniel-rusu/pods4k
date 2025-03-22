@@ -975,7 +975,9 @@ class ImmutableArrayTest {
             val randomValues = Array(size) { Random.nextInt() }
 
             expectThat(
-                randomValues.toImmutableArray<Int>().filterIndexed { index, value -> (index + value) % 2 == 0 }.asList(),
+                randomValues.toImmutableArray<Int>().filterIndexed { index, value ->
+                    (index + value) % 2 == 0
+                }.asList(),
             ).isEqualTo(randomValues.filterIndexed { index, value -> (index + value) % 2 == 0 })
         }
     }
