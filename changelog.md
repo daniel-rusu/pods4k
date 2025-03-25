@@ -16,6 +16,7 @@ _Date TBD_
 **New Features:**
 
 * Add `min()` extension functions
+* Add `max()` extension functions
 
 ## 0.7.0
 

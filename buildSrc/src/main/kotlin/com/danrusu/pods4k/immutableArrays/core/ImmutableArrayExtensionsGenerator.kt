@@ -31,6 +31,7 @@ internal object ImmutableArrayExtensionsGenerator {
             addLastIndexOf()
             addGetOrElse()
             addMin()
+            addMax()
             addFilterNotNull()
             addSorted()
             addSortedDescending()
@@ -204,6 +205,43 @@ private fun FileSpec.Builder.addMin() {
                     statement("minValue = minOf(minValue, values[i])")
                 }
                 statement("return minValue")
+            }
+        }
+    }
+}
+
+private fun FileSpec.Builder.addMax() {
+    val genericType = TypeVariableName("T", Comparable::class.asTypeName().parameterizedBy(TypeVariableName("T")))
+    for (baseType in BaseType.entries) {
+        function(
+            kdoc = """
+                @return the largest element
+                @throws NoSuchElementException if this ${baseType.generatedClassName} is empty
+            """.trimIndent(),
+            receiver = when (baseType) {
+                GENERIC -> baseType.getGeneratedClass().parameterizedBy(genericType)
+                else -> baseType.getGeneratedTypeName()
+            },
+            name = "max",
+            returns = if (baseType == GENERIC) genericType else baseType.type,
+        ) {
+            if (baseType == GENERIC) {
+                addGenericTypes(genericType)
+            }
+            if (baseType == BOOLEAN) {
+                // only call maxOf once and use equality checks instead because maxOf(boolean, boolean) auto-boxes the
+                // primitive booleans.  This optimization also stops early as it doesn't need to inspect the remainder
+                // after finding the max boolean value
+                statement("val maxBoolean = maxOf(true, false)")
+                statement("if (contains(maxBoolean)) return maxBoolean")
+                emptyLine()
+                statement("return first()")
+            } else {
+                statement("var maxValue = first()")
+                controlFlow("for (i in 1..lastIndex)") {
+                    statement("maxValue = maxOf(maxValue, values[i])")
+                }
+                statement("return maxValue")
             }
         }
     }

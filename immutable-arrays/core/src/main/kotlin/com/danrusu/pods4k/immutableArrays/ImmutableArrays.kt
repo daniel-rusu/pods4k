@@ -583,6 +583,113 @@ public fun ImmutableDoubleArray.min(): Double {
 }
 
 /**
+ * @return the largest element
+ * @throws NoSuchElementException if this ImmutableArray is empty
+ */
+public fun <T : Comparable<T>> ImmutableArray<T>.max(): T {
+    var maxValue = first()
+    for (i in 1..lastIndex) {
+        maxValue = maxOf(maxValue, values[i])
+    }
+    return maxValue
+}
+
+/**
+ * @return the largest element
+ * @throws NoSuchElementException if this ImmutableBooleanArray is empty
+ */
+public fun ImmutableBooleanArray.max(): Boolean {
+    val maxBoolean = maxOf(true, false)
+    if (contains(maxBoolean)) return maxBoolean
+
+    return first()
+}
+
+/**
+ * @return the largest element
+ * @throws NoSuchElementException if this ImmutableByteArray is empty
+ */
+public fun ImmutableByteArray.max(): Byte {
+    var maxValue = first()
+    for (i in 1..lastIndex) {
+        maxValue = maxOf(maxValue, values[i])
+    }
+    return maxValue
+}
+
+/**
+ * @return the largest element
+ * @throws NoSuchElementException if this ImmutableCharArray is empty
+ */
+public fun ImmutableCharArray.max(): Char {
+    var maxValue = first()
+    for (i in 1..lastIndex) {
+        maxValue = maxOf(maxValue, values[i])
+    }
+    return maxValue
+}
+
+/**
+ * @return the largest element
+ * @throws NoSuchElementException if this ImmutableShortArray is empty
+ */
+public fun ImmutableShortArray.max(): Short {
+    var maxValue = first()
+    for (i in 1..lastIndex) {
+        maxValue = maxOf(maxValue, values[i])
+    }
+    return maxValue
+}
+
+/**
+ * @return the largest element
+ * @throws NoSuchElementException if this ImmutableIntArray is empty
+ */
+public fun ImmutableIntArray.max(): Int {
+    var maxValue = first()
+    for (i in 1..lastIndex) {
+        maxValue = maxOf(maxValue, values[i])
+    }
+    return maxValue
+}
+
+/**
+ * @return the largest element
+ * @throws NoSuchElementException if this ImmutableLongArray is empty
+ */
+public fun ImmutableLongArray.max(): Long {
+    var maxValue = first()
+    for (i in 1..lastIndex) {
+        maxValue = maxOf(maxValue, values[i])
+    }
+    return maxValue
+}
+
+/**
+ * @return the largest element
+ * @throws NoSuchElementException if this ImmutableFloatArray is empty
+ */
+public fun ImmutableFloatArray.max(): Float {
+    var maxValue = first()
+    for (i in 1..lastIndex) {
+        maxValue = maxOf(maxValue, values[i])
+    }
+    return maxValue
+}
+
+/**
+ * @return the largest element
+ * @throws NoSuchElementException if this ImmutableDoubleArray is empty
+ */
+public fun ImmutableDoubleArray.max(): Double {
+    var maxValue = first()
+    for (i in 1..lastIndex) {
+        maxValue = maxOf(maxValue, values[i])
+    }
+    return maxValue
+}
+
+/**
  * Returns an immutable array containing only the non-null elements
  */
 @JvmName("filterNotNull_GENERIC")

@@ -208,10 +208,12 @@ class ImmutableArraysTest {
 
         // multiple elements
         with(immutableArrayOf("c", "a", "b")) {
-            expectThat(min()).isEqualTo("a")
+            expectThat(min())
+                .isEqualTo("a")
         }
         with(immutableArrayOf(3, 1, 2, 4)) {
-            expectThat(min()).isEqualTo(1)
+            expectThat(min())
+                .isEqualTo(1)
         }
         with(immutableArrayOf(maxBoolean, maxBoolean, maxBoolean, maxBoolean)) {
             expectThat(min())
@@ -229,6 +231,65 @@ class ImmutableArraysTest {
         }
         with(immutableArrayOf(1.0f, 2.0f, Float.NaN)) {
             expectThat(min())
+                .isEqualTo(Float.NaN)
+        }
+    }
+
+    @Test
+    fun `max validation`() {
+        val minBoolean = minOf(true, false)
+        val maxBoolean = maxOf(true, false)
+
+        expectThat(minBoolean)
+            .isNotEqualTo(maxBoolean)
+
+        // empty scenarios
+        with(emptyImmutableArray<String>()) {
+            expectThrows<NoSuchElementException> { max() }
+        }
+        with(emptyImmutableBooleanArray()) {
+            expectThrows<NoSuchElementException> { max() }
+        }
+
+        // single element
+        with(immutableArrayOf("c")) {
+            expectThat(max())
+                .isEqualTo("c")
+        }
+        with(immutableArrayOf(minBoolean)) {
+            expectThat(max())
+                .isEqualTo(minBoolean)
+        }
+        with(immutableArrayOf(maxBoolean)) {
+            expectThat(max())
+                .isEqualTo(maxBoolean)
+        }
+
+        // multiple elements
+        with(immutableArrayOf("c", "a", "b")) {
+            expectThat(max())
+                .isEqualTo("c")
+        }
+        with(immutableArrayOf(3, 1, 2, 4)) {
+            expectThat(max())
+                .isEqualTo(4)
+        }
+        with(immutableArrayOf(minBoolean, minBoolean, minBoolean, minBoolean)) {
+            expectThat(max())
+                .isEqualTo(minBoolean)
+        }
+        with(immutableArrayOf(minBoolean, minBoolean, maxBoolean, minBoolean)) {
+            expectThat(max())
+                .isEqualTo(maxBoolean)
+        }
+
+        // nan handling
+        with(immutableArrayOf(1.0, 2.0, Double.NaN)) {
+            expectThat(max())
+                .isEqualTo(Double.NaN)
+        }
+        with(immutableArrayOf(1.0f, 2.0f, Float.NaN)) {
+            expectThat(max())
                 .isEqualTo(Float.NaN)
         }
     }
