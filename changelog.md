@@ -1,6 +1,16 @@
 Change Log
 ==========
 
+## Unreleased
+
+_Date TBD_
+
+### Generic
+
+* Upgrade to Kotlin 2.1.0
+    * This fixes a compiler defect so we can start adding some missing features to Immutable Arrays (eg. extension
+      functions `min`, `max`, `minOrNull`, etc. with bounded type parameters)
+
 ## 0.7.0
 
 _2025-3-18_

@@ -1,5 +1,5 @@
 [versions]
-kotlin = "1.9.25" # https://kotlinlang.org/docs/releases.html#release-details
+kotlin = "2.1.0" # https://kotlinlang.org/docs/releases.html#release-details
 jUnit = "5.12.1" # https://github.com/junit-team/junit5
 jUnitPlatformLauncher = "1.12.1" # https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
 kotlinPoet = "1.17.0" # https://github.com/square/kotlinpoet
