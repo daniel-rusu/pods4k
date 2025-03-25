@@ -11,6 +11,12 @@ _Date TBD_
     * This fixes a compiler defect so we can start adding some missing features to Immutable Arrays (eg. extension
       functions `min`, `max`, `minOrNull`, etc. with bounded type parameters)
 
+### Immutable Arrays
+
+**New Features:**
+
+* Add `min()` extension functions
+
 ## 0.7.0
 
 _2025-3-18_

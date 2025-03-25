@@ -30,6 +30,7 @@ internal object ImmutableArrayExtensionsGenerator {
             addIndexOf()
             addLastIndexOf()
             addGetOrElse()
+            addMin()
             addFilterNotNull()
             addSorted()
             addSortedDescending()
@@ -167,6 +168,43 @@ private fun FileSpec.Builder.addGetOrElse() {
             addGenericTypes(baseType.type)
 
             statement("return values.getOrElse(index, defaultValue)")
+        }
+    }
+}
+
+private fun FileSpec.Builder.addMin() {
+    val genericType = TypeVariableName("T", Comparable::class.asTypeName().parameterizedBy(TypeVariableName("T")))
+    for (baseType in BaseType.entries) {
+        function(
+            kdoc = """
+                @return the smallest element
+                @throws NoSuchElementException if this ${baseType.generatedClassName} is empty
+            """.trimIndent(),
+            receiver = when (baseType) {
+                GENERIC -> baseType.getGeneratedClass().parameterizedBy(genericType)
+                else -> baseType.getGeneratedTypeName()
+            },
+            name = "min",
+            returns = if (baseType == GENERIC) genericType else baseType.type,
+        ) {
+            if (baseType == GENERIC) {
+                addGenericTypes(genericType)
+            }
+            if (baseType == BOOLEAN) {
+                // only call minOf once and use equality checks instead because minOf(boolean, boolean) auto-boxes the
+                // primitive booleans.  This optimization also stops early as it doesn't need to inspect the remainder
+                // after finding the min boolean value
+                statement("val minBoolean = minOf(true, false)")
+                statement("if (contains(minBoolean)) return minBoolean")
+                emptyLine()
+                statement("return first()")
+            } else {
+                statement("var minValue = first()")
+                controlFlow("for (i in 1..lastIndex)") {
+                    statement("minValue = minOf(minValue, values[i])")
+                }
+                statement("return minValue")
+            }
         }
     }
 }

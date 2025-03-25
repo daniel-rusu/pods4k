@@ -476,6 +476,113 @@ public inline fun ImmutableDoubleArray.getOrElse(index: Int, defaultValue: (inde
 }
 
 /**
+ * @return the smallest element
+ * @throws NoSuchElementException if this ImmutableArray is empty
+ */
+public fun <T : Comparable<T>> ImmutableArray<T>.min(): T {
+    var minValue = first()
+    for (i in 1..lastIndex) {
+        minValue = minOf(minValue, values[i])
+    }
+    return minValue
+}
+
+/**
+ * @return the smallest element
+ * @throws NoSuchElementException if this ImmutableBooleanArray is empty
+ */
+public fun ImmutableBooleanArray.min(): Boolean {
+    val minBoolean = minOf(true, false)
+    if (contains(minBoolean)) return minBoolean
+
+    return first()
+}
+
+/**
+ * @return the smallest element
+ * @throws NoSuchElementException if this ImmutableByteArray is empty
+ */
+public fun ImmutableByteArray.min(): Byte {
+    var minValue = first()
+    for (i in 1..lastIndex) {
+        minValue = minOf(minValue, values[i])
+    }
+    return minValue
+}
+
+/**
+ * @return the smallest element
+ * @throws NoSuchElementException if this ImmutableCharArray is empty
+ */
+public fun ImmutableCharArray.min(): Char {
+    var minValue = first()
+    for (i in 1..lastIndex) {
+        minValue = minOf(minValue, values[i])
+    }
+    return minValue
+}
+
+/**
+ * @return the smallest element
+ * @throws NoSuchElementException if this ImmutableShortArray is empty
+ */
+public fun ImmutableShortArray.min(): Short {
+    var minValue = first()
+    for (i in 1..lastIndex) {
+        minValue = minOf(minValue, values[i])
+    }
+    return minValue
+}
+
+/**
+ * @return the smallest element
+ * @throws NoSuchElementException if this ImmutableIntArray is empty
+ */
+public fun ImmutableIntArray.min(): Int {
+    var minValue = first()
+    for (i in 1..lastIndex) {
+        minValue = minOf(minValue, values[i])
+    }
+    return minValue
+}
+
+/**
+ * @return the smallest element
+ * @throws NoSuchElementException if this ImmutableLongArray is empty
+ */
+public fun ImmutableLongArray.min(): Long {
+    var minValue = first()
+    for (i in 1..lastIndex) {
+        minValue = minOf(minValue, values[i])
+    }
+    return minValue
+}
+
+/**
+ * @return the smallest element
+ * @throws NoSuchElementException if this ImmutableFloatArray is empty
+ */
+public fun ImmutableFloatArray.min(): Float {
+    var minValue = first()
+    for (i in 1..lastIndex) {
+        minValue = minOf(minValue, values[i])
+    }
+    return minValue
+}
+
+/**
+ * @return the smallest element
+ * @throws NoSuchElementException if this ImmutableDoubleArray is empty
+ */
+public fun ImmutableDoubleArray.min(): Double {
+    var minValue = first()
+    for (i in 1..lastIndex) {
+        minValue = minOf(minValue, values[i])
+    }
+    return minValue
+}
+
+/**
  * Returns an immutable array containing only the non-null elements
  */
 @JvmName("filterNotNull_GENERIC")

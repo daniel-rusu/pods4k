@@ -6,6 +6,7 @@ import strikt.api.expectThrows
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 import strikt.assertions.isFalse
+import strikt.assertions.isNotEqualTo
 import strikt.assertions.isTrue
 import strikt.assertions.message
 
@@ -172,6 +173,63 @@ class ImmutableArraysTest {
                 .isEqualTo(2)
             expectThat(this.getOrElse(3) { 100 })
                 .isEqualTo(100)
+        }
+    }
+
+    @Test
+    fun `min validation`() {
+        val minBoolean = minOf(true, false)
+        val maxBoolean = maxOf(true, false)
+
+        expectThat(minBoolean)
+            .isNotEqualTo(maxBoolean)
+
+        // empty scenarios
+        with(emptyImmutableArray<String>()) {
+            expectThrows<NoSuchElementException> { min() }
+        }
+        with(emptyImmutableBooleanArray()) {
+            expectThrows<NoSuchElementException> { min() }
+        }
+
+        // single element
+        with(immutableArrayOf("c")) {
+            expectThat(min())
+                .isEqualTo("c")
+        }
+        with(immutableArrayOf(minBoolean)) {
+            expectThat(min())
+                .isEqualTo(minBoolean)
+        }
+        with(immutableArrayOf(maxBoolean)) {
+            expectThat(min())
+                .isEqualTo(maxBoolean)
+        }
+
+        // multiple elements
+        with(immutableArrayOf("c", "a", "b")) {
+            expectThat(min()).isEqualTo("a")
+        }
+        with(immutableArrayOf(3, 1, 2, 4)) {
+            expectThat(min()).isEqualTo(1)
+        }
+        with(immutableArrayOf(maxBoolean, maxBoolean, maxBoolean, maxBoolean)) {
+            expectThat(min())
+                .isEqualTo(maxBoolean)
+        }
+        with(immutableArrayOf(maxBoolean, maxBoolean, minBoolean, maxBoolean)) {
+            expectThat(min())
+                .isEqualTo(minBoolean)
+        }
+
+        // nan handling
+        with(immutableArrayOf(1.0, 2.0, Double.NaN)) {
+            expectThat(min())
+                .isEqualTo(Double.NaN)
+        }
+        with(immutableArrayOf(1.0f, 2.0f, Float.NaN)) {
+            expectThat(min())
+                .isEqualTo(Float.NaN)
         }
     }
 
