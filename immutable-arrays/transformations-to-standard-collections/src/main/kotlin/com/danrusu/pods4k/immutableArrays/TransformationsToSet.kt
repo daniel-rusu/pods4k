@@ -61,72 +61,63 @@ public fun ImmutableDoubleArray.toSet(): Set<Double> = asList().toSet()
 /**
  * See [Array.toMutableSet]
  *
- * If the iteration order doesn't matter then use [toHashSet] as that produces a more efficient
- * mutable set.
+ * If the iteration order doesn't matter then use [toHashSet] as that produces a more efficient mutable set.
  */
 public fun <T> ImmutableArray<T>.toMutableSet(): MutableSet<T> = asList().toMutableSet()
 
 /**
  * See [Array.toMutableSet]
  *
- * If the iteration order doesn't matter then use [toHashSet] as that produces a more efficient
- * mutable set.
+ * If the iteration order doesn't matter then use [toHashSet] as that produces a more efficient mutable set.
  */
 public fun ImmutableBooleanArray.toMutableSet(): MutableSet<Boolean> = asList().toMutableSet()
 
 /**
  * See [Array.toMutableSet]
  *
- * If the iteration order doesn't matter then use [toHashSet] as that produces a more efficient
- * mutable set.
+ * If the iteration order doesn't matter then use [toHashSet] as that produces a more efficient mutable set.
  */
 public fun ImmutableByteArray.toMutableSet(): MutableSet<Byte> = asList().toMutableSet()
 
 /**
  * See [Array.toMutableSet]
  *
- * If the iteration order doesn't matter then use [toHashSet] as that produces a more efficient
- * mutable set.
+ * If the iteration order doesn't matter then use [toHashSet] as that produces a more efficient mutable set.
  */
 public fun ImmutableCharArray.toMutableSet(): MutableSet<Char> = asList().toMutableSet()
 
 /**
  * See [Array.toMutableSet]
  *
- * If the iteration order doesn't matter then use [toHashSet] as that produces a more efficient
- * mutable set.
+ * If the iteration order doesn't matter then use [toHashSet] as that produces a more efficient mutable set.
  */
 public fun ImmutableShortArray.toMutableSet(): MutableSet<Short> = asList().toMutableSet()
 
 /**
  * See [Array.toMutableSet]
  *
- * If the iteration order doesn't matter then use [toHashSet] as that produces a more efficient
- * mutable set.
+ * If the iteration order doesn't matter then use [toHashSet] as that produces a more efficient mutable set.
  */
 public fun ImmutableIntArray.toMutableSet(): MutableSet<Int> = asList().toMutableSet()
 
 /**
  * See [Array.toMutableSet]
  *
- * If the iteration order doesn't matter then use [toHashSet] as that produces a more efficient
- * mutable set.
+ * If the iteration order doesn't matter then use [toHashSet] as that produces a more efficient mutable set.
  */
 public fun ImmutableLongArray.toMutableSet(): MutableSet<Long> = asList().toMutableSet()
 
 /**
  * See [Array.toMutableSet]
  *
- * If the iteration order doesn't matter then use [toHashSet] as that produces a more efficient
- * mutable set.
+ * If the iteration order doesn't matter then use [toHashSet] as that produces a more efficient mutable set.
  */
 public fun ImmutableFloatArray.toMutableSet(): MutableSet<Float> = asList().toMutableSet()
 
 /**
  * See [Array.toMutableSet]
  *
- * If the iteration order doesn't matter then use [toHashSet] as that produces a more efficient
- * mutable set.
+ * If the iteration order doesn't matter then use [toHashSet] as that produces a more efficient mutable set.
  */
 public fun ImmutableDoubleArray.toMutableSet(): MutableSet<Double> = asList().toMutableSet()
 

@@ -103,15 +103,18 @@ private fun FileSpec.Builder.addMutableCollectionAddAll() {
 }
 
 private fun FileSpec.Builder.addMutableCollectionRemoveAll() {
+    val kdoc = """
+        Removes all the elements from [this] collection.
+
+        Note that if the immutable array contains duplicate elements then it might be more efficient to convert the
+        immutable array to a set first and remove the set from the collection instead.
+
+        @return true if the collection changed.
+    """.trimIndent()
+
     for (baseType in BaseType.entries) {
         function(
-            kdoc = """
-                Removes all the elements from [this] collection.
-
-                Note that if the immutable array contains duplicate elements then it might be more efficient to convert the immutable array to a set first and remove the set from the collection instead.
-
-                @return true if the collection changed.
-            """.trimIndent(),
+            kdoc = kdoc,
             receiver = ClassName("kotlin.collections", "MutableCollection")
                 .parameterizedBy(WildcardTypeName.consumerOf(baseType.type)),
             name = "removeAll",

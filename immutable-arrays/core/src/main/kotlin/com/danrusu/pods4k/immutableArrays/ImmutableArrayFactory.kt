@@ -358,12 +358,11 @@ internal object BuilderUtils {
     public const val MAX_ARRAY_SIZE: Int = Int.MAX_VALUE - 8
 
     /**
-     * Returns a capacity that's greater than or equal to [minCapacity].  If [currentCapacity] is
-     * already sufficient then [currentCapacity] is returned.
+     * Returns a capacity that's greater than or equal to [minCapacity].  If [currentCapacity] is already sufficient
+     * then [currentCapacity] is returned.
      *
-     * The strategy of choosing the new capacity attempts to balance the negative performance impact
-     * of repeated resizing operations with the negative memory impact of ending up with too much
-     * unused capacity.
+     * The strategy of choosing the new capacity attempts to balance the negative performance impact of repeated
+     * resizing operations with the negative memory impact of ending up with too much unused capacity.
      */
     public fun computeNewCapacity(currentCapacity: Int, minCapacity: Int): Int {
         when {

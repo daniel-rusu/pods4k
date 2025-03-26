@@ -21,15 +21,11 @@ import kotlin.OverloadResolutionByLambdaReturnType
 import kotlin.Short
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T, R> ImmutableArray<T>.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: T,
-    ) -> R?,
+    transform: (index: Int, element: T) -> R?,
 ): ImmutableArray<R> {
     val builder = ImmutableArray.Builder<R>()
     forEachIndexed { index, element ->
@@ -39,15 +35,11 @@ public inline fun <T, R> ImmutableArray<T>.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: T,
-    ) -> Boolean?,
+    transform: (index: Int, element: T) -> Boolean?,
 ): ImmutableBooleanArray {
     val builder = ImmutableBooleanArray.Builder()
     forEachIndexed { index, element ->
@@ -57,15 +49,11 @@ public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: T,
-    ) -> Byte?,
+    transform: (index: Int, element: T) -> Byte?,
 ): ImmutableByteArray {
     val builder = ImmutableByteArray.Builder()
     forEachIndexed { index, element ->
@@ -75,15 +63,11 @@ public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: T,
-    ) -> Char?,
+    transform: (index: Int, element: T) -> Char?,
 ): ImmutableCharArray {
     val builder = ImmutableCharArray.Builder()
     forEachIndexed { index, element ->
@@ -93,15 +77,11 @@ public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: T,
-    ) -> Short?,
+    transform: (index: Int, element: T) -> Short?,
 ): ImmutableShortArray {
     val builder = ImmutableShortArray.Builder()
     forEachIndexed { index, element ->
@@ -111,15 +91,11 @@ public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: T,
-    ) -> Int?,
+    transform: (index: Int, element: T) -> Int?,
 ): ImmutableIntArray {
     val builder = ImmutableIntArray.Builder()
     forEachIndexed { index, element ->
@@ -129,15 +105,11 @@ public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: T,
-    ) -> Long?,
+    transform: (index: Int, element: T) -> Long?,
 ): ImmutableLongArray {
     val builder = ImmutableLongArray.Builder()
     forEachIndexed { index, element ->
@@ -147,15 +119,11 @@ public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: T,
-    ) -> Float?,
+    transform: (index: Int, element: T) -> Float?,
 ): ImmutableFloatArray {
     val builder = ImmutableFloatArray.Builder()
     forEachIndexed { index, element ->
@@ -165,15 +133,11 @@ public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: T,
-    ) -> Double?,
+    transform: (index: Int, element: T) -> Double?,
 ): ImmutableDoubleArray {
     val builder = ImmutableDoubleArray.Builder()
     forEachIndexed { index, element ->
@@ -183,15 +147,11 @@ public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableBooleanArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Boolean,
-    ) -> R?,
+    transform: (index: Int, element: Boolean) -> R?,
 ): ImmutableArray<R> {
     val builder = ImmutableArray.Builder<R>()
     forEachIndexed { index, element ->
@@ -201,15 +161,11 @@ public inline fun <R> ImmutableBooleanArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Boolean,
-    ) -> Boolean?,
+    transform: (index: Int, element: Boolean) -> Boolean?,
 ): ImmutableBooleanArray {
     val builder = ImmutableBooleanArray.Builder()
     forEachIndexed { index, element ->
@@ -219,15 +175,11 @@ public inline fun ImmutableBooleanArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Boolean,
-    ) -> Byte?,
+    transform: (index: Int, element: Boolean) -> Byte?,
 ): ImmutableByteArray {
     val builder = ImmutableByteArray.Builder()
     forEachIndexed { index, element ->
@@ -237,15 +189,11 @@ public inline fun ImmutableBooleanArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Boolean,
-    ) -> Char?,
+    transform: (index: Int, element: Boolean) -> Char?,
 ): ImmutableCharArray {
     val builder = ImmutableCharArray.Builder()
     forEachIndexed { index, element ->
@@ -255,15 +203,11 @@ public inline fun ImmutableBooleanArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Boolean,
-    ) -> Short?,
+    transform: (index: Int, element: Boolean) -> Short?,
 ): ImmutableShortArray {
     val builder = ImmutableShortArray.Builder()
     forEachIndexed { index, element ->
@@ -273,15 +217,11 @@ public inline fun ImmutableBooleanArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Boolean,
-    ) -> Int?,
+    transform: (index: Int, element: Boolean) -> Int?,
 ): ImmutableIntArray {
     val builder = ImmutableIntArray.Builder()
     forEachIndexed { index, element ->
@@ -291,15 +231,11 @@ public inline fun ImmutableBooleanArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Boolean,
-    ) -> Long?,
+    transform: (index: Int, element: Boolean) -> Long?,
 ): ImmutableLongArray {
     val builder = ImmutableLongArray.Builder()
     forEachIndexed { index, element ->
@@ -309,15 +245,11 @@ public inline fun ImmutableBooleanArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Boolean,
-    ) -> Float?,
+    transform: (index: Int, element: Boolean) -> Float?,
 ): ImmutableFloatArray {
     val builder = ImmutableFloatArray.Builder()
     forEachIndexed { index, element ->
@@ -327,15 +259,11 @@ public inline fun ImmutableBooleanArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Boolean,
-    ) -> Double?,
+    transform: (index: Int, element: Boolean) -> Double?,
 ): ImmutableDoubleArray {
     val builder = ImmutableDoubleArray.Builder()
     forEachIndexed { index, element ->
@@ -345,15 +273,11 @@ public inline fun ImmutableBooleanArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableByteArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Byte,
-    ) -> R?,
+    transform: (index: Int, element: Byte) -> R?,
 ): ImmutableArray<R> {
     val builder = ImmutableArray.Builder<R>()
     forEachIndexed { index, element ->
@@ -363,15 +287,11 @@ public inline fun <R> ImmutableByteArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Byte,
-    ) -> Boolean?,
+    transform: (index: Int, element: Byte) -> Boolean?,
 ): ImmutableBooleanArray {
     val builder = ImmutableBooleanArray.Builder()
     forEachIndexed { index, element ->
@@ -381,15 +301,11 @@ public inline fun ImmutableByteArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Byte,
-    ) -> Byte?,
+    transform: (index: Int, element: Byte) -> Byte?,
 ): ImmutableByteArray {
     val builder = ImmutableByteArray.Builder()
     forEachIndexed { index, element ->
@@ -399,15 +315,11 @@ public inline fun ImmutableByteArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Byte,
-    ) -> Char?,
+    transform: (index: Int, element: Byte) -> Char?,
 ): ImmutableCharArray {
     val builder = ImmutableCharArray.Builder()
     forEachIndexed { index, element ->
@@ -417,15 +329,11 @@ public inline fun ImmutableByteArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Byte,
-    ) -> Short?,
+    transform: (index: Int, element: Byte) -> Short?,
 ): ImmutableShortArray {
     val builder = ImmutableShortArray.Builder()
     forEachIndexed { index, element ->
@@ -435,15 +343,11 @@ public inline fun ImmutableByteArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Byte,
-    ) -> Int?,
+    transform: (index: Int, element: Byte) -> Int?,
 ): ImmutableIntArray {
     val builder = ImmutableIntArray.Builder()
     forEachIndexed { index, element ->
@@ -453,15 +357,11 @@ public inline fun ImmutableByteArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Byte,
-    ) -> Long?,
+    transform: (index: Int, element: Byte) -> Long?,
 ): ImmutableLongArray {
     val builder = ImmutableLongArray.Builder()
     forEachIndexed { index, element ->
@@ -471,15 +371,11 @@ public inline fun ImmutableByteArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Byte,
-    ) -> Float?,
+    transform: (index: Int, element: Byte) -> Float?,
 ): ImmutableFloatArray {
     val builder = ImmutableFloatArray.Builder()
     forEachIndexed { index, element ->
@@ -489,15 +385,11 @@ public inline fun ImmutableByteArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Byte,
-    ) -> Double?,
+    transform: (index: Int, element: Byte) -> Double?,
 ): ImmutableDoubleArray {
     val builder = ImmutableDoubleArray.Builder()
     forEachIndexed { index, element ->
@@ -507,15 +399,11 @@ public inline fun ImmutableByteArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableCharArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Char,
-    ) -> R?,
+    transform: (index: Int, element: Char) -> R?,
 ): ImmutableArray<R> {
     val builder = ImmutableArray.Builder<R>()
     forEachIndexed { index, element ->
@@ -525,15 +413,11 @@ public inline fun <R> ImmutableCharArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Char,
-    ) -> Boolean?,
+    transform: (index: Int, element: Char) -> Boolean?,
 ): ImmutableBooleanArray {
     val builder = ImmutableBooleanArray.Builder()
     forEachIndexed { index, element ->
@@ -543,15 +427,11 @@ public inline fun ImmutableCharArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Char,
-    ) -> Byte?,
+    transform: (index: Int, element: Char) -> Byte?,
 ): ImmutableByteArray {
     val builder = ImmutableByteArray.Builder()
     forEachIndexed { index, element ->
@@ -561,15 +441,11 @@ public inline fun ImmutableCharArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Char,
-    ) -> Char?,
+    transform: (index: Int, element: Char) -> Char?,
 ): ImmutableCharArray {
     val builder = ImmutableCharArray.Builder()
     forEachIndexed { index, element ->
@@ -579,15 +455,11 @@ public inline fun ImmutableCharArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Char,
-    ) -> Short?,
+    transform: (index: Int, element: Char) -> Short?,
 ): ImmutableShortArray {
     val builder = ImmutableShortArray.Builder()
     forEachIndexed { index, element ->
@@ -597,15 +469,11 @@ public inline fun ImmutableCharArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Char,
-    ) -> Int?,
+    transform: (index: Int, element: Char) -> Int?,
 ): ImmutableIntArray {
     val builder = ImmutableIntArray.Builder()
     forEachIndexed { index, element ->
@@ -615,15 +483,11 @@ public inline fun ImmutableCharArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Char,
-    ) -> Long?,
+    transform: (index: Int, element: Char) -> Long?,
 ): ImmutableLongArray {
     val builder = ImmutableLongArray.Builder()
     forEachIndexed { index, element ->
@@ -633,15 +497,11 @@ public inline fun ImmutableCharArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Char,
-    ) -> Float?,
+    transform: (index: Int, element: Char) -> Float?,
 ): ImmutableFloatArray {
     val builder = ImmutableFloatArray.Builder()
     forEachIndexed { index, element ->
@@ -651,15 +511,11 @@ public inline fun ImmutableCharArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Char,
-    ) -> Double?,
+    transform: (index: Int, element: Char) -> Double?,
 ): ImmutableDoubleArray {
     val builder = ImmutableDoubleArray.Builder()
     forEachIndexed { index, element ->
@@ -669,15 +525,11 @@ public inline fun ImmutableCharArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableShortArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Short,
-    ) -> R?,
+    transform: (index: Int, element: Short) -> R?,
 ): ImmutableArray<R> {
     val builder = ImmutableArray.Builder<R>()
     forEachIndexed { index, element ->
@@ -687,15 +539,11 @@ public inline fun <R> ImmutableShortArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Short,
-    ) -> Boolean?,
+    transform: (index: Int, element: Short) -> Boolean?,
 ): ImmutableBooleanArray {
     val builder = ImmutableBooleanArray.Builder()
     forEachIndexed { index, element ->
@@ -705,15 +553,11 @@ public inline fun ImmutableShortArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Short,
-    ) -> Byte?,
+    transform: (index: Int, element: Short) -> Byte?,
 ): ImmutableByteArray {
     val builder = ImmutableByteArray.Builder()
     forEachIndexed { index, element ->
@@ -723,15 +567,11 @@ public inline fun ImmutableShortArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Short,
-    ) -> Char?,
+    transform: (index: Int, element: Short) -> Char?,
 ): ImmutableCharArray {
     val builder = ImmutableCharArray.Builder()
     forEachIndexed { index, element ->
@@ -741,15 +581,11 @@ public inline fun ImmutableShortArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Short,
-    ) -> Short?,
+    transform: (index: Int, element: Short) -> Short?,
 ): ImmutableShortArray {
     val builder = ImmutableShortArray.Builder()
     forEachIndexed { index, element ->
@@ -759,15 +595,11 @@ public inline fun ImmutableShortArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Short,
-    ) -> Int?,
+    transform: (index: Int, element: Short) -> Int?,
 ): ImmutableIntArray {
     val builder = ImmutableIntArray.Builder()
     forEachIndexed { index, element ->
@@ -777,15 +609,11 @@ public inline fun ImmutableShortArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Short,
-    ) -> Long?,
+    transform: (index: Int, element: Short) -> Long?,
 ): ImmutableLongArray {
     val builder = ImmutableLongArray.Builder()
     forEachIndexed { index, element ->
@@ -795,15 +623,11 @@ public inline fun ImmutableShortArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Short,
-    ) -> Float?,
+    transform: (index: Int, element: Short) -> Float?,
 ): ImmutableFloatArray {
     val builder = ImmutableFloatArray.Builder()
     forEachIndexed { index, element ->
@@ -813,15 +637,11 @@ public inline fun ImmutableShortArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Short,
-    ) -> Double?,
+    transform: (index: Int, element: Short) -> Double?,
 ): ImmutableDoubleArray {
     val builder = ImmutableDoubleArray.Builder()
     forEachIndexed { index, element ->
@@ -831,15 +651,11 @@ public inline fun ImmutableShortArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableIntArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Int,
-    ) -> R?,
+    transform: (index: Int, element: Int) -> R?,
 ): ImmutableArray<R> {
     val builder = ImmutableArray.Builder<R>()
     forEachIndexed { index, element ->
@@ -849,15 +665,11 @@ public inline fun <R> ImmutableIntArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Int,
-    ) -> Boolean?,
+    transform: (index: Int, element: Int) -> Boolean?,
 ): ImmutableBooleanArray {
     val builder = ImmutableBooleanArray.Builder()
     forEachIndexed { index, element ->
@@ -867,15 +679,11 @@ public inline fun ImmutableIntArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Int,
-    ) -> Byte?,
+    transform: (index: Int, element: Int) -> Byte?,
 ): ImmutableByteArray {
     val builder = ImmutableByteArray.Builder()
     forEachIndexed { index, element ->
@@ -885,15 +693,11 @@ public inline fun ImmutableIntArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Int,
-    ) -> Char?,
+    transform: (index: Int, element: Int) -> Char?,
 ): ImmutableCharArray {
     val builder = ImmutableCharArray.Builder()
     forEachIndexed { index, element ->
@@ -903,15 +707,11 @@ public inline fun ImmutableIntArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Int,
-    ) -> Short?,
+    transform: (index: Int, element: Int) -> Short?,
 ): ImmutableShortArray {
     val builder = ImmutableShortArray.Builder()
     forEachIndexed { index, element ->
@@ -921,15 +721,11 @@ public inline fun ImmutableIntArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Int,
-    ) -> Int?,
+    transform: (index: Int, element: Int) -> Int?,
 ): ImmutableIntArray {
     val builder = ImmutableIntArray.Builder()
     forEachIndexed { index, element ->
@@ -939,15 +735,11 @@ public inline fun ImmutableIntArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Int,
-    ) -> Long?,
+    transform: (index: Int, element: Int) -> Long?,
 ): ImmutableLongArray {
     val builder = ImmutableLongArray.Builder()
     forEachIndexed { index, element ->
@@ -957,15 +749,11 @@ public inline fun ImmutableIntArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Int,
-    ) -> Float?,
+    transform: (index: Int, element: Int) -> Float?,
 ): ImmutableFloatArray {
     val builder = ImmutableFloatArray.Builder()
     forEachIndexed { index, element ->
@@ -975,15 +763,11 @@ public inline fun ImmutableIntArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Int,
-    ) -> Double?,
+    transform: (index: Int, element: Int) -> Double?,
 ): ImmutableDoubleArray {
     val builder = ImmutableDoubleArray.Builder()
     forEachIndexed { index, element ->
@@ -993,15 +777,11 @@ public inline fun ImmutableIntArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableLongArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Long,
-    ) -> R?,
+    transform: (index: Int, element: Long) -> R?,
 ): ImmutableArray<R> {
     val builder = ImmutableArray.Builder<R>()
     forEachIndexed { index, element ->
@@ -1011,15 +791,11 @@ public inline fun <R> ImmutableLongArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Long,
-    ) -> Boolean?,
+    transform: (index: Int, element: Long) -> Boolean?,
 ): ImmutableBooleanArray {
     val builder = ImmutableBooleanArray.Builder()
     forEachIndexed { index, element ->
@@ -1029,15 +805,11 @@ public inline fun ImmutableLongArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Long,
-    ) -> Byte?,
+    transform: (index: Int, element: Long) -> Byte?,
 ): ImmutableByteArray {
     val builder = ImmutableByteArray.Builder()
     forEachIndexed { index, element ->
@@ -1047,15 +819,11 @@ public inline fun ImmutableLongArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Long,
-    ) -> Char?,
+    transform: (index: Int, element: Long) -> Char?,
 ): ImmutableCharArray {
     val builder = ImmutableCharArray.Builder()
     forEachIndexed { index, element ->
@@ -1065,15 +833,11 @@ public inline fun ImmutableLongArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Long,
-    ) -> Short?,
+    transform: (index: Int, element: Long) -> Short?,
 ): ImmutableShortArray {
     val builder = ImmutableShortArray.Builder()
     forEachIndexed { index, element ->
@@ -1083,15 +847,11 @@ public inline fun ImmutableLongArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Long,
-    ) -> Int?,
+    transform: (index: Int, element: Long) -> Int?,
 ): ImmutableIntArray {
     val builder = ImmutableIntArray.Builder()
     forEachIndexed { index, element ->
@@ -1101,15 +861,11 @@ public inline fun ImmutableLongArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Long,
-    ) -> Long?,
+    transform: (index: Int, element: Long) -> Long?,
 ): ImmutableLongArray {
     val builder = ImmutableLongArray.Builder()
     forEachIndexed { index, element ->
@@ -1119,15 +875,11 @@ public inline fun ImmutableLongArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Long,
-    ) -> Float?,
+    transform: (index: Int, element: Long) -> Float?,
 ): ImmutableFloatArray {
     val builder = ImmutableFloatArray.Builder()
     forEachIndexed { index, element ->
@@ -1137,15 +889,11 @@ public inline fun ImmutableLongArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Long,
-    ) -> Double?,
+    transform: (index: Int, element: Long) -> Double?,
 ): ImmutableDoubleArray {
     val builder = ImmutableDoubleArray.Builder()
     forEachIndexed { index, element ->
@@ -1155,15 +903,11 @@ public inline fun ImmutableLongArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableFloatArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Float,
-    ) -> R?,
+    transform: (index: Int, element: Float) -> R?,
 ): ImmutableArray<R> {
     val builder = ImmutableArray.Builder<R>()
     forEachIndexed { index, element ->
@@ -1173,15 +917,11 @@ public inline fun <R> ImmutableFloatArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Float,
-    ) -> Boolean?,
+    transform: (index: Int, element: Float) -> Boolean?,
 ): ImmutableBooleanArray {
     val builder = ImmutableBooleanArray.Builder()
     forEachIndexed { index, element ->
@@ -1191,15 +931,11 @@ public inline fun ImmutableFloatArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Float,
-    ) -> Byte?,
+    transform: (index: Int, element: Float) -> Byte?,
 ): ImmutableByteArray {
     val builder = ImmutableByteArray.Builder()
     forEachIndexed { index, element ->
@@ -1209,15 +945,11 @@ public inline fun ImmutableFloatArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Float,
-    ) -> Char?,
+    transform: (index: Int, element: Float) -> Char?,
 ): ImmutableCharArray {
     val builder = ImmutableCharArray.Builder()
     forEachIndexed { index, element ->
@@ -1227,15 +959,11 @@ public inline fun ImmutableFloatArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Float,
-    ) -> Short?,
+    transform: (index: Int, element: Float) -> Short?,
 ): ImmutableShortArray {
     val builder = ImmutableShortArray.Builder()
     forEachIndexed { index, element ->
@@ -1245,15 +973,11 @@ public inline fun ImmutableFloatArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Float,
-    ) -> Int?,
+    transform: (index: Int, element: Float) -> Int?,
 ): ImmutableIntArray {
     val builder = ImmutableIntArray.Builder()
     forEachIndexed { index, element ->
@@ -1263,15 +987,11 @@ public inline fun ImmutableFloatArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Float,
-    ) -> Long?,
+    transform: (index: Int, element: Float) -> Long?,
 ): ImmutableLongArray {
     val builder = ImmutableLongArray.Builder()
     forEachIndexed { index, element ->
@@ -1281,15 +1001,11 @@ public inline fun ImmutableFloatArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Float,
-    ) -> Float?,
+    transform: (index: Int, element: Float) -> Float?,
 ): ImmutableFloatArray {
     val builder = ImmutableFloatArray.Builder()
     forEachIndexed { index, element ->
@@ -1299,15 +1015,11 @@ public inline fun ImmutableFloatArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Float,
-    ) -> Double?,
+    transform: (index: Int, element: Float) -> Double?,
 ): ImmutableDoubleArray {
     val builder = ImmutableDoubleArray.Builder()
     forEachIndexed { index, element ->
@@ -1317,15 +1029,11 @@ public inline fun ImmutableFloatArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableDoubleArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Double,
-    ) -> R?,
+    transform: (index: Int, element: Double) -> R?,
 ): ImmutableArray<R> {
     val builder = ImmutableArray.Builder<R>()
     forEachIndexed { index, element ->
@@ -1335,15 +1043,11 @@ public inline fun <R> ImmutableDoubleArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Double,
-    ) -> Boolean?,
+    transform: (index: Int, element: Double) -> Boolean?,
 ): ImmutableBooleanArray {
     val builder = ImmutableBooleanArray.Builder()
     forEachIndexed { index, element ->
@@ -1353,15 +1057,11 @@ public inline fun ImmutableDoubleArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Double,
-    ) -> Byte?,
+    transform: (index: Int, element: Double) -> Byte?,
 ): ImmutableByteArray {
     val builder = ImmutableByteArray.Builder()
     forEachIndexed { index, element ->
@@ -1371,15 +1071,11 @@ public inline fun ImmutableDoubleArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Double,
-    ) -> Char?,
+    transform: (index: Int, element: Double) -> Char?,
 ): ImmutableCharArray {
     val builder = ImmutableCharArray.Builder()
     forEachIndexed { index, element ->
@@ -1389,15 +1085,11 @@ public inline fun ImmutableDoubleArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Double,
-    ) -> Short?,
+    transform: (index: Int, element: Double) -> Short?,
 ): ImmutableShortArray {
     val builder = ImmutableShortArray.Builder()
     forEachIndexed { index, element ->
@@ -1407,15 +1099,11 @@ public inline fun ImmutableDoubleArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Double,
-    ) -> Int?,
+    transform: (index: Int, element: Double) -> Int?,
 ): ImmutableIntArray {
     val builder = ImmutableIntArray.Builder()
     forEachIndexed { index, element ->
@@ -1425,15 +1113,11 @@ public inline fun ImmutableDoubleArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Double,
-    ) -> Long?,
+    transform: (index: Int, element: Double) -> Long?,
 ): ImmutableLongArray {
     val builder = ImmutableLongArray.Builder()
     forEachIndexed { index, element ->
@@ -1443,15 +1127,11 @@ public inline fun ImmutableDoubleArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Double,
-    ) -> Float?,
+    transform: (index: Int, element: Double) -> Float?,
 ): ImmutableFloatArray {
     val builder = ImmutableFloatArray.Builder()
     forEachIndexed { index, element ->
@@ -1461,15 +1141,11 @@ public inline fun ImmutableDoubleArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each
- * element and its index.
+ * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexedNotNull(
-    transform: (
-        index: Int,
-        element: Double,
-    ) -> Double?,
+    transform: (index: Int, element: Double) -> Double?,
 ): ImmutableDoubleArray {
     val builder = ImmutableDoubleArray.Builder()
     forEachIndexed { index, element ->

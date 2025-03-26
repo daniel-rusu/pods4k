@@ -42,15 +42,13 @@ public fun <T> ImmutableArray<T>.asList(): List<T> = object : AbstractList<T>(),
 /**
  * Returns an immutable list that wraps the same backing array without copying the elements.
  *
- * Note that accessing values from the resulting list will auto-box them everytime they are
- * accessed.  This is because [ImmutableBooleanArray] stores primitive values whereas [List] is defined
- * as a generic type.  If the number of accesses is expected to be multiple times larger than the size
- * of this array, then you might want to consider using [toList] instead in order to copy all the
- * elements into a standalone list and only auto-box each element once.
+ * Note that accessing values from the resulting list will auto-box them everytime they are accessed.  This is
+ * because [ImmutableBooleanArray] stores primitive values whereas [List] is defined as a generic type.  If the
+ * number of accesses is expected to be multiple times larger than the size of this array, then you might want
+ * to consider using [toList] instead in order to copy all the elements into a standalone list and only
+ * auto-box each element once.
  */
-public fun ImmutableBooleanArray.asList(): List<Boolean> = object :
-    AbstractList<Boolean>(),
-    RandomAccess {
+public fun ImmutableBooleanArray.asList(): List<Boolean> = object : AbstractList<Boolean>(), RandomAccess {
     override val size: Int get() = this@asList.size
     override fun isEmpty(): Boolean = this@asList.isEmpty()
     override fun contains(element: Boolean): Boolean = this@asList.contains(element)
@@ -62,11 +60,11 @@ public fun ImmutableBooleanArray.asList(): List<Boolean> = object :
 /**
  * Returns an immutable list that wraps the same backing array without copying the elements.
  *
- * Note that accessing values from the resulting list will auto-box them everytime they are
- * accessed.  This is because [ImmutableByteArray] stores primitive values whereas [List] is defined as
- * a generic type.  If the number of accesses is expected to be multiple times larger than the size of
- * this array, then you might want to consider using [toList] instead in order to copy all the elements
- * into a standalone list and only auto-box each element once.
+ * Note that accessing values from the resulting list will auto-box them everytime they are accessed.  This is
+ * because [ImmutableByteArray] stores primitive values whereas [List] is defined as a generic type.  If the
+ * number of accesses is expected to be multiple times larger than the size of this array, then you might want
+ * to consider using [toList] instead in order to copy all the elements into a standalone list and only
+ * auto-box each element once.
  */
 public fun ImmutableByteArray.asList(): List<Byte> = object : AbstractList<Byte>(), RandomAccess {
     override val size: Int get() = this@asList.size
@@ -80,11 +78,11 @@ public fun ImmutableByteArray.asList(): List<Byte> = object : AbstractList<Byte>
 /**
  * Returns an immutable list that wraps the same backing array without copying the elements.
  *
- * Note that accessing values from the resulting list will auto-box them everytime they are
- * accessed.  This is because [ImmutableCharArray] stores primitive values whereas [List] is defined as
- * a generic type.  If the number of accesses is expected to be multiple times larger than the size of
- * this array, then you might want to consider using [toList] instead in order to copy all the elements
- * into a standalone list and only auto-box each element once.
+ * Note that accessing values from the resulting list will auto-box them everytime they are accessed.  This is
+ * because [ImmutableCharArray] stores primitive values whereas [List] is defined as a generic type.  If the
+ * number of accesses is expected to be multiple times larger than the size of this array, then you might want
+ * to consider using [toList] instead in order to copy all the elements into a standalone list and only
+ * auto-box each element once.
  */
 public fun ImmutableCharArray.asList(): List<Char> = object : AbstractList<Char>(), RandomAccess {
     override val size: Int get() = this@asList.size
@@ -98,11 +96,11 @@ public fun ImmutableCharArray.asList(): List<Char> = object : AbstractList<Char>
 /**
  * Returns an immutable list that wraps the same backing array without copying the elements.
  *
- * Note that accessing values from the resulting list will auto-box them everytime they are
- * accessed.  This is because [ImmutableShortArray] stores primitive values whereas [List] is defined
- * as a generic type.  If the number of accesses is expected to be multiple times larger than the size
- * of this array, then you might want to consider using [toList] instead in order to copy all the
- * elements into a standalone list and only auto-box each element once.
+ * Note that accessing values from the resulting list will auto-box them everytime they are accessed.  This is
+ * because [ImmutableShortArray] stores primitive values whereas [List] is defined as a generic type.  If the
+ * number of accesses is expected to be multiple times larger than the size of this array, then you might want
+ * to consider using [toList] instead in order to copy all the elements into a standalone list and only
+ * auto-box each element once.
  */
 public fun ImmutableShortArray.asList(): List<Short> = object : AbstractList<Short>(), RandomAccess {
     override val size: Int get() = this@asList.size
@@ -116,11 +114,11 @@ public fun ImmutableShortArray.asList(): List<Short> = object : AbstractList<Sho
 /**
  * Returns an immutable list that wraps the same backing array without copying the elements.
  *
- * Note that accessing values from the resulting list will auto-box them everytime they are
- * accessed.  This is because [ImmutableIntArray] stores primitive values whereas [List] is defined as
- * a generic type.  If the number of accesses is expected to be multiple times larger than the size of
- * this array, then you might want to consider using [toList] instead in order to copy all the elements
- * into a standalone list and only auto-box each element once.
+ * Note that accessing values from the resulting list will auto-box them everytime they are accessed.  This is
+ * because [ImmutableIntArray] stores primitive values whereas [List] is defined as a generic type.  If the
+ * number of accesses is expected to be multiple times larger than the size of this array, then you might want
+ * to consider using [toList] instead in order to copy all the elements into a standalone list and only
+ * auto-box each element once.
  */
 public fun ImmutableIntArray.asList(): List<Int> = object : AbstractList<Int>(), RandomAccess {
     override val size: Int get() = this@asList.size
@@ -134,11 +132,11 @@ public fun ImmutableIntArray.asList(): List<Int> = object : AbstractList<Int>(),
 /**
  * Returns an immutable list that wraps the same backing array without copying the elements.
  *
- * Note that accessing values from the resulting list will auto-box them everytime they are
- * accessed.  This is because [ImmutableLongArray] stores primitive values whereas [List] is defined as
- * a generic type.  If the number of accesses is expected to be multiple times larger than the size of
- * this array, then you might want to consider using [toList] instead in order to copy all the elements
- * into a standalone list and only auto-box each element once.
+ * Note that accessing values from the resulting list will auto-box them everytime they are accessed.  This is
+ * because [ImmutableLongArray] stores primitive values whereas [List] is defined as a generic type.  If the
+ * number of accesses is expected to be multiple times larger than the size of this array, then you might want
+ * to consider using [toList] instead in order to copy all the elements into a standalone list and only
+ * auto-box each element once.
  */
 public fun ImmutableLongArray.asList(): List<Long> = object : AbstractList<Long>(), RandomAccess {
     override val size: Int get() = this@asList.size
@@ -152,11 +150,11 @@ public fun ImmutableLongArray.asList(): List<Long> = object : AbstractList<Long>
 /**
  * Returns an immutable list that wraps the same backing array without copying the elements.
  *
- * Note that accessing values from the resulting list will auto-box them everytime they are
- * accessed.  This is because [ImmutableFloatArray] stores primitive values whereas [List] is defined
- * as a generic type.  If the number of accesses is expected to be multiple times larger than the size
- * of this array, then you might want to consider using [toList] instead in order to copy all the
- * elements into a standalone list and only auto-box each element once.
+ * Note that accessing values from the resulting list will auto-box them everytime they are accessed.  This is
+ * because [ImmutableFloatArray] stores primitive values whereas [List] is defined as a generic type.  If the
+ * number of accesses is expected to be multiple times larger than the size of this array, then you might want
+ * to consider using [toList] instead in order to copy all the elements into a standalone list and only
+ * auto-box each element once.
  */
 public fun ImmutableFloatArray.asList(): List<Float> = object : AbstractList<Float>(), RandomAccess {
     override val size: Int get() = this@asList.size
@@ -170,15 +168,13 @@ public fun ImmutableFloatArray.asList(): List<Float> = object : AbstractList<Flo
 /**
  * Returns an immutable list that wraps the same backing array without copying the elements.
  *
- * Note that accessing values from the resulting list will auto-box them everytime they are
- * accessed.  This is because [ImmutableDoubleArray] stores primitive values whereas [List] is defined
- * as a generic type.  If the number of accesses is expected to be multiple times larger than the size
- * of this array, then you might want to consider using [toList] instead in order to copy all the
- * elements into a standalone list and only auto-box each element once.
+ * Note that accessing values from the resulting list will auto-box them everytime they are accessed.  This is
+ * because [ImmutableDoubleArray] stores primitive values whereas [List] is defined as a generic type.  If the
+ * number of accesses is expected to be multiple times larger than the size of this array, then you might want
+ * to consider using [toList] instead in order to copy all the elements into a standalone list and only
+ * auto-box each element once.
  */
-public fun ImmutableDoubleArray.asList(): List<Double> = object :
-    AbstractList<Double>(),
-    RandomAccess {
+public fun ImmutableDoubleArray.asList(): List<Double> = object : AbstractList<Double>(), RandomAccess {
     override val size: Int get() = this@asList.size
     override fun isEmpty(): Boolean = this@asList.isEmpty()
     override fun contains(element: Double): Boolean = this@asList.contains(element)
@@ -913,8 +909,8 @@ public fun ImmutableFloatArray.sorted(): ImmutableFloatArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableDoubleArray] with all elements
- * sorted according to their natural sort order.
+ * Leaves [this] immutable array as is and returns an [ImmutableDoubleArray] with all elements sorted
+ * according to their natural sort order.
  */
 public fun ImmutableDoubleArray.sorted(): ImmutableDoubleArray {
     // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
@@ -1020,8 +1016,8 @@ public fun ImmutableFloatArray.sortedDescending(): ImmutableFloatArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableDoubleArray] with all elements
- * sorted according to their reverse natural sort order.
+ * Leaves [this] immutable array as is and returns an [ImmutableDoubleArray] with all elements sorted
+ * according to their reverse natural sort order.
  */
 public fun ImmutableDoubleArray.sortedDescending(): ImmutableDoubleArray {
     // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
@@ -1045,8 +1041,8 @@ public operator fun <T> ImmutableArray<T>.plus(other: ImmutableArray<T>): Immuta
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableBooleanArray] with the elements of
- * [this] followed by the elements of [other]
+ * Leaves [this] immutable array as is and returns an [ImmutableBooleanArray] with the elements of [this]
+ * followed by the elements of [other]
  */
 public operator fun ImmutableBooleanArray.plus(other: ImmutableBooleanArray): ImmutableBooleanArray = when {
     isEmpty() -> other
@@ -1055,8 +1051,8 @@ public operator fun ImmutableBooleanArray.plus(other: ImmutableBooleanArray): Im
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableByteArray] with the elements of
- * [this] followed by the elements of [other]
+ * Leaves [this] immutable array as is and returns an [ImmutableByteArray] with the elements of [this]
+ * followed by the elements of [other]
  */
 public operator fun ImmutableByteArray.plus(other: ImmutableByteArray): ImmutableByteArray = when {
     isEmpty() -> other
@@ -1065,8 +1061,8 @@ public operator fun ImmutableByteArray.plus(other: ImmutableByteArray): Immutabl
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableCharArray] with the elements of
- * [this] followed by the elements of [other]
+ * Leaves [this] immutable array as is and returns an [ImmutableCharArray] with the elements of [this]
+ * followed by the elements of [other]
  */
 public operator fun ImmutableCharArray.plus(other: ImmutableCharArray): ImmutableCharArray = when {
     isEmpty() -> other
@@ -1075,8 +1071,8 @@ public operator fun ImmutableCharArray.plus(other: ImmutableCharArray): Immutabl
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableShortArray] with the elements of
- * [this] followed by the elements of [other]
+ * Leaves [this] immutable array as is and returns an [ImmutableShortArray] with the elements of [this]
+ * followed by the elements of [other]
  */
 public operator fun ImmutableShortArray.plus(other: ImmutableShortArray): ImmutableShortArray = when {
     isEmpty() -> other
@@ -1085,8 +1081,8 @@ public operator fun ImmutableShortArray.plus(other: ImmutableShortArray): Immuta
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableIntArray] with the elements of
- * [this] followed by the elements of [other]
+ * Leaves [this] immutable array as is and returns an [ImmutableIntArray] with the elements of [this]
+ * followed by the elements of [other]
  */
 public operator fun ImmutableIntArray.plus(other: ImmutableIntArray): ImmutableIntArray = when {
     isEmpty() -> other
@@ -1095,8 +1091,8 @@ public operator fun ImmutableIntArray.plus(other: ImmutableIntArray): ImmutableI
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableLongArray] with the elements of
- * [this] followed by the elements of [other]
+ * Leaves [this] immutable array as is and returns an [ImmutableLongArray] with the elements of [this]
+ * followed by the elements of [other]
  */
 public operator fun ImmutableLongArray.plus(other: ImmutableLongArray): ImmutableLongArray = when {
     isEmpty() -> other
@@ -1105,8 +1101,8 @@ public operator fun ImmutableLongArray.plus(other: ImmutableLongArray): Immutabl
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableFloatArray] with the elements of
- * [this] followed by the elements of [other]
+ * Leaves [this] immutable array as is and returns an [ImmutableFloatArray] with the elements of [this]
+ * followed by the elements of [other]
  */
 public operator fun ImmutableFloatArray.plus(other: ImmutableFloatArray): ImmutableFloatArray = when {
     isEmpty() -> other
@@ -1115,8 +1111,8 @@ public operator fun ImmutableFloatArray.plus(other: ImmutableFloatArray): Immuta
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableDoubleArray] with the elements of
- * [this] followed by the elements of [other]
+ * Leaves [this] immutable array as is and returns an [ImmutableDoubleArray] with the elements of [this]
+ * followed by the elements of [other]
  */
 public operator fun ImmutableDoubleArray.plus(other: ImmutableDoubleArray): ImmutableDoubleArray = when {
     isEmpty() -> other
@@ -1129,8 +1125,8 @@ public operator fun ImmutableDoubleArray.plus(other: ImmutableDoubleArray): Immu
  * followed by the specified [element].
  *
  * Important:
- * When needing to add multiple elements individually, use the buildImmutableArray methods or
- * immutable array builders as that's much more efficient instead of calling this function repeatedly.
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or immutable array
+ * builders as that's much more efficient instead of calling this function repeatedly.
  */
 @Suppress("UNCHECKED_CAST")
 public operator fun <T> ImmutableArray<T>.plus(element: T): ImmutableArray<T> {
@@ -1138,96 +1134,96 @@ public operator fun <T> ImmutableArray<T>.plus(element: T): ImmutableArray<T> {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableBooleanArray] with the elements of
- * [this] followed by the specified [element].
+ * Leaves [this] immutable array as is and returns an [ImmutableBooleanArray] with the elements of [this]
+ * followed by the specified [element].
  *
  * Important:
- * When needing to add multiple elements individually, use the buildImmutableArray methods or
- * immutable array builders as that's much more efficient instead of calling this function repeatedly.
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or immutable array
+ * builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableBooleanArray.plus(element: Boolean): ImmutableBooleanArray {
     return ImmutableBooleanArray(values + element)
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableByteArray] with the elements of
- * [this] followed by the specified [element].
+ * Leaves [this] immutable array as is and returns an [ImmutableByteArray] with the elements of [this]
+ * followed by the specified [element].
  *
  * Important:
- * When needing to add multiple elements individually, use the buildImmutableArray methods or
- * immutable array builders as that's much more efficient instead of calling this function repeatedly.
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or immutable array
+ * builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableByteArray.plus(element: Byte): ImmutableByteArray {
     return ImmutableByteArray(values + element)
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableCharArray] with the elements of
- * [this] followed by the specified [element].
+ * Leaves [this] immutable array as is and returns an [ImmutableCharArray] with the elements of [this]
+ * followed by the specified [element].
  *
  * Important:
- * When needing to add multiple elements individually, use the buildImmutableArray methods or
- * immutable array builders as that's much more efficient instead of calling this function repeatedly.
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or immutable array
+ * builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableCharArray.plus(element: Char): ImmutableCharArray {
     return ImmutableCharArray(values + element)
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableShortArray] with the elements of
- * [this] followed by the specified [element].
+ * Leaves [this] immutable array as is and returns an [ImmutableShortArray] with the elements of [this]
+ * followed by the specified [element].
  *
  * Important:
- * When needing to add multiple elements individually, use the buildImmutableArray methods or
- * immutable array builders as that's much more efficient instead of calling this function repeatedly.
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or immutable array
+ * builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableShortArray.plus(element: Short): ImmutableShortArray {
     return ImmutableShortArray(values + element)
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableIntArray] with the elements of
- * [this] followed by the specified [element].
+ * Leaves [this] immutable array as is and returns an [ImmutableIntArray] with the elements of [this]
+ * followed by the specified [element].
  *
  * Important:
- * When needing to add multiple elements individually, use the buildImmutableArray methods or
- * immutable array builders as that's much more efficient instead of calling this function repeatedly.
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or immutable array
+ * builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableIntArray.plus(element: Int): ImmutableIntArray {
     return ImmutableIntArray(values + element)
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableLongArray] with the elements of
- * [this] followed by the specified [element].
+ * Leaves [this] immutable array as is and returns an [ImmutableLongArray] with the elements of [this]
+ * followed by the specified [element].
  *
  * Important:
- * When needing to add multiple elements individually, use the buildImmutableArray methods or
- * immutable array builders as that's much more efficient instead of calling this function repeatedly.
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or immutable array
+ * builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableLongArray.plus(element: Long): ImmutableLongArray {
     return ImmutableLongArray(values + element)
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableFloatArray] with the elements of
- * [this] followed by the specified [element].
+ * Leaves [this] immutable array as is and returns an [ImmutableFloatArray] with the elements of [this]
+ * followed by the specified [element].
  *
  * Important:
- * When needing to add multiple elements individually, use the buildImmutableArray methods or
- * immutable array builders as that's much more efficient instead of calling this function repeatedly.
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or immutable array
+ * builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableFloatArray.plus(element: Float): ImmutableFloatArray {
     return ImmutableFloatArray(values + element)
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableDoubleArray] with the elements of
- * [this] followed by the specified [element].
+ * Leaves [this] immutable array as is and returns an [ImmutableDoubleArray] with the elements of [this]
+ * followed by the specified [element].
  *
  * Important:
- * When needing to add multiple elements individually, use the buildImmutableArray methods or
- * immutable array builders as that's much more efficient instead of calling this function repeatedly.
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or immutable array
+ * builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableDoubleArray.plus(element: Double): ImmutableDoubleArray {
     return ImmutableDoubleArray(values + element)
@@ -1236,8 +1232,8 @@ public operator fun ImmutableDoubleArray.plus(element: Double): ImmutableDoubleA
 /**
  * Returns an [ImmutableBooleanArray] containing the unboxed values of this array.
  *
- * [ImmutableBooleanArray] uses less memory and is faster to access as it stores the primitive
- * values directly without needing to store them in wrapper objects.
+ * [ImmutableBooleanArray] uses less memory and is faster to access as it stores the primitive values directly
+ * without needing to store them in wrapper objects.
  */
 public fun ImmutableArray<Boolean>.toImmutableBooleanArray(): ImmutableBooleanArray {
     return ImmutableBooleanArray(size) { this[it] }
@@ -1246,8 +1242,8 @@ public fun ImmutableArray<Boolean>.toImmutableBooleanArray(): ImmutableBooleanAr
 /**
  * Returns an [ImmutableByteArray] containing the unboxed values of this array.
  *
- * [ImmutableByteArray] uses less memory and is faster to access as it stores the primitive values
- * directly without needing to store them in wrapper objects.
+ * [ImmutableByteArray] uses less memory and is faster to access as it stores the primitive values directly
+ * without needing to store them in wrapper objects.
  */
 public fun ImmutableArray<Byte>.toImmutableByteArray(): ImmutableByteArray {
     return ImmutableByteArray(size) { this[it] }
@@ -1256,8 +1252,8 @@ public fun ImmutableArray<Byte>.toImmutableByteArray(): ImmutableByteArray {
 /**
  * Returns an [ImmutableCharArray] containing the unboxed values of this array.
  *
- * [ImmutableCharArray] uses less memory and is faster to access as it stores the primitive values
- * directly without needing to store them in wrapper objects.
+ * [ImmutableCharArray] uses less memory and is faster to access as it stores the primitive values directly
+ * without needing to store them in wrapper objects.
  */
 public fun ImmutableArray<Char>.toImmutableCharArray(): ImmutableCharArray {
     return ImmutableCharArray(size) { this[it] }
@@ -1266,8 +1262,8 @@ public fun ImmutableArray<Char>.toImmutableCharArray(): ImmutableCharArray {
 /**
  * Returns an [ImmutableShortArray] containing the unboxed values of this array.
  *
- * [ImmutableShortArray] uses less memory and is faster to access as it stores the primitive values
- * directly without needing to store them in wrapper objects.
+ * [ImmutableShortArray] uses less memory and is faster to access as it stores the primitive values directly
+ * without needing to store them in wrapper objects.
  */
 public fun ImmutableArray<Short>.toImmutableShortArray(): ImmutableShortArray {
     return ImmutableShortArray(size) { this[it] }
@@ -1276,8 +1272,8 @@ public fun ImmutableArray<Short>.toImmutableShortArray(): ImmutableShortArray {
 /**
  * Returns an [ImmutableIntArray] containing the unboxed values of this array.
  *
- * [ImmutableIntArray] uses less memory and is faster to access as it stores the primitive values
- * directly without needing to store them in wrapper objects.
+ * [ImmutableIntArray] uses less memory and is faster to access as it stores the primitive values directly
+ * without needing to store them in wrapper objects.
  */
 public fun ImmutableArray<Int>.toImmutableIntArray(): ImmutableIntArray {
     return ImmutableIntArray(size) { this[it] }
@@ -1286,8 +1282,8 @@ public fun ImmutableArray<Int>.toImmutableIntArray(): ImmutableIntArray {
 /**
  * Returns an [ImmutableLongArray] containing the unboxed values of this array.
  *
- * [ImmutableLongArray] uses less memory and is faster to access as it stores the primitive values
- * directly without needing to store them in wrapper objects.
+ * [ImmutableLongArray] uses less memory and is faster to access as it stores the primitive values directly
+ * without needing to store them in wrapper objects.
  */
 public fun ImmutableArray<Long>.toImmutableLongArray(): ImmutableLongArray {
     return ImmutableLongArray(size) { this[it] }
@@ -1296,8 +1292,8 @@ public fun ImmutableArray<Long>.toImmutableLongArray(): ImmutableLongArray {
 /**
  * Returns an [ImmutableFloatArray] containing the unboxed values of this array.
  *
- * [ImmutableFloatArray] uses less memory and is faster to access as it stores the primitive values
- * directly without needing to store them in wrapper objects.
+ * [ImmutableFloatArray] uses less memory and is faster to access as it stores the primitive values directly
+ * without needing to store them in wrapper objects.
  */
 public fun ImmutableArray<Float>.toImmutableFloatArray(): ImmutableFloatArray {
     return ImmutableFloatArray(size) { this[it] }
@@ -1306,8 +1302,8 @@ public fun ImmutableArray<Float>.toImmutableFloatArray(): ImmutableFloatArray {
 /**
  * Returns an [ImmutableDoubleArray] containing the unboxed values of this array.
  *
- * [ImmutableDoubleArray] uses less memory and is faster to access as it stores the primitive values
- * directly without needing to store them in wrapper objects.
+ * [ImmutableDoubleArray] uses less memory and is faster to access as it stores the primitive values directly
+ * without needing to store them in wrapper objects.
  */
 public fun ImmutableArray<Double>.toImmutableDoubleArray(): ImmutableDoubleArray {
     return ImmutableDoubleArray(size) { this[it] }
@@ -1316,8 +1312,8 @@ public fun ImmutableArray<Double>.toImmutableDoubleArray(): ImmutableDoubleArray
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
  *
- * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
- * be auto-boxed in a wrapper object.
+ * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will be
+ * auto-boxed in a wrapper object.
  */
 public fun ImmutableBooleanArray.toTypedImmutableArray(): ImmutableArray<Boolean> {
     return ImmutableArray(size) { this[it] }
@@ -1326,8 +1322,8 @@ public fun ImmutableBooleanArray.toTypedImmutableArray(): ImmutableArray<Boolean
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
  *
- * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
- * be auto-boxed in a wrapper object.
+ * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will be
+ * auto-boxed in a wrapper object.
  */
 public fun ImmutableByteArray.toTypedImmutableArray(): ImmutableArray<Byte> {
     return ImmutableArray(size) { this[it] }
@@ -1336,8 +1332,8 @@ public fun ImmutableByteArray.toTypedImmutableArray(): ImmutableArray<Byte> {
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
  *
- * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
- * be auto-boxed in a wrapper object.
+ * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will be
+ * auto-boxed in a wrapper object.
  */
 public fun ImmutableCharArray.toTypedImmutableArray(): ImmutableArray<Char> {
     return ImmutableArray(size) { this[it] }
@@ -1346,8 +1342,8 @@ public fun ImmutableCharArray.toTypedImmutableArray(): ImmutableArray<Char> {
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
  *
- * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
- * be auto-boxed in a wrapper object.
+ * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will be
+ * auto-boxed in a wrapper object.
  */
 public fun ImmutableShortArray.toTypedImmutableArray(): ImmutableArray<Short> {
     return ImmutableArray(size) { this[it] }
@@ -1356,8 +1352,8 @@ public fun ImmutableShortArray.toTypedImmutableArray(): ImmutableArray<Short> {
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
  *
- * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
- * be auto-boxed in a wrapper object.
+ * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will be
+ * auto-boxed in a wrapper object.
  */
 public fun ImmutableIntArray.toTypedImmutableArray(): ImmutableArray<Int> {
     return ImmutableArray(size) { this[it] }
@@ -1366,8 +1362,8 @@ public fun ImmutableIntArray.toTypedImmutableArray(): ImmutableArray<Int> {
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
  *
- * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
- * be auto-boxed in a wrapper object.
+ * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will be
+ * auto-boxed in a wrapper object.
  */
 public fun ImmutableLongArray.toTypedImmutableArray(): ImmutableArray<Long> {
     return ImmutableArray(size) { this[it] }
@@ -1376,8 +1372,8 @@ public fun ImmutableLongArray.toTypedImmutableArray(): ImmutableArray<Long> {
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
  *
- * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
- * be auto-boxed in a wrapper object.
+ * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will be
+ * auto-boxed in a wrapper object.
  */
 public fun ImmutableFloatArray.toTypedImmutableArray(): ImmutableArray<Float> {
     return ImmutableArray(size) { this[it] }
@@ -1386,8 +1382,8 @@ public fun ImmutableFloatArray.toTypedImmutableArray(): ImmutableArray<Float> {
 /**
  * Returns a typed [ImmutableArray] containing the values of this array.
  *
- * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will
- * be auto-boxed in a wrapper object.
+ * Note that [ImmutableArray] uses more memory and is slower to access as each primitive value will be
+ * auto-boxed in a wrapper object.
  */
 public fun ImmutableDoubleArray.toTypedImmutableArray(): ImmutableArray<Double> {
     return ImmutableArray(size) { this[it] }
@@ -1396,9 +1392,7 @@ public fun ImmutableDoubleArray.toTypedImmutableArray(): ImmutableArray<Double> 
 /**
  * Returns a regular (mutable) array with a copy of the elements.
  */
-public inline fun <reified T> ImmutableArray<T>.toMutableArray(): Array<out T> = Array(size) {
-    values[it]
-}
+public inline fun <reified T> ImmutableArray<T>.toMutableArray(): Array<out T> = Array(size) { values[it] }
 
 /**
  * Returns a regular (mutable) array with a copy of the elements.
@@ -1443,9 +1437,7 @@ public fun ImmutableDoubleArray.toMutableArray(): DoubleArray = values.copyOf()
 /**
  * Returns a regular (mutable) typed array with a copy of the elements.
  */
-public inline fun <reified T> ImmutableArray<T>.toTypedMutableArray(): Array<out T> = Array(size) {
-    values[it]
-}
+public inline fun <reified T> ImmutableArray<T>.toTypedMutableArray(): Array<out T> = Array(size) { values[it] }
 
 /**
  * Returns a regular (mutable) typed array with a copy of the elements.

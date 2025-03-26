@@ -49,22 +49,27 @@ internal object ImmutableArrayExtensionsGenerator {
 }
 
 private fun FileSpec.Builder.addAsList() {
-    val standardKdoc = "Returns an immutable list that wraps the same backing array without copying the elements."
+    val genericKdoc = "Returns an immutable list that wraps the same backing array without copying the elements."
+
+    val generatePrimitiveKdoc: (BaseType) -> String = { baseType ->
+        val immutableArrayClass = baseType.generatedClassName
+
+        """
+            $genericKdoc
+
+            Note that accessing values from the resulting list will auto-box them everytime they are accessed.  This is
+            because [$immutableArrayClass] stores primitive values whereas [List] is defined as a generic type.  If the
+            number of accesses is expected to be multiple times larger than the size of this array, then you might want
+            to consider using [toList] instead in order to copy all the elements into a standalone list and only
+            auto-box each element once.
+        """.trimIndent()
+    }
 
     for (baseType in BaseType.entries) {
         function(
             kdoc = when (baseType) {
-                GENERIC -> standardKdoc
-                else -> {
-                    "$standardKdoc" +
-                        "\n" +
-                        "\nNote that accessing values from the resulting list will auto-box them everytime they " +
-                        "are accessed.  This is because [${baseType.generatedClassName}] stores primitive values " +
-                        "whereas [List] is defined as a generic type.  If the number of accesses is expected to " +
-                        "be multiple times larger than the size of this array, then you might want to consider " +
-                        "using [toList] instead in order to copy all the elements into a standalone list and " +
-                        "only auto-box each element once."
-                }
+                GENERIC -> genericKdoc
+                else -> generatePrimitiveKdoc(baseType)
             },
             receiver = baseType.getGeneratedTypeName(),
             name = "asList",
@@ -289,28 +294,34 @@ private fun FileSpec.Builder.addSorted() {
     val genericVariableName = "T"
     val genericType = TypeVariableName(genericVariableName)
 
+    val generateKdoc: (BaseType) -> String = { baseType ->
+        val immutableArrayClass = baseType.generatedClassName
+
+        if (baseType == GENERIC) {
+            """
+                Leaves [this] immutable array as is and returns an [$immutableArrayClass] with all elements sorted
+                according to their natural sort order.
+
+                The sort is _stable_ so equal elements preserve their order relative to each other after sorting.
+            """.trimIndent()
+        } else {
+            """
+                Leaves [this] immutable array as is and returns an [$immutableArrayClass] with all elements sorted
+                according to their natural sort order.
+            """.trimIndent()
+        }
+    }
+
     for (baseType in BaseType.entries) {
         // both Java and Kotlin standard libraries don't provide sorting abilities for primitive boolean arrays
         if (baseType == BOOLEAN) continue
 
-        val kdoc = when (baseType) {
-            GENERIC ->
-                "Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with all " +
-                    "elements sorted according to their natural sort order." +
-                    "\n" +
-                    "\nThe sort is _stable_ so equal elements preserve their order relative to each other after " +
-                    "sorting."
-
-            else ->
-                "Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with all " +
-                    "elements sorted according to their natural sort order."
-        }
         val receiver = when (baseType) {
             GENERIC -> baseType.getGeneratedClass().parameterizedBy(genericType)
             else -> baseType.getGeneratedClass()
         }
         function(
-            kdoc = kdoc,
+            kdoc = generateKdoc(baseType),
             receiver = receiver,
             name = "sorted",
             returns = receiver,
@@ -344,28 +355,34 @@ private fun FileSpec.Builder.addSortedDescending() {
     val genericVariableName = "T"
     val genericType = TypeVariableName(genericVariableName)
 
+    val generateKdoc: (BaseType) -> String = { baseType ->
+        val immutableArrayClass = baseType.generatedClassName
+
+        if (baseType == GENERIC) {
+            """
+                Leaves [this] immutable array as is and returns an [$immutableArrayClass] with all elements sorted
+                according to their reverse natural sort order.
+
+                The sort is _stable_ so equal elements preserve their order relative to each other after sorting.
+            """.trimIndent()
+        } else {
+            """
+                Leaves [this] immutable array as is and returns an [$immutableArrayClass] with all elements sorted
+                according to their reverse natural sort order.
+            """.trimIndent()
+        }
+    }
+
     for (baseType in BaseType.entries) {
         // both Kotlin & Java standard libraries don't provide sorting abilities for primitive boolean arrays
         if (baseType == BOOLEAN) continue
 
-        val kdoc = when (baseType) {
-            GENERIC ->
-                "Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with all " +
-                    "elements sorted according to their reverse natural sort order." +
-                    "\n" +
-                    "\nThe sort is _stable_ so equal elements preserve their order relative to each other after " +
-                    "sorting."
-
-            else ->
-                "Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with all " +
-                    "elements sorted according to their reverse natural sort order."
-        }
         val receiver = when (baseType) {
             GENERIC -> baseType.getGeneratedClass().parameterizedBy(genericType)
             else -> baseType.getGeneratedClass()
         }
         function(
-            kdoc = kdoc,
+            kdoc = generateKdoc(baseType),
             receiver = receiver,
             name = "sortedDescending",
             returns = receiver,
@@ -393,10 +410,18 @@ private fun FileSpec.Builder.addSortedDescending() {
 }
 
 private fun FileSpec.Builder.addPlusImmutableArray() {
+    val generateKdoc: (BaseType) -> String = { baseType ->
+        val immutableArrayClass = baseType.generatedClassName
+
+        """
+            Leaves [this] immutable array as is and returns an [$immutableArrayClass] with the elements of [this]
+            followed by the elements of [other]
+        """.trimIndent()
+    }
+
     for (baseType in BaseType.entries) {
         function(
-            kdoc = "Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with the " +
-                "elements of [this] followed by the elements of [other]",
+            kdoc = generateKdoc(baseType),
             modifiers = listOf(KModifier.OPERATOR),
             receiver = baseType.getGeneratedTypeName(),
             name = "plus",
@@ -425,16 +450,21 @@ private fun FileSpec.Builder.addPlusImmutableArray() {
 }
 
 private fun FileSpec.Builder.addPlusValue() {
+    val generateKdoc: (BaseType) -> String = { baseType ->
+        val immutableArrayClass = baseType.generatedClassName
+        """
+            Leaves [this] immutable array as is and returns an [$immutableArrayClass] with the elements of [this]
+            followed by the specified [element].
+
+            Important:
+            When needing to add multiple elements individually, use the buildImmutableArray methods or immutable array
+            builders as that's much more efficient instead of calling this function repeatedly.
+        """.trimIndent()
+    }
+
     for (baseType in BaseType.entries) {
         function(
-            kdoc =
-            "Leaves [this] immutable array as is and returns an [${baseType.generatedClassName}] with the " +
-                "elements of [this] followed by the specified [element]." +
-                "\n" +
-                "\nImportant:" +
-                "\nWhen needing to add multiple elements individually, use the buildImmutableArray methods " +
-                "or immutable array builders as that's much more efficient instead of calling this function " +
-                "repeatedly.",
+            kdoc = generateKdoc(baseType),
             modifiers = listOf(KModifier.OPERATOR),
             receiver = baseType.getGeneratedTypeName(),
             name = "plus",
@@ -455,39 +485,55 @@ private fun FileSpec.Builder.addPlusValue() {
 }
 
 private fun FileSpec.Builder.addToPrimitiveImmutableArray() {
+    val generateKdoc: (BaseType) -> String = { baseType ->
+        val immutableArrayClass = baseType.generatedClassName
+
+        """
+            Returns an [$immutableArrayClass] containing the unboxed values of this array.
+
+            [$immutableArrayClass] uses less memory and is faster to access as it stores the primitive values directly
+            without needing to store them in wrapper objects.
+        """.trimIndent()
+    }
+
     for (baseType in BaseType.entries) {
         if (baseType == GENERIC) continue
 
         function(
-            kdoc = "Returns an [${baseType.generatedClassName}] containing the unboxed values of this array." +
-                "\n" +
-                "\n[${baseType.generatedClassName}] uses less memory and is faster to access as it stores the " +
-                "primitive values directly without needing to store them in wrapper objects.",
+            kdoc = generateKdoc(baseType),
             receiver = GENERIC.getGeneratedClass().parameterizedBy(baseType.type),
             name = "to${baseType.generatedClassName}",
             returns = baseType.getGeneratedTypeName(),
             forceFunctionBody = true,
         ) {
-            statement("return ${baseType.generatedClassName}(size)·{·this[it]·}")
+            statement("return ${baseType.generatedClassName}(size) { this[it] }")
         }
     }
 }
 
 private fun FileSpec.Builder.addToTypedImmutableArray() {
+    val generateKdoc: (BaseType) -> String = { baseType ->
+        val immutableArrayClass = GENERIC.generatedClassName
+
+        """
+            Returns a typed [$immutableArrayClass] containing the values of this array.
+
+            Note that [$immutableArrayClass] uses more memory and is slower to access as each primitive value will be
+            auto-boxed in a wrapper object.
+        """.trimIndent()
+    }
+
     for (baseType in BaseType.entries) {
         if (baseType == GENERIC) continue
 
         function(
-            kdoc = "Returns a typed [${GENERIC.generatedClassName}] containing the values of this array." +
-                "\n" +
-                "\nNote that [${GENERIC.generatedClassName}] uses more memory and is slower to access as each " +
-                "primitive value will be auto-boxed in a wrapper object.",
+            kdoc = generateKdoc(baseType),
             receiver = baseType.getGeneratedClass(),
             name = "toTyped${GENERIC.generatedClassName}",
             returns = GENERIC.getGeneratedClass().parameterizedBy(baseType.type),
             forceFunctionBody = true,
         ) {
-            statement("return ${GENERIC.generatedClassName}(size)·{·this[it]·}")
+            statement("return ${GENERIC.generatedClassName}(size) { this[it] }")
         }
     }
 }

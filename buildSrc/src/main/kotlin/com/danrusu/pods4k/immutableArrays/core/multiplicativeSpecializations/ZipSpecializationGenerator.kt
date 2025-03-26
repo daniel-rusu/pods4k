@@ -33,9 +33,14 @@ private fun FileSpec.Builder.addZipFunction(type1: BaseType, type2: BaseType) {
         type2ValueName = type2.type
         type2Name = type2.getGeneratedTypeName()
     }
+
+    val kdoc = """
+        Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
+        result has the length of the shortest immutable array.
+    """.trimIndent()
+
     function(
-        kdoc = "Returns an immutable array of pairs built from the elements of [this] and [other] with the same " +
-            "index. The result has the length of the shortest immutable array.",
+        kdoc = kdoc,
         modifiers = listOf(KModifier.INFIX),
         receiver = type1.getGeneratedTypeName(),
         name = "zip",
@@ -62,10 +67,15 @@ private fun FileSpec.Builder.addZipWithTransformFunction(fromType: BaseType, toT
         valueType = toType.type
         resultTypeName = toType.getGeneratedTypeName()
     }
+
+    val kdoc = """
+        Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+        the provided transform function applied to each pair of elements. The result has the length of the shortest
+        immutable array.
+    """.trimIndent()
+
     function(
-        kdoc = "Returns an immutable array of values built from the elements of [this] and [other] with the same " +
-            "index using the provided transform function applied to each pair of elements. The result has the " +
-            "length of the shortest immutable array.",
+        kdoc = kdoc,
         modifiers = listOf(KModifier.INLINE),
         receiver = fromType.getGeneratedTypeName(),
         name = "zip",

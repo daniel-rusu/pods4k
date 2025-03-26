@@ -33,9 +33,14 @@ private fun FileSpec.Builder.addUnzipFunction(type1: BaseType, type2: BaseType) 
         type2ValueName = type2.type
         type2Name = type2.getGeneratedTypeName()
     }
+
+    val kdoc = """
+        Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+        and the second immutable array is built from the second values of each pair.
+    """.trimIndent()
+
     function(
-        kdoc = "Returns a pair of immutable arrays, where first immutable array is built from the first values of " +
-            "each pair, and the second immutable array is built from the second values of each pair.",
+        kdoc = kdoc,
         receiver = BaseType.GENERIC.getGeneratedClass().parameterizedBy(
             Pair::class.asTypeName().parameterizedBy(type1.type, type2ValueName),
         ),

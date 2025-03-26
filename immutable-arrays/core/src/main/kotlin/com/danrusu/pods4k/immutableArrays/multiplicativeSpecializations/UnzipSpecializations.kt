@@ -22,8 +22,8 @@ import kotlin.Short
 import kotlin.jvm.JvmName
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_GENERIC_GENERIC")
 public fun <T, R> ImmutableArray<Pair<T, R>>.unzip(): Pair<ImmutableArray<T>, ImmutableArray<R>> {
@@ -37,8 +37,8 @@ public fun <T, R> ImmutableArray<Pair<T, R>>.unzip(): Pair<ImmutableArray<T>, Im
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_GENERIC_BOOLEAN")
 public fun <T> ImmutableArray<Pair<T, Boolean>>.unzip(): Pair<ImmutableArray<T>, ImmutableBooleanArray> {
@@ -52,8 +52,8 @@ public fun <T> ImmutableArray<Pair<T, Boolean>>.unzip(): Pair<ImmutableArray<T>,
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_GENERIC_BYTE")
 public fun <T> ImmutableArray<Pair<T, Byte>>.unzip(): Pair<ImmutableArray<T>, ImmutableByteArray> {
@@ -67,8 +67,8 @@ public fun <T> ImmutableArray<Pair<T, Byte>>.unzip(): Pair<ImmutableArray<T>, Im
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_GENERIC_CHAR")
 public fun <T> ImmutableArray<Pair<T, Char>>.unzip(): Pair<ImmutableArray<T>, ImmutableCharArray> {
@@ -82,8 +82,8 @@ public fun <T> ImmutableArray<Pair<T, Char>>.unzip(): Pair<ImmutableArray<T>, Im
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_GENERIC_SHORT")
 public fun <T> ImmutableArray<Pair<T, Short>>.unzip(): Pair<ImmutableArray<T>, ImmutableShortArray> {
@@ -97,8 +97,8 @@ public fun <T> ImmutableArray<Pair<T, Short>>.unzip(): Pair<ImmutableArray<T>, I
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_GENERIC_INT")
 public fun <T> ImmutableArray<Pair<T, Int>>.unzip(): Pair<ImmutableArray<T>, ImmutableIntArray> {
@@ -112,8 +112,8 @@ public fun <T> ImmutableArray<Pair<T, Int>>.unzip(): Pair<ImmutableArray<T>, Imm
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_GENERIC_LONG")
 public fun <T> ImmutableArray<Pair<T, Long>>.unzip(): Pair<ImmutableArray<T>, ImmutableLongArray> {
@@ -127,8 +127,8 @@ public fun <T> ImmutableArray<Pair<T, Long>>.unzip(): Pair<ImmutableArray<T>, Im
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_GENERIC_FLOAT")
 public fun <T> ImmutableArray<Pair<T, Float>>.unzip(): Pair<ImmutableArray<T>, ImmutableFloatArray> {
@@ -142,8 +142,8 @@ public fun <T> ImmutableArray<Pair<T, Float>>.unzip(): Pair<ImmutableArray<T>, I
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_GENERIC_DOUBLE")
 public fun <T> ImmutableArray<Pair<T, Double>>.unzip(): Pair<ImmutableArray<T>, ImmutableDoubleArray> {
@@ -157,8 +157,8 @@ public fun <T> ImmutableArray<Pair<T, Double>>.unzip(): Pair<ImmutableArray<T>, 
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_BOOLEAN_GENERIC")
 public fun <R> ImmutableArray<Pair<Boolean, R>>.unzip(): Pair<ImmutableBooleanArray, ImmutableArray<R>> {
@@ -172,8 +172,8 @@ public fun <R> ImmutableArray<Pair<Boolean, R>>.unzip(): Pair<ImmutableBooleanAr
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_BOOLEAN_BOOLEAN")
 public fun ImmutableArray<Pair<Boolean, Boolean>>.unzip(): Pair<ImmutableBooleanArray, ImmutableBooleanArray> {
@@ -187,8 +187,8 @@ public fun ImmutableArray<Pair<Boolean, Boolean>>.unzip(): Pair<ImmutableBoolean
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_BOOLEAN_BYTE")
 public fun ImmutableArray<Pair<Boolean, Byte>>.unzip(): Pair<ImmutableBooleanArray, ImmutableByteArray> {
@@ -202,8 +202,8 @@ public fun ImmutableArray<Pair<Boolean, Byte>>.unzip(): Pair<ImmutableBooleanArr
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_BOOLEAN_CHAR")
 public fun ImmutableArray<Pair<Boolean, Char>>.unzip(): Pair<ImmutableBooleanArray, ImmutableCharArray> {
@@ -217,8 +217,8 @@ public fun ImmutableArray<Pair<Boolean, Char>>.unzip(): Pair<ImmutableBooleanArr
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_BOOLEAN_SHORT")
 public fun ImmutableArray<Pair<Boolean, Short>>.unzip(): Pair<ImmutableBooleanArray, ImmutableShortArray> {
@@ -232,8 +232,8 @@ public fun ImmutableArray<Pair<Boolean, Short>>.unzip(): Pair<ImmutableBooleanAr
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_BOOLEAN_INT")
 public fun ImmutableArray<Pair<Boolean, Int>>.unzip(): Pair<ImmutableBooleanArray, ImmutableIntArray> {
@@ -247,8 +247,8 @@ public fun ImmutableArray<Pair<Boolean, Int>>.unzip(): Pair<ImmutableBooleanArra
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_BOOLEAN_LONG")
 public fun ImmutableArray<Pair<Boolean, Long>>.unzip(): Pair<ImmutableBooleanArray, ImmutableLongArray> {
@@ -262,8 +262,8 @@ public fun ImmutableArray<Pair<Boolean, Long>>.unzip(): Pair<ImmutableBooleanArr
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_BOOLEAN_FLOAT")
 public fun ImmutableArray<Pair<Boolean, Float>>.unzip(): Pair<ImmutableBooleanArray, ImmutableFloatArray> {
@@ -277,8 +277,8 @@ public fun ImmutableArray<Pair<Boolean, Float>>.unzip(): Pair<ImmutableBooleanAr
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_BOOLEAN_DOUBLE")
 public fun ImmutableArray<Pair<Boolean, Double>>.unzip(): Pair<ImmutableBooleanArray, ImmutableDoubleArray> {
@@ -292,8 +292,8 @@ public fun ImmutableArray<Pair<Boolean, Double>>.unzip(): Pair<ImmutableBooleanA
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_BYTE_GENERIC")
 public fun <R> ImmutableArray<Pair<Byte, R>>.unzip(): Pair<ImmutableByteArray, ImmutableArray<R>> {
@@ -307,8 +307,8 @@ public fun <R> ImmutableArray<Pair<Byte, R>>.unzip(): Pair<ImmutableByteArray, I
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_BYTE_BOOLEAN")
 public fun ImmutableArray<Pair<Byte, Boolean>>.unzip(): Pair<ImmutableByteArray, ImmutableBooleanArray> {
@@ -322,8 +322,8 @@ public fun ImmutableArray<Pair<Byte, Boolean>>.unzip(): Pair<ImmutableByteArray,
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_BYTE_BYTE")
 public fun ImmutableArray<Pair<Byte, Byte>>.unzip(): Pair<ImmutableByteArray, ImmutableByteArray> {
@@ -337,8 +337,8 @@ public fun ImmutableArray<Pair<Byte, Byte>>.unzip(): Pair<ImmutableByteArray, Im
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_BYTE_CHAR")
 public fun ImmutableArray<Pair<Byte, Char>>.unzip(): Pair<ImmutableByteArray, ImmutableCharArray> {
@@ -352,8 +352,8 @@ public fun ImmutableArray<Pair<Byte, Char>>.unzip(): Pair<ImmutableByteArray, Im
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_BYTE_SHORT")
 public fun ImmutableArray<Pair<Byte, Short>>.unzip(): Pair<ImmutableByteArray, ImmutableShortArray> {
@@ -367,8 +367,8 @@ public fun ImmutableArray<Pair<Byte, Short>>.unzip(): Pair<ImmutableByteArray, I
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_BYTE_INT")
 public fun ImmutableArray<Pair<Byte, Int>>.unzip(): Pair<ImmutableByteArray, ImmutableIntArray> {
@@ -382,8 +382,8 @@ public fun ImmutableArray<Pair<Byte, Int>>.unzip(): Pair<ImmutableByteArray, Imm
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_BYTE_LONG")
 public fun ImmutableArray<Pair<Byte, Long>>.unzip(): Pair<ImmutableByteArray, ImmutableLongArray> {
@@ -397,8 +397,8 @@ public fun ImmutableArray<Pair<Byte, Long>>.unzip(): Pair<ImmutableByteArray, Im
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_BYTE_FLOAT")
 public fun ImmutableArray<Pair<Byte, Float>>.unzip(): Pair<ImmutableByteArray, ImmutableFloatArray> {
@@ -412,8 +412,8 @@ public fun ImmutableArray<Pair<Byte, Float>>.unzip(): Pair<ImmutableByteArray, I
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_BYTE_DOUBLE")
 public fun ImmutableArray<Pair<Byte, Double>>.unzip(): Pair<ImmutableByteArray, ImmutableDoubleArray> {
@@ -427,8 +427,8 @@ public fun ImmutableArray<Pair<Byte, Double>>.unzip(): Pair<ImmutableByteArray, 
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_CHAR_GENERIC")
 public fun <R> ImmutableArray<Pair<Char, R>>.unzip(): Pair<ImmutableCharArray, ImmutableArray<R>> {
@@ -442,8 +442,8 @@ public fun <R> ImmutableArray<Pair<Char, R>>.unzip(): Pair<ImmutableCharArray, I
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_CHAR_BOOLEAN")
 public fun ImmutableArray<Pair<Char, Boolean>>.unzip(): Pair<ImmutableCharArray, ImmutableBooleanArray> {
@@ -457,8 +457,8 @@ public fun ImmutableArray<Pair<Char, Boolean>>.unzip(): Pair<ImmutableCharArray,
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_CHAR_BYTE")
 public fun ImmutableArray<Pair<Char, Byte>>.unzip(): Pair<ImmutableCharArray, ImmutableByteArray> {
@@ -472,8 +472,8 @@ public fun ImmutableArray<Pair<Char, Byte>>.unzip(): Pair<ImmutableCharArray, Im
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_CHAR_CHAR")
 public fun ImmutableArray<Pair<Char, Char>>.unzip(): Pair<ImmutableCharArray, ImmutableCharArray> {
@@ -487,8 +487,8 @@ public fun ImmutableArray<Pair<Char, Char>>.unzip(): Pair<ImmutableCharArray, Im
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_CHAR_SHORT")
 public fun ImmutableArray<Pair<Char, Short>>.unzip(): Pair<ImmutableCharArray, ImmutableShortArray> {
@@ -502,8 +502,8 @@ public fun ImmutableArray<Pair<Char, Short>>.unzip(): Pair<ImmutableCharArray, I
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_CHAR_INT")
 public fun ImmutableArray<Pair<Char, Int>>.unzip(): Pair<ImmutableCharArray, ImmutableIntArray> {
@@ -517,8 +517,8 @@ public fun ImmutableArray<Pair<Char, Int>>.unzip(): Pair<ImmutableCharArray, Imm
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_CHAR_LONG")
 public fun ImmutableArray<Pair<Char, Long>>.unzip(): Pair<ImmutableCharArray, ImmutableLongArray> {
@@ -532,8 +532,8 @@ public fun ImmutableArray<Pair<Char, Long>>.unzip(): Pair<ImmutableCharArray, Im
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_CHAR_FLOAT")
 public fun ImmutableArray<Pair<Char, Float>>.unzip(): Pair<ImmutableCharArray, ImmutableFloatArray> {
@@ -547,8 +547,8 @@ public fun ImmutableArray<Pair<Char, Float>>.unzip(): Pair<ImmutableCharArray, I
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_CHAR_DOUBLE")
 public fun ImmutableArray<Pair<Char, Double>>.unzip(): Pair<ImmutableCharArray, ImmutableDoubleArray> {
@@ -562,8 +562,8 @@ public fun ImmutableArray<Pair<Char, Double>>.unzip(): Pair<ImmutableCharArray, 
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_SHORT_GENERIC")
 public fun <R> ImmutableArray<Pair<Short, R>>.unzip(): Pair<ImmutableShortArray, ImmutableArray<R>> {
@@ -577,8 +577,8 @@ public fun <R> ImmutableArray<Pair<Short, R>>.unzip(): Pair<ImmutableShortArray,
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_SHORT_BOOLEAN")
 public fun ImmutableArray<Pair<Short, Boolean>>.unzip(): Pair<ImmutableShortArray, ImmutableBooleanArray> {
@@ -592,8 +592,8 @@ public fun ImmutableArray<Pair<Short, Boolean>>.unzip(): Pair<ImmutableShortArra
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_SHORT_BYTE")
 public fun ImmutableArray<Pair<Short, Byte>>.unzip(): Pair<ImmutableShortArray, ImmutableByteArray> {
@@ -607,8 +607,8 @@ public fun ImmutableArray<Pair<Short, Byte>>.unzip(): Pair<ImmutableShortArray, 
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_SHORT_CHAR")
 public fun ImmutableArray<Pair<Short, Char>>.unzip(): Pair<ImmutableShortArray, ImmutableCharArray> {
@@ -622,8 +622,8 @@ public fun ImmutableArray<Pair<Short, Char>>.unzip(): Pair<ImmutableShortArray, 
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_SHORT_SHORT")
 public fun ImmutableArray<Pair<Short, Short>>.unzip(): Pair<ImmutableShortArray, ImmutableShortArray> {
@@ -637,8 +637,8 @@ public fun ImmutableArray<Pair<Short, Short>>.unzip(): Pair<ImmutableShortArray,
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_SHORT_INT")
 public fun ImmutableArray<Pair<Short, Int>>.unzip(): Pair<ImmutableShortArray, ImmutableIntArray> {
@@ -652,8 +652,8 @@ public fun ImmutableArray<Pair<Short, Int>>.unzip(): Pair<ImmutableShortArray, I
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_SHORT_LONG")
 public fun ImmutableArray<Pair<Short, Long>>.unzip(): Pair<ImmutableShortArray, ImmutableLongArray> {
@@ -667,8 +667,8 @@ public fun ImmutableArray<Pair<Short, Long>>.unzip(): Pair<ImmutableShortArray, 
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_SHORT_FLOAT")
 public fun ImmutableArray<Pair<Short, Float>>.unzip(): Pair<ImmutableShortArray, ImmutableFloatArray> {
@@ -682,8 +682,8 @@ public fun ImmutableArray<Pair<Short, Float>>.unzip(): Pair<ImmutableShortArray,
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_SHORT_DOUBLE")
 public fun ImmutableArray<Pair<Short, Double>>.unzip(): Pair<ImmutableShortArray, ImmutableDoubleArray> {
@@ -697,8 +697,8 @@ public fun ImmutableArray<Pair<Short, Double>>.unzip(): Pair<ImmutableShortArray
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_INT_GENERIC")
 public fun <R> ImmutableArray<Pair<Int, R>>.unzip(): Pair<ImmutableIntArray, ImmutableArray<R>> {
@@ -712,8 +712,8 @@ public fun <R> ImmutableArray<Pair<Int, R>>.unzip(): Pair<ImmutableIntArray, Imm
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_INT_BOOLEAN")
 public fun ImmutableArray<Pair<Int, Boolean>>.unzip(): Pair<ImmutableIntArray, ImmutableBooleanArray> {
@@ -727,8 +727,8 @@ public fun ImmutableArray<Pair<Int, Boolean>>.unzip(): Pair<ImmutableIntArray, I
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_INT_BYTE")
 public fun ImmutableArray<Pair<Int, Byte>>.unzip(): Pair<ImmutableIntArray, ImmutableByteArray> {
@@ -742,8 +742,8 @@ public fun ImmutableArray<Pair<Int, Byte>>.unzip(): Pair<ImmutableIntArray, Immu
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_INT_CHAR")
 public fun ImmutableArray<Pair<Int, Char>>.unzip(): Pair<ImmutableIntArray, ImmutableCharArray> {
@@ -757,8 +757,8 @@ public fun ImmutableArray<Pair<Int, Char>>.unzip(): Pair<ImmutableIntArray, Immu
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_INT_SHORT")
 public fun ImmutableArray<Pair<Int, Short>>.unzip(): Pair<ImmutableIntArray, ImmutableShortArray> {
@@ -772,8 +772,8 @@ public fun ImmutableArray<Pair<Int, Short>>.unzip(): Pair<ImmutableIntArray, Imm
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_INT_INT")
 public fun ImmutableArray<Pair<Int, Int>>.unzip(): Pair<ImmutableIntArray, ImmutableIntArray> {
@@ -787,8 +787,8 @@ public fun ImmutableArray<Pair<Int, Int>>.unzip(): Pair<ImmutableIntArray, Immut
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_INT_LONG")
 public fun ImmutableArray<Pair<Int, Long>>.unzip(): Pair<ImmutableIntArray, ImmutableLongArray> {
@@ -802,8 +802,8 @@ public fun ImmutableArray<Pair<Int, Long>>.unzip(): Pair<ImmutableIntArray, Immu
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_INT_FLOAT")
 public fun ImmutableArray<Pair<Int, Float>>.unzip(): Pair<ImmutableIntArray, ImmutableFloatArray> {
@@ -817,8 +817,8 @@ public fun ImmutableArray<Pair<Int, Float>>.unzip(): Pair<ImmutableIntArray, Imm
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_INT_DOUBLE")
 public fun ImmutableArray<Pair<Int, Double>>.unzip(): Pair<ImmutableIntArray, ImmutableDoubleArray> {
@@ -832,8 +832,8 @@ public fun ImmutableArray<Pair<Int, Double>>.unzip(): Pair<ImmutableIntArray, Im
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_LONG_GENERIC")
 public fun <R> ImmutableArray<Pair<Long, R>>.unzip(): Pair<ImmutableLongArray, ImmutableArray<R>> {
@@ -847,8 +847,8 @@ public fun <R> ImmutableArray<Pair<Long, R>>.unzip(): Pair<ImmutableLongArray, I
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_LONG_BOOLEAN")
 public fun ImmutableArray<Pair<Long, Boolean>>.unzip(): Pair<ImmutableLongArray, ImmutableBooleanArray> {
@@ -862,8 +862,8 @@ public fun ImmutableArray<Pair<Long, Boolean>>.unzip(): Pair<ImmutableLongArray,
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_LONG_BYTE")
 public fun ImmutableArray<Pair<Long, Byte>>.unzip(): Pair<ImmutableLongArray, ImmutableByteArray> {
@@ -877,8 +877,8 @@ public fun ImmutableArray<Pair<Long, Byte>>.unzip(): Pair<ImmutableLongArray, Im
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_LONG_CHAR")
 public fun ImmutableArray<Pair<Long, Char>>.unzip(): Pair<ImmutableLongArray, ImmutableCharArray> {
@@ -892,8 +892,8 @@ public fun ImmutableArray<Pair<Long, Char>>.unzip(): Pair<ImmutableLongArray, Im
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_LONG_SHORT")
 public fun ImmutableArray<Pair<Long, Short>>.unzip(): Pair<ImmutableLongArray, ImmutableShortArray> {
@@ -907,8 +907,8 @@ public fun ImmutableArray<Pair<Long, Short>>.unzip(): Pair<ImmutableLongArray, I
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_LONG_INT")
 public fun ImmutableArray<Pair<Long, Int>>.unzip(): Pair<ImmutableLongArray, ImmutableIntArray> {
@@ -922,8 +922,8 @@ public fun ImmutableArray<Pair<Long, Int>>.unzip(): Pair<ImmutableLongArray, Imm
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_LONG_LONG")
 public fun ImmutableArray<Pair<Long, Long>>.unzip(): Pair<ImmutableLongArray, ImmutableLongArray> {
@@ -937,8 +937,8 @@ public fun ImmutableArray<Pair<Long, Long>>.unzip(): Pair<ImmutableLongArray, Im
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_LONG_FLOAT")
 public fun ImmutableArray<Pair<Long, Float>>.unzip(): Pair<ImmutableLongArray, ImmutableFloatArray> {
@@ -952,8 +952,8 @@ public fun ImmutableArray<Pair<Long, Float>>.unzip(): Pair<ImmutableLongArray, I
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_LONG_DOUBLE")
 public fun ImmutableArray<Pair<Long, Double>>.unzip(): Pair<ImmutableLongArray, ImmutableDoubleArray> {
@@ -967,8 +967,8 @@ public fun ImmutableArray<Pair<Long, Double>>.unzip(): Pair<ImmutableLongArray, 
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_FLOAT_GENERIC")
 public fun <R> ImmutableArray<Pair<Float, R>>.unzip(): Pair<ImmutableFloatArray, ImmutableArray<R>> {
@@ -982,8 +982,8 @@ public fun <R> ImmutableArray<Pair<Float, R>>.unzip(): Pair<ImmutableFloatArray,
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_FLOAT_BOOLEAN")
 public fun ImmutableArray<Pair<Float, Boolean>>.unzip(): Pair<ImmutableFloatArray, ImmutableBooleanArray> {
@@ -997,8 +997,8 @@ public fun ImmutableArray<Pair<Float, Boolean>>.unzip(): Pair<ImmutableFloatArra
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_FLOAT_BYTE")
 public fun ImmutableArray<Pair<Float, Byte>>.unzip(): Pair<ImmutableFloatArray, ImmutableByteArray> {
@@ -1012,8 +1012,8 @@ public fun ImmutableArray<Pair<Float, Byte>>.unzip(): Pair<ImmutableFloatArray, 
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_FLOAT_CHAR")
 public fun ImmutableArray<Pair<Float, Char>>.unzip(): Pair<ImmutableFloatArray, ImmutableCharArray> {
@@ -1027,8 +1027,8 @@ public fun ImmutableArray<Pair<Float, Char>>.unzip(): Pair<ImmutableFloatArray, 
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_FLOAT_SHORT")
 public fun ImmutableArray<Pair<Float, Short>>.unzip(): Pair<ImmutableFloatArray, ImmutableShortArray> {
@@ -1042,8 +1042,8 @@ public fun ImmutableArray<Pair<Float, Short>>.unzip(): Pair<ImmutableFloatArray,
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_FLOAT_INT")
 public fun ImmutableArray<Pair<Float, Int>>.unzip(): Pair<ImmutableFloatArray, ImmutableIntArray> {
@@ -1057,8 +1057,8 @@ public fun ImmutableArray<Pair<Float, Int>>.unzip(): Pair<ImmutableFloatArray, I
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_FLOAT_LONG")
 public fun ImmutableArray<Pair<Float, Long>>.unzip(): Pair<ImmutableFloatArray, ImmutableLongArray> {
@@ -1072,8 +1072,8 @@ public fun ImmutableArray<Pair<Float, Long>>.unzip(): Pair<ImmutableFloatArray, 
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_FLOAT_FLOAT")
 public fun ImmutableArray<Pair<Float, Float>>.unzip(): Pair<ImmutableFloatArray, ImmutableFloatArray> {
@@ -1087,8 +1087,8 @@ public fun ImmutableArray<Pair<Float, Float>>.unzip(): Pair<ImmutableFloatArray,
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_FLOAT_DOUBLE")
 public fun ImmutableArray<Pair<Float, Double>>.unzip(): Pair<ImmutableFloatArray, ImmutableDoubleArray> {
@@ -1102,8 +1102,8 @@ public fun ImmutableArray<Pair<Float, Double>>.unzip(): Pair<ImmutableFloatArray
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_DOUBLE_GENERIC")
 public fun <R> ImmutableArray<Pair<Double, R>>.unzip(): Pair<ImmutableDoubleArray, ImmutableArray<R>> {
@@ -1117,8 +1117,8 @@ public fun <R> ImmutableArray<Pair<Double, R>>.unzip(): Pair<ImmutableDoubleArra
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_DOUBLE_BOOLEAN")
 public fun ImmutableArray<Pair<Double, Boolean>>.unzip(): Pair<ImmutableDoubleArray, ImmutableBooleanArray> {
@@ -1132,8 +1132,8 @@ public fun ImmutableArray<Pair<Double, Boolean>>.unzip(): Pair<ImmutableDoubleAr
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_DOUBLE_BYTE")
 public fun ImmutableArray<Pair<Double, Byte>>.unzip(): Pair<ImmutableDoubleArray, ImmutableByteArray> {
@@ -1147,8 +1147,8 @@ public fun ImmutableArray<Pair<Double, Byte>>.unzip(): Pair<ImmutableDoubleArray
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_DOUBLE_CHAR")
 public fun ImmutableArray<Pair<Double, Char>>.unzip(): Pair<ImmutableDoubleArray, ImmutableCharArray> {
@@ -1162,8 +1162,8 @@ public fun ImmutableArray<Pair<Double, Char>>.unzip(): Pair<ImmutableDoubleArray
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_DOUBLE_SHORT")
 public fun ImmutableArray<Pair<Double, Short>>.unzip(): Pair<ImmutableDoubleArray, ImmutableShortArray> {
@@ -1177,8 +1177,8 @@ public fun ImmutableArray<Pair<Double, Short>>.unzip(): Pair<ImmutableDoubleArra
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_DOUBLE_INT")
 public fun ImmutableArray<Pair<Double, Int>>.unzip(): Pair<ImmutableDoubleArray, ImmutableIntArray> {
@@ -1192,8 +1192,8 @@ public fun ImmutableArray<Pair<Double, Int>>.unzip(): Pair<ImmutableDoubleArray,
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_DOUBLE_LONG")
 public fun ImmutableArray<Pair<Double, Long>>.unzip(): Pair<ImmutableDoubleArray, ImmutableLongArray> {
@@ -1207,8 +1207,8 @@ public fun ImmutableArray<Pair<Double, Long>>.unzip(): Pair<ImmutableDoubleArray
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_DOUBLE_FLOAT")
 public fun ImmutableArray<Pair<Double, Float>>.unzip(): Pair<ImmutableDoubleArray, ImmutableFloatArray> {
@@ -1222,8 +1222,8 @@ public fun ImmutableArray<Pair<Double, Float>>.unzip(): Pair<ImmutableDoubleArra
 }
 
 /**
- * Returns a pair of immutable arrays, where first immutable array is built from the first values of
- * each pair, and the second immutable array is built from the second values of each pair.
+ * Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
+ * and the second immutable array is built from the second values of each pair.
  */
 @JvmName("unzip_Pair_DOUBLE_DOUBLE")
 public fun ImmutableArray<Pair<Double, Double>>.unzip(): Pair<ImmutableDoubleArray, ImmutableDoubleArray> {

@@ -35,7 +35,7 @@ private fun FileSpec.Builder.addGenericArrayToImmutableArray() {
                 statement("return ${baseType.generatedClassName}.copyFrom(source = this, startIndex = 0, size = size)")
             } else {
                 // Each element needs to be unboxed so use the factory function to avoid creating the temporary builder
-                statement("return ${baseType.generatedClassName}(size)·{·this[it]·}")
+                statement("return ${baseType.generatedClassName}(size) { this[it] }")
             }
         }
     }
