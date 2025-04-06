@@ -329,7 +329,10 @@ private fun FileSpec.Builder.addSorted() {
             // regular primitive boolean arrays don't have sorting abilities so we need a custom solution in order for
             // Immutable Arrays to be a replacement for lists since we can sort List<Boolean>
             if (baseType == BOOLEAN) {
-                comment("match sorting order of List<Boolean>.sorted() as that relies on the minOf function")
+                comment(
+                    "match sorting order of List<Boolean>.sorted() as that relies on the compareTo method of the " +
+                        "auto-boxed Boolean wrapper",
+                )
                 statement("val minValue: Boolean = minOf(true, false)")
                 statement("val numMinValues = count { it == minValue }")
                 emptyLine()
@@ -386,9 +389,6 @@ private fun FileSpec.Builder.addSortedDescending() {
     }
 
     for (baseType in BaseType.entries) {
-        // both Kotlin & Java standard libraries don't provide sorting abilities for primitive boolean arrays
-        if (baseType == BOOLEAN) continue
-
         val receiver = when (baseType) {
             GENERIC -> baseType.getGeneratedClass().parameterizedBy(genericType)
             else -> baseType.getGeneratedClass()
@@ -400,14 +400,35 @@ private fun FileSpec.Builder.addSortedDescending() {
             returns = receiver,
             forceFunctionBody = true,
         ) {
-            if (baseType == GENERIC) {
+            statement("if (size <= 1) return this")
+            emptyLine()
+
+            // regular primitive boolean arrays don't have sorting abilities so we need a custom solution in order for
+            // Immutable Arrays to be a replacement for lists since we can sort List<Boolean>
+            if (baseType == BOOLEAN) {
+                comment(
+                    "match sorting order of List<Boolean>.sortedDescending() as that relies on the compareTo method " +
+                        "of the auto-boxed Boolean wrapper",
+                )
+                statement("val maxValue: Boolean = maxOf(true, false)")
+                statement("val numMaxValues = count { it == maxValue }")
+                emptyLine()
+                statement("val backingArray = ${baseType.backingArrayConstructor}(size)")
+                controlFlow("when (backingArray[0] == maxValue)") {
+                    statement(
+                        "true -> backingArray.fill(element = !maxValue, fromIndex = numMaxValues, toIndex = size)",
+                    )
+                    statement(
+                        "else -> backingArray.fill(element = maxValue, fromIndex = 0, toIndex = numMaxValues)",
+                    )
+                }
+                statement("return ${baseType.generatedClassName}(backingArray)")
+            } else if (baseType == GENERIC) {
                 addTypeVariable(
                     TypeVariableName(genericVariableName, Comparable::class.asTypeName().parameterizedBy(genericType)),
                 )
                 statement("return sortedWith(reverseOrder())")
             } else {
-                statement("if (size <= 1) return this")
-                emptyLine()
                 statement("val backingArray = ${baseType.backingArrayConstructor}(size) { get(it) }")
                 statement("backingArray.sort()")
                 statement("backingArray.reverse()")

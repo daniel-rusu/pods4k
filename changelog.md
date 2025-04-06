@@ -15,7 +15,7 @@ _Date TBD_
 
 **New Features:**
 
-* Add `ImmutableBooleanArray.sorted()` extension function matching ordering of calling `sorted()` on a `List<Boolean>`
+* Add `sorted` & `sortedDescending` for `ImmutableBooleanArray` matching ordering of `List<Boolean>.sorted()`
 * Add `min()` extension functions
 * Add `max()` extension functions
 

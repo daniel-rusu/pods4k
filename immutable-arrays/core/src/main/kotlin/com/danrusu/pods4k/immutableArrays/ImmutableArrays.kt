@@ -836,7 +836,7 @@ public fun <T : Comparable<T>> ImmutableArray<T>.sorted(): ImmutableArray<T> {
 public fun ImmutableBooleanArray.sorted(): ImmutableBooleanArray {
     if (size <= 1) return this
 
-    // match sorting order of List<Boolean>.sorted() as that relies on the minOf function
+    // match sorting order of List<Boolean>.sorted() as that relies on the compareTo method of the auto-boxed Boolean wrapper
     val minValue: Boolean = minOf(true, false)
     val numMinValues = count { it == minValue }
 
@@ -939,7 +939,28 @@ public fun ImmutableDoubleArray.sorted(): ImmutableDoubleArray {
  * The sort is _stable_ so equal elements preserve their order relative to each other after sorting.
  */
 public fun <T : Comparable<T>> ImmutableArray<T>.sortedDescending(): ImmutableArray<T> {
+    if (size <= 1) return this
+
     return sortedWith(reverseOrder())
+}
+
+/**
+ * Leaves [this] immutable array as is and returns an [ImmutableBooleanArray] with all elements sorted
+ * according to their reverse natural sort order.
+ */
+public fun ImmutableBooleanArray.sortedDescending(): ImmutableBooleanArray {
+    if (size <= 1) return this
+
+    // match sorting order of List<Boolean>.sortedDescending() as that relies on the compareTo method of the auto-boxed Boolean wrapper
+    val maxValue: Boolean = maxOf(true, false)
+    val numMaxValues = count { it == maxValue }
+
+    val backingArray = BooleanArray(size)
+    when (backingArray[0] == maxValue) {
+        true -> backingArray.fill(element = !maxValue, fromIndex = numMaxValues, toIndex = size)
+        else -> backingArray.fill(element = maxValue, fromIndex = 0, toIndex = numMaxValues)
+    }
+    return ImmutableBooleanArray(backingArray)
 }
 
 /**
