@@ -822,7 +822,6 @@ public fun ImmutableArray<Double?>.filterNotNull(): ImmutableDoubleArray {
  */
 @Suppress("UNCHECKED_CAST")
 public fun <T : Comparable<T>> ImmutableArray<T>.sorted(): ImmutableArray<T> {
-    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
     if (size <= 1) return this
 
     val backingArray = Array<Any?>(size) { get(it) }
@@ -831,11 +830,29 @@ public fun <T : Comparable<T>> ImmutableArray<T>.sorted(): ImmutableArray<T> {
 }
 
 /**
+ * Leaves [this] immutable array as is and returns an [ImmutableBooleanArray] with all elements sorted
+ * according to their natural sort order.
+ */
+public fun ImmutableBooleanArray.sorted(): ImmutableBooleanArray {
+    if (size <= 1) return this
+
+    // match sorting order of List<Boolean>.sorted() as that relies on the minOf function
+    val minValue: Boolean = minOf(true, false)
+    val numMinValues = count { it == minValue }
+
+    val backingArray = BooleanArray(size)
+    when (backingArray[0] == minValue) {
+        true -> backingArray.fill(element = !minValue, fromIndex = numMinValues, toIndex = size)
+        else -> backingArray.fill(element = minValue, fromIndex = 0, toIndex = numMinValues)
+    }
+    return ImmutableBooleanArray(backingArray)
+}
+
+/**
  * Leaves [this] immutable array as is and returns an [ImmutableByteArray] with all elements sorted
  * according to their natural sort order.
  */
 public fun ImmutableByteArray.sorted(): ImmutableByteArray {
-    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
     if (size <= 1) return this
 
     val backingArray = values.copyOf()
@@ -848,7 +865,6 @@ public fun ImmutableByteArray.sorted(): ImmutableByteArray {
  * according to their natural sort order.
  */
 public fun ImmutableCharArray.sorted(): ImmutableCharArray {
-    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
     if (size <= 1) return this
 
     val backingArray = values.copyOf()
@@ -861,7 +877,6 @@ public fun ImmutableCharArray.sorted(): ImmutableCharArray {
  * according to their natural sort order.
  */
 public fun ImmutableShortArray.sorted(): ImmutableShortArray {
-    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
     if (size <= 1) return this
 
     val backingArray = values.copyOf()
@@ -874,7 +889,6 @@ public fun ImmutableShortArray.sorted(): ImmutableShortArray {
  * according to their natural sort order.
  */
 public fun ImmutableIntArray.sorted(): ImmutableIntArray {
-    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
     if (size <= 1) return this
 
     val backingArray = values.copyOf()
@@ -887,7 +901,6 @@ public fun ImmutableIntArray.sorted(): ImmutableIntArray {
  * according to their natural sort order.
  */
 public fun ImmutableLongArray.sorted(): ImmutableLongArray {
-    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
     if (size <= 1) return this
 
     val backingArray = values.copyOf()
@@ -900,7 +913,6 @@ public fun ImmutableLongArray.sorted(): ImmutableLongArray {
  * according to their natural sort order.
  */
 public fun ImmutableFloatArray.sorted(): ImmutableFloatArray {
-    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
     if (size <= 1) return this
 
     val backingArray = values.copyOf()
@@ -913,7 +925,6 @@ public fun ImmutableFloatArray.sorted(): ImmutableFloatArray {
  * according to their natural sort order.
  */
 public fun ImmutableDoubleArray.sorted(): ImmutableDoubleArray {
-    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
     if (size <= 1) return this
 
     val backingArray = values.copyOf()
@@ -936,7 +947,6 @@ public fun <T : Comparable<T>> ImmutableArray<T>.sortedDescending(): ImmutableAr
  * according to their reverse natural sort order.
  */
 public fun ImmutableByteArray.sortedDescending(): ImmutableByteArray {
-    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
     if (size <= 1) return this
 
     val backingArray = ByteArray(size) { get(it) }
@@ -950,7 +960,6 @@ public fun ImmutableByteArray.sortedDescending(): ImmutableByteArray {
  * according to their reverse natural sort order.
  */
 public fun ImmutableCharArray.sortedDescending(): ImmutableCharArray {
-    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
     if (size <= 1) return this
 
     val backingArray = CharArray(size) { get(it) }
@@ -964,7 +973,6 @@ public fun ImmutableCharArray.sortedDescending(): ImmutableCharArray {
  * according to their reverse natural sort order.
  */
 public fun ImmutableShortArray.sortedDescending(): ImmutableShortArray {
-    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
     if (size <= 1) return this
 
     val backingArray = ShortArray(size) { get(it) }
@@ -978,7 +986,6 @@ public fun ImmutableShortArray.sortedDescending(): ImmutableShortArray {
  * according to their reverse natural sort order.
  */
 public fun ImmutableIntArray.sortedDescending(): ImmutableIntArray {
-    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
     if (size <= 1) return this
 
     val backingArray = IntArray(size) { get(it) }
@@ -992,7 +999,6 @@ public fun ImmutableIntArray.sortedDescending(): ImmutableIntArray {
  * according to their reverse natural sort order.
  */
 public fun ImmutableLongArray.sortedDescending(): ImmutableLongArray {
-    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
     if (size <= 1) return this
 
     val backingArray = LongArray(size) { get(it) }
@@ -1006,7 +1012,6 @@ public fun ImmutableLongArray.sortedDescending(): ImmutableLongArray {
  * according to their reverse natural sort order.
  */
 public fun ImmutableFloatArray.sortedDescending(): ImmutableFloatArray {
-    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
     if (size <= 1) return this
 
     val backingArray = FloatArray(size) { get(it) }
@@ -1020,7 +1025,6 @@ public fun ImmutableFloatArray.sortedDescending(): ImmutableFloatArray {
  * according to their reverse natural sort order.
  */
 public fun ImmutableDoubleArray.sortedDescending(): ImmutableDoubleArray {
-    // Immutable arrays can't be mutated, so it's safe to return the same array when the ordering won't change
     if (size <= 1) return this
 
     val backingArray = DoubleArray(size) { get(it) }

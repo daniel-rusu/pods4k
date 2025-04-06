@@ -9,6 +9,7 @@ import strikt.assertions.isFalse
 import strikt.assertions.isNotEqualTo
 import strikt.assertions.isTrue
 import strikt.assertions.message
+import kotlin.random.Random
 
 private val primitiveIntClass = 3::class.java
 
@@ -327,6 +328,11 @@ class ImmutableArraysTest {
     @Test
     fun `sorted validation`() {
         // references
+        with(emptyImmutableArray<String>()) {
+            expectThat(sorted().referencesSameArrayAs(ImmutableArray.EMPTY))
+                .isTrue()
+        }
+
         with(immutableArrayOf("one")) {
             expectThat(sorted().referencesSameArrayAs(this))
                 .isTrue()
@@ -342,6 +348,11 @@ class ImmutableArraysTest {
         }
 
         // primitives
+        with(emptyImmutableIntArray()) {
+            expectThat(sorted().referencesSameArrayAs(ImmutableIntArray.EMPTY))
+                .isTrue()
+        }
+
         with(immutableArrayOf(1)) {
             expectThat(sorted().referencesSameArrayAs(this))
                 .isTrue()
@@ -354,6 +365,49 @@ class ImmutableArraysTest {
             // original is left unchanged
             expectThat(this)
                 .isEqualTo(immutableArrayOf(1, 2, 5, 4, 3))
+        }
+
+        // boolean primitive (since it has a specialized implementation)
+        with(emptyImmutableBooleanArray()) {
+            expectThat(sorted().referencesSameArrayAs(ImmutableBooleanArray.EMPTY))
+                .isTrue()
+        }
+
+        val minBoolean = minOf(true, false)
+        val maxBoolean = !minBoolean
+
+        with(immutableArrayOf(minBoolean)) {
+            expectThat(sorted().referencesSameArrayAs(this))
+                .isTrue()
+        }
+
+        with(immutableArrayOf(maxBoolean)) {
+            expectThat(sorted().referencesSameArrayAs(this))
+                .isTrue()
+        }
+
+        with(immutableArrayOf(minBoolean, minBoolean)) {
+            expectThat(sorted())
+                .isEqualTo(immutableArrayOf(minBoolean, minBoolean))
+        }
+
+        with(immutableArrayOf(maxBoolean, maxBoolean)) {
+            expectThat(sorted())
+                .isEqualTo(immutableArrayOf(maxBoolean, maxBoolean))
+        }
+
+        with(immutableArrayOf(maxBoolean, minBoolean)) {
+            expectThat(sorted())
+                .isEqualTo(immutableArrayOf(minBoolean, maxBoolean))
+        }
+
+        // ensure same sorting behavior as sorting a List<Boolean>
+        repeat(10) {
+            val size = Random.nextInt(100)
+            val immutableArray = ImmutableBooleanArray(size) { Random.nextBoolean() }
+
+            expectThat(immutableArray.sorted().asList())
+                .isEqualTo(immutableArray.asList().sorted())
         }
     }
 

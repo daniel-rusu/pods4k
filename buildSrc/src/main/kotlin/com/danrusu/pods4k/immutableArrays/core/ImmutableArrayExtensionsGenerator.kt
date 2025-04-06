@@ -313,9 +313,6 @@ private fun FileSpec.Builder.addSorted() {
     }
 
     for (baseType in BaseType.entries) {
-        // both Java and Kotlin standard libraries don't provide sorting abilities for primitive boolean arrays
-        if (baseType == BOOLEAN) continue
-
         val receiver = when (baseType) {
             GENERIC -> baseType.getGeneratedClass().parameterizedBy(genericType)
             else -> baseType.getGeneratedClass()
@@ -326,12 +323,27 @@ private fun FileSpec.Builder.addSorted() {
             name = "sorted",
             returns = receiver,
         ) {
-            comment(
-                "Immutable arrays can't be mutated, so it's safe to return the same array when the ordering " +
-                    "won't change",
-            )
             statement("if (size <= 1) return this")
             emptyLine()
+
+            // regular primitive boolean arrays don't have sorting abilities so we need a custom solution in order for
+            // Immutable Arrays to be a replacement for lists since we can sort List<Boolean>
+            if (baseType == BOOLEAN) {
+                comment("match sorting order of List<Boolean>.sorted() as that relies on the minOf function")
+                statement("val minValue: Boolean = minOf(true, false)")
+                statement("val numMinValues = count { it == minValue }")
+                emptyLine()
+                statement("val backingArray = ${baseType.backingArrayConstructor}(size)")
+                controlFlow("when (backingArray[0] == minValue)") {
+                    statement(
+                        "true -> backingArray.fill(element = !minValue, fromIndex = numMinValues, toIndex = size)",
+                    )
+                    statement("else -> backingArray.fill(element = minValue, fromIndex = 0, toIndex = numMinValues)")
+                }
+                statement("return ${baseType.generatedClassName}(backingArray)")
+                return@function
+            }
+
             if (baseType == GENERIC) {
                 addTypeVariable(
                     TypeVariableName(genericVariableName, Comparable::class.asTypeName().parameterizedBy(genericType)),
@@ -394,10 +406,6 @@ private fun FileSpec.Builder.addSortedDescending() {
                 )
                 statement("return sortedWith(reverseOrder())")
             } else {
-                comment(
-                    "Immutable arrays can't be mutated, so it's safe to return the same array when the ordering " +
-                        "won't change",
-                )
                 statement("if (size <= 1) return this")
                 emptyLine()
                 statement("val backingArray = ${baseType.backingArrayConstructor}(size) { get(it) }")
