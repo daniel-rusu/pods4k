@@ -15,6 +15,7 @@ _Date TBD_
 
 **New Features:**
 
+* Add `maxOrNull` extension functions
 * Add `minOrNull` extension functions
 * Add `sorted` & `sortedDescending` for `ImmutableBooleanArray` matching ordering of `List<Boolean>.sorted()`
 * Add `min()` extension functions

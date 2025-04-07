@@ -33,6 +33,7 @@ internal object ImmutableArrayExtensionsGenerator {
             addMin()
             addMinOrNull()
             addMax()
+            addMaxOrNull()
             addFilterNotNull()
             addSorted()
             addSortedDescending()
@@ -272,6 +273,29 @@ private fun FileSpec.Builder.addMax() {
                 }
                 statement("return maxValue")
             }
+        }
+    }
+}
+
+private fun FileSpec.Builder.addMaxOrNull() {
+    val genericType = TypeVariableName("T", Comparable::class.asTypeName().parameterizedBy(TypeVariableName("T")))
+    for (baseType in BaseType.entries) {
+        function(
+            kdoc = "@return the largest element or null if [this] is empty",
+            receiver = when (baseType) {
+                GENERIC -> baseType.getGeneratedClass().parameterizedBy(genericType)
+                else -> baseType.getGeneratedTypeName()
+            },
+            name = "maxOrNull",
+            returns = when (baseType) {
+                GENERIC -> genericType.copy(nullable = true)
+                else -> baseType.type.copy(nullable = true)
+            },
+        ) {
+            if (baseType == GENERIC) {
+                addGenericTypes(genericType)
+            }
+            statement("return if (isEmpty()) null else max()")
         }
     }
 }

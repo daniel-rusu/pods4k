@@ -731,6 +731,51 @@ public fun ImmutableDoubleArray.max(): Double {
 }
 
 /**
+ * @return the largest element or null if [this] is empty
+ */
+public fun <T : Comparable<T>> ImmutableArray<T>.maxOrNull(): T? = if (isEmpty()) null else max()
+
+/**
+ * @return the largest element or null if [this] is empty
+ */
+public fun ImmutableBooleanArray.maxOrNull(): Boolean? = if (isEmpty()) null else max()
+
+/**
+ * @return the largest element or null if [this] is empty
+ */
+public fun ImmutableByteArray.maxOrNull(): Byte? = if (isEmpty()) null else max()
+
+/**
+ * @return the largest element or null if [this] is empty
+ */
+public fun ImmutableCharArray.maxOrNull(): Char? = if (isEmpty()) null else max()
+
+/**
+ * @return the largest element or null if [this] is empty
+ */
+public fun ImmutableShortArray.maxOrNull(): Short? = if (isEmpty()) null else max()
+
+/**
+ * @return the largest element or null if [this] is empty
+ */
+public fun ImmutableIntArray.maxOrNull(): Int? = if (isEmpty()) null else max()
+
+/**
+ * @return the largest element or null if [this] is empty
+ */
+public fun ImmutableLongArray.maxOrNull(): Long? = if (isEmpty()) null else max()
+
+/**
+ * @return the largest element or null if [this] is empty
+ */
+public fun ImmutableFloatArray.maxOrNull(): Float? = if (isEmpty()) null else max()
+
+/**
+ * @return the largest element or null if [this] is empty
+ */
+public fun ImmutableDoubleArray.maxOrNull(): Double? = if (isEmpty()) null else max()
+
+/**
  * Returns an immutable array containing only the non-null elements
  */
 @JvmName("filterNotNull_GENERIC")
