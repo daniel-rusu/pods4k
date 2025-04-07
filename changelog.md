@@ -9,12 +9,13 @@ _Date TBD_
 
 * Upgrade to Kotlin 2.1.0
     * Kotlin 2.1 fixed a compiler defect with generics and inline classes that prevented Immutable Arrays from having
-      extension functions with bounded type parameters like `min()`, `max()`, `minOrNull()` etc.
+      some extension functions with bounded type parameters like `min()`, `max()`, `minOrNull()` etc.
 
 ### Immutable Arrays
 
 **New Features:**
 
+* Add `minOrNull` extension functions
 * Add `sorted` & `sortedDescending` for `ImmutableBooleanArray` matching ordering of `List<Boolean>.sorted()`
 * Add `min()` extension functions
 * Add `max()` extension functions

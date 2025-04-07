@@ -31,6 +31,7 @@ internal object ImmutableArrayExtensionsGenerator {
             addLastIndexOf()
             addGetOrElse()
             addMin()
+            addMinOrNull()
             addMax()
             addFilterNotNull()
             addSorted()
@@ -211,6 +212,29 @@ private fun FileSpec.Builder.addMin() {
                 }
                 statement("return minValue")
             }
+        }
+    }
+}
+
+private fun FileSpec.Builder.addMinOrNull() {
+    val genericType = TypeVariableName("T", Comparable::class.asTypeName().parameterizedBy(TypeVariableName("T")))
+    for (baseType in BaseType.entries) {
+        function(
+            kdoc = "@return the smallest element or null if [this] is empty",
+            receiver = when (baseType) {
+                GENERIC -> baseType.getGeneratedClass().parameterizedBy(genericType)
+                else -> baseType.getGeneratedTypeName()
+            },
+            name = "minOrNull",
+            returns = when (baseType) {
+                GENERIC -> genericType.copy(nullable = true)
+                else -> baseType.type.copy(nullable = true)
+            },
+        ) {
+            if (baseType == GENERIC) {
+                addGenericTypes(genericType)
+            }
+            statement("return if (isEmpty()) null else min()")
         }
     }
 }

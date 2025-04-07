@@ -579,6 +579,51 @@ public fun ImmutableDoubleArray.min(): Double {
 }
 
 /**
+ * @return the smallest element or null if [this] is empty
+ */
+public fun <T : Comparable<T>> ImmutableArray<T>.minOrNull(): T? = if (isEmpty()) null else min()
+
+/**
+ * @return the smallest element or null if [this] is empty
+ */
+public fun ImmutableBooleanArray.minOrNull(): Boolean? = if (isEmpty()) null else min()
+
+/**
+ * @return the smallest element or null if [this] is empty
+ */
+public fun ImmutableByteArray.minOrNull(): Byte? = if (isEmpty()) null else min()
+
+/**
+ * @return the smallest element or null if [this] is empty
+ */
+public fun ImmutableCharArray.minOrNull(): Char? = if (isEmpty()) null else min()
+
+/**
+ * @return the smallest element or null if [this] is empty
+ */
+public fun ImmutableShortArray.minOrNull(): Short? = if (isEmpty()) null else min()
+
+/**
+ * @return the smallest element or null if [this] is empty
+ */
+public fun ImmutableIntArray.minOrNull(): Int? = if (isEmpty()) null else min()
+
+/**
+ * @return the smallest element or null if [this] is empty
+ */
+public fun ImmutableLongArray.minOrNull(): Long? = if (isEmpty()) null else min()
+
+/**
+ * @return the smallest element or null if [this] is empty
+ */
+public fun ImmutableFloatArray.minOrNull(): Float? = if (isEmpty()) null else min()
+
+/**
+ * @return the smallest element or null if [this] is empty
+ */
+public fun ImmutableDoubleArray.minOrNull(): Double? = if (isEmpty()) null else min()
+
+/**
  * @return the largest element
  * @throws NoSuchElementException if this ImmutableArray is empty
  */

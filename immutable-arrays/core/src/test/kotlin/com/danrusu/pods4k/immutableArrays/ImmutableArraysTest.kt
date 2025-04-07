@@ -6,7 +6,7 @@ import strikt.api.expectThrows
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 import strikt.assertions.isFalse
-import strikt.assertions.isNotEqualTo
+import strikt.assertions.isNull
 import strikt.assertions.isTrue
 import strikt.assertions.message
 import kotlin.random.Random
@@ -180,10 +180,7 @@ class ImmutableArraysTest {
     @Test
     fun `min validation`() {
         val minBoolean = minOf(true, false)
-        val maxBoolean = maxOf(true, false)
-
-        expectThat(minBoolean)
-            .isNotEqualTo(maxBoolean)
+        val maxBoolean = !minBoolean
 
         // empty scenarios
         with(emptyImmutableArray<String>()) {
@@ -237,12 +234,65 @@ class ImmutableArraysTest {
     }
 
     @Test
+    fun `minOrNull validation`() {
+        val minBoolean = minOf(true, false)
+        val maxBoolean = !minBoolean
+
+        // empty scenarios
+        with(emptyImmutableArray<String>()) {
+            expectThat(minOrNull()).isNull()
+        }
+        with(emptyImmutableBooleanArray()) {
+            expectThat(minOrNull()).isNull()
+        }
+
+        // single element
+        with(immutableArrayOf("c")) {
+            expectThat(minOrNull())
+                .isEqualTo("c")
+        }
+        with(immutableArrayOf(minBoolean)) {
+            expectThat(minOrNull())
+                .isEqualTo(minBoolean)
+        }
+        with(immutableArrayOf(maxBoolean)) {
+            expectThat(minOrNull())
+                .isEqualTo(maxBoolean)
+        }
+
+        // multiple elements
+        with(immutableArrayOf("c", "a", "b")) {
+            expectThat(minOrNull())
+                .isEqualTo("a")
+        }
+        with(immutableArrayOf(3, 1, 2, 4)) {
+            expectThat(minOrNull())
+                .isEqualTo(1)
+        }
+        with(immutableArrayOf(maxBoolean, maxBoolean, maxBoolean, maxBoolean)) {
+            expectThat(minOrNull())
+                .isEqualTo(maxBoolean)
+        }
+        with(immutableArrayOf(maxBoolean, maxBoolean, minBoolean, maxBoolean)) {
+            expectThat(minOrNull())
+                .isEqualTo(minBoolean)
+        }
+
+        // nan handling
+        with(immutableArrayOf(1.0, 2.0, Double.NaN)) {
+            expectThat(minOrNull())
+                .isEqualTo(Double.NaN)
+        }
+        with(immutableArrayOf(1.0f, 2.0f, Float.NaN)) {
+            expectThat(minOrNull())
+                .isEqualTo(Float.NaN)
+        }
+    }
+
+    @Test
     fun `max validation`() {
         val minBoolean = minOf(true, false)
-        val maxBoolean = maxOf(true, false)
-
-        expectThat(minBoolean)
-            .isNotEqualTo(maxBoolean)
+        val maxBoolean = !minBoolean
 
         // empty scenarios
         with(emptyImmutableArray<String>()) {
