@@ -345,6 +345,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addFilterIndexed(baseType)
             addFilterNot(baseType)
             addPartition(baseType)
+            addMinBy(baseType)
             addSortedBy(baseType)
             addSortedByDescending(baseType)
             addSortedWith(baseType)
@@ -950,6 +951,47 @@ private fun TypeSpec.Builder.addPartition(baseType: BaseType) {
         statement("val first = copyFrom(source = buffer, startIndex = 0, size = firstIndex)")
         statement("val second = ${baseType.generatedClassName}(size - first.size) { buffer[size - it - 1] }")
         statement("return Pair(first, second)")
+    }
+}
+
+private fun TypeSpec.Builder.addMinBy(baseType: BaseType) {
+    val genericVariableName = "R"
+    val genericType = TypeVariableName(genericVariableName)
+
+    function(
+        kdoc = """
+            @return the first element which the [selector] yields the smallest value.
+            @throws NoSuchElementException if this ${baseType.generatedClassName} is empty
+        """.trimIndent(),
+        modifiers = listOf(KModifier.INLINE),
+        name = "minBy",
+        parameters = {
+            "selector"(
+                type = lambda(
+                    parameters = { "element"(type = baseType.type) },
+                    returnType = genericType,
+                ),
+            )
+        },
+        returns = baseType.type,
+    ) {
+        addTypeVariable(
+            TypeVariableName(genericVariableName, Comparable::class.asTypeName().parameterizedBy(genericType)),
+        )
+        statement("var minElement = first()")
+        // avoid calling the selector when only a single element is present
+        statement("if (size == 1) return minElement")
+        emptyLine()
+        statement("var minValue = selector(minElement)")
+        controlFlow("for (i in 1..lastIndex)") {
+            statement("val currentElement = this[i]")
+            statement("val currentValue = selector(currentElement)")
+            controlFlow("if (currentValue < minValue)") {
+                statement("minElement = currentElement")
+                statement("minValue = currentValue")
+            }
+        }
+        statement("return minElement")
     }
 }
 

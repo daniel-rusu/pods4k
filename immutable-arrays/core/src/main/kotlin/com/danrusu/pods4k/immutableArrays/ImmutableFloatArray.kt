@@ -543,6 +543,26 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     }
 
     /**
+     * @return the first element which the [selector] yields the smallest value.
+     * @throws NoSuchElementException if this ImmutableFloatArray is empty
+     */
+    public inline fun <R : Comparable<R>> minBy(selector: (element: Float) -> R): Float {
+        var minElement = first()
+        if (size == 1) return minElement
+
+        var minValue = selector(minElement)
+        for (i in 1..lastIndex) {
+            val currentElement = this[i]
+            val currentValue = selector(currentElement)
+            if (currentValue < minValue) {
+                minElement = currentElement
+                minValue = currentValue
+            }
+        }
+        return minElement
+    }
+
+    /**
      * Leaves this immutable array as is and returns an ImmutableFloatArray with all elements sorted
      * according to the natural sort order of the value returned by the [selector].
      *

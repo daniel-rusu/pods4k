@@ -718,6 +718,23 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `minBy validation`() {
+        with(emptyImmutableIntArray()) {
+            expectThrows<NoSuchElementException> { minBy { it % 3 } }
+        }
+
+        with(immutableArrayOf(4)) {
+            expectThat(minBy { it % 3 })
+                .isEqualTo(4)
+        }
+
+        with(immutableArrayOf(2, 6, 0)) {
+            expectThat(minBy { it % 3 })
+                .isEqualTo(6)
+        }
+    }
+
+    @Test
     fun `sortedBy validation`() {
         with(immutableArrayOf(3, 17, 11)) {
             expectThat(sortedBy { it.toString() })
