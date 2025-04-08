@@ -346,6 +346,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addFilterNot(baseType)
             addPartition(baseType)
             addMinBy(baseType)
+            addMaxBy(baseType)
             addSortedBy(baseType)
             addSortedByDescending(baseType)
             addSortedWith(baseType)
@@ -984,7 +985,7 @@ private fun TypeSpec.Builder.addMinBy(baseType: BaseType) {
         emptyLine()
         statement("var minValue = selector(minElement)")
         controlFlow("for (i in 1..lastIndex)") {
-            statement("val currentElement = this[i]")
+            statement("val currentElement = values[i]")
             statement("val currentValue = selector(currentElement)")
             controlFlow("if (currentValue < minValue)") {
                 statement("minElement = currentElement")
@@ -992,6 +993,47 @@ private fun TypeSpec.Builder.addMinBy(baseType: BaseType) {
             }
         }
         statement("return minElement")
+    }
+}
+
+private fun TypeSpec.Builder.addMaxBy(baseType: BaseType) {
+    val genericVariableName = "R"
+    val genericType = TypeVariableName(genericVariableName)
+
+    function(
+        kdoc = """
+            @return the first element which the [selector] yields the largest value.
+            @throws NoSuchElementException if this ${baseType.generatedClassName} is empty
+        """.trimIndent(),
+        modifiers = listOf(KModifier.INLINE),
+        name = "maxBy",
+        parameters = {
+            "selector"(
+                type = lambda(
+                    parameters = { "element"(type = baseType.type) },
+                    returnType = genericType,
+                ),
+            )
+        },
+        returns = baseType.type,
+    ) {
+        addTypeVariable(
+            TypeVariableName(genericVariableName, Comparable::class.asTypeName().parameterizedBy(genericType)),
+        )
+        statement("var maxElement = first()")
+        // avoid calling the selector when only a single element is present
+        statement("if (size == 1) return maxElement")
+        emptyLine()
+        statement("var maxValue = selector(maxElement)")
+        controlFlow("for (i in 1..lastIndex)") {
+            statement("val currentElement = values[i]")
+            statement("val currentValue = selector(currentElement)")
+            controlFlow("if (currentValue > maxValue)") {
+                statement("maxElement = currentElement")
+                statement("maxValue = currentValue")
+            }
+        }
+        statement("return maxElement")
     }
 }
 

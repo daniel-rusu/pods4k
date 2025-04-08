@@ -552,7 +552,7 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
 
         var minValue = selector(minElement)
         for (i in 1..lastIndex) {
-            val currentElement = this[i]
+            val currentElement = values[i]
             val currentValue = selector(currentElement)
             if (currentValue < minValue) {
                 minElement = currentElement
@@ -560,6 +560,26 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
             }
         }
         return minElement
+    }
+
+    /**
+     * @return the first element which the [selector] yields the largest value.
+     * @throws NoSuchElementException if this ImmutableIntArray is empty
+     */
+    public inline fun <R : Comparable<R>> maxBy(selector: (element: Int) -> R): Int {
+        var maxElement = first()
+        if (size == 1) return maxElement
+
+        var maxValue = selector(maxElement)
+        for (i in 1..lastIndex) {
+            val currentElement = values[i]
+            val currentValue = selector(currentElement)
+            if (currentValue > maxValue) {
+                maxElement = currentElement
+                maxValue = currentValue
+            }
+        }
+        return maxElement
     }
 
     /**

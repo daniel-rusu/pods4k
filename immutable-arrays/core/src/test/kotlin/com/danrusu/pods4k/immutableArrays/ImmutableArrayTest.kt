@@ -1078,6 +1078,23 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `maxBy validation`() {
+        with(emptyImmutableArray<String>()) {
+            expectThrows<NoSuchElementException> { maxBy { it.length } }
+        }
+
+        with(immutableArrayOf("a")) {
+            expectThat(maxBy { it.length })
+                .isEqualTo("a")
+        }
+
+        with(immutableArrayOf("a", "bb", "cc")) {
+            expectThat(maxBy { it.length })
+                .isEqualTo("bb")
+        }
+    }
+
+    @Test
     fun `sortedBy validation`() {
         with(immutableArrayOf("one")) {
             expectThat(sortedBy { it.length }.referencesSameArrayAs(this))
