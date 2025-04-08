@@ -622,7 +622,7 @@ println(arrayOf("Dan", "Bob")) // [Ljava.lang.String;@7d4991ad  Yuck!
 </details>
 
 <details>
-<summary>✅ Optimized Performance – Operations run faster and use less memory</summary>
+<summary>✅ Faster operations with lower memory consumption</summary>
 
 Regular arrays are often used for memory and performance benefits, but many operations produce lists, negating those
 benefits and adding auto-boxing overhead.
@@ -689,6 +689,34 @@ array. Note that calling `asList()` on a generic array is not safe as the genera
 array, like `IntArray`, negatively affects memory and performance by auto-boxing elements every time they're accessed.
 
 Immutable arrays can be safely shared resulting in cleaner and more efficient code.
+</details>
+
+<details>
+<summary>✅ Covariant - Same subtype relationship as element types</summary>
+
+Kotlin prevents an entire category of Java defects by treating arrays as invariant because they're mutable. This
+prevents treating an `Array<String>` as an `Array<Any>` in order to avoid compiling code that later attempts to add
+non-String elements to the array.
+
+With Immutable Arrays, we restored covariance while guaranteeing type safety. Since they can't be modified, we can
+leverage subtyping relationships between classes. For example, if `Manager` is a subtype of `Person`:
+
+```kotlin
+fun promoteManagers(managers: ImmutableArray<Manager>) {
+    managers.forEach { increaseSalaryFor(it) }
+
+    // This works! ImmutableArray<Manager> is a subtype of ImmutableArray<Person>
+    notifyPeople(managers, "You got a raise!")
+}
+
+fun notifyPeople(people: ImmutableArray<Person>, message: String) {
+    //...
+}
+```
+
+Immutable Arrays follow the same subtyping relationships as their elements, making the code more intuitive and flexible
+without sacrificing safety.
+
 </details>
 
 ### Benefits over read-only lists
