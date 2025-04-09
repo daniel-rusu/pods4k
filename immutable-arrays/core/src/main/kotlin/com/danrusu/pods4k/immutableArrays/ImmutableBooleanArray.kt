@@ -563,7 +563,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     }
 
     /**
-     * @return the first element which the [selector] yields the smallest value or null if empty
+     * @return the first element which the [selector] yields the smallest value, or null if empty
      */
     public inline fun <R : Comparable<R>> minByOrNull(selector: (element: Boolean) -> R): Boolean? {
         return if (isEmpty()) null else minBy(selector)
@@ -587,6 +587,13 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
             }
         }
         return maxElement
+    }
+
+    /**
+     * @return the first element which the [selector] yields the largest value, or null if empty
+     */
+    public inline fun <R : Comparable<R>> maxByOrNull(selector: (element: Boolean) -> R): Boolean? {
+        return if (isEmpty()) null else maxBy(selector)
     }
 
     /**

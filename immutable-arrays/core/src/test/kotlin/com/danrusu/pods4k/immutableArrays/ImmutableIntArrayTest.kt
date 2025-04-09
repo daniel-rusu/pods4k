@@ -770,6 +770,24 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `maxByOrNull validation`() {
+        with(emptyImmutableIntArray()) {
+            expectThat(maxByOrNull { it % 3 })
+                .isNull()
+        }
+
+        with(immutableArrayOf(4)) {
+            expectThat(maxByOrNull { it % 3 })
+                .isEqualTo(4)
+        }
+
+        with(immutableArrayOf(1, 2, 5)) {
+            expectThat(maxByOrNull { it % 3 })
+                .isEqualTo(2)
+        }
+    }
+
+    @Test
     fun `sortedBy validation`() {
         with(immutableArrayOf(3, 17, 11)) {
             expectThat(sortedBy { it.toString() })

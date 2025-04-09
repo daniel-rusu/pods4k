@@ -348,6 +348,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addMinBy(baseType)
             addMinByOrNull(baseType)
             addMaxBy(baseType)
+            addMaxByOrNull(baseType)
             addSortedBy(baseType)
             addSortedByDescending(baseType)
             addSortedWith(baseType)
@@ -1002,7 +1003,7 @@ private fun TypeSpec.Builder.addMinByOrNull(baseType: BaseType) {
     val genericType = TypeVariableName(genericVariableName)
 
     function(
-        kdoc = "@return the first element which the [selector] yields the smallest value or null if empty",
+        kdoc = "@return the first element which the [selector] yields the smallest value, or null if empty",
         modifiers = listOf(KModifier.INLINE),
         name = "minByOrNull",
         parameters = {
@@ -1061,6 +1062,32 @@ private fun TypeSpec.Builder.addMaxBy(baseType: BaseType) {
             }
         }
         statement("return maxElement")
+    }
+}
+
+private fun TypeSpec.Builder.addMaxByOrNull(baseType: BaseType) {
+    val genericVariableName = "R"
+    val genericType = TypeVariableName(genericVariableName)
+
+    function(
+        kdoc = "@return the first element which the [selector] yields the largest value, or null if empty",
+        modifiers = listOf(KModifier.INLINE),
+        name = "maxByOrNull",
+        parameters = {
+            "selector"(
+                type = lambda(
+                    parameters = { "element"(type = baseType.type) },
+                    returnType = genericType,
+                ),
+            )
+        },
+        returns = baseType.type.copy(nullable = true),
+        forceFunctionBody = true,
+    ) {
+        addTypeVariable(
+            TypeVariableName(genericVariableName, Comparable::class.asTypeName().parameterizedBy(genericType)),
+        )
+        statement("return if(isEmpty()) null else maxBy(selector)")
     }
 }
 

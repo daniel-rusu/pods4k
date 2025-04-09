@@ -564,7 +564,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     }
 
     /**
-     * @return the first element which the [selector] yields the smallest value or null if empty
+     * @return the first element which the [selector] yields the smallest value, or null if empty
      */
     public inline fun <R : Comparable<R>> minByOrNull(selector: (element: Byte) -> R): Byte? {
         return if (isEmpty()) null else minBy(selector)
@@ -588,6 +588,13 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
             }
         }
         return maxElement
+    }
+
+    /**
+     * @return the first element which the [selector] yields the largest value, or null if empty
+     */
+    public inline fun <R : Comparable<R>> maxByOrNull(selector: (element: Byte) -> R): Byte? {
+        return if (isEmpty()) null else maxBy(selector)
     }
 
     /**
