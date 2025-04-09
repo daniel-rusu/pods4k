@@ -564,6 +564,13 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     }
 
     /**
+     * @return the first element which the [selector] yields the smallest value or null if empty
+     */
+    public inline fun <R : Comparable<R>> minByOrNull(selector: (element: Char) -> R): Char? {
+        return if (isEmpty()) null else minBy(selector)
+    }
+
+    /**
      * @return the first element which the [selector] yields the largest value.
      * @throws NoSuchElementException if this ImmutableCharArray is empty
      */

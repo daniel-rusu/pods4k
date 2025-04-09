@@ -346,6 +346,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addFilterNot(baseType)
             addPartition(baseType)
             addMinBy(baseType)
+            addMinByOrNull(baseType)
             addMaxBy(baseType)
             addSortedBy(baseType)
             addSortedByDescending(baseType)
@@ -993,6 +994,32 @@ private fun TypeSpec.Builder.addMinBy(baseType: BaseType) {
             }
         }
         statement("return minElement")
+    }
+}
+
+private fun TypeSpec.Builder.addMinByOrNull(baseType: BaseType) {
+    val genericVariableName = "R"
+    val genericType = TypeVariableName(genericVariableName)
+
+    function(
+        kdoc = "@return the first element which the [selector] yields the smallest value or null if empty",
+        modifiers = listOf(KModifier.INLINE),
+        name = "minByOrNull",
+        parameters = {
+            "selector"(
+                type = lambda(
+                    parameters = { "element"(type = baseType.type) },
+                    returnType = genericType,
+                ),
+            )
+        },
+        returns = baseType.type.copy(nullable = true),
+        forceFunctionBody = true,
+    ) {
+        addTypeVariable(
+            TypeVariableName(genericVariableName, Comparable::class.asTypeName().parameterizedBy(genericType)),
+        )
+        statement("return if(isEmpty()) null else minBy(selector)")
     }
 }
 

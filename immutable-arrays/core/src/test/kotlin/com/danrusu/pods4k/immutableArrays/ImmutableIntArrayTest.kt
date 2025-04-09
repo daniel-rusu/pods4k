@@ -735,6 +735,24 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `minByOrNull validation`() {
+        with(emptyImmutableIntArray()) {
+            expectThat(minByOrNull { it % 3 })
+                .isNull()
+        }
+
+        with(immutableArrayOf(4)) {
+            expectThat(minByOrNull { it % 3 })
+                .isEqualTo(4)
+        }
+
+        with(immutableArrayOf(2, 6, 0)) {
+            expectThat(minByOrNull { it % 3 })
+                .isEqualTo(6)
+        }
+    }
+
+    @Test
     fun `maxBy validation`() {
         with(emptyImmutableIntArray()) {
             expectThrows<NoSuchElementException> { maxBy { it % 3 } }

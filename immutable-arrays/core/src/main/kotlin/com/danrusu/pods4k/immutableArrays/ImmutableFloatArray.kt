@@ -563,6 +563,13 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
     }
 
     /**
+     * @return the first element which the [selector] yields the smallest value or null if empty
+     */
+    public inline fun <R : Comparable<R>> minByOrNull(selector: (element: Float) -> R): Float? {
+        return if (isEmpty()) null else minBy(selector)
+    }
+
+    /**
      * @return the first element which the [selector] yields the largest value.
      * @throws NoSuchElementException if this ImmutableFloatArray is empty
      */
