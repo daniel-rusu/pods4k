@@ -349,6 +349,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addMinByOrNull(baseType)
             addMaxBy(baseType)
             addMaxByOrNull(baseType)
+            addMinWith(baseType)
             addSortedBy(baseType)
             addSortedByDescending(baseType)
             addSortedWith(baseType)
@@ -554,10 +555,8 @@ private fun TypeSpec.Builder.overrideHashCode(baseType: BaseType) {
         name = "hashCode",
         returns = Int::class.asTypeName(),
     ) {
-        comment(
-            "Start with non-zero hash so that arrays that start with a different number of zero-hash elements end " +
-                "up with different hashCodes",
-        )
+        comment("Start with non-zero result so arrays that start with a different number of zero-hash elements end ")
+        comment("up with different hashCodes")
 
         statement("var hashCode = $prime1")
         controlFlow("for (value in values)") {
@@ -1088,6 +1087,33 @@ private fun TypeSpec.Builder.addMaxByOrNull(baseType: BaseType) {
             TypeVariableName(genericVariableName, Comparable::class.asTypeName().parameterizedBy(genericType)),
         )
         statement("return if(isEmpty()) null else maxBy(selector)")
+    }
+}
+
+private fun TypeSpec.Builder.addMinWith(baseType: BaseType) {
+    function(
+        kdoc = """
+            @return the first element having the smallest value according to the provided [comparator].
+            @throws NoSuchElementException if this ${baseType.generatedClassName} is empty
+        """.trimIndent(),
+        name = "minWith",
+        parameters = {
+            "comparator"(
+                type = ClassName("kotlin", "Comparator").parameterizedBy(WildcardTypeName.consumerOf(baseType.type)),
+            )
+        },
+        returns = baseType.type,
+    ) {
+        statement("var minElement = first()")
+        statement("if (size == 1) return minElement")
+        emptyLine()
+        controlFlow("for (i in 1..lastIndex)") {
+            statement("val currentElement = values[i]")
+            controlFlow("if (comparator.compare(minElement, currentElement) > 0)") {
+                statement("minElement = currentElement")
+            }
+        }
+        statement("return minElement")
     }
 }
 

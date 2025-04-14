@@ -109,7 +109,8 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     }
 
     override fun hashCode(): Int {
-        // Start with non-zero hash so that arrays that start with a different number of zero-hash elements end up with different hashCodes
+        // Start with non-zero result so arrays that start with a different number of zero-hash elements end
+        // up with different hashCodes
         var hashCode = 7
         for (value in values) {
             hashCode = 31 * hashCode + value.hashCode()
@@ -595,6 +596,23 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
      */
     public inline fun <R : Comparable<R>> maxByOrNull(selector: (element: Byte) -> R): Byte? {
         return if (isEmpty()) null else maxBy(selector)
+    }
+
+    /**
+     * @return the first element having the smallest value according to the provided [comparator].
+     * @throws NoSuchElementException if this ImmutableByteArray is empty
+     */
+    public fun minWith(comparator: Comparator<in Byte>): Byte {
+        var minElement = first()
+        if (size == 1) return minElement
+
+        for (i in 1..lastIndex) {
+            val currentElement = values[i]
+            if (comparator.compare(minElement, currentElement) > 0) {
+                minElement = currentElement
+            }
+        }
+        return minElement
     }
 
     /**
