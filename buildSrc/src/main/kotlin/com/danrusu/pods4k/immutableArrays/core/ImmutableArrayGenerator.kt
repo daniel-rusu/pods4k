@@ -350,6 +350,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addMaxBy(baseType)
             addMaxByOrNull(baseType)
             addMinWith(baseType)
+            addMaxWith(baseType)
             addSortedBy(baseType)
             addSortedByDescending(baseType)
             addSortedWith(baseType)
@@ -1114,6 +1115,33 @@ private fun TypeSpec.Builder.addMinWith(baseType: BaseType) {
             }
         }
         statement("return minElement")
+    }
+}
+
+private fun TypeSpec.Builder.addMaxWith(baseType: BaseType) {
+    function(
+        kdoc = """
+            @return the first element having the largest value according to the provided [comparator].
+            @throws NoSuchElementException if this ${baseType.generatedClassName} is empty
+        """.trimIndent(),
+        name = "maxWith",
+        parameters = {
+            "comparator"(
+                type = ClassName("kotlin", "Comparator").parameterizedBy(WildcardTypeName.consumerOf(baseType.type)),
+            )
+        },
+        returns = baseType.type,
+    ) {
+        statement("var maxElement = first()")
+        statement("if (size == 1) return maxElement")
+        emptyLine()
+        controlFlow("for (i in 1..lastIndex)") {
+            statement("val currentElement = values[i]")
+            controlFlow("if (comparator.compare(maxElement, currentElement) < 0)") {
+                statement("maxElement = currentElement")
+            }
+        }
+        statement("return maxElement")
     }
 }
 

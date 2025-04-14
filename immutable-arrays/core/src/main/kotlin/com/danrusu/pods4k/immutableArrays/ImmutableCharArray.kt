@@ -616,6 +616,23 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     }
 
     /**
+     * @return the first element having the largest value according to the provided [comparator].
+     * @throws NoSuchElementException if this ImmutableCharArray is empty
+     */
+    public fun maxWith(comparator: Comparator<in Char>): Char {
+        var maxElement = first()
+        if (size == 1) return maxElement
+
+        for (i in 1..lastIndex) {
+            val currentElement = values[i]
+            if (comparator.compare(maxElement, currentElement) < 0) {
+                maxElement = currentElement
+            }
+        }
+        return maxElement
+    }
+
+    /**
      * Leaves this immutable array as is and returns an ImmutableCharArray with all elements sorted
      * according to the natural sort order of the value returned by the [selector].
      *
