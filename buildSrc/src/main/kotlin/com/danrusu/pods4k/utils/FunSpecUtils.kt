@@ -13,6 +13,13 @@ internal fun FunSpec.Builder.suppress(warning: String): FunSpec.Builder {
     )
 }
 
+internal inline fun <reified T : Annotation> FunSpec.Builder.addAnnotation(): FunSpec.Builder {
+    return addAnnotation(
+        AnnotationSpec.builder(T::class)
+            .build(),
+    )
+}
+
 /**
  * Adds the jvmName override.
  *

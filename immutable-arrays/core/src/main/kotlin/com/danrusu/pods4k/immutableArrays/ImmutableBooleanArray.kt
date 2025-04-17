@@ -10,6 +10,7 @@ import kotlin.Comparator
 import kotlin.Double
 import kotlin.Float
 import kotlin.Int
+import kotlin.IntArray
 import kotlin.Long
 import kotlin.OverloadResolutionByLambdaReturnType
 import kotlin.Pair
@@ -449,27 +450,51 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
 
     /**
      * Returns an immutable array containing only the elements matching the given [predicate].
-     *
-     * Warning: This code is quite dense because it's highly optimized to reduce the temporary memory overhead and
-     * also dramatically improves performance due to branch elimination and a perfectly-sized result.
      */
-    public fun filterIndexed(predicate: (index: Int, element: Boolean) -> Boolean): ImmutableBooleanArray {
+    public inline fun filterIndexed(
+        crossinline predicate: (index: Int, element: Boolean) -> Boolean,
+    ): ImmutableBooleanArray {
         if (isEmpty()) return this
 
-        // divide by 32 rounding up
-        val bitArraySize = (size + 31) ushr 5
-        // store an array of int values whose 1-bits capture which elements pass the predicate
-        val bitArray = IntArray(bitArraySize)
+        val bitmap = createBitmap()
+        var resultSize = populateBitmap(bitmap) { index, element -> predicate(index, element) }
+        return select(bitmap, resultSize)
+    }
 
-        var resultSize = 0
+    /**
+     * Returns an immutable array containing only the elements that don't match the [predicate].
+     */
+    public inline fun filterNot(crossinline predicate: (element: Boolean) -> Boolean): ImmutableBooleanArray {
+        // delegate to filterIndexed as that's extremely optimized
+        return filterIndexed { _, element -> !predicate(element) }
+    }
+
+    /**
+     * Returns an [IntArray] containing sufficient bits to represent all the element indices.
+     */
+    @PublishedApi
+    internal fun createBitmap(): IntArray {
+        // divide by 32 rounding up
+        val bitmapSize = (size + 31) ushr 5
+        return IntArray(bitmapSize)
+    }
+
+    /**
+     * Populates the specified [bitmap] with 1-bits at the indices where the elements match the given [predicate].
+     *
+     * @return the number of 1-bits that the bitmap ends up with.
+     */
+    @PublishedApi
+    internal fun populateBitmap(bitmap: IntArray, predicate: (index: Int, element: Boolean) -> Boolean): Int {
+        var numOneBits = 0
         // the bit index into the current 32-bit int
         var bitIndex = -1 // start at -1 as it gets incremented right away in the loop
-        var bitArrayIndex = 0
+        var bitmapIndex = 0
         var currentBits = 0 // the current 32-bits with no elements yet
         forEachIndexed { index, element ->
             if (++bitIndex == 32) {
                 // reached the end of the current bits so store them and reset
-                bitArray[bitArrayIndex++] = currentBits
+                bitmap[bitmapIndex++] = currentBits
                 currentBits = 0
                 bitIndex = 0
             }
@@ -477,28 +502,38 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
             val currentElement = if (predicate(index, element)) 1 else 0
 
             // conditionally increase the size without branching
-            resultSize += currentElement
+            numOneBits += currentElement
 
             // conditionally include the current element without branching
             currentBits = currentBits or (currentElement shl bitIndex)
         }
-        if (resultSize == 0) return EMPTY
-        if (resultSize == size) return this
-
         // store the last set of partially-filled bits
-        bitArray[bitArrayIndex] = currentBits
+        bitmap[bitmapIndex] = currentBits
+        return numOneBits
+    }
 
-        val result = BooleanArray(resultSize)
+    /**
+     * Returns an immutable array containing only the elements from indices where the [bitmap] bits are 1.
+     *
+     * @param bitmap stored in chunks of 32 bits as an [IntArray] where the 1-bits control which elements are selected
+     * @param numOneBits the number of 1-bits present in the [bitmap]
+     */
+    @PublishedApi
+    internal fun select(bitmap: IntArray, numOneBits: Int): ImmutableBooleanArray {
+        if (numOneBits == 0) return EMPTY
+        if (numOneBits == size) return this
+
+        val result = BooleanArray(numOneBits)
         var resultIndex = 0
-        bitArrayIndex = 0
-        bitIndex = -1
-        currentBits = bitArray[0]
+        var bitmapIndex = 0
+        var bitIndex = -1
+        var currentBits = bitmap[0]
         var originalIndex = 0
-        // check the resultIndex instead of the originalIndex so that we can stop early
-        while (resultIndex < result.size) {
+
+        while (resultIndex < numOneBits) {
             if (++bitIndex == 32) {
                 // reached the end of the current bits so get the next 32 bits and reset
-                currentBits = bitArray[++bitArrayIndex]
+                currentBits = bitmap[++bitmapIndex]
                 bitIndex = 0
             }
             // always copy to avoid branching as resultIndex won't increment if current element isn't included
@@ -508,14 +543,6 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
             resultIndex += currentElement
         }
         return ImmutableBooleanArray(result)
-    }
-
-    /**
-     * Returns an immutable array containing only the elements that don't match the [predicate].
-     */
-    public inline fun filterNot(crossinline predicate: (element: Boolean) -> Boolean): ImmutableBooleanArray {
-        // delegate to filterIndexed as that's extremely optimized
-        return filterIndexed { _, element -> !predicate(element) }
     }
 
     /**

@@ -45,8 +45,8 @@ _2025-3-18_
 
 **Performance Improvements:**
 
-* Update `filter`, `filterIndexed`, & `filterNot` to switch from accumulating elements in a builder to capturing
-  accepted elements as single bits in an `IntArray` and use bitwise operations to avoid branching.
+* Optimized `filter`, `filterIndexed`, & `filterNot` by replacing the builder-based implementation with a bitmap
+  approach that uses bitwise operations to reduce branching.
 * Update `distinct()` to use `filter` with a `HashSet` instead of calling `toSet().toImmutableArray()` to avoid using
   the more expensive `LinkedHashSet` while still maintaining original ordering. This also returns the same instance when
   all elements are already distinct.
