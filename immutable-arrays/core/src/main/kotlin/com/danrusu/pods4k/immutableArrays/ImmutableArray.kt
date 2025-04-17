@@ -445,8 +445,11 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
      * Returns an immutable array containing only the elements matching the given [predicate].
      */
     public inline fun filter(crossinline predicate: (element: T) -> Boolean): ImmutableArray<T> {
-        // delegate to filterIndexed as that's extremely optimized
-        return filterIndexed { _, element -> predicate(element) }
+        if (isEmpty()) return this
+
+        val bitmap = createBitmap()
+        var resultSize = populateBitmap(bitmap) { _, element -> predicate(element) }
+        return select(bitmap, resultSize)
     }
 
     /**
