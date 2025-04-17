@@ -2,6 +2,7 @@ package com.danrusu.pods4k.immutableArrays.core.multiplicativeSpecializations
 
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.utils.addGenericTypes
+import com.danrusu.pods4k.utils.annotation
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.statement
 import com.squareup.kotlinpoet.FileSpec
@@ -50,7 +51,7 @@ private fun FileSpec.Builder.addMapIndexedFunction(fromType: BaseType, toType: B
         returns = resultTypeName,
         forceFunctionBody = true,
     ) {
-        addAnnotation(OverloadResolutionByLambdaReturnType::class)
+        annotation<OverloadResolutionByLambdaReturnType>()
         addGenericTypes(fromType.type, mappedType)
 
         statement("return ${toType.generatedClassName}(size) { transform(it, get(it)) }")

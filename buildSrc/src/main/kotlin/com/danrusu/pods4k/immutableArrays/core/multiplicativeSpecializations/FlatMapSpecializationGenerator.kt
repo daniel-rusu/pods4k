@@ -4,6 +4,7 @@ import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
 import com.danrusu.pods4k.immutableArrays.createImmutableArrayBuilder
 import com.danrusu.pods4k.utils.addGenericTypes
+import com.danrusu.pods4k.utils.annotation
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.jvmName
@@ -55,7 +56,7 @@ private fun FileSpec.Builder.addFlatMapFunction(fromType: BaseType, toType: Base
         returns = resultType,
     ) {
         jvmName("flatMap", "Iterable", toType.name)
-        addAnnotation(OverloadResolutionByLambdaReturnType::class)
+        annotation<OverloadResolutionByLambdaReturnType>()
         addGenericTypes(fromType.type, mappedType)
 
         createImmutableArrayBuilder(name = "builder", forType = toType, genericTypeOverride = mappedType)
@@ -81,7 +82,7 @@ private fun FileSpec.Builder.addFlatMapFunction(fromType: BaseType, toType: Base
         returns = resultType,
     ) {
         jvmName("flatMap", toType.generatedClassName)
-        addAnnotation(OverloadResolutionByLambdaReturnType::class)
+        annotation<OverloadResolutionByLambdaReturnType>()
         addGenericTypes(fromType.type, mappedType)
 
         /*

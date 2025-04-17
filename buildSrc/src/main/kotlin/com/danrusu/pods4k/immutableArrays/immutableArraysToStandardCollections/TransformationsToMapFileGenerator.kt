@@ -3,11 +3,11 @@ package com.danrusu.pods4k.immutableArrays.immutableArraysToStandardCollections
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
 import com.danrusu.pods4k.utils.addGenericTypes
+import com.danrusu.pods4k.utils.annotation
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.createFile
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.statement
-import com.danrusu.pods4k.utils.suppress
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.KModifier
@@ -179,7 +179,7 @@ private fun FileSpec.Builder.addGroupBy() {
                     "result.replaceAll { _, builder -> (builder as ${baseType.generatedClassName}.Builder).build() }",
                 )
             }
-            suppress("UNCHECKED_CAST")
+            annotation<Suppress>("UNCHECKED_CAST")
             statement("return result as %T<K, %T>", Map::class, baseType.getGeneratedTypeName())
         }
     }

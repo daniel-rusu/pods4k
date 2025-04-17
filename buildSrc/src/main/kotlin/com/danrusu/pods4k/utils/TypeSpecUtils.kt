@@ -8,12 +8,13 @@ import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.asTypeName
 
-internal fun TypeSpec.Builder.suppress(warning: String): TypeSpec.Builder {
-    return addAnnotation(
-        AnnotationSpec.builder(Suppress::class)
-            .addMember("%S", warning)
-            .build(),
-    )
+internal inline fun <reified T : Annotation> TypeSpec.Builder.annotation(vararg members: String): TypeSpec.Builder {
+    var builder = AnnotationSpec.builder(T::class)
+    for (member in members) {
+        builder = builder.addMember("%S", member)
+    }
+
+    return addAnnotation(builder.build())
 }
 
 internal inline fun TypeSpec.Builder.addPrimaryConstructor(

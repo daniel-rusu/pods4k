@@ -6,6 +6,7 @@ import com.danrusu.pods4k.immutableArrays.BaseType.GENERIC
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
 import com.danrusu.pods4k.immutableArrays.createImmutableArrayBuilder
 import com.danrusu.pods4k.utils.addGenericTypes
+import com.danrusu.pods4k.utils.annotation
 import com.danrusu.pods4k.utils.comment
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.createFile
@@ -13,7 +14,6 @@ import com.danrusu.pods4k.utils.emptyLine
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.jvmName
 import com.danrusu.pods4k.utils.statement
-import com.danrusu.pods4k.utils.suppress
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
@@ -327,7 +327,7 @@ private fun FileSpec.Builder.addFilterNotNull() {
                 }
             }
             if (baseType == GENERIC) {
-                suppress("UNCHECKED_CAST")
+                annotation<Suppress>("UNCHECKED_CAST")
                 val castType = baseType.getGeneratedClass().parameterizedBy(nonNullType)
                 statement("if (result.size == size) return this as %T", castType)
                 emptyLine()
@@ -399,7 +399,7 @@ private fun FileSpec.Builder.addSorted() {
                 addTypeVariable(
                     TypeVariableName(genericVariableName, Comparable::class.asTypeName().parameterizedBy(genericType)),
                 )
-                suppress("UNCHECKED_CAST")
+                annotation<Suppress>("UNCHECKED_CAST")
                 statement("val backingArray = ${baseType.backingArrayConstructor}(size) { get(it) }")
             } else {
                 statement("val backingArray = values.copyOf()")
@@ -513,7 +513,7 @@ private fun FileSpec.Builder.addPlusImmutableArray() {
                 statement("isEmpty() -> other")
                 statement("other.isEmpty() -> this")
                 if (baseType == GENERIC) {
-                    suppress("UNCHECKED_CAST")
+                    annotation<Suppress>("UNCHECKED_CAST")
                     statement(
                         "else -> ${baseType.generatedClassName}((this.values as Array<%T>) + other.values)",
                         baseType.type,
@@ -552,7 +552,7 @@ private fun FileSpec.Builder.addPlusValue() {
             addGenericTypes(baseType.type)
 
             if (baseType == GENERIC) {
-                suppress("UNCHECKED_CAST")
+                annotation<Suppress>("UNCHECKED_CAST")
                 statement("return ${baseType.generatedClassName}((values as Array<%T>) + element)", baseType.type)
             } else {
                 statement("return ${baseType.generatedClassName}(values + element)")
@@ -680,7 +680,7 @@ private fun FileSpec.Builder.addRequireNoNulls() {
 
         statement("require (null !in this) { \"null element found in \$this\" }")
         emptyLine()
-        suppress("UNCHECKED_CAST")
+        annotation<Suppress>("UNCHECKED_CAST")
         statement("return this as ${GENERIC.generatedClassName}<%T>", GENERIC.type)
     }
 }

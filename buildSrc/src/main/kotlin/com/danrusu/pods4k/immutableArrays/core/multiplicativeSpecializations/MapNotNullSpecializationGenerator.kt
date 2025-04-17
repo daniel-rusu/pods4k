@@ -3,6 +3,7 @@ package com.danrusu.pods4k.immutableArrays.core.multiplicativeSpecializations
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.createImmutableArrayBuilder
 import com.danrusu.pods4k.utils.addGenericTypes
+import com.danrusu.pods4k.utils.annotation
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.statement
@@ -47,7 +48,7 @@ private fun FileSpec.Builder.addMapNotNullFunction(fromType: BaseType, toType: B
         },
         returns = resultTypeName,
     ) {
-        addAnnotation(OverloadResolutionByLambdaReturnType::class)
+        annotation<OverloadResolutionByLambdaReturnType>()
         addGenericTypes(fromType.type, mappedType)
 
         createImmutableArrayBuilder(name = "builder", forType = toType, genericTypeOverride = mappedType)

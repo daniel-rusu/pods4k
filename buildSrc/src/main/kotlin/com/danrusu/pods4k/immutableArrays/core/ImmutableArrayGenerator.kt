@@ -4,9 +4,9 @@ import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.BaseType.GENERIC
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
 import com.danrusu.pods4k.utils.ParameterDSL
-import com.danrusu.pods4k.utils.addAnnotation
 import com.danrusu.pods4k.utils.addGenericTypes
 import com.danrusu.pods4k.utils.addPrimaryConstructor
+import com.danrusu.pods4k.utils.annotation
 import com.danrusu.pods4k.utils.comment
 import com.danrusu.pods4k.utils.companionObject
 import com.danrusu.pods4k.utils.controlFlow
@@ -16,7 +16,6 @@ import com.danrusu.pods4k.utils.emptyLine
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.property
 import com.danrusu.pods4k.utils.statement
-import com.danrusu.pods4k.utils.suppress
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
@@ -56,8 +55,8 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
     return createFile(ImmutableArrayConfig.packageName, baseType.generatedClassName) {
         declareClass(modifiers = listOf(KModifier.VALUE), name = baseType.generatedClassName) {
             addKdoc(classKdoc)
-            suppress("NOTHING_TO_INLINE")
-            addAnnotation(JvmInline::class)
+            annotation<Suppress>("NOTHING_TO_INLINE")
+            annotation<JvmInline>()
             if (baseType == GENERIC) {
                 val typeName = (baseType.type as TypeVariableName).name
                 addTypeVariable(TypeVariableName(typeName, KModifier.OUT))
@@ -364,7 +363,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
 
             companionObject {
                 if (baseType == GENERIC) {
-                    suppress("UNCHECKED_CAST")
+                    annotation<Suppress>("UNCHECKED_CAST")
                 }
                 addCompanionObjectEmptyProperty(baseType)
                 addCompanionObjectInvokeOperator(baseType)
@@ -477,7 +476,7 @@ private fun TypeSpec.Builder.addPrimaryConstructor(baseType: BaseType) {
         modifiers = listOf(KModifier.INTERNAL),
         parameters = { "values"(type = baseType.backingArrayType) },
     ) {
-        addAnnotation(PublishedApi::class)
+        annotation<PublishedApi>()
     }.property(
         kdoc = kdoc,
         modifiers = listOf(KModifier.INTERNAL),
@@ -485,7 +484,7 @@ private fun TypeSpec.Builder.addPrimaryConstructor(baseType: BaseType) {
         type = baseType.backingArrayType,
         init = "values",
     ) {
-        addAnnotation(PublishedApi::class)
+        annotation<PublishedApi>()
     }
 }
 
@@ -620,7 +619,7 @@ private fun TypeSpec.Builder.addSumOfFloat(baseType: BaseType) {
         },
         returns = Float::class.asTypeName(),
     ) {
-        addAnnotation(AnnotationSpec.builder(OverloadResolutionByLambdaReturnType::class).build())
+        annotation<OverloadResolutionByLambdaReturnType>()
         statement("var sum = 0.0f")
         controlFlow("for (element in values)") {
             statement("sum += selector(element)")
@@ -858,7 +857,7 @@ private fun TypeSpec.Builder.addCreateBitmap() {
         name = "createBitmap",
         returns = IntArray::class.asTypeName(),
     ) {
-        addAnnotation<PublishedApi>()
+        annotation<PublishedApi>()
 
         // Note that I tried using a Long array but that was marginally slower and more complex due to int conversions
         comment("divide by 32 rounding up")
@@ -889,7 +888,7 @@ private fun TypeSpec.Builder.addPopulateBitmap(baseType: BaseType) {
         },
         returns = Int::class.asTypeName(),
     ) {
-        addAnnotation<PublishedApi>()
+        annotation<PublishedApi>()
 
         statement("var numOneBits = 0")
         comment("the bit index into the current 32-bit int")
@@ -936,13 +935,13 @@ private fun TypeSpec.Builder.addSelect(baseType: BaseType) {
         },
         returns = baseType.getGeneratedTypeName(),
     ) {
-        addAnnotation<PublishedApi>()
+        annotation<PublishedApi>()
 
         statement("if (numOneBits == 0) return EMPTY")
         statement("if (numOneBits == size) return this")
         emptyLine()
         if (baseType == GENERIC) {
-            suppress("UNCHECKED_CAST")
+            annotation<Suppress>("UNCHECKED_CAST")
             statement("val result = arrayOfNulls<Any>(numOneBits) as Array<T>")
         } else {
             statement("val result = ${baseType.backingArrayConstructor}(numOneBits)")
@@ -995,7 +994,7 @@ private fun TypeSpec.Builder.addPartition(baseType: BaseType) {
         statement("var firstIndex = 0")
         statement("var secondIndex = size - 1")
         if (baseType == GENERIC) {
-            suppress("UNCHECKED_CAST")
+            annotation<Suppress>("UNCHECKED_CAST")
             statement("val buffer = arrayOfNulls<Any?>(size) as Array<T>")
         } else {
             statement("val buffer = ${baseType.backingArrayConstructor}(size)")
@@ -1299,7 +1298,7 @@ private fun TypeSpec.Builder.addSortedWith(baseType: BaseType) {
         statement("if (size <= 1) return this")
         emptyLine()
         if (baseType == GENERIC) {
-            suppress("UNCHECKED_CAST")
+            annotation<Suppress>("UNCHECKED_CAST")
             statement("val backingArray = arrayOfNulls<Any?>(size) as Array<%T>", baseType.type)
             statement("System.arraycopy(values, 0, backingArray, 0, size)")
             emptyLine()
@@ -1329,7 +1328,7 @@ private fun TypeSpec.Builder.addShuffled(baseType: BaseType) {
         statement("if (size <= 1) return this")
         emptyLine()
         if (baseType == GENERIC) {
-            suppress("UNCHECKED_CAST")
+            annotation<Suppress>("UNCHECKED_CAST")
             statement("val backingArray = arrayOfNulls<Any?>(size) as Array<%T>", baseType.type)
             statement("System.arraycopy(values, 0, backingArray, 0, size)")
             statement("backingArray.shuffle()")
@@ -1348,7 +1347,7 @@ private fun TypeSpec.Builder.addShuffled(baseType: BaseType) {
         statement("if (size <= 1) return this")
         emptyLine()
         if (baseType == GENERIC) {
-            suppress("UNCHECKED_CAST")
+            annotation<Suppress>("UNCHECKED_CAST")
             statement("val backingArray = arrayOfNulls<Any?>(size) as Array<%T>", baseType.type)
             statement("System.arraycopy(values, 0, backingArray, 0, size)")
             statement("backingArray.shuffle(random)")
@@ -1418,7 +1417,7 @@ private fun TypeSpec.Builder.addCompanionObjectEmptyProperty(baseType: BaseType)
         name = "EMPTY",
         type = type,
     ) {
-        addAnnotation(PublishedApi::class)
+        annotation<PublishedApi>()
         when (baseType) {
             GENERIC -> initializer("${baseType.generatedClassName}(emptyArray<Any>()) as %T", type)
             else -> initializer("${baseType.generatedClassName}(${baseType.backingArrayConstructor}(0))")
@@ -1646,7 +1645,7 @@ private fun TypeSpec.Builder.addBuilderBuildFunction(baseType: BaseType) {
          this optimization only applies when calling build() with the array exactly full.
          */
         if (baseType == GENERIC) {
-            suppress("UNCHECKED_CAST")
+            annotation<Suppress>("UNCHECKED_CAST")
             statement(
                 "if (size == values.size) return ${baseType.generatedClassName}(values as Array<%T>)",
                 baseType.type,

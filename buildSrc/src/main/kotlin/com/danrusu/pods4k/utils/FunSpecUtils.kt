@@ -5,19 +5,13 @@ import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeVariableName
 
-internal fun FunSpec.Builder.suppress(warning: String): FunSpec.Builder {
-    return addAnnotation(
-        AnnotationSpec.builder(Suppress::class)
-            .addMember("%S", warning)
-            .build(),
-    )
-}
+internal inline fun <reified T : Annotation> FunSpec.Builder.annotation(vararg members: String): FunSpec.Builder {
+    var builder = AnnotationSpec.builder(T::class)
+    for (member in members) {
+        builder = builder.addMember("%S", member)
+    }
 
-internal inline fun <reified T : Annotation> FunSpec.Builder.addAnnotation(): FunSpec.Builder {
-    return addAnnotation(
-        AnnotationSpec.builder(T::class)
-            .build(),
-    )
+    return addAnnotation(builder.build())
 }
 
 /**

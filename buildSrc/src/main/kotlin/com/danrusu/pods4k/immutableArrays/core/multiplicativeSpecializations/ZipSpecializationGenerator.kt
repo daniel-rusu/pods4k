@@ -2,6 +2,7 @@ package com.danrusu.pods4k.immutableArrays.core.multiplicativeSpecializations
 
 import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.utils.addGenericTypes
+import com.danrusu.pods4k.utils.annotation
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.statement
@@ -94,7 +95,7 @@ private fun FileSpec.Builder.addZipWithTransformFunction(fromType: BaseType, toT
         returns = resultTypeName,
         forceFunctionBody = true,
     ) {
-        addAnnotation(OverloadResolutionByLambdaReturnType::class)
+        annotation<OverloadResolutionByLambdaReturnType>()
         addGenericTypes(fromType.type, valueType)
 
         controlFlow("return ${toType.generatedClassName}(minOf(size, other.size)) { index ->") {
