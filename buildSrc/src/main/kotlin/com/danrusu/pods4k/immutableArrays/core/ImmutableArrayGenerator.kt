@@ -840,8 +840,11 @@ private fun TypeSpec.Builder.addFilterNot(baseType: BaseType) {
         },
         returns = baseType.getGeneratedTypeName(),
     ) {
-        comment("delegate to filterIndexed as that's extremely optimized")
-        statement("return filterIndexed { _, element -> !predicate(element) }")
+        statement("if (isEmpty()) return this")
+        emptyLine()
+        statement("val bitmap = createBitmap()")
+        statement("var resultSize = populateBitmap(bitmap) { _, element -> !predicate(element)}")
+        statement("return select(bitmap, resultSize)")
     }
 }
 

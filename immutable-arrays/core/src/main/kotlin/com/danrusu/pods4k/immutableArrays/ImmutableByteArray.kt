@@ -464,8 +464,11 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
      * Returns an immutable array containing only the elements that don't match the [predicate].
      */
     public inline fun filterNot(crossinline predicate: (element: Byte) -> Boolean): ImmutableByteArray {
-        // delegate to filterIndexed as that's extremely optimized
-        return filterIndexed { _, element -> !predicate(element) }
+        if (isEmpty()) return this
+
+        val bitmap = createBitmap()
+        var resultSize = populateBitmap(bitmap) { _, element -> !predicate(element) }
+        return select(bitmap, resultSize)
     }
 
     /**
