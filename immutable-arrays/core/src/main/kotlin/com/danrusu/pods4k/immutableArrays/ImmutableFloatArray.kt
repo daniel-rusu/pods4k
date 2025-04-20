@@ -36,7 +36,10 @@ import kotlin.sequences.Sequence
  * the backing array are marked inline.  This won't result in code duplication as it's a direct substitution
  * replacing calls to the wrapper with direct calls to the underlying functions on the backing array.
  */
-@Suppress("NOTHING_TO_INLINE")
+@Suppress(
+    "NOTHING_TO_INLINE",
+    "EqualsOrHashCode",
+)
 @JvmInline
 public value class ImmutableFloatArray @PublishedApi internal constructor(
     /**
@@ -447,7 +450,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
         if (isEmpty()) return this
 
         val bitmap = createBitmap()
-        var resultSize = populateBitmap(bitmap) { _, element -> predicate(element) }
+        val resultSize = populateBitmap(bitmap) { _, element -> predicate(element) }
         return select(bitmap, resultSize)
     }
 
@@ -460,7 +463,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
         if (isEmpty()) return this
 
         val bitmap = createBitmap()
-        var resultSize = populateBitmap(bitmap) { index, element -> predicate(index, element) }
+        val resultSize = populateBitmap(bitmap) { index, element -> predicate(index, element) }
         return select(bitmap, resultSize)
     }
 
@@ -471,7 +474,7 @@ public value class ImmutableFloatArray @PublishedApi internal constructor(
         if (isEmpty()) return this
 
         val bitmap = createBitmap()
-        var resultSize = populateBitmap(bitmap) { _, element -> !predicate(element) }
+        val resultSize = populateBitmap(bitmap) { _, element -> !predicate(element) }
         return select(bitmap, resultSize)
     }
 

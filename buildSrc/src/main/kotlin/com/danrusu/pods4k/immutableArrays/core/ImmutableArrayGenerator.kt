@@ -55,7 +55,9 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
     return createFile(ImmutableArrayConfig.packageName, baseType.generatedClassName) {
         declareClass(modifiers = listOf(KModifier.VALUE), name = baseType.generatedClassName) {
             addKdoc(classKdoc)
-            annotation<Suppress>("NOTHING_TO_INLINE")
+            // Submitted bug report about invalid warning for missing equals method:
+            // https://youtrack.jetbrains.com/issue/KTIJ-33857
+            annotation<Suppress>("NOTHING_TO_INLINE", "EqualsOrHashCode")
             annotation<JvmInline>()
             if (baseType == GENERIC) {
                 val typeName = (baseType.type as TypeVariableName).name
@@ -802,7 +804,7 @@ private fun TypeSpec.Builder.addFilter(baseType: BaseType) {
         statement("if (isEmpty()) return this")
         emptyLine()
         statement("val bitmap = createBitmap()")
-        statement("var resultSize = populateBitmap(bitmap) { _, element -> predicate(element)}")
+        statement("val resultSize = populateBitmap(bitmap) { _, element -> predicate(element)}")
         statement("return select(bitmap, resultSize)")
     }
 }
@@ -826,7 +828,7 @@ private fun TypeSpec.Builder.addFilterIndexed(baseType: BaseType) {
         statement("if (isEmpty()) return this")
         emptyLine()
         statement("val bitmap = createBitmap()")
-        statement("var resultSize = populateBitmap(bitmap) { index, element -> predicate(index, element)}")
+        statement("val resultSize = populateBitmap(bitmap) { index, element -> predicate(index, element)}")
         statement("return select(bitmap, resultSize)")
     }
 }
@@ -847,7 +849,7 @@ private fun TypeSpec.Builder.addFilterNot(baseType: BaseType) {
         statement("if (isEmpty()) return this")
         emptyLine()
         statement("val bitmap = createBitmap()")
-        statement("var resultSize = populateBitmap(bitmap) { _, element -> !predicate(element)}")
+        statement("val resultSize = populateBitmap(bitmap) { _, element -> !predicate(element)}")
         statement("return select(bitmap, resultSize)")
     }
 }
