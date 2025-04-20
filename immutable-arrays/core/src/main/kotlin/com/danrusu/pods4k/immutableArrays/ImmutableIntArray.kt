@@ -645,6 +645,13 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     }
 
     /**
+     * Returns the first element having the smallest value according to the provided [comparator] or null if empty.
+     */
+    public fun minWithOrNull(comparator: Comparator<in Int>): Int? {
+        return if (isEmpty()) null else minWith(comparator)
+    }
+
+    /**
      * @return the first element having the largest value according to the provided [comparator].
      * @throws NoSuchElementException if this ImmutableIntArray is empty
      */

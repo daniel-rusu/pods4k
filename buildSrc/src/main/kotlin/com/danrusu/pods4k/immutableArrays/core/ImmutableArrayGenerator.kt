@@ -353,6 +353,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addMaxBy(baseType)
             addMaxByOrNull(baseType)
             addMinWith(baseType)
+            addMinWithOrNull(baseType)
             addMaxWith(baseType)
             addSortedBy(baseType)
             addSortedByDescending(baseType)
@@ -1181,6 +1182,24 @@ private fun TypeSpec.Builder.addMinWith(baseType: BaseType) {
             }
         }
         statement("return minElement")
+    }
+}
+
+private fun TypeSpec.Builder.addMinWithOrNull(baseType: BaseType) {
+    function(
+        kdoc = """
+            Returns the first element having the smallest value according to the provided [comparator] or null if empty.
+        """.trimIndent(),
+        name = "minWithOrNull",
+        parameters = {
+            "comparator"(
+                type = ClassName("kotlin", "Comparator").parameterizedBy(WildcardTypeName.consumerOf(baseType.type)),
+            )
+        },
+        returns = baseType.type.copy(nullable = true),
+        forceFunctionBody = true,
+    ) {
+        statement("return if (isEmpty()) null else minWith(comparator)")
     }
 }
 

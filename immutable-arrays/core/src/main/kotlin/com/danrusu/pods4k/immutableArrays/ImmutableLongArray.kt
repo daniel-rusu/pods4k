@@ -646,6 +646,13 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     }
 
     /**
+     * Returns the first element having the smallest value according to the provided [comparator] or null if empty.
+     */
+    public fun minWithOrNull(comparator: Comparator<in Long>): Long? {
+        return if (isEmpty()) null else minWith(comparator)
+    }
+
+    /**
      * @return the first element having the largest value according to the provided [comparator].
      * @throws NoSuchElementException if this ImmutableLongArray is empty
      */

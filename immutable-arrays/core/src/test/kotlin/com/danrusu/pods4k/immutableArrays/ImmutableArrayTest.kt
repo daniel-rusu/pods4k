@@ -1146,6 +1146,24 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `minWithOrNull validation`() {
+        with(emptyImmutableArray<String>()) {
+            expectThat(minWithOrNull(Comparator.comparing { it.length }))
+                .isNull()
+        }
+
+        with(immutableArrayOf("a")) {
+            expectThat(minWithOrNull(Comparator.comparing { it.length }))
+                .isEqualTo("a")
+        }
+
+        with(immutableArrayOf("aa", "b", "c")) {
+            expectThat(minWithOrNull(Comparator.comparing { it.length }))
+                .isEqualTo("b")
+        }
+    }
+
+    @Test
     fun `maxWith validation`() {
         with(emptyImmutableArray<String>()) {
             expectThrows<NoSuchElementException> { maxWith(Comparator.comparing { it.length }) }
