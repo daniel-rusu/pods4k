@@ -1181,6 +1181,24 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `maxWithOrNull validation`() {
+        with(emptyImmutableArray<String>()) {
+            expectThat(maxWithOrNull(Comparator.comparing { it.length }))
+                .isNull()
+        }
+
+        with(immutableArrayOf("a")) {
+            expectThat(maxWithOrNull(Comparator.comparing { it.length }))
+                .isEqualTo("a")
+        }
+
+        with(immutableArrayOf("a", "bb", "cc")) {
+            expectThat(maxWithOrNull(Comparator.comparing { it.length }))
+                .isEqualTo("bb")
+        }
+    }
+
+    @Test
     fun `sortedBy validation`() {
         with(immutableArrayOf("one")) {
             expectThat(sortedBy { it.length }.referencesSameArrayAs(this))

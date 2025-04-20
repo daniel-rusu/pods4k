@@ -15,6 +15,7 @@ _Date TBD_
 
 **New Features:**
 
+* Add `maxWithOrNull` method
 * Add `minWithOrNull` method
 * Add `maxWith` method
 * Add `minWith` method

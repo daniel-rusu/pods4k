@@ -670,6 +670,13 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     }
 
     /**
+     * Returns the first element having the largest value according to the provided [comparator] or null if empty.
+     */
+    public fun maxWithOrNull(comparator: Comparator<in Long>): Long? {
+        return if (isEmpty()) null else maxWith(comparator)
+    }
+
+    /**
      * Leaves this immutable array as is and returns an ImmutableLongArray with all elements sorted
      * according to the natural sort order of the value returned by the [selector].
      *
