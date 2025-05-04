@@ -320,20 +320,21 @@ private fun FileSpec.Builder.addFilterNotNull() {
         ) {
             addGenericTypes(nonNullType)
             jvmName("filterNotNull", baseType.name)
-            createImmutableArrayBuilder(name = "result", forType = baseType, genericTypeOverride = nonNullType)
-            controlFlow("forEach { value ->") {
-                controlFlow("if (value != null)") {
-                    statement("result.add(value)")
-                }
-            }
+
             if (baseType == GENERIC) {
                 annotation<Suppress>("UNCHECKED_CAST")
                 val castType = baseType.getGeneratedClass().parameterizedBy(nonNullType)
-                statement("if (result.size == size) return this as %T", castType)
-                emptyLine()
+                statement("return filter { it != null } as %T", castType)
+            } else {
+                // don't delegate to filter so that we unbox the values
+                createImmutableArrayBuilder(name = "result", forType = baseType, genericTypeOverride = nonNullType)
+                controlFlow("forEach { value ->") {
+                    controlFlow("if (value != null)") {
+                        statement("result.add(value)")
+                    }
+                }
+                statement("return result.build()")
             }
-
-            statement("return result.build()")
         }
     }
 }

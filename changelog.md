@@ -29,6 +29,10 @@ _Date TBD_
 * Add `min()` extension functions
 * Add `max()` extension functions
 
+**Performance Improvements:**
+
+* Delegate `ImmutableArray<T?>.filterNotNull()` to the optimized `filter` method.
+
 ## 0.7.0
 
 _2025-3-18_

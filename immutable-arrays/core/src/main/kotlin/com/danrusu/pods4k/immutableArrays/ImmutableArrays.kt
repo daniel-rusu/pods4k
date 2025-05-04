@@ -781,15 +781,7 @@ public fun ImmutableDoubleArray.maxOrNull(): Double? = if (isEmpty()) null else 
 @JvmName("filterNotNull_GENERIC")
 @Suppress("UNCHECKED_CAST")
 public fun <T : Any> ImmutableArray<T?>.filterNotNull(): ImmutableArray<T> {
-    val result = ImmutableArray.Builder<T>()
-    forEach { value ->
-        if (value != null) {
-            result.add(value)
-        }
-    }
-    if (result.size == size) return this as ImmutableArray<T>
-
-    return result.build()
+    return filter { it != null } as ImmutableArray<T>
 }
 
 /**
