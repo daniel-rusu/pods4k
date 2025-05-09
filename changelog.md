@@ -31,7 +31,8 @@ _Date TBD_
 
 **Performance Improvements:**
 
-* Delegate `ImmutableArray<T?>.filterNotNull()` to the optimized `filter` method.
+* Update `filter`, `filterNot`, and `filterIndexed` to jump over the 0-bits when traversing the bitmap.
+* Delegate `ImmutableArray<T?>.filterNotNull()` to `filter` in order to take advantage of the bitwise optimizations.
 
 ## 0.7.0
 

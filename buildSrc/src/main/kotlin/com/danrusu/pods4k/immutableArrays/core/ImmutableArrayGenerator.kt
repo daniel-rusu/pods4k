@@ -951,22 +951,17 @@ private fun TypeSpec.Builder.addSelect(baseType: BaseType) {
             statement("val result = ${baseType.backingArrayConstructor}(numOneBits)")
         }
         statement("var resultIndex = 0")
-        statement("var bitmapIndex = 0")
-        statement("var bitIndex = -1")
-        statement("var currentBits = bitmap[0]")
         statement("var originalIndex = 0")
         emptyLine()
-        controlFlow("while (resultIndex < numOneBits)") {
-            controlFlow("if (++bitIndex == 32)") {
-                comment("reached the end of the current bits so get the next 32 bits and reset")
-                statement("currentBits = bitmap[++bitmapIndex]")
-                statement("bitIndex = 0")
+        controlFlow("for (i in 0..<bitmap.size)") {
+            statement("var bits = bitmap[i]")
+            comment("iterate through the 1-bits")
+            controlFlow("while (bits != 0)") {
+                statement("result[resultIndex++] = this[originalIndex + bits.countTrailingZeroBits()]")
+                comment("clear the last 1-bit")
+                statement("bits = bits and (bits - 1)")
             }
-            comment("always copy to avoid branching as resultIndex won't increment if current element isn't included")
-            statement("result[resultIndex] = this[originalIndex++]")
-            comment("increment the resultIndex if the current element should be included")
-            statement("val currentElement = (currentBits ushr bitIndex) and 1")
-            statement("resultIndex += currentElement")
+            statement("originalIndex += 32")
         }
         statement("return ${baseType.generatedClassName}(result)")
     }

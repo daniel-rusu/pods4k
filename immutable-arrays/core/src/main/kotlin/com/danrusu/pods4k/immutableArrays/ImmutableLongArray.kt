@@ -532,22 +532,17 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
 
         val result = LongArray(numOneBits)
         var resultIndex = 0
-        var bitmapIndex = 0
-        var bitIndex = -1
-        var currentBits = bitmap[0]
         var originalIndex = 0
 
-        while (resultIndex < numOneBits) {
-            if (++bitIndex == 32) {
-                // reached the end of the current bits so get the next 32 bits and reset
-                currentBits = bitmap[++bitmapIndex]
-                bitIndex = 0
+        for (i in 0..<bitmap.size) {
+            var bits = bitmap[i]
+            // iterate through the 1-bits
+            while (bits != 0) {
+                result[resultIndex++] = this[originalIndex + bits.countTrailingZeroBits()]
+                // clear the last 1-bit
+                bits = bits and (bits - 1)
             }
-            // always copy to avoid branching as resultIndex won't increment if current element isn't included
-            result[resultIndex] = this[originalIndex++]
-            // increment the resultIndex if the current element should be included
-            val currentElement = (currentBits ushr bitIndex) and 1
-            resultIndex += currentElement
+            originalIndex += 32
         }
         return ImmutableLongArray(result)
     }
