@@ -22,9 +22,9 @@ import kotlin.Pair
 import kotlin.Short
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T, V> ImmutableArray<T>.zip(
@@ -37,8 +37,8 @@ public inline fun <T, V> ImmutableArray<T>.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun <T, R> ImmutableArray<T>.zip(other: ImmutableArray<R>): ImmutableArray<Pair<T, R>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -47,9 +47,9 @@ public infix fun <T, R> ImmutableArray<T>.zip(other: ImmutableArray<R>): Immutab
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.zip(
@@ -62,8 +62,8 @@ public inline fun <T> ImmutableArray<T>.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun <T> ImmutableArray<T>.zip(other: ImmutableBooleanArray): ImmutableArray<Pair<T, Boolean>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -72,9 +72,9 @@ public infix fun <T> ImmutableArray<T>.zip(other: ImmutableBooleanArray): Immuta
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.zip(
@@ -87,8 +87,8 @@ public inline fun <T> ImmutableArray<T>.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun <T> ImmutableArray<T>.zip(other: ImmutableByteArray): ImmutableArray<Pair<T, Byte>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -97,9 +97,9 @@ public infix fun <T> ImmutableArray<T>.zip(other: ImmutableByteArray): Immutable
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.zip(
@@ -112,8 +112,8 @@ public inline fun <T> ImmutableArray<T>.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun <T> ImmutableArray<T>.zip(other: ImmutableCharArray): ImmutableArray<Pair<T, Char>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -122,9 +122,9 @@ public infix fun <T> ImmutableArray<T>.zip(other: ImmutableCharArray): Immutable
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.zip(
@@ -137,8 +137,8 @@ public inline fun <T> ImmutableArray<T>.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun <T> ImmutableArray<T>.zip(other: ImmutableShortArray): ImmutableArray<Pair<T, Short>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -147,9 +147,9 @@ public infix fun <T> ImmutableArray<T>.zip(other: ImmutableShortArray): Immutabl
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.zip(
@@ -162,8 +162,8 @@ public inline fun <T> ImmutableArray<T>.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun <T> ImmutableArray<T>.zip(other: ImmutableIntArray): ImmutableArray<Pair<T, Int>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -172,9 +172,9 @@ public infix fun <T> ImmutableArray<T>.zip(other: ImmutableIntArray): ImmutableA
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.zip(
@@ -187,8 +187,8 @@ public inline fun <T> ImmutableArray<T>.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun <T> ImmutableArray<T>.zip(other: ImmutableLongArray): ImmutableArray<Pair<T, Long>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -197,9 +197,9 @@ public infix fun <T> ImmutableArray<T>.zip(other: ImmutableLongArray): Immutable
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.zip(
@@ -212,8 +212,8 @@ public inline fun <T> ImmutableArray<T>.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun <T> ImmutableArray<T>.zip(other: ImmutableFloatArray): ImmutableArray<Pair<T, Float>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -222,9 +222,9 @@ public infix fun <T> ImmutableArray<T>.zip(other: ImmutableFloatArray): Immutabl
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.zip(
@@ -237,8 +237,8 @@ public inline fun <T> ImmutableArray<T>.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun <T> ImmutableArray<T>.zip(other: ImmutableDoubleArray): ImmutableArray<Pair<T, Double>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -247,9 +247,9 @@ public infix fun <T> ImmutableArray<T>.zip(other: ImmutableDoubleArray): Immutab
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <V> ImmutableBooleanArray.zip(
@@ -262,8 +262,8 @@ public inline fun <V> ImmutableBooleanArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun <R> ImmutableBooleanArray.zip(other: ImmutableArray<R>): ImmutableArray<Pair<Boolean, R>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -272,9 +272,9 @@ public infix fun <R> ImmutableBooleanArray.zip(other: ImmutableArray<R>): Immuta
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.zip(
@@ -287,8 +287,8 @@ public inline fun ImmutableBooleanArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableBooleanArray.zip(other: ImmutableBooleanArray): ImmutableArray<Pair<Boolean, Boolean>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -297,9 +297,9 @@ public infix fun ImmutableBooleanArray.zip(other: ImmutableBooleanArray): Immuta
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.zip(
@@ -312,8 +312,8 @@ public inline fun ImmutableBooleanArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableBooleanArray.zip(other: ImmutableByteArray): ImmutableArray<Pair<Boolean, Byte>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -322,9 +322,9 @@ public infix fun ImmutableBooleanArray.zip(other: ImmutableByteArray): Immutable
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.zip(
@@ -337,8 +337,8 @@ public inline fun ImmutableBooleanArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableBooleanArray.zip(other: ImmutableCharArray): ImmutableArray<Pair<Boolean, Char>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -347,9 +347,9 @@ public infix fun ImmutableBooleanArray.zip(other: ImmutableCharArray): Immutable
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.zip(
@@ -362,8 +362,8 @@ public inline fun ImmutableBooleanArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableBooleanArray.zip(other: ImmutableShortArray): ImmutableArray<Pair<Boolean, Short>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -372,9 +372,9 @@ public infix fun ImmutableBooleanArray.zip(other: ImmutableShortArray): Immutabl
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.zip(
@@ -387,8 +387,8 @@ public inline fun ImmutableBooleanArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableBooleanArray.zip(other: ImmutableIntArray): ImmutableArray<Pair<Boolean, Int>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -397,9 +397,9 @@ public infix fun ImmutableBooleanArray.zip(other: ImmutableIntArray): ImmutableA
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.zip(
@@ -412,8 +412,8 @@ public inline fun ImmutableBooleanArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableBooleanArray.zip(other: ImmutableLongArray): ImmutableArray<Pair<Boolean, Long>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -422,9 +422,9 @@ public infix fun ImmutableBooleanArray.zip(other: ImmutableLongArray): Immutable
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.zip(
@@ -437,8 +437,8 @@ public inline fun ImmutableBooleanArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableBooleanArray.zip(other: ImmutableFloatArray): ImmutableArray<Pair<Boolean, Float>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -447,9 +447,9 @@ public infix fun ImmutableBooleanArray.zip(other: ImmutableFloatArray): Immutabl
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.zip(
@@ -462,8 +462,8 @@ public inline fun ImmutableBooleanArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableBooleanArray.zip(other: ImmutableDoubleArray): ImmutableArray<Pair<Boolean, Double>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -472,9 +472,9 @@ public infix fun ImmutableBooleanArray.zip(other: ImmutableDoubleArray): Immutab
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <V> ImmutableByteArray.zip(
@@ -487,8 +487,8 @@ public inline fun <V> ImmutableByteArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun <R> ImmutableByteArray.zip(other: ImmutableArray<R>): ImmutableArray<Pair<Byte, R>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -497,9 +497,9 @@ public infix fun <R> ImmutableByteArray.zip(other: ImmutableArray<R>): Immutable
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.zip(
@@ -512,8 +512,8 @@ public inline fun ImmutableByteArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableByteArray.zip(other: ImmutableBooleanArray): ImmutableArray<Pair<Byte, Boolean>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -522,9 +522,9 @@ public infix fun ImmutableByteArray.zip(other: ImmutableBooleanArray): Immutable
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.zip(
@@ -537,8 +537,8 @@ public inline fun ImmutableByteArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableByteArray.zip(other: ImmutableByteArray): ImmutableArray<Pair<Byte, Byte>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -547,9 +547,9 @@ public infix fun ImmutableByteArray.zip(other: ImmutableByteArray): ImmutableArr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.zip(
@@ -562,8 +562,8 @@ public inline fun ImmutableByteArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableByteArray.zip(other: ImmutableCharArray): ImmutableArray<Pair<Byte, Char>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -572,9 +572,9 @@ public infix fun ImmutableByteArray.zip(other: ImmutableCharArray): ImmutableArr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.zip(
@@ -587,8 +587,8 @@ public inline fun ImmutableByteArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableByteArray.zip(other: ImmutableShortArray): ImmutableArray<Pair<Byte, Short>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -597,9 +597,9 @@ public infix fun ImmutableByteArray.zip(other: ImmutableShortArray): ImmutableAr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.zip(
@@ -612,8 +612,8 @@ public inline fun ImmutableByteArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableByteArray.zip(other: ImmutableIntArray): ImmutableArray<Pair<Byte, Int>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -622,9 +622,9 @@ public infix fun ImmutableByteArray.zip(other: ImmutableIntArray): ImmutableArra
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.zip(
@@ -637,8 +637,8 @@ public inline fun ImmutableByteArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableByteArray.zip(other: ImmutableLongArray): ImmutableArray<Pair<Byte, Long>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -647,9 +647,9 @@ public infix fun ImmutableByteArray.zip(other: ImmutableLongArray): ImmutableArr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.zip(
@@ -662,8 +662,8 @@ public inline fun ImmutableByteArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableByteArray.zip(other: ImmutableFloatArray): ImmutableArray<Pair<Byte, Float>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -672,9 +672,9 @@ public infix fun ImmutableByteArray.zip(other: ImmutableFloatArray): ImmutableAr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.zip(
@@ -687,8 +687,8 @@ public inline fun ImmutableByteArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableByteArray.zip(other: ImmutableDoubleArray): ImmutableArray<Pair<Byte, Double>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -697,9 +697,9 @@ public infix fun ImmutableByteArray.zip(other: ImmutableDoubleArray): ImmutableA
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <V> ImmutableCharArray.zip(
@@ -712,8 +712,8 @@ public inline fun <V> ImmutableCharArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun <R> ImmutableCharArray.zip(other: ImmutableArray<R>): ImmutableArray<Pair<Char, R>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -722,9 +722,9 @@ public infix fun <R> ImmutableCharArray.zip(other: ImmutableArray<R>): Immutable
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.zip(
@@ -737,8 +737,8 @@ public inline fun ImmutableCharArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableCharArray.zip(other: ImmutableBooleanArray): ImmutableArray<Pair<Char, Boolean>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -747,9 +747,9 @@ public infix fun ImmutableCharArray.zip(other: ImmutableBooleanArray): Immutable
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.zip(
@@ -762,8 +762,8 @@ public inline fun ImmutableCharArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableCharArray.zip(other: ImmutableByteArray): ImmutableArray<Pair<Char, Byte>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -772,9 +772,9 @@ public infix fun ImmutableCharArray.zip(other: ImmutableByteArray): ImmutableArr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.zip(
@@ -787,8 +787,8 @@ public inline fun ImmutableCharArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableCharArray.zip(other: ImmutableCharArray): ImmutableArray<Pair<Char, Char>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -797,9 +797,9 @@ public infix fun ImmutableCharArray.zip(other: ImmutableCharArray): ImmutableArr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.zip(
@@ -812,8 +812,8 @@ public inline fun ImmutableCharArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableCharArray.zip(other: ImmutableShortArray): ImmutableArray<Pair<Char, Short>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -822,9 +822,9 @@ public infix fun ImmutableCharArray.zip(other: ImmutableShortArray): ImmutableAr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.zip(
@@ -837,8 +837,8 @@ public inline fun ImmutableCharArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableCharArray.zip(other: ImmutableIntArray): ImmutableArray<Pair<Char, Int>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -847,9 +847,9 @@ public infix fun ImmutableCharArray.zip(other: ImmutableIntArray): ImmutableArra
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.zip(
@@ -862,8 +862,8 @@ public inline fun ImmutableCharArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableCharArray.zip(other: ImmutableLongArray): ImmutableArray<Pair<Char, Long>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -872,9 +872,9 @@ public infix fun ImmutableCharArray.zip(other: ImmutableLongArray): ImmutableArr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.zip(
@@ -887,8 +887,8 @@ public inline fun ImmutableCharArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableCharArray.zip(other: ImmutableFloatArray): ImmutableArray<Pair<Char, Float>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -897,9 +897,9 @@ public infix fun ImmutableCharArray.zip(other: ImmutableFloatArray): ImmutableAr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.zip(
@@ -912,8 +912,8 @@ public inline fun ImmutableCharArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableCharArray.zip(other: ImmutableDoubleArray): ImmutableArray<Pair<Char, Double>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -922,9 +922,9 @@ public infix fun ImmutableCharArray.zip(other: ImmutableDoubleArray): ImmutableA
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <V> ImmutableShortArray.zip(
@@ -937,8 +937,8 @@ public inline fun <V> ImmutableShortArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun <R> ImmutableShortArray.zip(other: ImmutableArray<R>): ImmutableArray<Pair<Short, R>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -947,9 +947,9 @@ public infix fun <R> ImmutableShortArray.zip(other: ImmutableArray<R>): Immutabl
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.zip(
@@ -962,8 +962,8 @@ public inline fun ImmutableShortArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableShortArray.zip(other: ImmutableBooleanArray): ImmutableArray<Pair<Short, Boolean>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -972,9 +972,9 @@ public infix fun ImmutableShortArray.zip(other: ImmutableBooleanArray): Immutabl
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.zip(
@@ -987,8 +987,8 @@ public inline fun ImmutableShortArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableShortArray.zip(other: ImmutableByteArray): ImmutableArray<Pair<Short, Byte>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -997,9 +997,9 @@ public infix fun ImmutableShortArray.zip(other: ImmutableByteArray): ImmutableAr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.zip(
@@ -1012,8 +1012,8 @@ public inline fun ImmutableShortArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableShortArray.zip(other: ImmutableCharArray): ImmutableArray<Pair<Short, Char>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1022,9 +1022,9 @@ public infix fun ImmutableShortArray.zip(other: ImmutableCharArray): ImmutableAr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.zip(
@@ -1037,8 +1037,8 @@ public inline fun ImmutableShortArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableShortArray.zip(other: ImmutableShortArray): ImmutableArray<Pair<Short, Short>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1047,9 +1047,9 @@ public infix fun ImmutableShortArray.zip(other: ImmutableShortArray): ImmutableA
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.zip(
@@ -1062,8 +1062,8 @@ public inline fun ImmutableShortArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableShortArray.zip(other: ImmutableIntArray): ImmutableArray<Pair<Short, Int>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1072,9 +1072,9 @@ public infix fun ImmutableShortArray.zip(other: ImmutableIntArray): ImmutableArr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.zip(
@@ -1087,8 +1087,8 @@ public inline fun ImmutableShortArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableShortArray.zip(other: ImmutableLongArray): ImmutableArray<Pair<Short, Long>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1097,9 +1097,9 @@ public infix fun ImmutableShortArray.zip(other: ImmutableLongArray): ImmutableAr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.zip(
@@ -1112,8 +1112,8 @@ public inline fun ImmutableShortArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableShortArray.zip(other: ImmutableFloatArray): ImmutableArray<Pair<Short, Float>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1122,9 +1122,9 @@ public infix fun ImmutableShortArray.zip(other: ImmutableFloatArray): ImmutableA
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.zip(
@@ -1137,8 +1137,8 @@ public inline fun ImmutableShortArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableShortArray.zip(other: ImmutableDoubleArray): ImmutableArray<Pair<Short, Double>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1147,9 +1147,9 @@ public infix fun ImmutableShortArray.zip(other: ImmutableDoubleArray): Immutable
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <V> ImmutableIntArray.zip(
@@ -1162,8 +1162,8 @@ public inline fun <V> ImmutableIntArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun <R> ImmutableIntArray.zip(other: ImmutableArray<R>): ImmutableArray<Pair<Int, R>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1172,9 +1172,9 @@ public infix fun <R> ImmutableIntArray.zip(other: ImmutableArray<R>): ImmutableA
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.zip(
@@ -1187,8 +1187,8 @@ public inline fun ImmutableIntArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableIntArray.zip(other: ImmutableBooleanArray): ImmutableArray<Pair<Int, Boolean>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1197,9 +1197,9 @@ public infix fun ImmutableIntArray.zip(other: ImmutableBooleanArray): ImmutableA
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.zip(
@@ -1212,8 +1212,8 @@ public inline fun ImmutableIntArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableIntArray.zip(other: ImmutableByteArray): ImmutableArray<Pair<Int, Byte>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1222,9 +1222,9 @@ public infix fun ImmutableIntArray.zip(other: ImmutableByteArray): ImmutableArra
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.zip(
@@ -1237,8 +1237,8 @@ public inline fun ImmutableIntArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableIntArray.zip(other: ImmutableCharArray): ImmutableArray<Pair<Int, Char>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1247,9 +1247,9 @@ public infix fun ImmutableIntArray.zip(other: ImmutableCharArray): ImmutableArra
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.zip(
@@ -1262,8 +1262,8 @@ public inline fun ImmutableIntArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableIntArray.zip(other: ImmutableShortArray): ImmutableArray<Pair<Int, Short>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1272,9 +1272,9 @@ public infix fun ImmutableIntArray.zip(other: ImmutableShortArray): ImmutableArr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.zip(
@@ -1287,8 +1287,8 @@ public inline fun ImmutableIntArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableIntArray.zip(other: ImmutableIntArray): ImmutableArray<Pair<Int, Int>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1297,9 +1297,9 @@ public infix fun ImmutableIntArray.zip(other: ImmutableIntArray): ImmutableArray
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.zip(
@@ -1312,8 +1312,8 @@ public inline fun ImmutableIntArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableIntArray.zip(other: ImmutableLongArray): ImmutableArray<Pair<Int, Long>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1322,9 +1322,9 @@ public infix fun ImmutableIntArray.zip(other: ImmutableLongArray): ImmutableArra
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.zip(
@@ -1337,8 +1337,8 @@ public inline fun ImmutableIntArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableIntArray.zip(other: ImmutableFloatArray): ImmutableArray<Pair<Int, Float>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1347,9 +1347,9 @@ public infix fun ImmutableIntArray.zip(other: ImmutableFloatArray): ImmutableArr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.zip(
@@ -1362,8 +1362,8 @@ public inline fun ImmutableIntArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableIntArray.zip(other: ImmutableDoubleArray): ImmutableArray<Pair<Int, Double>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1372,9 +1372,9 @@ public infix fun ImmutableIntArray.zip(other: ImmutableDoubleArray): ImmutableAr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <V> ImmutableLongArray.zip(
@@ -1387,8 +1387,8 @@ public inline fun <V> ImmutableLongArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun <R> ImmutableLongArray.zip(other: ImmutableArray<R>): ImmutableArray<Pair<Long, R>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1397,9 +1397,9 @@ public infix fun <R> ImmutableLongArray.zip(other: ImmutableArray<R>): Immutable
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.zip(
@@ -1412,8 +1412,8 @@ public inline fun ImmutableLongArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableLongArray.zip(other: ImmutableBooleanArray): ImmutableArray<Pair<Long, Boolean>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1422,9 +1422,9 @@ public infix fun ImmutableLongArray.zip(other: ImmutableBooleanArray): Immutable
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.zip(
@@ -1437,8 +1437,8 @@ public inline fun ImmutableLongArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableLongArray.zip(other: ImmutableByteArray): ImmutableArray<Pair<Long, Byte>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1447,9 +1447,9 @@ public infix fun ImmutableLongArray.zip(other: ImmutableByteArray): ImmutableArr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.zip(
@@ -1462,8 +1462,8 @@ public inline fun ImmutableLongArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableLongArray.zip(other: ImmutableCharArray): ImmutableArray<Pair<Long, Char>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1472,9 +1472,9 @@ public infix fun ImmutableLongArray.zip(other: ImmutableCharArray): ImmutableArr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.zip(
@@ -1487,8 +1487,8 @@ public inline fun ImmutableLongArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableLongArray.zip(other: ImmutableShortArray): ImmutableArray<Pair<Long, Short>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1497,9 +1497,9 @@ public infix fun ImmutableLongArray.zip(other: ImmutableShortArray): ImmutableAr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.zip(
@@ -1512,8 +1512,8 @@ public inline fun ImmutableLongArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableLongArray.zip(other: ImmutableIntArray): ImmutableArray<Pair<Long, Int>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1522,9 +1522,9 @@ public infix fun ImmutableLongArray.zip(other: ImmutableIntArray): ImmutableArra
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.zip(
@@ -1537,8 +1537,8 @@ public inline fun ImmutableLongArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableLongArray.zip(other: ImmutableLongArray): ImmutableArray<Pair<Long, Long>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1547,9 +1547,9 @@ public infix fun ImmutableLongArray.zip(other: ImmutableLongArray): ImmutableArr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.zip(
@@ -1562,8 +1562,8 @@ public inline fun ImmutableLongArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableLongArray.zip(other: ImmutableFloatArray): ImmutableArray<Pair<Long, Float>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1572,9 +1572,9 @@ public infix fun ImmutableLongArray.zip(other: ImmutableFloatArray): ImmutableAr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.zip(
@@ -1587,8 +1587,8 @@ public inline fun ImmutableLongArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableLongArray.zip(other: ImmutableDoubleArray): ImmutableArray<Pair<Long, Double>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1597,9 +1597,9 @@ public infix fun ImmutableLongArray.zip(other: ImmutableDoubleArray): ImmutableA
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <V> ImmutableFloatArray.zip(
@@ -1612,8 +1612,8 @@ public inline fun <V> ImmutableFloatArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun <R> ImmutableFloatArray.zip(other: ImmutableArray<R>): ImmutableArray<Pair<Float, R>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1622,9 +1622,9 @@ public infix fun <R> ImmutableFloatArray.zip(other: ImmutableArray<R>): Immutabl
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.zip(
@@ -1637,8 +1637,8 @@ public inline fun ImmutableFloatArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableFloatArray.zip(other: ImmutableBooleanArray): ImmutableArray<Pair<Float, Boolean>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1647,9 +1647,9 @@ public infix fun ImmutableFloatArray.zip(other: ImmutableBooleanArray): Immutabl
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.zip(
@@ -1662,8 +1662,8 @@ public inline fun ImmutableFloatArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableFloatArray.zip(other: ImmutableByteArray): ImmutableArray<Pair<Float, Byte>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1672,9 +1672,9 @@ public infix fun ImmutableFloatArray.zip(other: ImmutableByteArray): ImmutableAr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.zip(
@@ -1687,8 +1687,8 @@ public inline fun ImmutableFloatArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableFloatArray.zip(other: ImmutableCharArray): ImmutableArray<Pair<Float, Char>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1697,9 +1697,9 @@ public infix fun ImmutableFloatArray.zip(other: ImmutableCharArray): ImmutableAr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.zip(
@@ -1712,8 +1712,8 @@ public inline fun ImmutableFloatArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableFloatArray.zip(other: ImmutableShortArray): ImmutableArray<Pair<Float, Short>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1722,9 +1722,9 @@ public infix fun ImmutableFloatArray.zip(other: ImmutableShortArray): ImmutableA
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.zip(
@@ -1737,8 +1737,8 @@ public inline fun ImmutableFloatArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableFloatArray.zip(other: ImmutableIntArray): ImmutableArray<Pair<Float, Int>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1747,9 +1747,9 @@ public infix fun ImmutableFloatArray.zip(other: ImmutableIntArray): ImmutableArr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.zip(
@@ -1762,8 +1762,8 @@ public inline fun ImmutableFloatArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableFloatArray.zip(other: ImmutableLongArray): ImmutableArray<Pair<Float, Long>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1772,9 +1772,9 @@ public infix fun ImmutableFloatArray.zip(other: ImmutableLongArray): ImmutableAr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.zip(
@@ -1787,8 +1787,8 @@ public inline fun ImmutableFloatArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableFloatArray.zip(other: ImmutableFloatArray): ImmutableArray<Pair<Float, Float>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1797,9 +1797,9 @@ public infix fun ImmutableFloatArray.zip(other: ImmutableFloatArray): ImmutableA
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.zip(
@@ -1812,8 +1812,8 @@ public inline fun ImmutableFloatArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableFloatArray.zip(other: ImmutableDoubleArray): ImmutableArray<Pair<Float, Double>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1822,9 +1822,9 @@ public infix fun ImmutableFloatArray.zip(other: ImmutableDoubleArray): Immutable
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <V> ImmutableDoubleArray.zip(
@@ -1837,8 +1837,8 @@ public inline fun <V> ImmutableDoubleArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun <R> ImmutableDoubleArray.zip(other: ImmutableArray<R>): ImmutableArray<Pair<Double, R>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1847,9 +1847,9 @@ public infix fun <R> ImmutableDoubleArray.zip(other: ImmutableArray<R>): Immutab
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.zip(
@@ -1862,8 +1862,8 @@ public inline fun ImmutableDoubleArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableDoubleArray.zip(other: ImmutableBooleanArray): ImmutableArray<Pair<Double, Boolean>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1872,9 +1872,9 @@ public infix fun ImmutableDoubleArray.zip(other: ImmutableBooleanArray): Immutab
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.zip(
@@ -1887,8 +1887,8 @@ public inline fun ImmutableDoubleArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableDoubleArray.zip(other: ImmutableByteArray): ImmutableArray<Pair<Double, Byte>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1897,9 +1897,9 @@ public infix fun ImmutableDoubleArray.zip(other: ImmutableByteArray): ImmutableA
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.zip(
@@ -1912,8 +1912,8 @@ public inline fun ImmutableDoubleArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableDoubleArray.zip(other: ImmutableCharArray): ImmutableArray<Pair<Double, Char>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1922,9 +1922,9 @@ public infix fun ImmutableDoubleArray.zip(other: ImmutableCharArray): ImmutableA
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.zip(
@@ -1937,8 +1937,8 @@ public inline fun ImmutableDoubleArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableDoubleArray.zip(other: ImmutableShortArray): ImmutableArray<Pair<Double, Short>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1947,9 +1947,9 @@ public infix fun ImmutableDoubleArray.zip(other: ImmutableShortArray): Immutable
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.zip(
@@ -1962,8 +1962,8 @@ public inline fun ImmutableDoubleArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableDoubleArray.zip(other: ImmutableIntArray): ImmutableArray<Pair<Double, Int>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1972,9 +1972,9 @@ public infix fun ImmutableDoubleArray.zip(other: ImmutableIntArray): ImmutableAr
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.zip(
@@ -1987,8 +1987,8 @@ public inline fun ImmutableDoubleArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableDoubleArray.zip(other: ImmutableLongArray): ImmutableArray<Pair<Double, Long>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -1997,9 +1997,9 @@ public infix fun ImmutableDoubleArray.zip(other: ImmutableLongArray): ImmutableA
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.zip(
@@ -2012,8 +2012,8 @@ public inline fun ImmutableDoubleArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableDoubleArray.zip(other: ImmutableFloatArray): ImmutableArray<Pair<Double, Float>> {
     return ImmutableArray(minOf(size, other.size)) { index ->
@@ -2022,9 +2022,9 @@ public infix fun ImmutableDoubleArray.zip(other: ImmutableFloatArray): Immutable
 }
 
 /**
- * Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+ * Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
  * the provided transform function applied to each pair of elements. The result has the length of the shortest
- * immutable array.
+ * Immutable Array.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.zip(
@@ -2037,8 +2037,8 @@ public inline fun ImmutableDoubleArray.zip(
 }
 
 /**
- * Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
- * result has the length of the shortest immutable array.
+ * Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+ * result has the length of the shortest Immutable Array.
  */
 public infix fun ImmutableDoubleArray.zip(other: ImmutableDoubleArray): ImmutableArray<Pair<Double, Double>> {
     return ImmutableArray(minOf(size, other.size)) { index ->

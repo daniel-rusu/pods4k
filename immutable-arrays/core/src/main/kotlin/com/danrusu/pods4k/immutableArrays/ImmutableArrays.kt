@@ -776,7 +776,7 @@ public fun ImmutableFloatArray.maxOrNull(): Float? = if (isEmpty()) null else ma
 public fun ImmutableDoubleArray.maxOrNull(): Double? = if (isEmpty()) null else max()
 
 /**
- * Returns an immutable array containing only the non-null elements
+ * Returns an Immutable Array containing only the non-null elements
  */
 @JvmName("filterNotNull_GENERIC")
 @Suppress("UNCHECKED_CAST")
@@ -785,7 +785,7 @@ public fun <T : Any> ImmutableArray<T?>.filterNotNull(): ImmutableArray<T> {
 }
 
 /**
- * Returns an immutable array containing only the non-null elements
+ * Returns an Immutable Array containing only the non-null elements
  */
 @JvmName("filterNotNull_BOOLEAN")
 public fun ImmutableArray<Boolean?>.filterNotNull(): ImmutableBooleanArray {
@@ -799,7 +799,7 @@ public fun ImmutableArray<Boolean?>.filterNotNull(): ImmutableBooleanArray {
 }
 
 /**
- * Returns an immutable array containing only the non-null elements
+ * Returns an Immutable Array containing only the non-null elements
  */
 @JvmName("filterNotNull_BYTE")
 public fun ImmutableArray<Byte?>.filterNotNull(): ImmutableByteArray {
@@ -813,7 +813,7 @@ public fun ImmutableArray<Byte?>.filterNotNull(): ImmutableByteArray {
 }
 
 /**
- * Returns an immutable array containing only the non-null elements
+ * Returns an Immutable Array containing only the non-null elements
  */
 @JvmName("filterNotNull_CHAR")
 public fun ImmutableArray<Char?>.filterNotNull(): ImmutableCharArray {
@@ -827,7 +827,7 @@ public fun ImmutableArray<Char?>.filterNotNull(): ImmutableCharArray {
 }
 
 /**
- * Returns an immutable array containing only the non-null elements
+ * Returns an Immutable Array containing only the non-null elements
  */
 @JvmName("filterNotNull_SHORT")
 public fun ImmutableArray<Short?>.filterNotNull(): ImmutableShortArray {
@@ -841,7 +841,7 @@ public fun ImmutableArray<Short?>.filterNotNull(): ImmutableShortArray {
 }
 
 /**
- * Returns an immutable array containing only the non-null elements
+ * Returns an Immutable Array containing only the non-null elements
  */
 @JvmName("filterNotNull_INT")
 public fun ImmutableArray<Int?>.filterNotNull(): ImmutableIntArray {
@@ -855,7 +855,7 @@ public fun ImmutableArray<Int?>.filterNotNull(): ImmutableIntArray {
 }
 
 /**
- * Returns an immutable array containing only the non-null elements
+ * Returns an Immutable Array containing only the non-null elements
  */
 @JvmName("filterNotNull_LONG")
 public fun ImmutableArray<Long?>.filterNotNull(): ImmutableLongArray {
@@ -869,7 +869,7 @@ public fun ImmutableArray<Long?>.filterNotNull(): ImmutableLongArray {
 }
 
 /**
- * Returns an immutable array containing only the non-null elements
+ * Returns an Immutable Array containing only the non-null elements
  */
 @JvmName("filterNotNull_FLOAT")
 public fun ImmutableArray<Float?>.filterNotNull(): ImmutableFloatArray {
@@ -883,7 +883,7 @@ public fun ImmutableArray<Float?>.filterNotNull(): ImmutableFloatArray {
 }
 
 /**
- * Returns an immutable array containing only the non-null elements
+ * Returns an Immutable Array containing only the non-null elements
  */
 @JvmName("filterNotNull_DOUBLE")
 public fun ImmutableArray<Double?>.filterNotNull(): ImmutableDoubleArray {
@@ -897,7 +897,7 @@ public fun ImmutableArray<Double?>.filterNotNull(): ImmutableDoubleArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableArray] with all elements sorted
+ * Leaves [this] Immutable Array as is and returns an [ImmutableArray] with all elements sorted
  * according to their natural sort order.
  *
  * The sort is _stable_ so equal elements preserve their order relative to each other after sorting.
@@ -912,7 +912,7 @@ public fun <T : Comparable<T>> ImmutableArray<T>.sorted(): ImmutableArray<T> {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableBooleanArray] with all elements sorted
+ * Leaves [this] Immutable Array as is and returns an [ImmutableBooleanArray] with all elements sorted
  * according to their natural sort order.
  */
 public fun ImmutableBooleanArray.sorted(): ImmutableBooleanArray {
@@ -931,7 +931,7 @@ public fun ImmutableBooleanArray.sorted(): ImmutableBooleanArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableByteArray] with all elements sorted
+ * Leaves [this] Immutable Array as is and returns an [ImmutableByteArray] with all elements sorted
  * according to their natural sort order.
  */
 public fun ImmutableByteArray.sorted(): ImmutableByteArray {
@@ -943,7 +943,7 @@ public fun ImmutableByteArray.sorted(): ImmutableByteArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableCharArray] with all elements sorted
+ * Leaves [this] Immutable Array as is and returns an [ImmutableCharArray] with all elements sorted
  * according to their natural sort order.
  */
 public fun ImmutableCharArray.sorted(): ImmutableCharArray {
@@ -955,7 +955,7 @@ public fun ImmutableCharArray.sorted(): ImmutableCharArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableShortArray] with all elements sorted
+ * Leaves [this] Immutable Array as is and returns an [ImmutableShortArray] with all elements sorted
  * according to their natural sort order.
  */
 public fun ImmutableShortArray.sorted(): ImmutableShortArray {
@@ -967,7 +967,7 @@ public fun ImmutableShortArray.sorted(): ImmutableShortArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableIntArray] with all elements sorted
+ * Leaves [this] Immutable Array as is and returns an [ImmutableIntArray] with all elements sorted
  * according to their natural sort order.
  */
 public fun ImmutableIntArray.sorted(): ImmutableIntArray {
@@ -979,7 +979,7 @@ public fun ImmutableIntArray.sorted(): ImmutableIntArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableLongArray] with all elements sorted
+ * Leaves [this] Immutable Array as is and returns an [ImmutableLongArray] with all elements sorted
  * according to their natural sort order.
  */
 public fun ImmutableLongArray.sorted(): ImmutableLongArray {
@@ -991,7 +991,7 @@ public fun ImmutableLongArray.sorted(): ImmutableLongArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableFloatArray] with all elements sorted
+ * Leaves [this] Immutable Array as is and returns an [ImmutableFloatArray] with all elements sorted
  * according to their natural sort order.
  */
 public fun ImmutableFloatArray.sorted(): ImmutableFloatArray {
@@ -1003,7 +1003,7 @@ public fun ImmutableFloatArray.sorted(): ImmutableFloatArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableDoubleArray] with all elements sorted
+ * Leaves [this] Immutable Array as is and returns an [ImmutableDoubleArray] with all elements sorted
  * according to their natural sort order.
  */
 public fun ImmutableDoubleArray.sorted(): ImmutableDoubleArray {
@@ -1015,7 +1015,7 @@ public fun ImmutableDoubleArray.sorted(): ImmutableDoubleArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableArray] with all elements sorted
+ * Leaves [this] Immutable Array as is and returns an [ImmutableArray] with all elements sorted
  * according to their reverse natural sort order.
  *
  * The sort is _stable_ so equal elements preserve their order relative to each other after sorting.
@@ -1027,7 +1027,7 @@ public fun <T : Comparable<T>> ImmutableArray<T>.sortedDescending(): ImmutableAr
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableBooleanArray] with all elements sorted
+ * Leaves [this] Immutable Array as is and returns an [ImmutableBooleanArray] with all elements sorted
  * according to their reverse natural sort order.
  */
 public fun ImmutableBooleanArray.sortedDescending(): ImmutableBooleanArray {
@@ -1046,7 +1046,7 @@ public fun ImmutableBooleanArray.sortedDescending(): ImmutableBooleanArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableByteArray] with all elements sorted
+ * Leaves [this] Immutable Array as is and returns an [ImmutableByteArray] with all elements sorted
  * according to their reverse natural sort order.
  */
 public fun ImmutableByteArray.sortedDescending(): ImmutableByteArray {
@@ -1059,7 +1059,7 @@ public fun ImmutableByteArray.sortedDescending(): ImmutableByteArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableCharArray] with all elements sorted
+ * Leaves [this] Immutable Array as is and returns an [ImmutableCharArray] with all elements sorted
  * according to their reverse natural sort order.
  */
 public fun ImmutableCharArray.sortedDescending(): ImmutableCharArray {
@@ -1072,7 +1072,7 @@ public fun ImmutableCharArray.sortedDescending(): ImmutableCharArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableShortArray] with all elements sorted
+ * Leaves [this] Immutable Array as is and returns an [ImmutableShortArray] with all elements sorted
  * according to their reverse natural sort order.
  */
 public fun ImmutableShortArray.sortedDescending(): ImmutableShortArray {
@@ -1085,7 +1085,7 @@ public fun ImmutableShortArray.sortedDescending(): ImmutableShortArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableIntArray] with all elements sorted
+ * Leaves [this] Immutable Array as is and returns an [ImmutableIntArray] with all elements sorted
  * according to their reverse natural sort order.
  */
 public fun ImmutableIntArray.sortedDescending(): ImmutableIntArray {
@@ -1098,7 +1098,7 @@ public fun ImmutableIntArray.sortedDescending(): ImmutableIntArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableLongArray] with all elements sorted
+ * Leaves [this] Immutable Array as is and returns an [ImmutableLongArray] with all elements sorted
  * according to their reverse natural sort order.
  */
 public fun ImmutableLongArray.sortedDescending(): ImmutableLongArray {
@@ -1111,7 +1111,7 @@ public fun ImmutableLongArray.sortedDescending(): ImmutableLongArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableFloatArray] with all elements sorted
+ * Leaves [this] Immutable Array as is and returns an [ImmutableFloatArray] with all elements sorted
  * according to their reverse natural sort order.
  */
 public fun ImmutableFloatArray.sortedDescending(): ImmutableFloatArray {
@@ -1124,7 +1124,7 @@ public fun ImmutableFloatArray.sortedDescending(): ImmutableFloatArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableDoubleArray] with all elements sorted
+ * Leaves [this] Immutable Array as is and returns an [ImmutableDoubleArray] with all elements sorted
  * according to their reverse natural sort order.
  */
 public fun ImmutableDoubleArray.sortedDescending(): ImmutableDoubleArray {
@@ -1137,7 +1137,7 @@ public fun ImmutableDoubleArray.sortedDescending(): ImmutableDoubleArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableArray] with the elements of [this]
+ * Leaves [this] Immutable Array as is and returns an [ImmutableArray] with the elements of [this]
  * followed by the elements of [other]
  */
 @Suppress("UNCHECKED_CAST")
@@ -1148,7 +1148,7 @@ public operator fun <T> ImmutableArray<T>.plus(other: ImmutableArray<T>): Immuta
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableBooleanArray] with the elements of [this]
+ * Leaves [this] Immutable Array as is and returns an [ImmutableBooleanArray] with the elements of [this]
  * followed by the elements of [other]
  */
 public operator fun ImmutableBooleanArray.plus(other: ImmutableBooleanArray): ImmutableBooleanArray = when {
@@ -1158,7 +1158,7 @@ public operator fun ImmutableBooleanArray.plus(other: ImmutableBooleanArray): Im
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableByteArray] with the elements of [this]
+ * Leaves [this] Immutable Array as is and returns an [ImmutableByteArray] with the elements of [this]
  * followed by the elements of [other]
  */
 public operator fun ImmutableByteArray.plus(other: ImmutableByteArray): ImmutableByteArray = when {
@@ -1168,7 +1168,7 @@ public operator fun ImmutableByteArray.plus(other: ImmutableByteArray): Immutabl
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableCharArray] with the elements of [this]
+ * Leaves [this] Immutable Array as is and returns an [ImmutableCharArray] with the elements of [this]
  * followed by the elements of [other]
  */
 public operator fun ImmutableCharArray.plus(other: ImmutableCharArray): ImmutableCharArray = when {
@@ -1178,7 +1178,7 @@ public operator fun ImmutableCharArray.plus(other: ImmutableCharArray): Immutabl
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableShortArray] with the elements of [this]
+ * Leaves [this] Immutable Array as is and returns an [ImmutableShortArray] with the elements of [this]
  * followed by the elements of [other]
  */
 public operator fun ImmutableShortArray.plus(other: ImmutableShortArray): ImmutableShortArray = when {
@@ -1188,7 +1188,7 @@ public operator fun ImmutableShortArray.plus(other: ImmutableShortArray): Immuta
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableIntArray] with the elements of [this]
+ * Leaves [this] Immutable Array as is and returns an [ImmutableIntArray] with the elements of [this]
  * followed by the elements of [other]
  */
 public operator fun ImmutableIntArray.plus(other: ImmutableIntArray): ImmutableIntArray = when {
@@ -1198,7 +1198,7 @@ public operator fun ImmutableIntArray.plus(other: ImmutableIntArray): ImmutableI
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableLongArray] with the elements of [this]
+ * Leaves [this] Immutable Array as is and returns an [ImmutableLongArray] with the elements of [this]
  * followed by the elements of [other]
  */
 public operator fun ImmutableLongArray.plus(other: ImmutableLongArray): ImmutableLongArray = when {
@@ -1208,7 +1208,7 @@ public operator fun ImmutableLongArray.plus(other: ImmutableLongArray): Immutabl
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableFloatArray] with the elements of [this]
+ * Leaves [this] Immutable Array as is and returns an [ImmutableFloatArray] with the elements of [this]
  * followed by the elements of [other]
  */
 public operator fun ImmutableFloatArray.plus(other: ImmutableFloatArray): ImmutableFloatArray = when {
@@ -1218,7 +1218,7 @@ public operator fun ImmutableFloatArray.plus(other: ImmutableFloatArray): Immuta
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableDoubleArray] with the elements of [this]
+ * Leaves [this] Immutable Array as is and returns an [ImmutableDoubleArray] with the elements of [this]
  * followed by the elements of [other]
  */
 public operator fun ImmutableDoubleArray.plus(other: ImmutableDoubleArray): ImmutableDoubleArray = when {
@@ -1228,11 +1228,11 @@ public operator fun ImmutableDoubleArray.plus(other: ImmutableDoubleArray): Immu
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableArray] with the elements of [this]
+ * Leaves [this] Immutable Array as is and returns an [ImmutableArray] with the elements of [this]
  * followed by the specified [element].
  *
  * Important:
- * When needing to add multiple elements individually, use the buildImmutableArray methods or immutable array
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or Immutable Array
  * builders as that's much more efficient instead of calling this function repeatedly.
  */
 @Suppress("UNCHECKED_CAST")
@@ -1241,11 +1241,11 @@ public operator fun <T> ImmutableArray<T>.plus(element: T): ImmutableArray<T> {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableBooleanArray] with the elements of [this]
+ * Leaves [this] Immutable Array as is and returns an [ImmutableBooleanArray] with the elements of [this]
  * followed by the specified [element].
  *
  * Important:
- * When needing to add multiple elements individually, use the buildImmutableArray methods or immutable array
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or Immutable Array
  * builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableBooleanArray.plus(element: Boolean): ImmutableBooleanArray {
@@ -1253,11 +1253,11 @@ public operator fun ImmutableBooleanArray.plus(element: Boolean): ImmutableBoole
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableByteArray] with the elements of [this]
+ * Leaves [this] Immutable Array as is and returns an [ImmutableByteArray] with the elements of [this]
  * followed by the specified [element].
  *
  * Important:
- * When needing to add multiple elements individually, use the buildImmutableArray methods or immutable array
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or Immutable Array
  * builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableByteArray.plus(element: Byte): ImmutableByteArray {
@@ -1265,11 +1265,11 @@ public operator fun ImmutableByteArray.plus(element: Byte): ImmutableByteArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableCharArray] with the elements of [this]
+ * Leaves [this] Immutable Array as is and returns an [ImmutableCharArray] with the elements of [this]
  * followed by the specified [element].
  *
  * Important:
- * When needing to add multiple elements individually, use the buildImmutableArray methods or immutable array
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or Immutable Array
  * builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableCharArray.plus(element: Char): ImmutableCharArray {
@@ -1277,11 +1277,11 @@ public operator fun ImmutableCharArray.plus(element: Char): ImmutableCharArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableShortArray] with the elements of [this]
+ * Leaves [this] Immutable Array as is and returns an [ImmutableShortArray] with the elements of [this]
  * followed by the specified [element].
  *
  * Important:
- * When needing to add multiple elements individually, use the buildImmutableArray methods or immutable array
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or Immutable Array
  * builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableShortArray.plus(element: Short): ImmutableShortArray {
@@ -1289,11 +1289,11 @@ public operator fun ImmutableShortArray.plus(element: Short): ImmutableShortArra
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableIntArray] with the elements of [this]
+ * Leaves [this] Immutable Array as is and returns an [ImmutableIntArray] with the elements of [this]
  * followed by the specified [element].
  *
  * Important:
- * When needing to add multiple elements individually, use the buildImmutableArray methods or immutable array
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or Immutable Array
  * builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableIntArray.plus(element: Int): ImmutableIntArray {
@@ -1301,11 +1301,11 @@ public operator fun ImmutableIntArray.plus(element: Int): ImmutableIntArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableLongArray] with the elements of [this]
+ * Leaves [this] Immutable Array as is and returns an [ImmutableLongArray] with the elements of [this]
  * followed by the specified [element].
  *
  * Important:
- * When needing to add multiple elements individually, use the buildImmutableArray methods or immutable array
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or Immutable Array
  * builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableLongArray.plus(element: Long): ImmutableLongArray {
@@ -1313,11 +1313,11 @@ public operator fun ImmutableLongArray.plus(element: Long): ImmutableLongArray {
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableFloatArray] with the elements of [this]
+ * Leaves [this] Immutable Array as is and returns an [ImmutableFloatArray] with the elements of [this]
  * followed by the specified [element].
  *
  * Important:
- * When needing to add multiple elements individually, use the buildImmutableArray methods or immutable array
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or Immutable Array
  * builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableFloatArray.plus(element: Float): ImmutableFloatArray {
@@ -1325,11 +1325,11 @@ public operator fun ImmutableFloatArray.plus(element: Float): ImmutableFloatArra
 }
 
 /**
- * Leaves [this] immutable array as is and returns an [ImmutableDoubleArray] with the elements of [this]
+ * Leaves [this] Immutable Array as is and returns an [ImmutableDoubleArray] with the elements of [this]
  * followed by the specified [element].
  *
  * Important:
- * When needing to add multiple elements individually, use the buildImmutableArray methods or immutable array
+ * When needing to add multiple elements individually, use the buildImmutableArray methods or Immutable Array
  * builders as that's much more efficient instead of calling this function repeatedly.
  */
 public operator fun ImmutableDoubleArray.plus(element: Double): ImmutableDoubleArray {
@@ -1599,7 +1599,7 @@ public fun <T> ImmutableArray<T?>.requireNoNulls(): ImmutableArray<T> {
 }
 
 /**
- * Returns a single immutable array with all the elements from all nested collections.
+ * Returns a single Immutable Array with all the elements from all nested collections.
  */
 @JvmName("flatten_Iterable_GENERIC")
 public fun <T> ImmutableArray<Iterable<T>>.flatten(): ImmutableArray<T> {
@@ -1611,7 +1611,7 @@ public fun <T> ImmutableArray<Iterable<T>>.flatten(): ImmutableArray<T> {
 }
 
 /**
- * Returns a single immutable array with all the elements from all nested arrays.
+ * Returns a single Immutable Array with all the elements from all nested arrays.
  */
 @JvmName("flatten_ImmutableArray")
 public fun <T> ImmutableArray<ImmutableArray<T>>.flatten(): ImmutableArray<T> {
@@ -1623,7 +1623,7 @@ public fun <T> ImmutableArray<ImmutableArray<T>>.flatten(): ImmutableArray<T> {
 }
 
 /**
- * Returns a single immutable array with all the elements from all nested arrays.
+ * Returns a single Immutable Array with all the elements from all nested arrays.
  */
 @JvmName("flatten_ImmutableBooleanArray")
 public fun ImmutableArray<ImmutableBooleanArray>.flatten(): ImmutableBooleanArray {
@@ -1635,7 +1635,7 @@ public fun ImmutableArray<ImmutableBooleanArray>.flatten(): ImmutableBooleanArra
 }
 
 /**
- * Returns a single immutable array with all the elements from all nested arrays.
+ * Returns a single Immutable Array with all the elements from all nested arrays.
  */
 @JvmName("flatten_ImmutableByteArray")
 public fun ImmutableArray<ImmutableByteArray>.flatten(): ImmutableByteArray {
@@ -1647,7 +1647,7 @@ public fun ImmutableArray<ImmutableByteArray>.flatten(): ImmutableByteArray {
 }
 
 /**
- * Returns a single immutable array with all the elements from all nested arrays.
+ * Returns a single Immutable Array with all the elements from all nested arrays.
  */
 @JvmName("flatten_ImmutableCharArray")
 public fun ImmutableArray<ImmutableCharArray>.flatten(): ImmutableCharArray {
@@ -1659,7 +1659,7 @@ public fun ImmutableArray<ImmutableCharArray>.flatten(): ImmutableCharArray {
 }
 
 /**
- * Returns a single immutable array with all the elements from all nested arrays.
+ * Returns a single Immutable Array with all the elements from all nested arrays.
  */
 @JvmName("flatten_ImmutableShortArray")
 public fun ImmutableArray<ImmutableShortArray>.flatten(): ImmutableShortArray {
@@ -1671,7 +1671,7 @@ public fun ImmutableArray<ImmutableShortArray>.flatten(): ImmutableShortArray {
 }
 
 /**
- * Returns a single immutable array with all the elements from all nested arrays.
+ * Returns a single Immutable Array with all the elements from all nested arrays.
  */
 @JvmName("flatten_ImmutableIntArray")
 public fun ImmutableArray<ImmutableIntArray>.flatten(): ImmutableIntArray {
@@ -1683,7 +1683,7 @@ public fun ImmutableArray<ImmutableIntArray>.flatten(): ImmutableIntArray {
 }
 
 /**
- * Returns a single immutable array with all the elements from all nested arrays.
+ * Returns a single Immutable Array with all the elements from all nested arrays.
  */
 @JvmName("flatten_ImmutableLongArray")
 public fun ImmutableArray<ImmutableLongArray>.flatten(): ImmutableLongArray {
@@ -1695,7 +1695,7 @@ public fun ImmutableArray<ImmutableLongArray>.flatten(): ImmutableLongArray {
 }
 
 /**
- * Returns a single immutable array with all the elements from all nested arrays.
+ * Returns a single Immutable Array with all the elements from all nested arrays.
  */
 @JvmName("flatten_ImmutableFloatArray")
 public fun ImmutableArray<ImmutableFloatArray>.flatten(): ImmutableFloatArray {
@@ -1707,7 +1707,7 @@ public fun ImmutableArray<ImmutableFloatArray>.flatten(): ImmutableFloatArray {
 }
 
 /**
- * Returns a single immutable array with all the elements from all nested arrays.
+ * Returns a single Immutable Array with all the elements from all nested arrays.
  */
 @JvmName("flatten_ImmutableDoubleArray")
 public fun ImmutableArray<ImmutableDoubleArray>.flatten(): ImmutableDoubleArray {

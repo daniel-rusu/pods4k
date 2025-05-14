@@ -312,7 +312,7 @@ private fun FileSpec.Builder.addFilterNotNull() {
         }
 
         function(
-            kdoc = "Returns an immutable array containing only the non-null elements",
+            kdoc = "Returns an Immutable Array containing only the non-null elements",
             receiver = GENERIC.getGeneratedClass().parameterizedBy(nonNullType.copy(nullable = true)),
             name = "filterNotNull",
             returns = returnType,
@@ -348,14 +348,14 @@ private fun FileSpec.Builder.addSorted() {
 
         if (baseType == GENERIC) {
             """
-                Leaves [this] immutable array as is and returns an [$immutableArrayClass] with all elements sorted
+                Leaves [this] Immutable Array as is and returns an [$immutableArrayClass] with all elements sorted
                 according to their natural sort order.
 
                 The sort is _stable_ so equal elements preserve their order relative to each other after sorting.
             """.trimIndent()
         } else {
             """
-                Leaves [this] immutable array as is and returns an [$immutableArrayClass] with all elements sorted
+                Leaves [this] Immutable Array as is and returns an [$immutableArrayClass] with all elements sorted
                 according to their natural sort order.
             """.trimIndent()
         }
@@ -424,14 +424,14 @@ private fun FileSpec.Builder.addSortedDescending() {
 
         if (baseType == GENERIC) {
             """
-                Leaves [this] immutable array as is and returns an [$immutableArrayClass] with all elements sorted
+                Leaves [this] Immutable Array as is and returns an [$immutableArrayClass] with all elements sorted
                 according to their reverse natural sort order.
 
                 The sort is _stable_ so equal elements preserve their order relative to each other after sorting.
             """.trimIndent()
         } else {
             """
-                Leaves [this] immutable array as is and returns an [$immutableArrayClass] with all elements sorted
+                Leaves [this] Immutable Array as is and returns an [$immutableArrayClass] with all elements sorted
                 according to their reverse natural sort order.
             """.trimIndent()
         }
@@ -492,7 +492,7 @@ private fun FileSpec.Builder.addPlusImmutableArray() {
         val immutableArrayClass = baseType.generatedClassName
 
         """
-            Leaves [this] immutable array as is and returns an [$immutableArrayClass] with the elements of [this]
+            Leaves [this] Immutable Array as is and returns an [$immutableArrayClass] with the elements of [this]
             followed by the elements of [other]
         """.trimIndent()
     }
@@ -531,11 +531,11 @@ private fun FileSpec.Builder.addPlusValue() {
     val generateKdoc: (BaseType) -> String = { baseType ->
         val immutableArrayClass = baseType.generatedClassName
         """
-            Leaves [this] immutable array as is and returns an [$immutableArrayClass] with the elements of [this]
+            Leaves [this] Immutable Array as is and returns an [$immutableArrayClass] with the elements of [this]
             followed by the specified [element].
 
             Important:
-            When needing to add multiple elements individually, use the buildImmutableArray methods or immutable array
+            When needing to add multiple elements individually, use the buildImmutableArray methods or Immutable Array
             builders as that's much more efficient instead of calling this function repeatedly.
         """.trimIndent()
     }
@@ -688,7 +688,7 @@ private fun FileSpec.Builder.addRequireNoNulls() {
 
 private fun FileSpec.Builder.addFlatten() {
     function(
-        kdoc = "Returns a single immutable array with all the elements from all nested collections.",
+        kdoc = "Returns a single Immutable Array with all the elements from all nested collections.",
         receiver = GENERIC.getGeneratedClass()
             .parameterizedBy(Iterable::class.asTypeName().parameterizedBy(GENERIC.type)),
         name = "flatten",
@@ -707,7 +707,7 @@ private fun FileSpec.Builder.addFlatten() {
 
     for (baseType in BaseType.entries) {
         function(
-            kdoc = "Returns a single immutable array with all the elements from all nested arrays.",
+            kdoc = "Returns a single Immutable Array with all the elements from all nested arrays.",
             receiver = GENERIC.getGeneratedClass().parameterizedBy(baseType.getGeneratedTypeName()),
             name = "flatten",
             returns = baseType.getGeneratedTypeName(),

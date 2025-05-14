@@ -62,7 +62,7 @@ private fun FileSpec.Builder.addCollectionContainsAll() {
             else -> Any::class.asTypeName().copy(nullable = true)
         }
         function(
-            kdoc = "Checks whether [this] collection contains all the elements from the specified immutable array",
+            kdoc = "Checks whether [this] collection contains all the elements from the specified Immutable Array",
             receiver = ClassName("kotlin.collections", "Collection")
                 .parameterizedBy(collectionType),
             name = "containsAll",
@@ -106,8 +106,8 @@ private fun FileSpec.Builder.addMutableCollectionRemoveAll() {
     val kdoc = """
         Removes all the elements from [this] collection.
 
-        Note that if the immutable array contains duplicate elements then it might be more efficient to convert the
-        immutable array to a set first and remove the set from the collection instead.
+        Note that if the Immutable Array contains duplicate elements then it might be more efficient to convert the
+        Immutable Array to a set first and remove the set from the collection instead.
 
         @return true if the collection changed.
     """.trimIndent()
@@ -133,7 +133,7 @@ private fun FileSpec.Builder.addMutableCollectionRetainAll() {
     for (baseType in BaseType.entries) {
         function(
             kdoc = """
-                Retains only the elements in [this] collection that are contained in the specified immutable array.
+                Retains only the elements in [this] collection that are contained in the specified Immutable Array.
 
                 @return true if the collection changed.
             """.trimIndent(),
@@ -154,7 +154,7 @@ private fun FileSpec.Builder.addMutableCollectionRetainAll() {
 private fun FileSpec.Builder.addIterableFlatten() {
     for (baseType in BaseType.entries) {
         function(
-            kdoc = "Returns a single immutable array with all the elements from all nested arrays.",
+            kdoc = "Returns a single Immutable Array with all the elements from all nested arrays.",
             receiver = Iterable::class.asTypeName().parameterizedBy(baseType.getGeneratedTypeName()),
             name = "flatten",
             returns = baseType.getGeneratedTypeName(),

@@ -35,8 +35,8 @@ private fun FileSpec.Builder.addUnzipFunction(type1: BaseType, type2: BaseType) 
     }
 
     val kdoc = """
-        Returns a pair of immutable arrays, where first immutable array is built from the first values of each pair,
-        and the second immutable array is built from the second values of each pair.
+        Returns a pair of Immutable Arrays, where the first Immutable Array is built from the first values of each pair,
+        and the second Immutable Array is built from the second values of each pair.
     """.trimIndent()
 
     function(

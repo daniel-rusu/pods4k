@@ -23,7 +23,7 @@ class FlatMapSpecializationsTest {
                 .isA<ImmutableArray<Char>>()
                 .isEmpty()
 
-            // immutable array
+            // Immutable Array
             expectThat(flatMap { it.toList().toImmutableArray<Char>() })
                 .isA<ImmutableArray<Char>>()
                 .isEmpty()
@@ -34,7 +34,7 @@ class FlatMapSpecializationsTest {
             expectThat(flatMap<String, Char> { it.toList() })
                 .isEqualTo(immutableArrayOf<Char>('D', 'a', 'n', 'J', 'i', 'l', 'l'))
 
-            // immutable array
+            // Immutable Array
             expectThat(flatMap { it.toList().toImmutableArray<Char>() })
                 .isEqualTo(immutableArrayOf<Char>('D', 'a', 'n', 'J', 'i', 'l', 'l'))
         }
@@ -52,7 +52,7 @@ class FlatMapSpecializationsTest {
                 .isA<ImmutableIntArray>()
                 .isEmpty()
 
-            // immutable array
+            // Immutable Array
             expectThat(
                 flatMap { element ->
                     element.toCharArray().map { it.digitToInt() }.toImmutableArray()
@@ -70,7 +70,7 @@ class FlatMapSpecializationsTest {
                 },
             ).isEqualTo(immutableArrayOf(1, 2, 2, 3, 3, 3))
 
-            // immutable array
+            // Immutable Array
             expectThat(
                 flatMap { element ->
                     element.toCharArray().map { it.digitToInt() }.toImmutableArray()
@@ -87,7 +87,7 @@ class FlatMapSpecializationsTest {
                 .isA<ImmutableArray<Char>>()
                 .isEmpty()
 
-            // immutable array
+            // Immutable Array
             expectThat(flatMap { it.toString().toList().toImmutableArray<Char>() })
                 .isA<ImmutableArray<Char>>()
                 .isEmpty()
@@ -98,7 +98,7 @@ class FlatMapSpecializationsTest {
             expectThat(flatMap<Char> { it.toString().toList() })
                 .isEqualTo(immutableArrayOf<Char>('1', '0', '2', '3', '7'))
 
-            // immutable array
+            // Immutable Array
             expectThat(flatMap { it.toString().toList().toImmutableArray<Char>() })
                 .isEqualTo(immutableArrayOf<Char>('1', '0', '2', '3', '7'))
         }
@@ -116,7 +116,7 @@ class FlatMapSpecializationsTest {
                 .isA<ImmutableDoubleArray>()
                 .isEmpty()
 
-            // immutable array
+            // Immutable Array
             expectThat(
                 flatMap { element ->
                     DoubleArray(element) { it.toDouble() / element }.toList().toImmutableArray()
@@ -134,7 +134,7 @@ class FlatMapSpecializationsTest {
                 },
             ).isEqualTo(immutableArrayOf(0.0, 0.0, 1.0 / 2, 0.0, 1.0 / 3, 2.0 / 3))
 
-            // immutable array
+            // Immutable Array
             expectThat(
                 flatMap { element ->
                     DoubleArray(element) { it.toDouble() / element }.toList().toImmutableArray()

@@ -21,7 +21,7 @@ import kotlin.OverloadResolutionByLambdaReturnType
 import kotlin.Short
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T, R> ImmutableArray<T>.mapNotNull(transform: (element: T) -> R?): ImmutableArray<R> {
@@ -33,7 +33,7 @@ public inline fun <T, R> ImmutableArray<T>.mapNotNull(transform: (element: T) ->
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Boolean?): ImmutableBooleanArray {
@@ -45,7 +45,7 @@ public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Bo
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Byte?): ImmutableByteArray {
@@ -57,7 +57,7 @@ public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> By
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Char?): ImmutableCharArray {
@@ -69,7 +69,7 @@ public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Ch
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Short?): ImmutableShortArray {
@@ -81,7 +81,7 @@ public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Sh
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Int?): ImmutableIntArray {
@@ -93,7 +93,7 @@ public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> In
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Long?): ImmutableLongArray {
@@ -105,7 +105,7 @@ public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Lo
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Float?): ImmutableFloatArray {
@@ -117,7 +117,7 @@ public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Fl
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Double?): ImmutableDoubleArray {
@@ -129,7 +129,7 @@ public inline fun <T> ImmutableArray<T>.mapNotNull(transform: (element: T) -> Do
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableBooleanArray.mapNotNull(transform: (element: Boolean) -> R?): ImmutableArray<R> {
@@ -141,7 +141,7 @@ public inline fun <R> ImmutableBooleanArray.mapNotNull(transform: (element: Bool
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean) -> Boolean?): ImmutableBooleanArray {
@@ -153,7 +153,7 @@ public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean)
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean) -> Byte?): ImmutableByteArray {
@@ -165,7 +165,7 @@ public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean)
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean) -> Char?): ImmutableCharArray {
@@ -177,7 +177,7 @@ public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean)
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean) -> Short?): ImmutableShortArray {
@@ -189,7 +189,7 @@ public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean)
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean) -> Int?): ImmutableIntArray {
@@ -201,7 +201,7 @@ public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean)
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean) -> Long?): ImmutableLongArray {
@@ -213,7 +213,7 @@ public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean)
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean) -> Float?): ImmutableFloatArray {
@@ -225,7 +225,7 @@ public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean)
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean) -> Double?): ImmutableDoubleArray {
@@ -237,7 +237,7 @@ public inline fun ImmutableBooleanArray.mapNotNull(transform: (element: Boolean)
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableByteArray.mapNotNull(transform: (element: Byte) -> R?): ImmutableArray<R> {
@@ -249,7 +249,7 @@ public inline fun <R> ImmutableByteArray.mapNotNull(transform: (element: Byte) -
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Boolean?): ImmutableBooleanArray {
@@ -261,7 +261,7 @@ public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Bo
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Byte?): ImmutableByteArray {
@@ -273,7 +273,7 @@ public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> By
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Char?): ImmutableCharArray {
@@ -285,7 +285,7 @@ public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Ch
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Short?): ImmutableShortArray {
@@ -297,7 +297,7 @@ public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Sh
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Int?): ImmutableIntArray {
@@ -309,7 +309,7 @@ public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> In
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Long?): ImmutableLongArray {
@@ -321,7 +321,7 @@ public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Lo
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Float?): ImmutableFloatArray {
@@ -333,7 +333,7 @@ public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Fl
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Double?): ImmutableDoubleArray {
@@ -345,7 +345,7 @@ public inline fun ImmutableByteArray.mapNotNull(transform: (element: Byte) -> Do
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableCharArray.mapNotNull(transform: (element: Char) -> R?): ImmutableArray<R> {
@@ -357,7 +357,7 @@ public inline fun <R> ImmutableCharArray.mapNotNull(transform: (element: Char) -
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Boolean?): ImmutableBooleanArray {
@@ -369,7 +369,7 @@ public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Bo
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Byte?): ImmutableByteArray {
@@ -381,7 +381,7 @@ public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> By
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Char?): ImmutableCharArray {
@@ -393,7 +393,7 @@ public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Ch
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Short?): ImmutableShortArray {
@@ -405,7 +405,7 @@ public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Sh
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Int?): ImmutableIntArray {
@@ -417,7 +417,7 @@ public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> In
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Long?): ImmutableLongArray {
@@ -429,7 +429,7 @@ public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Lo
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Float?): ImmutableFloatArray {
@@ -441,7 +441,7 @@ public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Fl
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Double?): ImmutableDoubleArray {
@@ -453,7 +453,7 @@ public inline fun ImmutableCharArray.mapNotNull(transform: (element: Char) -> Do
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableShortArray.mapNotNull(transform: (element: Short) -> R?): ImmutableArray<R> {
@@ -465,7 +465,7 @@ public inline fun <R> ImmutableShortArray.mapNotNull(transform: (element: Short)
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> Boolean?): ImmutableBooleanArray {
@@ -477,7 +477,7 @@ public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> 
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> Byte?): ImmutableByteArray {
@@ -489,7 +489,7 @@ public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> 
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> Char?): ImmutableCharArray {
@@ -501,7 +501,7 @@ public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> 
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> Short?): ImmutableShortArray {
@@ -513,7 +513,7 @@ public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> 
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> Int?): ImmutableIntArray {
@@ -525,7 +525,7 @@ public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> 
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> Long?): ImmutableLongArray {
@@ -537,7 +537,7 @@ public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> 
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> Float?): ImmutableFloatArray {
@@ -549,7 +549,7 @@ public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> 
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> Double?): ImmutableDoubleArray {
@@ -561,7 +561,7 @@ public inline fun ImmutableShortArray.mapNotNull(transform: (element: Short) -> 
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableIntArray.mapNotNull(transform: (element: Int) -> R?): ImmutableArray<R> {
@@ -573,7 +573,7 @@ public inline fun <R> ImmutableIntArray.mapNotNull(transform: (element: Int) -> 
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Boolean?): ImmutableBooleanArray {
@@ -585,7 +585,7 @@ public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Bool
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Byte?): ImmutableByteArray {
@@ -597,7 +597,7 @@ public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Byte
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Char?): ImmutableCharArray {
@@ -609,7 +609,7 @@ public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Char
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Short?): ImmutableShortArray {
@@ -621,7 +621,7 @@ public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Shor
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Int?): ImmutableIntArray {
@@ -633,7 +633,7 @@ public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Int?
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Long?): ImmutableLongArray {
@@ -645,7 +645,7 @@ public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Long
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Float?): ImmutableFloatArray {
@@ -657,7 +657,7 @@ public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Floa
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Double?): ImmutableDoubleArray {
@@ -669,7 +669,7 @@ public inline fun ImmutableIntArray.mapNotNull(transform: (element: Int) -> Doub
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableLongArray.mapNotNull(transform: (element: Long) -> R?): ImmutableArray<R> {
@@ -681,7 +681,7 @@ public inline fun <R> ImmutableLongArray.mapNotNull(transform: (element: Long) -
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Boolean?): ImmutableBooleanArray {
@@ -693,7 +693,7 @@ public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Bo
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Byte?): ImmutableByteArray {
@@ -705,7 +705,7 @@ public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> By
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Char?): ImmutableCharArray {
@@ -717,7 +717,7 @@ public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Ch
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Short?): ImmutableShortArray {
@@ -729,7 +729,7 @@ public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Sh
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Int?): ImmutableIntArray {
@@ -741,7 +741,7 @@ public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> In
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Long?): ImmutableLongArray {
@@ -753,7 +753,7 @@ public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Lo
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Float?): ImmutableFloatArray {
@@ -765,7 +765,7 @@ public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Fl
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Double?): ImmutableDoubleArray {
@@ -777,7 +777,7 @@ public inline fun ImmutableLongArray.mapNotNull(transform: (element: Long) -> Do
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableFloatArray.mapNotNull(transform: (element: Float) -> R?): ImmutableArray<R> {
@@ -789,7 +789,7 @@ public inline fun <R> ImmutableFloatArray.mapNotNull(transform: (element: Float)
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> Boolean?): ImmutableBooleanArray {
@@ -801,7 +801,7 @@ public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> 
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> Byte?): ImmutableByteArray {
@@ -813,7 +813,7 @@ public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> 
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> Char?): ImmutableCharArray {
@@ -825,7 +825,7 @@ public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> 
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> Short?): ImmutableShortArray {
@@ -837,7 +837,7 @@ public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> 
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> Int?): ImmutableIntArray {
@@ -849,7 +849,7 @@ public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> 
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> Long?): ImmutableLongArray {
@@ -861,7 +861,7 @@ public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> 
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> Float?): ImmutableFloatArray {
@@ -873,7 +873,7 @@ public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> 
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> Double?): ImmutableDoubleArray {
@@ -885,7 +885,7 @@ public inline fun ImmutableFloatArray.mapNotNull(transform: (element: Float) -> 
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableDoubleArray.mapNotNull(transform: (element: Double) -> R?): ImmutableArray<R> {
@@ -897,7 +897,7 @@ public inline fun <R> ImmutableDoubleArray.mapNotNull(transform: (element: Doubl
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -> Boolean?): ImmutableBooleanArray {
@@ -909,7 +909,7 @@ public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -> Byte?): ImmutableByteArray {
@@ -921,7 +921,7 @@ public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -> Char?): ImmutableCharArray {
@@ -933,7 +933,7 @@ public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -> Short?): ImmutableShortArray {
@@ -945,7 +945,7 @@ public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -> Int?): ImmutableIntArray {
@@ -957,7 +957,7 @@ public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -> Long?): ImmutableLongArray {
@@ -969,7 +969,7 @@ public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -> Float?): ImmutableFloatArray {
@@ -981,7 +981,7 @@ public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -
 }
 
 /**
- * Transforms each element and returns an immutable array with the non-null results.
+ * Transforms each element and returns an Immutable Array with the non-null results.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapNotNull(transform: (element: Double) -> Double?): ImmutableDoubleArray {

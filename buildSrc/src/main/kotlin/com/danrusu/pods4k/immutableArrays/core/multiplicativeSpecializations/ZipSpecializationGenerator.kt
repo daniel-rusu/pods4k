@@ -36,8 +36,8 @@ private fun FileSpec.Builder.addZipFunction(type1: BaseType, type2: BaseType) {
     }
 
     val kdoc = """
-        Returns an immutable array of pairs built from the elements of [this] and [other] with the same index. The
-        result has the length of the shortest immutable array.
+        Returns an Immutable Array of pairs built from the elements of [this] and [other] with the same index. The
+        result has the length of the shortest Immutable Array.
     """.trimIndent()
 
     function(
@@ -70,9 +70,9 @@ private fun FileSpec.Builder.addZipWithTransformFunction(fromType: BaseType, toT
     }
 
     val kdoc = """
-        Returns an immutable array of values built from the elements of [this] and [other] with the same index using
+        Returns an Immutable Array of values built from the elements of [this] and [other] with the same index using
         the provided transform function applied to each pair of elements. The result has the length of the shortest
-        immutable array.
+        Immutable Array.
     """.trimIndent()
 
     function(

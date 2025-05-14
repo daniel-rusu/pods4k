@@ -1392,7 +1392,7 @@ class ImmutableArrayTest {
         expectThat(builder.build())
             .isEqualTo(ImmutableArray(5) { it.toString() })
 
-        // Add all from immutable array
+        // Add all from Immutable Array
         builder.addAll(immutableArrayOf("5", "6", "7", "8", "9", "10"))
 
         expectThat(builder.size)

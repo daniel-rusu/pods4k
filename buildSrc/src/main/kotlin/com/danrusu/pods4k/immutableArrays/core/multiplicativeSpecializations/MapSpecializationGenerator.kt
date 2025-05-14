@@ -32,7 +32,7 @@ private fun FileSpec.Builder.addMapFunction(fromType: BaseType, toType: BaseType
         resultTypeName = toType.getGeneratedTypeName()
     }
     function(
-        kdoc = "Returns an immutable array containing the results of applying [transform] to each element.",
+        kdoc = "Returns an Immutable Array containing the results of applying [transform] to each element.",
         modifiers = listOf(KModifier.INLINE),
         receiver = fromType.getGeneratedTypeName(),
         name = "map",

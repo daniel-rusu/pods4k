@@ -34,7 +34,7 @@ private fun FileSpec.Builder.addMapNotNullFunction(fromType: BaseType, toType: B
         resultTypeName = toType.getGeneratedTypeName()
     }
     function(
-        kdoc = "Transforms each element and returns an immutable array with the non-null results.",
+        kdoc = "Transforms each element and returns an Immutable Array with the non-null results.",
         modifiers = listOf(KModifier.INLINE),
         receiver = fromType.getGeneratedTypeName(),
         name = "mapNotNull",

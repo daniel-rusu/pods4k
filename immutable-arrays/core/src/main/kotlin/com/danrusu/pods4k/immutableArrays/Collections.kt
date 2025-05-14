@@ -133,63 +133,63 @@ public fun Iterable<Double>.toImmutableArray(): ImmutableDoubleArray {
 }
 
 /**
- * Checks whether [this] collection contains all the elements from the specified immutable array
+ * Checks whether [this] collection contains all the elements from the specified Immutable Array
  */
 public fun <T> Collection<T>.containsAll(elements: ImmutableArray<T>): Boolean {
     return containsAll(elements.asList())
 }
 
 /**
- * Checks whether [this] collection contains all the elements from the specified immutable array
+ * Checks whether [this] collection contains all the elements from the specified Immutable Array
  */
 public fun Collection<Any?>.containsAll(elements: ImmutableBooleanArray): Boolean {
     return containsAll(elements.asList())
 }
 
 /**
- * Checks whether [this] collection contains all the elements from the specified immutable array
+ * Checks whether [this] collection contains all the elements from the specified Immutable Array
  */
 public fun Collection<Any?>.containsAll(elements: ImmutableByteArray): Boolean {
     return containsAll(elements.asList())
 }
 
 /**
- * Checks whether [this] collection contains all the elements from the specified immutable array
+ * Checks whether [this] collection contains all the elements from the specified Immutable Array
  */
 public fun Collection<Any?>.containsAll(elements: ImmutableCharArray): Boolean {
     return containsAll(elements.asList())
 }
 
 /**
- * Checks whether [this] collection contains all the elements from the specified immutable array
+ * Checks whether [this] collection contains all the elements from the specified Immutable Array
  */
 public fun Collection<Any?>.containsAll(elements: ImmutableShortArray): Boolean {
     return containsAll(elements.asList())
 }
 
 /**
- * Checks whether [this] collection contains all the elements from the specified immutable array
+ * Checks whether [this] collection contains all the elements from the specified Immutable Array
  */
 public fun Collection<Any?>.containsAll(elements: ImmutableIntArray): Boolean {
     return containsAll(elements.asList())
 }
 
 /**
- * Checks whether [this] collection contains all the elements from the specified immutable array
+ * Checks whether [this] collection contains all the elements from the specified Immutable Array
  */
 public fun Collection<Any?>.containsAll(elements: ImmutableLongArray): Boolean {
     return containsAll(elements.asList())
 }
 
 /**
- * Checks whether [this] collection contains all the elements from the specified immutable array
+ * Checks whether [this] collection contains all the elements from the specified Immutable Array
  */
 public fun Collection<Any?>.containsAll(elements: ImmutableFloatArray): Boolean {
     return containsAll(elements.asList())
 }
 
 /**
- * Checks whether [this] collection contains all the elements from the specified immutable array
+ * Checks whether [this] collection contains all the elements from the specified Immutable Array
  */
 public fun Collection<Any?>.containsAll(elements: ImmutableDoubleArray): Boolean {
     return containsAll(elements.asList())
@@ -288,8 +288,8 @@ public fun MutableCollection<in Double>.addAll(elements: ImmutableDoubleArray): 
 /**
  * Removes all the elements from [this] collection.
  *
- * Note that if the immutable array contains duplicate elements then it might be more efficient to convert the
- * immutable array to a set first and remove the set from the collection instead.
+ * Note that if the Immutable Array contains duplicate elements then it might be more efficient to convert the
+ * Immutable Array to a set first and remove the set from the collection instead.
  *
  * @return true if the collection changed.
  */
@@ -300,8 +300,8 @@ public fun <T> MutableCollection<in T>.removeAll(elements: ImmutableArray<T>): B
 /**
  * Removes all the elements from [this] collection.
  *
- * Note that if the immutable array contains duplicate elements then it might be more efficient to convert the
- * immutable array to a set first and remove the set from the collection instead.
+ * Note that if the Immutable Array contains duplicate elements then it might be more efficient to convert the
+ * Immutable Array to a set first and remove the set from the collection instead.
  *
  * @return true if the collection changed.
  */
@@ -312,8 +312,8 @@ public fun MutableCollection<in Boolean>.removeAll(elements: ImmutableBooleanArr
 /**
  * Removes all the elements from [this] collection.
  *
- * Note that if the immutable array contains duplicate elements then it might be more efficient to convert the
- * immutable array to a set first and remove the set from the collection instead.
+ * Note that if the Immutable Array contains duplicate elements then it might be more efficient to convert the
+ * Immutable Array to a set first and remove the set from the collection instead.
  *
  * @return true if the collection changed.
  */
@@ -324,8 +324,8 @@ public fun MutableCollection<in Byte>.removeAll(elements: ImmutableByteArray): B
 /**
  * Removes all the elements from [this] collection.
  *
- * Note that if the immutable array contains duplicate elements then it might be more efficient to convert the
- * immutable array to a set first and remove the set from the collection instead.
+ * Note that if the Immutable Array contains duplicate elements then it might be more efficient to convert the
+ * Immutable Array to a set first and remove the set from the collection instead.
  *
  * @return true if the collection changed.
  */
@@ -336,8 +336,8 @@ public fun MutableCollection<in Char>.removeAll(elements: ImmutableCharArray): B
 /**
  * Removes all the elements from [this] collection.
  *
- * Note that if the immutable array contains duplicate elements then it might be more efficient to convert the
- * immutable array to a set first and remove the set from the collection instead.
+ * Note that if the Immutable Array contains duplicate elements then it might be more efficient to convert the
+ * Immutable Array to a set first and remove the set from the collection instead.
  *
  * @return true if the collection changed.
  */
@@ -348,8 +348,8 @@ public fun MutableCollection<in Short>.removeAll(elements: ImmutableShortArray):
 /**
  * Removes all the elements from [this] collection.
  *
- * Note that if the immutable array contains duplicate elements then it might be more efficient to convert the
- * immutable array to a set first and remove the set from the collection instead.
+ * Note that if the Immutable Array contains duplicate elements then it might be more efficient to convert the
+ * Immutable Array to a set first and remove the set from the collection instead.
  *
  * @return true if the collection changed.
  */
@@ -360,8 +360,8 @@ public fun MutableCollection<in Int>.removeAll(elements: ImmutableIntArray): Boo
 /**
  * Removes all the elements from [this] collection.
  *
- * Note that if the immutable array contains duplicate elements then it might be more efficient to convert the
- * immutable array to a set first and remove the set from the collection instead.
+ * Note that if the Immutable Array contains duplicate elements then it might be more efficient to convert the
+ * Immutable Array to a set first and remove the set from the collection instead.
  *
  * @return true if the collection changed.
  */
@@ -372,8 +372,8 @@ public fun MutableCollection<in Long>.removeAll(elements: ImmutableLongArray): B
 /**
  * Removes all the elements from [this] collection.
  *
- * Note that if the immutable array contains duplicate elements then it might be more efficient to convert the
- * immutable array to a set first and remove the set from the collection instead.
+ * Note that if the Immutable Array contains duplicate elements then it might be more efficient to convert the
+ * Immutable Array to a set first and remove the set from the collection instead.
  *
  * @return true if the collection changed.
  */
@@ -384,8 +384,8 @@ public fun MutableCollection<in Float>.removeAll(elements: ImmutableFloatArray):
 /**
  * Removes all the elements from [this] collection.
  *
- * Note that if the immutable array contains duplicate elements then it might be more efficient to convert the
- * immutable array to a set first and remove the set from the collection instead.
+ * Note that if the Immutable Array contains duplicate elements then it might be more efficient to convert the
+ * Immutable Array to a set first and remove the set from the collection instead.
  *
  * @return true if the collection changed.
  */
@@ -394,7 +394,7 @@ public fun MutableCollection<in Double>.removeAll(elements: ImmutableDoubleArray
 }
 
 /**
- * Retains only the elements in [this] collection that are contained in the specified immutable array.
+ * Retains only the elements in [this] collection that are contained in the specified Immutable Array.
  *
  * @return true if the collection changed.
  */
@@ -403,7 +403,7 @@ public fun <T> MutableCollection<in T>.retainAll(elements: ImmutableArray<T>): B
 }
 
 /**
- * Retains only the elements in [this] collection that are contained in the specified immutable array.
+ * Retains only the elements in [this] collection that are contained in the specified Immutable Array.
  *
  * @return true if the collection changed.
  */
@@ -412,7 +412,7 @@ public fun MutableCollection<in Boolean>.retainAll(elements: ImmutableBooleanArr
 }
 
 /**
- * Retains only the elements in [this] collection that are contained in the specified immutable array.
+ * Retains only the elements in [this] collection that are contained in the specified Immutable Array.
  *
  * @return true if the collection changed.
  */
@@ -421,7 +421,7 @@ public fun MutableCollection<in Byte>.retainAll(elements: ImmutableByteArray): B
 }
 
 /**
- * Retains only the elements in [this] collection that are contained in the specified immutable array.
+ * Retains only the elements in [this] collection that are contained in the specified Immutable Array.
  *
  * @return true if the collection changed.
  */
@@ -430,7 +430,7 @@ public fun MutableCollection<in Char>.retainAll(elements: ImmutableCharArray): B
 }
 
 /**
- * Retains only the elements in [this] collection that are contained in the specified immutable array.
+ * Retains only the elements in [this] collection that are contained in the specified Immutable Array.
  *
  * @return true if the collection changed.
  */
@@ -439,7 +439,7 @@ public fun MutableCollection<in Short>.retainAll(elements: ImmutableShortArray):
 }
 
 /**
- * Retains only the elements in [this] collection that are contained in the specified immutable array.
+ * Retains only the elements in [this] collection that are contained in the specified Immutable Array.
  *
  * @return true if the collection changed.
  */
@@ -448,7 +448,7 @@ public fun MutableCollection<in Int>.retainAll(elements: ImmutableIntArray): Boo
 }
 
 /**
- * Retains only the elements in [this] collection that are contained in the specified immutable array.
+ * Retains only the elements in [this] collection that are contained in the specified Immutable Array.
  *
  * @return true if the collection changed.
  */
@@ -457,7 +457,7 @@ public fun MutableCollection<in Long>.retainAll(elements: ImmutableLongArray): B
 }
 
 /**
- * Retains only the elements in [this] collection that are contained in the specified immutable array.
+ * Retains only the elements in [this] collection that are contained in the specified Immutable Array.
  *
  * @return true if the collection changed.
  */
@@ -466,7 +466,7 @@ public fun MutableCollection<in Float>.retainAll(elements: ImmutableFloatArray):
 }
 
 /**
- * Retains only the elements in [this] collection that are contained in the specified immutable array.
+ * Retains only the elements in [this] collection that are contained in the specified Immutable Array.
  *
  * @return true if the collection changed.
  */
@@ -475,7 +475,7 @@ public fun MutableCollection<in Double>.retainAll(elements: ImmutableDoubleArray
 }
 
 /**
- * Returns a single immutable array with all the elements from all nested arrays.
+ * Returns a single Immutable Array with all the elements from all nested arrays.
  */
 @JvmName("flatten_ImmutableArray")
 public fun <T> Iterable<ImmutableArray<T>>.flatten(): ImmutableArray<T> {
@@ -487,7 +487,7 @@ public fun <T> Iterable<ImmutableArray<T>>.flatten(): ImmutableArray<T> {
 }
 
 /**
- * Returns a single immutable array with all the elements from all nested arrays.
+ * Returns a single Immutable Array with all the elements from all nested arrays.
  */
 @JvmName("flatten_ImmutableBooleanArray")
 public fun Iterable<ImmutableBooleanArray>.flatten(): ImmutableBooleanArray {
@@ -499,7 +499,7 @@ public fun Iterable<ImmutableBooleanArray>.flatten(): ImmutableBooleanArray {
 }
 
 /**
- * Returns a single immutable array with all the elements from all nested arrays.
+ * Returns a single Immutable Array with all the elements from all nested arrays.
  */
 @JvmName("flatten_ImmutableByteArray")
 public fun Iterable<ImmutableByteArray>.flatten(): ImmutableByteArray {
@@ -511,7 +511,7 @@ public fun Iterable<ImmutableByteArray>.flatten(): ImmutableByteArray {
 }
 
 /**
- * Returns a single immutable array with all the elements from all nested arrays.
+ * Returns a single Immutable Array with all the elements from all nested arrays.
  */
 @JvmName("flatten_ImmutableCharArray")
 public fun Iterable<ImmutableCharArray>.flatten(): ImmutableCharArray {
@@ -523,7 +523,7 @@ public fun Iterable<ImmutableCharArray>.flatten(): ImmutableCharArray {
 }
 
 /**
- * Returns a single immutable array with all the elements from all nested arrays.
+ * Returns a single Immutable Array with all the elements from all nested arrays.
  */
 @JvmName("flatten_ImmutableShortArray")
 public fun Iterable<ImmutableShortArray>.flatten(): ImmutableShortArray {
@@ -535,7 +535,7 @@ public fun Iterable<ImmutableShortArray>.flatten(): ImmutableShortArray {
 }
 
 /**
- * Returns a single immutable array with all the elements from all nested arrays.
+ * Returns a single Immutable Array with all the elements from all nested arrays.
  */
 @JvmName("flatten_ImmutableIntArray")
 public fun Iterable<ImmutableIntArray>.flatten(): ImmutableIntArray {
@@ -547,7 +547,7 @@ public fun Iterable<ImmutableIntArray>.flatten(): ImmutableIntArray {
 }
 
 /**
- * Returns a single immutable array with all the elements from all nested arrays.
+ * Returns a single Immutable Array with all the elements from all nested arrays.
  */
 @JvmName("flatten_ImmutableLongArray")
 public fun Iterable<ImmutableLongArray>.flatten(): ImmutableLongArray {
@@ -559,7 +559,7 @@ public fun Iterable<ImmutableLongArray>.flatten(): ImmutableLongArray {
 }
 
 /**
- * Returns a single immutable array with all the elements from all nested arrays.
+ * Returns a single Immutable Array with all the elements from all nested arrays.
  */
 @JvmName("flatten_ImmutableFloatArray")
 public fun Iterable<ImmutableFloatArray>.flatten(): ImmutableFloatArray {
@@ -571,7 +571,7 @@ public fun Iterable<ImmutableFloatArray>.flatten(): ImmutableFloatArray {
 }
 
 /**
- * Returns a single immutable array with all the elements from all nested arrays.
+ * Returns a single Immutable Array with all the elements from all nested arrays.
  */
 @JvmName("flatten_ImmutableDoubleArray")
 public fun Iterable<ImmutableDoubleArray>.flatten(): ImmutableDoubleArray {

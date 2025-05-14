@@ -67,9 +67,9 @@ private fun FileSpec.Builder.addFlatMapIndexedFunction(fromType: BaseType, toTyp
         statement("return builder.build()")
     }
 
-    // flatMapIndexed joining immutable arrays
+    // flatMapIndexed joining Immutable Arrays
     function(
-        kdoc = "Transforms each element into an immutable array and appends those arrays in a single " +
+        kdoc = "Transforms each element into an Immutable Array and appends those arrays in a single " +
             "${toType.generatedClassName}.",
         modifiers = listOf(KModifier.INLINE),
         receiver = fromType.getGeneratedTypeName(),
@@ -96,7 +96,7 @@ private fun FileSpec.Builder.addFlatMapIndexedFunction(fromType: BaseType, toTyp
          */
         statement("var numElements = 0")
         controlFlow("val arrays = mapIndexed { index, element ->") {
-            // reference the underlying array directly to avoid auto-boxing the immutable array
+            // reference the underlying array directly to avoid auto-boxing the Immutable Array
             statement("transform(index, element).values.also { numElements += it.size }")
         }
         controlFlow(

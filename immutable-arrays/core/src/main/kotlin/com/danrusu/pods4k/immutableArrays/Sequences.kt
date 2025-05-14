@@ -94,7 +94,7 @@ public fun Sequence<Double>.toImmutableArray(): ImmutableDoubleArray {
 }
 
 /**
- * Returns a sequence of all elements from all nested immutable arrays in this sequence.
+ * Returns a sequence of all elements from all nested Immutable Arrays in this sequence.
  *
  * The operation is _intermediate_ and _stateless_.
  */
@@ -104,7 +104,7 @@ public fun <T> Sequence<ImmutableArray<T>>.flatten(): Sequence<T> {
 }
 
 /**
- * Returns a sequence of all elements from all nested immutable arrays in this sequence.
+ * Returns a sequence of all elements from all nested Immutable Arrays in this sequence.
  *
  * The operation is _intermediate_ and _stateless_.
  */
@@ -114,7 +114,7 @@ public fun Sequence<ImmutableBooleanArray>.flatten(): Sequence<Boolean> {
 }
 
 /**
- * Returns a sequence of all elements from all nested immutable arrays in this sequence.
+ * Returns a sequence of all elements from all nested Immutable Arrays in this sequence.
  *
  * The operation is _intermediate_ and _stateless_.
  */
@@ -124,7 +124,7 @@ public fun Sequence<ImmutableByteArray>.flatten(): Sequence<Byte> {
 }
 
 /**
- * Returns a sequence of all elements from all nested immutable arrays in this sequence.
+ * Returns a sequence of all elements from all nested Immutable Arrays in this sequence.
  *
  * The operation is _intermediate_ and _stateless_.
  */
@@ -134,7 +134,7 @@ public fun Sequence<ImmutableCharArray>.flatten(): Sequence<Char> {
 }
 
 /**
- * Returns a sequence of all elements from all nested immutable arrays in this sequence.
+ * Returns a sequence of all elements from all nested Immutable Arrays in this sequence.
  *
  * The operation is _intermediate_ and _stateless_.
  */
@@ -144,7 +144,7 @@ public fun Sequence<ImmutableShortArray>.flatten(): Sequence<Short> {
 }
 
 /**
- * Returns a sequence of all elements from all nested immutable arrays in this sequence.
+ * Returns a sequence of all elements from all nested Immutable Arrays in this sequence.
  *
  * The operation is _intermediate_ and _stateless_.
  */
@@ -154,7 +154,7 @@ public fun Sequence<ImmutableIntArray>.flatten(): Sequence<Int> {
 }
 
 /**
- * Returns a sequence of all elements from all nested immutable arrays in this sequence.
+ * Returns a sequence of all elements from all nested Immutable Arrays in this sequence.
  *
  * The operation is _intermediate_ and _stateless_.
  */
@@ -164,7 +164,7 @@ public fun Sequence<ImmutableLongArray>.flatten(): Sequence<Long> {
 }
 
 /**
- * Returns a sequence of all elements from all nested immutable arrays in this sequence.
+ * Returns a sequence of all elements from all nested Immutable Arrays in this sequence.
  *
  * The operation is _intermediate_ and _stateless_.
  */
@@ -174,7 +174,7 @@ public fun Sequence<ImmutableFloatArray>.flatten(): Sequence<Float> {
 }
 
 /**
- * Returns a sequence of all elements from all nested immutable arrays in this sequence.
+ * Returns a sequence of all elements from all nested Immutable Arrays in this sequence.
  *
  * The operation is _intermediate_ and _stateless_.
  */

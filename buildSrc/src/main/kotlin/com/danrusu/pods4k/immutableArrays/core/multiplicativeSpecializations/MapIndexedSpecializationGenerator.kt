@@ -32,7 +32,7 @@ private fun FileSpec.Builder.addMapIndexedFunction(fromType: BaseType, toType: B
         resultTypeName = toType.getGeneratedTypeName()
     }
     function(
-        kdoc = "Returns an immutable array containing the results of applying [transform] to each element and its " +
+        kdoc = "Returns an Immutable Array containing the results of applying [transform] to each element and its " +
             "index.",
         modifiers = listOf(KModifier.INLINE),
         receiver = fromType.getGeneratedTypeName(),

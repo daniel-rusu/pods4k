@@ -21,7 +21,7 @@ import kotlin.OverloadResolutionByLambdaReturnType
 import kotlin.Short
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T, R> ImmutableArray<T>.mapIndexed(transform: (index: Int, element: T) -> R): ImmutableArray<R> {
@@ -29,7 +29,7 @@ public inline fun <T, R> ImmutableArray<T>.mapIndexed(transform: (index: Int, el
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexed(
@@ -39,7 +39,7 @@ public inline fun <T> ImmutableArray<T>.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexed(transform: (index: Int, element: T) -> Byte): ImmutableByteArray {
@@ -47,7 +47,7 @@ public inline fun <T> ImmutableArray<T>.mapIndexed(transform: (index: Int, eleme
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexed(transform: (index: Int, element: T) -> Char): ImmutableCharArray {
@@ -55,7 +55,7 @@ public inline fun <T> ImmutableArray<T>.mapIndexed(transform: (index: Int, eleme
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexed(transform: (index: Int, element: T) -> Short): ImmutableShortArray {
@@ -63,7 +63,7 @@ public inline fun <T> ImmutableArray<T>.mapIndexed(transform: (index: Int, eleme
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexed(transform: (index: Int, element: T) -> Int): ImmutableIntArray {
@@ -71,7 +71,7 @@ public inline fun <T> ImmutableArray<T>.mapIndexed(transform: (index: Int, eleme
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexed(transform: (index: Int, element: T) -> Long): ImmutableLongArray {
@@ -79,7 +79,7 @@ public inline fun <T> ImmutableArray<T>.mapIndexed(transform: (index: Int, eleme
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexed(transform: (index: Int, element: T) -> Float): ImmutableFloatArray {
@@ -87,7 +87,7 @@ public inline fun <T> ImmutableArray<T>.mapIndexed(transform: (index: Int, eleme
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexed(
@@ -97,7 +97,7 @@ public inline fun <T> ImmutableArray<T>.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableBooleanArray.mapIndexed(
@@ -107,7 +107,7 @@ public inline fun <R> ImmutableBooleanArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexed(
@@ -117,7 +117,7 @@ public inline fun ImmutableBooleanArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexed(
@@ -127,7 +127,7 @@ public inline fun ImmutableBooleanArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexed(
@@ -137,7 +137,7 @@ public inline fun ImmutableBooleanArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexed(
@@ -147,7 +147,7 @@ public inline fun ImmutableBooleanArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexed(
@@ -157,7 +157,7 @@ public inline fun ImmutableBooleanArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexed(
@@ -167,7 +167,7 @@ public inline fun ImmutableBooleanArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexed(
@@ -177,7 +177,7 @@ public inline fun ImmutableBooleanArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexed(
@@ -187,7 +187,7 @@ public inline fun ImmutableBooleanArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableByteArray.mapIndexed(transform: (index: Int, element: Byte) -> R): ImmutableArray<R> {
@@ -195,7 +195,7 @@ public inline fun <R> ImmutableByteArray.mapIndexed(transform: (index: Int, elem
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexed(
@@ -205,7 +205,7 @@ public inline fun ImmutableByteArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexed(transform: (index: Int, element: Byte) -> Byte): ImmutableByteArray {
@@ -213,7 +213,7 @@ public inline fun ImmutableByteArray.mapIndexed(transform: (index: Int, element:
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexed(transform: (index: Int, element: Byte) -> Char): ImmutableCharArray {
@@ -221,7 +221,7 @@ public inline fun ImmutableByteArray.mapIndexed(transform: (index: Int, element:
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexed(transform: (index: Int, element: Byte) -> Short): ImmutableShortArray {
@@ -229,7 +229,7 @@ public inline fun ImmutableByteArray.mapIndexed(transform: (index: Int, element:
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexed(transform: (index: Int, element: Byte) -> Int): ImmutableIntArray {
@@ -237,7 +237,7 @@ public inline fun ImmutableByteArray.mapIndexed(transform: (index: Int, element:
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexed(transform: (index: Int, element: Byte) -> Long): ImmutableLongArray {
@@ -245,7 +245,7 @@ public inline fun ImmutableByteArray.mapIndexed(transform: (index: Int, element:
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexed(transform: (index: Int, element: Byte) -> Float): ImmutableFloatArray {
@@ -253,7 +253,7 @@ public inline fun ImmutableByteArray.mapIndexed(transform: (index: Int, element:
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexed(
@@ -263,7 +263,7 @@ public inline fun ImmutableByteArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableCharArray.mapIndexed(transform: (index: Int, element: Char) -> R): ImmutableArray<R> {
@@ -271,7 +271,7 @@ public inline fun <R> ImmutableCharArray.mapIndexed(transform: (index: Int, elem
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexed(
@@ -281,7 +281,7 @@ public inline fun ImmutableCharArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexed(transform: (index: Int, element: Char) -> Byte): ImmutableByteArray {
@@ -289,7 +289,7 @@ public inline fun ImmutableCharArray.mapIndexed(transform: (index: Int, element:
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexed(transform: (index: Int, element: Char) -> Char): ImmutableCharArray {
@@ -297,7 +297,7 @@ public inline fun ImmutableCharArray.mapIndexed(transform: (index: Int, element:
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexed(transform: (index: Int, element: Char) -> Short): ImmutableShortArray {
@@ -305,7 +305,7 @@ public inline fun ImmutableCharArray.mapIndexed(transform: (index: Int, element:
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexed(transform: (index: Int, element: Char) -> Int): ImmutableIntArray {
@@ -313,7 +313,7 @@ public inline fun ImmutableCharArray.mapIndexed(transform: (index: Int, element:
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexed(transform: (index: Int, element: Char) -> Long): ImmutableLongArray {
@@ -321,7 +321,7 @@ public inline fun ImmutableCharArray.mapIndexed(transform: (index: Int, element:
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexed(transform: (index: Int, element: Char) -> Float): ImmutableFloatArray {
@@ -329,7 +329,7 @@ public inline fun ImmutableCharArray.mapIndexed(transform: (index: Int, element:
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexed(
@@ -339,7 +339,7 @@ public inline fun ImmutableCharArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableShortArray.mapIndexed(transform: (index: Int, element: Short) -> R): ImmutableArray<R> {
@@ -347,7 +347,7 @@ public inline fun <R> ImmutableShortArray.mapIndexed(transform: (index: Int, ele
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexed(
@@ -357,7 +357,7 @@ public inline fun ImmutableShortArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexed(transform: (index: Int, element: Short) -> Byte): ImmutableByteArray {
@@ -365,7 +365,7 @@ public inline fun ImmutableShortArray.mapIndexed(transform: (index: Int, element
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexed(transform: (index: Int, element: Short) -> Char): ImmutableCharArray {
@@ -373,7 +373,7 @@ public inline fun ImmutableShortArray.mapIndexed(transform: (index: Int, element
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexed(
@@ -383,7 +383,7 @@ public inline fun ImmutableShortArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexed(transform: (index: Int, element: Short) -> Int): ImmutableIntArray {
@@ -391,7 +391,7 @@ public inline fun ImmutableShortArray.mapIndexed(transform: (index: Int, element
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexed(transform: (index: Int, element: Short) -> Long): ImmutableLongArray {
@@ -399,7 +399,7 @@ public inline fun ImmutableShortArray.mapIndexed(transform: (index: Int, element
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexed(
@@ -409,7 +409,7 @@ public inline fun ImmutableShortArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexed(
@@ -419,7 +419,7 @@ public inline fun ImmutableShortArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableIntArray.mapIndexed(transform: (index: Int, element: Int) -> R): ImmutableArray<R> {
@@ -427,7 +427,7 @@ public inline fun <R> ImmutableIntArray.mapIndexed(transform: (index: Int, eleme
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexed(
@@ -437,7 +437,7 @@ public inline fun ImmutableIntArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexed(transform: (index: Int, element: Int) -> Byte): ImmutableByteArray {
@@ -445,7 +445,7 @@ public inline fun ImmutableIntArray.mapIndexed(transform: (index: Int, element: 
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexed(transform: (index: Int, element: Int) -> Char): ImmutableCharArray {
@@ -453,7 +453,7 @@ public inline fun ImmutableIntArray.mapIndexed(transform: (index: Int, element: 
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexed(transform: (index: Int, element: Int) -> Short): ImmutableShortArray {
@@ -461,7 +461,7 @@ public inline fun ImmutableIntArray.mapIndexed(transform: (index: Int, element: 
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexed(transform: (index: Int, element: Int) -> Int): ImmutableIntArray {
@@ -469,7 +469,7 @@ public inline fun ImmutableIntArray.mapIndexed(transform: (index: Int, element: 
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexed(transform: (index: Int, element: Int) -> Long): ImmutableLongArray {
@@ -477,7 +477,7 @@ public inline fun ImmutableIntArray.mapIndexed(transform: (index: Int, element: 
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexed(transform: (index: Int, element: Int) -> Float): ImmutableFloatArray {
@@ -485,7 +485,7 @@ public inline fun ImmutableIntArray.mapIndexed(transform: (index: Int, element: 
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexed(transform: (index: Int, element: Int) -> Double): ImmutableDoubleArray {
@@ -493,7 +493,7 @@ public inline fun ImmutableIntArray.mapIndexed(transform: (index: Int, element: 
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableLongArray.mapIndexed(transform: (index: Int, element: Long) -> R): ImmutableArray<R> {
@@ -501,7 +501,7 @@ public inline fun <R> ImmutableLongArray.mapIndexed(transform: (index: Int, elem
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexed(
@@ -511,7 +511,7 @@ public inline fun ImmutableLongArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexed(transform: (index: Int, element: Long) -> Byte): ImmutableByteArray {
@@ -519,7 +519,7 @@ public inline fun ImmutableLongArray.mapIndexed(transform: (index: Int, element:
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexed(transform: (index: Int, element: Long) -> Char): ImmutableCharArray {
@@ -527,7 +527,7 @@ public inline fun ImmutableLongArray.mapIndexed(transform: (index: Int, element:
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexed(transform: (index: Int, element: Long) -> Short): ImmutableShortArray {
@@ -535,7 +535,7 @@ public inline fun ImmutableLongArray.mapIndexed(transform: (index: Int, element:
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexed(transform: (index: Int, element: Long) -> Int): ImmutableIntArray {
@@ -543,7 +543,7 @@ public inline fun ImmutableLongArray.mapIndexed(transform: (index: Int, element:
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexed(transform: (index: Int, element: Long) -> Long): ImmutableLongArray {
@@ -551,7 +551,7 @@ public inline fun ImmutableLongArray.mapIndexed(transform: (index: Int, element:
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexed(transform: (index: Int, element: Long) -> Float): ImmutableFloatArray {
@@ -559,7 +559,7 @@ public inline fun ImmutableLongArray.mapIndexed(transform: (index: Int, element:
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexed(
@@ -569,7 +569,7 @@ public inline fun ImmutableLongArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableFloatArray.mapIndexed(transform: (index: Int, element: Float) -> R): ImmutableArray<R> {
@@ -577,7 +577,7 @@ public inline fun <R> ImmutableFloatArray.mapIndexed(transform: (index: Int, ele
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexed(
@@ -587,7 +587,7 @@ public inline fun ImmutableFloatArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexed(transform: (index: Int, element: Float) -> Byte): ImmutableByteArray {
@@ -595,7 +595,7 @@ public inline fun ImmutableFloatArray.mapIndexed(transform: (index: Int, element
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexed(transform: (index: Int, element: Float) -> Char): ImmutableCharArray {
@@ -603,7 +603,7 @@ public inline fun ImmutableFloatArray.mapIndexed(transform: (index: Int, element
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexed(
@@ -613,7 +613,7 @@ public inline fun ImmutableFloatArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexed(transform: (index: Int, element: Float) -> Int): ImmutableIntArray {
@@ -621,7 +621,7 @@ public inline fun ImmutableFloatArray.mapIndexed(transform: (index: Int, element
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexed(transform: (index: Int, element: Float) -> Long): ImmutableLongArray {
@@ -629,7 +629,7 @@ public inline fun ImmutableFloatArray.mapIndexed(transform: (index: Int, element
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexed(
@@ -639,7 +639,7 @@ public inline fun ImmutableFloatArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexed(
@@ -649,7 +649,7 @@ public inline fun ImmutableFloatArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableDoubleArray.mapIndexed(
@@ -659,7 +659,7 @@ public inline fun <R> ImmutableDoubleArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexed(
@@ -669,7 +669,7 @@ public inline fun ImmutableDoubleArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexed(
@@ -679,7 +679,7 @@ public inline fun ImmutableDoubleArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexed(
@@ -689,7 +689,7 @@ public inline fun ImmutableDoubleArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexed(
@@ -699,7 +699,7 @@ public inline fun ImmutableDoubleArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexed(transform: (index: Int, element: Double) -> Int): ImmutableIntArray {
@@ -707,7 +707,7 @@ public inline fun ImmutableDoubleArray.mapIndexed(transform: (index: Int, elemen
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexed(
@@ -717,7 +717,7 @@ public inline fun ImmutableDoubleArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexed(
@@ -727,7 +727,7 @@ public inline fun ImmutableDoubleArray.mapIndexed(
 }
 
 /**
- * Returns an immutable array containing the results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexed(

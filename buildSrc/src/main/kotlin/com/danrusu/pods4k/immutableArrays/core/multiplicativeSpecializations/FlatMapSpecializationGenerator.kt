@@ -64,9 +64,9 @@ private fun FileSpec.Builder.addFlatMapFunction(fromType: BaseType, toType: Base
         statement("return builder.build()")
     }
 
-    // flatMap joining immutable arrays
+    // flatMap joining Immutable Arrays
     function(
-        kdoc = "Transforms each element into an immutable array and appends those arrays in a single " +
+        kdoc = "Transforms each element into an Immutable Array and appends those arrays in a single " +
             "${toType.generatedClassName}.",
         modifiers = listOf(KModifier.INLINE),
         receiver = fromType.getGeneratedTypeName(),
@@ -133,7 +133,7 @@ private fun FileSpec.Builder.addFlatMapFunction(fromType: BaseType, toType: Base
         The memory overhead of storing an array of N references to each nested array is significantly lower than the
         memory of the temporary backing arrays as it's re-sized a bunch of times to finally end up with sufficient
         capacity to store N * M elements.  If the provided flatMap transform returns references to pre-existing
-        immutable arrays (which is common) then the memory benefit becomes even larger.
+        Immutable Arrays (which is common) then the memory benefit becomes even larger.
 
         Performance intuition:
         =======================
@@ -146,7 +146,7 @@ private fun FileSpec.Builder.addFlatMapFunction(fromType: BaseType, toType: Base
          */
         statement("var numElements = 0")
         controlFlow("val arrays = map { element ->") {
-            // reference the underlying array directly to avoid auto-boxing the immutable array
+            // reference the underlying array directly to avoid auto-boxing the Immutable Array
             statement("transform(element).values.also { numElements += it.size }")
         }
         controlFlow(

@@ -45,7 +45,7 @@ public inline fun <T, R> ImmutableArray<T>.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableArray.
  */
 @JvmName("flatMapIndexed_ImmutableArray")
 @OverloadResolutionByLambdaReturnType
@@ -75,7 +75,7 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableBooleanArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableBooleanArray.
  */
 @JvmName("flatMapIndexed_ImmutableBooleanArray")
 @OverloadResolutionByLambdaReturnType
@@ -105,7 +105,7 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableByteArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableByteArray.
  */
 @JvmName("flatMapIndexed_ImmutableByteArray")
 @OverloadResolutionByLambdaReturnType
@@ -135,7 +135,7 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableCharArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableCharArray.
  */
 @JvmName("flatMapIndexed_ImmutableCharArray")
 @OverloadResolutionByLambdaReturnType
@@ -165,7 +165,7 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableShortArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableShortArray.
  */
 @JvmName("flatMapIndexed_ImmutableShortArray")
 @OverloadResolutionByLambdaReturnType
@@ -195,7 +195,7 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableIntArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableIntArray.
  */
 @JvmName("flatMapIndexed_ImmutableIntArray")
 @OverloadResolutionByLambdaReturnType
@@ -225,7 +225,7 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableLongArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableLongArray.
  */
 @JvmName("flatMapIndexed_ImmutableLongArray")
 @OverloadResolutionByLambdaReturnType
@@ -255,7 +255,7 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableFloatArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableFloatArray.
  */
 @JvmName("flatMapIndexed_ImmutableFloatArray")
 @OverloadResolutionByLambdaReturnType
@@ -285,7 +285,7 @@ public inline fun <T> ImmutableArray<T>.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableDoubleArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableDoubleArray.
  */
 @JvmName("flatMapIndexed_ImmutableDoubleArray")
 @OverloadResolutionByLambdaReturnType
@@ -315,7 +315,7 @@ public inline fun <R> ImmutableBooleanArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableArray.
  */
 @JvmName("flatMapIndexed_ImmutableArray")
 @OverloadResolutionByLambdaReturnType
@@ -345,7 +345,7 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableBooleanArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableBooleanArray.
  */
 @JvmName("flatMapIndexed_ImmutableBooleanArray")
 @OverloadResolutionByLambdaReturnType
@@ -375,7 +375,7 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableByteArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableByteArray.
  */
 @JvmName("flatMapIndexed_ImmutableByteArray")
 @OverloadResolutionByLambdaReturnType
@@ -405,7 +405,7 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableCharArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableCharArray.
  */
 @JvmName("flatMapIndexed_ImmutableCharArray")
 @OverloadResolutionByLambdaReturnType
@@ -435,7 +435,7 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableShortArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableShortArray.
  */
 @JvmName("flatMapIndexed_ImmutableShortArray")
 @OverloadResolutionByLambdaReturnType
@@ -465,7 +465,7 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableIntArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableIntArray.
  */
 @JvmName("flatMapIndexed_ImmutableIntArray")
 @OverloadResolutionByLambdaReturnType
@@ -495,7 +495,7 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableLongArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableLongArray.
  */
 @JvmName("flatMapIndexed_ImmutableLongArray")
 @OverloadResolutionByLambdaReturnType
@@ -525,7 +525,7 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableFloatArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableFloatArray.
  */
 @JvmName("flatMapIndexed_ImmutableFloatArray")
 @OverloadResolutionByLambdaReturnType
@@ -555,7 +555,7 @@ public inline fun ImmutableBooleanArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableDoubleArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableDoubleArray.
  */
 @JvmName("flatMapIndexed_ImmutableDoubleArray")
 @OverloadResolutionByLambdaReturnType
@@ -585,7 +585,7 @@ public inline fun <R> ImmutableByteArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableArray.
  */
 @JvmName("flatMapIndexed_ImmutableArray")
 @OverloadResolutionByLambdaReturnType
@@ -615,7 +615,7 @@ public inline fun ImmutableByteArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableBooleanArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableBooleanArray.
  */
 @JvmName("flatMapIndexed_ImmutableBooleanArray")
 @OverloadResolutionByLambdaReturnType
@@ -645,7 +645,7 @@ public inline fun ImmutableByteArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableByteArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableByteArray.
  */
 @JvmName("flatMapIndexed_ImmutableByteArray")
 @OverloadResolutionByLambdaReturnType
@@ -675,7 +675,7 @@ public inline fun ImmutableByteArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableCharArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableCharArray.
  */
 @JvmName("flatMapIndexed_ImmutableCharArray")
 @OverloadResolutionByLambdaReturnType
@@ -705,7 +705,7 @@ public inline fun ImmutableByteArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableShortArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableShortArray.
  */
 @JvmName("flatMapIndexed_ImmutableShortArray")
 @OverloadResolutionByLambdaReturnType
@@ -735,7 +735,7 @@ public inline fun ImmutableByteArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableIntArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableIntArray.
  */
 @JvmName("flatMapIndexed_ImmutableIntArray")
 @OverloadResolutionByLambdaReturnType
@@ -765,7 +765,7 @@ public inline fun ImmutableByteArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableLongArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableLongArray.
  */
 @JvmName("flatMapIndexed_ImmutableLongArray")
 @OverloadResolutionByLambdaReturnType
@@ -795,7 +795,7 @@ public inline fun ImmutableByteArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableFloatArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableFloatArray.
  */
 @JvmName("flatMapIndexed_ImmutableFloatArray")
 @OverloadResolutionByLambdaReturnType
@@ -825,7 +825,7 @@ public inline fun ImmutableByteArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableDoubleArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableDoubleArray.
  */
 @JvmName("flatMapIndexed_ImmutableDoubleArray")
 @OverloadResolutionByLambdaReturnType
@@ -855,7 +855,7 @@ public inline fun <R> ImmutableCharArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableArray.
  */
 @JvmName("flatMapIndexed_ImmutableArray")
 @OverloadResolutionByLambdaReturnType
@@ -885,7 +885,7 @@ public inline fun ImmutableCharArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableBooleanArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableBooleanArray.
  */
 @JvmName("flatMapIndexed_ImmutableBooleanArray")
 @OverloadResolutionByLambdaReturnType
@@ -915,7 +915,7 @@ public inline fun ImmutableCharArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableByteArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableByteArray.
  */
 @JvmName("flatMapIndexed_ImmutableByteArray")
 @OverloadResolutionByLambdaReturnType
@@ -945,7 +945,7 @@ public inline fun ImmutableCharArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableCharArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableCharArray.
  */
 @JvmName("flatMapIndexed_ImmutableCharArray")
 @OverloadResolutionByLambdaReturnType
@@ -975,7 +975,7 @@ public inline fun ImmutableCharArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableShortArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableShortArray.
  */
 @JvmName("flatMapIndexed_ImmutableShortArray")
 @OverloadResolutionByLambdaReturnType
@@ -1005,7 +1005,7 @@ public inline fun ImmutableCharArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableIntArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableIntArray.
  */
 @JvmName("flatMapIndexed_ImmutableIntArray")
 @OverloadResolutionByLambdaReturnType
@@ -1035,7 +1035,7 @@ public inline fun ImmutableCharArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableLongArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableLongArray.
  */
 @JvmName("flatMapIndexed_ImmutableLongArray")
 @OverloadResolutionByLambdaReturnType
@@ -1065,7 +1065,7 @@ public inline fun ImmutableCharArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableFloatArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableFloatArray.
  */
 @JvmName("flatMapIndexed_ImmutableFloatArray")
 @OverloadResolutionByLambdaReturnType
@@ -1095,7 +1095,7 @@ public inline fun ImmutableCharArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableDoubleArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableDoubleArray.
  */
 @JvmName("flatMapIndexed_ImmutableDoubleArray")
 @OverloadResolutionByLambdaReturnType
@@ -1125,7 +1125,7 @@ public inline fun <R> ImmutableShortArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableArray.
  */
 @JvmName("flatMapIndexed_ImmutableArray")
 @OverloadResolutionByLambdaReturnType
@@ -1155,7 +1155,7 @@ public inline fun ImmutableShortArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableBooleanArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableBooleanArray.
  */
 @JvmName("flatMapIndexed_ImmutableBooleanArray")
 @OverloadResolutionByLambdaReturnType
@@ -1185,7 +1185,7 @@ public inline fun ImmutableShortArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableByteArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableByteArray.
  */
 @JvmName("flatMapIndexed_ImmutableByteArray")
 @OverloadResolutionByLambdaReturnType
@@ -1215,7 +1215,7 @@ public inline fun ImmutableShortArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableCharArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableCharArray.
  */
 @JvmName("flatMapIndexed_ImmutableCharArray")
 @OverloadResolutionByLambdaReturnType
@@ -1245,7 +1245,7 @@ public inline fun ImmutableShortArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableShortArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableShortArray.
  */
 @JvmName("flatMapIndexed_ImmutableShortArray")
 @OverloadResolutionByLambdaReturnType
@@ -1275,7 +1275,7 @@ public inline fun ImmutableShortArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableIntArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableIntArray.
  */
 @JvmName("flatMapIndexed_ImmutableIntArray")
 @OverloadResolutionByLambdaReturnType
@@ -1305,7 +1305,7 @@ public inline fun ImmutableShortArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableLongArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableLongArray.
  */
 @JvmName("flatMapIndexed_ImmutableLongArray")
 @OverloadResolutionByLambdaReturnType
@@ -1335,7 +1335,7 @@ public inline fun ImmutableShortArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableFloatArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableFloatArray.
  */
 @JvmName("flatMapIndexed_ImmutableFloatArray")
 @OverloadResolutionByLambdaReturnType
@@ -1365,7 +1365,7 @@ public inline fun ImmutableShortArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableDoubleArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableDoubleArray.
  */
 @JvmName("flatMapIndexed_ImmutableDoubleArray")
 @OverloadResolutionByLambdaReturnType
@@ -1395,7 +1395,7 @@ public inline fun <R> ImmutableIntArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableArray.
  */
 @JvmName("flatMapIndexed_ImmutableArray")
 @OverloadResolutionByLambdaReturnType
@@ -1425,7 +1425,7 @@ public inline fun ImmutableIntArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableBooleanArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableBooleanArray.
  */
 @JvmName("flatMapIndexed_ImmutableBooleanArray")
 @OverloadResolutionByLambdaReturnType
@@ -1455,7 +1455,7 @@ public inline fun ImmutableIntArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableByteArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableByteArray.
  */
 @JvmName("flatMapIndexed_ImmutableByteArray")
 @OverloadResolutionByLambdaReturnType
@@ -1485,7 +1485,7 @@ public inline fun ImmutableIntArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableCharArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableCharArray.
  */
 @JvmName("flatMapIndexed_ImmutableCharArray")
 @OverloadResolutionByLambdaReturnType
@@ -1515,7 +1515,7 @@ public inline fun ImmutableIntArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableShortArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableShortArray.
  */
 @JvmName("flatMapIndexed_ImmutableShortArray")
 @OverloadResolutionByLambdaReturnType
@@ -1545,7 +1545,7 @@ public inline fun ImmutableIntArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableIntArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableIntArray.
  */
 @JvmName("flatMapIndexed_ImmutableIntArray")
 @OverloadResolutionByLambdaReturnType
@@ -1575,7 +1575,7 @@ public inline fun ImmutableIntArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableLongArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableLongArray.
  */
 @JvmName("flatMapIndexed_ImmutableLongArray")
 @OverloadResolutionByLambdaReturnType
@@ -1605,7 +1605,7 @@ public inline fun ImmutableIntArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableFloatArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableFloatArray.
  */
 @JvmName("flatMapIndexed_ImmutableFloatArray")
 @OverloadResolutionByLambdaReturnType
@@ -1635,7 +1635,7 @@ public inline fun ImmutableIntArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableDoubleArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableDoubleArray.
  */
 @JvmName("flatMapIndexed_ImmutableDoubleArray")
 @OverloadResolutionByLambdaReturnType
@@ -1665,7 +1665,7 @@ public inline fun <R> ImmutableLongArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableArray.
  */
 @JvmName("flatMapIndexed_ImmutableArray")
 @OverloadResolutionByLambdaReturnType
@@ -1695,7 +1695,7 @@ public inline fun ImmutableLongArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableBooleanArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableBooleanArray.
  */
 @JvmName("flatMapIndexed_ImmutableBooleanArray")
 @OverloadResolutionByLambdaReturnType
@@ -1725,7 +1725,7 @@ public inline fun ImmutableLongArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableByteArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableByteArray.
  */
 @JvmName("flatMapIndexed_ImmutableByteArray")
 @OverloadResolutionByLambdaReturnType
@@ -1755,7 +1755,7 @@ public inline fun ImmutableLongArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableCharArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableCharArray.
  */
 @JvmName("flatMapIndexed_ImmutableCharArray")
 @OverloadResolutionByLambdaReturnType
@@ -1785,7 +1785,7 @@ public inline fun ImmutableLongArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableShortArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableShortArray.
  */
 @JvmName("flatMapIndexed_ImmutableShortArray")
 @OverloadResolutionByLambdaReturnType
@@ -1815,7 +1815,7 @@ public inline fun ImmutableLongArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableIntArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableIntArray.
  */
 @JvmName("flatMapIndexed_ImmutableIntArray")
 @OverloadResolutionByLambdaReturnType
@@ -1845,7 +1845,7 @@ public inline fun ImmutableLongArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableLongArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableLongArray.
  */
 @JvmName("flatMapIndexed_ImmutableLongArray")
 @OverloadResolutionByLambdaReturnType
@@ -1875,7 +1875,7 @@ public inline fun ImmutableLongArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableFloatArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableFloatArray.
  */
 @JvmName("flatMapIndexed_ImmutableFloatArray")
 @OverloadResolutionByLambdaReturnType
@@ -1905,7 +1905,7 @@ public inline fun ImmutableLongArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableDoubleArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableDoubleArray.
  */
 @JvmName("flatMapIndexed_ImmutableDoubleArray")
 @OverloadResolutionByLambdaReturnType
@@ -1935,7 +1935,7 @@ public inline fun <R> ImmutableFloatArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableArray.
  */
 @JvmName("flatMapIndexed_ImmutableArray")
 @OverloadResolutionByLambdaReturnType
@@ -1965,7 +1965,7 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableBooleanArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableBooleanArray.
  */
 @JvmName("flatMapIndexed_ImmutableBooleanArray")
 @OverloadResolutionByLambdaReturnType
@@ -1995,7 +1995,7 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableByteArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableByteArray.
  */
 @JvmName("flatMapIndexed_ImmutableByteArray")
 @OverloadResolutionByLambdaReturnType
@@ -2025,7 +2025,7 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableCharArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableCharArray.
  */
 @JvmName("flatMapIndexed_ImmutableCharArray")
 @OverloadResolutionByLambdaReturnType
@@ -2055,7 +2055,7 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableShortArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableShortArray.
  */
 @JvmName("flatMapIndexed_ImmutableShortArray")
 @OverloadResolutionByLambdaReturnType
@@ -2085,7 +2085,7 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableIntArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableIntArray.
  */
 @JvmName("flatMapIndexed_ImmutableIntArray")
 @OverloadResolutionByLambdaReturnType
@@ -2115,7 +2115,7 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableLongArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableLongArray.
  */
 @JvmName("flatMapIndexed_ImmutableLongArray")
 @OverloadResolutionByLambdaReturnType
@@ -2145,7 +2145,7 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableFloatArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableFloatArray.
  */
 @JvmName("flatMapIndexed_ImmutableFloatArray")
 @OverloadResolutionByLambdaReturnType
@@ -2175,7 +2175,7 @@ public inline fun ImmutableFloatArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableDoubleArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableDoubleArray.
  */
 @JvmName("flatMapIndexed_ImmutableDoubleArray")
 @OverloadResolutionByLambdaReturnType
@@ -2205,7 +2205,7 @@ public inline fun <R> ImmutableDoubleArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableArray.
  */
 @JvmName("flatMapIndexed_ImmutableArray")
 @OverloadResolutionByLambdaReturnType
@@ -2235,7 +2235,7 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableBooleanArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableBooleanArray.
  */
 @JvmName("flatMapIndexed_ImmutableBooleanArray")
 @OverloadResolutionByLambdaReturnType
@@ -2265,7 +2265,7 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableByteArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableByteArray.
  */
 @JvmName("flatMapIndexed_ImmutableByteArray")
 @OverloadResolutionByLambdaReturnType
@@ -2295,7 +2295,7 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableCharArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableCharArray.
  */
 @JvmName("flatMapIndexed_ImmutableCharArray")
 @OverloadResolutionByLambdaReturnType
@@ -2325,7 +2325,7 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableShortArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableShortArray.
  */
 @JvmName("flatMapIndexed_ImmutableShortArray")
 @OverloadResolutionByLambdaReturnType
@@ -2355,7 +2355,7 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableIntArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableIntArray.
  */
 @JvmName("flatMapIndexed_ImmutableIntArray")
 @OverloadResolutionByLambdaReturnType
@@ -2385,7 +2385,7 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableLongArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableLongArray.
  */
 @JvmName("flatMapIndexed_ImmutableLongArray")
 @OverloadResolutionByLambdaReturnType
@@ -2415,7 +2415,7 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableFloatArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableFloatArray.
  */
 @JvmName("flatMapIndexed_ImmutableFloatArray")
 @OverloadResolutionByLambdaReturnType
@@ -2445,7 +2445,7 @@ public inline fun ImmutableDoubleArray.flatMapIndexed(
 }
 
 /**
- * Transforms each element into an immutable array and appends those arrays in a single ImmutableDoubleArray.
+ * Transforms each element into an Immutable Array and appends those arrays in a single ImmutableDoubleArray.
  */
 @JvmName("flatMapIndexed_ImmutableDoubleArray")
 @OverloadResolutionByLambdaReturnType

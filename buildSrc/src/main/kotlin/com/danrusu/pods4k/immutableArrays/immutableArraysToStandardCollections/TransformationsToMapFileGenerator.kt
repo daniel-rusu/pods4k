@@ -142,7 +142,7 @@ private fun FileSpec.Builder.addGroupBy() {
             // iteration order since this library is documented as a replacement for read-only lists.
             addGenericTypes(baseType.type, key)
             /*
-            Reusing the same map to store the builders and final immutable arrays in order to reduce memory footprint.
+            Reusing the same map to store the builders and final Immutable Arrays in order to reduce memory footprint.
 
             The regular approach of creating a map of builders and calling mapValues ends up creating
             a second map so all the builders (with their extra unused capacity) stick around until groupBy returns.

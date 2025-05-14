@@ -21,7 +21,7 @@ import kotlin.OverloadResolutionByLambdaReturnType
 import kotlin.Short
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T, R> ImmutableArray<T>.mapIndexedNotNull(
@@ -35,7 +35,7 @@ public inline fun <T, R> ImmutableArray<T>.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
@@ -49,7 +49,7 @@ public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
@@ -63,7 +63,7 @@ public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
@@ -77,7 +77,7 @@ public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
@@ -91,7 +91,7 @@ public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
@@ -105,7 +105,7 @@ public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
@@ -119,7 +119,7 @@ public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
@@ -133,7 +133,7 @@ public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
@@ -147,7 +147,7 @@ public inline fun <T> ImmutableArray<T>.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableBooleanArray.mapIndexedNotNull(
@@ -161,7 +161,7 @@ public inline fun <R> ImmutableBooleanArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexedNotNull(
@@ -175,7 +175,7 @@ public inline fun ImmutableBooleanArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexedNotNull(
@@ -189,7 +189,7 @@ public inline fun ImmutableBooleanArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexedNotNull(
@@ -203,7 +203,7 @@ public inline fun ImmutableBooleanArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexedNotNull(
@@ -217,7 +217,7 @@ public inline fun ImmutableBooleanArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexedNotNull(
@@ -231,7 +231,7 @@ public inline fun ImmutableBooleanArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexedNotNull(
@@ -245,7 +245,7 @@ public inline fun ImmutableBooleanArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexedNotNull(
@@ -259,7 +259,7 @@ public inline fun ImmutableBooleanArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableBooleanArray.mapIndexedNotNull(
@@ -273,7 +273,7 @@ public inline fun ImmutableBooleanArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableByteArray.mapIndexedNotNull(
@@ -287,7 +287,7 @@ public inline fun <R> ImmutableByteArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexedNotNull(
@@ -301,7 +301,7 @@ public inline fun ImmutableByteArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexedNotNull(
@@ -315,7 +315,7 @@ public inline fun ImmutableByteArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexedNotNull(
@@ -329,7 +329,7 @@ public inline fun ImmutableByteArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexedNotNull(
@@ -343,7 +343,7 @@ public inline fun ImmutableByteArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexedNotNull(
@@ -357,7 +357,7 @@ public inline fun ImmutableByteArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexedNotNull(
@@ -371,7 +371,7 @@ public inline fun ImmutableByteArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexedNotNull(
@@ -385,7 +385,7 @@ public inline fun ImmutableByteArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableByteArray.mapIndexedNotNull(
@@ -399,7 +399,7 @@ public inline fun ImmutableByteArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableCharArray.mapIndexedNotNull(
@@ -413,7 +413,7 @@ public inline fun <R> ImmutableCharArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexedNotNull(
@@ -427,7 +427,7 @@ public inline fun ImmutableCharArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexedNotNull(
@@ -441,7 +441,7 @@ public inline fun ImmutableCharArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexedNotNull(
@@ -455,7 +455,7 @@ public inline fun ImmutableCharArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexedNotNull(
@@ -469,7 +469,7 @@ public inline fun ImmutableCharArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexedNotNull(
@@ -483,7 +483,7 @@ public inline fun ImmutableCharArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexedNotNull(
@@ -497,7 +497,7 @@ public inline fun ImmutableCharArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexedNotNull(
@@ -511,7 +511,7 @@ public inline fun ImmutableCharArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableCharArray.mapIndexedNotNull(
@@ -525,7 +525,7 @@ public inline fun ImmutableCharArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableShortArray.mapIndexedNotNull(
@@ -539,7 +539,7 @@ public inline fun <R> ImmutableShortArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexedNotNull(
@@ -553,7 +553,7 @@ public inline fun ImmutableShortArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexedNotNull(
@@ -567,7 +567,7 @@ public inline fun ImmutableShortArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexedNotNull(
@@ -581,7 +581,7 @@ public inline fun ImmutableShortArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexedNotNull(
@@ -595,7 +595,7 @@ public inline fun ImmutableShortArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexedNotNull(
@@ -609,7 +609,7 @@ public inline fun ImmutableShortArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexedNotNull(
@@ -623,7 +623,7 @@ public inline fun ImmutableShortArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexedNotNull(
@@ -637,7 +637,7 @@ public inline fun ImmutableShortArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableShortArray.mapIndexedNotNull(
@@ -651,7 +651,7 @@ public inline fun ImmutableShortArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableIntArray.mapIndexedNotNull(
@@ -665,7 +665,7 @@ public inline fun <R> ImmutableIntArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexedNotNull(
@@ -679,7 +679,7 @@ public inline fun ImmutableIntArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexedNotNull(
@@ -693,7 +693,7 @@ public inline fun ImmutableIntArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexedNotNull(
@@ -707,7 +707,7 @@ public inline fun ImmutableIntArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexedNotNull(
@@ -721,7 +721,7 @@ public inline fun ImmutableIntArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexedNotNull(
@@ -735,7 +735,7 @@ public inline fun ImmutableIntArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexedNotNull(
@@ -749,7 +749,7 @@ public inline fun ImmutableIntArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexedNotNull(
@@ -763,7 +763,7 @@ public inline fun ImmutableIntArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableIntArray.mapIndexedNotNull(
@@ -777,7 +777,7 @@ public inline fun ImmutableIntArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableLongArray.mapIndexedNotNull(
@@ -791,7 +791,7 @@ public inline fun <R> ImmutableLongArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexedNotNull(
@@ -805,7 +805,7 @@ public inline fun ImmutableLongArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexedNotNull(
@@ -819,7 +819,7 @@ public inline fun ImmutableLongArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexedNotNull(
@@ -833,7 +833,7 @@ public inline fun ImmutableLongArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexedNotNull(
@@ -847,7 +847,7 @@ public inline fun ImmutableLongArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexedNotNull(
@@ -861,7 +861,7 @@ public inline fun ImmutableLongArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexedNotNull(
@@ -875,7 +875,7 @@ public inline fun ImmutableLongArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexedNotNull(
@@ -889,7 +889,7 @@ public inline fun ImmutableLongArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableLongArray.mapIndexedNotNull(
@@ -903,7 +903,7 @@ public inline fun ImmutableLongArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableFloatArray.mapIndexedNotNull(
@@ -917,7 +917,7 @@ public inline fun <R> ImmutableFloatArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexedNotNull(
@@ -931,7 +931,7 @@ public inline fun ImmutableFloatArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexedNotNull(
@@ -945,7 +945,7 @@ public inline fun ImmutableFloatArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexedNotNull(
@@ -959,7 +959,7 @@ public inline fun ImmutableFloatArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexedNotNull(
@@ -973,7 +973,7 @@ public inline fun ImmutableFloatArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexedNotNull(
@@ -987,7 +987,7 @@ public inline fun ImmutableFloatArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexedNotNull(
@@ -1001,7 +1001,7 @@ public inline fun ImmutableFloatArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexedNotNull(
@@ -1015,7 +1015,7 @@ public inline fun ImmutableFloatArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableFloatArray.mapIndexedNotNull(
@@ -1029,7 +1029,7 @@ public inline fun ImmutableFloatArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun <R> ImmutableDoubleArray.mapIndexedNotNull(
@@ -1043,7 +1043,7 @@ public inline fun <R> ImmutableDoubleArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexedNotNull(
@@ -1057,7 +1057,7 @@ public inline fun ImmutableDoubleArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexedNotNull(
@@ -1071,7 +1071,7 @@ public inline fun ImmutableDoubleArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexedNotNull(
@@ -1085,7 +1085,7 @@ public inline fun ImmutableDoubleArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexedNotNull(
@@ -1099,7 +1099,7 @@ public inline fun ImmutableDoubleArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexedNotNull(
@@ -1113,7 +1113,7 @@ public inline fun ImmutableDoubleArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexedNotNull(
@@ -1127,7 +1127,7 @@ public inline fun ImmutableDoubleArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexedNotNull(
@@ -1141,7 +1141,7 @@ public inline fun ImmutableDoubleArray.mapIndexedNotNull(
 }
 
 /**
- * Returns an immutable array containing the non-null results of applying [transform] to each element and its index.
+ * Returns an Immutable Array containing the non-null results of applying [transform] to each element and its index.
  */
 @OverloadResolutionByLambdaReturnType
 public inline fun ImmutableDoubleArray.mapIndexedNotNull(

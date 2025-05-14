@@ -22,7 +22,7 @@ class FlatMapIndexedSpecializationsTest {
                 .isA<ImmutableArray<Char>>()
                 .isEmpty()
 
-            // immutable array
+            // Immutable Array
             expectThat(flatMapIndexed { index, element -> element.toList().drop(index).toImmutableArray<Char>() })
                 .isA<ImmutableArray<Char>>()
                 .isEmpty()
@@ -34,7 +34,7 @@ class FlatMapIndexedSpecializationsTest {
                 flatMapIndexed<String, Char> { index, element -> element.toList().drop(index) },
             ).isEqualTo(immutableArrayOf<Char>('D', 'a', 'n', 'i', 'l', 'l'))
 
-            // immutable array
+            // Immutable Array
             expectThat(
                 flatMapIndexed { index, element -> element.toList().drop(index).toImmutableArray<Char>() },
             ).isEqualTo(immutableArrayOf<Char>('D', 'a', 'n', 'i', 'l', 'l'))
@@ -53,7 +53,7 @@ class FlatMapIndexedSpecializationsTest {
                 .isA<ImmutableIntArray>()
                 .isEmpty()
 
-            // immutable array
+            // Immutable Array
             expectThat(
                 flatMapIndexed { index, element ->
                     (element.toCharArray().map { it.digitToInt() } + index).toImmutableArray()
@@ -71,7 +71,7 @@ class FlatMapIndexedSpecializationsTest {
                 },
             ).isEqualTo(immutableArrayOf(1, 0, 2, 2, 1, 3, 3, 3, 2))
 
-            // immutable array
+            // Immutable Array
             expectThat(
                 flatMapIndexed { index, element ->
                     (element.toCharArray().map { it.digitToInt() } + index).toImmutableArray()
@@ -90,7 +90,7 @@ class FlatMapIndexedSpecializationsTest {
                 .isA<ImmutableArray<Char>>()
                 .isEmpty()
 
-            // immutable array
+            // Immutable Array
             expectThat(
                 flatMapIndexed { index, element -> element.toString().toList().drop(index).toImmutableArray<Char>() },
             )
@@ -104,7 +104,7 @@ class FlatMapIndexedSpecializationsTest {
                 flatMapIndexed<Char> { index, element -> element.toString().toList().drop(index) },
             ).isEqualTo(immutableArrayOf<Char>('2', '0', '8', '9'))
 
-            // immutable array
+            // Immutable Array
             expectThat(
                 flatMapIndexed { index, element -> element.toString().toList().drop(index).toImmutableArray<Char>() },
             ).isEqualTo(immutableArrayOf<Char>('2', '0', '8', '9'))
@@ -123,7 +123,7 @@ class FlatMapIndexedSpecializationsTest {
                 .isA<ImmutableDoubleArray>()
                 .isEmpty()
 
-            // immutable array
+            // Immutable Array
             expectThat(
                 flatMapIndexed { index, element ->
                     DoubleArray(element) { (index + it).toDouble() / element }.toImmutableArray()
@@ -141,7 +141,7 @@ class FlatMapIndexedSpecializationsTest {
                 },
             ).isEqualTo(immutableArrayOf(0.0, 1.0 / 3, 2.0 / 3, 1.0 / 4, 2.0 / 4, 3.0 / 4, 4.0 / 4))
 
-            // immutable array
+            // Immutable Array
             expectThat(
                 flatMapIndexed { index, element ->
                     DoubleArray(element) { (index + it).toDouble() / element }.toImmutableArray()

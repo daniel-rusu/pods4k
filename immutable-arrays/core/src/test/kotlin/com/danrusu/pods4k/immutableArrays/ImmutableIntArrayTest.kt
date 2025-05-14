@@ -1413,7 +1413,7 @@ class ImmutableIntArrayTest {
         expectThat(builder.build())
             .isEqualTo(ImmutableIntArray(11) { it })
 
-        // Add all from primitive immutable array
+        // Add all from primitive Immutable Array
         builder.addAll(immutableArrayOf(11, 12, 13, 14))
 
         expectThat(builder.size)
@@ -1421,7 +1421,7 @@ class ImmutableIntArrayTest {
         expectThat(builder.build())
             .isEqualTo(ImmutableIntArray(15) { it })
 
-        // Add all from generic immutable array
+        // Add all from generic Immutable Array
         builder.addAll(immutableArrayOf<Int>(15, 16, 17))
 
         expectThat(builder.size)
