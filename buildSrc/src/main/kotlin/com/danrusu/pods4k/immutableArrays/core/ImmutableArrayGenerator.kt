@@ -378,6 +378,9 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 val builderKdoc = """
                     Builder to create immutable arrays when the resulting size isn't known in advance.
 
+                    Note: While the generated Immutable Array is thread-safe, this builder is not.  External concurrency
+                    control is required when sharing builders between threads.
+
                     @param initialCapacity The initial capacity of the temporary array where the values are
                     accumulated.  A larger value reduces the number of times it's resized as elements get added.
                 """.trimIndent()
