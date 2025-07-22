@@ -1,3 +1,34 @@
+
+<div align="right">
+  <details>
+    <summary >🌐 Language</summary>
+    <div>
+      <div align="center">
+        <a href="https://openaitx.github.io/view.html?user=daniel-rusu&project=pods4k&lang=en">English</a>
+        | <a href="https://openaitx.github.io/view.html?user=daniel-rusu&project=pods4k&lang=zh-CN">简体中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=daniel-rusu&project=pods4k&lang=zh-TW">繁體中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=daniel-rusu&project=pods4k&lang=ja">日本語</a>
+        | <a href="https://openaitx.github.io/view.html?user=daniel-rusu&project=pods4k&lang=ko">한국어</a>
+        | <a href="https://openaitx.github.io/view.html?user=daniel-rusu&project=pods4k&lang=hi">हिन्दी</a>
+        | <a href="https://openaitx.github.io/view.html?user=daniel-rusu&project=pods4k&lang=th">ไทย</a>
+        | <a href="https://openaitx.github.io/view.html?user=daniel-rusu&project=pods4k&lang=fr">Français</a>
+        | <a href="https://openaitx.github.io/view.html?user=daniel-rusu&project=pods4k&lang=de">Deutsch</a>
+        | <a href="https://openaitx.github.io/view.html?user=daniel-rusu&project=pods4k&lang=es">Español</a>
+        | <a href="https://openaitx.github.io/view.html?user=daniel-rusu&project=pods4k&lang=it">Italiano</a>
+        | <a href="https://openaitx.github.io/view.html?user=daniel-rusu&project=pods4k&lang=ru">Русский</a>
+        | <a href="https://openaitx.github.io/view.html?user=daniel-rusu&project=pods4k&lang=pt">Português</a>
+        | <a href="https://openaitx.github.io/view.html?user=daniel-rusu&project=pods4k&lang=nl">Nederlands</a>
+        | <a href="https://openaitx.github.io/view.html?user=daniel-rusu&project=pods4k&lang=pl">Polski</a>
+        | <a href="https://openaitx.github.io/view.html?user=daniel-rusu&project=pods4k&lang=ar">العربية</a>
+        | <a href="https://openaitx.github.io/view.html?user=daniel-rusu&project=pods4k&lang=fa">فارسی</a>
+        | <a href="https://openaitx.github.io/view.html?user=daniel-rusu&project=pods4k&lang=tr">Türkçe</a>
+        | <a href="https://openaitx.github.io/view.html?user=daniel-rusu&project=pods4k&lang=vi">Tiếng Việt</a>
+        | <a href="https://openaitx.github.io/view.html?user=daniel-rusu&project=pods4k&lang=id">Bahasa Indonesia</a>
+      </div>
+    </div>
+  </details>
+</div>
+
 # pods4k
 
 [![Maven Central][maven-central-badge]][maven-central-url]
