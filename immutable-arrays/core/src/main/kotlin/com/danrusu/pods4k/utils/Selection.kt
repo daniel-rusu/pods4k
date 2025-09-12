@@ -42,6 +42,8 @@ internal value class Selection private constructor(
     constructor(numElements: Int, predicate: (index: Int) -> Boolean) : this(
         values = createBackingArray(numElements),
     ) {
+        if (numElements == 0) return
+
         this.numElements = numElements
 
         var numOneBits = 0
@@ -67,10 +69,8 @@ internal value class Selection private constructor(
         }
         numSelectedElements = numOneBits
 
-        if (numElements > 0) {
-            // store the last set of partially-filled bits
-            values[bitmapIndex] = currentBits
-        }
+        // store the last set of partially-filled bits
+        values[bitmapIndex] = currentBits
     }
 
     inline fun forEachSelectedIndex(body: (index: Int) -> Unit) {
