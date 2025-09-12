@@ -1,6 +1,7 @@
 // Auto-generated file. DO NOT EDIT!
 package com.danrusu.pods4k.immutableArrays
 
+import com.danrusu.pods4k.utils.Selection
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
@@ -10,7 +11,6 @@ import kotlin.Comparator
 import kotlin.Double
 import kotlin.Float
 import kotlin.Int
-import kotlin.IntArray
 import kotlin.Long
 import kotlin.Nothing
 import kotlin.OverloadResolutionByLambdaReturnType
@@ -450,9 +450,8 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     public inline fun filter(crossinline predicate: (element: T) -> Boolean): ImmutableArray<T> {
         if (isEmpty()) return this
 
-        val bitmap = createBitmap()
-        val resultSize = populateBitmap(bitmap) { _, element -> predicate(element) }
-        return select(bitmap, resultSize)
+        val selection = Selection(numElements = size) { index -> predicate(this[index]) }
+        return select(selection)
     }
 
     /**
@@ -461,9 +460,8 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     public inline fun filterIndexed(crossinline predicate: (index: Int, element: T) -> Boolean): ImmutableArray<T> {
         if (isEmpty()) return this
 
-        val bitmap = createBitmap()
-        val resultSize = populateBitmap(bitmap) { index, element -> predicate(index, element) }
-        return select(bitmap, resultSize)
+        val selection = Selection(numElements = size) { index -> predicate(index, this[index]) }
+        return select(selection)
     }
 
     /**
@@ -472,79 +470,25 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     public inline fun filterNot(crossinline predicate: (element: T) -> Boolean): ImmutableArray<T> {
         if (isEmpty()) return this
 
-        val bitmap = createBitmap()
-        val resultSize = populateBitmap(bitmap) { _, element -> !predicate(element) }
-        return select(bitmap, resultSize)
+        val selection = Selection(numElements = size) { index -> !predicate(this[index]) }
+        return select(selection)
     }
 
     /**
-     * Returns an [IntArray] containing sufficient bits to represent all the element indices.
-     */
-    @PublishedApi
-    internal fun createBitmap(): IntArray {
-        // divide by 32 rounding up
-        val bitmapSize = (size + 31) ushr 5
-        return IntArray(bitmapSize)
-    }
-
-    /**
-     * Populates the specified [bitmap] with 1-bits at the indices where the elements match the given [predicate].
-     *
-     * @return the number of 1-bits that the bitmap ends up with.
-     */
-    @PublishedApi
-    internal fun populateBitmap(bitmap: IntArray, predicate: (index: Int, element: T) -> Boolean): Int {
-        var numOneBits = 0
-        // the bit index into the current 32-bit int
-        var bitIndex = -1 // start at -1 as it gets incremented right away in the loop
-        var bitmapIndex = 0
-        var currentBits = 0 // the current 32-bits with no elements yet
-        forEachIndexed { index, element ->
-            if (++bitIndex == 32) {
-                // reached the end of the current bits so store them and reset
-                bitmap[bitmapIndex++] = currentBits
-                currentBits = 0
-                bitIndex = 0
-            }
-            // jit turns this into a branchless operation
-            val currentElement = if (predicate(index, element)) 1 else 0
-
-            // conditionally increase the size without branching
-            numOneBits += currentElement
-
-            // conditionally include the current element without branching
-            currentBits = currentBits or (currentElement shl bitIndex)
-        }
-        // store the last set of partially-filled bits
-        bitmap[bitmapIndex] = currentBits
-        return numOneBits
-    }
-
-    /**
-     * Returns an Immutable Array containing only the elements from indices where the [bitmap] bits are 1.
-     *
-     * @param bitmap stored in chunks of 32 bits as an [IntArray] where the 1-bits control which elements are selected
-     * @param numOneBits the number of 1-bits present in the [bitmap]
+     * Returns an Immutable Array containing only the elements from indices indicated by the [selection].
      */
     @PublishedApi
     @Suppress("UNCHECKED_CAST")
-    internal fun select(bitmap: IntArray, numOneBits: Int): ImmutableArray<T> {
-        if (numOneBits == 0) return EMPTY
-        if (numOneBits == size) return this
-
-        val result = arrayOfNulls<Any>(numOneBits) as Array<T>
+    internal fun select(selection: Selection): ImmutableArray<T> {
+        val resultSize = selection.numSelectedElements
+        when (resultSize) {
+            0 -> return EMPTY
+            size -> return this
+        }
+        val result = arrayOfNulls<Any>(resultSize) as Array<T>
         var resultIndex = 0
-        var originalIndex = 0
-
-        for (i in 0..<bitmap.size) {
-            var bits = bitmap[i]
-            // iterate through the 1-bits
-            while (bits != 0) {
-                result[resultIndex++] = this[originalIndex + bits.countTrailingZeroBits()]
-                // clear the last 1-bit
-                bits = bits and (bits - 1)
-            }
-            originalIndex += 32
+        selection.forEachSelectedIndex { originalIndex ->
+            result[resultIndex++] = this[originalIndex]
         }
         return ImmutableArray(result)
     }

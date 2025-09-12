@@ -346,8 +346,6 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
             addFilter(baseType)
             addFilterIndexed(baseType)
             addFilterNot(baseType)
-            addCreateBitmap()
-            addPopulateBitmap(baseType)
             addSelect(baseType)
             addPartition(baseType)
             addMinBy(baseType)
@@ -806,9 +804,8 @@ private fun TypeSpec.Builder.addFilter(baseType: BaseType) {
     ) {
         statement("if (isEmpty()) return this")
         emptyLine()
-        statement("val bitmap = createBitmap()")
-        statement("val resultSize = populateBitmap(bitmap) { _, element -> predicate(element)}")
-        statement("return select(bitmap, resultSize)")
+        statement("val selection = Selection(numElements = size) { index -> predicate(this[index]) }")
+        statement("return select(selection)")
     }
 }
 
@@ -830,9 +827,8 @@ private fun TypeSpec.Builder.addFilterIndexed(baseType: BaseType) {
     ) {
         statement("if (isEmpty()) return this")
         emptyLine()
-        statement("val bitmap = createBitmap()")
-        statement("val resultSize = populateBitmap(bitmap) { index, element -> predicate(index, element)}")
-        statement("return select(bitmap, resultSize)")
+        statement("val selection = Selection(numElements = size) { index -> predicate(index, this[index]) }")
+        statement("return select(selection)")
     }
 }
 
@@ -851,119 +847,36 @@ private fun TypeSpec.Builder.addFilterNot(baseType: BaseType) {
     ) {
         statement("if (isEmpty()) return this")
         emptyLine()
-        statement("val bitmap = createBitmap()")
-        statement("val resultSize = populateBitmap(bitmap) { _, element -> !predicate(element)}")
-        statement("return select(bitmap, resultSize)")
-    }
-}
-
-private fun TypeSpec.Builder.addCreateBitmap() {
-    function(
-        kdoc = "Returns an [IntArray] containing sufficient bits to represent all the element indices.",
-        modifiers = listOf(KModifier.INTERNAL),
-        name = "createBitmap",
-        returns = IntArray::class.asTypeName(),
-    ) {
-        annotation<PublishedApi>()
-
-        comment("divide by 32 rounding up")
-        statement("val bitmapSize = (size + 31) ushr 5")
-        statement("return IntArray(bitmapSize)")
-    }
-}
-
-private fun TypeSpec.Builder.addPopulateBitmap(baseType: BaseType) {
-    val kdoc = """
-        Populates the specified [bitmap] with 1-bits at the indices where the elements match the given [predicate].
-
-        @return the number of 1-bits that the bitmap ends up with.
-    """.trimIndent()
-
-    function(
-        kdoc = kdoc,
-        modifiers = listOf(KModifier.INTERNAL),
-        name = "populateBitmap",
-        parameters = {
-            "bitmap"(type = IntArray::class.asTypeName())
-            "predicate"(
-                type = lambda<Boolean> {
-                    "index"<Int>()
-                    "element"(type = baseType.type)
-                },
-            )
-        },
-        returns = Int::class.asTypeName(),
-    ) {
-        annotation<PublishedApi>()
-
-        statement("var numOneBits = 0")
-        comment("the bit index into the current 32-bit int")
-        statement("var bitIndex = -1 // start at -1 as it gets incremented right away in the loop")
-        statement("var bitmapIndex = 0")
-        statement("var currentBits = 0 // the current 32-bits with no elements yet")
-        controlFlow("forEachIndexed { index, element ->") {
-            controlFlow("if (++bitIndex == 32)") {
-                comment("reached the end of the current bits so store them and reset")
-                statement("bitmap[bitmapIndex++] = currentBits")
-                statement("currentBits = 0")
-                statement("bitIndex = 0")
-            }
-            comment("jit turns this into a branchless operation")
-            statement("val currentElement = if (predicate(index, element)) 1 else 0")
-            emptyLine()
-            comment("conditionally increase the size without branching")
-            statement("numOneBits += currentElement")
-            emptyLine()
-            comment("conditionally include the current element without branching")
-            statement("currentBits = currentBits or (currentElement shl bitIndex)")
-        }
-        comment("store the last set of partially-filled bits")
-        statement("bitmap[bitmapIndex] = currentBits")
-        statement("return numOneBits")
+        statement("val selection = Selection(numElements = size) { index -> !predicate(this[index]) }")
+        statement("return select(selection)")
     }
 }
 
 private fun TypeSpec.Builder.addSelect(baseType: BaseType) {
-    val kdoc = """
-        Returns an Immutable Array containing only the elements from indices where the [bitmap] bits are 1.
-
-        @param bitmap stored in chunks of 32 bits as an [IntArray] where the 1-bits control which elements are selected
-        @param numOneBits the number of 1-bits present in the [bitmap]
-    """.trimIndent()
-
     function(
-        kdoc = kdoc,
+        kdoc = "Returns an Immutable Array containing only the elements from indices indicated by the [selection].",
         modifiers = listOf(KModifier.INTERNAL),
         name = "select",
         parameters = {
-            "bitmap"(type = IntArray::class.asTypeName())
-            "numOneBits"<Int>()
+            "selection"(type = ClassName("com.danrusu.pods4k.utils", "Selection"))
         },
         returns = baseType.getGeneratedTypeName(),
     ) {
         annotation<PublishedApi>()
-
-        statement("if (numOneBits == 0) return EMPTY")
-        statement("if (numOneBits == size) return this")
-        emptyLine()
+        statement("val resultSize = selection.numSelectedElements")
+        controlFlow("when (resultSize)") {
+            statement("0 -> return EMPTY")
+            statement("size -> return this")
+        }
         if (baseType == GENERIC) {
             annotation<Suppress>("UNCHECKED_CAST")
-            statement("val result = arrayOfNulls<Any>(numOneBits) as Array<T>")
+            statement("val result = arrayOfNulls<Any>(resultSize) as Array<T>")
         } else {
-            statement("val result = ${baseType.backingArrayConstructor}(numOneBits)")
+            statement("val result = ${baseType.backingArrayConstructor}(resultSize)")
         }
         statement("var resultIndex = 0")
-        statement("var originalIndex = 0")
-        emptyLine()
-        controlFlow("for (i in 0..<bitmap.size)") {
-            statement("var bits = bitmap[i]")
-            comment("iterate through the 1-bits")
-            controlFlow("while (bits != 0)") {
-                statement("result[resultIndex++] = this[originalIndex + bits.countTrailingZeroBits()]")
-                comment("clear the last 1-bit")
-                statement("bits = bits and (bits - 1)")
-            }
-            statement("originalIndex += 32")
+        controlFlow("selection.forEachSelectedIndex { originalIndex ->") {
+            statement("result[resultIndex++] = this[originalIndex]")
         }
         statement("return ${baseType.generatedClassName}(result)")
     }
