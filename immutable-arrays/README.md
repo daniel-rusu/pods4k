@@ -817,13 +817,22 @@ Compose isn't aware that Immutable Arrays cannot be modified so we need to appen
 the [stability configuration file][stability-configuration-url]:
 
 ```text
-// Consider immutable arrays as stable since they can't be modified
-com.danrusu.pods4k.immutableArrays.Immutable*
+// Consider ImmutableArray<T> as stable when T is stable
+com.danrusu.pods4k.immutableArrays.ImmutableArray<*>
+
+// Consider primitive immutable arrays as stable as the contents can never be modified
+com.danrusu.pods4k.immutableArrays.ImmutableBooleanArray
+com.danrusu.pods4k.immutableArrays.ImmutableByteArray
+com.danrusu.pods4k.immutableArrays.ImmutableCharArray
+com.danrusu.pods4k.immutableArrays.ImmutableShortArray
+com.danrusu.pods4k.immutableArrays.ImmutableIntArray
+com.danrusu.pods4k.immutableArrays.ImmutableFloatArray
+com.danrusu.pods4k.immutableArrays.ImmutableLongArray
+com.danrusu.pods4k.immutableArrays.ImmutableDoubleArray
 ```
 
-This allows you to store immutable or stable elements in Immutable Arrays and safely skip recomposition. Immutable
-elements are deeply immutable. Stable elements can contain [MutableState][mutable-state-url] components that notify the
-Compose runtime when a value changed and trigger recomposition.
+Note that mutable elements can be stable when the mutable parts use [MutableState][mutable-state-url] to automatically
+notify the Compose runtime when a value changed and trigger recomposition appropriately.
 
 </details>
 
