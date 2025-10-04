@@ -18,6 +18,7 @@ Ideal for Android, backend services, and any application seeking enhanced safety
 [Efficiency](#-efficiency) |
 [Usage](#-usage) |
 [Comparison with Alternatives](#-comparison-with-alternatives) |
+[FAQ](#-faq) |
 [Caveats](#-caveats)
 
 ## ✨ Key Benefits
@@ -516,23 +517,6 @@ by large numbers of discarded wrappers making this usage pattern extremely fast 
 
 </details>
 
-<details>
-<summary>Why Immutable Arrays don't implement the List interface</summary>
-
-There are several reasons why Immutable Arrays shouldn't implement the `List` interface:
-
-1. If the 8 primitive variants implemented the List interface, (eg.`ImmutableFloatArray` implemented `List<Float>`),
-   elements would be auto-boxed on every access significantly affecting the memory and performance of the library.
-2. If Immutable Arrays implement `List`, the Kotlin standard library operations overshadow the optimized versions from
-   this library. This significantly affects the memory and performance of this library and also breaks immutability
-   guarantees since the Kotlin standard library produces read-only lists that can be mutated through casting.
-3. The `List` interface contains methods with `List` return types that we wouldn't want users to use. Using these would
-   affect the memory and performance, but most importantly, this would make usages accidentally cross over into the list
-   world where the immutability guarantees no longer exist. Throwing an `OperationNotSupportedException` would break the
-   `List` contract breaking downstream usages in unpredictable ways.
-
-</details>
-
 ## 🏆 Comparison with Alternatives
 
 | Feature                  | Immutable Arrays | Regular Arrays | Read-only Lists    | Unmodifiable Lists | Java Immutable Lists |
@@ -824,6 +808,42 @@ Immutable lists have the same performance drawbacks as read-only lists
 
 </details>
 
+## 🙋 FAQ
+
+<details>
+<summary>How can we skip recomposition with Compose?</summary>
+
+Compose isn't aware that Immutable Arrays cannot be modified so we need to append the following to
+the [stability configuration file][stability-configuration-url]:
+
+```text
+// Consider immutable arrays as stable since they can't be modified
+com.danrusu.pods4k.immutableArrays.Immutable*
+```
+
+This allows you to store immutable or stable elements in Immutable Arrays and safely skip recomposition. Immutable
+elements are deeply immutable. Stable elements can contain [MutableState][mutable-state-url] components that notify the
+Compose runtime when a value changed and trigger recomposition.
+
+</details>
+
+<details>
+<summary>Why don't Immutable Arrays implement the List interface?</summary>
+
+There are several reasons:
+
+1. If the 8 primitive variants implemented the List interface, (eg.`ImmutableFloatArray` implemented `List<Float>`),
+   elements would be auto-boxed on every access significantly affecting the memory and performance of the library.
+2. If Immutable Arrays implement `List`, the Kotlin standard library operations overshadow the optimized versions from
+   this library. This significantly affects the memory and performance of this library and also breaks immutability
+   guarantees since the Kotlin standard library produces read-only lists that can be mutated through casting.
+3. The `List` interface contains methods with `List` return types that we wouldn't want users to use. Using these would
+   affect the memory and performance, but most importantly, this would make usages accidentally cross over into the list
+   world where the immutability guarantees no longer exist. Throwing an `OperationNotSupportedException` would break the
+   `List` contract breaking downstream usages in unpredictable ways.
+
+</details>
+
 ## 📌 Caveats
 
 <details>
@@ -999,3 +1019,7 @@ This library leverages the following experimental Kotlin features that may evolv
 [maven-central-url]: https://central.sonatype.com/artifact/com.danrusu.pods4k/pods4k
 
 [license-url]: https://github.com/daniel-rusu/pods4k/blob/main/LICENSE
+
+[stability-configuration-url]: https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file
+
+[mutable-state-url]: https://developer.android.com/reference/kotlin/androidx/compose/runtime/MutableState
