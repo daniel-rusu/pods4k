@@ -811,6 +811,20 @@ Immutable lists have the same performance drawbacks as read-only lists
 ## 🙋 FAQ
 
 <details>
+<summary>Does it support Kotlin Multiplatform (KMP)?</summary>
+
+Our goal is to turn this into a Kotlin Multiplatform library. We already took steps to replace usages of the Java
+standard library with equivalents from the Kotlin standard library. This will make it a fairly easy transition as most
+of the code would end up in the common module.
+
+The main blocker is that JetBrains only added custom-equals-for-values-classes to the JVM backend (which supports
+both JVM and Android) and put the other multi-platform targets on hold to focus on the K2 compiler. The K2 initiative
+was a massive undertaking so they forgot about this feature. Vote and comment on
+this [YouTrack ticket](https://youtrack.jetbrains.com/issue/KT-24874) to help unblock us.
+
+</details>
+
+<details>
 <summary>How can we skip recomposition with Compose?</summary>
 
 Compose isn't aware that Immutable Arrays cannot be modified so we need to append the following to
