@@ -499,24 +499,24 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
      */
     @Suppress("UNCHECKED_CAST")
     public fun partition(predicate: (element: T) -> Boolean): Pair<ImmutableArray<T>, ImmutableArray<T>> {
-        var firstIndex = 0
-        var secondIndex = size - 1
-        val buffer = arrayOfNulls<Any?>(size) as Array<T>
-        for (element in values) {
-            if (predicate(element)) {
-                buffer[firstIndex] = element
-                firstIndex++
-            } else {
-                buffer[secondIndex] = element
-                secondIndex--
-            }
-        }
-        if (firstIndex == 0) return Pair(EMPTY, this)
-        if (firstIndex == size) return Pair(this, EMPTY)
+        val selection = Selection(numElements = size) { index -> predicate(this[index]) }
+        val numSelectedElements = selection.numSelectedElements
 
-        val first = copyFrom(source = buffer, startIndex = 0, size = firstIndex)
-        val second = ImmutableArray(size - first.size) { buffer[size - it - 1] }
-        return Pair(first, second)
+        if (numSelectedElements == 0) return Pair(EMPTY, this)
+        if (numSelectedElements == size) return Pair(this, EMPTY)
+
+        val first = arrayOfNulls<Any>(numSelectedElements) as Array<T>
+        var firstIndex = 0
+        selection.forEachSelectedIndex { originalIndex ->
+            first[firstIndex++] = values[originalIndex]
+        }
+
+        val second = arrayOfNulls<Any>(size - numSelectedElements) as Array<T>
+        var secondIndex = 0
+        selection.forEachUnselectedIndex { originalIndex ->
+            second[secondIndex++] = values[originalIndex]
+        }
+        return Pair(ImmutableArray(first), ImmutableArray(second))
     }
 
     /**

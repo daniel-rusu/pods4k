@@ -896,44 +896,37 @@ private fun TypeSpec.Builder.addPartition(baseType: BaseType) {
         returns = Pair::class.asTypeName()
             .parameterizedBy(baseType.getGeneratedTypeName(), baseType.getGeneratedTypeName()),
     ) {
-        /*
-        Create a perfectly-sized double-ended buffer.  Add the elements that yielded true starting from the beginning of
-        the buffer and the other elements from the end.  The only trick is to remember to copy the elements from the end
-        in reverse order so that they maintain their original ordering.
-
-        This uses less memory and is much faster based on JMH benchmarks compared to the traditional approach of
-        maintaining separate builders.  That's because unlike the builders, the buffer never needs to be resized so the
-        elements don't need to be copied multiple times into larger replacements as it gets resized along the way.
-         */
-        statement("var firstIndex = 0")
-        statement("var secondIndex = size - 1")
         if (baseType == GENERIC) {
             annotation<Suppress>("UNCHECKED_CAST")
-            statement("val buffer = arrayOfNulls<Any?>(size) as Array<T>")
-        } else {
-            statement("val buffer = ${baseType.backingArrayConstructor}(size)")
         }
-        controlFlow("for (element in values)") {
-            addCode(
-                """
-                    if (predicate(element)) {
-                        buffer[firstIndex] = element
-                        firstIndex++
-                    } else {
-                        buffer[secondIndex] = element
-                        secondIndex--
-                    }
-                """.trimIndent(),
-            )
-        }
-        // IMPORTANT: Don't try to remove this empty check because although copyFrom has an empty check, we want to use
-        // this as the right side without copying it
-        statement("if (firstIndex == 0) return Pair(EMPTY, this)")
-        statement("if (firstIndex == size) return Pair(this, EMPTY)")
+        statement("val selection = Selection(numElements = size) { index -> predicate(this[index]) }")
+        statement("val numSelectedElements = selection.numSelectedElements")
         emptyLine()
-        statement("val first = copyFrom(source = buffer, startIndex = 0, size = firstIndex)")
-        statement("val second = ${baseType.generatedClassName}(size - first.size) { buffer[size - it - 1] }")
-        statement("return Pair(first, second)")
+        statement("if (numSelectedElements == 0) return Pair(EMPTY, this)")
+        statement("if (numSelectedElements == size) return Pair(this, EMPTY)")
+        emptyLine()
+        if (baseType == GENERIC) {
+            statement("val first = arrayOfNulls<Any>(numSelectedElements) as Array<T>")
+        } else {
+            statement("val first = ${baseType.backingArrayConstructor}(numSelectedElements)")
+        }
+        // Traverse the bitmap twice to populate each side.  This is faster as traversing is done in sublinear time
+        // and avoids branching.  This also results in a more predictable memory-access pattern.
+        statement("var firstIndex = 0")
+        controlFlow("selection.forEachSelectedIndex { originalIndex ->") {
+            statement("first[firstIndex++] = values[originalIndex]")
+        }
+        emptyLine()
+        if (baseType == GENERIC) {
+            statement("val second = arrayOfNulls<Any>(size - numSelectedElements) as Array<T>")
+        } else {
+            statement("val second = ${baseType.backingArrayConstructor}(size - numSelectedElements)")
+        }
+        statement("var secondIndex = 0")
+        controlFlow("selection.forEachUnselectedIndex { originalIndex ->") {
+            statement("second[secondIndex++] = values[originalIndex]")
+        }
+        statement("return Pair(${baseType.generatedClassName}(first), ${baseType.generatedClassName}(second))")
     }
 }
 

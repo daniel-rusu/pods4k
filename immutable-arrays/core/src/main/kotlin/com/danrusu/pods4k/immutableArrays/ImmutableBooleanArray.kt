@@ -498,24 +498,24 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
      * the second contains the other elements.
      */
     public fun partition(predicate: (element: Boolean) -> Boolean): Pair<ImmutableBooleanArray, ImmutableBooleanArray> {
-        var firstIndex = 0
-        var secondIndex = size - 1
-        val buffer = BooleanArray(size)
-        for (element in values) {
-            if (predicate(element)) {
-                buffer[firstIndex] = element
-                firstIndex++
-            } else {
-                buffer[secondIndex] = element
-                secondIndex--
-            }
-        }
-        if (firstIndex == 0) return Pair(EMPTY, this)
-        if (firstIndex == size) return Pair(this, EMPTY)
+        val selection = Selection(numElements = size) { index -> predicate(this[index]) }
+        val numSelectedElements = selection.numSelectedElements
 
-        val first = copyFrom(source = buffer, startIndex = 0, size = firstIndex)
-        val second = ImmutableBooleanArray(size - first.size) { buffer[size - it - 1] }
-        return Pair(first, second)
+        if (numSelectedElements == 0) return Pair(EMPTY, this)
+        if (numSelectedElements == size) return Pair(this, EMPTY)
+
+        val first = BooleanArray(numSelectedElements)
+        var firstIndex = 0
+        selection.forEachSelectedIndex { originalIndex ->
+            first[firstIndex++] = values[originalIndex]
+        }
+
+        val second = BooleanArray(size - numSelectedElements)
+        var secondIndex = 0
+        selection.forEachUnselectedIndex { originalIndex ->
+            second[secondIndex++] = values[originalIndex]
+        }
+        return Pair(ImmutableBooleanArray(first), ImmutableBooleanArray(second))
     }
 
     /**

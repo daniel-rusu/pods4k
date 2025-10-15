@@ -31,8 +31,10 @@ _Date TBD_
 
 **Performance Improvements:**
 
-* Update `filter`, `filterNot`, and `filterIndexed` to jump over consecutive 0-bits of the bitmap in a single step and
-  also increased CPU instruction-cache utilization.
+* Update `partition` to use a bitmap instead of the double-ended buffer. This improves performance and reduces temporary
+  memory consumption by element-size (eg. 32X memory reduction for 32-bit references).
+* Update `filter`, `filterNot`, and `filterIndexed` to traverse the bitmap in sublinear time by jumping over consecutive
+  0-bits in a single step. Also increased CPU instruction-cache utilization.
 * Delegate `ImmutableArray<T?>.filterNotNull()` to `filter` in order to take advantage of the bitwise optimizations.
 
 ## 0.7.0
@@ -116,8 +118,8 @@ _2024-11-06_
   the contents when they are the same backing array.
 * Make `toList` return the empty singleton when the size is 0, singleton-list when 1, and share the backing array when
   working with generic types.
-* Pre-allocate a perfectly sized buffer for `partition` by populating the buffer array from both ends.
-* Pre-allocate a perfectly sized backing array for `flatMap` & `flatMapIndexed` when operating on nested immutable
+* Pre-allocate a perfectly-sized buffer for `partition` by populating the buffer array from both ends.
+* Pre-allocate a perfectly-sized backing array for `flatMap` & `flatMapIndexed` when operating on nested immutable
   arrays.
 
 ## 0.4.0
@@ -157,8 +159,8 @@ _2024-08-19_
 
 **Performance Improvements:**
 
-* When converting iterables or sequences to immutable arrays, use immutable array builders instead of accumulating the
-  values in a temporary list as that's much more efficient.
+* When converting iterables or sequences to immutable arrays, use the much more efficient immutable-array builders
+  instead of accumulating the values in a temporary list.
 
 ## 0.3.0
 
@@ -219,8 +221,8 @@ _2024-07-16_
 
 **Performance Improvements:**
 
-* Use System.arraycopy in `immutableArrayOf` factory functions
-* Use System.arraycopy when creating immutable arrays from regular arrays
+* Use `arraycopy` in `immutableArrayOf` factory functions
+* Use `arraycopy` when creating immutable arrays from regular arrays
 
 ## 0.1.0
 
