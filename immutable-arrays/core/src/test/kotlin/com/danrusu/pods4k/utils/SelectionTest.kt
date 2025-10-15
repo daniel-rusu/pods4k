@@ -14,9 +14,13 @@ class SelectionTest {
             expectThat(numElements).isEqualTo(0)
             expectThat(numSelectedElements).isEqualTo(0)
 
-            val elements = mutableListOf<Int>()
-            forEachSelectedIndex { elements.add(it) }
-            expectThat(elements).isEmpty()
+            val selectedElements = mutableListOf<Int>()
+            forEachSelectedIndex { selectedElements.add(it) }
+            expectThat(selectedElements).isEmpty()
+
+            val unselectedElements = mutableListOf<Int>()
+            forEachUnselectedIndex { unselectedElements.add(it) }
+            expectThat(unselectedElements).isEmpty()
         }
 
         repeat(100) {
@@ -26,9 +30,13 @@ class SelectionTest {
                 expectThat(numElements).isEqualTo(size)
                 expectThat(numSelectedElements).isEqualTo(0)
 
-                val elements = mutableListOf<Int>()
-                forEachSelectedIndex { elements.add(it) }
-                expectThat(elements).isEmpty()
+                val selectedElements = mutableListOf<Int>()
+                forEachSelectedIndex { selectedElements.add(it) }
+                expectThat(selectedElements).isEmpty()
+
+                val unselectedElements = mutableListOf<Int>()
+                forEachUnselectedIndex { unselectedElements.add(it) }
+                expectThat(unselectedElements).isEqualTo((0..<size).toMutableList())
             }
         }
     }
@@ -43,10 +51,17 @@ class SelectionTest {
                 expectThat(numElements).isEqualTo(size)
                 expectThat(numSelectedElements).isEqualTo(1)
 
-                val elements = mutableListOf<Int>()
-                forEachSelectedIndex { elements.add(it) }
-                expectThat(elements).hasSize(1)
-                expectThat(elements.single()).isEqualTo(selectedElement)
+                val selectedElements = mutableListOf<Int>()
+                forEachSelectedIndex { selectedElements.add(it) }
+                expectThat(selectedElements).hasSize(1)
+                expectThat(selectedElements.single()).isEqualTo(selectedElement)
+
+                val unselectedElements = mutableListOf<Int>()
+                forEachUnselectedIndex { unselectedElements.add(it) }
+                expectThat(unselectedElements)
+                    .isEqualTo(
+                        (0..<size).filter { it != selectedElement }.toMutableList(),
+                    )
             }
         }
     }
@@ -65,10 +80,17 @@ class SelectionTest {
                 expectThat(numElements).isEqualTo(size)
                 expectThat(numSelectedElements).isEqualTo(selectionSize)
 
-                val elements = mutableListOf<Int>()
-                forEachSelectedIndex { elements.add(it) }
-                expectThat(elements).hasSize(selectionSize)
-                expectThat(elements.toSet()).isEqualTo(selectedElements)
+                val actualSelectedElements = mutableListOf<Int>()
+                forEachSelectedIndex { actualSelectedElements.add(it) }
+                expectThat(actualSelectedElements).hasSize(selectionSize)
+                expectThat(actualSelectedElements.toSet()).isEqualTo(selectedElements)
+
+                val unselectedElements = mutableListOf<Int>()
+                forEachUnselectedIndex { unselectedElements.add(it) }
+                expectThat(unselectedElements)
+                    .isEqualTo(
+                        (0..<size).filter { it !in selectedElements }.toMutableList(),
+                    )
             }
         }
     }
@@ -82,9 +104,13 @@ class SelectionTest {
                 expectThat(numElements).isEqualTo(size)
                 expectThat(numSelectedElements).isEqualTo(size)
 
-                val elements = mutableListOf<Int>()
-                forEachSelectedIndex { elements.add(it) }
-                expectThat(elements).isEqualTo((0..<size).toMutableList())
+                val selectedElements = mutableListOf<Int>()
+                forEachSelectedIndex { selectedElements.add(it) }
+                expectThat(selectedElements).isEqualTo((0..<size).toMutableList())
+
+                val unselectedElements = mutableListOf<Int>()
+                forEachUnselectedIndex { unselectedElements.add(it) }
+                expectThat(unselectedElements).isEmpty()
             }
         }
     }

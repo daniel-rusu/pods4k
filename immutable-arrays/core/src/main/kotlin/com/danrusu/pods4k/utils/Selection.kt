@@ -75,6 +75,7 @@ internal value class Selection private constructor(
 
     inline fun forEachSelectedIndex(body: (index: Int) -> Unit) {
         var originalIndex = 0
+        // start iterating after the metadata elements
         for (i in NUM_METADATA_ELEMENTS..<values.size) {
             var bits = values[i]
             // iterate through the 1-bits
@@ -84,6 +85,37 @@ internal value class Selection private constructor(
                 bits = bits and (bits - 1)
             }
             originalIndex += ARRAY_ELEMENT_SIZE
+        }
+    }
+
+    inline fun forEachUnselectedIndex(body: (index: Int) -> Unit) {
+        val numIndices = numElements
+        val numSelectedIndices = numSelectedElements
+        if (numSelectedIndices == numIndices) return
+
+        var originalIndex = 0
+        // start after the metadata elements and don't process the last element yet as that can have unused 0-bits
+        for (i in NUM_METADATA_ELEMENTS..<values.size - 1) {
+            // invert the bits so we can iterate through the 1-bits instead
+            var bits = values[i].inv()
+            while (bits != 0) {
+                body(originalIndex + bits.countTrailingZeroBits())
+                // clear last bit
+                bits = bits and (bits - 1)
+            }
+            originalIndex += ARRAY_ELEMENT_SIZE
+        }
+
+        // process last element
+        // bitwise mod optimization since ARRAY_ELEMENT_SIZE is a power of 2
+        val numRemainingBits = numElements and (ARRAY_ELEMENT_SIZE - 1) // = numElements % ARRAY_ELEMENT_SIZE
+        // for the mask, start with all 1-bits and zero out the unused bits
+        val mask = -1 ushr (ARRAY_ELEMENT_SIZE - numRemainingBits)
+        // invert the bits so we can iterate through the 1-bits instead
+        var lastBits = values.last().inv() and mask
+        while (lastBits != 0) {
+            body(originalIndex + lastBits.countTrailingZeroBits())
+            lastBits = lastBits and (lastBits - 1) // clear last bit
         }
     }
 }
