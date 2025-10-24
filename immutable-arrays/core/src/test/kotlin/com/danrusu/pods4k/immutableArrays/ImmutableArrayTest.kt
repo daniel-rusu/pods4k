@@ -518,6 +518,110 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `windowed validation`() {
+        expectThrows<IllegalArgumentException> {
+            immutableArrayOf("A", "B").windowed(size = 0)
+        }.message.isEqualTo("The window size must be positive")
+
+        expectThrows<IllegalArgumentException> {
+            immutableArrayOf("A", "B").windowed(size = 1, step = 0)
+        }.message.isEqualTo("The step must be positive")
+
+        with(emptyImmutableArray<String>()) {
+            expectThat(windowed(size = 1))
+                .isEqualTo(emptyImmutableArray<ImmutableArray<String>>())
+        }
+
+        with(immutableArrayOf("A", "B", "C", "D", "E")) {
+            expectThat(windowed(size = 1))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf("A"),
+                        immutableArrayOf("B"),
+                        immutableArrayOf("C"),
+                        immutableArrayOf("D"),
+                        immutableArrayOf("E"),
+                    ),
+                )
+
+            expectThat(windowed(size = 1, partialWindows = false))
+                .isEqualTo(windowed(size = 1, partialWindows = true))
+
+            expectThat(windowed(size = 3))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf("A", "B", "C"),
+                        immutableArrayOf("B", "C", "D"),
+                        immutableArrayOf("C", "D", "E"),
+                    ),
+                )
+
+            expectThat(windowed(size = 3, partialWindows = true))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf("A", "B", "C"),
+                        immutableArrayOf("B", "C", "D"),
+                        immutableArrayOf("C", "D", "E"),
+                        immutableArrayOf("D", "E"),
+                        immutableArrayOf("E"),
+                    ),
+                )
+
+            expectThat(windowed(size = 3, step = 2))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf("A", "B", "C"),
+                        immutableArrayOf("C", "D", "E"),
+                    ),
+                )
+
+            expectThat(windowed(size = 3, step = 2, partialWindows = true))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf("A", "B", "C"),
+                        immutableArrayOf("C", "D", "E"),
+                        immutableArrayOf("E"),
+                    ),
+                )
+
+            expectThat(windowed(size = 2, step = 3))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf("A", "B"),
+                        immutableArrayOf("D", "E"),
+                    ),
+                )
+
+            expectThat(windowed(size = 2, step = 3, partialWindows = false))
+                .isEqualTo(windowed(size = 2, step = 3, partialWindows = true))
+
+            expectThat(windowed(size = 5, step = 5))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf("A", "B", "C", "D", "E"),
+                    ),
+                )
+
+            expectThat(windowed(size = 5, step = 5, partialWindows = false))
+                .isEqualTo(windowed(size = 5, step = 5, partialWindows = true))
+
+            expectThat(windowed(size = 6))
+                .isEqualTo(emptyImmutableArray())
+
+            expectThat(windowed(size = 6, partialWindows = true))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf("A", "B", "C", "D", "E"),
+                        immutableArrayOf("B", "C", "D", "E"),
+                        immutableArrayOf("C", "D", "E"),
+                        immutableArrayOf("D", "E"),
+                        immutableArrayOf("E"),
+                    )
+                )
+        }
+    }
+
+    @Test
     fun `toMutableArray validation`() {
         with(emptyImmutableArray<String>()) {
             val result = toMutableArray()

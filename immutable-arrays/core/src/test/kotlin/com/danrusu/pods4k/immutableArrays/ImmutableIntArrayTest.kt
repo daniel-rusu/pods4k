@@ -533,6 +533,110 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `windowed validation`() {
+        expectThrows<IllegalArgumentException> {
+            immutableArrayOf(1, 2).windowed(size = 0)
+        }.message.isEqualTo("The window size must be positive")
+
+        expectThrows<IllegalArgumentException> {
+            immutableArrayOf(1, 2).windowed(size = 1, step = 0)
+        }.message.isEqualTo("The step must be positive")
+
+        with(emptyImmutableArray<String>()) {
+            expectThat(windowed(size = 1))
+                .isEqualTo(emptyImmutableArray<ImmutableArray<String>>())
+        }
+
+        with(immutableArrayOf(1, 2, 3, 4, 5)) {
+            expectThat(windowed(size = 1))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf(1),
+                        immutableArrayOf(2),
+                        immutableArrayOf(3),
+                        immutableArrayOf(4),
+                        immutableArrayOf(5),
+                    ),
+                )
+
+            expectThat(windowed(size = 1, partialWindows = false))
+                .isEqualTo(windowed(size = 1, partialWindows = true))
+
+            expectThat(windowed(size = 3))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf(1, 2, 3),
+                        immutableArrayOf(2, 3, 4),
+                        immutableArrayOf(3, 4, 5),
+                    ),
+                )
+
+            expectThat(windowed(size = 3, partialWindows = true))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf(1, 2, 3),
+                        immutableArrayOf(2, 3, 4),
+                        immutableArrayOf(3, 4, 5),
+                        immutableArrayOf(4, 5),
+                        immutableArrayOf(5),
+                    ),
+                )
+
+            expectThat(windowed(size = 3, step = 2))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf(1, 2, 3),
+                        immutableArrayOf(3, 4, 5),
+                    ),
+                )
+
+            expectThat(windowed(size = 3, step = 2, partialWindows = true))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf(1, 2, 3),
+                        immutableArrayOf(3, 4, 5),
+                        immutableArrayOf(5),
+                    ),
+                )
+
+            expectThat(windowed(size = 2, step = 3))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf(1, 2),
+                        immutableArrayOf(4, 5),
+                    ),
+                )
+
+            expectThat(windowed(size = 2, step = 3, partialWindows = false))
+                .isEqualTo(windowed(size = 2, step = 3, partialWindows = true))
+
+            expectThat(windowed(size = 5, step = 5))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf(1, 2, 3, 4, 5),
+                    ),
+                )
+
+            expectThat(windowed(size = 5, step = 5, partialWindows = false))
+                .isEqualTo(windowed(size = 5, step = 5, partialWindows = true))
+
+            expectThat(windowed(size = 6))
+                .isEqualTo(emptyImmutableArray())
+
+            expectThat(windowed(size = 6, partialWindows = true))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf(1, 2, 3, 4, 5),
+                        immutableArrayOf(2, 3, 4, 5),
+                        immutableArrayOf(3, 4, 5),
+                        immutableArrayOf(4, 5),
+                        immutableArrayOf(5),
+                    )
+                )
+        }
+    }
+
+    @Test
     fun `toMutableArray validation`() {
         with(emptyImmutableIntArray()) {
             val result = toMutableArray()

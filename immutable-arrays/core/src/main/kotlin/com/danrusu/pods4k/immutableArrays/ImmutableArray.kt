@@ -265,6 +265,35 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     public inline fun asSequence(): Sequence<T> = values.asSequence()
 
     /**
+     * Returns an Immutable Array of Immutable Arrays where each nested Immutable Array represents a sliding window
+     * with [size] elements.  The sliding window jumps over [step] elements at a time to copy subsequent windows.
+     *
+     * @param size the number of elements to copy in each window
+     * @param step the start of each window jumps forward by this amount
+     * @param partialWindows controls whether to include windows with fewer than [size] elements when the sliding
+     * window overlaps past the end.
+     */
+    public fun windowed(
+        size: Int,
+        step: Int = 1,
+        partialWindows: Boolean = false,
+    ): ImmutableArray<ImmutableArray<T>> {
+        require(size > 0) { "The window size must be positive" }
+        require(step > 0) { "The step must be positive" }
+
+        val numWindows = when {
+            partialWindows -> (this.size + step - 1) / step
+            this.size >= size -> (this.size - size) / step + 1
+            else -> 0
+        }
+        var windowStart = -step // start negative as it gets incremented by step right away
+        return ImmutableArray(numWindows) {
+            windowStart += step
+            copyFrom(values, windowStart, size.coerceAtMost(this.size - windowStart))
+        }
+    }
+
+    /**
      * See [Array.forEach]
      */
     public inline fun forEach(action: (element: T) -> Unit) {

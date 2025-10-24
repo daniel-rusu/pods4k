@@ -251,6 +251,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 baseType = baseType,
                 returns = Sequence::class.asTypeName().parameterizedBy(baseType.type),
             )
+            addWindowed(baseType)
             "forEach"(
                 typeSpecBuilder = this,
                 baseType = baseType,
@@ -598,6 +599,41 @@ private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
             returns = baseType.type,
         ) {
             statement("return get(${n - 1})")
+        }
+    }
+}
+
+private fun TypeSpec.Builder.addWindowed(baseType: BaseType) {
+    function(
+        kdoc = """
+            Returns an Immutable Array of Immutable Arrays where each nested Immutable Array represents a sliding window
+            with [size] elements.  The sliding window jumps over [step] elements at a time to copy subsequent windows.
+
+            @param size the number of elements to copy in each window
+            @param step the start of each window jumps forward by this amount
+            @param partialWindows controls whether to include windows with fewer than [size] elements when the sliding
+            window overlaps past the end.
+        """.trimIndent(),
+        name = "windowed",
+        parameters = {
+            "size"<Int>()
+            "step"<Int>(defaultValue = "1")
+            "partialWindows"<Boolean>(defaultValue = "false")
+        },
+        returns = GENERIC.getGeneratedClass().parameterizedBy(baseType.getGeneratedTypeName()),
+    ) {
+        statement("""require(size > 0) { "The window size must be positive" }""")
+        statement("""require(step > 0) { "The step must be positive" }""")
+        emptyLine()
+        controlFlow("val numWindows = when") {
+            statement("partialWindows -> (this.size + step - 1) / step")
+            statement("this.size >= size -> (this.size - size) / step + 1")
+            statement("else -> 0")
+        }
+        statement("var windowStart = -step // start negative as it gets incremented by step right away")
+        controlFlow("return ${GENERIC.generatedClassName}(numWindows)") {
+            statement("windowStart += step")
+            statement("copyFrom(values, windowStart, size.coerceAtMost(this.size - windowStart))")
         }
     }
 }
