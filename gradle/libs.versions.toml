@@ -4,7 +4,7 @@ jUnit = "5.14.0" # https://github.com/junit-team/junit5
 jUnitPlatformLauncher = "1.14.0" # https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
 kotlinPoet = "2.0.0" # https://github.com/square/kotlinpoet
 strikt = "0.34.1" # https://github.com/robfletcher/strikt/releases/latest
-gradleMavenPublishPlugin = "0.30.0" # https://github.com/vanniktech/gradle-maven-publish-plugin
+gradleMavenPublishPlugin = "0.34.0" # https://github.com/vanniktech/gradle-maven-publish-plugin
 spotless = "7.2.1" # https://mvnrepository.com/artifact/com.diffplug.spotless/spotless-plugin-gradle
 
 [libraries]
