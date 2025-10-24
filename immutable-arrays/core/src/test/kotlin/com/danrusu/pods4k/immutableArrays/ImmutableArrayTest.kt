@@ -518,10 +518,64 @@ class ImmutableArrayTest {
     }
 
     @Test
+    fun `chunked validation`() {
+        expectThrows<IllegalArgumentException> {
+            immutableArrayOf("A", "B").chunked(size = 0)
+        }.message.isEqualTo("The size must be positive")
+
+        with(emptyImmutableArray<String>()) {
+            expectThat(chunked(3))
+                .isEqualTo(emptyImmutableArray<ImmutableArray<String>>())
+        }
+
+        with(immutableArrayOf("A", "B", "C", "D")) {
+            expectThat(chunked(1))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf("A"),
+                        immutableArrayOf("B"),
+                        immutableArrayOf("C"),
+                        immutableArrayOf("D"),
+                    ),
+                )
+
+            expectThat(chunked(2))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf("A", "B"),
+                        immutableArrayOf("C", "D"),
+                    ),
+                )
+
+            expectThat(chunked(3))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf("A", "B", "C"),
+                        immutableArrayOf("D"),
+                    ),
+                )
+
+            expectThat(chunked(4))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf("A", "B", "C", "D"),
+                    ),
+                )
+
+            expectThat(chunked(5))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf("A", "B", "C", "D"),
+                    ),
+                )
+        }
+    }
+
+    @Test
     fun `windowed validation`() {
         expectThrows<IllegalArgumentException> {
             immutableArrayOf("A", "B").windowed(size = 0)
-        }.message.isEqualTo("The window size must be positive")
+        }.message.isEqualTo("The size must be positive")
 
         expectThrows<IllegalArgumentException> {
             immutableArrayOf("A", "B").windowed(size = 1, step = 0)
@@ -616,7 +670,7 @@ class ImmutableArrayTest {
                         immutableArrayOf("C", "D", "E"),
                         immutableArrayOf("D", "E"),
                         immutableArrayOf("E"),
-                    )
+                    ),
                 )
         }
     }

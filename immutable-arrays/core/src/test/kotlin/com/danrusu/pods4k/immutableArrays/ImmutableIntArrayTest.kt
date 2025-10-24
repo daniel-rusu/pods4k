@@ -533,10 +533,64 @@ class ImmutableIntArrayTest {
     }
 
     @Test
+    fun `chunked validation`() {
+        expectThrows<IllegalArgumentException> {
+            immutableArrayOf(1, 2).chunked(size = 0)
+        }.message.isEqualTo("The size must be positive")
+
+        with(emptyImmutableIntArray()) {
+            expectThat(chunked(3))
+                .isEqualTo(emptyImmutableArray<ImmutableIntArray>())
+        }
+
+        with(immutableArrayOf(1, 2, 3, 4)) {
+            expectThat(chunked(1))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf(1),
+                        immutableArrayOf(2),
+                        immutableArrayOf(3),
+                        immutableArrayOf(4),
+                    ),
+                )
+
+            expectThat(chunked(2))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf(1, 2),
+                        immutableArrayOf(3, 4),
+                    ),
+                )
+
+            expectThat(chunked(3))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf(1, 2, 3),
+                        immutableArrayOf(4),
+                    ),
+                )
+
+            expectThat(chunked(4))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf(1, 2, 3, 4),
+                    ),
+                )
+
+            expectThat(chunked(5))
+                .isEqualTo(
+                    immutableArrayOf(
+                        immutableArrayOf(1, 2, 3, 4),
+                    ),
+                )
+        }
+    }
+
+    @Test
     fun `windowed validation`() {
         expectThrows<IllegalArgumentException> {
             immutableArrayOf(1, 2).windowed(size = 0)
-        }.message.isEqualTo("The window size must be positive")
+        }.message.isEqualTo("The size must be positive")
 
         expectThrows<IllegalArgumentException> {
             immutableArrayOf(1, 2).windowed(size = 1, step = 0)
@@ -631,7 +685,7 @@ class ImmutableIntArrayTest {
                         immutableArrayOf(3, 4, 5),
                         immutableArrayOf(4, 5),
                         immutableArrayOf(5),
-                    )
+                    ),
                 )
         }
     }

@@ -251,6 +251,7 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 baseType = baseType,
                 returns = Sequence::class.asTypeName().parameterizedBy(baseType.type),
             )
+            addChunked(baseType)
             addWindowed(baseType)
             "forEach"(
                 typeSpecBuilder = this,
@@ -603,6 +604,33 @@ private fun TypeSpec.Builder.addComponentNFunctions(baseType: BaseType) {
     }
 }
 
+private fun TypeSpec.Builder.addChunked(baseType: BaseType) {
+    function(
+        kdoc = """
+            Splits this Immutable Array into chunks that each contain [size] elements.  The resulting Immutable
+            Array contains a nested Immutable Array for each chunk.  The last chunk may contain fewer elements when the
+            size isn't a perfect multiple of the [size].
+        """.trimIndent(),
+        name = "chunked",
+        parameters = { "size"<Int>() },
+        returns = GENERIC.getGeneratedClass().parameterizedBy(baseType.getGeneratedTypeName()),
+        forceFunctionBody = true,
+    ) {
+        /*
+        I was initially planning to return an Iterable that creates chunks lazily in order to reduce the max memory
+        consumption but there are several problems with that idea.  First, the equivalent chunked function from the
+        Kotlin standard library creates the chunks eagerly so diverging from that can result in surprises such as users
+        not expecting a performance impact at the time of iteration if they expect the copying to happen earlier.
+        Second, iterating through the chunks multiple times would re-create them each time hampering performance and
+        adding extra pressure on the garbage collector.  Third, for users that chunk the values and don't hold a
+        reference to the original array, the original becomes eligible for garbage collection whereas the lazy approach
+        maintains a reference to the original preventing the memory from being reclaimed (this is the reason why the
+        Java substring method was changed to copy the characters as it used to pin the original string).
+         */
+        statement("return windowed(size = size, step = size, partialWindows = true)")
+    }
+}
+
 private fun TypeSpec.Builder.addWindowed(baseType: BaseType) {
     function(
         kdoc = """
@@ -622,7 +650,7 @@ private fun TypeSpec.Builder.addWindowed(baseType: BaseType) {
         },
         returns = GENERIC.getGeneratedClass().parameterizedBy(baseType.getGeneratedTypeName()),
     ) {
-        statement("""require(size > 0) { "The window size must be positive" }""")
+        statement("""require(size > 0) { "The size must be positive" }""")
         statement("""require(step > 0) { "The step must be positive" }""")
         emptyLine()
         controlFlow("val numWindows = when") {

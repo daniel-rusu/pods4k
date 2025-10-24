@@ -265,6 +265,15 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     public inline fun asSequence(): Sequence<Short> = values.asSequence()
 
     /**
+     * Splits this Immutable Array into chunks that each contain [size] elements.  The resulting Immutable
+     * Array contains a nested Immutable Array for each chunk.  The last chunk may contain fewer elements when the
+     * size isn't a perfect multiple of the [size].
+     */
+    public fun chunked(size: Int): ImmutableArray<ImmutableShortArray> {
+        return windowed(size = size, step = size, partialWindows = true)
+    }
+
+    /**
      * Returns an Immutable Array of Immutable Arrays where each nested Immutable Array represents a sliding window
      * with [size] elements.  The sliding window jumps over [step] elements at a time to copy subsequent windows.
      *
@@ -278,7 +287,7 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
         step: Int = 1,
         partialWindows: Boolean = false,
     ): ImmutableArray<ImmutableShortArray> {
-        require(size > 0) { "The window size must be positive" }
+        require(size > 0) { "The size must be positive" }
         require(step > 0) { "The step must be positive" }
 
         val numWindows = when {

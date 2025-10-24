@@ -15,6 +15,7 @@ _Date TBD_
 
 **New Features:**
 
+* Add `chunked` method
 * Add `windowed` method
 * Add `maxWithOrNull` method
 * Add `minWithOrNull` method
