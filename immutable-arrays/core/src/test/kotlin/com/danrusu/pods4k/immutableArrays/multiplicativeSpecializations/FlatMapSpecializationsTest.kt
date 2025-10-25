@@ -4,14 +4,14 @@ import com.danrusu.pods4k.immutableArrays.ImmutableArray
 import com.danrusu.pods4k.immutableArrays.ImmutableDoubleArray
 import com.danrusu.pods4k.immutableArrays.ImmutableIntArray
 import com.danrusu.pods4k.immutableArrays.emptyImmutableArray
+import com.danrusu.pods4k.immutableArrays.emptyImmutableDoubleArray
 import com.danrusu.pods4k.immutableArrays.emptyImmutableIntArray
 import com.danrusu.pods4k.immutableArrays.immutableArrayOf
-import com.danrusu.pods4k.immutableArrays.isEmpty
 import com.danrusu.pods4k.immutableArrays.toImmutableArray
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
-import strikt.assertions.isA
 import strikt.assertions.isEqualTo
+import strikt.assertions.isTrue
 
 class FlatMapSpecializationsTest {
     @Test
@@ -19,22 +19,26 @@ class FlatMapSpecializationsTest {
         // iterable
         with(emptyImmutableArray<String>()) {
             // iterable
-            expectThat(flatMap<String, Char> { it.toList() })
-                .isA<ImmutableArray<Char>>()
-                .isEmpty()
+            expectThat(flatMap<String, Char> { it.toList() }.referencesSameArrayAs(ImmutableArray.EMPTY))
+                .isTrue()
 
             // Immutable Array
-            expectThat(flatMap { it.toList().toImmutableArray<Char>() })
-                .isA<ImmutableArray<Char>>()
-                .isEmpty()
+            expectThat(flatMap { it.toList().toImmutableArray<Char>() }.referencesSameArrayAs(ImmutableArray.EMPTY))
+                .isTrue()
         }
 
         with(immutableArrayOf("Dan", "Jill")) {
             // iterable
+            expectThat(flatMap<String, Char> { emptyList<Char>() }.referencesSameArrayAs(ImmutableArray.EMPTY))
+                .isTrue()
+
             expectThat(flatMap<String, Char> { it.toList() })
                 .isEqualTo(immutableArrayOf<Char>('D', 'a', 'n', 'J', 'i', 'l', 'l'))
 
             // Immutable Array
+            expectThat(flatMap { emptyImmutableArray<Char>() }.referencesSameArrayAs(ImmutableArray.EMPTY))
+                .isTrue()
+
             expectThat(flatMap { it.toList().toImmutableArray<Char>() })
                 .isEqualTo(immutableArrayOf<Char>('D', 'a', 'n', 'J', 'i', 'l', 'l'))
         }
@@ -47,23 +51,22 @@ class FlatMapSpecializationsTest {
             expectThat(
                 flatMap { element ->
                     element.toCharArray().map { it.digitToInt() }
-                },
-            )
-                .isA<ImmutableIntArray>()
-                .isEmpty()
+                }.referencesSameArrayAs(ImmutableIntArray.EMPTY),
+            ).isTrue()
 
             // Immutable Array
             expectThat(
                 flatMap { element ->
                     element.toCharArray().map { it.digitToInt() }.toImmutableArray()
-                },
-            )
-                .isA<ImmutableIntArray>()
-                .isEmpty()
+                }.referencesSameArrayAs(ImmutableIntArray.EMPTY),
+            ).isTrue()
         }
 
         with(immutableArrayOf("1", "22", "333")) {
             // iterable
+            expectThat(flatMap { emptyList<Int>() }.referencesSameArrayAs(ImmutableIntArray.EMPTY))
+                .isTrue()
+
             expectThat(
                 flatMap { element ->
                     element.toCharArray().map { it.digitToInt() }
@@ -71,6 +74,9 @@ class FlatMapSpecializationsTest {
             ).isEqualTo(immutableArrayOf(1, 2, 2, 3, 3, 3))
 
             // Immutable Array
+            expectThat(flatMap { emptyImmutableIntArray() }.referencesSameArrayAs(ImmutableIntArray.EMPTY))
+                .isTrue()
+
             expectThat(
                 flatMap { element ->
                     element.toCharArray().map { it.digitToInt() }.toImmutableArray()
@@ -83,22 +89,27 @@ class FlatMapSpecializationsTest {
     fun `primitive to generic validation`() {
         with(emptyImmutableIntArray()) {
             // iterable
-            expectThat(flatMap<Char> { it.toString().toList() })
-                .isA<ImmutableArray<Char>>()
-                .isEmpty()
+            expectThat(flatMap<Char> { it.toString().toList() }.referencesSameArrayAs(ImmutableArray.EMPTY))
+                .isTrue()
 
             // Immutable Array
-            expectThat(flatMap { it.toString().toList().toImmutableArray<Char>() })
-                .isA<ImmutableArray<Char>>()
-                .isEmpty()
+            expectThat(
+                flatMap { it.toString().toList().toImmutableArray<Char>() }.referencesSameArrayAs(ImmutableArray.EMPTY),
+            ).isTrue()
         }
 
         with(immutableArrayOf(10, 2, 37)) {
             // iterable
+            expectThat(flatMap<Char> { emptyList() }.referencesSameArrayAs(ImmutableArray.EMPTY))
+                .isTrue()
+
             expectThat(flatMap<Char> { it.toString().toList() })
                 .isEqualTo(immutableArrayOf<Char>('1', '0', '2', '3', '7'))
 
             // Immutable Array
+            expectThat(flatMap { emptyImmutableArray<Char>() }.referencesSameArrayAs(ImmutableArray.EMPTY))
+                .isTrue()
+
             expectThat(flatMap { it.toString().toList().toImmutableArray<Char>() })
                 .isEqualTo(immutableArrayOf<Char>('1', '0', '2', '3', '7'))
         }
@@ -111,23 +122,22 @@ class FlatMapSpecializationsTest {
             expectThat(
                 flatMap { element ->
                     DoubleArray(element) { it.toDouble() / element }.toList()
-                },
-            )
-                .isA<ImmutableDoubleArray>()
-                .isEmpty()
+                }.referencesSameArrayAs(ImmutableDoubleArray.EMPTY),
+            ).isTrue()
 
             // Immutable Array
             expectThat(
                 flatMap { element ->
                     DoubleArray(element) { it.toDouble() / element }.toList().toImmutableArray()
-                },
-            )
-                .isA<ImmutableDoubleArray>()
-                .isEmpty()
+                }.referencesSameArrayAs(ImmutableDoubleArray.EMPTY),
+            ).isTrue()
         }
 
         with(immutableArrayOf(1, 2, 3)) {
             // iterable
+            expectThat(flatMap { emptyList<Double>() }.referencesSameArrayAs(ImmutableDoubleArray.EMPTY))
+                .isTrue()
+
             expectThat(
                 flatMap { element ->
                     DoubleArray(element) { it.toDouble() / element }.toList()
@@ -135,6 +145,10 @@ class FlatMapSpecializationsTest {
             ).isEqualTo(immutableArrayOf(0.0, 0.0, 1.0 / 2, 0.0, 1.0 / 3, 2.0 / 3))
 
             // Immutable Array
+            expectThat(
+                flatMap { emptyImmutableDoubleArray() }.referencesSameArrayAs(ImmutableDoubleArray.EMPTY),
+            ).isTrue()
+
             expectThat(
                 flatMap { element ->
                     DoubleArray(element) { it.toDouble() / element }.toList().toImmutableArray()

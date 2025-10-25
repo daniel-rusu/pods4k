@@ -133,55 +133,55 @@ included:
 
 These scenarios return the `EMPTY` singleton without allocating any memory:
 
-| Operation                                           | Returns `EMPTY` singleton when                                 |
-|-----------------------------------------------------|----------------------------------------------------------------|
-| `emptyImmutableArray()` & 8 primitive variants      | always                                                         |
-| `immutableArrayOf()`                                | no arguments provided                                          |
-| `ImmutableArray(n) { init }` & 8 primitive variants | `n == 0`                                                       |
-| `regularArray.toImmutableArray()`                   | `isEmpty()`                                                    |
-| `copyFrom(array, startIndex, size)`                 | `size == 0`                                                    |
-| `take(n)`                                           | `n == 0`                                                       |
-| `takeWhile { condition }`                           | first element fails condition                                  |
-| `takeLast(n)`                                       | `n == 0`                                                       |
-| `takeLastWhile { condition }`                       | last element fails condition                                   |
-| `drop(n)`                                           | `n >= size`                                                    |
-| `dropWhile { condition }`                           | all elements fail condition                                    |
-| `dropLast(n)`                                       | `n >= size`                                                    |
-| `dropLastWhile { condition }`                       | all elements fail condition                                    |
-| `map { selector }`                                  | `isEmpty()`                                                    |
-| `mapIndexed { selector }`                           | `isEmpty()`                                                    |
-| `flatMapIndexed { transform }`                      | `isEmpty()` or when `transform` produces all empty collections |
-| `sorted()`                                          | `isEmpty()`                                                    |
-| `sortedDescending()`                                | `isEmpty()`                                                    |
-| `sortedBy { selector }`                             | `isEmpty()`                                                    |
-| `sortedByDescending { selector }`                   | `isEmpty()`                                                    |
-| `sortedWith(comparator)`                            | `isEmpty()`                                                    |
-| `shuffled()` & `shuffled(random)`                   | `isEmpty()`                                                    |
-| `distinct()`                                        | `isEmpty()`                                                    |
-| `distinctBy { selector }`                           | `isEmpty()`                                                    |
-| `plus(otherArray)`                                  | `isEmpty() && otherArray.isEmpty()`                            |
-| `toTypedImmutableArray()`                           | `isEmpty()`                                                    |
-| `zip(other)`                                        | `isEmpty()` or `other.isEmpty()`                               |
+| Operation                                           | Returns `EMPTY` singleton when      |
+|-----------------------------------------------------|-------------------------------------|
+| `emptyImmutableArray()` & 8 primitive variants      | always                              |
+| `immutableArrayOf()`                                | no arguments provided               |
+| `ImmutableArray(n) { init }` & 8 primitive variants | `n == 0`                            |
+| `regularArray.toImmutableArray()`                   | `isEmpty()`                         |
+| `copyFrom(array, startIndex, size)`                 | `size == 0`                         |
+| `take(n)`                                           | `n == 0`                            |
+| `takeWhile { condition }`                           | first element fails condition       |
+| `takeLast(n)`                                       | `n == 0`                            |
+| `takeLastWhile { condition }`                       | last element fails condition        |
+| `drop(n)`                                           | `n >= size`                         |
+| `dropWhile { condition }`                           | all elements fail condition         |
+| `dropLast(n)`                                       | `n >= size`                         |
+| `dropLastWhile { condition }`                       | all elements fail condition         |
+| `map { selector }`                                  | `isEmpty()`                         |
+| `mapIndexed { selector }`                           | `isEmpty()`                         |
+| `sorted()`                                          | `isEmpty()`                         |
+| `sortedDescending()`                                | `isEmpty()`                         |
+| `sortedBy { selector }`                             | `isEmpty()`                         |
+| `sortedByDescending { selector }`                   | `isEmpty()`                         |
+| `sortedWith(comparator)`                            | `isEmpty()`                         |
+| `shuffled()` & `shuffled(random)`                   | `isEmpty()`                         |
+| `distinct()`                                        | `isEmpty()`                         |
+| `distinctBy { selector }`                           | `isEmpty()`                         |
+| `plus(otherArray)`                                  | `isEmpty() && otherArray.isEmpty()` |
+| `toTypedImmutableArray()`                           | `isEmpty()`                         |
+| `zip(other)`                                        | `isEmpty()` or `other.isEmpty()`    |
 
 These scenarios allocate memory to track elements, but return `EMPTY` singleton when no elements are included:
 
-| Operation                                               | Returns `EMPTY` singleton when    |
-|---------------------------------------------------------|-----------------------------------|
-| `ImmutableArray.Builder.build()` & 8 primitive variants | `isEmpty()`                       |
-| `immutableArrayOfNotNull(...)`                          | all arguments are null            |
-| `buildImmutableArray { ... }` & 8 primitive variants    | no elements added                 |
-| `iterable.toImmutableArray()`                           | the iterable is empty             |
-| `sequence.toImmutableArray()`                           | the sequence is empty             |
-| `filter { condition }`                                  | all elements meet the condition   |
-| `filterIndexed { condition }`                           | all elements meet the condition   |
-| `filterNot { condition }`                               | all elements fail the condition   |
-| `filterNotNull()`                                       | all elements are null             |
-| `mapNotNull { selector }`                               | all elements are null             |
-| `mapIndexedNotNull { selector }`                        | all elements are null             |
-| `distinct()`                                            | all elements are distinct         |
-| `distinctBy { selector }`                               | selector produces distinct values |
-| `flatMap { selector }`                                  | all nested collections are empty  |
-| `flatten()`                                             | all nested arrays are empty       |
+| Operation                                               | Returns `EMPTY` singleton when                            |
+|---------------------------------------------------------|-----------------------------------------------------------|
+| `ImmutableArray.Builder.build()` & 8 primitive variants | `isEmpty()`                                               |
+| `immutableArrayOfNotNull(...)`                          | all arguments are null                                    |
+| `buildImmutableArray { ... }` & 8 primitive variants    | no elements added                                         |
+| `iterable.toImmutableArray()`                           | the iterable is empty                                     |
+| `sequence.toImmutableArray()`                           | the sequence is empty                                     |
+| `filter { condition }`                                  | all elements meet the condition                           |
+| `filterIndexed { condition }`                           | all elements meet the condition                           |
+| `filterNot { condition }`                               | all elements fail the condition                           |
+| `filterNotNull()`                                       | all elements are null                                     |
+| `mapNotNull { selector }`                               | all elements are null                                     |
+| `mapIndexedNotNull { selector }`                        | all elements are null                                     |
+| `distinct()`                                            | all elements are distinct                                 |
+| `distinctBy { selector }`                               | selector produces distinct values                         |
+| `flatMap { selector }`                                  | `isEmpty()` or `transform` produces all empty collections |
+| `flatMapIndexed { selector }`                           | `isEmpty()` or `transform` produces all empty collections |
+| `flatten()`                                             | all nested arrays are empty                               |
 
 </details>
 
