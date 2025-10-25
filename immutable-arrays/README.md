@@ -148,8 +148,8 @@ These scenarios return the `EMPTY` singleton without allocating any memory:
 | `dropWhile { condition }`                           | all elements fail condition         |
 | `dropLast(n)`                                       | `n >= size`                         |
 | `dropLastWhile { condition }`                       | all elements fail condition         |
-| `map { selector }`                                  | `isEmpty()`                         |
-| `mapIndexed { selector }`                           | `isEmpty()`                         |
+| `map { transform }`                                 | `isEmpty()`                         |
+| `mapIndexed { transform }`                          | `isEmpty()`                         |
 | `sorted()`                                          | `isEmpty()`                         |
 | `sortedDescending()`                                | `isEmpty()`                         |
 | `sortedBy { selector }`                             | `isEmpty()`                         |
@@ -164,23 +164,25 @@ These scenarios return the `EMPTY` singleton without allocating any memory:
 
 These scenarios allocate memory to track elements, but return `EMPTY` singleton when no elements are included:
 
-| Operation                                               | Returns `EMPTY` singleton when    |
-|---------------------------------------------------------|-----------------------------------|
-| `ImmutableArray.Builder.build()` & 8 primitive variants | `isEmpty()`                       |
-| `immutableArrayOfNotNull(...)`                          | all arguments are null            |
-| `buildImmutableArray { ... }` & 8 primitive variants    | no elements added                 |
-| `iterable.toImmutableArray()`                           | the iterable is empty             |
-| `sequence.toImmutableArray()`                           | the sequence is empty             |
-| `filter { condition }`                                  | all elements meet the condition   |
-| `filterIndexed { condition }`                           | all elements meet the condition   |
-| `filterNot { condition }`                               | all elements fail the condition   |
-| `filterNotNull()`                                       | all elements are null             |
-| `mapNotNull { selector }`                               | all elements are null             |
-| `mapIndexedNotNull { selector }`                        | all elements are null             |
-| `distinct()`                                            | all elements are distinct         |
-| `distinctBy { selector }`                               | selector produces distinct values |
-| `flatMap { selector }`                                  | all nested collections are empty  |
-| `flatten()`                                             | all nested arrays are empty       |
+| Operation                                               | Returns `EMPTY` singleton when                            |
+|---------------------------------------------------------|-----------------------------------------------------------|
+| `ImmutableArray.Builder.build()` & 8 primitive variants | `isEmpty()`                                               |
+| `immutableArrayOfNotNull(...)`                          | all arguments are null                                    |
+| `buildImmutableArray { ... }` & 8 primitive variants    | no elements added                                         |
+| `iterable.toImmutableArray()`                           | the iterable is empty                                     |
+| `sequence.toImmutableArray()`                           | the sequence is empty                                     |
+| `filter { condition }`                                  | all elements meet the condition                           |
+| `filterIndexed { condition }`                           | all elements meet the condition                           |
+| `filterNot { condition }`                               | all elements fail the condition                           |
+| `filterNotNull()`                                       | all elements are null                                     |
+| `mapNotNull { transform }`                              | all elements are null                                     |
+| `mapIndexedNotNull { transform }`                       | all elements are null                                     |
+| `flatMap { transform }`                                 | `isEmpty()` or `transform` produces all empty collections |
+| `flatMapIndexed { transform }`                          | `isEmpty()` or `transform` produces all empty collections |
+| `distinct()`                                            | all elements are distinct                                 |
+| `distinctBy { selector }`                               | selector produces distinct values                         |
+| `flatMap { selector }`                                  | all nested collections are empty                          |
+| `flatten()`                                             | all nested arrays are empty                               |
 
 </details>
 
