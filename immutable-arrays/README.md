@@ -161,6 +161,8 @@ These scenarios return the `EMPTY` singleton without allocating any memory:
 | `plus(otherArray)`                                  | `isEmpty() && otherArray.isEmpty()` |
 | `toTypedImmutableArray()`                           | `isEmpty()`                         |
 | `zip(other)`                                        | `isEmpty()` or `other.isEmpty()`    |
+| `chunked(chunkSize)`                                | `isEmpty()`                         |
+| `windowed(windowSize)`                              | `isEmpty()`                         |
 
 These scenarios allocate memory to track elements, but return `EMPTY` singleton when no elements are included:
 

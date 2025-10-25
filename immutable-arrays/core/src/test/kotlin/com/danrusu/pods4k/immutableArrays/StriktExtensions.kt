@@ -159,7 +159,7 @@ fun <T> Assertion.Builder<ImmutableArray<T>>.isEmpty(): Assertion.Builder<Immuta
         }
         // Ensure that all places that can return an empty result always return the EMPTY instance
         if (isEmpty != isEmptyInstance) {
-            return@assert fail("Inconsistent isEmpty():$isEmpty with isSameInstanceAs(EMPTY):$isEmptyInstance")
+            return@assert fail("Inconsistent isEmpty():$isEmpty with referencesSameArrayAs(EMPTY):$isEmptyInstance")
         }
         when (isEmpty) {
             true -> pass()

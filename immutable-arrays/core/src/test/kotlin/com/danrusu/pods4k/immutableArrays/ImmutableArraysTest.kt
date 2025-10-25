@@ -405,7 +405,8 @@ class ImmutableArraysTest {
     fun `filterNotNull validation`() {
         with(emptyImmutableArray<String?>()) {
             expectThat(filterNotNull())
-                .isEqualTo(emptyImmutableArray<String>())
+                .isA<ImmutableArray<String>>()
+                .isEmpty()
         }
 
         with(immutableArrayOf("one", null, "two")) {

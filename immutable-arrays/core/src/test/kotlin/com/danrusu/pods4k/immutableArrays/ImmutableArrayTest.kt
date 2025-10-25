@@ -525,7 +525,8 @@ class ImmutableArrayTest {
 
         with(emptyImmutableArray<String>()) {
             expectThat(chunked(3))
-                .isEqualTo(emptyImmutableArray<ImmutableArray<String>>())
+                .isA<ImmutableArray<String>>()
+                .isEmpty()
         }
 
         with(immutableArrayOf("A", "B", "C", "D")) {
@@ -583,7 +584,8 @@ class ImmutableArrayTest {
 
         with(emptyImmutableArray<String>()) {
             expectThat(windowed(size = 1))
-                .isEqualTo(emptyImmutableArray<ImmutableArray<String>>())
+                .isA<ImmutableArray<ImmutableArray<String>>>()
+                .isEmpty()
         }
 
         with(immutableArrayOf("A", "B", "C", "D", "E")) {
@@ -660,7 +662,8 @@ class ImmutableArrayTest {
                 .isEqualTo(windowed(size = 5, step = 5, partialWindows = true))
 
             expectThat(windowed(size = 6))
-                .isEqualTo(emptyImmutableArray())
+                .isA<ImmutableArray<ImmutableArray<String>>>()
+                .isEmpty()
 
             expectThat(windowed(size = 6, partialWindows = true))
                 .isEqualTo(

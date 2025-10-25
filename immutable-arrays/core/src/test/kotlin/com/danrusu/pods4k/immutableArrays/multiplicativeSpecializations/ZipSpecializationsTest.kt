@@ -123,9 +123,9 @@ class ZipSpecializationsTest {
         }
 
         with(immutableArrayOf(1, 2)) {
-            expectThat(
-                zip(emptyImmutableCharArray()),
-            ).isEqualTo(emptyImmutableArray<Pair<Int, Char>>())
+            expectThat(zip(emptyImmutableCharArray()))
+                .isA<ImmutableArray<Pair<Int, Char>>>()
+                .isEmpty()
 
             expectThat(
                 zip(immutableArrayOf('a')),

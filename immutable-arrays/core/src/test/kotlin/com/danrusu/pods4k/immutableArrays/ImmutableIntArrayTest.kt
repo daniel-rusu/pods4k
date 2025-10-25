@@ -540,7 +540,8 @@ class ImmutableIntArrayTest {
 
         with(emptyImmutableIntArray()) {
             expectThat(chunked(3))
-                .isEqualTo(emptyImmutableArray<ImmutableIntArray>())
+                .isA<ImmutableArray<ImmutableIntArray>>()
+                .isEmpty()
         }
 
         with(immutableArrayOf(1, 2, 3, 4)) {
@@ -596,9 +597,10 @@ class ImmutableIntArrayTest {
             immutableArrayOf(1, 2).windowed(size = 1, step = 0)
         }.message.isEqualTo("The step must be positive")
 
-        with(emptyImmutableArray<String>()) {
+        with(emptyImmutableIntArray()) {
             expectThat(windowed(size = 1))
-                .isEqualTo(emptyImmutableArray<ImmutableArray<String>>())
+                .isA<ImmutableArray<ImmutableIntArray>>()
+                .isEmpty()
         }
 
         with(immutableArrayOf(1, 2, 3, 4, 5)) {
@@ -675,7 +677,8 @@ class ImmutableIntArrayTest {
                 .isEqualTo(windowed(size = 5, step = 5, partialWindows = true))
 
             expectThat(windowed(size = 6))
-                .isEqualTo(emptyImmutableArray())
+                .isA<ImmutableArray<ImmutableIntArray>>()
+                .isEmpty()
 
             expectThat(windowed(size = 6, partialWindows = true))
                 .isEqualTo(
