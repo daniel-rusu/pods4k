@@ -27,7 +27,7 @@ jobs:
 
       - name: Upload test report if failed
         if: failure() # Only upload the build report if the previous step failed
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: Test report
           path: |
