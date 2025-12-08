@@ -5,4 +5,5 @@ users, the aggregator creates a top-level `pods4k` artifact which includes compi
 this library. When adding a dependency to the top-level `pods4k` artifact, that will automatically bring in all the
 other artifacts of this library.
 
-Adding a dependency to this top-level artifact is described in [dependency details](../../README.md#dependency).
+Adding a dependency to this top-level artifact is described in
+the [installation instructions](../../README.md#installation).

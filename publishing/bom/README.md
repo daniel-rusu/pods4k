@@ -70,6 +70,6 @@ The `bom` references the following artifacts:
 | `com.danrusu.pods4k.immutable-arrays` | `core`                                    | The core Immutable Arrays library                                          |
 | `com.danrusu.pods4k.immutable-arrays` | `transformations-to-standard-collections` | Extensions that transform immutable arrays to standard-library collections |
 
-[latest-version-shield]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdaniel-rusu%2Fpods4k%2Frefs%2Fheads%2Fmain%2Flatest_version.json&query=version&label=Latest%20Version&color=orange
+[latest-version-shield]: https://img.shields.io/maven-central/v/com.danrusu.pods4k/pods4k?label=Latest%20Version
 
 [maven-central-url]: https://central.sonatype.com/artifact/com.danrusu.pods4k/bom

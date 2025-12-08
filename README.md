@@ -88,7 +88,7 @@ Java & Kotlin codebase to store one of these data structures in a Java-defined c
 structures by their class name is only supported within Kotlin files.
 
 
-[maven-central-badge]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdaniel-rusu%2Fpods4k%2Frefs%2Fheads%2Fmain%2Flatest_version.json&query=version&style=for-the-badge&label=maven-central&color=orange
+[maven-central-badge]: https://img.shields.io/maven-central/v/com.danrusu.pods4k/pods4k?style=for-the-badge
 
 [license-badge]: https://img.shields.io/github/license/daniel-rusu/pods4k?style=for-the-badge
 
@@ -111,7 +111,7 @@ structures by their class name is only supported within Kotlin files.
 
 [github-stars-shield]: https://img.shields.io/github/stars/daniel-rusu/pods4k?label=Star
 
-[latest-version-shield]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdaniel-rusu%2Fpods4k%2Frefs%2Fheads%2Fmain%2Flatest_version.json&query=version&label=Latest%20Version&color=orange
+[latest-version-shield]: https://img.shields.io/maven-central/v/com.danrusu.pods4k/pods4k?label=Latest%20Version
 
 
 [stars-url]: https://github.com/daniel-rusu/pods4k/stargazers
