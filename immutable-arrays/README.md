@@ -18,6 +18,7 @@ Ideal for Android, backend services, and any application seeking enhanced safety
 [Efficiency](#-efficiency) |
 [Comparison with Alternatives](#-comparison-with-alternatives) |
 [Interop & Migration](#-interop--migration) |
+[Immutability Guarantees](#-immutability-guarantees) |
 [FAQ](#-faq) |
 [Caveats](#-caveats)
 
@@ -904,6 +905,18 @@ the function, class, package, or module level. The boundaries that interact with
 Immutable Arrays as regular collections using `asList()`, `asIterable()`, or `toList()`. As adoption progresses, the
 boundary layers can be updated to operate on Immutable Arrays directly for optimal efficiency.
 
+## 📘 Immutability Guarantees
+
+Immutable Arrays enforce immutability at the type and API level: no mutating operations are exposed. All transformation
+operations leave the original unchanged and return Immutable Arrays, preserving immutability across chained operations.
+
+Immutability is shallow: referenced objects may themselves be mutable. This is the standard immutability model used by
+immutable collections across programming languages.
+
+As with all JVM immutable collection libraries (including Guava and `kotlinx.collections.immutable`), immutability is
+enforced by language constraints rather than as a security mechanism. Low-level JVM mechanisms (such as reflection,
+bytecode instrumentation, or native code) operate outside this model and are considered out of scope.
+
 ## 🙋 FAQ
 
 <details>
@@ -964,22 +977,6 @@ There are several reasons:
 </details>
 
 ## 📌 Caveats
-
-<details>
-<summary>Shallow immutability</summary>
-
-Immutable Arrays are shallowly immutable – you can’t modify the array itself, but the elements inside may still be
-mutable:
-
-```kotlin
-val people = immutableArrayOf(Person("Bob"), Person("Jane"))
-
-people[0].spouse = Person("Jill")
-```
-
-This is typical behavior for immutable collections across programming languages.
-
-</details>
 
 <details>
 <summary>No identity</summary>
