@@ -16,7 +16,6 @@ Ideal for Android, backend services, and any application seeking enhanced safety
 [Quick Start](#-quick-start) |
 [Performance](#-performance) |
 [Efficiency](#-efficiency) |
-[Usage](#-usage) |
 [Interop & Migration](#-interop--migration) |
 [Comparison with Alternatives](#-comparison-with-alternatives) |
 [FAQ](#-faq) |
@@ -61,6 +60,215 @@ for (person in people) {
 val employedPeople = people.filter { it.isEmployed() }
 val salaries = employedPeople.map { it.salary }
 ```
+
+<details>
+<summary>Creating Immutable Arrays</summary>
+
+#### Regular Creation
+
+```kotlin
+// Empty Arrays
+emptyImmutableArray<String>() // generic ImmutableArray<String>
+emptyImmutableBooleanArray() // primitive ImmutableBooleanArray
+// ...
+
+// From Values
+immutableArrayOf("Bob", "Jane") // ImmutableArray<String>
+immutableArrayOf(1, 2, 3) // primitive int array
+immutableArrayOf<Int>(1, 2, 3) // generic array with boxed integers
+
+// Generated Elements
+ImmutableArray(size = 3) { it.toString() } // ["0", "1", "2"]
+ImmutableIntArray(size = 5) { it * it } // [0, 1, 4, 9, 16]
+
+// From Existing Collections
+listOfStrings.toImmutableArray() // ImmutableArray<String>
+listOfIntegers.toImmutableArray() // primitive ImmutableIntArray
+listOfIntegers.toImmutableArray<Int>() // generic ImmutableArray<Int>
+// similarly with conversions from regular arrays or other iterables like Set, etc.
+
+
+```
+
+#### With Builders
+
+Use immutable-array builders when accumulating values in complex scenarios. They're safer and more efficient than
+accumulating values in a mutable list.
+
+```kotlin
+fun getTopStocks(): ImmutableArray<Stock> {
+    val topStocksBuilder = ImmutableArray.Builder<Stock>()
+
+    addTrendingStocks(topStocksBuilder)
+    addFastestGrowingStocks(topStocksBuilder)
+
+    return topStocksBuilder.build()
+}
+
+// primitive variants also have builders e.g. ImmutableBooleanArray.Builder()
+```
+
+Immutable-Array builders are safer because they're append-only without the ability to replace or remove items. This
+allows us to partially populate them and safely pass the builder to utilities to append additional elements without
+concerns of losing current results. The builders also incorporate multiple optimizations that make them faster and more
+efficient than accumulating elements in a mutable list.
+
+If you know the resulting capacity in advance, specifying that makes it several times more efficient as it avoids
+capacity growth and also shares the resulting array without needing a final copy step when calling `build()`:
+
+```kotlin
+val top100StocksBuilder = ImmutableArray.Builder<Stock>(initialCapacity = 100)
+```
+
+#### With Build Functions
+
+There are also cleaner build functions that wrap the builders for when all the logic is contained in a single place:
+
+```kotlin
+// Creates generic ImmutableArray<Person>
+val adults = buildImmutableArray<Person> {
+    for (person in people) {
+        if (person.age >= 18) add(person)
+    }
+}
+
+// Creates primitive ImmutableIntArray
+val favoriteNumbers = buildImmutableIntArray {
+    people.forEach { addAll(it.favoriteNumbers) }
+}
+```
+
+If you know the resulting capacity in advance, specifying that makes it several times more efficient as it avoids
+capacity growth and also shares the resulting array without needing a final copy step:
+
+```kotlin
+val top100People = buildImmutableArray<Person>(initialCapacity = 100) {
+    //...
+}
+```
+
+</details>
+
+<details>
+<summary>Accessing Elements</summary>
+
+#### By Position
+
+```kotlin
+val names = immutableArrayOf("Dan", "Bob", "Jill")
+
+names[0] // "Dan"
+val (first, _, third) = names // first = "Dan", third = "Jill"
+
+// Special access methods
+names.single() // similarly with singleOrNull()
+names.first() // similarly with firstOrNUll()
+names.last() // similarly with lastOrNull()
+```
+
+#### By Condition
+
+```kotlin
+val numbers = immutableArrayOf(1, 4, 5, 6)
+
+val firstEvenNumber = numbers.first { it % 2 == 0 } // 4
+val lastOddNumber = numbers.last { it % 2 == 1 } // 5
+// similarly with firstOrNull { condition } and lastOrNull { condition }
+
+numbers.single { it % 3 == 0 } // 6
+// similarly with singleOrNull
+```
+
+</details>
+
+<details>
+<summary>Iterating Elements</summary>
+
+```kotlin
+val names = immutableArrayOf("Dan", "Bob", "Jill")
+
+// For-Loop
+for (name in names) {
+    println(name)
+}
+
+// ForEach
+names.forEach { println(it) }
+names.forEachIndexed { index, name -> println("$index: name") }
+
+// Sequence
+names.asSequence()
+    .filter { /* ... */ }
+    .forEach { /* ... */ }
+
+// Iterator
+names.asIterable()
+
+val iterator = names.iterator()
+while (iterator.hasNext()) {
+    //...
+}
+```
+
+</details>
+
+<details>
+<summary>Conditions</summary>
+
+#### Element Conditions
+
+```kotlin
+val names = immutableArrayOf("Dan", "Bobby", "Jill")
+
+"Jill" in names // true
+names.contains("Joe") // false
+names.isEmpty() // false
+
+names.all { it.isNotEmpty() } // true
+names.any { it.startsWith("B") } // true
+names.none { it.length > 10 } // true
+// etc.
+```
+
+#### Array Equality Conditions
+
+Structural equality (double `==`) works as expected. Kotlin prevents using `===` (referential equality) because
+Immutable Arrays are erased at compile time. Instead, use `referencesSameArrayAs` to check if two instances reference
+the same underlying array:
+
+```kotlin
+val names = immutableArrayOf("Dan", "Jill")
+val sameNames = immutableArrayOf("Dan", "Jill")
+
+// true since they contain identical values
+names == sameNames // regular equality
+
+// false since they were created separately 
+names.referencesSameArrayAs(sameNames) // referential equality of the array
+
+// Immutability allows us to safely share instances behind the scenes
+names.take(100).referencesSameArrayAs(names) // true
+names.filter { it.isNotEmpty() }.referencesSameArrayAs(names) // true
+// etc.
+```
+
+</details>
+
+<details>
+<summary>Transformations</summary>
+
+```kotlin
+val names = immutableArrayOf("Dan", "Bobby", "Jill")
+
+names.map { it.length } // [3, 5, 4]
+names.filter { it.length <= 4 } // ["Dan", "Jill"]
+names.take(2) // ["Dan", "Bobby"]
+names.sorted() // ["Bobby", "Dan", "Jill"]
+names.partition { it.length % 2 == 0 } // Pair(["Jill"], ["Dan", "Bobby"])
+// etc.
+```
+
+</details>
 
 ## 🔥 Performance
 
@@ -278,217 +486,6 @@ and loop counters are usually small, but storing loop counters in lists isn't co
 
 <sup>1</sup> `Long` is chosen when anticipating larger values, such as when storing salaries in cents, but all salaries
 are greater than $1.27 making the cache useless in this scenario.
-
-</details>
-
-## 📖 Usage
-
-<details>
-<summary>Creating Immutable Arrays</summary>
-
-#### Regular Creation
-
-```kotlin
-// Empty Arrays
-emptyImmutableArray<String>() // generic ImmutableArray<String>
-emptyImmutableBooleanArray() // primitive ImmutableBooleanArray
-// ...
-
-// From Values
-immutableArrayOf("Bob", "Jane") // ImmutableArray<String>
-immutableArrayOf(1, 2, 3) // primitive int array
-immutableArrayOf<Int>(1, 2, 3) // generic array with boxed integers
-
-// Generated Elements
-ImmutableArray(size = 3) { it.toString() } // ["0", "1", "2"]
-ImmutableIntArray(size = 5) { it * it } // [0, 1, 4, 9, 16]
-
-// From Existing Collections
-listOfStrings.toImmutableArray() // ImmutableArray<String>
-listOfIntegers.toImmutableArray() // primitive ImmutableIntArray
-listOfIntegers.toImmutableArray<Int>() // generic ImmutableArray<Int>
-// similarly with conversions from regular arrays or other iterables like Set, etc.
-
-
-```
-
-#### With Builders
-
-Use immutable-array builders when accumulating values in complex scenarios. They're safer and more efficient than
-accumulating values in a mutable list.
-
-```kotlin
-fun getTopStocks(): ImmutableArray<Stock> {
-    val topStocksBuilder = ImmutableArray.Builder<Stock>()
-
-    addTrendingStocks(topStocksBuilder)
-    addFastestGrowingStocks(topStocksBuilder)
-
-    return topStocksBuilder.build()
-}
-
-// primitive variants also have builders e.g. ImmutableBooleanArray.Builder()
-```
-
-Immutable-Array builders are safer because they're append-only without the ability to replace or remove items. This
-allows us to partially populate them and safely pass the builder to utilities to append additional elements without
-concerns of losing current results. The builders also incorporate multiple optimizations that make them faster and more
-efficient than accumulating elements in a mutable list.
-
-If you know the resulting capacity in advance, specifying that makes it several times more efficient as it avoids
-capacity growth and also shares the resulting array without needing a final copy step when calling `build()`:
-
-```kotlin
-val top100StocksBuilder = ImmutableArray.Builder<Stock>(initialCapacity = 100)
-```
-
-</details>
-
-#### With Build Functions
-
-There are also cleaner build functions that wrap the builders for when all the logic is contained in a single place:
-
-```kotlin
-// Creates generic ImmutableArray<Person>
-val adults = buildImmutableArray<Person> {
-   for (person in people) {
-      if (person.age >= 18) add(person)
-   }
-}
-
-// Creates primitive ImmutableIntArray
-val favoriteNumbers = buildImmutableIntArray {
-   people.forEach { addAll(it.favoriteNumbers) }
-}
-```
-
-If you know the resulting capacity in advance, specifying that makes it several times more efficient as it avoids
-capacity growth and also shares the resulting array without needing a final copy step:
-
-```kotlin
-val top100People = buildImmutableArray<Person>(initialCapacity = 100) {
-    //...
-}
-```
-
-<details>
-<summary>Accessing Elements</summary>
-
-#### By Position
-
-```kotlin
-val names = immutableArrayOf("Dan", "Bob", "Jill")
-
-names[0] // "Dan"
-val (first, _, third) = names // first = "Dan", third = "Jill"
-
-// Special access methods
-names.single() // similarly with singleOrNull()
-names.first() // similarly with firstOrNUll()
-names.last() // similarly with lastOrNull()
-```
-
-#### By Condition
-
-```kotlin
-val numbers = immutableArrayOf(1, 4, 5, 6)
-
-val firstEvenNumber = numbers.first { it % 2 == 0 } // 4
-val lastOddNumber = numbers.last { it % 2 == 1 } // 5
-// similarly with firstOrNull { condition } and lastOrNull { condition }
-
-numbers.single { it % 3 == 0 } // 6
-// similarly with singleOrNull
-```
-
-</details>
-
-<details>
-<summary>Iterating Elements</summary>
-
-```kotlin
-val names = immutableArrayOf("Dan", "Bob", "Jill")
-
-// For-Loop
-for (name in names) {
-    println(name)
-}
-
-// ForEach
-names.forEach { println(it) }
-names.forEachIndexed { index, name -> println("$index: name") }
-
-// Sequence
-names.asSequence()
-    .filter { /* ... */ }
-    .forEach { /* ... */ }
-
-// Iterator
-names.asIterable()
-
-val iterator = names.iterator()
-while (iterator.hasNext()) {
-    //...
-}
-```
-
-</details>
-
-<details>
-<summary>Conditions</summary>
-
-#### Element Conditions
-
-```kotlin
-val names = immutableArrayOf("Dan", "Bobby", "Jill")
-
-"Jill" in names // true
-names.contains("Joe") // false
-names.isEmpty() // false
-
-names.all { it.isNotEmpty() } // true
-names.any { it.startsWith("B") } // true
-names.none { it.length > 10 } // true
-// etc.
-```
-
-#### Array Equality Conditions
-
-Structural equality (double `==`) works as expected. Kotlin prevents using `===` (referential equality) because
-Immutable Arrays are erased at compile time. Instead, use `referencesSameArrayAs` to check if two instances reference
-the same underlying array:
-
-```kotlin
-val names = immutableArrayOf("Dan", "Jill")
-val sameNames = immutableArrayOf("Dan", "Jill")
-
-// true since they contain identical values
-names == sameNames // regular equality
-
-// false since they were created separately 
-names.referencesSameArrayAs(sameNames) // referential equality of the array
-
-// Immutability allows us to safely share instances behind the scenes
-names.take(100).referencesSameArrayAs(names) // true
-names.filter { it.isNotEmpty() }.referencesSameArrayAs(names) // true
-// etc.
-```
-
-</details>
-
-<details>
-<summary>Transformations</summary>
-
-```kotlin
-val names = immutableArrayOf("Dan", "Bobby", "Jill")
-
-names.map { it.length } // [3, 5, 4]
-names.filter { it.length <= 4 } // ["Dan", "Jill"]
-names.take(2) // ["Dan", "Bobby"]
-names.sorted() // ["Bobby", "Dan", "Jill"]
-names.partition { it.length % 2 == 0 } // Pair(["Jill"], ["Dan", "Bobby"])
-// etc.
-```
 
 </details>
 
