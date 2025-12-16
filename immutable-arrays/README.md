@@ -16,9 +16,9 @@ Ideal for Android, backend services, and any application seeking enhanced safety
 [Quick Start](#-quick-start) |
 [Performance](#-performance) |
 [Efficiency](#-efficiency) |
-[Comparison with Alternatives](#-comparison-with-alternatives) |
+[Alternatives](#-alternatives) |
 [Interop & Migration](#-interop--migration) |
-[Immutability Guarantees](#-immutability-guarantees) |
+[Immutability Model](#-immutability-model) |
 [FAQ](#-faq) |
 [Caveats](#-caveats)
 
@@ -465,7 +465,7 @@ are greater than $1.27 making the cache useless in this scenario.
 
 </details>
 
-## 🏆 Comparison with Alternatives
+## 🏆 Alternatives
 
 | Feature                  | Immutable Arrays | Regular Arrays | Read-only Lists    | Unmodifiable Lists | Java Immutable Lists |
 |--------------------------|------------------|----------------|--------------------|--------------------|----------------------|
@@ -905,7 +905,7 @@ the function, class, package, or module level. The boundaries that interact with
 Immutable Arrays as regular collections using `asList()`, `asIterable()`, or `toList()`. As adoption progresses, the
 boundary layers can be updated to operate on Immutable Arrays directly for optimal efficiency.
 
-## 📘 Immutability Guarantees
+## 📘 Immutability Model
 
 Immutable Arrays enforce immutability at the type and API level: no mutating operations are exposed. All transformation
 operations leave the original unchanged and return Immutable Arrays, preserving immutability across chained operations.
