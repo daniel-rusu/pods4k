@@ -86,8 +86,6 @@ listOfStrings.toImmutableArray() // ImmutableArray<String>
 listOfIntegers.toImmutableArray() // primitive ImmutableIntArray
 listOfIntegers.toImmutableArray<Int>() // generic ImmutableArray<Int>
 // similarly with conversions from regular arrays or other iterables like Set, etc.
-
-
 ```
 
 #### With Builders
@@ -105,44 +103,21 @@ fun getTopStocks(): ImmutableArray<Stock> {
     return topStocksBuilder.build()
 }
 
-// primitive variants also have builders e.g. ImmutableBooleanArray.Builder()
-```
-
-Immutable-Array builders are safer because they're append-only without the ability to replace or remove items. This
-allows us to partially populate them and safely pass the builder to utilities to append additional elements without
-concerns of losing current results. The builders also incorporate multiple optimizations that make them faster and more
-efficient than accumulating elements in a mutable list.
-
-If you know the resulting capacity in advance, specifying that makes it several times more efficient as it avoids
-capacity growth and also shares the resulting array without needing a final copy step when calling `build()`:
-
-```kotlin
-val top100StocksBuilder = ImmutableArray.Builder<Stock>(initialCapacity = 100)
+// Primitive variants also have builders e.g. ImmutableBooleanArray.Builder()
+// When the resulting size is known in advance, specify the initial capacity to further optimize efficiency
 ```
 
 #### With Build Functions
 
-There are also cleaner build functions that wrap the builders for when all the logic is contained in a single place:
+There's also build functions that wrap the builder construction for when all the logic is contained in a single place:
 
 ```kotlin
-// Creates generic ImmutableArray<Person>
-val adults = buildImmutableArray<Person> {
-    for (person in people) {
-        if (person.age >= 18) add(person)
-    }
-}
-
-// Creates primitive ImmutableIntArray
 val favoriteNumbers = buildImmutableIntArray {
     people.forEach { addAll(it.favoriteNumbers) }
 }
-```
 
-If you know the resulting capacity in advance, specifying that makes it several times more efficient as it avoids
-capacity growth and also shares the resulting array without needing a final copy step:
-
-```kotlin
-val top100People = buildImmutableArray<Person>(initialCapacity = 100) {
+// When the resulting size is known in advance, specify the initial capacity to further optimize efficiency
+val top100Stocks = buildImmutableArray<Stock>(initialCapacity = 100) {
     //...
 }
 ```
