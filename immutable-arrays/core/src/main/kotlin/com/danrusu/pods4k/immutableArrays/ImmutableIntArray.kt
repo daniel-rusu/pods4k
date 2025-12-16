@@ -771,7 +771,9 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     }
 
     /**
-     * Builder to create Immutable Arrays when the resulting size isn't known in advance.
+     * Builder to create Immutable Arrays.  This builder is append-only without the ability to replace or
+     * remove added elements.  This allows us to partially populate them and safely pass the builder to
+     * utilities to add additional elements without concerns of losing current results.
      *
      * Note: While the generated Immutable Array is thread-safe, this builder is not.  External concurrency
      * control is required when sharing builders between threads.

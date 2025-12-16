@@ -312,27 +312,9 @@ listOfIntegers.toImmutableArray<Int>() // generic ImmutableArray<Int>
 
 ```
 
-#### With Build Functions
-
-Use build functions for unknown sizes — they're more efficient than collecting elements in a mutable list.
-
-```kotlin
-// Creates generic ImmutableArray<Person>
-val adults = buildImmutableArray<Person> {
-    for (person in people) {
-        if (person.age >= 18) add(person)
-    }
-}
-
-// Creates primitive ImmutableIntArray
-val favoriteNumbers = buildImmutableIntArray {
-    people.forEach { addAll(it.favoriteNumbers) }
-}
-```
-
 #### With Builders
 
-Use immutable-array builders when accumulating values in more complex scenarios. They're more efficient than
+Use immutable-array builders when accumulating values in complex scenarios. They're safer and more efficient than
 accumulating values in a mutable list.
 
 ```kotlin
@@ -348,7 +330,46 @@ fun getTopStocks(): ImmutableArray<Stock> {
 // primitive variants also have builders e.g. ImmutableBooleanArray.Builder()
 ```
 
+Immutable-Array builders are safer because they're append-only without the ability to replace or remove items. This
+allows us to partially populate them and safely pass the builder to utilities to append additional elements without
+concerns of losing current results. The builders also incorporate multiple optimizations that make them faster and more
+efficient than accumulating elements in a mutable list.
+
+If you know the resulting capacity in advance, specifying that makes it several times more efficient as it avoids
+capacity growth and also shares the resulting array without needing a final copy step when calling `build()`:
+
+```kotlin
+val top100StocksBuilder = ImmutableArray.Builder<Stock>(initialCapacity = 100)
+```
+
 </details>
+
+#### With Build Functions
+
+There are also cleaner build functions that wrap the builders for when all the logic is contained in a single place:
+
+```kotlin
+// Creates generic ImmutableArray<Person>
+val adults = buildImmutableArray<Person> {
+   for (person in people) {
+      if (person.age >= 18) add(person)
+   }
+}
+
+// Creates primitive ImmutableIntArray
+val favoriteNumbers = buildImmutableIntArray {
+   people.forEach { addAll(it.favoriteNumbers) }
+}
+```
+
+If you know the resulting capacity in advance, specifying that makes it several times more efficient as it avoids
+capacity growth and also shares the resulting array without needing a final copy step:
+
+```kotlin
+val top100People = buildImmutableArray<Person>(initialCapacity = 100) {
+    //...
+}
+```
 
 <details>
 <summary>Accessing Elements</summary>
