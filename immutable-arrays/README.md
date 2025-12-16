@@ -17,6 +17,7 @@ Ideal for Android, backend services, and any application seeking enhanced safety
 [Performance](#-performance) |
 [Efficiency](#-efficiency) |
 [Usage](#-usage) |
+[Interop & Migration](#-interop--migration) |
 [Comparison with Alternatives](#-comparison-with-alternatives) |
 [FAQ](#-faq) |
 [Caveats](#-caveats)
@@ -470,56 +471,154 @@ names.partition { it.length % 2 == 0 } // Pair(["Jill"], ["Dan", "Bobby"])
 
 </details>
 
-### Interop with List APIs
+## 🤝 Interop & Migration
 
-Using Immutable Arrays with List-based APIs:
+Immutable Arrays can be exposed as regular collections in constant-time. That's because the elements don't need to be
+copied due to tiny immutable wrappers backed by the same array. This makes it very efficient to pass Immutable Arrays to
+APIs that expect collections:
 
 ```kotlin
 val people = immutableArrayOf(dan, bob, jill)
 
+// List wrapper backed by the same array, supports random access
+people.asList()
+
+// Iterable wrapper backed by the same array, forces sequential access via iterators
+people.asIterable()
+```
+
+Elements can also be copied into regular arrays or standalone lists:
+
+```kotlin
+val weights = immutableArrayOf(1.0f, 2.0f, 3.0f) // ImmutableFloatArray
+
+// copy to equivalent regular array
+weights.toArray() // FloatArray
+
+// copy to regular typed array
+weights.toTypedArray() // Array<Float>
+
 // copy to standalone read-only List
-processData(people.toList())
-
-// create an immutable List wrapper backed by the same array without copying elements
-processData(people.asList())
-
-// create an Iterable wrapper without copying the elements
-processData(people.asIterable())
+weights.toList() // List<Float>
 ```
 
 <details>
-<summary>Adding Immutable Arrays to existing projects</summary>
+<summary>Choosing between asList(), asIterable(), and toList()</summary>
 
-You can transition to Immutable Arrays gradually, without needing to replace all lists at once. This can be tackled at
-the class, package, or module level. The boundaries that interact with other parts of the application can expose
-Immutable Arrays as regular collections using `toList`, `asList`, or `asIterable`. As adoption progresses, the boundary
-layers can be updated to operate on Immutable Arrays directly for optimal efficiency.
+Always prefer `asList()` when operating on a generic `ImmutableArray<T>` (or choose `asIterable()` if you want to
+enforce sequential access). Only prefer `toList()` when working with a primitive variant, such as `ImmutableFloatArray`,
+and when the elements will be accessed more times than the number of elements.
 
-Mutable lists that are used for accumulating elements can also be replaced with Immutable Array builders as these
-builders are much more efficient.
+The tiny wrappers created by `asList()` or `asIterable()` operate on generics, so primitive elements get auto-boxed
+lazily every time they're accessed. Lazy auto-boxing reduces peak memory consumption and is more efficient than creating
+a standalone list when the number of accesses won't exceed the number of elements. Additionally, modern garbage
+collectors only traverse live objects so the collection step is unaffected by the number of temporary objects that are
+quickly discarded. Using `toList()` forces the garbage collector to maintain all the auto-boxed wrapper objects until
+we're done processing the entire list. However, for the common scenario where we process one element at a time without
+storing previous ones, lazy auto-boxing significantly reduces garbage collection overhead as only one auto-boxed wrapper
+will be live at a time.
+
+When working with one of the 8 primitive variants and when the elements will be accessed multiple times, the auto-boxing
+overhead can start to dominate. In this case, use `toList()` to auto-box and copy all elements upfront.
 
 </details>
 
 <details>
-<summary>Choosing between toList(), asList(), and asIterable()</summary>
+<summary>Transforming regular data structures into Immutable Arrays</summary>
 
-For reference types, like `ImmutableArray<Person>`, use `asList()` or `asIterable()`. These create a tiny wrapper over
-the same array without copying the elements so it's extremely memory efficient and fast. Using `asList()` supports
-random access while `asIterable()` forces sequential access patterns.
+Use `toImmutableArray()` to copy elements from regular data structures into Immutable Arrays:
 
-For the 8 primitive variants, such as `ImmutableFloatArray`, exposing these to list APIs will auto-box elements:
+```kotlin
+regularArray.toImmutableArray()
 
-* Use `asList()` or `asIterable()` when the number of accesses won't exceed the number of elements as this minimizes
-  auto-boxing since elements will get auto-boxed lazily each time they are accessed.
-* For everything else, use `toList()` to copy and auto-box all values upfront into a separate collection and avoid
-  additional auto-boxing if the number of accesses might exceed the number of elements.
+list.toImmutableArray()
 
-Using `asList()` or `asIterable()` uses less up-front memory and also reduces the garbage collection overhead for use
-cases that process elements without retaining them, such as when summing their values. Processing elements one at a time
-only retains a reference to the most recent one. The garbage collection step traverses live objects so it's unaffected
-by large numbers of discarded wrappers making this usage pattern extremely fast and efficient.
+iterable.toImmutableArray()
+
+sequence.toImmutableArray()
+
+// Consider splitting large sequences into manageable chunks first
+sequence
+    .chunked(chunkSize)
+    .forEach { chunk -> processImmutableArray(chunk.toImmutableArray()) }
+```
 
 </details>
+
+<details>
+<summary>Replacing mutable lists</summary>
+
+For the common scenario where mutable lists are used to accumulate elements by appending to the end, Immutable-Array
+builders are a safer and more efficient alternative:
+
+```kotlin
+val interestingStocksBuilder = ImmutableArray.Builder<Stock>() // ImmutableArray.Builder<Stock>
+for (stock in topStocks) {
+    if (!stock.isInteresting()) continue
+
+    interestingStocksBuilder += stock
+}
+val interestingStocks = interestingStocksBuilder.build() // ImmutableArray<Stock>
+
+// primitive variants also have builders e.g. ImmutableBooleanArray.Builder()
+```
+
+Immutable-Array builders are safer than mutable lists as they are append-only. This allows us to populate part of the
+result and confidently pass the same builder instance to helper functions that append additional results as
+previously-added elements can't be removed or replaced.
+
+For developers with a Java background, we often see mutable lists used with logic that iterates through elements to
+accumulate elements that meet some criteria. In Kotlin, these common scenarios can be accomplished with 1-liners:
+
+```kotlin
+// Before
+val children = mutableListOf<Person>()
+for (person in people) {
+    if (person.age < 13) {
+        children += persion
+    }
+}
+
+// After
+val children = people.filter { it.age < 13 }
+
+// similarly with other operations like take, takeWhile, map, partition, etc.
+```
+
+Consider whether the mutable list usage can be transformed into a cleaner functional equivalent and then convert that
+cleaner version to Immutable Arrays.
+
+</details>
+
+<details>
+<summary>Migrating referential equality checks</summary>
+
+Structural equality checks using double equals `==` work as expected with Immutable Arrays so no changes are needed.
+
+Referential equality checks using triple equals `===` are prevented by the Kotlin compiler for Immutable Arrays. A
+slight change is required when migrating to Immutable Arrays:
+
+```kotlin
+// lists
+if (elements === otherElements) doSomething()
+
+// equivalent version after conversion to Immutable Arrays
+if (elements.referencesSameArrayAs(otherElements)) doSomething()
+```
+
+Note that while `referencesSameArrayAs` for Immutable Arrays is 100% equivalent to `===` with lists, this condition will
+be true more often after migrating to Immutable Arrays. That's because immutability allows Immutable Arrays to safely
+re-use instances to reduce memory consumption. For example, all empty Immutable Arrays of the same type reference the
+same `EMPTY` singleton. Additionally, most operations return the same instance when they detect that the results will be
+the same (E.g.`elements.filter { criteriaThatAcceptsAllElements }`). See [Zero-memory scenarios](#zero-memory-scenarios)
+for a list of scenarios where the instance-reuse optimization is used.
+
+</details>
+
+We recommend transitioning to Immutable Arrays gradually instead of replacing all lists at once. This can be tackled at
+the function, class, package, or module level. The boundaries that interact with the rest of the application can expose
+Immutable Arrays as regular collections using `asList()`, `asIterable()`, or `toList()`. As adoption progresses, the
+boundary layers can be updated to operate on Immutable Arrays directly for optimal efficiency.
 
 ## 🏆 Comparison with Alternatives
 
