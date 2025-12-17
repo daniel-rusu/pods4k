@@ -280,36 +280,29 @@ Immutable Arrays intelligently reuse instances to minimize memory:
 
 These scenarios return `this` without allocating any memory:
 
-| Operation                         | Returns `this` when                 |
-|-----------------------------------|-------------------------------------|
-| `take(n)`                         | `n >= size`                         |
-| `takeWhile { condition }`         | all elements meet the condition     |
-| `takeLast(n)`                     | `n >= size`                         |
-| `takeLastWhile { condition }`     | all elements meet the condition     |
-| `drop(n)`                         | `n == 0`                            |
-| `dropWhile { condition }`         | first element fails condition       |
-| `dropLast(n)`                     | `n == 0`                            |
-| `dropLastWhile { condition }`     | last element fails condition        |
-| `sorted()`                        | `size <= 1`                         |
-| `sortedDescending()`              | `size <= 1`                         |
-| `sortedBy { selector }`           | `size <= 1`                         |
-| `sortedByDescending { selector }` | `size <= 1`                         |
-| `sortedWith(comparator)`          | `size <= 1`                         |
-| `shuffled()` & `shuffled(random)` | `size <= 1`                         |
-| `distinct()`                      | `size <= 1`                         |
-| `distinctBy { selector }`         | `size <= 1`                         |
-| `plus(otherArray)`                | `otherArray.isEmpty()` & vice versa |
+| Operation                                                   | Returns `this` when                 |
+|-------------------------------------------------------------|-------------------------------------|
+| `take(n)` & `takeLast(n)`                                   | `n >= size`                         |
+| `takeWhile { condition }` & `takeLastWhile { condition }`   | all elements meet the condition     |
+| `drop(n)` & `dropLast(n)`                                   | `n == 0`                            |
+| `dropWhile { condition }`,                                  | first element fails condition       |
+| `dropLastWhile { condition }`                               | last element fails condition        |
+| `sorted()` & `sortedDescending()`                           | `size <= 1`                         |
+| `sortedBy { selector }` & `sortedByDescending { selector }` | `size <= 1`                         |
+| `sortedWith(comparator)`                                    | `size <= 1`                         |
+| `shuffled()` & `shuffled(random)`                           | `size <= 1`                         |
+| `distinct()` & `distinctBy { selector }`                    | `size <= 1`                         |
+| `plus(otherArray)`                                          | `otherArray.isEmpty()` & vice versa |
 
 These scenarios allocate memory to track elements, but discard it returning the original instance when all elements are
 included:
 
-| Operation                     | Returns `this` when               |
-|-------------------------------|-----------------------------------|
-| `filter { condition }`        | all elements meet the condition   |
-| `filterIndexed { condition }` | all elements meet the condition   |
-| `filterNot { condition }`     | all elements fail the condition   |
-| `distinct()`                  | all elements are distinct         |
-| `distinctBy { selector }`     | selector produces distinct values |
+| Operation                                              | Returns `this` when               |
+|--------------------------------------------------------|-----------------------------------|
+| `filter { condition }` & `filterIndexed { condition }` | all elements meet the condition   |
+| `filterNot { condition }`                              | all elements fail the condition   |
+| `distinct()`                                           | all elements are distinct         |
+| `distinctBy { selector }`                              | selector produces distinct values |
 
 </details>
 
@@ -318,58 +311,46 @@ included:
 
 These scenarios return the `EMPTY` singleton without allocating any memory:
 
-| Operation                                           | Returns `EMPTY` singleton when      |
-|-----------------------------------------------------|-------------------------------------|
-| `emptyImmutableArray()` & 8 primitive variants      | always                              |
-| `immutableArrayOf()`                                | no arguments provided               |
-| `ImmutableArray(n) { init }` & 8 primitive variants | `n == 0`                            |
-| `regularArray.toImmutableArray()`                   | `isEmpty()`                         |
-| `copyFrom(array, startIndex, size)`                 | `size == 0`                         |
-| `take(n)`                                           | `n == 0`                            |
-| `takeWhile { condition }`                           | first element fails condition       |
-| `takeLast(n)`                                       | `n == 0`                            |
-| `takeLastWhile { condition }`                       | last element fails condition        |
-| `drop(n)`                                           | `n >= size`                         |
-| `dropWhile { condition }`                           | all elements fail condition         |
-| `dropLast(n)`                                       | `n >= size`                         |
-| `dropLastWhile { condition }`                       | all elements fail condition         |
-| `map { transform }`                                 | `isEmpty()`                         |
-| `mapIndexed { transform }`                          | `isEmpty()`                         |
-| `sorted()`                                          | `isEmpty()`                         |
-| `sortedDescending()`                                | `isEmpty()`                         |
-| `sortedBy { selector }`                             | `isEmpty()`                         |
-| `sortedByDescending { selector }`                   | `isEmpty()`                         |
-| `sortedWith(comparator)`                            | `isEmpty()`                         |
-| `shuffled()` & `shuffled(random)`                   | `isEmpty()`                         |
-| `distinct()`                                        | `isEmpty()`                         |
-| `distinctBy { selector }`                           | `isEmpty()`                         |
-| `plus(otherArray)`                                  | `isEmpty() && otherArray.isEmpty()` |
-| `toTypedImmutableArray()`                           | `isEmpty()`                         |
-| `zip(other)`                                        | `isEmpty()` or `other.isEmpty()`    |
-| `chunked(chunkSize)`                                | `isEmpty()`                         |
-| `windowed(windowSize)`                              | `isEmpty()`                         |
+| Operation                                                   | Returns `EMPTY` singleton when      |
+|-------------------------------------------------------------|-------------------------------------|
+| `emptyImmutableArray()` & 8 primitive variants              | always                              |
+| `immutableArrayOf()`                                        | no arguments provided               |
+| `ImmutableArray(n) { init }` & 8 primitive variants         | `n == 0`                            |
+| `regularArray.toImmutableArray()`                           | `isEmpty()`                         |
+| `copyFrom(array, startIndex, size)`                         | `size == 0`                         |
+| `take(n)` & `takeLast(n)`                                   | `n == 0`                            |
+| `takeWhile { condition }`                                   | first element fails condition       |
+| `takeLastWhile { condition }`                               | last element fails condition        |
+| `drop(n)` & `dropLast(n)`                                   | `n >= size`                         |
+| `dropWhile { condition }` & `dropLastWhile { condition }`   | all elements fail condition         |
+| `map { transform }` & `mapIndexed { transform }`            | `isEmpty()`                         |
+| `sorted()` & `sortedDescending()`                           | `isEmpty()`                         |
+| `sortedBy { selector }` & `sortedByDescending { selector }` | `isEmpty()`                         |
+| `sortedWith(comparator)`                                    | `isEmpty()`                         |
+| `shuffled()` & `shuffled(random)`                           | `isEmpty()`                         |
+| `distinct()` & `distinctBy { selector }`                    | `isEmpty()`                         |
+| `plus(otherArray)`                                          | `isEmpty() && otherArray.isEmpty()` |
+| `toTypedImmutableArray()`                                   | `isEmpty()`                         |
+| `zip(other)`                                                | `isEmpty()` or `other.isEmpty()`    |
+| `chunked(chunkSize)`                                        | `isEmpty()`                         |
+| `windowed(windowSize)`                                      | `isEmpty()`                         |
 
 These scenarios allocate memory to track elements, but return `EMPTY` singleton when no elements are included:
 
-| Operation                                               | Returns `EMPTY` singleton when                            |
-|---------------------------------------------------------|-----------------------------------------------------------|
-| `ImmutableArray.Builder.build()` & 8 primitive variants | `isEmpty()`                                               |
-| `immutableArrayOfNotNull(...)`                          | all arguments are null                                    |
-| `buildImmutableArray { ... }` & 8 primitive variants    | no elements added                                         |
-| `iterable.toImmutableArray()`                           | the iterable is empty                                     |
-| `sequence.toImmutableArray()`                           | the sequence is empty                                     |
-| `filter { condition }`                                  | all elements meet the condition                           |
-| `filterIndexed { condition }`                           | all elements meet the condition                           |
-| `filterNot { condition }`                               | all elements fail the condition                           |
-| `filterNotNull()`                                       | all elements are null                                     |
-| `mapNotNull { transform }`                              | all elements are null                                     |
-| `mapIndexedNotNull { transform }`                       | all elements are null                                     |
-| `flatMap { transform }`                                 | `isEmpty()` or `transform` produces all empty collections |
-| `flatMapIndexed { transform }`                          | `isEmpty()` or `transform` produces all empty collections |
-| `distinct()`                                            | all elements are distinct                                 |
-| `distinctBy { selector }`                               | selector produces distinct values                         |
-| `flatMap { selector }`                                  | all nested collections are empty                          |
-| `flatten()`                                             | all nested arrays are empty                               |
+| Operation                                                      | Returns `EMPTY` singleton when                        |
+|----------------------------------------------------------------|-------------------------------------------------------|
+| `ImmutableArray.Builder.build()` & 8 primitive variants        | `isEmpty()`                                           |
+| `immutableArrayOfNotNull(...)`                                 | all arguments are null                                |
+| `buildImmutableArray { ... }` & 8 primitive variants           | no elements added                                     |
+| `iterable.toImmutableArray()`                                  | the iterable is empty                                 |
+| `sequence.toImmutableArray()`                                  | the sequence is empty                                 |
+| `filter { condition }` & `filterIndexed { condition }`         | all elements fail the condition                       |
+| `filterNot { condition }`                                      | all elements meet the condition                       |
+| `filterNotNull()`                                              | all elements are null                                 |
+| `mapNotNull { transform }` & `mapIndexedNotNull { transform }` | `transform` always produces null                      |
+| `flatMap { transform }` & `flatMapIndexed { transform }`       | `isEmpty()` or `transform` produces all empty results |
+| `flatten()`                                                    | `isEmpty()` or all nested arrays are empty            |
+| `distinct()` & `distinctBy { selector }`                       | `isEmpty()`                                           |
 
 </details>
 
