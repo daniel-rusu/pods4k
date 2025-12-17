@@ -19,8 +19,8 @@ Ideal for Android, backend services, and any application seeking enhanced safety
 [Alternatives](#-alternatives) |
 [Interop & Migration](#-interop--migration) |
 [Immutability Model](#-immutability-model) |
-[FAQ](#-faq) |
-[Caveats](#-caveats)
+[Caveats](#-caveats) |
+[FAQ](#-faq)
 
 ## ✨ Key Benefits
 
@@ -917,65 +917,6 @@ As with all JVM immutable collection libraries (including Guava and `kotlinx.col
 enforced by language constraints rather than as a security mechanism. Low-level JVM mechanisms (such as reflection,
 bytecode instrumentation, or native code) operate outside this model and are considered out of scope.
 
-## 🙋 FAQ
-
-<details>
-<summary>Does it support Kotlin Multiplatform (KMP)?</summary>
-
-Our goal is to turn this into a Kotlin Multiplatform library. We already took steps to replace usages of the Java
-standard library with equivalents from the Kotlin standard library. This will make it a fairly easy transition as most
-of the code would end up in the common module.
-
-The main blocker is that JetBrains only added custom-equals-for-values-classes to the JVM backend (which supports
-both JVM and Android) and put the other multi-platform targets on hold to focus on the K2 compiler. The K2 initiative
-was a massive undertaking so they forgot about this feature. Vote and comment on
-this [YouTrack ticket](https://youtrack.jetbrains.com/issue/KT-24874) to help unblock us.
-
-</details>
-
-<details>
-<summary>How can we skip recomposition with Compose?</summary>
-
-Compose isn't aware that Immutable Arrays cannot be modified so we need to append the following to
-the [stability configuration file][stability-configuration-url]:
-
-```text
-// Consider ImmutableArray<T> as stable when T is stable
-com.danrusu.pods4k.immutableArrays.ImmutableArray<*>
-
-// Consider primitive immutable arrays as stable as the contents can never be modified
-com.danrusu.pods4k.immutableArrays.ImmutableBooleanArray
-com.danrusu.pods4k.immutableArrays.ImmutableByteArray
-com.danrusu.pods4k.immutableArrays.ImmutableCharArray
-com.danrusu.pods4k.immutableArrays.ImmutableShortArray
-com.danrusu.pods4k.immutableArrays.ImmutableIntArray
-com.danrusu.pods4k.immutableArrays.ImmutableFloatArray
-com.danrusu.pods4k.immutableArrays.ImmutableLongArray
-com.danrusu.pods4k.immutableArrays.ImmutableDoubleArray
-```
-
-Note that mutable elements can be stable when the mutable parts use [MutableState][mutable-state-url] to automatically
-notify the Compose runtime when a value changed and trigger recomposition appropriately.
-
-</details>
-
-<details>
-<summary>Why don't Immutable Arrays implement the List interface?</summary>
-
-There are several reasons:
-
-1. If the 8 primitive variants implemented the List interface, (eg.`ImmutableFloatArray` implemented `List<Float>`),
-   elements would be auto-boxed on every access significantly affecting the memory and performance of the library.
-2. If Immutable Arrays implement `List`, the Kotlin standard library operations overshadow the optimized versions from
-   this library. This significantly affects the memory and performance of this library and also breaks immutability
-   guarantees since the Kotlin standard library produces read-only lists that can be mutated through casting.
-3. The `List` interface contains methods with `List` return types that we wouldn't want users to use. Using these would
-   affect the memory and performance, but most importantly, this would make usages accidentally cross over into the list
-   world where the immutability guarantees no longer exist. Throwing `OperationNotSupportedException` would violate the
-   `List` contract and leading to unpredictable downstream behavior.
-
-</details>
-
 ## 📌 Caveats
 
 <details>
@@ -1098,6 +1039,65 @@ This library leverages the following experimental Kotlin features that may evolv
       but hasn't been announced yet because the other multiplatform backends were not ready.
     * Vote and comment on this [YouTrack ticket](https://youtrack.jetbrains.com/issue/KT-24874) to raise the importance
       of this feature so that Immutable Arrays can eventually support Kotlin multiplatform.
+
+</details>
+
+## 🙋 FAQ
+
+<details>
+<summary>Does it support Kotlin Multiplatform (KMP)?</summary>
+
+Our goal is to turn this into a Kotlin Multiplatform library. We already took steps to replace usages of the Java
+standard library with equivalents from the Kotlin standard library. This will make it a fairly easy transition as most
+of the code would end up in the common module.
+
+The main blocker is that JetBrains only added custom-equals-for-values-classes to the JVM backend (which supports
+both JVM and Android) and put the other multi-platform targets on hold to focus on the K2 compiler. The K2 initiative
+was a massive undertaking so they forgot about this feature. Vote and comment on
+this [YouTrack ticket](https://youtrack.jetbrains.com/issue/KT-24874) to help unblock us.
+
+</details>
+
+<details>
+<summary>How can we skip recomposition with Compose?</summary>
+
+Compose isn't aware that Immutable Arrays cannot be modified so we need to append the following to
+the [stability configuration file][stability-configuration-url]:
+
+```text
+// Consider ImmutableArray<T> as stable when T is stable
+com.danrusu.pods4k.immutableArrays.ImmutableArray<*>
+
+// Consider primitive immutable arrays as stable as the contents can never be modified
+com.danrusu.pods4k.immutableArrays.ImmutableBooleanArray
+com.danrusu.pods4k.immutableArrays.ImmutableByteArray
+com.danrusu.pods4k.immutableArrays.ImmutableCharArray
+com.danrusu.pods4k.immutableArrays.ImmutableShortArray
+com.danrusu.pods4k.immutableArrays.ImmutableIntArray
+com.danrusu.pods4k.immutableArrays.ImmutableFloatArray
+com.danrusu.pods4k.immutableArrays.ImmutableLongArray
+com.danrusu.pods4k.immutableArrays.ImmutableDoubleArray
+```
+
+Note that mutable elements can be stable when the mutable parts use [MutableState][mutable-state-url] to automatically
+notify the Compose runtime when a value changed and trigger recomposition appropriately.
+
+</details>
+
+<details>
+<summary>Why don't Immutable Arrays implement the List interface?</summary>
+
+There are several reasons:
+
+1. If the 8 primitive variants implemented the List interface, (eg.`ImmutableFloatArray` implemented `List<Float>`),
+   elements would be auto-boxed on every access significantly affecting the memory and performance of the library.
+2. If Immutable Arrays implement `List`, the Kotlin standard library operations overshadow the optimized versions from
+   this library. This significantly affects the memory and performance of this library and also breaks immutability
+   guarantees since the Kotlin standard library produces read-only lists that can be mutated through casting.
+3. The `List` interface contains methods with `List` return types that we wouldn't want users to use. Using these would
+   affect the memory and performance, but most importantly, this would make usages accidentally cross over into the list
+   world where the immutability guarantees no longer exist. Throwing `OperationNotSupportedException` would violate the
+   `List` contract and leading to unpredictable downstream behavior.
 
 </details>
 
