@@ -472,9 +472,11 @@ Unlike regular arrays, Immutable arrays have proper equals & hashCode implementa
 equality:
 
 ```kotlin
-immutableArrayOf("Dan", "Bob") == immutableArrayOf("Dan", "Bob") // true
+// ✅ returns true
+immutableArrayOf("Dan", "Bob") == immutableArrayOf("Dan", "Bob")
 
-arrayOf("Dan", "Bob") == arrayOf("Dan", "Bob") // false despite identical contents
+// ❌ returns false despite identical contents
+arrayOf("Dan", "Bob") == arrayOf("Dan", "Bob")
 ```
 
 Since we can compare lists directly, developers occasionally attempt to do the same with regular arrays. This can lead
@@ -484,7 +486,7 @@ to subtle defects when it's not obvious that the code relies on array equality:
 data class Order(val id: Long, private val products: Array<Product>)
 
 val rejectedOrders = mutableSetOf<Order>()
-// Oops, attempting to add Orders to a hashSet will make use of the auto-generated 
+// ❌ Oops, attempting to add Orders to a hashSet will make use of the auto-generated 
 // equals & hashCode methods from the Order data class. This will in turn rely on 
 // the defective equals & hashCode implementation of regular arrays
 ```
@@ -505,7 +507,7 @@ val array = arrayOf("Dan", "Jill")
 val list = namesArray.asList()
 
 (list as MutableList<String>)[0] = "Bob"
-array[0] // "Bob"!!!
+array[0] // ❌ "Bob"!!!
 ```
 
 Unlike regular arrays, calling `asList()` on an Immutable Array is safe as that returns a truly-immutable view backed by
@@ -519,9 +521,9 @@ the same array.
 Unlike regular arrays, Immutable Arrays provide a readable `toString()` output:
 
 ```kotlin
-println(immutableArrayOf("Dan", "Bob")) // [Dan, Bob]  Nice!
+println(immutableArrayOf("Dan", "Bob")) // ✅ [Dan, Bob]
 
-println(arrayOf("Dan", "Bob")) // [Ljava.lang.String;@7d4991ad  Yuck!
+println(arrayOf("Dan", "Bob")) // ❌ [Ljava.lang.String;@7d4991ad
 ```
 
 </details>
@@ -610,7 +612,7 @@ leverage subtyping relationships between classes. For example, if `Manager` is a
 fun promoteManagers(managers: ImmutableArray<Manager>) {
     managers.forEach { increaseSalaryFor(it) }
 
-    // This works! ImmutableArray<Manager> is a subtype of ImmutableArray<Person>
+    // ✅ ImmutableArray<Manager> is a subtype of ImmutableArray<Person>
     notifyPeople(managers, "You got a raise!")
 }
 
@@ -634,7 +636,7 @@ Despite appearances, read-only lists can be modified through casting to `Mutable
 ```kotlin
 val values = listOf(1, 2, 3)
 (values as MutableList)[0] = 100 // backdoor to mutation
-println(values) // [100, 2, 3]
+println(values) // ❌ [100, 2, 3]
 ```
 
 Immutable arrays don't have this backdoor:
@@ -645,7 +647,7 @@ values[0] = 100 // Compiler error: No set method providing array access
 
 @Suppress("CAST_NEVER_SUCCEEDS")
 (values as IntArray)[0] = 100
-// ClassCastException: ImmutableIntArray cannot be cast to [I
+// ✅ ClassCastException: ImmutableIntArray cannot be cast to [I
 ```
 
 </details>
@@ -911,20 +913,19 @@ auto-boxed wrapper is temporary so its identity cannot be used.
 
 ```kotlin
 // Note the triple === referential equality.
-immutableArray1 === immutableArray2 // Compiler error: Referential equality is not supported for value classes
+immutableArray1 === immutableArray2 // ❌ Compiler error: Referential equality is not supported for value classes
 ```
 
-Instead, use double equals (`immutableArray1 == immutableArray2`) for structural equality or use
-`immutableArray1.referencesSameArrayAs(immutableArray2)` to check whether two Immutable Arrays reference the same
-underlying array instance.
+Instead, use `immutableArray1.referencesSameArrayAs(immutableArray2)` to check whether two Immutable Arrays reference
+the same array instance. Note that structural equality with double equals `==` works as expected.
 
 #### Identity hashCode:
 
 ```kotlin
 val values = immutableArrayOf(1, 2, 3)
 val identityHashCode = System.identityHashCode(values)
-// Note that identityHashCode accepts Any, which causes auto-boxing. This can produce a different 
-// hashCode each time since that's the identity hashcode of the temporary auto-boxed wrapper
+// ❌ identityHashCode accepts Any, which causes auto-boxing. This can produce a different identity
+// hashCode each time since a temporary auto-boxed wrapper object is created each time it's called
 ```
 
 #### Synchronization:
@@ -932,7 +933,7 @@ val identityHashCode = System.identityHashCode(values)
 ```kotlin
 class Account(val accountHolders: ImmutableArray<Person>) {
     fun withdraw(amount: Money) {
-        // Compiler warning: Synchronizing on a value class is not supported, 
+        // ❌ Compiler warning: Synchronizing on a value class is not supported, 
         // as synchronization would occur on a temporary auto-boxed wrapper.
         synchronized(accountHolders) {
             balance -= amount
