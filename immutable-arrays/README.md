@@ -1,8 +1,8 @@
 # Immutable Arrays
 
-**Immutable Arrays** offer a safer, faster, and more efficient alternative to lists while maintaining familiar syntax.
-They are inline classes that compile to regular arrays but with highly-optimized operations and immutability enforced at
-the type level.
+**Immutable Arrays** provide a safer, faster, and more memory-efficient alternative to lists while maintaining familiar
+syntax. They are inline classes that compile to regular arrays but with highly-optimized operations and compile-time
+immutability guarantees.
 
 Ideal for Android, backend services, and any application seeking enhanced safety, efficiency, or performance.
 
@@ -79,8 +79,8 @@ immutableArrayOf(1, 2, 3) // primitive int array
 immutableArrayOf<Int>(1, 2, 3) // generic array with boxed integers
 
 // Generated Elements
-ImmutableArray(size = 3) { it.toString() } // ["0", "1", "2"]
-ImmutableIntArray(size = 5) { it * it } // [0, 1, 4, 9, 16]
+ImmutableArray(3) { it.toString() } // ["0", "1", "2"]
+ImmutableIntArray(5) { it * it } // [0, 1, 4, 9, 16]
 
 // From Existing Collections
 listOfStrings.toImmutableArray() // ImmutableArray<String>
@@ -92,7 +92,7 @@ listOfIntegers.toImmutableArray<Int>() // generic ImmutableArray<Int>
 #### With Builders
 
 Use immutable-array builders when accumulating values in complex scenarios. They're safer and more efficient than
-accumulating values in a mutable list.
+mutable list.
 
 ```kotlin
 fun getTopStocks(): ImmutableArray<Stock> {
@@ -105,12 +105,11 @@ fun getTopStocks(): ImmutableArray<Stock> {
 }
 
 // Primitive variants also have builders e.g. ImmutableBooleanArray.Builder()
-// When the resulting size is known in advance, specify the initial capacity to further optimize efficiency
 ```
 
 #### With Build Functions
 
-There's also build functions that wrap the builder construction for when all the logic is contained in a single place:
+Use build functions that wrap the builder construction for when all the logic is contained in a single place:
 
 ```kotlin
 val favoriteNumbers = buildImmutableIntArray {
@@ -134,12 +133,12 @@ val top100Stocks = buildImmutableArray<Stock>(initialCapacity = 100) {
 val names = immutableArrayOf("Dan", "Bob", "Jill")
 
 names[0] // "Dan"
-val (first, _, third) = names // first = "Dan", third = "Jill"
+val (first, _, third) = names // "Dan", "Jill"
 
 // Special access methods
-names.single() // similarly with singleOrNull()
-names.first() // similarly with firstOrNUll()
-names.last() // similarly with lastOrNull()
+names.single() // or singleOrNull()
+names.first() // or firstOrNull()
+names.last() // or lastOrNull()
 ```
 
 #### By Condition
@@ -170,7 +169,7 @@ for (name in names) {
 
 // ForEach
 names.forEach { println(it) }
-names.forEachIndexed { index, name -> println("$index: name") }
+names.forEachIndexed { index, name -> println("$index: $name") }
 
 // Sequence
 names.asSequence()
@@ -194,10 +193,9 @@ while (iterator.hasNext()) {
 #### Element Conditions
 
 ```kotlin
-val names = immutableArrayOf("Dan", "Bobby", "Jill")
+val names = immutableArrayOf("Dan", "Bob", "Jill")
 
 "Jill" in names // true
-names.contains("Joe") // false
 names.isEmpty() // false
 
 names.all { it.isNotEmpty() } // true
@@ -216,13 +214,10 @@ the same underlying array:
 val names = immutableArrayOf("Dan", "Jill")
 val sameNames = immutableArrayOf("Dan", "Jill")
 
-// true since they contain identical values
-names == sameNames // regular equality
+names == sameNames // true - structural equality
+names.referencesSameArrayAs(sameNames) // false - different instance
 
-// false since they were created separately 
-names.referencesSameArrayAs(sameNames) // referential equality of the array
-
-// Immutability allows us to safely share instances behind the scenes
+// Optimization: most operations return original instance for identical results
 names.take(100).referencesSameArrayAs(names) // true
 names.filter { it.isNotEmpty() }.referencesSameArrayAs(names) // true
 // etc.
@@ -234,13 +229,12 @@ names.filter { it.isNotEmpty() }.referencesSameArrayAs(names) // true
 <summary>Transformations</summary>
 
 ```kotlin
-val names = immutableArrayOf("Dan", "Bobby", "Jill")
+val names = immutableArrayOf("Dan", "Bob", "Jill")
 
 names.map { it.length } // [3, 5, 4]
 names.filter { it.length <= 4 } // ["Dan", "Jill"]
-names.take(2) // ["Dan", "Bobby"]
-names.sorted() // ["Bobby", "Dan", "Jill"]
-names.partition { it.length % 2 == 0 } // Pair(["Jill"], ["Dan", "Bobby"])
+names.take(2) // ["Dan", "Bob"]
+names.sorted() // ["Bob", "Dan", "Jill"]
 // etc.
 ```
 
@@ -248,10 +242,10 @@ names.partition { it.length % 2 == 0 } // Pair(["Jill"], ["Dan", "Bobby"])
 
 ## 🔥 Performance
 
-Immutable Arrays typically outperform lists by **2 to 8 times**, often beating regular arrays too. This stems from
-highly optimized operations designed for immutability.
+Immutable Arrays typically outperform lists by **2 to 8X** due to highly optimized operations designed for
+immutability.
 
-Preview from the [Benchmarks page](BENCHMARKS.md), which includes more benchmarks and explanations:
+Preview from the [benchmarks page](BENCHMARKS.md), which includes more benchmarks along with explanations:
 
 ![take benchmarks](./resources/benchmarks/take.png)
 
@@ -265,13 +259,12 @@ Filtering elements seems impossibly fast:
 
 ## 🎯 Efficiency
 
-Immutable Arrays re-use instances when operations produce the same elements whereas lists create new collections.
-Operations have many optimizations to reduce temporary memory consumption, and they automatically leverage primitives.
-Additionally, Immutable Arrays are perfectly sized, whereas lists typically have unused capacity.
+Immutable Arrays reduce memory by re-using instances when results are identical, leveraging primitives automatically,
+minimizing temporary allocations, and producing perfectly-sized results without unused capacity.
 
 Combined, these optimizations often **reduce memory consumption by over 4X** compared to lists.
 
-### Zero-memory scenarios
+### Instance Reuse
 
 Immutable Arrays intelligently reuse instances to minimize memory:
 
@@ -294,8 +287,7 @@ These scenarios return `this` without allocating any memory:
 | `distinct()` & `distinctBy { selector }`                    | `size <= 1`                         |
 | `plus(otherArray)`                                          | `otherArray.isEmpty()` & vice versa |
 
-These scenarios allocate memory to track elements, but discard it returning the original instance when all elements are
-included:
+These scenarios track which elements should be included, but return the original instance when all elements match.
 
 | Operation                                              | Returns `this` when               |
 |--------------------------------------------------------|-----------------------------------|
@@ -335,7 +327,7 @@ These scenarios return the `EMPTY` singleton without allocating any memory:
 | `chunked(chunkSize)`                                        | `isEmpty()`                         |
 | `windowed(windowSize)`                                      | `isEmpty()`                         |
 
-These scenarios allocate memory to track elements, but return `EMPTY` singleton when no elements are included:
+These scenarios track which elements should be included, but return the `EMPTY` singleton when no elements match.
 
 | Operation                                                      | Returns `EMPTY` singleton when                        |
 |----------------------------------------------------------------|-------------------------------------------------------|
@@ -441,12 +433,14 @@ and loop counters are usually small, but storing loop counters in lists isn't co
 | Long <sup>1</sup> | `-128 to 127`    | 5%                   |
 | Double            | N/A              | 0%                   |
 
-<sup>1</sup> `Long` is chosen when anticipating larger values, such as when storing salaries in cents, but all salaries
-are greater than $1.27 making the cache useless in this scenario.
+<sup>1</sup> `Long` is chosen when anticipating larger values, such as when storing salaries in cents, but typical
+salaries exceed $1.27 (127 cents), making the cache rarely useful.
 
 </details>
 
 ## 🏆 Alternatives
+
+Immutable Arrays are the only solution providing type safety, efficiency, and performance:
 
 | Feature                  | Immutable Arrays | Regular Arrays | Read-only Lists    | Unmodifiable Lists | Java Immutable Lists |
 |--------------------------|------------------|----------------|--------------------|--------------------|----------------------|
@@ -468,8 +462,7 @@ are greater than $1.27 making the cache useless in this scenario.
 <details>
 <summary>✅ Proper equals / hashCode</summary>
 
-Unlike regular arrays, Immutable arrays have proper equals & hashCode implementations allowing us to check structural
-equality:
+Unlike regular arrays, Immutable Arrays implement equals & hashCode correctly for structural equality:
 
 ```kotlin
 // ✅ returns true
@@ -498,20 +491,16 @@ Swapping `Array<Product>` with `ImmutableArray<Product>` will fix this defect sc
 <details>
 <summary>✅ Safe asList() – No mutation backdoor</summary>
 
-The `asList()` function is typically used to efficiently share regular arrays with APIs that operate on lists since this
-creates a view wrapper that shares the same backing array without copying the elements. However, casting the wrapper
-allows mutating the original underlying array:
+Calling `asList()` on an Immutable Array provides a truly immutable view. However, with regular arrays the view can be
+cast into a `MutableList` to mutate the original array:
 
 ```kotlin
 val array = arrayOf("Dan", "Jill")
-val list = namesArray.asList()
+val list = array.asList()
 
 (list as MutableList<String>)[0] = "Bob"
-array[0] // ❌ "Bob"!!!
+array[0] // ❌ "Bob" - original array was mutated!
 ```
-
-Unlike regular arrays, calling `asList()` on an Immutable Array is safe as that returns a truly-immutable view backed by
-the same array.
 
 </details>
 
@@ -536,12 +525,13 @@ benefits and adding auto-boxing overhead.
 
 ```kotlin
 val weights = doubleArrayOf(1.5, 3.0, 10.2, 15.7, 2.0)
+
+// ❌ Oops, this creates a List<Double> auto-boxing each value!
 val largeWeights = weights.filter { it > 10.0 }
-// Oops, this creates a List<Double> auto-boxing each value!
 ```
 
-Unlike regular arrays, Immutable Arrays have specializations resulting in the most optimal representation so that clean
-code is efficient by default:
+Unlike regular arrays, dozens of Immutable Array operations have specializations that produce the most optimal
+representation so that clean code is efficient by default:
 
 ```kotlin
 val people = immutableArrayOf(
@@ -549,51 +539,20 @@ val people = immutableArrayOf(
     Person(name = "Bob", age = 4),
 ) // ImmutableArray<Person>
 
-// Since the age field is a non-nullable Int, Mapping the ages uses an 
-// efficient ImmutableIntArray storing primitive int values
-val ages = people.map { it.age }
+val ages = people.map { it.age } // ✅ ImmutableIntArray because age is an Int
 ```
 
-Here's a non-exhaustive list of operations that take advantage of primitives resulting in significant memory and
-performance improvements over regular arrays:
-
-* drop
-* dropLast
-* dropLastWhile
-* dropWhile
-* filter
-* filterIndexed
-* filterNot
-* filterNotNull
-* flatMap
-* flatMapIndexed
-* flatten
-* map
-* mapNotNull
-* mapIndexed
-* mapIndexedNotNull
-* partition
-* sorted
-* sortedBy
-* sortedByDescending
-* sortedDescending
-* sortedWith
-* take
-* takeLast
-* takeLastWhile
-* takeWhile
-* etc.
+These specializations unlocked additional optimizations such as using `arraycopy` to copy multiple elements in bulk for
+operations like `take`, `takeWhile`, `drop`, `dropWhile`, `dropLast`, `dropLastWhile`, `flatMap`, `flatten`, etc.
 
 </details>
 
 <details>
 <summary>✅ Efficient sharing of encapsulated data</summary>
 
-Regular arrays can have their elements reassigned making them a poor choice for encapsulated data that needs to be
-shared. The only safe solution is to duplicate the contents before sharing so that callers can't mutate the encapsulated
-array. Note that calling `asList()` on a generic array is not safe as the generated view can be cast into a
-`MutableList` exposing a backdoor for mutating the original array. Additionally, calling `asList()` on a primitive
-array, like `IntArray`, negatively affects memory and performance by auto-boxing elements every time they're accessed.
+Regular arrays require defensive copying before sharing since their elements can be reassigned. While `asList()` might
+seem like an alternative, it's unsafe for generic arrays (can be cast to `MutableList` to mutate the original array) and
+inefficient for primitive arrays due to repeated auto-boxing on every access.
 
 Immutable arrays can be safely shared resulting in cleaner and more efficient code.
 </details>
@@ -601,28 +560,12 @@ Immutable arrays can be safely shared resulting in cleaner and more efficient co
 <details>
 <summary>✅ Covariant - Same subtype relationship as element types</summary>
 
-Kotlin prevents an entire category of Java defects by treating arrays as invariant because they're mutable. This
-prevents treating an `Array<String>` as an `Array<Any>` in order to avoid compiling code that later attempts to add
-non-String elements to the array.
+Kotlin treats arrays as invariant to prevent mutation defects - for example, preventing `Array<String>` from being
+passed as `Array<Any>`, which would compile code that attempts to add non-String elements.
 
-With Immutable Arrays, we restored covariance while guaranteeing type safety. Since they can't be modified, we can
-leverage subtyping relationships between classes. For example, if `Manager` is a subtype of `Person`:
-
-```kotlin
-fun promoteManagers(managers: ImmutableArray<Manager>) {
-    managers.forEach { increaseSalaryFor(it) }
-
-    // ✅ ImmutableArray<Manager> is a subtype of ImmutableArray<Person>
-    notifyPeople(managers, "You got a raise!")
-}
-
-fun notifyPeople(people: ImmutableArray<Person>, message: String) {
-    //...
-}
-```
-
-Immutable Arrays follow the same subtyping relationships as their elements, making the code more intuitive and flexible
-without sacrificing safety.
+Immutable Arrays safely restore covariance since they can't be modified. Immutable Arrays follow the same subtyping
+relationships as their elements, making the code more intuitive and flexible without sacrificing safety. For example,
+`ImmutableArray<Manager>` can be treated as an `ImmutableArray<Person>` because `Manager` is a subtype of `Person`.
 
 </details>
 
@@ -631,7 +574,7 @@ without sacrificing safety.
 <details>
 <summary>✅ Casting doesn't introduce backdoor for mutation</summary>
 
-Despite appearances, read-only lists can be modified through casting to `MutableList`:
+Read-only lists can be mutated by casting to `MutableList`:
 
 ```kotlin
 val values = listOf(1, 2, 3)
@@ -673,14 +616,13 @@ details.
 <details>
 <summary>✅ Avoids delayed-processing defects</summary>
 
-Calling `Collections.unmodifiableList(myMutableList)` doesn't create a new immutable list — it simply wraps the
-original, which remains mutable. Although the view won't allow mutation, the underlying collection that the view
-references can still be mutated. This can introduce subtle defects when a view is shared and the underlying list is
-modified before the view is processed. This can happen when the view is shared and then a separate thread mutates the
-underlying list. Another scenario is when the handling logic gets updated to delay the processing to a later time by
-introducing a worker queue.
+Using `Collections.unmodifiableList(...)` wraps a mutable list without copying it. While the wrapper prevents mutation,
+the underlying list can still be modified. This can introduce subtle defects:
 
-Immutable arrays don't have this problem as they can never be mutated.
+* A separate thread mutates the underlying list after the view is shared.
+* Processing is delayed (e.g. via a worker queue) while the original list changes.
+
+Immutable arrays don't have this concern as they can never be mutated.
 
 </details>
 
@@ -741,9 +683,8 @@ Immutable lists have the same performance drawbacks as read-only lists
 
 ## 🤝 Interop & Migration
 
-Immutable Arrays can be exposed as regular collections in constant-time. That's because the elements don't need to be
-copied due to tiny immutable wrappers backed by the same array. This makes it very efficient to pass Immutable Arrays to
-APIs that expect collections:
+Immutable Arrays can be exposed as regular collections in constant-time without copying elements. This is achieved
+through tiny immutable wrappers backed by the same array, making it highly efficient to pass them to existing APIs:
 
 ```kotlin
 val people = immutableArrayOf(dan, bob, jill)
@@ -773,21 +714,12 @@ weights.toList() // List<Float>
 <details>
 <summary>Choosing between asList(), asIterable(), and toList()</summary>
 
-Always prefer `asList()` when operating on a generic `ImmutableArray<T>` (or choose `asIterable()` if you want to
-enforce sequential access). Only prefer `toList()` when working with a primitive variant, such as `ImmutableFloatArray`,
-and when the elements will be accessed more times than the number of elements.
+Use `asList()` by default. It provides zero-copy views that auto-box primitives lazily to minimize people memory
+consumption and GC pressure. The `size` property along with random access makes it more efficient than `asIterable()`
+for most follow-on operations.
 
-The tiny wrappers created by `asList()` or `asIterable()` operate on generics, so primitive elements get auto-boxed
-lazily every time they're accessed. Lazy auto-boxing reduces peak memory consumption and is more efficient than creating
-a standalone list when the number of accesses won't exceed the number of elements. Additionally, modern garbage
-collectors only traverse live objects so the collection step is unaffected by the number of temporary objects that are
-quickly discarded. Using `toList()` forces the garbage collector to maintain all the auto-boxed wrapper objects until
-we're done processing the entire list. However, for the common scenario where we process one element at a time without
-storing previous ones, lazy auto-boxing significantly reduces garbage collection overhead as only one auto-boxed wrapper
-will be live at a time.
-
-When working with one of the 8 primitive variants and when the elements will be accessed multiple times, the auto-boxing
-overhead can start to dominate. In this case, use `toList()` to auto-box and copy all elements upfront.
+Use `toList()` only for primitive variants (e.g. `ImmutableFloatArray`) when elements are accessed repeatedly. This
+auto-boxes and copies all elements into a standalone list avoiding repeated boxing overhead.
 
 </details>
 
@@ -816,8 +748,9 @@ sequence
 <details>
 <summary>Replacing mutable lists</summary>
 
-For the common scenario where mutable lists are used to accumulate elements by appending to the end, Immutable-Array
-builders are a safer and more efficient alternative:
+Replace `MutableList` accumulation with Immutable-Array builders. They are append-only making them safer as they prevent
+helper functions from removing or replacing previously added elements. Immutable-Array builders also contain many
+optimizations that make them faster and more efficient than accumulating elements in a mutable list.
 
 ```kotlin
 val interestingStocksBuilder = ImmutableArray.Builder<Stock>() // ImmutableArray.Builder<Stock>
@@ -831,55 +764,27 @@ val interestingStocks = interestingStocksBuilder.build() // ImmutableArray<Stock
 // primitive variants also have builders e.g. ImmutableBooleanArray.Builder()
 ```
 
-Immutable-Array builders are safer than mutable lists as they are append-only. This allows us to populate part of the
-result and confidently pass the same builder instance to helper functions that append additional results as
-previously-added elements can't be removed or replaced.
-
-For developers with a Java background, we often see mutable lists used with logic that iterates through elements to
-accumulate elements that meet some criteria. In Kotlin, these common scenarios can be accomplished with 1-liners:
-
-```kotlin
-// Before
-val children = mutableListOf<Person>()
-for (person in people) {
-    if (person.age < 13) {
-        children += persion
-    }
-}
-
-// After
-val children = people.filter { it.age < 13 }
-
-// similarly with other operations like take, takeWhile, map, partition, etc.
-```
-
-Consider whether the mutable list usage can be transformed into a cleaner functional equivalent and then convert that
-cleaner version to Immutable Arrays.
-
 </details>
 
 <details>
 <summary>Migrating referential equality checks</summary>
 
-Structural equality checks using double equals `==` work as expected with Immutable Arrays so no changes are needed.
+Structural equality (`==`) works as expected - no changes needed.
 
-Referential equality checks using triple equals `===` are prevented by the Kotlin compiler for Immutable Arrays. A
-slight change is required when migrating to Immutable Arrays:
+For referential equality, replace `===` with `referencesSameArrayAs()`:
 
 ```kotlin
-// lists
-if (elements === otherElements) doSomething()
+// Before (lists) 
+if (values === otherValues) doSomething()
 
-// equivalent version after conversion to Immutable Arrays
-if (elements.referencesSameArrayAs(otherElements)) doSomething()
+// After (Immutable Arrays)
+// checks if both reference the same underlying array instance
+if (values.referencesSameArrayAs(otherValues)) doSomething()
 ```
 
-Note that while `referencesSameArrayAs` for Immutable Arrays is 100% equivalent to `===` with lists, this condition will
-be true more often after migrating to Immutable Arrays. That's because immutability allows Immutable Arrays to safely
-re-use instances to reduce memory consumption. For example, all empty Immutable Arrays of the same type reference the
-same `EMPTY` singleton. Additionally, most operations return the same instance when they detect that the results will be
-the same (E.g.`elements.filter { criteriaThatAcceptsAllElements }`). See [Zero-memory scenarios](#zero-memory-scenarios)
-for a list of scenarios where the instance-reuse optimization is used.
+Note: This condition triggers more often because immutability enables instance reuse (e.g. empty Immutable Arrays share
+an `EMPTY` singleton, and most operations return the original when results are identical).
+See [Instance Reuse](#instance-reuse) for details.
 
 </details>
 
@@ -893,8 +798,8 @@ boundary layers can be updated to operate on Immutable Arrays directly for optim
 Immutable Arrays enforce immutability at the type and API level: no mutating operations are exposed. All transformation
 operations leave the original unchanged and return Immutable Arrays, preserving immutability across chained operations.
 
-Immutability is shallow: referenced objects may themselves be mutable. This is the standard immutability model used by
-immutable collections across programming languages.
+Immutability is shallow: referenced objects may themselves be mutable. This is the standard model used by immutable
+collections across programming languages.
 
 As with all JVM immutable collection libraries (including Guava and `kotlinx.collections.immutable`), immutability is
 enforced by language constraints rather than as a security mechanism. Low-level JVM mechanisms (such as reflection,
@@ -905,61 +810,36 @@ bytecode instrumentation, or native code) operate outside this model and are con
 <details>
 <summary>No identity</summary>
 
-As inline value classes, Immutable Arrays are primarily compile-time abstractions: in most cases they compile directly
-to regular arrays in bytecode, without a persistent wrapper object. When auto-boxing occurs (see Auto-boxing below), the
-auto-boxed wrapper is temporary so its identity cannot be used.
-
 #### Reference equality:
 
-```kotlin
-// Note the triple === referential equality.
-immutableArray1 === immutableArray2 // ❌ Compiler error: Referential equality is not supported for value classes
-```
-
-Instead, use `immutableArray1.referencesSameArrayAs(immutableArray2)` to check whether two Immutable Arrays reference
-the same array instance. Note that structural equality with double equals `==` works as expected.
+Using `===` with Immutable Arrays is forbidden by the Kotlin compiler because value classes don't have object identity.
+Use `values.referencesSameArrayAs(otherValues)` to check whether two Immutable Arrays reference the same array instance.
 
 #### Identity hashCode:
 
-```kotlin
-val values = immutableArrayOf(1, 2, 3)
-val identityHashCode = System.identityHashCode(values)
-// ❌ identityHashCode accepts Any, which causes auto-boxing. This can produce a different identity
-// hashCode each time since a temporary auto-boxed wrapper object is created each time it's called
-```
+Avoid `System.identityHashCode(immutableArray)`. Immutable Arrays get auto-boxed when passed as `Any` so you might get a
+different hash code for the same array every time.
 
 #### Synchronization:
 
-```kotlin
-class Account(val accountHolders: ImmutableArray<Person>) {
-    fun withdraw(amount: Money) {
-        // ❌ Compiler warning: Synchronizing on a value class is not supported, 
-        // as synchronization would occur on a temporary auto-boxed wrapper.
-        synchronized(accountHolders) {
-            balance -= amount
-        }
-    }
-}
-```
+Using `synchronized(immutableArray) { }` will generate a compiler warning because value classes don't have object
+identity. It locks on a temporary auto-boxed wrapper object making it ineffective for thread safety.
 
 </details>
 
 <details>
 <summary>Auto-boxing</summary>
 
-Immutable arrays are zero-cost abstractions that get eliminated at compile time so the code operates on the underlying
-array directly.
+Immutable Arrays are zero-cost abstractions eliminated at compile time—code operates on the underlying array directly.
 
-When an Immutable Array is used as a generic type or supertype (such as Any), the Kotlin compiler performs auto-boxing
-by wrapping the array in a small wrapper object. This auto-boxing is different from lists where each primitive element
-is auto-boxed. Instead, the element representation is unaffected and the entire array is wrapped in a single tiny
-wrapper. This avoids the memory and performance concerns that we usually encounter when auto-boxing values in lists
-because the per-element memory consumption is unchanged, and primitives continue to be stored in a contiguous region of
-memory.
+When an Immutable Array is passed as a generic type or `Any`, the compiler auto-boxes the entire array in a single
+wrapper object. Unlike lists (which box each primitive element), the contiguous element representation remains unchanged
+preserving memory and performance benefits.
 
-Explicitly specifying Immutable-Array types avoids auto-boxing. Auto-boxing is also avoided for generic parameters of
-inline functions. For example, `with(immutableArray) { ... }` avoids auto-boxing because `with` is declared as an inline
-function so the body gets inlined into each call site replacing the generic type with the actual type.
+Although this overhead is tiny, explicitly specifying Immutable-Array types avoids auto-boxing. Auto-boxing is also
+avoided for generic parameters of inline functions. For example, `with(immutableArray) { ... }` avoids auto-boxing
+because `with` is declared as an inline function so the body gets inlined into each call site replacing the generic type
+with the actual type.
 
 Here are some examples to get a better idea of where auto-boxing occurs:
 
@@ -975,16 +855,15 @@ with(names) {
 // casting induces auto-boxing.  This prevents casting an Immutable Array as a regular array 
 names as Any
 
-// auto-boxing.  The Immutable Array is passed as a supertype since println accepts `Any`
-println(names)
+println(names) // auto-boxing (passed as Any)
+println(names.toString()) // avoids auto-boxing (rarely matters)
 
-// You can avoid auto-boxing by calling toString() explicitly but the benefit is negligible if it's not in a loop
-println(names.toString()) // no auto-boxing since we're not passing the immutable array itself
-
-// Even though we're explicitly specifying the ImmutableArray type as the generic type, the ArrayList 
-// class itself isn't hardcoded to work with Immutable Arrays, so each immutable array will be auto-boxed
-val arrays = ArrayList<ImmutableArray<String>>()
-arrays += names // auto-boxing due to generics
+// Even though we're explicitly specifying Immutable Arrays as the generic type, the Pair class 
+// isn't hardcoded to work with Immutable Arrays, so each immutable array will be auto-boxed
+val arrays: Pair<ImmutableArray<String>, ImmutableArray<String>> = Pair(
+    immutableArrayOf("Dan", "Bob"),
+    immutableArrayOf("Jill", "Jane"),
+)
 
 // auto-boxing because the immutable array is used as a generic receiver
 names.genericExtensionFunction()
@@ -1009,7 +888,7 @@ auto-boxing, as the generic parameter is replaced at compile time.
 This library leverages the following experimental Kotlin features that may evolve in future Kotlin releases:
 
 * [Overload resolution by lambda return type](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-overload-resolution-by-lambda-return-type/)
-    * This enables multiple overloaded functions that only differ in the lambda return type. This enables optimized
+    * This allows overloaded functions that only differ in the lambda return type. This enables optimized
       specializations that auto-bind to the most optimal return type. Eg. `people.map { it.weightKg }` returns an
       `ImmutableFloatArray` when `weightKg` is a float.
     * This feature was introduced in Kotlin 1.4 and is used extensively throughout the Kotlin standard library.
@@ -1071,15 +950,16 @@ notify the Compose runtime when a value changed and trigger recomposition approp
 
 There are several reasons:
 
-1. If the 8 primitive variants implemented the List interface, (eg.`ImmutableFloatArray` implemented `List<Float>`),
-   elements would be auto-boxed on every access significantly affecting the memory and performance of the library.
-2. If Immutable Arrays implement `List`, the Kotlin standard library operations overshadow the optimized versions from
-   this library. This significantly affects the memory and performance of this library and also breaks immutability
-   guarantees since the Kotlin standard library produces read-only lists that can be mutated through casting.
-3. The `List` interface contains methods with `List` return types that we wouldn't want users to use. Using these would
-   affect the memory and performance, but most importantly, this would make usages accidentally cross over into the list
-   world where the immutability guarantees no longer exist. Throwing `OperationNotSupportedException` would violate the
-   `List` contract and leading to unpredictable downstream behavior.
+1. **Performance**: If the primitive variants implemented the List interface, (eg.`ImmutableFloatArray` implemented
+   `List<Float>`), elements would be auto-boxed on every access affecting the memory and performance of the library.
+2. **Immutability**: If Immutable Arrays implement `List`, the Kotlin standard library operations overshadow the
+   optimized
+   versions from this library. This affects performance and also breaks immutability guarantees since those would
+   produce read-only lists that can be mutated through casting.
+3. **API Integrity**: The `List` interface contains methods with `List` return types that we wouldn't want to be used.
+   Using these would affect performance, but most importantly, this would make usages accidentally cross over into the
+   list world where the immutability guarantees no longer exist. Throwing `OperationNotSupportedException` would violate
+   the `List` contract and leading to unpredictable downstream behavior.
 
 </details>
 
