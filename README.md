@@ -45,7 +45,7 @@ Alternatively, you can [pick & choose](publishing/bom/README.md) individual comp
 
 ## Immutable Arrays
 
-[Immutable Arrays](immutable-arrays/README.md) offer a safer, faster, and more efficient alternative to lists while
+[Immutable Arrays](immutable-arrays) offer a safer, faster, and more efficient alternative to lists while
 maintaining familiar syntax.
 
 #### Key Benefits
