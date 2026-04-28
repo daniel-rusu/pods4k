@@ -4,7 +4,6 @@ import com.danrusu.pods4k.immutableArrays.BaseType
 import com.danrusu.pods4k.immutableArrays.BaseType.BOOLEAN
 import com.danrusu.pods4k.immutableArrays.BaseType.GENERIC
 import com.danrusu.pods4k.immutableArrays.ImmutableArrayConfig
-import com.danrusu.pods4k.immutableArrays.createImmutableArrayBuilder
 import com.danrusu.pods4k.utils.addGenericTypes
 import com.danrusu.pods4k.utils.annotation
 import com.danrusu.pods4k.utils.comment
@@ -14,6 +13,7 @@ import com.danrusu.pods4k.utils.emptyLine
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.jvmName
 import com.danrusu.pods4k.utils.statement
+import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
@@ -327,13 +327,19 @@ private fun FileSpec.Builder.addFilterNotNull() {
                 statement("return filter { it != null } as %T", castType)
             } else {
                 // don't delegate to filter so that we unbox the values
-                createImmutableArrayBuilder(name = "result", forType = baseType, genericTypeOverride = nonNullType)
-                controlFlow("forEach { value ->") {
-                    controlFlow("if (value != null)") {
-                        statement("result.add(value)")
-                    }
+                statement(
+                    "val selection = %T(numElements = size) { index -> this[index] != null }",
+                    ClassName("com.danrusu.pods4k.utils", "Selection"),
+                )
+                statement("val resultSize = selection.numSelectedElements")
+                statement("if (resultSize == 0) return ${baseType.generatedClassName}.EMPTY")
+                emptyLine()
+                statement("val result = ${baseType.backingArrayConstructor}(resultSize)")
+                statement("var resultIndex = 0")
+                controlFlow("selection.forEachSelectedIndex { originalIndex ->") {
+                    statement("result[resultIndex++] = this[originalIndex]!!")
                 }
-                statement("return result.build()")
+                statement("return ${baseType.generatedClassName}(result)")
             }
         }
     }

@@ -33,10 +33,12 @@ _Date TBD_
 
 **Performance Improvements:**
 
+* Update `filterNotNull` for nullable primitive wrappers to use bitmaps. This reduces temporary memory consumption and
+  improves performance by reducing branches.
 * Update `partition` to use a bitmap instead of the double-ended buffer. This improves performance and reduces temporary
   memory consumption by element-size (eg. 32X memory reduction for 32-bit references).
-* Update `filter`, `filterNot`, and `filterIndexed` to traverse the bitmap in sublinear time by jumping over consecutive
-  0-bits in a single step. Also increased CPU instruction-cache utilization.
+* Update `filter`, `filterNot`, and `filterIndexed` to traverse the bitmap in sublinear time by jumping over multiple
+  consecutive 0-bits in a single step. Also increased CPU instruction-cache utilization.
 * Delegate `ImmutableArray<T?>.filterNotNull()` to `filter` in order to take advantage of the bitwise optimizations.
 
 ## 0.7.0

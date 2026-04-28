@@ -1,6 +1,7 @@
 // Auto-generated file. DO NOT EDIT!
 package com.danrusu.pods4k.immutableArrays
 
+import com.danrusu.pods4k.utils.Selection
 import java.util.RandomAccess
 import kotlin.Any
 import kotlin.Array
@@ -789,13 +790,16 @@ public fun <T : Any> ImmutableArray<T?>.filterNotNull(): ImmutableArray<T> {
  */
 @JvmName("filterNotNull_BOOLEAN")
 public fun ImmutableArray<Boolean?>.filterNotNull(): ImmutableBooleanArray {
-    val result = ImmutableBooleanArray.Builder()
-    forEach { value ->
-        if (value != null) {
-            result.add(value)
-        }
+    val selection = Selection(numElements = size) { index -> this[index] != null }
+    val resultSize = selection.numSelectedElements
+    if (resultSize == 0) return ImmutableBooleanArray.EMPTY
+
+    val result = BooleanArray(resultSize)
+    var resultIndex = 0
+    selection.forEachSelectedIndex { originalIndex ->
+        result[resultIndex++] = this[originalIndex]!!
     }
-    return result.build()
+    return ImmutableBooleanArray(result)
 }
 
 /**
@@ -803,13 +807,16 @@ public fun ImmutableArray<Boolean?>.filterNotNull(): ImmutableBooleanArray {
  */
 @JvmName("filterNotNull_BYTE")
 public fun ImmutableArray<Byte?>.filterNotNull(): ImmutableByteArray {
-    val result = ImmutableByteArray.Builder()
-    forEach { value ->
-        if (value != null) {
-            result.add(value)
-        }
+    val selection = Selection(numElements = size) { index -> this[index] != null }
+    val resultSize = selection.numSelectedElements
+    if (resultSize == 0) return ImmutableByteArray.EMPTY
+
+    val result = ByteArray(resultSize)
+    var resultIndex = 0
+    selection.forEachSelectedIndex { originalIndex ->
+        result[resultIndex++] = this[originalIndex]!!
     }
-    return result.build()
+    return ImmutableByteArray(result)
 }
 
 /**
@@ -817,13 +824,16 @@ public fun ImmutableArray<Byte?>.filterNotNull(): ImmutableByteArray {
  */
 @JvmName("filterNotNull_CHAR")
 public fun ImmutableArray<Char?>.filterNotNull(): ImmutableCharArray {
-    val result = ImmutableCharArray.Builder()
-    forEach { value ->
-        if (value != null) {
-            result.add(value)
-        }
+    val selection = Selection(numElements = size) { index -> this[index] != null }
+    val resultSize = selection.numSelectedElements
+    if (resultSize == 0) return ImmutableCharArray.EMPTY
+
+    val result = CharArray(resultSize)
+    var resultIndex = 0
+    selection.forEachSelectedIndex { originalIndex ->
+        result[resultIndex++] = this[originalIndex]!!
     }
-    return result.build()
+    return ImmutableCharArray(result)
 }
 
 /**
@@ -831,13 +841,16 @@ public fun ImmutableArray<Char?>.filterNotNull(): ImmutableCharArray {
  */
 @JvmName("filterNotNull_SHORT")
 public fun ImmutableArray<Short?>.filterNotNull(): ImmutableShortArray {
-    val result = ImmutableShortArray.Builder()
-    forEach { value ->
-        if (value != null) {
-            result.add(value)
-        }
+    val selection = Selection(numElements = size) { index -> this[index] != null }
+    val resultSize = selection.numSelectedElements
+    if (resultSize == 0) return ImmutableShortArray.EMPTY
+
+    val result = ShortArray(resultSize)
+    var resultIndex = 0
+    selection.forEachSelectedIndex { originalIndex ->
+        result[resultIndex++] = this[originalIndex]!!
     }
-    return result.build()
+    return ImmutableShortArray(result)
 }
 
 /**
@@ -845,13 +858,16 @@ public fun ImmutableArray<Short?>.filterNotNull(): ImmutableShortArray {
  */
 @JvmName("filterNotNull_INT")
 public fun ImmutableArray<Int?>.filterNotNull(): ImmutableIntArray {
-    val result = ImmutableIntArray.Builder()
-    forEach { value ->
-        if (value != null) {
-            result.add(value)
-        }
+    val selection = Selection(numElements = size) { index -> this[index] != null }
+    val resultSize = selection.numSelectedElements
+    if (resultSize == 0) return ImmutableIntArray.EMPTY
+
+    val result = IntArray(resultSize)
+    var resultIndex = 0
+    selection.forEachSelectedIndex { originalIndex ->
+        result[resultIndex++] = this[originalIndex]!!
     }
-    return result.build()
+    return ImmutableIntArray(result)
 }
 
 /**
@@ -859,13 +875,16 @@ public fun ImmutableArray<Int?>.filterNotNull(): ImmutableIntArray {
  */
 @JvmName("filterNotNull_LONG")
 public fun ImmutableArray<Long?>.filterNotNull(): ImmutableLongArray {
-    val result = ImmutableLongArray.Builder()
-    forEach { value ->
-        if (value != null) {
-            result.add(value)
-        }
+    val selection = Selection(numElements = size) { index -> this[index] != null }
+    val resultSize = selection.numSelectedElements
+    if (resultSize == 0) return ImmutableLongArray.EMPTY
+
+    val result = LongArray(resultSize)
+    var resultIndex = 0
+    selection.forEachSelectedIndex { originalIndex ->
+        result[resultIndex++] = this[originalIndex]!!
     }
-    return result.build()
+    return ImmutableLongArray(result)
 }
 
 /**
@@ -873,13 +892,16 @@ public fun ImmutableArray<Long?>.filterNotNull(): ImmutableLongArray {
  */
 @JvmName("filterNotNull_FLOAT")
 public fun ImmutableArray<Float?>.filterNotNull(): ImmutableFloatArray {
-    val result = ImmutableFloatArray.Builder()
-    forEach { value ->
-        if (value != null) {
-            result.add(value)
-        }
+    val selection = Selection(numElements = size) { index -> this[index] != null }
+    val resultSize = selection.numSelectedElements
+    if (resultSize == 0) return ImmutableFloatArray.EMPTY
+
+    val result = FloatArray(resultSize)
+    var resultIndex = 0
+    selection.forEachSelectedIndex { originalIndex ->
+        result[resultIndex++] = this[originalIndex]!!
     }
-    return result.build()
+    return ImmutableFloatArray(result)
 }
 
 /**
@@ -887,13 +909,16 @@ public fun ImmutableArray<Float?>.filterNotNull(): ImmutableFloatArray {
  */
 @JvmName("filterNotNull_DOUBLE")
 public fun ImmutableArray<Double?>.filterNotNull(): ImmutableDoubleArray {
-    val result = ImmutableDoubleArray.Builder()
-    forEach { value ->
-        if (value != null) {
-            result.add(value)
-        }
+    val selection = Selection(numElements = size) { index -> this[index] != null }
+    val resultSize = selection.numSelectedElements
+    if (resultSize == 0) return ImmutableDoubleArray.EMPTY
+
+    val result = DoubleArray(resultSize)
+    var resultIndex = 0
+    selection.forEachSelectedIndex { originalIndex ->
+        result[resultIndex++] = this[originalIndex]!!
     }
-    return result.build()
+    return ImmutableDoubleArray(result)
 }
 
 /**
