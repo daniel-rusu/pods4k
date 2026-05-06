@@ -19,9 +19,9 @@ import kotlin.PublishedApi
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Unit
+import kotlin.collections.CharIterator
 import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
-import kotlin.collections.Iterator
 import kotlin.jvm.JvmInline
 import kotlin.random.Random
 import kotlin.ranges.IntRange
@@ -247,7 +247,7 @@ public value class ImmutableCharArray @PublishedApi internal constructor(
     /**
      * See [CharArray.iterator]
      */
-    public inline operator fun iterator(): Iterator<Char> = values.iterator()
+    public inline operator fun iterator(): CharIterator = values.iterator()
 
     /**
      * See [CharArray.asIterable]

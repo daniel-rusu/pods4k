@@ -20,7 +20,7 @@ import kotlin.Suppress
 import kotlin.Unit
 import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
-import kotlin.collections.Iterator
+import kotlin.collections.LongIterator
 import kotlin.jvm.JvmInline
 import kotlin.random.Random
 import kotlin.ranges.IntRange
@@ -246,7 +246,7 @@ public value class ImmutableLongArray @PublishedApi internal constructor(
     /**
      * See [LongArray.iterator]
      */
-    public inline operator fun iterator(): Iterator<Long> = values.iterator()
+    public inline operator fun iterator(): LongIterator = values.iterator()
 
     /**
      * See [LongArray.asIterable]

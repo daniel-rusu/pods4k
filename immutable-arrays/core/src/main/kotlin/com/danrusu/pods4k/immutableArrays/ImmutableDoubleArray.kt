@@ -18,9 +18,9 @@ import kotlin.PublishedApi
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Unit
+import kotlin.collections.DoubleIterator
 import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
-import kotlin.collections.Iterator
 import kotlin.jvm.JvmInline
 import kotlin.random.Random
 import kotlin.ranges.IntRange
@@ -246,7 +246,7 @@ public value class ImmutableDoubleArray @PublishedApi internal constructor(
     /**
      * See [DoubleArray.iterator]
      */
-    public inline operator fun iterator(): Iterator<Double> = values.iterator()
+    public inline operator fun iterator(): DoubleIterator = values.iterator()
 
     /**
      * See [DoubleArray.asIterable]

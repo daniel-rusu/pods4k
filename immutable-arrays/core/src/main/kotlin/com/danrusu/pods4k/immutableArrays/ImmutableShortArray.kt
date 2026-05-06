@@ -21,7 +21,7 @@ import kotlin.Suppress
 import kotlin.Unit
 import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
-import kotlin.collections.Iterator
+import kotlin.collections.ShortIterator
 import kotlin.jvm.JvmInline
 import kotlin.random.Random
 import kotlin.ranges.IntRange
@@ -247,7 +247,7 @@ public value class ImmutableShortArray @PublishedApi internal constructor(
     /**
      * See [ShortArray.iterator]
      */
-    public inline operator fun iterator(): Iterator<Short> = values.iterator()
+    public inline operator fun iterator(): ShortIterator = values.iterator()
 
     /**
      * See [ShortArray.asIterable]

@@ -18,9 +18,9 @@ import kotlin.PublishedApi
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Unit
+import kotlin.collections.BooleanIterator
 import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
-import kotlin.collections.Iterator
 import kotlin.jvm.JvmInline
 import kotlin.random.Random
 import kotlin.ranges.IntRange
@@ -246,7 +246,7 @@ public value class ImmutableBooleanArray @PublishedApi internal constructor(
     /**
      * See [BooleanArray.iterator]
      */
-    public inline operator fun iterator(): Iterator<Boolean> = values.iterator()
+    public inline operator fun iterator(): BooleanIterator = values.iterator()
 
     /**
      * See [BooleanArray.asIterable]

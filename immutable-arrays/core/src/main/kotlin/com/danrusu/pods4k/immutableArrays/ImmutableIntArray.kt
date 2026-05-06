@@ -19,8 +19,8 @@ import kotlin.String
 import kotlin.Suppress
 import kotlin.Unit
 import kotlin.collections.IndexedValue
+import kotlin.collections.IntIterator
 import kotlin.collections.Iterable
-import kotlin.collections.Iterator
 import kotlin.jvm.JvmInline
 import kotlin.random.Random
 import kotlin.ranges.IntRange
@@ -246,7 +246,7 @@ public value class ImmutableIntArray @PublishedApi internal constructor(
     /**
      * See [IntArray.iterator]
      */
-    public inline operator fun iterator(): Iterator<Int> = values.iterator()
+    public inline operator fun iterator(): IntIterator = values.iterator()
 
     /**
      * See [IntArray.asIterable]

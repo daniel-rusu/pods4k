@@ -19,9 +19,9 @@ import kotlin.PublishedApi
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Unit
+import kotlin.collections.ByteIterator
 import kotlin.collections.IndexedValue
 import kotlin.collections.Iterable
-import kotlin.collections.Iterator
 import kotlin.jvm.JvmInline
 import kotlin.random.Random
 import kotlin.ranges.IntRange
@@ -247,7 +247,7 @@ public value class ImmutableByteArray @PublishedApi internal constructor(
     /**
      * See [ByteArray.iterator]
      */
-    public inline operator fun iterator(): Iterator<Byte> = values.iterator()
+    public inline operator fun iterator(): ByteIterator = values.iterator()
 
     /**
      * See [ByteArray.asIterable]

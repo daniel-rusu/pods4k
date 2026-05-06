@@ -228,11 +228,16 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 parameters = { "random"<Random>() },
                 returns = baseType.type.copy(nullable = true),
             )
+
+            val iteratorReturnType = when (baseType) {
+                GENERIC -> Iterator::class.asTypeName().parameterizedBy(baseType.type)
+                else -> ClassName("kotlin.collections", "${baseType.typeClass.simpleName}Iterator")
+            }
             "iterator"(
                 typeSpecBuilder = this,
                 baseType = baseType,
                 modifiers = listOf(KModifier.OPERATOR),
-                returns = Iterator::class.asTypeName().parameterizedBy(baseType.type),
+                returns = iteratorReturnType,
             )
             "asIterable"(
                 typeSpecBuilder = this,
