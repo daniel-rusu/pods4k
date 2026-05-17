@@ -112,21 +112,18 @@ class ImmutableArrayFactoryTest {
 
             // Overflow from the array growth handles overflow gracefully when current size is close to max array size
             expectThat(computeNewCapacity(currentCapacity = currentCapacity, minCapacity = currentCapacity + 1))
-                .isEqualTo(MAX_ARRAY_SIZE)
+                .isEqualTo(MAX_SAFE_ARRAY_SIZE)
 
             // Specifying a minCapacity that has overflowed
             expectThrows<IllegalStateException> {
                 computeNewCapacity(currentCapacity = currentCapacity, minCapacity = currentCapacity + 21)
             }.message.isEqualTo("minCapacity encountered overflow")
 
-            // Requesting a capacity equal to the max array size is allowed
-            expectThat(computeNewCapacity(currentCapacity = currentCapacity, minCapacity = MAX_ARRAY_SIZE))
-                .isEqualTo(MAX_ARRAY_SIZE)
-
-            // Specifying a minCapacity that exceeds the max array size
-            expectThrows<IllegalStateException> {
-                computeNewCapacity(currentCapacity = currentCapacity, minCapacity = MAX_ARRAY_SIZE + 1)
-            }.message.isEqualTo("minCapacity exceeds max array size")
+            // Crossing the MAX_SAFE_ARRAY_SIZE is allowed but no additional spare capacity is added
+            for (minCapacity in MAX_SAFE_ARRAY_SIZE..Int.MAX_VALUE) {
+                expectThat(computeNewCapacity(currentCapacity = currentCapacity, minCapacity = minCapacity))
+                    .isEqualTo(minCapacity)
+            }
         }
     }
 }

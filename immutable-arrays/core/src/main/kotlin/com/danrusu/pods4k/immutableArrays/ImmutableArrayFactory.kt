@@ -12,6 +12,7 @@ import kotlin.Long
 import kotlin.Short
 import kotlin.Unit
 import kotlin.jvm.JvmName
+import kotlin.math.max
 
 /**
  * Returns an empty [ImmutableArray].
@@ -353,9 +354,10 @@ public fun buildImmutableDoubleArray(
 
 internal object BuilderUtils {
     /**
-     * Some VMs reserve header words in the array so this is the max safe array size
+     * Some VMs reserve header words in the array so this is the max safe array size that we'll reserve spare
+     * capacity up to.  After this point we attempt to increase the size just to the minimum requested.
      */
-    public const val MAX_ARRAY_SIZE: Int = Int.MAX_VALUE - 8
+    public const val MAX_SAFE_ARRAY_SIZE: Int = Int.MAX_VALUE - 8
 
     /**
      * Returns a capacity that's greater than or equal to [minCapacity].  If [currentCapacity] is already sufficient
@@ -368,14 +370,14 @@ internal object BuilderUtils {
         when {
             minCapacity < 0 -> error("minCapacity encountered overflow")
             currentCapacity >= minCapacity -> return currentCapacity
-            minCapacity > MAX_ARRAY_SIZE -> error("minCapacity exceeds max array size")
         }
-        // increase the size by at least 50 percent
-        val newCapacity = currentCapacity + (currentCapacity shr 1) + 1
-        return when {
-            newCapacity < 0 -> MAX_ARRAY_SIZE // handle overflow
-            newCapacity < minCapacity -> minCapacity
-            else -> newCapacity
+        // attempt to increase the size by at least 50 percent
+        var newCapacity = currentCapacity + (currentCapacity shr 1) + 1
+
+        // handle overflow and don't over-allocate past the MAX_SAFE_ARRAY_SIZE
+        if (newCapacity !in 0..MAX_SAFE_ARRAY_SIZE) {
+            newCapacity = MAX_SAFE_ARRAY_SIZE
         }
+        return max(newCapacity, minCapacity)
     }
 }

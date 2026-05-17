@@ -9,12 +9,14 @@ import com.danrusu.pods4k.utils.comment
 import com.danrusu.pods4k.utils.controlFlow
 import com.danrusu.pods4k.utils.createFile
 import com.danrusu.pods4k.utils.declareObject
+import com.danrusu.pods4k.utils.emptyLine
 import com.danrusu.pods4k.utils.function
 import com.danrusu.pods4k.utils.jvmName
 import com.danrusu.pods4k.utils.property
 import com.danrusu.pods4k.utils.statement
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.KModifier
+import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.TypeVariableName
@@ -32,10 +34,15 @@ internal object ImmutableArrayFactoryGenerator {
                 modifiers = listOf(KModifier.INTERNAL),
                 name = "BuilderUtils",
             ) {
+                val maxSafeArraySizeKdoc = """
+                    Some VMs reserve header words in the array so this is the max safe array size that we'll reserve spare
+                    capacity up to.  After this point we attempt to increase the size just to the minimum requested.
+                """.trimIndent()
+
                 property<Int>(
-                    kdoc = "Some VMs reserve header words in the array so this is the max safe array size",
+                    kdoc = maxSafeArraySizeKdoc,
                     modifiers = listOf(KModifier.CONST),
-                    name = "MAX_ARRAY_SIZE",
+                    name = "MAX_SAFE_ARRAY_SIZE",
                     init = "Int.MAX_VALUE - 8",
                 )
                 addBuilderUtilsEnsureCapacity()
@@ -164,14 +171,15 @@ private fun TypeSpec.Builder.addBuilderUtilsEnsureCapacity() {
         controlFlow("when") {
             statement("minCapacity < 0 -> error(%S)", "minCapacity encountered overflow")
             statement("currentCapacity >= minCapacity -> return currentCapacity")
-            statement("minCapacity > MAX_ARRAY_SIZE -> error(%S)", "minCapacity exceeds max array size")
         }
-        comment("increase the size by at least 50 percent")
-        statement("val newCapacity = currentCapacity + (currentCapacity shr 1) + 1")
-        controlFlow("return when") {
-            statement("newCapacity < 0 -> MAX_ARRAY_SIZE // handle overflow")
-            statement("newCapacity < minCapacity -> minCapacity")
-            statement("else -> newCapacity")
+        comment("attempt to increase the size by at least 50 percent")
+        // adding 1 reduces excessive resizing when starting with tiny capacities
+        statement("var newCapacity = currentCapacity + (currentCapacity shr 1) + 1")
+        emptyLine()
+        comment("handle overflow and don't over-allocate past the MAX_SAFE_ARRAY_SIZE")
+        controlFlow("if (newCapacity !in 0..MAX_SAFE_ARRAY_SIZE)") {
+            statement("newCapacity = MAX_SAFE_ARRAY_SIZE")
         }
+        statement("return %M(newCapacity, minCapacity)", MemberName("kotlin.math", "max"))
     }
 }
