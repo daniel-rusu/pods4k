@@ -229,16 +229,27 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 returns = baseType.type.copy(nullable = true),
             )
 
-            val iteratorReturnType = when (baseType) {
-                GENERIC -> Iterator::class.asTypeName().parameterizedBy(baseType.type)
-                else -> ClassName("kotlin.collections", "${baseType.typeClass.simpleName}Iterator")
+            if (baseType == GENERIC) {
+                val returnType = ClassName(ImmutableArrayConfig.packageName, "ImmutableArrayIterator")
+                    .parameterizedBy(baseType.type)
+
+                function(
+                    kdoc = "Creates an [ImmutableArrayIterator] for iterating over the elements.",
+                    modifiers = listOf(KModifier.OPERATOR),
+                    name = "iterator",
+                    returns = returnType,
+                ) {
+                    statement("return ImmutableArrayIterator(values)")
+                }
+            } else {
+                "iterator"(
+                    typeSpecBuilder = this,
+                    baseType = baseType,
+                    modifiers = listOf(KModifier.OPERATOR),
+                    returns = ClassName("kotlin.collections", "${baseType.typeClass.simpleName}Iterator"),
+                )
             }
-            "iterator"(
-                typeSpecBuilder = this,
-                baseType = baseType,
-                modifiers = listOf(KModifier.OPERATOR),
-                returns = iteratorReturnType,
-            )
+
             "asIterable"(
                 typeSpecBuilder = this,
                 baseType = baseType,
@@ -427,6 +438,48 @@ private fun generateImmutableArrayFile(baseType: BaseType): FileSpec {
                 addBuilderAddAllFunctions(baseType)
                 addBuilderBuildFunction(baseType)
                 addBuilderEnsureCapacityFunction()
+            }
+        }
+
+        if (baseType == GENERIC) {
+            // Declare final custom iterator class as that makes it much easier for the JIT to optimize usages with
+            // escape analysis so that an iterator-based for-loop turns into an optimized index-based for-loop
+            declareClass(name = "ImmutableArrayIterator") {
+                val typeName = (baseType.type as TypeVariableName).name
+                addTypeVariable(TypeVariableName(typeName, KModifier.OUT))
+                addSuperinterface(
+                    ClassName("kotlin.collections", "Iterator").parameterizedBy(baseType.type),
+                )
+
+                addPrimaryConstructor(
+                    modifiers = listOf(KModifier.INTERNAL),
+                    parameters = { "values"(type = baseType.backingArrayType) },
+                ).property(
+                    modifiers = listOf(KModifier.PRIVATE),
+                    name = "values",
+                    type = baseType.backingArrayType,
+                    init = "values",
+                )
+
+                property<Int>(modifiers = listOf(KModifier.PRIVATE), isMutable = true, name = "index", init = "0")
+
+                function(
+                    modifiers = listOf(KModifier.OVERRIDE),
+                    name = "hasNext",
+                    returns = Boolean::class.asTypeName(),
+                ) {
+                    statement("return index < values.size")
+                }
+
+                function(
+                    modifiers = listOf(KModifier.OVERRIDE),
+                    name = "next",
+                    returns = baseType.type,
+                ) {
+                    statement("if (index >= values.size) throw %T()", NoSuchElementException::class)
+                    emptyLine()
+                    statement("return values[index++]")
+                }
             }
         }
     }

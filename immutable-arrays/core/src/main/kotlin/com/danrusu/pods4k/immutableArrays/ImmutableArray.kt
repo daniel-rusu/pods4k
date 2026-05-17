@@ -2,6 +2,7 @@
 package com.danrusu.pods4k.immutableArrays
 
 import com.danrusu.pods4k.utils.Selection
+import java.util.NoSuchElementException
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
@@ -245,9 +246,9 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
     public inline fun randomOrNull(random: Random): T? = values.randomOrNull(random)
 
     /**
-     * See [Array.iterator]
+     * Creates an [ImmutableArrayIterator] for iterating over the elements.
      */
-    public inline operator fun iterator(): Iterator<T> = values.iterator()
+    public operator fun iterator(): ImmutableArrayIterator<T> = ImmutableArrayIterator(values)
 
     /**
      * See [Array.asIterable]
@@ -864,5 +865,17 @@ public value class ImmutableArray<out T> @PublishedApi internal constructor(
 
             values = values.copyOf(newCapacity)
         }
+    }
+}
+
+public class ImmutableArrayIterator<out T> internal constructor(private val values: Array<out T>) : Iterator<T> {
+    private var index: Int = 0
+
+    override fun hasNext(): Boolean = index < values.size
+
+    override fun next(): T {
+        if (index >= values.size) throw NoSuchElementException()
+
+        return values[index++]
     }
 }
