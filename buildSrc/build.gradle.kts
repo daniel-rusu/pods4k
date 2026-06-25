@@ -13,7 +13,7 @@ dependencies {
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
     compilerOptions {
-        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8)
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
 
         // generate default methods in interfaces without the DefaultImpls
         freeCompilerArgs.add("-Xjvm-default=all")
@@ -29,7 +29,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
     }
 }
 
-// Ensure "org.gradle.jvm.version" is set to "8" in Gradle metadata.
+// Ensure "org.gradle.jvm.version" is set to "11" in Gradle metadata.
 tasks.withType<JavaCompile> {
-    options.release.set(8)
+    options.release.set(11)
 }
