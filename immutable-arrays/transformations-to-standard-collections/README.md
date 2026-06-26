@@ -1,20 +1,21 @@
-# Immutable Array to Standard Collections
+# Immutable Array Transformations to Standard Collections
 
-Extensions for transforming immutable arrays into standard library collections.
+Extensions for transforming immutable arrays into Kotlin/JDK standard-library collections.
 
-## Use case
+## Use Case
 
-Some transformation functions like `associateBy`, `groupBy`, etc. produce collections.
+Some operations naturally produce standard collections rather than immutable arrays. This module provides those
+operations separately from the core immutable-array API, including functions such as `toList`, `toSet`, `associateBy`,
+`groupBy`, etc.
+
+Keeping these APIs in a separate module preserves a clear boundary: core transformations produce immutable arrays, while
+this module intentionally allocates standard collections.
 
 There are several performance-oriented collection libraries like
 [Eclipse Collections](https://github.com/eclipse/eclipse-collections), [FastUtil](https://github.com/vigna/fastutil),
-etc. that advertise improved efficiency. Additionally, [Project Valhalla](https://openjdk.org/projects/valhalla/) should
-enable more efficient collections and might even enhance the standard-library collections enabling them to be used in a
-more efficient manner.
+and others that advertise improved efficiency. Additionally, [Project Valhalla](https://openjdk.org/projects/valhalla/)
+might enable more efficient collections over time.
 
-If we ever decide to use non-standard collections for these transformations in the future, that ability would be added
-in a separate module to provide an easy upgrade path. This would allow users that prefer to continue using standard
-collections to configure the appropriate dependencies without needing to modify their code.
-
-Note that there are no plans for using different collection libraries at the moment so this approach is just a
-precaution to reduce backward-compatibility risk.
+If this library ever adds transformations to non-standard collections, those APIs can live in a new module without
+changing this module's standard-collection behavior. There are no plans for using different collection libraries at the
+moment so this approach is just a precaution to reduce backward-compatibility risk.

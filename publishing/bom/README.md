@@ -3,12 +3,12 @@
 This library is composed of multiple modules where each module is published as a separate artifact on Maven Central. We
 also publish a single top-level artifact that automatically brings in all the artifacts of this library, so the simplest
 way to depend on the entire library is to add a single dependency to the top-level artifact as described in
-[dependency details](../../README.md#dependency).
+[installation](../../README.md#installation).
 
-In addition to the above, we also publish a bill of materials, BOM, which references all the artifact versions in that
-release. The main use-case for the BOM is if you prefer to pick and choose individual components instead of
-depending on the entire library. In that case, you can reference the BOM at a particular version and add dependencies
-for the components that you want without specifying their individual versions.
+In addition to the above, we also publish a bill of materials (BOM), which references all the artifact versions in that
+release. The BOM is useful when you prefer to pick and choose individual components instead of depending on the entire
+library. Reference the BOM at a particular version, then add dependencies for the components you want without specifying
+their individual versions.
 
 [![Latest Release][latest-version-shield]][maven-central-url]
 
@@ -47,7 +47,7 @@ dependencies {
         </dependencies>
     </dependencyManagement>
 
-    <!-- Pick the artifacts that you want but don't specify their versios as that's controlled by the BOM -->
+    <!-- Pick the artifacts that you want but don't specify their versions as that's controlled by the BOM -->
     <dependencies>
         <dependency>
             <groupId>com.danrusu.pods4k.immutable-arrays</groupId>
