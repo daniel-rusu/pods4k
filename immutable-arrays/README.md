@@ -1,8 +1,8 @@
 # Immutable Arrays
 
 **Immutable Arrays** provide a safer, faster, and more efficient alternative to lists while maintaining familiar syntax.
-They use 4x less memory, and are 2-8x faster than lists. They are inline classes that compile to regular arrays but with
-highly-optimized operations and compile-time immutability guarantees.
+They use over 4x less memory, and are 2-8x faster than lists. They are inline classes that compile to regular arrays
+but with highly-optimized operations and compile-time immutability guarantees.
 
 Ideal for Android, backend services, and any application seeking enhanced safety, reduced memory overhead, or increased
 performance.
@@ -50,6 +50,8 @@ dependencies {
 Using Immutable Arrays feels like using lists. No complicated syntax or API to learn:
 
 ```kotlin
+import com.danrusu.pods4k.immutableArrays.*
+
 val people = immutableArrayOf(dan, jill, bobby)
 
 // Iterate naturally
@@ -97,7 +99,7 @@ mutable lists.
 fun getTopStocks(): ImmutableArray<Stock> {
     val topStocksBuilder = ImmutableArray.Builder<Stock>()
 
-    topStockBuilder += getFastestGrowingStock()
+    topStocksBuilder += getFastestGrowingStock()
     addTrendingStocks(topStocksBuilder)
 
     return topStocksBuilder.build()
@@ -242,13 +244,13 @@ Smaller data types are split on the right to avoid skewing the axis due to extre
 
 ![map benchmarks](./resources/benchmarks/map.png)
 
-Filtering elements seems impossibly fast:
+Filtering benefits from bitmap optimizations that reduce intermediate allocations:
 
 ![filter benchmarks](./resources/benchmarks/filter.png)
 
 ## 🎯 Efficiency
 
-Immutable Arrays reduce memory consumption resulting in fewer garbage collection pauses. They re-use instances when
+Immutable Arrays reduce memory consumption resulting in fewer garbage collection pauses. They reuse instances when
 results are identical, operations use less temporary memory, they avoid auto-boxing primitives, and always produce
 perfectly-sized results without wasted capacity.
 
@@ -266,7 +268,7 @@ Immutable Arrays intelligently reuse instances to minimize memory:
 | `take(n)` & `takeLast(n)`                                   | `n >= size`                          |
 | `takeWhile { condition }` & `takeLastWhile { condition }`   | all elements meet the condition      |
 | `drop(n)` & `dropLast(n)`                                   | `n == 0`                             |
-| `dropWhile { condition }`,                                  | first element fails condition        |
+| `dropWhile { condition }`                                   | first element fails condition        |
 | `dropLastWhile { condition }`                               | last element fails condition         |
 | `sorted()` & `sortedDescending()`                           | `size <= 1`                          |
 | `sortedBy { selector }` & `sortedByDescending { selector }` | `size <= 1`                          |
@@ -371,7 +373,7 @@ Storing references to cached wrappers often takes more memory than storing the v
 
 ![cached values](./resources/memory/CachedValues.png)
 
-The cache is bypassed when calling the constructor directly (E.g. `java.lang.Integer(0)`, etc.). This can happen in
+The cache is bypassed when calling the constructor directly (e.g., `java.lang.Integer(0)`). This can happen in
 generic utilities, like custom serializers, that use reflection to fetch the class by name and call the
 constructor making it easy to miss these types of inefficiencies.
 
@@ -385,9 +387,9 @@ plus padding. Combined with storing a reference to each wrapper, this results in
 
 ![uncached values](./resources/memory/UncachedValues.png)
 
-Note that JDK 27 enables compact object headers on HotSpot JVMs (excludes Android, OpenJ9, or native images). This makes
-lists of `Long` or `Double` use 20 bytes per element. The smaller types are unaffected as the reduced header is offset
-by increased memory-alignment padding.
+JDK 27 is slated to enable compact object headers by default on HotSpot JVMs (excluding Android, OpenJ9, and native
+images). This makes lists of `Long` or `Double` use 20 bytes per element. The smaller types are unaffected as the
+reduced header is offset by increased memory-alignment padding.
 
 </details>
 
@@ -528,7 +530,8 @@ passed as `Array<Any>`, to prevent compiling code that attempts to add non-Strin
 Immutable Arrays restore covariance since they're immutable. They follow the same subtyping relationships as their
 elements, making the code more intuitive and flexible without sacrificing safety:
 
-* E.g. `ImmutableArray<Manager>` can be passed as `ImmutableArray<Person>` because `Manager` is a subtype of `Person`.
+* For example, `ImmutableArray<Manager>` can be passed as `ImmutableArray<Person>` because `Manager` is a subtype of
+  `Person`.
 
 </details>
 
@@ -569,7 +572,7 @@ See [Efficiency](#-efficiency) for details.
 <details>
 <summary>✅ Higher performance</summary>
 
-Immutable Arrays are between 2 - 8X faster than lists for most operations. See the [Benchmark page](BENCHMARKS.md) for
+Immutable Arrays are 2-8x faster than lists for most operations. See the [Benchmark page](BENCHMARKS.md) for
 details.
 
 </details>
@@ -844,7 +847,7 @@ This library leverages the following experimental Kotlin features that may evolv
 
 * [Overload resolution by lambda return type](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-overload-resolution-by-lambda-return-type/)
     * Enables optimized specializations that auto-bind to the most optimal return type based on the lambda return type.
-        * Eg. `people.map { it.weightKg }` returns an `ImmutableFloatArray` when `weightKg` is a float.
+        * For example, `people.map { it.weightKg }` returns an `ImmutableFloatArray` when `weightKg` is a float.
     * Introduced in Kotlin 1.4 and used extensively throughout the Kotlin standard library.
     * Vote and comment on this [YouTrack ticket](https://youtrack.jetbrains.com/issue/KT-51107) to stabilize this
       feature.
@@ -911,7 +914,7 @@ notify the Compose runtime when a value changed and trigger recomposition approp
 
 There are several reasons:
 
-1. **Performance**: If the primitive variants implemented the List interface, (eg.`ImmutableFloatArray` implemented
+1. **Performance**: If the primitive variants implemented the List interface (e.g., `ImmutableFloatArray` implemented
    `List<Float>`), elements would be auto-boxed on every access affecting the memory and performance of the library.
 2. **Immutability**: If Immutable Arrays implement `List`, the Kotlin standard library operations overshadow the
    optimized

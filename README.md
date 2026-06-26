@@ -1,7 +1,7 @@
 # pods4k
 
 [![Maven Central][maven-central-badge]][maven-central-url]
-[![Licence][license-badge]][license-url]
+[![License][license-badge]][license-url]
 ![Top language][top-language-badge]
 ![Build Status][build-status-badge]
 [![Stargazers][stars-badge]][stars-url]
@@ -60,6 +60,8 @@ maintaining familiar syntax.
 #### Intuitive list-like syntax
 
 ```kotlin
+import com.danrusu.pods4k.immutableArrays.*
+
 val people = immutableArrayOf(dan, jill, bobby)
 
 // Iterate naturally
